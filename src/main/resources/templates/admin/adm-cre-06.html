@@ -178,7 +178,7 @@
                             element.rightAnswer.replace(/\s/g, "").length == 0
                         ) {
                             this.isEmpty = true;
-                            Swal.fire('Please Fill All Question Input Forms')
+                            Swal.fire('Please Fill All Question Forms')
                         }
                         else if (
                             this.course.replace(/\s/g, "").length == 0 ||
@@ -192,25 +192,25 @@
                         }
                     })
 
-                    if(!this.isEmpty) {
-                    let data = {
-                        course: this.course,
-                        name: this.name,
-                        startDateTime: this.startDateTime,
-                        endDateTime: this.endDateTime,
-                        fullMark: this.fullMark,
-                        questionList: this.questionList
-                    }
-                    axios
-                        .post('http://localhost:8080/api/exam/addExam', data)
-                        .then(() => {
-                            Swal.fire(
-                                'Successfully Created!',
-                                '',
-                                'success'
-                            )
-                        })
-                        .catch(error => console.log(error));
+                    if (!this.isEmpty) {
+                        let data = {
+                            course: this.course,
+                            name: this.name,
+                            startDateTime: this.startDateTime,
+                            endDateTime: this.endDateTime,
+                            fullMark: this.fullMark,
+                            questionList: this.questionList
+                        }
+                        axios
+                            .post('http://localhost:8080/api/exam/addExam', data)
+                            .then(() => {
+                                Swal.fire(
+                                    'Successfully Created!',
+                                    '',
+                                    'success'
+                                ).then(() => location.reload());
+                            })
+                            .catch(error => console.log(error));
                     }
 
                 },
