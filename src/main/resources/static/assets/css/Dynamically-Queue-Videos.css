@@ -1,0 +1,42 @@
+.dqv-range {
+  padding: 5px 0;
+}
+
+.dqv-range.vol {
+  width: 50px;
+}
+
+.dqv-range.dur {
+  padding: 0 .5em;
+  border: 1px solid #d3d3d3;
+  border-radius: 4px;
+}
+
+#dqv .material-icons, #dqv input[type=range].dqv-range {
+  cursor: pointer;
+}
+
+#dqv .controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  padding-left: 0;
+}
+
+#dqv .controls:first-child {
+  padding-left: 15px;
+}
+
+@media (max-width:767px) {
+  #dqv .controls {
+    padding-left: 15px;
+  }
+}
+
+#dqv .vids {
+  max-height: 400px;
+  overflow: auto;
+}
+

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/admin/admin-fragments :: admin_head">
+    <title>Create Exam</title>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+
+        <!-- this is where side nav is -->
+        <div th:insert="/admin/admin-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+
+                <!-- this is where nav bar is -->
+                <div th:insert="/admin/admin-fragments :: navbar" />
+
+                <div class="container-fluid pb-5 pe-5 ps-5 pt-2" id="app" style="max-width: 45rem;">
+                    <h1 class="h2">Create Exam</h1>
+                    <form action="">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body p-4">
+                                <select v-model="course" class="form-select mb-4" aria-label="Default select example"
+                                    required style="width: 10rem;">
+                                    <option value="" disabled>Choose Course</option>
+                                    <option v-for="(course, index) in courseList" :key="index">
+                                        {{course}}
+                                    </option>
+                                </select>
+
+                                <div class="input-group mb-3">
+                                    <input v-model="name" type="text" class="form-control mb-2" placeholder="Exam Name"
+                                        required />
+                                </div><label>Start Time</label>
+                                <div class="input-group mb-3">
+                                    <input v-model="startDateTime" type="datetime-local" class="form-control mb-2"
+                                        required placeholder="Username" />
+                                </div><label>End Time</label>
+                                <div class="input-group mb-3">
+                                    <input v-model="endDateTime" type="datetime-local" class="form-control mb-2"
+                                        required placeholder="Username" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-for="(question, index) in questionList" :key="index">
+                            <div class="card mb-4 shadow-sm">
+                                <div class="card-body p-4">
+                                    <form>
+                                        <label class="form-label fs-4 fw-bold">Question</label>
+                                        <div class="input-group mb-3">
+                                            <input v-model="question.examQuestion" type="text" class="form-control mb-2"
+                                                required style="width: 100%;" placeholder="Untitiled Question" />
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input fs-5" type="radio" disabled
+                                                    name="inlineRadioOptions" id="formInput8" value="option1" />
+                                                <div class="input-group mb-3">
+                                                    <input v-model="question.firstRadioValue" type="text" required
+                                                        class="form-control" placeholder="Option1" />
+                                                </div>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input fs-5" type="radio" disabled
+                                                    name="inlineRadioOptions" id="formInput8" value="option1" />
+                                                <div class="input-group mb-3">
+                                                    <input v-model="question.secondRadioValue" type="text" required
+                                                        class="form-control" placeholder="Option2" />
+                                                </div>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input fs-5" type="radio" disabled
+                                                    name="inlineRadioOptions" id="formInput8" value="option1" />
+                                                <div class="input-group mb-3">
+                                                    <input v-model="question.thirdRadioValue" type="text" required
+                                                        class="form-control" placeholder="Option3" />
+                                                </div>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input fs-5" type="radio" disabled
+                                                    name="inlineRadioOptions" id="formInput8" value="option1" />
+                                                <div class="input-group mb-3">
+                                                    <input v-model="question.fourthRadioValue" type="text" required
+                                                        class="form-control" placeholder="Option4" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input v-model="question.rightAnswer" type="text" class="form-control" required
+                                            placeholder="Enter the right answer" />
+                                        <div class="text-end mt-3">
+                                            <button @click.prevent="removeQuestion(index)" type="button"
+                                                class="btn btn-danger btn-lg fw-bold me-3"
+                                                style="width: 50px;">-</button>
+                                            <button @click.prevent="addQuestion()" type="button"
+                                                class="btn btn-lg btn-primary fw-bold" style="width: 50px;">+</button>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body p-4">
+                                <label for="inputEmail4" class="form-label fs-4 fw-bold">Full Mark</label>
+                                <div class="input-group mb-3">
+                                    <input v-model="fullMark" type="text" class="form-control mb-4" id="inputEmail4"
+                                        required style="width: 100%;" placeholder="Enter Full Mark" />
+                                    <button @click="createExam()" type="submit"
+                                        class="btn btn-lg btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+    <div th:insert="/admin/admin-fragments :: footer" />
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    isEmpty: null,
+                    courseList: [],
+                    course: '',
+                    name: '',
+                    startDateTime: '',
+                    endDateTime: '',
+                    fullMark: '',
+                    questionList: [
+                        {
+                            examQuestion: '',
+                            firstRadioValue: '',
+                            secondRadioValue: '',
+                            thirdRadioValue: '',
+                            fourthRadioValue: '',
+                            rightAnswer: ''
+                        }
+                    ]
+                }
+            },
+            methods: {
+                addQuestion() {
+                    this.questionList = [...this.questionList,
+                    {
+                        examQuestion: '',
+                        firstRadioValue: '',
+                        secondRadioValue: '',
+                        thirdRadioValue: '',
+                        fourthRadioValue: '',
+                        rightAnswer: ''
+                    }
+                    ];
+                },
+                removeQuestion(index) {
+                    if (this.questionList.length > 1) {
+                        const values = [...this.questionList];
+                        values.splice(index, 1);
+                        this.questionList = values;
+                    }
+                },
+                createExam() {
+                    this.isEmpty = false;
+                    this.questionList.forEach(element => {
+                        if (
+                            element.examQuestion.replace(/\s/g, "").length == 0 ||
+                            element.firstRadioValue.replace(/\s/g, "").length == 0 ||
+                            element.secondRadioValue.replace(/\s/g, "").length == 0 ||
+                            element.thirdRadioValue.replace(/\s/g, "").length == 0 ||
+                            element.fourthRadioValue.replace(/\s/g, "").length == 0 ||
+                            element.rightAnswer.replace(/\s/g, "").length == 0
+                        ) {
+                            this.isEmpty = true;
+                            Swal.fire('Please Fill All Question Input Forms')
+                        }
+                        else if (
+                            this.course.replace(/\s/g, "").length == 0 ||
+                            this.name.replace(/\s/g, "").length == 0 ||
+                            this.startDateTime.replace(/\s/g, "").length == 0 ||
+                            this.endDateTime.replace(/\s/g, "").length == 0 ||
+                            this.fullMark.replace(/\s/g, "").length == 0
+                        ) {
+                            this.isEmpty = true;
+                            Swal.fire('Please Fill All Input Forms')
+                        }
+                    })
+
+                    if(!this.isEmpty) {
+                    let data = {
+                        course: this.course,
+                        name: this.name,
+                        startDateTime: this.startDateTime,
+                        endDateTime: this.endDateTime,
+                        fullMark: this.fullMark,
+                        questionList: this.questionList
+                    }
+                    axios
+                        .post('http://localhost:8080/api/exam/addExam', data)
+                        .then(() => {
+                            Swal.fire(
+                                'Successfully Created!',
+                                '',
+                                'success'
+                            )
+                        })
+                        .catch(error => console.log(error));
+                    }
+
+                },
+                getAllCourses() {
+                    axios
+                        .get('http://localhost:8080/api/course/getAllCourses')
+                        .then(res => {
+                            res.data.forEach(course => {
+                                this.courseList.push(course.name);
+                            });
+                        })
+                        .catch(error => console.log(error));
+                }
+            },
+            mounted() {
+                this.getAllCourses();
+            },
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>
