@@ -1,0 +1,15 @@
+.course-accordion {
+  max-height: 500px;
+  overflow: auto;
+}
+
+.course-disscusion-reply {
+  max-height: 800px;
+  overflow: auto;
+}
+
+.chatbox-body {
+  max-height: 600px;
+  overflow: auto;
+}
+

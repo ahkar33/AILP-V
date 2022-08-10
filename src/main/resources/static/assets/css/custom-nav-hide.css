@@ -1,0 +1,12 @@
+@media (min-width: 762px) {
+  .hide-on-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 763px) {
+  .hide-on-desktop {
+    display: none;
+  }
+}
+

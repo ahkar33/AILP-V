@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/admin/admin-fragments :: admin_head">
+    <title>Exam Table</title>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <!-- this is where side nav is -->
+        <div th:insert="/admin/admin-fragments :: sidebar" />
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <!-- this is wherer nav bar is -->
+                <div th:insert="/admin/admin-fragments :: navbar" />
+                <div class="container-fluid">
+                    <h1 class="text-start"
+                        style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Anek Kannada', sans-serif;">
+                        Exam Table
+                    </h1>
+                    <div
+                        class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
+                        <div>
+                            <a class="btn btn-primary btn-lg" role="button" th:href="@{/admin/create-exam}" 
+                                style="width: 176.1px;font-size: 16px;height: 44px;margin-bottom: 12px;">
+                                <i class="fa-file-alt fas fs-4"></i>
+                                Create Exam
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card shadow">
+                        <!-- <div class="card-header py-3">
+                            <form>
+                                <div class="row">
+                                    <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                            <label class="form-label" style="color: rgb(77,77,77);"
+                                                for="cours-name">Course<select
+                                                    class="form-select d-inline-block form-select form-select-sm"
+                                                    style="margin-left: 10px;width: 146.062px;" name="cours-name">
+                                                    <option value="JAVA">JAVA</option>
+                                                    <option value="PHP">PHP</option>
+                                                    <option value="Programming Fundamental">Programming Fundamental
+                                                    </option>
+                                                    <option value="Andriod">Andriod</option>
+                                                </select>&nbsp;</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 col-lg-3"><button class="btn btn-dark border rounded shadow-sm"
+                                            type="submit">Search</button></div>
+
+                                </div>
+                            </form>
+                        </div> -->
+                        <div class="card-body">
+
+                            <!-- this is where to write datatable -->
+                            <table id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Exam Id</th>
+                                        <th>Exam Name</th>
+                                        <th>Course Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>001</td>
+                                        <td>Mid-Term Exam</td>
+                                        <td>Web Java</td>
+                                        <td>
+                                            <button class="btn btn-outline-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>002</td>
+                                        <td>Final Exam</td>
+                                        <td>Web Java</td>
+                                        <td>
+                                            <button class="btn btn-outline-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>003</td>
+                                        <td>Mid-Term Exam</td>
+                                        <td>PHP</td>
+                                        <td>
+                                            <button class="btn btn-outline-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>004</td>
+                                        <td>Final Exam</td>
+                                        <td>PHP</td>
+                                        <td>
+                                            <button class="btn btn-outline-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
+                </div>
+            </footer>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+    <div th:insert="/admin/admin-fragments :: footer" />
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+</body>
+
+</html>

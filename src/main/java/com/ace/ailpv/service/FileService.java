@@ -12,15 +12,15 @@ import org.springframework.stereotype.Service;
 public class FileService {
 
     public void createFolderForCourse(String courseName) {
-        File theDir = new File("C:\\Users\\Ahkar Toe Maw\\Documents\\Trying Things\\almost-real-one\\src\\main\\resources\\static\\courses\\" + courseName);
+        File theDir = new File("C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\ailp-v\\src\\main\\resources\\static\\courses\\" + courseName);
         if (!theDir.exists()) {
             theDir.mkdirs();
         }
-        File videoFolder = new File("C:\\Users\\Ahkar Toe Maw\\Documents\\Trying Things\\almost-real-one\\src\\main\\resources\\static\\courses\\" + courseName + "\\video");
+        File videoFolder = new File("C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\ailp-v\\src\\main\\resources\\static\\courses\\" + courseName + "\\video");
         if (!videoFolder.exists()) {
             videoFolder.mkdirs();
         }
-        File resourceFolder = new File("C:\\Users\\Ahkar Toe Maw\\Documents\\Trying Things\\almost-real-one\\src\\main\\resources\\static\\courses\\" + courseName + "\\resource");
+        File resourceFolder = new File("C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\ailp-v\\src\\main\\resources\\static\\courses\\" + courseName + "\\resource");
         if (!resourceFolder.exists()) {
             resourceFolder.mkdirs();
         }
@@ -31,14 +31,14 @@ public class FileService {
 
         file.transferTo(
                 new File(
-                        "C:\\Users\\Ahkar Toe Maw\\Documents\\Trying Things\\almost-real-one\\src\\main\\resources\\static\\courses\\"
+                        "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\ailp-v\\src\\main\\resources\\static\\courses\\"
                                 + folderName + "\\"
                                 + file.getOriginalFilename()));
     }
 
     public void  deleteFolder(String folderName) throws IOException {
                 File directory = new File(
-                "C:\\Users\\Ahkar Toe Maw\\Documents\\Trying Things\\almost-real-one\\src\\main\\resources\\static\\courses\\" + folderName);
+                "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\ailp-v\\src\\main\\resources\\static\\courses\\" + folderName);
         FileUtils.deleteDirectory(directory);
     }
 

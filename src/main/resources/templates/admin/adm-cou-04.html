@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/admin/admin-fragments :: admin_head">
+    <title>Course Table</title>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <!-- this is where side bar is -->
+        <div th:insert="/admin/admin-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <!-- this is where nav bar is -->
+                <div th:insert="/admin/admin-fragments :: navbar" />
+
+                <div class="container-fluid">
+                    <div>
+                        <h1 class="text-start"
+                            style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Anek Kannada', sans-serif;">
+                            Course Table
+                        </h1>
+                    </div>
+                    <div
+                        class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
+                        <div>
+                            <a class="btn btn-primary btn-lg" role="button" href="#add-course-button"
+                                data-bs-toggle="modal"
+                                style="width: 176.1px;font-size: 16px;height: 44px;margin-bottom: 12px;">
+                                <i class="fa-photo-video fas fs-5"></i>
+                                Create Course
+                            </a>
+                            <div class="modal fade" role="dialog" tabindex="-1" id="add-course-button">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <form th:action="@{/admin/addCourse}" th:object="${course}" method="post"
+                                            enctype="multipart/form-data">
+                                            <div class="modal-header" style="background: #f8f9fc;">
+                                                <h4
+                                                    style="color: rgb(75,75,75);font-family: 'Anek Bangla', sans-serif;font-weight: bold;margin-top: 5px;margin-bottom: 2px;">
+                                                    Create Course
+                                                </h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close">
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <label for="">Cousre Name</label>
+                                                <input type="text" class="form-control" th:field="*{name}" required
+                                                    maxlength="100" minlength="1">
+
+                                                <label for="">Fee</label>
+                                                <input type="text" class="form-control" th:field="*{fee}" required
+                                                    maxlength="20">
+
+                                                <label for="">Description</label>
+                                                <input type="text" class="form-control" th:field="*{description}"
+                                                    required maxlength="1000">
+
+                                                <label for="">Video</label>
+                                                <input type="file" class="form-control" multiple th:field="*{videos}"
+                                                    required>
+
+                                                <label for="">Resource</label>
+                                                <input type="file" class="form-control" multiple th:field="*{resources}"
+                                                    required>
+
+                                            </div>
+                                            <div class="modal-footer" style="background: #f8f9fc;">
+                                                <button class="btn btn-light" data-bs-dismiss="modal"
+                                                    style="margin-right: 13px;">Cancel</button>
+                                                <button class="btn btn-primary" type="submit">
+                                                    Create
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow">
+                        <h2 class="text-danger text-center">[[${msg}]]</h2>
+                        <div class="card-body">
+                            <table id="dataTable">
+                                <thead class="table">
+                                    <tr>
+                                        <th>Course Id</th>
+                                        <th>Course Name</th>
+                                        <th>Fee</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="course : ${courseList}">
+                                        <td>[[${course.id}]]</td>
+                                        <td>[[${course.name}]]</td>
+                                        <td>[[${course.fee}]]</td>
+                                        <td>[[${course.description}]]</td>
+                                        <td>
+                                            <a th:href="@{'/admin/deleteCourse/' + ${course.id} + '/' + ${course.name}}"
+                                                class="btn btn-outline-danger">
+                                                Remove
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+    <div th:insert="/admin/admin-fragments :: footer" />
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+
+</body>
+</html>
