@@ -28,7 +28,7 @@ public class Student {
     private String name;
     private String password;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "batch_id", nullable = false)
     private Batch studentBatch;
 

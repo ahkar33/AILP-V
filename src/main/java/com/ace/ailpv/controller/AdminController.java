@@ -17,6 +17,7 @@ import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
+import com.ace.ailpv.service.StudentService;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,6 +31,9 @@ public class AdminController {
     
     @Autowired 
     private ExamService examService;
+
+    @Autowired 
+    private StudentService studentService;
 
 
     @GetMapping("/course-table")
@@ -97,7 +101,8 @@ public class AdminController {
     }
 
     @GetMapping("/student-table")
-    public String setupStudentTable() {
+    public String setupStudentTable(ModelMap model) {
+        model.addAttribute("studentList", studentService.getAllStudents());
         return "/admin/ADM-STB-08";
     }
 
@@ -105,6 +110,14 @@ public class AdminController {
     public String setupStudentRegister(ModelMap model) {
         model.addAttribute("batchList", batchService.getAllBatches());
         return "/admin/ADM-STG-07";
+    }
+
+    @GetMapping("/deleteStudent/{id}")
+    public String deleteStudent(@PathVariable("id") String id)
+            throws IOException {
+        studentService.deleteStudentById(id);
+        return "redirect:/admin/student-table";
+
     }
 
     @GetMapping("/deleteExam/{id}")
