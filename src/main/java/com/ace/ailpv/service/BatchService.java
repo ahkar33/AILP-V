@@ -18,6 +18,10 @@ public class BatchService {
         batchRepository.save(batch);
     }
 
+    // public void updateBatch(Batch batch) {
+    //     batchRepository.sav;
+    // }
+
     public void deleteBatchById(Long id) {
         batchRepository.deleteById(id);
     }

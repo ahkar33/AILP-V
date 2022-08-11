@@ -71,14 +71,14 @@
                                 <tbody>
 
                                     <tr th:each="exam : ${examList}">
-                                        <td>[[${exam.name}]]</td>
-                                        <td>[[${exam.examCourse.name}]]</td>
-                                        <td>[[${exam.fullMark}]]</td>
-                                        <td>[[${exam.startDateTime}]]</td>
-                                        <td>[[${exam.endDateTime}]]</td>
+                                        <td>[[${exam?.name}]]</td>
+                                        <td>[[${exam?.examCourse.name}]]</td>
+                                        <td>[[${exam?.fullMark}]]</td>
+                                        <td>[[${exam?.startDateTime}]]</td>
+                                        <td>[[${exam?.endDateTime}]]</td>
                                         <td>
                                             <a class="btn btn-outline-danger"
-                                                th:href="@{'/admin/deleteExam/' + ${exam.id}}">
+                                                th:href="@{'/admin/deleteExam/' + ${exam?.id}}">
                                                 Remove
                                             </a>
                                         </td>
