@@ -20,7 +20,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class Student {
-  
+
     @Id
     private String id;
 
