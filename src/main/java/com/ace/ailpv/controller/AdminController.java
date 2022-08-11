@@ -27,7 +27,7 @@ public class AdminController {
     public String setupCourseTable(ModelMap model) {
         model.addAttribute("courseList", courseService.getAllCourses());
         model.addAttribute("course", new Course());
-        return "/admin/adm-cou-04";
+        return "/admin/ADM-COU-04";
     }
 
     @PostMapping("/addCourse")
@@ -55,12 +55,12 @@ public class AdminController {
 
     @GetMapping("/exam-table")
     public String setupExamTable() {
-        return "/admin/adm-etb-05";
+        return "/admin/ADM-ETB-05";
     }
 
     @GetMapping("/create-exam")
     public String setupCreateExam() {
-        return "/admin/adm-cre-06";
+        return "/admin/ADM-CRE-06";
     }
 
 }
