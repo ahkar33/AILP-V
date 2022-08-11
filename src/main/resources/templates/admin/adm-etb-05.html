@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -53,53 +54,37 @@
                             </form>
                         </div> -->
                         <div class="card-body">
+                           
 
                             <!-- this is where to write datatable -->
                             <table id="dataTable">
                                 <thead>
                                     <tr>
-                                        <th>Exam Id</th>
+                                        
                                         <th>Exam Name</th>
                                         <th>Course Name</th>
+                                        <th>Full Mark</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>001</td>
-                                        <td>Mid-Term Exam</td>
-                                        <td>Web Java</td>
+
+                                    <tr th:each="exam : ${examList}">
+                                        <td>[[${exam.name}]]</td>
+                                        <td>[[${exam.course}]]</td>
+                                        <td>[[${exam.fullMark}]]</td>
+                                        <td>[[${exam.startDateTime}]]</td>
+                                        <td>[[${exam.endDateTime}]]</td>
                                         <td>
-                                            <button class="btn btn-outline-danger">Remove</button>
+                                            <a th:href="@{'/admin/deleteExam/' + ${exam.id}}"><button class="btn btn-outline-danger">Remove</button></a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>002</td>
-                                        <td>Final Exam</td>
-                                        <td>Web Java</td>
-                                        <td>
-                                            <button class="btn btn-outline-danger">Remove</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>003</td>
-                                        <td>Mid-Term Exam</td>
-                                        <td>PHP</td>
-                                        <td>
-                                            <button class="btn btn-outline-danger">Remove</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>004</td>
-                                        <td>Final Exam</td>
-                                        <td>PHP</td>
-                                        <td>
-                                            <button class="btn btn-outline-danger">Remove</button>
-                                        </td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
-
+                            </form>
                         </div>
                     </div>
                 </div>
