@@ -81,10 +81,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>001</td>
-                                        <td>Sheldon</td>
-                                        <td class="flex-lg-nowrap flex-nowrap">Web Java Batch 01</td>
+                                    <tr th:each="student : ${studentList}">
+                                        <td>[[${student.id}]]</td>
+                                        <td>[[${student.name}]]</td>
+                                        <td>[[${student.studentBatch.name}]]</td>
+
+                                        <td class="flex-lg-nowrap flex-nowrap"></td>
                                         <td class="d-flex d-lg-flex flex-lg-nowrap flex-nowrap">
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal"
@@ -143,7 +145,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <a th:href="@{'/admin/deleteStudent/' + ${student.id}}">
                                             <button class="btn btn-outline-danger">Remove</button>
+                                            </a>
                                         </td>
                                         <td class="flex-lg-nowrap flex-nowrap">
                                             <!-- Button trigger modal -->
@@ -205,30 +209,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>002</td>
-                                        <td>Leonard</td>
-                                        <td>OJT Batch 01</td>
-                                        <td class="d-flex d-lg-flex flex-lg-nowrap flex-nowrap">
-                                            <button class="btn btn-primary me-2" style="width: 68px;">Edit</button>
-                                            <button class="btn btn-outline-danger">Remove</button>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-warning">Detail</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>003</td>
-                                        <td>Chandler</td>
-                                        <td>OJT Batch-02</td>
-                                        <td class="d-flex d-lg-flex flex-lg-nowrap flex-nowrap">
-                                            <button class="btn btn-primary me-2" style="width: 68px;">Edit</button>
-                                            <button class="btn btn-outline-danger">Remove</button>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-warning">Detail</button>
-                                        </td>
-                                    </tr>
+                                   
                                 </tbody>
                             </table>
 
