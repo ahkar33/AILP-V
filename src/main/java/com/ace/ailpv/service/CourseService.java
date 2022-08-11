@@ -14,7 +14,6 @@ import com.ace.ailpv.entity.Resource;
 import com.ace.ailpv.entity.Video;
 import com.ace.ailpv.repository.CourseRepository;
 
-
 @Service
 public class CourseService {
 
@@ -49,6 +48,14 @@ public class CourseService {
 
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
+    }
+
+    public Course getCourseById(Long id) {
+        return courseRepository.findById(id).get();
+    }
+
+    public Course getCourseByName(String name) {
+        return courseRepository.findByName(name);
     }
 
     public void deleteCourseById(Long courseId, String courseName) throws IOException {

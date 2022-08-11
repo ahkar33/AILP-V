@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Course;
+import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.entity.Exam;
 import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
-
 
 @Controller
 @RequestMapping("/admin")
@@ -26,7 +27,11 @@ public class AdminController {
     private CourseService courseService;
 
     @Autowired
+    private BatchService batchService;
+    
+    @Autowired 
     private ExamService examService;
+
 
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {
@@ -53,11 +58,6 @@ public class AdminController {
         return "redirect:/admin/course-table";
     }
 
-    @GetMapping("/batch-table")
-    public String setupBatchTable() {
-        return "/admin/batch-table";
-    }
-
     @GetMapping("/exam-table")
     public String setupExamTable(ModelMap model) {
         model.addAttribute("examList", examService.getAllExams());
@@ -70,11 +70,49 @@ public class AdminController {
         return "/admin/ADM-CRE-06";
     }
 
+    @GetMapping("/batch-table")
+    public String setupBatchTable(ModelMap model) {
+        model.addAttribute("courseList", courseService.getAllCourses());
+        model.addAttribute("batch", new Batch());
+        model.addAttribute("editBatch", new Batch());
+        model.addAttribute("batchList", batchService.getAllBatches());
+        return "/admin/ADM-BTB-05";
+    }
+
+    @PostMapping("/addBatch")
+    public String addBatch(@ModelAttribute("batch") Batch batch) {
+        batch.setBatchCourse(courseService.getCourseById(batch.getCourseId()));
+        batchService.addBatch(batch);
+        return "redirect:/admin/batch-table";
+    }
+
+    @GetMapping("/deleteBatch/{id}")
+    public String deleteBatch(@PathVariable("id") Long id) {
+        batchService.deleteBatchById(id);
+        return "redirect:/admin/batch-table";
+    }
+
+    @GetMapping("/editBatch/{id}")
+    public String editBatch(@PathVariable("id") Long id) {
+        return "/admin/ADM-EDB-11";
+    }
+
+    @GetMapping("/student-table")
+    public String setupStudentTable() {
+        return "/admin/ADM-STB-08";
+    }
+
+    @GetMapping("/studentRegister")
+    public String setupStudentRegister(ModelMap model) {
+        model.addAttribute("batchList", batchService.getAllBatches());
+        return "/admin/ADM-STG-07";
+
     @GetMapping("/deleteExam/{id}")
     public String deleteExam(@PathVariable("id") Long id)
             throws IOException {
         examService.deleteExamById(id);
         return "redirect:/admin/exam-table";
+
     }
 
 }
