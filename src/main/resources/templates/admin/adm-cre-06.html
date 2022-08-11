@@ -25,9 +25,14 @@
                                 <select v-model="course" class="form-select mb-4" aria-label="Default select example"
                                     required style="width: 10rem;">
                                     <option value="" disabled>Choose Course</option>
-                                    <option v-for="(course, index) in courseList" :key="index">
+                                    <span th:each="course : ${courseList}">
+                                        <option th:value="${course.name}">
+                                            [[${course.name}]] 
+                                        </option>
+                                    </span>
+                                    <!-- <option v-for="(course, index) in courseList" :key="index">
                                         {{course}}
-                                    </option>
+                                    </option> -->
                                 </select>
 
                                 <div class="input-group mb-3">
@@ -215,18 +220,18 @@
 
                 },
                 getAllCourses() {
-                    axios
-                        .get('http://localhost:8080/api/course/getAllCourses')
-                        .then(res => {
-                            res.data.forEach(course => {
-                                this.courseList.push(course.name);
-                            });
-                        })
-                        .catch(error => console.log(error));
+                    // axios
+                    //     .get('http://localhost:8080/api/course/getAllCourses')
+                    //     .then(res => {
+                    //         res.data.forEach(course => {
+                    //             this.courseList.push(course.name);
+                    //         });
+                    //     })
+                    //     .catch(error => console.log(error));
                 }
             },
             mounted() {
-                this.getAllCourses();
+                // this.getAllCourses();
             },
         });
 
