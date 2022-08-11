@@ -1,5 +1,7 @@
 package com.ace.ailpv.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,14 @@ public class ExamService {
 
     public void addExam(Exam exam) {
         examRepository.save(exam);
+    }
+
+    public List<Exam> getAllExams() {
+       return examRepository.findAll(); 
+    }
+
+    public void deleteExamById(Long id) {
+         examRepository.deleteById(id);
     }
 
 }

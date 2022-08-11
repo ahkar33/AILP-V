@@ -15,7 +15,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.service.BatchService;
+import com.ace.ailpv.entity.Exam;
 import com.ace.ailpv.service.CourseService;
+import com.ace.ailpv.service.ExamService;
 
 @Controller
 @RequestMapping("/admin")
@@ -26,6 +28,10 @@ public class AdminController {
 
     @Autowired
     private BatchService batchService;
+    
+    @Autowired 
+    private ExamService examService;
+
 
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {
@@ -53,7 +59,9 @@ public class AdminController {
     }
 
     @GetMapping("/exam-table")
-    public String setupExamTable() {
+    public String setupExamTable(ModelMap model) {
+        model.addAttribute("examList", examService.getAllExams());
+        
         return "/admin/ADM-ETB-05";
     }
 
@@ -98,6 +106,13 @@ public class AdminController {
     public String setupStudentRegister(ModelMap model) {
         model.addAttribute("batchList", batchService.getAllBatches());
         return "/admin/ADM-STG-07";
+
+    @GetMapping("/deleteExam/{id}")
+    public String deleteExam(@PathVariable("id") Long id)
+            throws IOException {
+        examService.deleteExamById(id);
+        return "redirect:/admin/exam-table";
+
     }
 
 }
