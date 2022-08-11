@@ -45,22 +45,22 @@
 
                                                 <label for="">Course</label>
                                                 <select th:field="*{courseId}" class="form-select mb-3"
-                                                    aria-label="Default select example">
+                                                    aria-label="Default select example" required>
                                                     <span th:each="course : ${courseList}">
                                                         <option th:value="${course.id}">[[${course.name}]]</option>
                                                     </span>
                                                 </select>
 
                                                 <label for="">Batch Name</label>
-                                                <input type="text" class="form-control mb-3" th:field="*{name}"
+                                                <input type="text" class="form-control mb-3" th:field="*{name}" required
                                                     placeholder="eg: Java Batch 01" />
 
 
                                                 <label for="">Start Date</label>
-                                                <input type="date" class="form-control mb-3" th:field="*{startDate}" />
+                                                <input type="date" class="form-control mb-3" th:field="*{startDate}" required />
 
                                                 <label for="">End Date</label>
-                                                <input type="date" class="form-control mb-3" th:field="*{endDate}" />
+                                                <input type="date" class="form-control mb-3" th:field="*{endDate}" required />
 
                                             </div>
                                             <div class="modal-footer" style="background: #f8f9fc;">
