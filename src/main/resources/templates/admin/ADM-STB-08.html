@@ -82,9 +82,9 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="student : ${studentList}">
-                                        <td>[[${student.id}]]</td>
-                                        <td>[[${student.name}]]</td>
-                                        <td>[[${student.studentBatch.name}]]</td>
+                                        <td>[[${student?.id}]]</td>
+                                        <td>[[${student?.name}]]</td>
+                                        <td>[[${student?.studentBatch.name}]]</td>
 
                                         <td class="d-flex d-lg-flex flex-lg-nowrap flex-nowrap">
                                             <!-- Button trigger modal -->
@@ -145,7 +145,7 @@
                                                 </div>
                                             </div>
                                             <a class="btn btn-outline-danger"
-                                                th:href="@{'/admin/deleteStudent/' + ${student.id}}">
+                                                th:href="@{'/admin/deleteStudent/' + ${student?.id}}">
                                                 Remove
                                             </a>
                                         </td>

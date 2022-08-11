@@ -27,7 +27,7 @@
                                     <option value="" disabled>Choose Course</option>
                                     <span th:each="course : ${courseList}">
                                         <option th:value="${course.id}">
-                                            [[${course.name}]] 
+                                            [[${course?.name}]] 
                                         </option>
                                     </span>
                                     <!-- <option v-for="(course, index) in courseList" :key="index">

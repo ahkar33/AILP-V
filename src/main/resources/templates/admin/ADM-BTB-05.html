@@ -119,17 +119,17 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="batch : ${batchList}">
-                                        <td>[[${batch.id}]]</td>
-                                        <td>[[${batch.name}]]</td>
-                                        <td>[[${batch.batchCourse.name}]]</td>
-                                        <td>[[${batch.startDate}]]</td>
-                                        <td>[[${batch.endDate}]]</td>
+                                        <td>[[${batch?.id}]]</td>
+                                        <td>[[${batch?.name}]]</td>
+                                        <td>[[${batch?.batchCourse.name}]]</td>
+                                        <td>[[${batch?.startDate}]]</td>
+                                        <td>[[${batch?.endDate}]]</td>
                                         <td>
-                                            <a th:href="@{/admin/editBatch/} + ${batch.id}"
+                                            <a th:href="@{/admin/editBatch/} + ${batch?.id}"
                                             class="btn btn-primary">
                                             Edit
                                             </a> 
-                                            <a th:href="@{'/admin/deleteBatch/' + ${batch.id}}"
+                                            <a th:href="@{'/admin/deleteBatch/' + ${batch?.id}}"
                                                 class="btn btn-outline-danger">
                                                 Remove
                                             </a>

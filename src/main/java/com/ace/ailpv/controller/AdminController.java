@@ -1,6 +1,7 @@
 package com.ace.ailpv.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -96,8 +97,19 @@ public class AdminController {
     }
 
     @GetMapping("/editBatch/{id}")
-    public String editBatch(@PathVariable("id") Long id) {
+    public String setupEditBatch(@PathVariable("id") Long id, ModelMap model) {
+        Batch batch = batchService.getBatchById(id);
+        List<Course> courseList = courseService.getAllCourses();
+        model.addAttribute("courseList", courseList);
+        model.addAttribute("batch", batch);
         return "/admin/ADM-EDB-11";
+    }
+
+    @PostMapping("/editBatch")
+    public String editBatch(@ModelAttribute("batch") Batch batch) {
+        batch.setBatchCourse(courseService.getCourseById(batch.getCourseId()));
+        batchService.addBatch(batch);
+        return "redirect:/admin/batch-table";
     }
 
     @GetMapping("/student-table")
