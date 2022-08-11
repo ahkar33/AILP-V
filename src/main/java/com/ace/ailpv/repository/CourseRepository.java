@@ -8,4 +8,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     Boolean existsByName(String name);
 
+    Course findByName(String name);
+
 }

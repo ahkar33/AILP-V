@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,5 +31,8 @@ public class Student {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "batch_id", nullable = false)
     private Batch studentBatch;
+
+    @Transient
+    private String batchId;
 
 }

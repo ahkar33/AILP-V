@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/admin/admin-fragments :: admin_head">
+    <title>Batch Table</title>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+
+        <!-- this is where side bar is -->
+        <div th:insert="/admin/admin-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <!-- this is where nav bar is -->
+                <div th:insert="/admin/admin-fragments :: navbar" />
+
+                <div class="container-fluid">
+                    <h1 class="mb-4 text-start"
+                        style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
+                        Student Table</h1>
+                    <div
+                        class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
+                        <div>
+                            <a class="btn btn-lg btn-primary fs-6" role="button" th:href="@{/admin/studentRegister}" 
+                                style="width: 179.1px;font-size: 18px;height: 44px;margin-bottom: 12px;">
+                                <i class="fa fa-user-plus fas fs-5"></i>&nbsp; &nbsp;
+                                Add Student
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card shadow">
+                        <!-- <div class="card-header py-3">
+                            <form>
+                                <div class="row">
+                                    <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                            <label class="form-label" style="color: rgb(77,77,77);"
+                                                for="cours-name">Course<select
+                                                    class="form-select d-inline-block form-select form-select-sm"
+                                                    style="margin-left: 10px;width: 146.062px;" name="cours-name">
+                                                    <option value="JAVA">JAVA</option>
+                                                    <option value="PHP">PHP</option>
+                                                    <option value="Programming Fundamental">Programming Fundamental
+                                                    </option>
+                                                    <option value="Andriod">Andriod</option>
+                                                </select>&nbsp;</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto col-sm-auto col-md-auto col-lg-auto col-xl-auto col-xxl-auto text-nowrap"
+                                        style="margin-top: 4px;">
+                                        <div id="dataTable_length-2" class="dataTables_length"
+                                            aria-controls="dataTable"><label class="form-label"
+                                                style="color: rgb(77,77,77);" for="batch-name">Batch<select
+                                                    class="form-select d-inline-block form-select form-select-sm"
+                                                    style="margin-left: 10px;width: 127.453px;" name="batch-name">
+                                                    <option selected disabled>Choose One Batch</option>
+                                                    <option value="1">Java Web Batch 01</option>
+                                                    <option value="2">OJT Batch 01</option>
+                                                    <option value="3">PHP Batch 01</option>
+                                                </select>&nbsp;</label></div>
+                                    </div>
+                                    <div class="col-sm-5 col-lg-3"><button class="btn btn-dark border rounded shadow-sm"
+                                            type="submit">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> -->
+                        <div class="card-body">
+
+                            <!-- where I have to write table -->
+                            <table id="dataTable">
+                                <thead class="table">
+                                    <tr>
+                                        <th>Student Id</th>
+                                        <th>Student Name</th>
+                                        <th>Batch</th>
+                                        <th>Action</th>
+                                        <th>Info</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>001</td>
+                                        <td>Sheldon</td>
+                                        <td class="flex-lg-nowrap flex-nowrap">Web Java Batch 01</td>
+                                        <td class="d-flex d-lg-flex flex-lg-nowrap flex-nowrap">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop" style="width: 68px;">
+                                                Edit
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">Edit
+                                                                Student
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form action="">
+                                                            <div class="modal-body">
+
+                                                                <label for="">Student Id</label>
+                                                                <input type="text" class="form-control" value="001"
+                                                                    readonly />
+
+                                                                <label for="">Student Name</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="Sheldon" />
+
+                                                                <label for="">Password</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="&A89*ae00231" />
+
+                                                                <label for="">Phone</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="0934383282" />
+
+                                                                <label for="">Batch</label>
+                                                                <select class="form-select"
+                                                                    aria-label="Default select example">
+                                                                    <option selected disabled>Choose One Batch</option>
+                                                                    <option value="1">Java Web Batch 01</option>
+                                                                    <option value="2">OJT Batch 01</option>
+                                                                    <option value="3">PHP Batch 01</option>
+                                                                </select>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Edit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-outline-danger">Remove</button>
+                                        </td>
+                                        <td class="flex-lg-nowrap flex-nowrap">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop2">
+                                                Detail
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static"
+                                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">Student
+                                                                Detail
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table>
+                                                                <tr>
+                                                                    <td><b>Student Name</b></td>
+                                                                    <td>Sheldon</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Attendance</b></td>
+                                                                    <td>90%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Assignemnt-1 Mark</b></td>
+                                                                    <td>80/100 Marks</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Assignemnt-2 Mark</b></td>
+                                                                    <td>50/100 Marks</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Assignemnt-3 Mark</b></td>
+                                                                    <td>85/100 Marks</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Mid-Term Exam Mark</b></td>
+                                                                    <td>90/100 Marks</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Final Exam Mark</b></td>
+                                                                    <td>89/100 Marks</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>002</td>
+                                        <td>Leonard</td>
+                                        <td>OJT Batch 01</td>
+                                        <td class="d-flex d-lg-flex flex-lg-nowrap flex-nowrap">
+                                            <button class="btn btn-primary me-2" style="width: 68px;">Edit</button>
+                                            <button class="btn btn-outline-danger">Remove</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-warning">Detail</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>003</td>
+                                        <td>Chandler</td>
+                                        <td>OJT Batch-02</td>
+                                        <td class="d-flex d-lg-flex flex-lg-nowrap flex-nowrap">
+                                            <button class="btn btn-primary me-2" style="width: 68px;">Edit</button>
+                                            <button class="btn btn-outline-danger">Remove</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-warning">Detail</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+    <div th:insert="/admin/admin-fragments :: footer" />
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+</body>
+
+</html>
