@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/admin/admin-fragments :: admin_head">
+    <title>Edit Student</title>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <!-- this is where side bar is -->
+          <div th:insert="/admin/admin-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content" class="fs-6">
+                <!-- this is where navbar is -->
+                <div th:insert="/admin/admin-fragments :: navbar" />
+
+                <div class="container-fluid pb-5 pe-5 ps-5 pt-2" style="max-width: 45rem;">
+                    <h1 class="h2" style="padding-right: 0px;">Edit Student</h1>
+                    <div class="card mb-4 shadow-sm">
+                        <form th:action="@{/admin/editStudent}" th:object="${student}" method="post">
+                            <div class="card-body p-4 text-dark">
+                        
+                                <label class="fs-6">Student Id</label>
+                                <div class="input-group mb-3">
+                                    <input class="form-control mb-2"
+                                    th:field="*{id}"  type="hidden"/>
+                                </div>
+                                <label class="fs-6">Student Name</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control mb-2"
+                                    th:field="*{name}"  
+                                     placeholder="Enter Student name"
+                                         required="true" />
+                                </div>
+                                <label class="fs-6">Student Batch</label>
+                                <div class="input-group mb-3">
+                                    <input type="date" class="form-control mb-2"
+                                    th:field="*{studentBatch}" 
+                                         required="true" />
+                                </div>
+                            
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+     <div th:insert="/admin/admin-fragments :: footer" />
+
+</body>
+
+</html>

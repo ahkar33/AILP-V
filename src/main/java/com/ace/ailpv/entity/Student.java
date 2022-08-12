@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +30,7 @@ public class Student {
     private String password;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("studentList")
     @JoinColumn(name = "batch_id", nullable = false)
     private Batch studentBatch;
 

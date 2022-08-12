@@ -27,5 +27,8 @@ public class StudentService {
 
     }
 
+    public Student getStudentById(String id){
+        return studentRepository.findById(id).get();
+    }
 
 }
