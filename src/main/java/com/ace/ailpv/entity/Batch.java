@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,27 +17,24 @@ import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Batch {
   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
      
-    private String name;    
+    private String name;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
@@ -46,7 +42,8 @@ public class Batch {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
+    // @JsonBackReference
     @JoinColumn(name = "course_id", nullable = false)
     private Course batchCourse;
 
@@ -54,13 +51,11 @@ public class Batch {
     private Long courseId;
 
     @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, mappedBy = "studentBatch")
-    @JsonIgnoreProperties("studentBatch")
+    // @JsonManagedReference
     Set<Student> studentList = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, mappedBy = "batchList")
+    // @JsonManagedReference
     Set<Teacher> teacherList = new HashSet<>();
-
-    // @Transient
-    // private String courseName;
 
 }

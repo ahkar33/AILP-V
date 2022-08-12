@@ -140,19 +140,17 @@ public class AdminController {
     @GetMapping("/editStudent/{id}")
     public String setupEditStudent(@PathVariable("id") String id, ModelMap model) {
         Student student = studentService.getStudentById(id);
-      //  Batch batch = batchService.getBatchById(id);
+        model.addAttribute("batchList", batchService.getAllBatches());
         model.addAttribute("student", student);
-       // model.addAttribute("batch", batch);
         return "/admin/ADM-EDS-12";
     }
 
     @PostMapping("/editStudent")
     public String editStudent(@ModelAttribute("student") Student student) {
-       // batch.setBatchCourse(courseService.getCourseById(batch.getCourseId()));
+        student.setStudentBatch(batchService.getBatchById(Long.parseLong(student.getBatchId())));
         studentService.addStudent(student);
         return "redirect:/admin/student-table";
     }
-
 
     @GetMapping("/deleteExam/{id}")
     public String deleteExam(@PathVariable("id") Long id)
