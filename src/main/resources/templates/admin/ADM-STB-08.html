@@ -86,66 +86,11 @@
                                         <td>[[${student?.name}]]</td>
                                         <td>[[${student?.studentBatch.name}]]</td>
 
-                                        <td class="d-flex d-lg-flex flex-lg-nowrap flex-nowrap">
-                                            <!-- Button trigger modal -->
+                                        <td>
                                             <a th:href="@{/admin/editStudent/} + ${student?.id}"
-                                                                    class="btn btn-primary">
-                                                                    Edit
-                                                                </a>
-
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-                                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticBackdropLabel">Edit
-                                                                Student
-                                                            </h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <form action="">
-                                                            <div class="modal-body">
-
-                                                                <label for="">Student Id</label>
-                                                                <input type="text" class="form-control" value="001"
-                                                                    readonly />
-
-                                                                <label for="">Student Name</label>
-                                                                <input type="text" class="form-control"
-                                                                    value="Sheldon" />
-
-                                                                <label for="">Password</label>
-                                                                <input type="text" class="form-control"
-                                                                    value="&A89*ae00231" />
-
-                                                                <label for="">Phone</label>
-                                                                <input type="text" class="form-control"
-                                                                    value="0934383282" />
-
-                                                                <label for="">Batch</label>
-                                                                <select class="form-select"
-                                                                    aria-label="Default select example">
-                                                                    <option selected disabled>Choose One Batch</option>
-                                                                    <option value="1">Java Web Batch 01</option>
-                                                                    <option value="2">OJT Batch 01</option>
-                                                                    <option value="3">PHP Batch 01</option>
-                                                                </select>
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <a th:href="@{/admin/editStudent/} + ${student?.id}"
-                                                                    class="btn btn-primary">
-                                                                    Edit
-                                                                </a>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                class="btn btn-primary me-1">
+                                                Edit
+                                            </a>
                                             <a class="btn btn-outline-danger"
                                                 th:href="@{'/admin/deleteStudent/' + ${student?.id}}">
                                                 Remove

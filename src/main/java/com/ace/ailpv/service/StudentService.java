@@ -10,7 +10,7 @@ import com.ace.ailpv.repository.StudentRepository;
 
 @Service
 public class StudentService {
-  
+
     @Autowired
     private StudentRepository studentRepository;
 
@@ -18,17 +18,20 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    public List<Student> getAllStudents(){
-       return  studentRepository.findAll();     
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
     }
 
-    public void deleteStudentById(String id){
-         studentRepository.deleteById(id);
-
+    public void deleteStudentById(String id) {
+        studentRepository.deleteById(id);
     }
 
-    public Student getStudentById(String id){
-        return studentRepository.findById(id).get();
+    public Student getStudentById(String id) {
+        return studentRepository.findStudentById(id);
+    }
+
+    public Student getStudentByName(String name) {
+        return studentRepository.findByName(name);
     }
 
 }
