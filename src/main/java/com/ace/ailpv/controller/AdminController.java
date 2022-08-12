@@ -174,7 +174,6 @@ public class AdminController {
 
     @GetMapping("/deleteTeacher/{id}")
     public String deleteTeacher(@PathVariable("id") String id) {
-        System.out.println("in teacher delete");
         teacherService.deleteTeacherById(id);
         return "redirect:/admin/teacher-table";
     }

@@ -92,7 +92,7 @@
                                                 Edit
                                             </a>
                                             <a class="btn btn-outline-danger"
-                                                th:href="@{'/admin/deleteStudent/' + ${student?.id}}">
+                                                th:attr="onclick=|handleDelete('${student.id}')|">
                                                 Remove
                                             </a>
                                         </td>
@@ -128,6 +128,23 @@
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });
+
+        const handleDelete = (teacherId) => {
+            console.log(teacherId);
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = `http://localhost:8080/admin/deleteTeacher/${teacherId}`;
+                }
+            })
+        }
     </script>
 </body>
 
