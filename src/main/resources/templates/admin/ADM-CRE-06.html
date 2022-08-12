@@ -183,7 +183,11 @@
                             element.rightAnswer.replace(/\s/g, "").length == 0
                         ) {
                             this.isEmpty = true;
-                            Swal.fire('Please Fill All Question Forms')
+                            Swal.fire(
+                                'Please Fill All Question Forms!',
+                                '',
+                                'info'
+                            )
                         }
                         else if (
                             this.course.replace(/\s/g, "").length == 0 ||
@@ -193,7 +197,11 @@
                             this.fullMark.replace(/\s/g, "").length == 0
                         ) {
                             this.isEmpty = true;
-                            Swal.fire('Please Fill All Input Forms')
+                            Swal.fire(
+                                'Please Fill All Input Forms!',
+                                '',
+                                'info'
+                            )
                         }
                     })
 
