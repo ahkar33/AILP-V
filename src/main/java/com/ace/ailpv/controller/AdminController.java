@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Course;
+import com.ace.ailpv.entity.Student;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
@@ -136,6 +137,23 @@ public class AdminController {
 
     }
 
+    @GetMapping("/editStudent/{id}")
+    public String setupEditStudent(@PathVariable("id") String id, ModelMap model) {
+        Student student = studentService.getStudentById(id);
+      //  Batch batch = batchService.getBatchById(id);
+        model.addAttribute("student", student);
+       // model.addAttribute("batch", batch);
+        return "/admin/ADM-EDS-12";
+    }
+
+    @PostMapping("/editStudent")
+    public String editStudent(@ModelAttribute("student") Student student) {
+       // batch.setBatchCourse(courseService.getCourseById(batch.getCourseId()));
+        studentService.addStudent(student);
+        return "redirect:/admin/student-table";
+    }
+
+
     @GetMapping("/deleteExam/{id}")
     public String deleteExam(@PathVariable("id") Long id)
             throws IOException {
@@ -162,5 +180,7 @@ public class AdminController {
         teacherService.deleteTeacherById(id);
         return "redirect:/admin/teacher-table";
     }
+
+
 
 }
