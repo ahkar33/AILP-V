@@ -26,8 +26,8 @@
                                     required style="width: 10rem;">
                                     <option value="" disabled>Choose Course</option>
                                     <span th:each="course : ${courseList}">
-                                        <option th:value="${course.name}">
-                                            [[${course.name}]] 
+                                        <option th:value="${course.id}">
+                                            [[${course?.name}]] 
                                         </option>
                                     </span>
                                     <!-- <option v-for="(course, index) in courseList" :key="index">
@@ -199,13 +199,14 @@
 
                     if (!this.isEmpty) {
                         let data = {
-                            course: this.course,
+                            courseId: this.course,
                             name: this.name,
                             startDateTime: this.startDateTime,
                             endDateTime: this.endDateTime,
                             fullMark: this.fullMark,
                             questionList: this.questionList
                         }
+                        console.log(data);
                         axios
                             .post('http://localhost:8080/api/exam/addExam', data)
                             .then(() => {

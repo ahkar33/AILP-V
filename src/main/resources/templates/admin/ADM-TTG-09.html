@@ -1,8 +1,27 @@
 <!DOCTYPE html>
 <html>
 
-<head th:insert="/admin/admin-fragments :: admin_head">
-    <title>Register Student</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Table - Brand</title>
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Bangla&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Kannada&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Average+Sans&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inria+Sans&amp;display=swap" />
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="../assets/fonts/ionicons.min.css" />
+    <link rel="stylesheet" href="../assets/fonts/material-icons.min.css" />
+    <link rel="stylesheet" href="../assets/fonts/fontawesome5-overrides.min.css" />
+    <link rel="stylesheet" href="../assets/css/Dark-footer-with-social-media-icons.css" />
+    <link rel="stylesheet" href="../assets/css/dh-header-cover-image-button.css" />
+    <link rel="stylesheet" href="../assets/css/Footer-Dark-Multi-Column.css" />
 </head>
 
 <body id="page-top">
@@ -15,20 +34,21 @@
                 <!-- this is where nav bar is -->
                 <div th:insert="/admin/admin-fragments :: navbar" />
 
-                <div id="student-grid">
+                <div id="teacher-grid">
                     <div class="container-fluid">
+                        <!-- this is where i write grid -->
                         <select v-model="batch" class="form-select" aria-label="Default select example"
                             style="width: 12rem;">
-                            <option disabled>Choose One Batch</option>
+                            <option selected disabled>Choose One Batch</option>
                             <span th:each="batch : ${batchList}">
-                                <option th:value="${batch.id}">[[${batch.name}]]</option>
+                                <option th:value="${batch?.id}">[[${batch?.name}]]</option>
                             </span>
                         </select>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Student Id</th>
-                                    <th>Student Name</th>
+                                    <th>Teacher Id</th>
+                                    <th>Teacher Name</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -42,7 +62,7 @@
                                         <input v-model="inputField.name" class="form-control" type="text"
                                             placeholder="name" />
                                     </td>
-                                    <td class="d-inline-flex flex-lg-wrap">
+                                    <td class="d-flex flex-lg-wrap">
                                         <button @click.prevent="handleRemoveField(index)"
                                             class="btn btn-danger m-1">-</button>
                                         <button @click.prevent="handleAddField()" class="btn btn-success m-1">+</button>
@@ -51,11 +71,12 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-start ms-2">
-                            <button @click.prevent="handleSend()" class="btn btn-primary">Add</button>
+                            <button @click.prevent="handleSend()" class="btn btn-primary d-flex d-lg-flex"
+                                style="width: 67px; padding-left: 16px;">Add</button>
                         </div>
                     </div>
-
                 </div>
+
             </div>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
@@ -73,13 +94,13 @@
                 return {
                     batch: 'Choose One Batch',
                     inputFields: [
-                        { id: '', name: '', batchId: '' },
+                        { id: '', name: '', batch: '' },
                     ],
                 }
             },
             methods: {
                 handleAddField() {
-                    this.inputFields = [...this.inputFields, { id: '', name: '', batchId: '' }];
+                    this.inputFields = [...this.inputFields, { id: '', name: '', batch: '' }];
                 },
                 handleRemoveField(index) {
                     if (this.inputFields.length > 1) {
@@ -89,37 +110,27 @@
                     }
                 },
                 handleSend() {
-                    console.log(this.batch);
                     let data = [];
-                    this.inputFields.forEach(student => {
-                        data = [...data, { id: student.id, name: student.name, batchId: this.batch }];
+                    this.inputFields.forEach(teacher => {
+                        data = [...data, { id: teacher.id, name: teacher.name, batchId: this.batch }];
                     });
                     console.log(data);
                     axios
-                        .post('http://localhost:8080/api/student/addStudents', data)
+                        .post('http://localhost:8080/api/teacher/addTeachers', data)
                         .then(() => {
                             Swal.fire(
                                 'Successfully Registered!',
                                 '',
                                 'success'
-                            ).then(() => window.location = "http://localhost:8080/admin/student-table");
+                            ).then(() => window.location = "http://localhost:8080/admin/teacher-table");
                         })
                         .catch(error => console.log(error));
-                },
-                getAllBatches() {
-                    axios.
-                        get("http://localhost:8080/api/student/getCourses")
-                        .then(() => {
-
-                        })
-                        .catch(error => console.log(error))
                 }
             },
         });
 
-        app.mount('#student-grid');
+        app.mount('#teacher-grid');
     </script>
-
 </body>
 
 </html>

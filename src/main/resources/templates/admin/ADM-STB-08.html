@@ -23,7 +23,7 @@
                     <div
                         class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
                         <div>
-                            <a class="btn btn-lg btn-primary fs-6" role="button" th:href="@{/admin/studentRegister}" 
+                            <a class="btn btn-lg btn-primary fs-6" role="button" th:href="@{/admin/studentRegister}"
                                 style="width: 179.1px;font-size: 18px;height: 44px;margin-bottom: 12px;">
                                 <i class="fa fa-user-plus fas fs-5"></i>&nbsp; &nbsp;
                                 Add Student
@@ -82,11 +82,10 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="student : ${studentList}">
-                                        <td>[[${student.id}]]</td>
-                                        <td>[[${student.name}]]</td>
-                                        <td>[[${student.studentBatch.name}]]</td>
+                                        <td>[[${student?.id}]]</td>
+                                        <td>[[${student?.name}]]</td>
+                                        <td>[[${student?.studentBatch.name}]]</td>
 
-                                        <td class="flex-lg-nowrap flex-nowrap"></td>
                                         <td class="d-flex d-lg-flex flex-lg-nowrap flex-nowrap">
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal"
@@ -145,8 +144,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a th:href="@{'/admin/deleteStudent/' + ${student.id}}">
-                                            <button class="btn btn-outline-danger">Remove</button>
+                                            <a class="btn btn-outline-danger"
+                                                th:href="@{'/admin/deleteStudent/' + ${student?.id}}">
+                                                Remove
                                             </a>
                                         </td>
                                         <td class="flex-lg-nowrap flex-nowrap">
@@ -209,7 +209,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                   
+
                                 </tbody>
                             </table>
 

@@ -96,12 +96,12 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="course : ${courseList}">
-                                        <td>[[${course.id}]]</td>
-                                        <td>[[${course.name}]]</td>
-                                        <td>[[${course.fee}]]</td>
-                                        <td>[[${course.description}]]</td>
+                                        <td>[[${course?.id}]]</td>
+                                        <td>[[${course?.name}]]</td>
+                                        <td>[[${course?.fee}]]</td>
+                                        <td>[[${course?.description}]]</td>
                                         <td>
-                                            <a th:href="@{'/admin/deleteCourse/' + ${course.id} + '/' + ${course.name}}"
+                                            <a th:href="@{'/admin/deleteCourse/' + ${course?.id} + '/' + ${course?.name}}"
                                                 class="btn btn-outline-danger">
                                                 Remove
                                             </a>

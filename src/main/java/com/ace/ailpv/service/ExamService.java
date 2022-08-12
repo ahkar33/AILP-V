@@ -23,6 +23,10 @@ public class ExamService {
        return examRepository.findAll(); 
     }
 
+    public Exam getExamById(Long id) {
+        return examRepository.findById(id).get();
+    }
+
     public void deleteExamById(Long id) {
          examRepository.deleteById(id);
     }

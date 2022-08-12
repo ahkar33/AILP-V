@@ -1,6 +1,7 @@
 package com.ace.ailpv.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
 import com.ace.ailpv.service.StudentService;
+import com.ace.ailpv.service.TeacherService;
 
 @Controller
 @RequestMapping("/admin")
@@ -34,6 +36,9 @@ public class AdminController {
 
     @Autowired 
     private StudentService studentService;
+
+    @Autowired
+    private TeacherService teacherService;
 
 
     @GetMapping("/course-table")
@@ -96,8 +101,19 @@ public class AdminController {
     }
 
     @GetMapping("/editBatch/{id}")
-    public String editBatch(@PathVariable("id") Long id) {
+    public String setupEditBatch(@PathVariable("id") Long id, ModelMap model) {
+        Batch batch = batchService.getBatchById(id);
+        List<Course> courseList = courseService.getAllCourses();
+        model.addAttribute("courseList", courseList);
+        model.addAttribute("batch", batch);
         return "/admin/ADM-EDB-11";
+    }
+
+    @PostMapping("/editBatch")
+    public String editBatch(@ModelAttribute("batch") Batch batch) {
+        batch.setBatchCourse(courseService.getCourseById(batch.getCourseId()));
+        batchService.addBatch(batch);
+        return "redirect:/admin/batch-table";
     }
 
     @GetMapping("/student-table")
@@ -126,6 +142,25 @@ public class AdminController {
         examService.deleteExamById(id);
         return "redirect:/admin/exam-table";
 
+    }
+
+    @GetMapping("/teacher-table")
+    public String setupTeacherTable(ModelMap model) {
+        model.addAttribute("teacherList", teacherService.getAllTeachers());
+        return "/admin/ADM-TTB-10";
+    }
+
+    @GetMapping("/teacherRegister")
+    public String setupTeacherRegister(ModelMap model) {
+        model.addAttribute("batchList", batchService.getAllBatches());
+        return "/admin/ADM-TTG-09";
+    }
+
+    @GetMapping("/deleteTeacher/{id}")
+    public String deleteTeacher(@PathVariable("id") String id) {
+        System.out.println("in teacher delete");
+        teacherService.deleteTeacherById(id);
+        return "redirect:/admin/teacher-table";
     }
 
 }
