@@ -1,6 +1,5 @@
 package com.ace.ailpv.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
