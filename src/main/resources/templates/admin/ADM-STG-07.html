@@ -89,22 +89,43 @@
                     }
                 },
                 handleSend() {
-                    console.log(this.batch);
-                    let data = [];
-                    this.inputFields.forEach(student => {
-                        data = [...data, { id: student.id, name: student.name, batchId: this.batch }];
-                    });
-                    console.log(data);
-                    axios
-                        .post('http://localhost:8080/api/student/addStudents', data)
-                        .then(() => {
+
+                    // this.inputFields.replace(/\s/g, "").length == 0 
+                    this.inputFields.forEach(element => {
+                        if (
+                            element.id.replace(/\s/g, "").length == 0 ||
+                            element.name.replace(/\s/g, "").length == 0
+                        ) {
                             Swal.fire(
-                                'Successfully Registered!',
+                                'Please Fill All Student Inputs!',
                                 '',
-                                'success'
-                            ).then(() => window.location = "http://localhost:8080/admin/student-table");
-                        })
-                        .catch(error => console.log(error));
+                                'info'
+                            )
+                        }
+                        else if (this.batch == "Choose One Batch") {
+                            Swal.fire(
+                                'Please Choose One Batch!',
+                                '',
+                                'info'
+                            )
+                        } else {
+                            let data = [];
+                            this.inputFields.forEach(student => {
+                                data = [...data, { id: student.id, name: student.name, batchId: this.batch }];
+                            });
+                            axios
+                                .post('http://localhost:8080/api/student/addStudents', data)
+                                .then(() => {
+                                    Swal.fire(
+                                        'Successfully Registered!',
+                                        '',
+                                        'success'
+                                    ).then(() => window.location = "http://localhost:8080/admin/student-table");
+                                })
+                                .catch(error => console.log(error));
+                        }
+                    });
+
                 },
                 getAllBatches() {
                     axios.

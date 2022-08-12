@@ -110,21 +110,43 @@
                     }
                 },
                 handleSend() {
-                    let data = [];
-                    this.inputFields.forEach(teacher => {
-                        data = [...data, { id: teacher.id, name: teacher.name, batchId: this.batch }];
-                    });
-                    console.log(data);
-                    axios
-                        .post('http://localhost:8080/api/teacher/addTeachers', data)
-                        .then(() => {
+
+                    this.inputFields.forEach(element => {
+                        if (
+                            element.id.replace(/\s/g, "").length == 0 ||
+                            element.name.replace(/\s/g, "").length == 0
+                        ) {
+
                             Swal.fire(
-                                'Successfully Registered!',
+                                'Please Fill All Teacher Inputs!',
                                 '',
-                                'success'
-                            ).then(() => window.location = "http://localhost:8080/admin/teacher-table");
-                        })
-                        .catch(error => console.log(error));
+                                'info'
+                            )
+                        }
+                        else if (this.batch == "Choose One Batch") {
+                            Swal.fire(
+                                'Please Choose One Batch!',
+                                '',
+                                'info'
+                            )
+                        } else {
+                            let data = [];
+                            this.inputFields.forEach(teacher => {
+                                data = [...data, { id: teacher.id, name: teacher.name, batchId: this.batch }];
+                            });
+                            axios
+                                .post('http://localhost:8080/api/teacher/addTeachers', data)
+                                .then(() => {
+                                    Swal.fire(
+                                        'Successfully Registered!',
+                                        '',
+                                        'success'
+                                    ).then(() => window.location = "http://localhost:8080/admin/teacher-table");
+                                })
+                                .catch(error => console.log(error));
+                        }
+                    });
+
                 }
             },
         });
