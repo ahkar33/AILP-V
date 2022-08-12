@@ -101,10 +101,18 @@
                                         <td>[[${course?.fee}]]</td>
                                         <td>[[${course?.description}]]</td>
                                         <td>
-                                            <a th:href="@{'/admin/deleteCourse/' + ${course?.id} + '/' + ${course?.name}}"
+                                            <!-- <a th:href="@{'/admin/deleteCourse/' + ${course?.id} + '/' + ${course?.name}}"
                                                 class="btn btn-outline-danger">
                                                 Remove
-                                            </a>
+                                            </a> -->
+                                            <a class="btn btn-outline-danger"
+                                            th:attr="onclick=|handleDelete('${course.id}' + '/' + '${course.name}')|">
+                                            Remove
+                                        </a>
+                                        <!-- <a class="btn btn-outline-danger"
+                                        th:attr="onclick=|handleDelete('${teacher.id}')|">
+                                        Remove
+                                    </a> -->
                                         </td>
                                     </tr>
                                 </tbody>
@@ -124,6 +132,23 @@
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });
+
+        const handleDelete = (courseId) => {
+            console.log(courseId);
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = `http://localhost:8080/admin/deleteCourse/${courseId}}`;
+                }
+            })
+        }
     </script>
 
 </body>

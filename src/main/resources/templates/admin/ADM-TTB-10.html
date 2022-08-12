@@ -104,10 +104,10 @@
                                             <a href="" class="btn btn-primary me-2">
                                                 Edit
                                             </a>
-                                            <button th:attr="onclick=|handleDelete('${teacher.id}')|"
-                                                class="btn btn-outline-danger">
+                                            <a class="btn btn-outline-danger"
+                                                th:attr="onclick=|handleDelete('${teacher.id}')|">
                                                 Remove
-                                            </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -147,7 +147,6 @@
                 }
             })
         }
-
     </script>
 </body>
 
