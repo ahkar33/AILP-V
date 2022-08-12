@@ -57,10 +57,12 @@
 
 
                                                 <label for="">Start Date</label>
-                                                <input type="date" class="form-control mb-3" th:field="*{startDate}" required />
+                                                <input type="date" class="form-control mb-3" th:field="*{startDate}"
+                                                    required />
 
                                                 <label for="">End Date</label>
-                                                <input type="date" class="form-control mb-3" th:field="*{endDate}" required />
+                                                <input type="date" class="form-control mb-3" th:field="*{endDate}"
+                                                    required />
 
                                             </div>
                                             <div class="modal-footer" style="background: #f8f9fc;">
@@ -125,12 +127,12 @@
                                         <td>[[${batch?.startDate}]]</td>
                                         <td>[[${batch?.endDate}]]</td>
                                         <td>
-                                            <a th:href="@{/admin/editBatch/} + ${batch?.id}"
-                                            class="btn btn-primary">
-                                            Edit
-                                            </a> 
-                                            <a th:href="@{'/admin/deleteBatch/' + ${batch?.id}}"
-                                                class="btn btn-outline-danger">
+                                            <a th:href="@{/admin/editBatch/} + ${batch?.id}" class="btn btn-primary">
+                                                Edit
+                                            </a>
+
+                                            <a class="btn btn-outline-danger"
+                                                th:attr="onclick=|handleDelete('${batch.id}')|">
                                                 Remove
                                             </a>
                                         </td>
@@ -147,21 +149,33 @@
                     <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
                 </div>
             </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
-    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../assets/js/bs-init.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="../assets/js/theme.js"></script>
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <!-- datatable-js -->
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+
+    <div th:insert="/admin/admin-fragments :: footer" />
+   
     <script>
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });
+
+        const handleDelete = (batchId) => {
+            console.log(batchId);
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = `http://localhost:8080/admin/deleteBatch/${batchId}`;
+                }
+            })
+        }
     </script>
 </body>
 

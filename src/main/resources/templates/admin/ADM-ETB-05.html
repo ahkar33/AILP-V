@@ -78,7 +78,7 @@
                                         <td>[[${exam?.endDateTime}]]</td>
                                         <td>
                                             <a class="btn btn-outline-danger"
-                                                th:href="@{'/admin/deleteExam/' + ${exam?.id}}">
+                                                th:attr="onclick=|handleDelete('${exam.id}')|">
                                                 Remove
                                             </a>
                                         </td>
@@ -101,10 +101,28 @@
     </div>
 
     <div th:insert="/admin/admin-fragments :: footer" />
+   
     <script>
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });
+
+        const handleDelete = (examId) => {
+            console.log(examId);
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = `http://localhost:8080/admin/deleteExam/${examId}`;
+                }
+            })
+        }
     </script>
 </body>
 
