@@ -129,10 +129,14 @@
                                             class="btn btn-primary">
                                             Edit
                                             </a> 
-                                            <a th:href="@{'/admin/deleteBatch/' + ${batch?.id}}"
+                                            <!-- <a th:href="@{'/admin/deleteBatch/' + ${batch?.id}}"
                                                 class="btn btn-outline-danger">
                                                 Remove
-                                            </a>
+                                            </a> -->
+                                            <button  @click.prevent="handleDelete(${batch?.id})"
+                                            class="btn btn-outline-danger">
+                                            Remove
+                                        </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -162,6 +166,22 @@
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });
+
+        const handleDelete = (batchId) => {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = `http://localhost:8080/admin/deleteBatch/${batchId}`;
+                }
+            })
+        }
     </script>
 </body>
 
