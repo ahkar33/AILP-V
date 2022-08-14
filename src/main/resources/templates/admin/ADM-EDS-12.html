@@ -30,17 +30,15 @@
                                     <input type="text" class="form-control mb-2" th:field="*{name}"
                                         placeholder="Enter Student name" required="true" />
                                 </div>
+                                <input type="hidden" th:field="*{password}">
+                                <input type="hidden" th:field="*{role}">
                                 <label class="fs-6">Student Batch</label>
                                 <div class="input-group mb-3">
                                     <!-- this is where select box is -->
-                                    <select th:field="*{studentBatch.id}" class="form-select mb-3"
+                                    <select th:field="*{batchList}" class="form-select mb-3"
                                         aria-label="Default select example" required>
-                                        <option th:value="${student.studentBatch.id}">[[${student.studentBatch.name}]]
-                                        </option>
                                         <span th:each="batch : ${batchList}">
-                                            <span th:if="${batch?.id != student.studentBatch.id}">
                                                 <option th:value="${batch.id}">[[${batch.name}]]</option>
-                                            </span>
                                         </span>
                                     </select>
                                 </div>

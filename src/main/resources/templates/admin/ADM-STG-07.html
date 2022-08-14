@@ -51,7 +51,7 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-start ms-2">
-                            <button @click.prevent="handleSend()" class="btn btn-primary">Add</button>
+                            <button @click.once="handleSend()" class="btn btn-primary">Add</button>
                         </div>
                     </div>
 
@@ -71,6 +71,7 @@
         const app = Vue.createApp({
             data() {
                 return {
+                    isEmpty: null,
                     batch: 'Choose One Batch',
                     inputFields: [
                         { id: '', name: '', batchId: '' },
@@ -90,12 +91,13 @@
                 },
                 handleSend() {
 
-                    // this.inputFields.replace(/\s/g, "").length == 0 
+                    this.isEmpty = false;
                     this.inputFields.forEach(element => {
                         if (
                             element.id.replace(/\s/g, "").length == 0 ||
                             element.name.replace(/\s/g, "").length == 0
                         ) {
+                            this.isEmpty = true;
                             Swal.fire(
                                 'Please Fill All Student Inputs!',
                                 '',
@@ -103,38 +105,33 @@
                             )
                         }
                         else if (this.batch == "Choose One Batch") {
+                            this.isEmpty = true;
                             Swal.fire(
                                 'Please Choose One Batch!',
                                 '',
                                 'info'
                             )
-                        } else {
-                            let data = [];
-                            this.inputFields.forEach(student => {
-                                data = [...data, { id: student.id, name: student.name, batchId: this.batch }];
-                            });
-                            axios
-                                .post('http://localhost:8080/api/student/addStudents', data)
-                                .then(() => {
-                                    Swal.fire(
-                                        'Successfully Registered!',
-                                        '',
-                                        'success'
-                                    ).then(() => window.location = "http://localhost:8080/admin/student-table");
-                                })
-                                .catch(error => console.log(error));
                         }
+
                     });
+                    if (!this.isEmpty) {
+                        let data = [];
+                        this.inputFields.forEach(student => {
+                            data = [...data, { id: student.id, name: student.name, batchId: this.batch }];
+                        });
+                        axios
+                            .post('http://localhost:8080/api/student/addStudents/', data)
+                            .then(() => {
+                                Swal.fire(
+                                    'Successfully Registered!',
+                                    '',
+                                    'success'
+                                ).then(() => window.location = "http://localhost:8080/admin/student-table");
+                            })
+                            .catch(error => console.log(error));
 
+                    }
                 },
-                getAllBatches() {
-                    axios.
-                        get("http://localhost:8080/api/student/getCourses")
-                        .then(() => {
-
-                        })
-                        .catch(error => console.log(error))
-                }
             },
         });
 
