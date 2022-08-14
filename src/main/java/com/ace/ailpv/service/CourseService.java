@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.entity.Resource;
 import com.ace.ailpv.entity.Video;
@@ -22,6 +23,9 @@ public class CourseService {
 
     @Autowired
     private FileService fileService;
+    
+    @Autowired
+    private BatchService batchService;
 
     public void addCourse(Course course) throws IllegalStateException, IOException {
 
@@ -60,6 +64,10 @@ public class CourseService {
 
     public void deleteCourseById(Long courseId, String courseName) throws IOException {
         fileService.deleteFolder(courseName);
+        List<Batch> batchList =  batchService.getBatchesByCourseId(courseId);
+        for(Batch batch : batchList) {
+            batchService.deleteBatchById(batch.getId());
+        }
         courseRepository.deleteById(courseId);
     }
 

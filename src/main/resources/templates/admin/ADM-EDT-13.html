@@ -33,7 +33,7 @@
                                 <label class="fs-6">Teacher Batch</label>
                                 <div class="input-group mb-3">
                                     <!-- this is where select box is -->
-                                    <select th:field="*{batchList}" class="form-select" multiple aria-label="multiple select example">
+                                    <select th:field="*{batchList}" class="form-select" multiple aria-label="multiple select example" required>
                                         <span th:each="batch : ${batchList}">
                                             <option th:value="${batch.id}">[[${batch.name}]]</option>
                                         </span>

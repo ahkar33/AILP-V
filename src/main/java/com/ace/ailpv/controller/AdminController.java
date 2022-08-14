@@ -22,6 +22,7 @@ import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
 import com.ace.ailpv.service.StudentService;
 import com.ace.ailpv.service.TeacherService;
+import com.ace.ailpv.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
@@ -41,6 +42,9 @@ public class AdminController {
 
     @Autowired
     private TeacherService teacherService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {
@@ -117,7 +121,7 @@ public class AdminController {
 
     @GetMapping("/student-table")
     public String setupStudentTable(ModelMap model) {
-        model.addAttribute("studentList", studentService.getAllStudents());
+        model.addAttribute("studentList", userService.getAllStudents());
         return "/admin/ADM-STB-08";
     }
 
@@ -130,7 +134,7 @@ public class AdminController {
     @GetMapping("/deleteStudent/{id}")
     public String deleteStudent(@PathVariable("id") String id)
             throws IOException {
-        studentService.deleteStudentById(id);
+        userService.deleteUserById(id);
         return "redirect:/admin/student-table";
 
     }
@@ -159,7 +163,7 @@ public class AdminController {
 
     @GetMapping("/teacher-table")
     public String setupTeacherTable(ModelMap model) {
-        model.addAttribute("teacherList", teacherService.getAllTeachers());
+        model.addAttribute("teacherList", userService.getAllTeachers());
         return "/admin/ADM-TTB-10";
     }
 
@@ -171,7 +175,7 @@ public class AdminController {
 
     @GetMapping("/deleteTeacher/{id}")
     public String deleteTeacher(@PathVariable("id") String id) {
-        teacherService.deleteTeacherById(id);
+        userService.deleteUserById(id);
         return "redirect:/admin/teacher-table";
     }
 
