@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/admin/admin-fragments :: admin_head">
-    <title>Edit Student</title>
+    <title>Edit Teacher</title>
 </head>
 
 <body id="page-top">
@@ -16,31 +16,26 @@
                 <div th:insert="/admin/admin-fragments :: navbar" />
 
                 <div class="container-fluid pb-5 pe-5 ps-5 pt-2" style="max-width: 45rem;">
-                    <h1 class="h2" style="padding-right: 0px;">Edit Student</h1>
+                    <h1 class="h2" style="padding-right: 0px;">Edit Teacher</h1>
                     <div class="card mb-4 shadow-sm">
-                        <form th:action="@{/admin/editStudent}" th:object="${student}" method="post">
+                        <form th:action="@{/admin/editTeacher}" th:object="${teacher}" method="post">
                             <div class="card-body p-4 text-dark">
 
-                                <label class="fs-6">Student Id</label>
+                                <label class="fs-6">Teacher Id</label>
                                 <div class="input-group mb-3">
                                     <input class="form-control mb-2" th:field="*{id}" readonly />
                                 </div>
-                                <label class="fs-6">Student Name</label>
+                                <label class="fs-6">Teacher Name</label>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control mb-2" th:field="*{name}"
                                         placeholder="Enter Student name" required="true" />
                                 </div>
-                                <label class="fs-6">Student Batch</label>
+                                <label class="fs-6">Teacher Batch</label>
                                 <div class="input-group mb-3">
                                     <!-- this is where select box is -->
-                                    <select th:field="*{studentBatch.id}" class="form-select mb-3"
-                                        aria-label="Default select example" required>
-                                        <option th:value="${student.studentBatch.id}">[[${student.studentBatch.name}]]
-                                        </option>
+                                    <select th:field="*{batchList}" class="form-select" multiple aria-label="multiple select example">
                                         <span th:each="batch : ${batchList}">
-                                            <span th:if="${batch?.id != student.studentBatch.id}">
-                                                <option th:value="${batch.id}">[[${batch.name}]]</option>
-                                            </span>
+                                            <option th:value="${batch.id}">[[${batch.name}]]</option>
                                         </span>
                                     </select>
                                 </div>
