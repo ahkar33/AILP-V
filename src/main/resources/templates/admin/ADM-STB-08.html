@@ -84,7 +84,9 @@
                                     <tr th:each="student : ${studentList}">
                                         <td>[[${student?.id}]]</td>
                                         <td>[[${student?.name}]]</td>
-                                        <td>[[${student?.studentBatch.name}]]</td>
+                                        <td th:each="batch : ${student.batchList}">
+                                            [[${batch.name}]]
+                                        </td>
 
                                         <td>
                                             <a th:href="@{/admin/editStudent/} + ${student?.id}"

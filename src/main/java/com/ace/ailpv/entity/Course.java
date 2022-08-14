@@ -41,7 +41,7 @@ public class Course {
     @Transient
     private MultipartFile resources[];
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "batchCourse")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "batchCourse")
     Set<Batch> batchList = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)

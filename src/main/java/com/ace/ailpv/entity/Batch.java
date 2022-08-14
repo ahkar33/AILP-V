@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,11 +27,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Batch {
-  
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-     
+
     private String name;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -49,12 +48,16 @@ public class Batch {
     // @Transient
     // private Long courseId;
 
-    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, mappedBy = "studentBatch")
+    @OneToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "studentBatch")
     // @JsonManagedReference
     Set<Student> studentList = new HashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, mappedBy = "batchList")
+    @ManyToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "batchList")
     // @JsonManagedReference
     Set<Teacher> teacherList = new HashSet<>();
+
+    @ManyToMany(cascade = { CascadeType.PERSIST }, mappedBy = "batchList")
+    // @JsonManagedReference
+    Set<User> userList = new HashSet<>();
 
 }
