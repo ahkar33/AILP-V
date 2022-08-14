@@ -93,7 +93,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input v-model="question.rightAnswer" type="text" class="form-control" required
+                                        <input v-model="question.rightAnswer" class="form-control" required
                                             placeholder="Enter the right answer" />
                                         <div class="text-end mt-3">
                                             <button @click.prevent="removeQuestion(index)" type="button"
@@ -112,7 +112,7 @@
                             <div class="card-body p-4">
                                 <label for="inputEmail4" class="form-label fs-4 fw-bold">Full Mark</label>
                                 <div class="input-group mb-3">
-                                    <input v-model="fullMark" type="text" class="form-control mb-4" id="inputEmail4"
+                                    <input v-model="fullMark" type="number" class="form-control mb-4" id="inputEmail4"
                                         required style="width: 100%;" placeholder="Enter Full Mark" />
                                     <button @click="createExam()" type="submit"
                                         class="btn btn-lg btn-primary">Submit</button>
@@ -194,7 +194,7 @@
                             this.name.replace(/\s/g, "").length == 0 ||
                             this.startDateTime.replace(/\s/g, "").length == 0 ||
                             this.endDateTime.replace(/\s/g, "").length == 0 ||
-                            this.fullMark.replace(/\s/g, "").length == 0
+                            this.fullMark.length == 0
                         ) {
                             this.isEmpty = true;
                             Swal.fire(

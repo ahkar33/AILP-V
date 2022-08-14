@@ -13,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -47,8 +46,8 @@ public class Batch {
     @JoinColumn(name = "course_id", nullable = false)
     private Course batchCourse;
 
-    @Transient
-    private Long courseId;
+    // @Transient
+    // private Long courseId;
 
     @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, mappedBy = "studentBatch")
     // @JsonManagedReference

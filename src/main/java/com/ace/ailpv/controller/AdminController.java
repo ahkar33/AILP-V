@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.entity.Student;
+import com.ace.ailpv.entity.Teacher;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
@@ -31,16 +32,15 @@ public class AdminController {
 
     @Autowired
     private BatchService batchService;
-    
-    @Autowired 
+
+    @Autowired
     private ExamService examService;
 
-    @Autowired 
+    @Autowired
     private StudentService studentService;
 
     @Autowired
     private TeacherService teacherService;
-
 
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {
@@ -90,7 +90,6 @@ public class AdminController {
 
     @PostMapping("/addBatch")
     public String addBatch(@ModelAttribute("batch") Batch batch) {
-        batch.setBatchCourse(courseService.getCourseById(batch.getCourseId()));
         batchService.addBatch(batch);
         return "redirect:/admin/batch-table";
     }
@@ -112,7 +111,6 @@ public class AdminController {
 
     @PostMapping("/editBatch")
     public String editBatch(@ModelAttribute("batch") Batch batch) {
-        batch.setBatchCourse(courseService.getCourseById(batch.getCourseId()));
         batchService.addBatch(batch);
         return "redirect:/admin/batch-table";
     }
@@ -147,7 +145,6 @@ public class AdminController {
 
     @PostMapping("/editStudent")
     public String editStudent(@ModelAttribute("student") Student student) {
-        student.setStudentBatch(batchService.getBatchById(Long.parseLong(student.getBatchId())));
         studentService.addStudent(student);
         return "redirect:/admin/student-table";
     }
@@ -178,6 +175,18 @@ public class AdminController {
         return "redirect:/admin/teacher-table";
     }
 
+    @GetMapping("/editTeacher/{id}")
+    public String setupEditTeacher(@PathVariable("id") String id, ModelMap model) {
+        Teacher teacher = teacherService.getTeacherById(id);
+        model.addAttribute("batchList", batchService.getAllBatches());
+        model.addAttribute("teacher", teacher);
+        return "/admin/ADM-EDT-13.html";
+    }
 
+    @PostMapping("/editTeacher")
+    public String editTeacher(@ModelAttribute("teacher") Teacher teacher) {
+        teacherService.addTeacher(teacher);
+        return "redirect:/admin/teacher-table";
+    }
 
 }

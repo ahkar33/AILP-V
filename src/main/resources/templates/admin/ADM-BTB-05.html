@@ -44,7 +44,7 @@
                                             <div class="modal-body">
 
                                                 <label for="">Course</label>
-                                                <select th:field="*{courseId}" class="form-select mb-3"
+                                                <select th:field="*{batchCourse.id}" class="form-select mb-3"
                                                     aria-label="Default select example" required>
                                                     <span th:each="course : ${courseList}">
                                                         <option th:value="${course.id}">[[${course.name}]]</option>

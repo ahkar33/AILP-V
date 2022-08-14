@@ -52,7 +52,7 @@
                                                     maxlength="100" minlength="1">
 
                                                 <label for="">Fee</label>
-                                                <input type="text" class="form-control" th:field="*{fee}" required
+                                                <input type="number" class="form-control" th:field="*{fee}" required
                                                     maxlength="20">
 
                                                 <label for="">Description</label>
@@ -60,11 +60,12 @@
                                                     required maxlength="1000">
 
                                                 <label for="">Video</label>
-                                                <input type="file" class="form-control" multiple th:field="*{videos}"
+                                                <input type="file" class="form-control" multiple th:field="*{videos}" accept="video/*"
                                                     required>
 
                                                 <label for="">Resource</label>
-                                                <input type="file" class="form-control" multiple th:field="*{resources}"
+                                                <input type="file" class="form-control" multiple th:field="*{resources}" 
+                                                    accept=".pdf, .pptx, .xlsx,"
                                                     required>
 
                                             </div>
@@ -145,7 +146,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location = `http://localhost:8080/admin/deleteCourse/${courseId}}`;
+                    window.location = `http://localhost:8080/admin/deleteCourse/${courseId}`;
                 }
             })
         }
