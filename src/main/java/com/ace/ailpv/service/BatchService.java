@@ -36,7 +36,11 @@ public class BatchService {
                 .collect(Collectors.toSet());
             user.getBatchList().clear();
             user.getBatchList().addAll(filteredBatchList);
-            userService.addUser(user);
+            if(user.getBatchList().size() == 0) {
+                userService.deleteUserById(user.getId());
+            }else {
+                userService.addUser(user);
+            }
         }
         batchRepository.deleteById(id);
     }

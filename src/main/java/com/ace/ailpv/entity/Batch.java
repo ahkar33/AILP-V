@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -47,14 +46,6 @@ public class Batch {
 
     // @Transient
     // private Long courseId;
-
-    @OneToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "studentBatch")
-    // @JsonManagedReference
-    Set<Student> studentList = new HashSet<>();
-
-    @ManyToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "batchList")
-    // @JsonManagedReference
-    Set<Teacher> teacherList = new HashSet<>();
 
     @ManyToMany(cascade = { CascadeType.PERSIST }, mappedBy = "batchList")
     // @JsonManagedReference

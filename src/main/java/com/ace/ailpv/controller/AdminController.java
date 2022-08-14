@@ -15,13 +15,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Course;
-import com.ace.ailpv.entity.Student;
-import com.ace.ailpv.entity.Teacher;
+import com.ace.ailpv.entity.User;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
-import com.ace.ailpv.service.StudentService;
-import com.ace.ailpv.service.TeacherService;
 import com.ace.ailpv.service.UserService;
 
 @Controller
@@ -36,12 +33,6 @@ public class AdminController {
 
     @Autowired
     private ExamService examService;
-
-    @Autowired
-    private StudentService studentService;
-
-    @Autowired
-    private TeacherService teacherService;
 
     @Autowired
     private UserService userService;
@@ -141,15 +132,15 @@ public class AdminController {
 
     @GetMapping("/editStudent/{id}")
     public String setupEditStudent(@PathVariable("id") String id, ModelMap model) {
-        Student student = studentService.getStudentById(id);
+        User student = userService.getUserById(id);
         model.addAttribute("batchList", batchService.getAllBatches());
         model.addAttribute("student", student);
         return "/admin/ADM-EDS-12";
     }
 
     @PostMapping("/editStudent")
-    public String editStudent(@ModelAttribute("student") Student student) {
-        studentService.addStudent(student);
+    public String editStudent(@ModelAttribute("student") User student) {
+        userService.addUser(student);
         return "redirect:/admin/student-table";
     }
 
@@ -181,15 +172,15 @@ public class AdminController {
 
     @GetMapping("/editTeacher/{id}")
     public String setupEditTeacher(@PathVariable("id") String id, ModelMap model) {
-        Teacher teacher = teacherService.getTeacherById(id);
+        User teacher = userService.getUserById(id);
         model.addAttribute("batchList", batchService.getAllBatches());
         model.addAttribute("teacher", teacher);
         return "/admin/ADM-EDT-13.html";
     }
 
     @PostMapping("/editTeacher")
-    public String editTeacher(@ModelAttribute("teacher") Teacher teacher) {
-        teacherService.addTeacher(teacher);
+    public String editTeacher(@ModelAttribute("teacher") User teacher) {
+        userService.addUser(teacher);
         return "redirect:/admin/teacher-table";
     }
 
