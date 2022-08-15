@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/admin/admin-fragments :: admin_head">
-    <title>Course Table</title>
+    <title>Resource Table</title>
 </head>
 
 <body id="page-top">
@@ -30,7 +30,7 @@
                         <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             <i class="fa-photo-video fas fs-5"></i>
-                            Add Video
+                            Add Resource
                         </button>
 
                         <!-- Modal -->
@@ -41,7 +41,7 @@
                                     <form th:action="@{/admin/uploadCourseVideo}" method="post"
                                         enctype="multipart/form-data">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Update Video</h5>
+                                            <h5 class="modal-title" id="staticBackdropLabel">Update Resource</h5>
                                             <input type="hidden" name="courseId" th:value="${course?.id}">
 
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -79,15 +79,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="video : ${videoList}">
+                                    <tr th:each="resource : ${resourceList}">
 
-                                        <td>[[${video.name}]]</td>
+                                        <td>[[${resource.name}]]</td>
                                         <td>
                                             <!-- <a class="btn btn-outline-primary" ]
                                                 th:href="@{'/admin/updateFile/' + ${video?.id} + '/' + ${course?.name}}">
                                                 Update</a> -->
                                             <a class="btn btn-outline-danger"
-                                                th:href="@{'/admin/deleteVideo/' + ${video?.id} + '/' + ${course?.name}}">
+                                                th:href="@{'/admin/deleteResource/' + ${resource?.id} + '/' + ${course?.name}}">
                                                 Remove
                                             </a>
                                         </td>

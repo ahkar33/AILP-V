@@ -60,13 +60,12 @@
                                                     required maxlength="1000">
 
                                                 <label for="">Video</label>
-                                                <input type="file" class="form-control" multiple th:field="*{videos}" accept="video/*"
-                                                    required>
+                                                <input type="file" class="form-control" multiple th:field="*{videos}"
+                                                    accept="video/*" required>
 
                                                 <label for="">Resource</label>
-                                                <input type="file" class="form-control" multiple th:field="*{resources}" 
-                                                    accept=".pdf, .pptx, .xlsx,"
-                                                    required>
+                                                <input type="file" class="form-control" multiple th:field="*{resources}"
+                                                    accept=".pdf, .pptx, .xlsx," required>
 
                                             </div>
                                             <div class="modal-footer" style="background: #f8f9fc;">
@@ -107,16 +106,20 @@
                                                 Remove
                                             </a> -->
                                             <a class="btn btn-outline-primary"
-                                            th:href="@{'/admin/editCourse/' + ${course?.id}}">
-                                            Edit
-                                        </a>
-                                        
+                                                th:href="@{'/admin/editVideo/' + ${course?.id}}">
+                                                Edit Video
+                                            </a>
+                                            <a class="btn btn-outline-primary"
+                                                th:href="@{'/admin/editResource/' + ${course?.id}}">
+                                                Edit Resource
+                                            </a>
+
                                             <a class="btn btn-outline-danger"
-                                            th:attr="onclick=|handleDelete('${course.id}' + '/' + '${course.name}')|">
-                                            Remove
-                                        </a>
-                                        
-                                        <!-- <a class="btn btn-outline-danger"
+                                                th:attr="onclick=|handleDelete('${course.id}' + '/' + '${course.name}')|">
+                                                Remove
+                                            </a>
+
+                                            <!-- <a class="btn btn-outline-danger"
                                         th:attr="onclick=|handleDelete('${teacher.id}')|">
                                         Remove
                                     </a> -->
@@ -159,4 +162,5 @@
     </script>
 
 </body>
+
 </html>
