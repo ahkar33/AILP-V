@@ -106,10 +106,16 @@
                                                 class="btn btn-outline-danger">
                                                 Remove
                                             </a> -->
+                                            <a class="btn btn-outline-primary"
+                                            th:href="@{'/admin/editCourse/' + ${course?.id}}">
+                                            Edit
+                                        </a>
+                                        
                                             <a class="btn btn-outline-danger"
                                             th:attr="onclick=|handleDelete('${course.id}' + '/' + '${course.name}')|">
                                             Remove
                                         </a>
+                                        
                                         <!-- <a class="btn btn-outline-danger"
                                         th:attr="onclick=|handleDelete('${teacher.id}')|">
                                         Remove
