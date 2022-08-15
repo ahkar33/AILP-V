@@ -16,10 +16,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.entity.User;
+import com.ace.ailpv.entity.Video;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
+import com.ace.ailpv.service.FileService;
 import com.ace.ailpv.service.UserService;
+import com.ace.ailpv.service.VideoService;
 
 @Controller
 @RequestMapping("/admin")
@@ -27,6 +30,9 @@ public class AdminController {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private FileService fileService;
 
     @Autowired
     private BatchService batchService;
@@ -37,6 +43,10 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private VideoService videoService;
+
+    String path = "D:\\ACE(OJT)\\AILP(V)\\AILP(V)\\AILP-V\\src\\main\\resources\\static\\courses\\";
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {
         model.addAttribute("courseList", courseService.getAllCourses());
@@ -54,6 +64,39 @@ public class AdminController {
         courseService.addCourse(course);
         return "redirect:/admin/course-table";
     }
+
+    @GetMapping("/editCourse/{id}")
+    public String editCourse(@PathVariable("id") Long id, ModelMap model) {
+        Course course = courseService.getCourseById(id);
+        //Set<String> videoList = fileService.listFilesUsingJavaIO(path + course.getName() + "\\video");
+        // List<Video> videoList = videoService.getVideoByCourseId(String.valueOf(id));
+        List<Video> videoList = videoService.getVideoByCourseId(id);
+        
+        model.addAttribute("videoList", videoList);
+        model.addAttribute("course", course);
+        return "/admin/ADM-VTB-14";
+    }
+
+    @GetMapping("/deleteFile/{vidId}/{courseName}")
+    public String deleteFile(@PathVariable("vidId") String vidId, @PathVariable("courseName") String courseName , ModelMap model) throws IOException {
+        
+        Video videoName = videoService.getVideoById(Long.parseLong(vidId));
+        Course course = courseService.getCourseByName(courseName);
+       
+        // boolean isDeleted = 
+        fileService.deleteFile(path + courseName + "\\video\\" + videoName.getName());
+        videoService.deleteVideoById(Long.parseLong(vidId));
+        // add data again
+       
+        //Set<String> videoList = fileService.listFilesUsingJavaIO(path + course.getName() + "\\video");
+        List<Video> videoList = videoService.getAllVideos();
+        model.addAttribute("videoList", videoList);
+        model.addAttribute("course", courseName);
+       
+       
+       model.addAttribute("msg", "Deleted!!");
+        return "redirect:/admin/editCourse/" + course.getId();
+    } 
 
     @GetMapping("/deleteCourse/{id}/{courseName}")
     public String deleteCourse(@PathVariable("id") Long id, @PathVariable("courseName") String courseName)
@@ -183,5 +226,8 @@ public class AdminController {
         userService.addUser(teacher);
         return "redirect:/admin/teacher-table";
     }
+    //zar zar soe
+
+    
 
 }

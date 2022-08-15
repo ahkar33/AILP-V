@@ -35,6 +35,7 @@ build/
 ### ignore videos and resources ###
 *.mp4
 *.m4v
+*.mov
 *.pdf
 *.xlsx
 *.pptx
