@@ -28,4 +28,8 @@ public class VideoService{
     public List<Video> getVideoByCourseId(Long courseId) {
         return videoRepository.findByCourseId_id(courseId);
     }
+
+    public void addVideo(Video video){
+        videoRepository.save(video);
+    }
 }
