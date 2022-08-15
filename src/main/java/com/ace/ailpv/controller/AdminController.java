@@ -55,8 +55,11 @@ public class AdminController {
 
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {
+        
+        
         model.addAttribute("courseList", courseService.getAllCourses());
         model.addAttribute("course", new Course());
+       
         return "/admin/ADM-CTB-04";
     }
 
@@ -68,6 +71,20 @@ public class AdminController {
             return "redirect:/admin/course-table";
         }
         courseService.addCourse(course);
+        return "redirect:/admin/course-table";
+    }
+
+    @PostMapping("/editCourse")
+    public String editCourse(@RequestParam("id") String id, @RequestParam("name") String name, @RequestParam("fee") String fee, @RequestParam("desc") String description,RedirectAttributes redirectAttrs)
+            throws IllegalStateException, IOException {
+        Course updateCourse = new Course();
+        updateCourse.setId(Long.parseLong(id));
+        updateCourse.setName(name);
+        updateCourse.setFee(Double.parseDouble(fee));
+        updateCourse.setDescription(description);
+
+        
+        courseService.updateCourse(updateCourse);
         return "redirect:/admin/course-table";
     }
 
