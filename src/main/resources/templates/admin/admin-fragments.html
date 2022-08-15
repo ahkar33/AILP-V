@@ -30,7 +30,7 @@
                     <div class="nav-item dropdown no-arrow">
                         <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
                             <span class="d-lg-inline d-none fw-bold me-2 small text-black-50 text-gray-600">
-                                Sitt Thiha Naing
+                                [[${session?.userInfo.name}]]
                             </span>
                             <img class="border rounded-circle img-profile" src="/assets/img/zzs_profile.jpg"
                                 style="width: 35px; height: 35px;" />
@@ -40,8 +40,9 @@
                                 <i class="fa-fw fa-sm fa-user fas me-2 text-dark"></i>
                                 &nbsp;Profile
                             </a>
-                            <div class="dropdown-divider"></div> <a class="dropdown-item fs-6 text-dark" href="#"> <i
-                                    class="fa-fw fa-sign-out-alt fa-sm fas me-2 text-dark"></i>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item fs-6 text-dark" onclick="handleLogout()">
+                                <i class="fa-fw fa-sign-out-alt fa-sm fas me-2 text-dark"></i>
                                 &nbsp;Logout
                             </a>
                         </div>
@@ -171,6 +172,24 @@
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <!-- vue3 -->
         <script src="https://unpkg.com/vue@3"></script>
+        <script>
+            const handleLogout = () => {
+                console.log("hello")
+                Swal.fire({
+                    title: 'Are you sure want to Logout?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Logout'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = "http://localhost:8080/auth/logout";
+                    }
+                })
+            }
+        </script>
+
     </div>
 
 </body>

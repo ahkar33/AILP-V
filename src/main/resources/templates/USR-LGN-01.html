@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Login - Brand</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Bangla&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Kannada&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arimo&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Average+Sans&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dangrek&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+KR&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inria+Sans&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+</head>
+
+<body class="d-xl-flex bg-gradient-primary" style="background: rgb(55,81,162);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-lg-12 col-xl-10">
+                <div class="card shadow-lg o-hidden border-0 my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-flex">
+                                <div class="flex-grow-1 bg-login-image"
+                                    style="background: url(&quot;/assets/img/login_background.jpg&quot;) center / cover no-repeat;">
+                                </div>
+                            </div>
+                            <div class="col-lg-6" style="padding-left: 0px;padding-right: 0px;">
+                                <div class="p-5" style="margin-top: -25px;margin-bottom: -17px;">
+                                    <div class="text-center">
+                                        <img src="/assets/img/logo_blue.png"
+                                            style="width: 229px;margin-bottom: 33px;margin-top: 12px;">
+                                    </div>
+                                    <span th:if="${message != null}">
+                                        <div class="alert alert-danger">
+                                            [[${message}]]
+                                        </div>
+                                    </span>
+                                    <div class="text-start" style="margin-top: -12px;">
+                                        <p
+                                            style="font-family: 'Average Sans', sans-serif;font-size: 34px;color: rgb(101,99,99);">
+                                            Welcome
+                                            <br>
+                                        </p>
+                                    </div>
+                                    <div class="text-start">
+                                        <p
+                                            style="font-family: 'Anek Bangla', sans-serif;font-size: 19px;color: rgb(101,99,99);margin-bottom: 20px;margin-top: -17px;">
+                                            Log in to continue to your account.
+                                            <br>
+                                        </p>
+                                    </div>
+                                    <!-- form start -->
+                                    <form th:action="@{/auth/login}" th:object="${user}" method="post" class="user"
+                                        style="margin-top: -8px;">
+                                        <div class="mb-3">
+                                            <input th:field="*{id}"
+                                                class="border rounded border-1 border-secondary shadow-sm form-control form-control-user"
+                                                type="text" placeholder="Enter Username or ID" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input th:field="*{password}"
+                                                class="border rounded border-1 border-secondary shadow-sm form-control form-control-user"
+                                                type="password" placeholder="Enter Password" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="custom-control custom-checkbox small">
+                                                <div class="form-check"><input
+                                                        class="form-check-input custom-control-input" type="checkbox"
+                                                        id="formCheck-1" style="font-size: 15px;">
+                                                    <label class="form-check-label custom-control-label"
+                                                        for="formCheck-1" style="color: rgb(82,82,82);font-size: 15px;">
+                                                        Remember Me
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary border rounded shadow-sm d-block btn-user w-100"
+                                            role="button" data-bss-hover-animate="pulse"
+                                            style="background: rgb(55,81,162);border-radius: 9px;margin-bottom: 18px;margin-left: 0px;"
+                                            type="submit">
+                                            Login
+                                        </button>
+                                        <hr>
+                                    </form>
+                                    <!-- form end -->
+                                    <div>
+                                        <p
+                                            style="font-family: 'Average Sans', sans-serif;font-size: 18px;color: rgb(21,21,21);margin-bottom: 20px;">
+                                            To request an account, please contact us.
+                                        </p>
+                                        <div class="row d-flex">
+                                            <div class="col-xl-6 col-xxl-5 d-flex"><a class="text-decoration-none"
+                                                    href="tel: +959253257742">
+                                                    <p class="text-decoration-none"
+                                                        style="font-family: 'Average Sans', sans-serif;font-size: 17px;">
+                                                        <img src="/assets/img/login_call_logo.png"
+                                                            style="width: 24px;filter: contrast(94%) hue-rotate(281deg) saturate(93%);">&nbsp;
+                                                        +959253257742
+                                                    </p>
+                                                </a></div>
+                                            <div class="col-xl-6 col-xxl-5 d-flex"><a class="text-decoration-none"
+                                                    href="tel: +959795519692">
+                                                    <p class="text-decoration-none"
+                                                        style="font-family: 'Average Sans', sans-serif;font-size: 17px;">
+                                                        <img src="/assets/img/login_call_logo.png"
+                                                            style="width: 24px;filter: contrast(94%) hue-rotate(281deg) saturate(93%);">&nbsp;
+                                                        +959795519692
+                                                    </p>
+                                                </a></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-nowrap"><a class="text-decoration-none"
+                                                    href="https://www.facebook.com/aceinspiration">
+                                                    <p class="text-truncate text-decoration-none"
+                                                        style="font-family: 'Average Sans', sans-serif;font-size: 18px;">
+                                                        <img src="/assets/img/loginin_facebook_logo.png"
+                                                            style="width: 24px;">&nbsp; www.facebook.com/aceinspiration
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bs-init.js"></script>
+    <script src="/assets/js/theme.js"></script>
+</body>
+
+</html>
