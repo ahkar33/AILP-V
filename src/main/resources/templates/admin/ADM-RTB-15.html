@@ -30,7 +30,7 @@
                         <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             <i class="fa-photo-video fas fs-5"></i>
-                            Add Resource
+                            Upload Resource
                         </button>
 
                         <!-- Modal -->
@@ -38,17 +38,18 @@
                             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
-                                    <form th:action="@{/admin/uploadCourseVideo}" method="post"
+                                    <form th:action="@{/admin/uploadCourseResource}" method="post"
                                         enctype="multipart/form-data">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Update Resource</h5>
+                                            <h5 class="modal-title" id="staticBackdropLabel">Upload Resource</h5>
                                             <input type="hidden" name="courseId" th:value="${course?.id}">
 
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                                aria-label="Close">
+                                            </button>
                                         </div>
                                         <div class="modal-body">
-                                            <input type="file" name="file" multiple>
+                                            <input class="form-control" type="file" name="file" multiple  accept=".pdf, .pptx, .xlsx," required>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
@@ -56,14 +57,11 @@
                                             <button type="submit" class="btn btn-primary">Upload</button>
                                         </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
 
                     </div>
-
-
 
                     <div class="card shadow">
                         <h2 class="text-danger text-center">[[${msg}]]</h2>
@@ -83,11 +81,8 @@
 
                                         <td>[[${resource.name}]]</td>
                                         <td>
-                                            <!-- <a class="btn btn-outline-primary" ]
-                                                th:href="@{'/admin/updateFile/' + ${video?.id} + '/' + ${course?.name}}">
-                                                Update</a> -->
                                             <a class="btn btn-outline-danger"
-                                                th:href="@{'/admin/deleteResource/' + ${resource?.id} + '/' + ${course?.name}}">
+                                                th:href="@{'/admin/deleteResource/' + ${resource?.id} + '/' + ${course?.name} }">
                                                 Remove
                                             </a>
                                         </td>

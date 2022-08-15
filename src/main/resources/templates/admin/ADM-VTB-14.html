@@ -30,7 +30,7 @@
                         <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             <i class="fa-photo-video fas fs-5"></i>
-                            Add Video
+                            Upload Video
                         </button>
 
                         <!-- Modal -->
@@ -41,14 +41,14 @@
                                     <form th:action="@{/admin/uploadCourseVideo}" method="post"
                                         enctype="multipart/form-data">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Update Video</h5>
+                                            <h5 class="modal-title" id="staticBackdropLabel">Upload Video</h5>
                                             <input type="hidden" name="courseId" th:value="${course?.id}">
 
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <input type="file" name="file" multiple>
+                                            <input class="form-control" type="file" name="file" multiple accept="video/*" required>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"

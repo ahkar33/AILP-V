@@ -13,6 +13,10 @@ public class VideoService{
     @Autowired
     VideoRepository videoRepository;
 
+    public Boolean isExistByVideoName(String name) {
+        return videoRepository.existsByName(name);
+    }
+
     public List<Video> getAllVideos() {
         return videoRepository.findAll();
     }
@@ -26,7 +30,7 @@ public class VideoService{
     }
 
     public List<Video> getVideoByCourseId(Long courseId) {
-        return videoRepository.findByCourseId_id(courseId);
+        return videoRepository.findByVideoCourse_id(courseId);
     }
 
     public void addVideo(Video video){

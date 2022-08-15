@@ -13,15 +13,28 @@ public class ResourceService {
     @Autowired
     ResourceRepository resourceRepository;
 
-    public List<Resource>getAllResources(){
-        return resourceRepository.findAll();
-    }
-    
-    public List<Resource>getResourceByCourseId(Long courseId){
-        return resourceRepository.findByCourseId_id(courseId);
+    public Boolean isExistByResourceName(String name) {
+        return resourceRepository.existsByName(name);
     }
 
-    public Resource getResourceById(Long resourceId){
+    public List<Resource> getAllResources() {
+        return resourceRepository.findAll();
+    }
+
+    public List<Resource> getResourceByCourseId(Long courseId) {
+        return resourceRepository.findByResourceCourse_id(courseId);
+    }
+
+    public Resource getResourceById(Long resourceId) {
         return resourceRepository.findById(resourceId).get();
     }
+
+    public void addResource(Resource resource) {
+        resourceRepository.save(resource);
+    }
+
+    public void deleteResourceById(Long id) {
+        resourceRepository.deleteById(id);
+    }
+
 }

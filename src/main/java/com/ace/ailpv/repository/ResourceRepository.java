@@ -9,6 +9,8 @@ import com.ace.ailpv.entity.Resource;
 @Repository
 public interface ResourceRepository extends JpaRepository<Resource,Long> {
 
-    List<Resource> findByCourseId_id(Long id);
+    Boolean existsByName(String name);
+
+    List<Resource> findByResourceCourse_id(Long id);
     
 }

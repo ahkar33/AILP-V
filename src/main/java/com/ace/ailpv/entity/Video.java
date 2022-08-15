@@ -30,6 +30,6 @@ public class Video {
 
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
-    private Course courseId;
+    private Course videoCourse;
 
 }

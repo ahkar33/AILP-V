@@ -43,10 +43,10 @@ public class Course {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "batchCourse")
     Set<Batch> batchList = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "courseId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "videoCourse")
     Set<Video> videoList = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "courseId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "resourceCourse")
     Set<Resource> resourceList = new HashSet<>();
 
 }

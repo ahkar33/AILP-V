@@ -1,9 +1,7 @@
 package com.ace.ailpv.service;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,27 +25,35 @@ public class CourseService {
     @Autowired
     private BatchService batchService;
 
+    @Autowired
+    private VideoService videoService;
+
+    @Autowired
+    private ResourceService resourceService;
+
     public void addCourse(Course course) throws IllegalStateException, IOException {
 
         fileService.createFolderForCourse(course.getName());
 
-        Set<Video> videoList = new HashSet<>();
-        Set<Resource> resourceList = new HashSet<>();
+        courseRepository.save(course);
+        Course resCourse = getCourseById(course.getId());
 
         for (MultipartFile video : course.getVideos()) {
             fileService.createFile(video, course.getName() + "\\video");
-            videoList.add(new Video(video.getOriginalFilename()));
+            Video reqVideo = new Video();
+            reqVideo.setName(video.getOriginalFilename());
+            reqVideo.setVideoCourse(resCourse);
+            videoService.addVideo(reqVideo);
         }
 
         for (MultipartFile resource : course.getResources()) {
             fileService.createFile(resource, course.getName() + "\\resource");
-            resourceList.add(new Resource(resource.getOriginalFilename()));
+            Resource reqResource = new Resource();
+            reqResource.setName(resource.getOriginalFilename());
+            reqResource.setResourceCourse(resCourse);
+            resourceService.addResource(reqResource);
         }
 
-        course.getVideoList().addAll(videoList);
-        course.getResourceList().addAll(resourceList);
-
-        courseRepository.save(course);
     }
 
     public List<Course> getAllCourses() {

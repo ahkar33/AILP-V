@@ -1,4 +1,5 @@
 package com.ace.ailpv.controller;
+
 import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,13 +51,13 @@ public class AdminController {
     @Autowired
     private ResourceService resourceService;
 
-    String path = "D:\\ACE(OJT)\\AILP(V)\\AILP(V)\\AILP-V\\src\\main\\resources\\static\\courses\\";
+    String path = "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\AILP-V\\src\\main\\resources\\static\\courses\\";
 
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {
         model.addAttribute("courseList", courseService.getAllCourses());
         model.addAttribute("course", new Course());
-        return "/admin/ADM-COU-04";
+        return "/admin/ADM-CTB-04";
     }
 
     @PostMapping("/addCourse")
@@ -73,9 +74,6 @@ public class AdminController {
     @GetMapping("/editVideo/{id}")
     public String editVideo(@PathVariable("id") Long id, ModelMap model) {
         Course course = courseService.getCourseById(id);
-        // Set<String> videoList = fileService.listFilesUsingJavaIO(path +
-        // course.getName() + "\\video");
-        // List<Video> videoList = videoService.getVideoByCourseId(String.valueOf(id));
         List<Video> videoList = videoService.getVideoByCourseId(id);
 
         model.addAttribute("videoList", videoList);
@@ -96,70 +94,66 @@ public class AdminController {
     public String deleteVideo(@PathVariable("vidId") String vidId, @PathVariable("courseName") String courseName,
             ModelMap model) throws IOException {
 
-        Video videoName = videoService.getVideoById(Long.parseLong(vidId));
+        Video video = videoService.getVideoById(Long.parseLong(vidId));
         Course course = courseService.getCourseByName(courseName);
-
-        // boolean isDeleted =
-        fileService.deleteFile(path + courseName + "\\video\\" + videoName.getName());
+        fileService.deleteFile(path + courseName + "\\video\\" + video.getName());
         videoService.deleteVideoById(Long.parseLong(vidId));
-        // add data again
-
-        // Set<String> videoList = fileService.listFilesUsingJavaIO(path +
-        // course.getName() + "\\video");
         List<Video> videoList = videoService.getAllVideos();
         model.addAttribute("videoList", videoList);
         model.addAttribute("course", courseName);
 
         model.addAttribute("msg", "Deleted!!");
-        return "redirect:/admin/editCourse/" + course.getId();
+        return "redirect:/admin/editVideo/" + course.getId();
     }
 
     @GetMapping("/deleteResource/{resourceId}/{courseName}")
-    public String deleteResource(@PathVariable("resourceId") String recourceId,
+    public String deleteResource(@PathVariable("resourceId") String resourceId,
             @PathVariable("courseName") String courseName,
             ModelMap model) throws IOException {
 
-        Resource resourceName = resourceService.getResourceById(Long.parseLong(recourceId));
+        Resource resource = resourceService.getResourceById(Long.parseLong(resourceId));
         Course course = courseService.getCourseByName(courseName);
-        fileService.deleteFile(path + courseName + "\\resource\\" + resourceName.getName());
-        videoService.deleteVideoById(Long.parseLong(recourceId));
+        fileService.deleteFile(path + courseName + "\\resource\\" + resource.getName());
+        resourceService.deleteResourceById(Long.parseLong(resourceId));
         List<Resource> resourceList = resourceService.getAllResources();
         model.addAttribute("resourceList", resourceList);
         model.addAttribute("course", courseName);
         model.addAttribute("msg", "Deleted!!");
-        return "redirect:/admin/editCourse/" + course.getId();
+        return "redirect:/admin/editResource/" + course.getId();
     }
 
-    // this is where you fix
     @PostMapping("/uploadCourseVideo")
     public String uploadCourseVideo(ModelMap modal, @RequestParam("file") MultipartFile[] files,
             @RequestParam("courseId") String courseId) throws IllegalStateException, IOException {
         String courseName = courseService.getCourseById(Long.parseLong(courseId)).getName();
         Course course = courseService.getCourseById(Long.parseLong(courseId));
-        List<Video> videoList = videoService.getVideoByCourseId(Long.parseLong(courseId));
         for (MultipartFile file : files) {
             fileService.createFile(file, courseName + "\\video");
-            if (videoList.size() > 0) {
-                for (Video video : videoList) {
-                    System.out.println(video.getName());
-                    System.out.println(file.getOriginalFilename());
-                    if (!video.getName().equals(file.getOriginalFilename())) {
-                        Video newVideo = new Video();
-                        newVideo.setName(file.getOriginalFilename());
-                        newVideo.setCourseId(course);
-                        videoService.addVideo(newVideo);
-                    }
-                }
-            } else {
+            if (!videoService.isExistByVideoName(file.getOriginalFilename())) {
                 Video newVideo = new Video();
                 newVideo.setName(file.getOriginalFilename());
-                newVideo.setCourseId(course);
+                newVideo.setVideoCourse(course);
                 videoService.addVideo(newVideo);
             }
-
         }
+        return "redirect:/admin/editVideo/" + courseId;
+    }
 
-        return "redirect:/admin/editCourse/" + courseId;
+    @PostMapping("/uploadCourseResource")
+    public String uploadCourseResource(ModelMap modal, @RequestParam("file") MultipartFile[] files,
+            @RequestParam("courseId") String courseId) throws IllegalStateException, IOException {
+        String courseName = courseService.getCourseById(Long.parseLong(courseId)).getName();
+        Course course = courseService.getCourseById(Long.parseLong(courseId));
+        for (MultipartFile file : files) {
+            fileService.createFile(file, courseName + "\\resource");
+            if (!resourceService.isExistByResourceName(file.getOriginalFilename())) {
+                Resource newResource = new Resource();
+                newResource.setName(file.getOriginalFilename());
+                newResource.setResourceCourse(course);
+                resourceService.addResource(newResource);
+            }
+        }
+        return "redirect:/admin/editResource/" + courseId;
     }
 
     @GetMapping("/deleteCourse/{id}/{courseName}")
