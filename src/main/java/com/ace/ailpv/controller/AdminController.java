@@ -1,8 +1,6 @@
 package com.ace.ailpv.controller;
-
 import java.io.IOException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,20 +8,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Course;
+import com.ace.ailpv.entity.Resource;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.Video;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
 import com.ace.ailpv.service.FileService;
+import com.ace.ailpv.service.ResourceService;
 import com.ace.ailpv.service.UserService;
 import com.ace.ailpv.service.VideoService;
 
@@ -49,6 +47,9 @@ public class AdminController {
     @Autowired
     private VideoService videoService;
 
+    @Autowired
+    private ResourceService resourceService;
+
     String path = "D:\\ACE(OJT)\\AILP(V)\\AILP(V)\\AILP-V\\src\\main\\resources\\static\\courses\\";
 
     @GetMapping("/course-table")
@@ -69,8 +70,8 @@ public class AdminController {
         return "redirect:/admin/course-table";
     }
 
-    @GetMapping("/editCourse/{id}")
-    public String editCourse(@PathVariable("id") Long id, ModelMap model) {
+    @GetMapping("/editVideo/{id}")
+    public String editVideo(@PathVariable("id") Long id, ModelMap model) {
         Course course = courseService.getCourseById(id);
         // Set<String> videoList = fileService.listFilesUsingJavaIO(path +
         // course.getName() + "\\video");
@@ -82,8 +83,17 @@ public class AdminController {
         return "/admin/ADM-VTB-14";
     }
 
-    @GetMapping("/deleteFile/{vidId}/{courseName}")
-    public String deleteFile(@PathVariable("vidId") String vidId, @PathVariable("courseName") String courseName,
+    @GetMapping("/editResource/{id}")
+    public String editResource(@PathVariable("id") Long id, ModelMap model) {
+        Course course = courseService.getCourseById(id);
+        List<Resource> resourceList = resourceService.getResourceByCourseId(id);
+        model.addAttribute("resourceList", resourceList);
+        model.addAttribute("course", course);
+        return "/admin/ADM-RTB-15";
+    }
+
+    @GetMapping("/deleteVideo/{vidId}/{courseName}")
+    public String deleteVideo(@PathVariable("vidId") String vidId, @PathVariable("courseName") String courseName,
             ModelMap model) throws IOException {
 
         Video videoName = videoService.getVideoById(Long.parseLong(vidId));
@@ -100,6 +110,22 @@ public class AdminController {
         model.addAttribute("videoList", videoList);
         model.addAttribute("course", courseName);
 
+        model.addAttribute("msg", "Deleted!!");
+        return "redirect:/admin/editCourse/" + course.getId();
+    }
+
+    @GetMapping("/deleteResource/{resourceId}/{courseName}")
+    public String deleteResource(@PathVariable("resourceId") String recourceId,
+            @PathVariable("courseName") String courseName,
+            ModelMap model) throws IOException {
+
+        Resource resourceName = resourceService.getResourceById(Long.parseLong(recourceId));
+        Course course = courseService.getCourseByName(courseName);
+        fileService.deleteFile(path + courseName + "\\resource\\" + resourceName.getName());
+        videoService.deleteVideoById(Long.parseLong(recourceId));
+        List<Resource> resourceList = resourceService.getAllResources();
+        model.addAttribute("resourceList", resourceList);
+        model.addAttribute("course", courseName);
         model.addAttribute("msg", "Deleted!!");
         return "redirect:/admin/editCourse/" + course.getId();
     }
