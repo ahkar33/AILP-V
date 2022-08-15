@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="teacher_head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap" />
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+    <!-- datatable-css -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
+</head>
+
+<body>
+
+    <!-- This is NavBar -->
+    <nav th:fragment="navbar"
+        class="navbar navbar-light navbar-expand sticky-top bg-white shadow-sm mb-4 topbar static-top">
+        <div class="container-fluid">
+            <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button">
+                <i class="fas fa-bars"></i>
+            </button> <a href=""><img src="/assets/img/logo_blue.png" style="width: 150px;" /></a>
+            <ul class="navbar-nav flex-nowrap ms-auto">
+                <li class="nav-item dropdown no-arrow">
+                    <div class="nav-item dropdown no-arrow">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
+                            <span class="d-lg-inline d-none fw-bold me-2 small text-black-50 text-gray-600">
+                                [[${session?.userInfo.name}]]
+                            </span>
+                            <img class="border rounded-circle img-profile" src="/assets/img/zzs_profile.jpg"
+                                style="width: 35px; height: 35px;" />
+                        </a>
+                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                            <a class="dropdown-item fs-6 text-dark" href="/student/student-profile.html">
+                                <i class="fa-fw fa-sm fa-user fas me-2 text-dark"></i>
+                                &nbsp;Profile
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item fs-6 text-dark" onclick="handleLogout()">
+                                <i class="fa-fw fa-sign-out-alt fa-sm fas me-2 text-dark"></i>
+                                &nbsp;Logout
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- This is Sidebar -->
+    <nav th:fragment="sidebar"
+        class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+        style="background: rgb(50,77,160); position: sticky; top:0; left: 0; bottom: 0;">
+
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+            style="background: rgb(50,77,160);">
+            <div class="container d-flex flex-column p-0">
+                <hr class="sidebar-divider my-0" />
+                <ul class="mt-4 navbar-nav text-light" id="accordionSidebar">
+                    <!-- side bar link start -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
+                            href="teacher-dashboard.html" style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa-chart-bar fas fs-4"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px;">Dashboard</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <!-- side bar link end -->
+
+                    <!-- side bar link start -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" href="post-content.html"
+                            style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa-photo-video fas fs-4"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Post Content</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="d-flex d-md-flex nav-link" data-bss-hover-animate="pulse" href="student-table.html"
+                            style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa-users fas fs-4"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">&nbsp;Student Table
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" href="attendance-table.html"
+                            style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa-user-check fas fs-4"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Attendance Table
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" href="attendance.html"
+                            style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa-users-cog fas fs-4"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Modify Attendance
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <!-- side bar link end -->
+
+                    <!-- side bar link start -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" href="assignment-table.html"
+                            style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa-clipboard-list fas fs-4"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Assignment Table
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" href="assignment-grade.html"
+                            style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa-file-signature fas fs-4"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Assignment Grade
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <!-- side bar link end -->
+
+                    <!-- side bar link start -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" href="exam-table.html"
+                            style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa fa-file-signature fa-file-text fas fs-4"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Exam Table</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- side bar link start -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" href="exam-grade.html"
+                            style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa-poll-h fas fs-4"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Exam Grade</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <!-- side bar link end -->
+                </ul>
+                <div class="text-center d-none d-md-inline">
+                    <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
+                </div>
+            </div>
+        </nav>
+
+    </nav>
+
+    <!-- This is footer -->
+    <div th:fragment="footer">
+        <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/assets/js/bs-init.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script src="/assets/js/theme.js"></script>
+        <!-- jquery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <!-- sweet alert -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- datatable-js -->
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+        <!-- axios -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <!-- vue3 -->
+        <script src="https://unpkg.com/vue@3"></script>
+        <script>
+            const handleLogout = () => {
+                console.log("hello")
+                Swal.fire({
+                    title: 'Are you sure want to Logout?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Logout'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = "http://localhost:8080/auth/logout";
+                    }
+                })
+            }
+        </script>
+    </div>
+
+
+</body>
+
+</html>
