@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/admin/admin-fragments :: admin_head">
+    <title>Course Table</title>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <!-- this is where side bar is -->
+        <div th:insert="/admin/admin-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <!-- this is where nav bar is -->
+                <div th:insert="/admin/admin-fragments :: navbar" />
+
+                <div class="container-fluid">
+                    <div>
+                        <h1 class="text-start"
+                            style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Anek Kannada', sans-serif;"
+                            th:text="${course?.name}"
+                            >
+           
+                        </h1>
+                    </div>
+                    <div
+                        class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
+                    
+                        <div>
+                            
+                        </div>
+                    </div>
+                        
+
+                    <div class="card shadow">
+                        <h2 class="text-danger text-center">[[${msg}]]</h2>
+                        <div class="card-body">
+                            <table id="dataTable">
+                                <thead class="table">
+                                    <tr>
+                                        
+                                        
+                                        <th>Name</th>
+                                        <th>Action</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="video : ${videoList}">
+                                        
+                                        <td>[[${video.name}]]</td>
+                                        
+                                        <td>
+                                            
+                                            <a class="btn btn-outline-primary"]
+                                            th:href="@{'/admin/updateFile/' + ${video?.id} + '/' + ${course?.name}}">
+                                            Update
+                                            
+                                        </a>
+                                        <a class="btn btn-outline-danger"
+                                        th:href="@{'/admin/deleteFile/' + ${video?.id} + '/' + ${course?.name}}">
+                                            Remove
+                                        
+                                        </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+    <div th:insert="/admin/admin-fragments :: footer" />
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+
+        const handleDelete = (courseId) => {
+            console.log(courseId);
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = `http://localhost:8080/admin/deleteCourse/${courseId}`;
+                }
+            })
+        }
+    </script>
+
+</body>
+</html>
