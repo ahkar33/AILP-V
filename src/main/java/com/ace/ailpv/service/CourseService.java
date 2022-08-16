@@ -81,4 +81,8 @@ public class CourseService {
         return courseRepository.existsByName(name);
     }
 
+    public void updateCourse(Course course) {
+        courseRepository.save(course);
+    }
+
 }
