@@ -24,10 +24,6 @@ public class BatchService {
         batchRepository.save(batch);
     }
 
-    // public void updateBatch(Batch batch) {
-    //     batchRepository.sav;
-    // }
-
     public void deleteBatchById(Long id) {
         List<User> userList = userService.findUserByBatchId(id);
         for(User user : userList) {

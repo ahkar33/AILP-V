@@ -51,7 +51,7 @@ public class AdminController {
     @Autowired
     private ResourceService resourceService;
 
-    String path = "D:\\ACE(OJT)\\AILP(V)\\AILP(V)\\AILP-V\\src\\main\\resources\\static\\courses\\";
+    String path = "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\AILP-V\\src\\main\\resources\\static\\courses\\";
 
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {

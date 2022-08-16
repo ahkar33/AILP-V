@@ -40,15 +40,10 @@ public class Batch {
     private LocalDate endDate;
 
     @ManyToOne
-    // @JsonBackReference
     @JoinColumn(name = "course_id", nullable = false)
     private Course batchCourse;
 
-    // @Transient
-    // private Long courseId;
-
     @ManyToMany(cascade = { CascadeType.PERSIST }, mappedBy = "batchList")
-    // @JsonManagedReference
     Set<User> userList = new HashSet<>();
 
 }
