@@ -27,8 +27,8 @@
                         class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center mb-3">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop" style="width: 176.1px;font-size: 16px;height: 44px;margin-bottom: 5px;">
                             <i class="fa-photo-video fas fs-5"></i>
                             Upload Video
                         </button>
@@ -65,7 +65,7 @@
 
 
 
-                    <div class="card shadow">
+                    <div class="card shadow text-dark">
                         <h2 class="text-danger text-center">[[${msg}]]</h2>
                         <div class="card-body">
                             <table id="dataTable">
@@ -91,7 +91,7 @@
                                                 Remove
                                             </a> -->
 
-                                            <a class="btn btn-outline-danger"
+                                            <a class=" fw-bold btn btn-outline-danger"
                                             th:attr="onclick=|handleDelete('${video.id}' + '/' + '${course.name}')|">
                                             Remove
                                         </a>
