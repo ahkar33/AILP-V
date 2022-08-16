@@ -22,6 +22,9 @@
                             Course Table
                         </h1>
                     </div>
+
+                    
+
                     <div
                         class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
                         <div>
@@ -105,6 +108,56 @@
                                                 class="btn btn-outline-danger">
                                                 Remove
                                             </a> -->
+
+                                            <!-- my modal -->
+                    <div class="modal fade" role="dialog" tabindex="-1" th:attr="id='edit-course-button' + ${course.id}">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <form th:action="@{/admin/editCourse}" method="post"
+                                    >
+                                    <div class="modal-header" style="background: #f8f9fc;">
+                                        <h4
+                                            style="color: rgb(75,75,75);font-family: 'Anek Bangla', sans-serif;font-weight: bold;margin-top: 5px;margin-bottom: 2px;">
+                                            Edit Course
+                                        </h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" name="id" th:value="${course?.id}">
+                                        <label for="">Cousre Name</label>
+                                        <input type="text" name="name" class="form-control"  required
+                                            maxlength="100" minlength="1" th:value="${course?.name}">
+
+                                        <label for="">Fee</label>
+                                        <input type="number" name="fee" class="form-control"  th:value="${course?.fee}" required
+                                            maxlength="20">
+
+                                        <label for="">Description</label>
+                                        <input type="text" name="desc" class="form-control"  th:value="${course?.description}"
+                                            required maxlength="1000">
+
+                                    </div>
+                                    <div class="modal-footer" style="background: #f8f9fc;">
+                                        <button class="btn btn-light" data-bs-dismiss="modal"
+                                            style="margin-right: 13px;">Cancel</button>
+                                        <button class="btn btn-primary" type="submit">
+                                            Update
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                                            <a class="btn btn-outline-primary"
+                                                th:attr="href='#edit-course-button' + ${course.id}" data-bs-toggle="modal"
+                                                >
+                                                Edit Course
+                                            </a>
+
+                                            
                                             <a class="btn btn-outline-primary"
                                                 th:href="@{'/admin/editVideo/' + ${course?.id} }">
                                                 Edit Video
@@ -146,7 +199,7 @@
         const handleDelete = (courseId) => {
             console.log(courseId);
             Swal.fire({
-                title: 'Are you sure?',
+                title: 'Are you sure want to delete?',
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,

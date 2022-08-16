@@ -86,10 +86,15 @@
                                             <!-- <a class="btn btn-outline-primary" ]
                                                 th:href="@{'/admin/updateFile/' + ${video?.id} + '/' + ${course?.name}}">
                                                 Update</a> -->
-                                            <a class="btn btn-outline-danger"
+                                            <!-- <a class="btn btn-outline-danger"
                                                 th:href="@{'/admin/deleteVideo/' + ${video?.id} + '/' + ${course?.name}}">
                                                 Remove
-                                            </a>
+                                            </a> -->
+
+                                            <a class="btn btn-outline-danger"
+                                            th:attr="onclick=|handleDelete('${video.id}' + '/' + '${course.name}')|">
+                                            Remove
+                                        </a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -110,10 +115,10 @@
             $('#dataTable').DataTable();
         });
 
-        const handleDelete = (courseId) => {
-            console.log(courseId);
+        const handleDelete = (vidId) => {
+            console.log(vidId);
             Swal.fire({
-                title: 'Are you sure?',
+                title: 'Are you sure want to delete?',
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -122,7 +127,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location = `http://localhost:8080/admin/deleteCourse/${courseId}`;
+                    window.location = `http://localhost:8080/admin/deleteVideo/${vidId}`;
                 }
             })
         }
