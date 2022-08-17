@@ -33,13 +33,13 @@ public class CourseService {
 
     public void addCourse(Course course) throws IllegalStateException, IOException {
 
-        fileService.createFolderForCourse(course.getName());
+        fileService.createFolderForCourse(course.getName().trim());
 
         courseRepository.save(course);
         Course resCourse = getCourseById(course.getId());
 
         for (MultipartFile video : course.getVideos()) {
-            fileService.createFile(video, course.getName() + "\\video");
+            fileService.createFile(video, course.getName().trim() + "\\video");
             Video reqVideo = new Video();
             reqVideo.setName(video.getOriginalFilename());
             reqVideo.setVideoCourse(resCourse);
@@ -47,7 +47,7 @@ public class CourseService {
         }
 
         for (MultipartFile resource : course.getResources()) {
-            fileService.createFile(resource, course.getName() + "\\resource");
+            fileService.createFile(resource, course.getName().trim() + "\\resource");
             Resource reqResource = new Resource();
             reqResource.setName(resource.getOriginalFilename());
             reqResource.setResourceCourse(resCourse);
