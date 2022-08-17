@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,10 +43,12 @@ public class Batch {
     private LocalDate endDate;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "course_id", nullable = false)
     private Course batchCourse;
 
     @ManyToMany(cascade = { CascadeType.PERSIST }, mappedBy = "batchList")
+    @JsonIgnore
     Set<User> userList = new HashSet<>();
 
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
