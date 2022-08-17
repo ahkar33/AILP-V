@@ -43,7 +43,7 @@
         const app = Vue.createApp({
             data() {
                 return {
-                    previousUserId: '',
+                    // previousUserId: '',
                     batchId: '',
                     userName: '',
                     message: '',
@@ -76,8 +76,8 @@
                         get(`http://localhost:8080/api/message/getMessagesByBatchId/${this.batchId}`)
                         .then(res => {
                             this.messageList = [...res.data];
-                            let lastElement = this.messageList[this.messageList.length - 1];
-                            this.previousUserId = lastElement.messageUser.id;
+                            // let lastElement = this.messageList[this.messageList.length - 1];
+                            // this.previousUserId = lastElement.messageUser.id;
                         })
                         .catch(error => console.log(error));
                 }
