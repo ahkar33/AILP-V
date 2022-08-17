@@ -27,7 +27,7 @@
                         class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center mb-3">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-primary" style="width: 190.1px;font-size: 16px;height: 44px;margin-bottom: 5px;" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             <i class="fa-photo-video fas fs-5"></i>
                             Upload Resource
@@ -63,7 +63,7 @@
 
                     </div>
 
-                    <div class="card shadow">
+                    <div class="card shadow text-dark">
                         <h2 class="text-danger text-center">[[${msg}]]</h2>
                         <div class="card-body">
                             <table id="dataTable">
@@ -86,7 +86,7 @@
                                                 Remove
                                             </a> -->
 
-                                            <a class="btn btn-outline-danger"
+                                            <a class="btn btn-outline-danger fw-bold"
                                             th:attr="onclick=|handleDelete('${resource.id}' + '/' + '${course.name}')|">
                                             Remove
                                         </a>

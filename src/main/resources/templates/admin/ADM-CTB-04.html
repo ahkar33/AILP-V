@@ -13,12 +13,12 @@
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <!-- this is where nav bar is -->
-                <div th:insert="/admin/admin-fragments :: navbar" />
+                <div th:insert="/admin/admin-fragments :: navbar" />    
 
                 <div class="container-fluid">
                     <div>
                         <h1 class="text-start"
-                            style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Anek Kannada', sans-serif;">
+                            style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
                             Course Table
                         </h1>
                     </div>
@@ -30,18 +30,18 @@
                         <div>
                             <a class="btn btn-primary btn-lg" role="button" href="#add-course-button"
                                 data-bs-toggle="modal"
-                                style="width: 176.1px;font-size: 16px;height: 44px;margin-bottom: 12px;">
-                                <i class="fa-photo-video fas fs-5"></i>
+                                style="width: 176.1px;font-size: 16px;height: 44px;margin-bottom: 12px; padding-top: 3px;">
+                                <i class="fa-photo-video fas fs-5" style="padding-bottom: 7px; padding-top: 6px;"></i><span style="font-size: 20px;"><b>&nbsp;</b></span>
                                 Create Course
                             </a>
-                            <div class="modal fade" role="dialog" tabindex="-1" id="add-course-button">
+                            <div class="fw-bold modal fade" style="font-family: 'Roboto', sans-serif;" role="dialog" tabindex="-1" id="add-course-button">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
+                                    <div class="modal-content text-dark">
                                         <form th:action="@{/admin/addCourse}" th:object="${course}" method="post"
                                             enctype="multipart/form-data">
                                             <div class="modal-header" style="background: #f8f9fc;">
                                                 <h4
-                                                    style="color: rgb(75,75,75);font-family: 'Anek Bangla', sans-serif;font-weight: bold;margin-top: 5px;margin-bottom: 2px;">
+                                                    style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif;font-weight: bold;margin-top: 5px;margin-bottom: 2px;">
                                                     Create Course
                                                 </h4>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -50,24 +50,24 @@
                                             </div>
                                             <div class="modal-body">
 
-                                                <label for="">Cousre Name</label>
-                                                <input type="text" class="form-control" th:field="*{name}" required
+                                                <label for="">Course Name</label>
+                                                <input type="text" class="form-control mb-3" th:field="*{name}" required
                                                     maxlength="100" minlength="1">
 
                                                 <label for="">Fee</label>
-                                                <input type="number" class="form-control" th:field="*{fee}" required
+                                                <input type="number" class="form-control mb-3" th:field="*{fee}" required
                                                     maxlength="20">
 
                                                 <label for="">Description</label>
-                                                <input type="text" class="form-control" th:field="*{description}"
+                                                <input type="text" class="form-control mb-3" th:field="*{description}"
                                                     required maxlength="1000">
 
                                                 <label for="">Video</label>
-                                                <input type="file" class="form-control" multiple th:field="*{videos}"
+                                                <input type="file" class="form-control mb-3" multiple th:field="*{videos}"
                                                     accept="video/*" required>
 
                                                 <label for="">Resource</label>
-                                                <input type="file" class="form-control" multiple th:field="*{resources}"
+                                                <input type="file" class="form-control mb-3" multiple th:field="*{resources}"
                                                     accept=".pdf, .pptx, .xlsx," required>
 
                                             </div>
@@ -112,12 +112,12 @@
                                             <!-- my modal -->
                     <div class="modal fade" role="dialog" tabindex="-1" th:attr="id='edit-course-button' + ${course.id}">
                         <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
+                            <div class="fw-bold modal-content" style="font-family: 'Roboto', sans-serif;">
                                 <form th:action="@{/admin/editCourse}" method="post"
                                     >
                                     <div class="modal-header" style="background: #f8f9fc;">
                                         <h4
-                                            style="color: rgb(75,75,75);font-family: 'Anek Bangla', sans-serif;font-weight: bold;margin-top: 5px;margin-bottom: 2px;">
+                                            style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif;font-weight: bold;margin-top: 5px;margin-bottom: 2px;">
                                             Edit Course
                                         </h4>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -126,16 +126,16 @@
                                     </div>
                                     <div class="modal-body">
                                         <input type="hidden" name="id" th:value="${course?.id}">
-                                        <label for="">Cousre Name</label>
-                                        <input type="text" name="name" class="form-control"  required
+                                        <label for="">Course Name</label>
+                                        <input type="text" name="name" class="form-control mb-3"  required
                                             maxlength="100" minlength="1" th:value="${course?.name}">
 
                                         <label for="">Fee</label>
-                                        <input type="number" name="fee" class="form-control"  th:value="${course?.fee}" required
+                                        <input type="number" name="fee" class="form-control mb-3"  th:value="${course?.fee}" required
                                             maxlength="20">
 
                                         <label for="">Description</label>
-                                        <input type="text" name="desc" class="form-control"  th:value="${course?.description}"
+                                        <input type="text" name="desc" class="form-control mb-3"  th:value="${course?.description}"
                                             required maxlength="1000">
 
                                     </div>
@@ -151,25 +151,24 @@
                         </div>
                     </div>
 
-                                            <a class="btn btn-outline-primary"
+                                            <a class="btn btn-warning me-2 fw-bold"
                                                 th:attr="href='#edit-course-button' + ${course.id}" data-bs-toggle="modal"
                                                 >
-                                                Edit Course
+                                                Course   <i class="fa-edit fas"></i>
                                             </a>
 
                                             
-                                            <a class="btn btn-outline-primary"
+                                            <a class="btn btn-success me-2 fw-bold" title="Edit Video" data-bs-placement="top" data-bs-toggle="tooltip"
                                                 th:href="@{'/admin/editVideo/' + ${course?.id} }">
-                                                Edit Video
+                                                Video    <i class="fa-edit fas"></i>
                                             </a>
-                                            <a class="btn btn-outline-primary"
+                                            <a class="btn btn-info me-2 fw-bold" title="Edit Resource" data-bs-placement="top" data-bs-toggle="tooltip"
                                                 th:href="@{'/admin/editResource/' + ${course?.id} }">
-                                                Edit Resource
+                                                Resource    <i class="fa-edit fas"></i>
                                             </a>
 
-                                            <a class="btn btn-outline-danger"
-                                                th:attr="onclick=|handleDelete('${course.id}' + '/' + '${course.name}')|">
-                                                Remove
+                                            <a class="btn btn-outline-danger" title="Remove" data-bs-placement="top" data-bs-toggle="tooltip"
+                                                th:attr="onclick=|handleDelete('${course.id}' + '/' + '${course.name}')|"><i class="fa-trash-alt fas"></i>
                                             </a>
 
                                             <!-- <a class="btn btn-outline-danger"
@@ -212,6 +211,12 @@
                 }
             })
         }
+    </script>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
     </script>
 
 </body>
