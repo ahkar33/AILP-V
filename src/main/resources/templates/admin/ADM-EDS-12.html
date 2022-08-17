@@ -16,10 +16,12 @@
                 <div th:insert="/admin/admin-fragments :: navbar" />
 
                 <div class="container-fluid pb-5 pe-5 ps-5 pt-2" style="max-width: 45rem;">
-                    <h1 class="h2" style="padding-right: 0px;">Edit Student</h1>
+                    <h1 class="mb-2 text-start"
+                    style="font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
+                    Edit Student</h1>
                     <div class="card mb-4 shadow-sm">
                         <form th:action="@{/admin/editStudent}" th:object="${student}" method="post">
-                            <div class="card-body p-4 text-dark">
+                            <div class="card-body p-4 text-dark fw-bold">
 
                                 <label class="fs-6">Student Id</label>
                                 <div class="input-group mb-3">
