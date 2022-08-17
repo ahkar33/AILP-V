@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.User;
+import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.UserService;
 
 @Controller
@@ -19,6 +21,9 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BatchService batchService;
 
     @GetMapping("/login")
     public String setupLogin(ModelMap model) {
@@ -34,11 +39,20 @@ public class AuthController {
             if (userInfo.getRole().equals("admin")) {
                 // changed back later to admin dashboard
                 return "redirect:/admin/course-table";
-            } else if(userInfo.getRole().equals("teacher")) {
+            } else if (userInfo.getRole().equals("teacher")) {
                 // changed back later to teacher dashboard
                 return "redirect:/teacher/student-table";
             } else {
-                
+                // changed back later to student home
+                userInfo.setBatchId(userInfo.getBatchList().iterator().next().getId().toString());
+                Batch userBatch = batchService.getBatchById(Long.parseLong(userInfo.getBatchId()));
+                if (userBatch.getIsActive()) {
+                    session.setAttribute("userInfo", userInfo);
+                    return "redirect:/student/student-home";
+                }
+                String message = "Your Batch has been disabled";
+                model.addAttribute("message", message);
+                return "/USR-LGN-01";
             }
         }
         String message = "ID and Password do not match";
