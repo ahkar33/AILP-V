@@ -40,14 +40,6 @@
                                 <div class="input-group mb-3">
                                     <input v-model="name" type="text" class="form-control mb-2" placeholder="Exam Name"
                                         required />
-                                </div><label>Start Time</label>
-                                <div class="input-group mb-3">
-                                    <input v-model="startDateTime" type="datetime-local" class="form-control mb-2"
-                                        required placeholder="Username" />
-                                </div><label>End Time</label>
-                                <div class="input-group mb-3">
-                                    <input v-model="endDateTime" type="datetime-local" class="form-control mb-2"
-                                        required placeholder="Username" />
                                 </div>
                             </div>
                         </div>
@@ -138,8 +130,6 @@
                     courseList: [],
                     course: '',
                     name: '',
-                    startDateTime: '',
-                    endDateTime: '',
                     fullMark: '',
                     questionList: [
                         {
@@ -194,8 +184,6 @@
                         else if (
                             this.course.replace(/\s/g, "").length == 0 ||
                             this.name.replace(/\s/g, "").length == 0 ||
-                            this.startDateTime.replace(/\s/g, "").length == 0 ||
-                            this.endDateTime.replace(/\s/g, "").length == 0 ||
                             this.fullMark.length == 0
                         ) {
                             this.isEmpty = true;
@@ -211,8 +199,6 @@
                         let data = {
                             courseId: this.course,
                             name: this.name,
-                            startDateTime: this.startDateTime,
-                            endDateTime: this.endDateTime,
                             fullMark: this.fullMark,
                             questionList: this.questionList
                         }
@@ -228,21 +214,7 @@
                             })
                             .catch(error => console.log(error));
                     }
-
                 },
-                getAllCourses() {
-                    // axios
-                    //     .get('http://localhost:8080/api/course/getAllCourses')
-                    //     .then(res => {
-                    //         res.data.forEach(course => {
-                    //             this.courseList.push(course.name);
-                    //         });
-                    //     })
-                    //     .catch(error => console.log(error));
-                }
-            },
-            mounted() {
-                // this.getAllCourses();
             },
         });
 

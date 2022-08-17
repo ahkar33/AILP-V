@@ -41,16 +41,14 @@ public class FileService {
 
     public Set<String> listFilesUsingJavaIO(String dir) {
         return Stream.of(new File(dir).listFiles())
-          .filter(file -> !file.isDirectory())
-          .map(File::getName)
-          .collect(Collectors.toSet());
+                .filter(file -> !file.isDirectory())
+                .map(File::getName)
+                .collect(Collectors.toSet());
     }
 
     public boolean deleteFile(String fileName) throws IOException {
         boolean isDeleted = new File(fileName).delete();
-        
         return isDeleted;
-
     }
 
 }
