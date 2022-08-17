@@ -35,11 +35,12 @@ public class AuthController {
     public String login(@ModelAttribute("user") User user, ModelMap model, HttpSession session) {
         if (userService.checkLogin(user.getId(), user.getPassword())) {
             User userInfo = userService.getUserById(user.getId());
-            session.setAttribute("userInfo", userInfo);
             if (userInfo.getRole().equals("admin")) {
                 // changed back later to admin dashboard
+                session.setAttribute("userInfo", userInfo);
                 return "redirect:/admin/course-table";
             } else if (userInfo.getRole().equals("teacher")) {
+                session.setAttribute("userInfo", userInfo);
                 // changed back later to teacher dashboard
                 return "redirect:/teacher/student-table";
             } else {

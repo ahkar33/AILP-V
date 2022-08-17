@@ -1,6 +1,5 @@
 package com.ace.ailpv.entity;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,8 +33,6 @@ public class Exam {
     private Long id;
 
     private String name;
-    private LocalDateTime startDateTime;
-    private LocalDateTime endDateTime;
     private Double fullMark;
 
     @OneToMany(cascade = CascadeType.ALL)

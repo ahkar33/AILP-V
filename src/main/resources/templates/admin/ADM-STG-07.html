@@ -54,7 +54,6 @@
                             <button @click.prevent="handleSend()" class="btn btn-primary">Add</button>
                         </div>
                     </div>
-
                 </div>
             </div>
             <footer class="bg-white sticky-footer">
@@ -90,7 +89,6 @@
                     }
                 },
                 handleSend() {
-
                     this.isEmpty = false;
                     this.inputFields.forEach(element => {
                         if (
@@ -112,7 +110,6 @@
                                 'info'
                             )
                         }
-
                     });
                     if (!this.isEmpty) {
                         let data = [];
@@ -129,7 +126,6 @@
                                 ).then(() => window.location = "http://localhost:8080/admin/student-table");
                             })
                             .catch(error => console.log(error));
-
                     }
                 },
             },
