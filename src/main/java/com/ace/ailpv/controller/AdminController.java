@@ -203,6 +203,7 @@ public class AdminController {
 
     @PostMapping("/addBatch")
     public String addBatch(@ModelAttribute("batch") Batch batch) {
+        batch.setIsActive(true);
         batchService.addBatch(batch);
         return "redirect:/admin/batch-table";
     }
@@ -210,6 +211,18 @@ public class AdminController {
     @GetMapping("/deleteBatch/{id}")
     public String deleteBatch(@PathVariable("id") Long id) {
         batchService.deleteBatchById(id);
+        return "redirect:/admin/batch-table";
+    }
+
+    @GetMapping("/toggleDisableBatch/{id}")
+    public String disableBatch(@PathVariable("id") Long id) {
+        Batch batch = batchService.getBatchById(id);
+        if(batch.getIsActive()) {
+            batch.setIsActive(false);
+        } else {
+            batch.setIsActive(true);
+        }
+        batchService.addBatch(batch);
         return "redirect:/admin/batch-table";
     }
 

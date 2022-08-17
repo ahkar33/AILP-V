@@ -131,8 +131,24 @@
                                                 Edit
                                             </a>
 
-                                            <a class="btn btn-outline-danger"
-                                                th:attr="onclick=|handleDelete('${batch.id}')|">
+                                            <span th:if="${batch.isActive == true}">
+                                                <a th:href="@{/admin/toggleDisableBatch/} + ${batch?.id}"
+                                                    class="btn btn-outline-danger">
+                                                    Disable
+                                                </a>
+                                            </span>
+
+                                            <span th:if="${batch.isActive == false}">
+                                                <a th:href="@{/admin/toggleDisableBatch/} + ${batch?.id}"
+                                                    class="btn btn-outline-success">
+                                                    Enable
+                                                </a>
+
+                                            </span>
+
+
+
+                                            <a class="btn btn-danger" th:attr="onclick=|handleDelete('${batch.id}')|">
                                                 Remove
                                             </a>
                                         </td>
@@ -154,7 +170,7 @@
     </div>
 
     <div th:insert="/admin/admin-fragments :: footer" />
-   
+
     <script>
         $(document).ready(function () {
             $('#dataTable').DataTable();

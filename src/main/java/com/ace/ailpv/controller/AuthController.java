@@ -37,6 +37,8 @@ public class AuthController {
             } else if(userInfo.getRole().equals("teacher")) {
                 // changed back later to teacher dashboard
                 return "redirect:/teacher/student-table";
+            } else {
+                
             }
         }
         String message = "ID and Password do not match";

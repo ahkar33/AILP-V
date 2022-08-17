@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -46,4 +47,7 @@ public class Batch {
     @ManyToMany(cascade = { CascadeType.PERSIST }, mappedBy = "batchList")
     Set<User> userList = new HashSet<>();
 
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    private Boolean isActive;
+    
 }

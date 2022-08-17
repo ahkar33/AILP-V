@@ -45,6 +45,10 @@ public class BatchService {
         return batchRepository.findById(id).get();
     }
 
+    public Batch getBatchByUserId(String id) {
+        return null; 
+    }
+
     public List<Batch> getAllBatches() {
         return batchRepository.findAll();
     }
