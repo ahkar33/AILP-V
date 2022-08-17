@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,15 +41,13 @@ public class Batch {
     private LocalDate endDate;
 
     @ManyToOne
-    // @JsonBackReference
     @JoinColumn(name = "course_id", nullable = false)
     private Course batchCourse;
 
-    // @Transient
-    // private Long courseId;
-
     @ManyToMany(cascade = { CascadeType.PERSIST }, mappedBy = "batchList")
-    // @JsonManagedReference
     Set<User> userList = new HashSet<>();
 
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    private Boolean isActive;
+    
 }

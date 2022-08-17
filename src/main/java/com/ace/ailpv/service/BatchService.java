@@ -24,10 +24,6 @@ public class BatchService {
         batchRepository.save(batch);
     }
 
-    // public void updateBatch(Batch batch) {
-    //     batchRepository.sav;
-    // }
-
     public void deleteBatchById(Long id) {
         List<User> userList = userService.findUserByBatchId(id);
         for(User user : userList) {
@@ -47,6 +43,10 @@ public class BatchService {
 
     public Batch getBatchById(Long id) {
         return batchRepository.findById(id).get();
+    }
+
+    public Batch getBatchByUserId(String id) {
+        return null; 
     }
 
     public List<Batch> getAllBatches() {

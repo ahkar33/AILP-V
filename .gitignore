@@ -39,3 +39,6 @@ build/
 *.pdf
 *.xlsx
 *.pptx
+
+### ignore property files ###
+application.properties
