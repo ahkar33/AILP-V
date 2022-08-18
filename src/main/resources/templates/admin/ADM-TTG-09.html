@@ -92,6 +92,7 @@
         const app = Vue.createApp({
             data() {
                 return {
+                    userIdList: [],
                     isEmpty: null,
                     batch: 'Choose One Batch',
                     inputFields: [
@@ -100,6 +101,14 @@
                 }
             },
             methods: {
+                isDuplicate(array) {
+                    const isDuplicate = array.some((item, index) => index !== array.indexOf(item));
+                    if (!isDuplicate) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                },
                 handleAddField() {
                     this.inputFields = [...this.inputFields, { id: '', name: '', batch: '' }];
                 },
@@ -111,11 +120,15 @@
                     }
                 },
                 handleSend() {
+                    let inputIdList = [];
+                    this.inputFields.forEach(student => {
+                        inputIdList.push(student.id);
+                    });
                     this.isEmpty = false;
-                    this.inputFields.forEach(element => {
+                    this.inputFields.forEach(teacher => {
                         if (
-                            element.id.replace(/\s/g, "").length == 0 ||
-                            element.name.replace(/\s/g, "").length == 0
+                            teacher.id.replace(/\s/g, "").length == 0 ||
+                            teacher.name.replace(/\s/g, "").length == 0
                         ) {
                             this.isEmpty = true;
                             Swal.fire(
@@ -123,11 +136,24 @@
                                 '',
                                 'info'
                             )
-                        }
-                        else if (this.batch == "Choose One Batch") {
+                        } else if (this.batch == "Choose One Batch") {
                             this.isEmpty = true;
                             Swal.fire(
                                 'Please Choose One Batch!',
+                                '',
+                                'info'
+                            )
+                        } else if (this.userIdList.includes(teacher.id)) {
+                            this.isEmpty = true;
+                            Swal.fire(
+                                `ID ${teacher.id} already exists`,
+                                '',
+                                'info'
+                            )
+                        } else if (this.isDuplicate(inputIdList)) {
+                            this.isEmpty = true;
+                            Swal.fire(
+                                `ID ${teacher.id} is duplicate`,
                                 '',
                                 'info'
                             )
@@ -152,6 +178,14 @@
                     }
 
                 }
+            },
+            mounted() {
+                axios
+                    .get('http://localhost:8080/api/user/getUserIdList')
+                    .then(res => {
+                        this.userIdList = [...res.data];
+                    })
+                    .catch(error => console.log(error));
             },
         });
 
