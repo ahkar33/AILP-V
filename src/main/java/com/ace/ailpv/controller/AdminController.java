@@ -237,6 +237,12 @@ public class AdminController {
 
     @PostMapping("/editBatch")
     public String editBatch(@ModelAttribute("batch") Batch batch) {
+        Batch resBatch = batchService.getBatchById(batch.getId());
+        if(resBatch.getIsActive()) {
+            batch.setIsActive(true);
+        } else {
+            batch.setIsActive(false);
+        }
         batchService.addBatch(batch);
         return "redirect:/admin/batch-table";
     }
