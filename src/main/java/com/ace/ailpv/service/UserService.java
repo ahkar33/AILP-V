@@ -73,4 +73,13 @@ public class UserService {
         return stduentList;
     }
 
+    public List<String> getUserIdList() {
+        List<String> userIdList = new ArrayList<>();
+        List<User> userList = userRepository.findAll();
+        for(User user : userList) {
+            userIdList.add(user.getId());
+        }
+        return userIdList; 
+    }
+
 }
