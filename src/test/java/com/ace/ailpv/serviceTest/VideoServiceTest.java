@@ -30,8 +30,8 @@ public class VideoServiceTest {
     @Test
     public void isExistByVideoNameTest(){
         String videoName = "something";
-        videoService.isExistByVideoName(videoName);
-        verify(videoRepository,times(1)).existsByName(videoName);
+        videoService.isExistByVideoNameAndCourseId(videoName, 1L);
+        verify(videoRepository,times(1)).existsByNameAndVideoCourse_id(videoName, 1L);
     }
 
     @Test
