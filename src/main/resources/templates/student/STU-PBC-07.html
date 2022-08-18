@@ -126,6 +126,7 @@
         const app = Vue.createApp({
             data() {
                 return {
+                    isEmpty: null,
                     messageListLength: '',
                     batchId: '',
                     userId: '',
@@ -152,22 +153,28 @@
                     return false;
                 },
                 handleSend() {
-                    let data = {
-                        message: this.message,
-                        userId: this.userId,
-                        batchId: this.batchId,
-                        dateTime: new Date().toLocaleString()
+                    this.isEmpty = false;
+                    if (this.message.replace(/\s/g, "").length == 0) {
+                        this.isEmpty = true;
                     }
+                    if (!this.isEmpty) {
+                        let data = {
+                            message: this.message,
+                            userId: this.userId,
+                            batchId: this.batchId,
+                            dateTime: new Date().toLocaleString()
+                        }
 
-                    this.message = "";
+                        this.message = "";
 
-                    axios
-                        .post('http://localhost:8080/api/message/addMessage/', data)
-                        .then(() => {
-                            console.log("success");
-                            this.getAllMessages();
-                        })
-                        .catch(error => console.log(error));
+                        axios
+                            .post('http://localhost:8080/api/message/addMessage/', data)
+                            .then(() => {
+                                console.log("success");
+                                this.getAllMessages();
+                            })
+                            .catch(error => console.log(error));
+                    }
 
                 },
                 getAllMessages() {
