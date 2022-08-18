@@ -49,7 +49,7 @@ public class AuthController {
                 Batch userBatch = batchService.getBatchById(Long.parseLong(userInfo.getBatchId()));
                 if (userBatch.getIsActive()) {
                     session.setAttribute("userInfo", userInfo);
-                    return "redirect:/student/student-group-chat";
+                    return "redirect:/student/student-public-chat";
                 }
                 String message = "Your Batch has been disabled";
                 model.addAttribute("message", message);

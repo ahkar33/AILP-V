@@ -18,4 +18,9 @@ public class StudentController {
         return "/student/student-group-chat";
     }
 
+    @GetMapping("/student-public-chat")
+    public String setupStudentPublicChat() {
+        return "/student/STU-PBC-07.html";
+    }
+
 }

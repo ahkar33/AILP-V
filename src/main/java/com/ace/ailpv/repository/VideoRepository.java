@@ -10,7 +10,7 @@ import com.ace.ailpv.entity.Video;
 @Repository
 public interface VideoRepository extends JpaRepository<Video, Long> {
 
-    Boolean existsByName(String name);
+    Boolean existsByNameAndVideoCourse_id(String name, Long id);
 
     List<Video> findByVideoCourse_id(Long id);
 

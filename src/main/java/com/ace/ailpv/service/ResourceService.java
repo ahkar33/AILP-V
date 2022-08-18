@@ -13,8 +13,8 @@ public class ResourceService {
     @Autowired
     ResourceRepository resourceRepository;
 
-    public Boolean isExistByResourceName(String name) {
-        return resourceRepository.existsByName(name);
+    public Boolean isExistByResourceNameAndCourseId(String name, Long id) {
+        return resourceRepository.existsByNameAndResourceCourse_id(name, id);
     }
 
     public List<Resource> getAllResources() {

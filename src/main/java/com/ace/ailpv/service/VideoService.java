@@ -13,8 +13,8 @@ public class VideoService{
     @Autowired
     VideoRepository videoRepository;
 
-    public Boolean isExistByVideoName(String name) {
-        return videoRepository.existsByName(name);
+    public Boolean isExistByVideoNameAndCourseId(String name, Long id) {
+        return videoRepository.existsByNameAndVideoCourse_id(name, id);
     }
 
     public List<Video> getAllVideos() {
