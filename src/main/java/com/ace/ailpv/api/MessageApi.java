@@ -1,6 +1,5 @@
 package com.ace.ailpv.api;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +36,6 @@ public class MessageApi {
     public void addMessage(@RequestBody Message message) {
         Batch batch = batchService.getBatchById(Long.parseLong(message.getBatchId()));
         User user = userService.getUserById(message.getUserId());
-        LocalDateTime now = LocalDateTime.now();
-        message.setDateTime(now);
         message.setMessageBatch(batch);
         message.setMessageUser(user);
         messageService.addMessage(message);

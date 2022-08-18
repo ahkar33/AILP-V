@@ -126,22 +126,37 @@
         const app = Vue.createApp({
             data() {
                 return {
-                    // previousUserId: '',
                     messageListLength: '',
                     batchId: '',
+                    userId: '',
                     userName: '',
                     message: '',
                     messageList: []
                 }
             },
             methods: {
+                isToday(date) {
+                    let today = new Date();
+                    if (today.toLocaleDateString() == date.substring(0, 9)) {
+                        return true;
+                    }
+                    return false;
+                },
+                isYesterday(date) {
+                    let today = new Date();
+                    let yesterday = new Date();
+                    yesterday.setDate(today.getDate() - 1);
+                    if (yesterday.toLocaleDateString() == date.substring(0, 9)) {
+                        return true;
+                    }
+                    return false;
+                },
                 handleSend() {
-                    let userId = document.getElementById('userId').value;
-
                     let data = {
                         message: this.message,
-                        userId: userId,
-                        batchId: this.batchId
+                        userId: this.userId,
+                        batchId: this.batchId,
+                        dateTime: new Date().toLocaleString()
                     }
 
                     this.message = "";
@@ -160,6 +175,17 @@
                         get(`http://localhost:8080/api/message/getMessagesByBatchId/${this.batchId}`)
                         .then(res => {
                             this.messageList = [...res.data];
+                            this.messageList = this.messageList.map(msg => {
+                                let resDateTime = msg.dateTime;
+                                if (this.isToday(resDateTime)) {
+                                    var dateTime = "Today at " + resDateTime.substring(11, 16) + " " + resDateTime.substring(20);
+                                } else if (this.isYesterday(resDateTime)) {
+                                    var dateTime = "Yesterday at " + resDateTime.substring(11, 16) + " " + resDateTime.substring(20);
+                                } else {
+                                    var dateTime = resDateTime.substring(0, 9);
+                                }
+                                return { ...msg, dateTime: dateTime };
+                            });
                             let messageLength = this.messageList.length
                             if (this.messageListLength < messageLength) {
                                 setTimeout(() => {
@@ -168,13 +194,13 @@
                                 }, 0);
                             }
                             this.messageListLength = messageLength;
-                            console.log(this.messageListLength);
                         })
                         .catch(error => console.log(error));
                 }
             },
             mounted() {
                 this.batchId = document.getElementById('batchId').value;
+                this.userId = document.getElementById('userId').value;
                 setInterval(() => {
                     this.getAllMessages();
                 }, 1000);

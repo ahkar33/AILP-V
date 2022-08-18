@@ -1,7 +1,5 @@
 package com.ace.ailpv.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,14 +19,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Message {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;   
-    
+    private Long id;
+
     private String message;
 
-    private LocalDateTime dateTime;
+    private String dateTime;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
