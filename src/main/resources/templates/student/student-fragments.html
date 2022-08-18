@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="student_head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Bangla&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Kannada&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arimo&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Average+Sans&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dangrek&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+KR&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inria+Sans&amp;display=swap" />
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="/assets/fonts/ionicons.min.css" />
+    <link rel="stylesheet" href="/assets/fonts/line-awesome.min.css" />
+    <link rel="stylesheet" href="/assets/fonts/material-icons.min.css" />
+    <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css" />
+    <link rel="stylesheet" href="/assets/css/Bootstrap-Chat.css" />
+    <link rel="stylesheet" href="/assets/css/Community-ChatComments.css" />
+    <link rel="stylesheet" href="/assets/css/custom-nav-hide.css" />
+    <link rel="stylesheet" href="/assets/css/custom.css" />
+    <link rel="stylesheet" href="/assets/css/textarea.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
+</head>
+
+<body>
+
+    <nav th:fragment="pc-navbar" class="mb-2 navbar navbar-expand navbar-light shadow static-top topbar"
+        style="background-color: #32499a;">
+        <div class="container">
+            <a href="student-home-page.html">
+                <img src="../assets/img/logo.png" style="width: 200px;" />
+            </a>
+            <ul class="navbar-nav flex-nowrap ms-auto">
+                <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Home Page"
+                    style="margin-right: 3px;margin-left: 3px;">
+                    <a class="active nav-link" href="student-home-page.html">
+                        <i class="icon ion-ios-home" style="font-size: 25px;"></i>
+                    </a>
+                </li>
+                <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Videos"
+                    style="margin-right: 3px;margin-left: 3px;">
+                    <a class="nav-link" href="student-course-videos.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                            viewBox="0 0 16 16" class="bi bi-play-circle-fill" style="font-size: 20px;">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z">
+                            </path>
+                        </svg>
+                    </a>
+                </li>
+                <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Group Chat"
+                    style="margin-right: 3px;margin-left: 3px;">
+                    <a class="nav-link" href="student-public-chat.html">
+                        <i class="icon ion-chatboxes" style="font-size: 24px;margin-top: 2px;">
+                        </i>
+                    </a>
+                </li>
+                <div class="d-none d-sm-block topbar-divider"></div>
+                <li class="nav-item dropdown no-arrow">
+                    <div class="nav-item dropdown no-arrow">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
+                            <span class="d-lg-inline d-none me-2 small text-light"
+                                style="font-size: 15px;font-weight: bold;">Zar Zar Soe
+                            </span>
+                            <img class="rounded-circle img-profile" src="../assets/img/zzs_profile.jpg"
+                                style="width: 35px; height: 35px;" />
+                        </a>
+                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                            <a class="dropdown-item fs-6 mb-1" href="student-profile.html">
+                                <i class="fa-fw fa-sm fa-user fas me-2 text-dark"></i>
+                                &nbsp;Profile
+                            </a>
+                            <button class="dropdown-item fs-6 mb-1" onclick="handleLogout()">
+                                <i class="fa-fw fa-sign-out-alt fa-sm fas me-2 text-dark"></i>
+                                &nbsp;Logout
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <nav th:fragment="mobile-navbar" class="navbar navbar-light navbar-expand fixed-bottom shadow hide-on-mobile"
+        style="font-size: 29px;background: linear-gradient(180deg, rgb(50, 73, 154) 0%, rgb(25, 43, 106) 100%);border-radius: 35px;margin-bottom: 18px;margin-right: 15px;margin-left: 15px;height: 51.5px;padding-top: 15px;color: rgb(255,255,255);">
+        <div class="container-fluid"><button data-bs-toggle="collapse" class="navbar-toggler"
+                data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span
+                    class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"
+                        style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
+                        <a class="nav-link" href="student-home-page.html" style="margin-right: 1px;"><i
+                                class="la la-home"
+                                style="margin-right: 1px;color: rgba(241,241,241,0.55);border-color: rgba(241,241,241,0.55);"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item"
+                        style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
+                        <a class="nav-link" href="student-course-videos.html" style="margin-right: 1px;"><i
+                                class="la la-play-circle"
+                                style="margin-right: 1px;color: rgba(241,241,241,0.55);border-color: rgba(241,241,241,0.55);"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item"
+                        style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
+                        <a class="nav-link" href="student-resources.html"><i class="la la-file-zip-o"
+                                style="color: rgba(241,241,241,0.55);"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item"
+                        style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
+                        <a class="nav-link" href="student-assignment.html" style="margin-right: 1px;"><i
+                                class="la la-paste" style="margin-right: 1px;color: rgba(241,241,241,0.55);"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item"
+                        style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
+                        <a class="nav-link" href="student-gradebook.html"><i class="la la-book"
+                                style="color: rgba(241,241,241,0.55);"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div th:fragment="footer">
+
+        <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/assets/js/bs-init.js"></script>
+        <script src="/assets/js/theme.js"></script>
+        <script type="text/javascript"> </script>
+        <!-- jquery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <!-- sweet alert -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- datatable-js -->
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+        <!-- axios -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <!-- vue3 -->
+        <script src="https://unpkg.com/vue@3"></script>
+        <script>
+            const handleLogout = () => {
+                console.log("hello")
+                Swal.fire({
+                    title: 'Are you sure want to Logout?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Logout'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = "http://localhost:8080/auth/logout";
+                    }
+                })
+            }
+        </script>
+    </div>
+
+
+</body>
+
+</html>

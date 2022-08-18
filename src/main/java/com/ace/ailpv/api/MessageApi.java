@@ -1,5 +1,6 @@
 package com.ace.ailpv.api;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import com.ace.ailpv.service.UserService;
 @CrossOrigin(origins = "*")
 public class MessageApi {
 
-    @Autowired 
+    @Autowired
     private MessageService messageService;
 
     @Autowired
@@ -32,10 +33,12 @@ public class MessageApi {
     @Autowired
     private BatchService batchService;
 
-    @PostMapping("/addMessage")    
+    @PostMapping("/addMessage")
     public void addMessage(@RequestBody Message message) {
         Batch batch = batchService.getBatchById(Long.parseLong(message.getBatchId()));
         User user = userService.getUserById(message.getUserId());
+        LocalDateTime now = LocalDateTime.now();
+        message.setDateTime(now);
         message.setMessageBatch(batch);
         message.setMessageUser(user);
         messageService.addMessage(message);
@@ -43,7 +46,7 @@ public class MessageApi {
 
     @GetMapping("/getMessagesByBatchId/{id}")
     public List<Message> getAllMessages(@PathVariable("id") String id) {
-        long batchId = Long.parseLong(id); 
+        long batchId = Long.parseLong(id);
         return messageService.getMessageListByBatchId(batchId);
     }
 
