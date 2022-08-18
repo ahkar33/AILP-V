@@ -55,11 +55,10 @@ public class AdminController {
 
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {
-        
-        
+
         model.addAttribute("courseList", courseService.getAllCourses());
         model.addAttribute("course", new Course());
-       
+
         return "/admin/ADM-CTB-04";
     }
 
@@ -75,7 +74,8 @@ public class AdminController {
     }
 
     @PostMapping("/editCourse")
-    public String editCourse(@RequestParam("id") String id, @RequestParam("name") String name, @RequestParam("fee") String fee, @RequestParam("desc") String description,RedirectAttributes redirectAttrs)
+    public String editCourse(@RequestParam("id") String id, @RequestParam("name") String name,
+            @RequestParam("fee") String fee, @RequestParam("desc") String description, RedirectAttributes redirectAttrs)
             throws IllegalStateException, IOException {
         Course updateCourse = new Course();
         updateCourse.setId(Long.parseLong(id));
@@ -83,7 +83,6 @@ public class AdminController {
         updateCourse.setFee(Double.parseDouble(fee));
         updateCourse.setDescription(description);
 
-        
         courseService.updateCourse(updateCourse);
         return "redirect:/admin/course-table";
     }
@@ -146,7 +145,7 @@ public class AdminController {
         Course course = courseService.getCourseById(Long.parseLong(courseId));
         for (MultipartFile file : files) {
             fileService.createFile(file, courseName + "\\video");
-            if (!videoService.isExistByVideoName(file.getOriginalFilename())) {
+            if (!videoService.isExistByVideoNameAndCourseId(file.getOriginalFilename(), Long.parseLong(courseId))) {
                 Video newVideo = new Video();
                 newVideo.setName(file.getOriginalFilename());
                 newVideo.setVideoCourse(course);
@@ -163,7 +162,8 @@ public class AdminController {
         Course course = courseService.getCourseById(Long.parseLong(courseId));
         for (MultipartFile file : files) {
             fileService.createFile(file, courseName + "\\resource");
-            if (!resourceService.isExistByResourceName(file.getOriginalFilename())) {
+            if (!resourceService.isExistByResourceNameAndCourseId(file.getOriginalFilename(),
+                    Long.parseLong(courseId))) {
                 Resource newResource = new Resource();
                 newResource.setName(file.getOriginalFilename());
                 newResource.setResourceCourse(course);
@@ -217,7 +217,7 @@ public class AdminController {
     @GetMapping("/toggleDisableBatch/{id}")
     public String disableBatch(@PathVariable("id") Long id) {
         Batch batch = batchService.getBatchById(id);
-        if(batch.getIsActive()) {
+        if (batch.getIsActive()) {
             batch.setIsActive(false);
         } else {
             batch.setIsActive(true);
@@ -238,7 +238,7 @@ public class AdminController {
     @PostMapping("/editBatch")
     public String editBatch(@ModelAttribute("batch") Batch batch) {
         Batch resBatch = batchService.getBatchById(batch.getId());
-        if(resBatch.getIsActive()) {
+        if (resBatch.getIsActive()) {
             batch.setIsActive(true);
         } else {
             batch.setIsActive(false);
