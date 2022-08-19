@@ -15,9 +15,9 @@
 
     <div id="app" style="width: 90%;" class="container-fluid h-100 mb-5 mb-md-0 pe-1 ps-1">
 
-        <input id="userName" type="hidden" th:value="${session?.userInfo?.name}">
-        <input id="batchId" type="hidden" th:value="${session?.userInfo?.batchId}">
-        <input id="userId" type="hidden" th:value="${session?.userInfo?.id}">
+        <input id="userName" type="hidden" th:value="${username}">
+        <input id="batchId" type="hidden" th:value="${batchId}">
+        <input id="userId" type="hidden" th:value="${userId}">
 
         <div class="d-flex justify-content-center row">
             <div class="col-12 col-lg-8 col-md-12 col-sm-12 col-xl-8">
@@ -35,7 +35,7 @@
                                         <div class="col-9 col-lg-10 col-md-4 col-sm-11 g-0">
                                             <h6 class="fs-5 fw-normal m-b-0 mb-0 text-light"
                                                 style="font-family: 'Roboto', sans-serif;">
-                                                [[${session?.userInfo?.batchName}]]
+                                                [[${batchName}]]
                                             </h6>
                                         </div>
                                     </div>
@@ -184,11 +184,23 @@
                         .then(res => {
                             this.messageList = [...res.data];
                             this.messageList = this.messageList.map(msg => {
+
+                                // var member = "my name is Mate";
+                                // var last2 = member.slice(-2);
+
                                 let resDateTime = msg.dateTime;
                                 if (this.isToday(resDateTime)) {
-                                    var dateTime = "Today at " + resDateTime.substring(11, 15) + " " + resDateTime.substring(19);
+                                    if(resDateTime.slice(-2) == "PM") {
+                                        var dateTime = "Today at " + resDateTime.substring(11, 15) + " " + resDateTime.substring(19);
+                                    } else {
+                                        var dateTime = "Today at " + resDateTime.substring(11, 16) + " " + resDateTime.substring(20);
+                                    }
                                 } else if (this.isYesterday(resDateTime)) {
-                                    var dateTime = "Yesterday at " + resDateTime.substring(11, 15) + " " + resDateTime.substring(19);
+                                    if(resDateTime.slice(-2) == "PM") {
+                                        var dateTime = "Yesterday at " + resDateTime.substring(11, 15) + " " + resDateTime.substring(19);
+                                    } else {
+                                        var dateTime = "Yesterday at " + resDateTime.substring(11, 16) + " " + resDateTime.substring(20);
+                                    }
                                 } else {
                                     var dateTime = resDateTime.substring(0, 9);
                                 }
