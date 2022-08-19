@@ -176,7 +176,6 @@
                             })
                             .catch(error => console.log(error));
                     }
-
                 },
                 getAllMessages() {
                     axios.
@@ -184,22 +183,18 @@
                         .then(res => {
                             this.messageList = [...res.data];
                             this.messageList = this.messageList.map(msg => {
-
-                                // var member = "my name is Mate";
-                                // var last2 = member.slice(-2);
-
                                 let resDateTime = msg.dateTime;
                                 if (this.isToday(resDateTime)) {
-                                    if(resDateTime.slice(-2) == "PM") {
-                                        var dateTime = "Today at " + resDateTime.substring(11, 15) + " " + resDateTime.substring(19);
+                                    if(resDateTime.length == 21) {
+                                        var dateTime = "Today at " + resDateTime.substring(11, 15) + " " + resDateTime.slice(-2);
                                     } else {
-                                        var dateTime = "Today at " + resDateTime.substring(11, 16) + " " + resDateTime.substring(20);
+                                        var dateTime = "Today at " + resDateTime.substring(11, 16) + " " + resDateTime.slice(-2);
                                     }
                                 } else if (this.isYesterday(resDateTime)) {
-                                    if(resDateTime.slice(-2) == "PM") {
-                                        var dateTime = "Yesterday at " + resDateTime.substring(11, 15) + " " + resDateTime.substring(19);
+                                    if(resDateTime.length == 21) {
+                                        var dateTime = "Yesterday at " + resDateTime.substring(11, 15) + " " + resDateTime.slice(-2);
                                     } else {
-                                        var dateTime = "Yesterday at " + resDateTime.substring(11, 16) + " " + resDateTime.substring(20);
+                                        var dateTime = "Yesterday at " + resDateTime.substring(11, 16) + " " + resDateTime.slice(-2);
                                     }
                                 } else {
                                     var dateTime = resDateTime.substring(0, 9);
@@ -221,10 +216,10 @@
             mounted() {
                 this.batchId = document.getElementById('batchId').value;
                 this.userId = document.getElementById('userId').value;
+                this.userName = document.getElementById('userName').value;
                 setInterval(() => {
                     this.getAllMessages();
                 }, 1000);
-                this.userName = document.getElementById('userName').value;
             }
         })
         app.mount('#app');
