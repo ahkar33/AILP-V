@@ -55,10 +55,8 @@ public class AdminController {
 
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {
-
         model.addAttribute("courseList", courseService.getAllCourses());
         model.addAttribute("course", new Course());
-
         return "/admin/ADM-CTB-04";
     }
 
@@ -82,7 +80,6 @@ public class AdminController {
         updateCourse.setName(name);
         updateCourse.setFee(Double.parseDouble(fee));
         updateCourse.setDescription(description);
-
         courseService.updateCourse(updateCourse);
         return "redirect:/admin/course-table";
     }
