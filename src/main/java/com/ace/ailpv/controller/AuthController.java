@@ -45,7 +45,6 @@ public class AuthController {
                 return "redirect:/teacher/student-table";
             } else {
                 userInfo.setBatchId(userInfo.getBatchList().iterator().next().getId().toString());
-                userInfo.setBatchName(userInfo.getBatchList().iterator().next().getName().toLowerCase());
                 Batch userBatch = batchService.getBatchById(Long.parseLong(userInfo.getBatchId()));
                 if (userBatch.getIsActive()) {
                     session.setAttribute("userInfo", userInfo);
