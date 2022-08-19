@@ -10,17 +10,12 @@ public class StudentController {
 
     @GetMapping("/student-home")
     public String showStudentHomePage() {
-        return "/student/student-home";
-    }
-
-    @GetMapping("/student-group-chat")
-    public String setupStudentGroupChat() {
-        return "/student/student-group-chat";
+        return "/student/STU-HOM-01";
     }
 
     @GetMapping("/student-public-chat")
     public String setupStudentPublicChat() {
-        return "/student/STU-PBC-07.html";
+        return "/student/STU-PBC-07";
     }
 
 }

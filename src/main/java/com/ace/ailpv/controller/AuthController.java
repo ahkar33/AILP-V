@@ -44,12 +44,12 @@ public class AuthController {
                 // changed back later to teacher dashboard
                 return "redirect:/teacher/student-table";
             } else {
-                // changed back later to student home
                 userInfo.setBatchId(userInfo.getBatchList().iterator().next().getId().toString());
+                userInfo.setBatchName(userInfo.getBatchList().iterator().next().getName().toLowerCase());
                 Batch userBatch = batchService.getBatchById(Long.parseLong(userInfo.getBatchId()));
                 if (userBatch.getIsActive()) {
                     session.setAttribute("userInfo", userInfo);
-                    return "redirect:/student/student-public-chat";
+                    return "redirect:/student/student-home";
                 }
                 String message = "Your Batch has been disabled";
                 model.addAttribute("message", message);
