@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/teacher/teacher-fragments :: teacher_head">
+    <title>Student Table</title>
+</head>
+
+
+<body id="page-top">
+    <div id="wrapper">
+        <!-- this is where side bar is -->
+        <div th:insert="/teacher/teacher-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <!-- this is where nav bar is -->
+                <div th:insert="/teacher/teacher-fragments :: navbar" />
+
+                <div class="container-fluid" style="max-width: 45rem;">
+                    <h1 class="fs-3 mb-4 text-start"
+                        style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
+                        Upload Resource
+                    </h1>
+                    <div class="card shadow">
+                        <div class="card-body p-4 text-dark fw-bold">
+                            <form th:action="@{/teacher/uploadResourceForBatch}" th:object="${batchHasResource}" method="post">
+                                <input type="hidden" name="resource.id" id="resource.id" th:value="${resourceId}">
+                                <label class="fs-6" style="font-family: 'Roboto';">Resource</label>
+                                <input class="form-control mb-3" type="text" th:value="${resourceName}" readonly>
+                                <label class="fs-6" style="font-family: 'Roboto';">Batch</label>
+                                <select class="form-control mb-3" th:field="*{batch.id}">
+                                    <span th:each="batch : ${teacherBatchList}">
+                                        <option th:value="${batch.id}">[[${batch.name}]]</option>
+                                    </span>
+                                </select>
+                                <label class="fs-6" style="font-family: 'Roboto';">Schedule</label>
+                                <input class="form-control mb-3" type="datetime-local" th:field="*{schedule}">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <div th:insert="/teacher/teacher-fragments :: footer" />
+</body>
+
+</html>

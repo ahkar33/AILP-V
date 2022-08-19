@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -51,7 +52,11 @@ public class Batch {
     @JsonIgnore
     Set<User> userList = new HashSet<>();
 
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "batch")
+    @JsonIgnore
+    private Set<BatchHasResource> batchHasResourceList = new HashSet<>();
+
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean isActive;
-    
+
 }
