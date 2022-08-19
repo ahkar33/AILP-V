@@ -1,5 +1,6 @@
 package com.ace.ailpv.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -74,6 +75,36 @@ public class TeacherController {
         batchHasResourceService.addBatchHasResource(batchHasResource);
         redirectAttrs.addFlashAttribute("msg", "Successfully Uploaded");
         return "redirect:/teacher/uploadResource";
+    }
+
+    @GetMapping("/teacher-public-chat")
+    public String setupTeacherPublicChat(HttpSession session, ModelMap model) {
+        User teacherInfo = (User) session.getAttribute("userInfo");
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherInfo.getId());
+        Batch firstBatch = batchList.get(0);
+        model.addAttribute("userId", teacherInfo.getId());
+        model.addAttribute("username", teacherInfo.getName());
+        model.addAttribute("batchId", firstBatch.getId());
+        model.addAttribute("batchName", firstBatch.getName());
+        model.addAttribute("batchList", batchList);
+        return "/teacher/TCH-PBC-05";
+    }
+
+    @GetMapping("/chatWithBatch/{batchId}/{batchName}")
+    public String setupChatWithBatch(
+        @PathVariable("batchId") Long batchId,
+        @PathVariable("batchName") String batchName,
+        HttpSession session,
+        ModelMap model
+        ) {
+        User teacherInfo = (User) session.getAttribute("userInfo");
+        model.addAttribute("userId", teacherInfo.getId());
+        model.addAttribute("username", teacherInfo.getName());
+        model.addAttribute("batchId", batchId);
+        model.addAttribute("batchName", batchName);
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherInfo.getId());
+        model.addAttribute("batchList", batchList);
+        return "/teacher/TCH-CWB-06";
     }
 
 }

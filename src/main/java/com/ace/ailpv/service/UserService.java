@@ -84,13 +84,16 @@ public class UserService {
         return userIdList;
     }
 
-    public Set<Batch> getTeacherBatchListById(String id) {
+    public List<Batch> getTeacherBatchListById(String id) {
         User teacher = userRepository.findById(id).orElse(null);
-        return teacher.getBatchList();
+        // return teacher.getBatchList();
+        List<Batch> batchList = new ArrayList<>();
+        batchList.addAll(teacher.getBatchList());
+        return batchList;
     }
 
     public Set<Course> getTeacherCourseListById(String id) {
-        Set<Batch> teacherBatchList = getTeacherBatchListById(id);
+        List<Batch> teacherBatchList = getTeacherBatchListById(id);
         Set<Course> teacherCourseList = new HashSet<>();
         for (Batch batch : teacherBatchList) {
             teacherCourseList.add(batch.getBatchCourse());
@@ -99,7 +102,7 @@ public class UserService {
     }
 
     public Set<Batch> getTeacherBatchListByTeacherIdAndCourseId(String teacherId, Long courseId) {
-        Set<Batch> teacherBatchList = getTeacherBatchListById(teacherId);
+        List<Batch> teacherBatchList = getTeacherBatchListById(teacherId);
         Set<Batch> teacherFilteredBatchList = teacherBatchList.stream()
                 .filter(batch -> batch.getBatchCourse().getId() == courseId)
                 .collect(Collectors.toSet());
