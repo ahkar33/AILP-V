@@ -1,6 +1,9 @@
 const app = Vue.createApp({
     data() {
         return {
+            userList: [],
+            isMute: null,
+            isFirstTime: true,
             isEmpty: null,
             messageListLength: '',
             batchId: '',
@@ -11,6 +14,19 @@ const app = Vue.createApp({
         }
     },
     methods: {
+        playNoti() {
+            var audio = new Audio('/assets/mp3/noti.mp3');
+            audio.play();
+        },
+        toggleMute() {
+            let data = { id: this.userId, isMute: !this.isMute };
+            axios
+                .post('http://localhost:8080/api/user/toggleMute/', data)
+                .then(() => {
+                    console.log("toggle mute success");
+                })
+                .catch(error => console.log(error));
+        },
         isToday(date) {
             let today = new Date();
             if (today.toLocaleDateString() == date.substring(0, 9)) {
@@ -28,6 +44,7 @@ const app = Vue.createApp({
             return false;
         },
         handleSend() {
+            this.message = document.getElementById('inputMessage').value;
             this.isEmpty = false;
             if (this.message.replace(/\s/g, "").length == 0) {
                 this.isEmpty = true;
@@ -40,7 +57,7 @@ const app = Vue.createApp({
                     dateTime: new Date().toLocaleString()
                 }
 
-                this.message = "";
+                $("#inputMessage").data("emojioneArea").setText('');
 
                 axios
                     .post('http://localhost:8080/api/message/addMessage/', data)
@@ -50,6 +67,19 @@ const app = Vue.createApp({
                     })
                     .catch(error => console.log(error));
             }
+        },
+        getUserList() {
+            axios
+                .get('http://localhost:8080/api/user/getUserList')
+                .then(res => {
+                    this.userList = [...res.data];
+                    this.userList.forEach(user => {
+                        if (user.id == this.userId) {
+                            this.isMute = user.isMute;
+                        }
+                    });
+                })
+                .catch(error => console.log(error));
         },
         getAllMessages() {
             axios.
@@ -77,23 +107,36 @@ const app = Vue.createApp({
                     });
                     let messageLength = this.messageList.length
                     if (this.messageListLength < messageLength) {
+                        if (this.messageList.at(-1).messageUser.id !== this.userId && !this.isMute && !this.isFirstTime) {
+                            this.playNoti();
+                            console.log("play")
+                        }
                         setTimeout(() => {
                             let objDiv = document.getElementById("messages");
                             objDiv.scrollTop = objDiv.scrollHeight;
                         }, 0);
                     }
+                    this.isFirstTime = false;
                     this.messageListLength = messageLength;
                 })
                 .catch(error => console.log(error));
         }
     },
     mounted() {
+        $("#inputMessage").emojioneArea({
+        });
         this.batchId = document.getElementById('batchId').value;
         this.userId = document.getElementById('userId').value;
         this.userName = document.getElementById('userName').value;
+        setInterval(() => {
+            this.getUserList();
+        }, 100);
         setInterval(() => {
             this.getAllMessages();
         }, 1000);
     }
 })
 app.mount('#app');
+
+
+

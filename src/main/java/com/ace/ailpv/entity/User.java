@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -33,12 +34,12 @@ public class User {
     private String password;
     private String role;
 
+    @Column(nullable = false, columnDefinition = "TINYINT(0)")
+    private Boolean isMute;
+
     @ManyToMany
     @JsonIgnore
-    @JoinTable(
-        name = "batch_has_user",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "batch_id"))
+    @JoinTable(name = "batch_has_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "batch_id"))
     Set<Batch> batchList = new HashSet<>();
 
     @Transient

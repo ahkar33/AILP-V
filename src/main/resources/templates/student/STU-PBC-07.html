@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 
+<link rel="stylesheet" href="/assets/css/emojionearea.min.css">
 <link rel="stylesheet" href="/assets/css/student-public-chat.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <head th:insert="/student/student-fragments :: student_head">
     <title>Public Chat</title>
@@ -36,6 +40,14 @@
                                             <h6 class="fs-5 fw-normal m-b-0 mb-0 text-light"
                                                 style="font-family: 'Roboto', sans-serif;">
                                                 [[${batchName}]]
+                                                <span @click="toggleMute()" class="ms-1">
+                                                    <span v-if="isMute">
+                                                        <i class="fa-solid fa-bell-slash"></i>
+                                                    </span>
+                                                    <span v-else>
+                                                        <i class="fa-solid fa-bell"></i>
+                                                    </span>
+                                                </span>
                                             </h6>
                                         </div>
                                     </div>
@@ -74,7 +86,11 @@
                                             class="align-items-start clearfix d-flex flex-column flex-nowrap g-0 mb-3 text-start">
                                             <div class="d-flex mw-100 row w-100" style="max-width: 508px;">
                                                 <div class="col-1 col-lg-2 col-md-4 col-sm-1 pe-0 w-auto">
-                                                    <h6 class="fw-bold mb-auto">{{message.messageUser.name}}</h6>
+                                                    <h6 class="fw-bold mb-auto">
+                                                        {{message.messageUser.name}}
+                                                        <span v-show="message.messageUser.role == 'teacher'"
+                                                            class="text-info"> (Teacher)</span>
+                                                    </h6>
                                                 </div>
                                             </div>
                                             <div class="d-flex mw-100 row w-100" style="max-width: 508px;">
@@ -108,9 +124,9 @@
                             <div class="input-group mb-0 pb-0 pt-2" style="height: 80px;">
                                 <div class="input-group-prepend">
                                 </div>
-                                <input v-model="message" type="text" class="form-control" style="height: 59px;">
+                                <input id="inputMessage" type="text" class="form-control" style="height: 50px;">
                                 <button @click="handleSend()" class="btn text-light"
-                                    style="border-top-right-radius: 5px; border-bottom-right-radius: 5px; line-height: 30px; height: 59px; width: 48px; background-color: #32499a;">
+                                    style="border-top-right-radius: 5px; border-bottom-right-radius: 5px; line-height: 30px; height: 50px; width: 48px; background-color: #32499a;">
                                     <i class="fa fa-send"></i>
                                 </button>
                             </div>
@@ -122,7 +138,7 @@
     </div>
 
     <div th:insert="/student/student-fragments :: footer" />
-
+    <script src="/assets/js/emojionearea.min.js"></script>
     <script src="/assets/js/group-chat.js"></script>
 
 </body>
