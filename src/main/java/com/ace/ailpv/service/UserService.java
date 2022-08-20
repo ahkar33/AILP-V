@@ -1,6 +1,7 @@
 package com.ace.ailpv.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ace.ailpv.entity.Batch;
+import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.repository.UserRepository;
 
@@ -43,7 +45,7 @@ public class UserService {
     }
 
     public User getUserById(String id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElse(null);
     }
 
     public boolean checkUserId(String id) {
@@ -76,10 +78,35 @@ public class UserService {
     public List<String> getUserIdList() {
         List<String> userIdList = new ArrayList<>();
         List<User> userList = userRepository.findAll();
-        for(User user : userList) {
+        for (User user : userList) {
             userIdList.add(user.getId());
         }
-        return userIdList; 
+        return userIdList;
+    }
+
+    public List<Batch> getTeacherBatchListById(String id) {
+        User teacher = userRepository.findById(id).orElse(null);
+        // return teacher.getBatchList();
+        List<Batch> batchList = new ArrayList<>();
+        batchList.addAll(teacher.getBatchList());
+        return batchList;
+    }
+
+    public Set<Course> getTeacherCourseListById(String id) {
+        List<Batch> teacherBatchList = getTeacherBatchListById(id);
+        Set<Course> teacherCourseList = new HashSet<>();
+        for (Batch batch : teacherBatchList) {
+            teacherCourseList.add(batch.getBatchCourse());
+        }
+        return teacherCourseList;
+    }
+
+    public Set<Batch> getTeacherBatchListByTeacherIdAndCourseId(String teacherId, Long courseId) {
+        List<Batch> teacherBatchList = getTeacherBatchListById(teacherId);
+        Set<Batch> teacherFilteredBatchList = teacherBatchList.stream()
+                .filter(batch -> batch.getBatchCourse().getId() == courseId)
+                .collect(Collectors.toSet());
+        return teacherFilteredBatchList;
     }
 
 }

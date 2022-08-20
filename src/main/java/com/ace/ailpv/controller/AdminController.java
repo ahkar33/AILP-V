@@ -55,10 +55,8 @@ public class AdminController {
 
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {
-
         model.addAttribute("courseList", courseService.getAllCourses());
         model.addAttribute("course", new Course());
-
         return "/admin/ADM-CTB-04";
     }
 
@@ -82,7 +80,6 @@ public class AdminController {
         updateCourse.setName(name);
         updateCourse.setFee(Double.parseDouble(fee));
         updateCourse.setDescription(description);
-
         courseService.updateCourse(updateCourse);
         return "redirect:/admin/course-table";
     }
@@ -91,7 +88,6 @@ public class AdminController {
     public String editVideo(@PathVariable("id") Long id, ModelMap model) {
         Course course = courseService.getCourseById(id);
         List<Video> videoList = videoService.getVideoByCourseId(id);
-
         model.addAttribute("videoList", videoList);
         model.addAttribute("course", course);
         return "/admin/ADM-VTB-14";
@@ -117,7 +113,6 @@ public class AdminController {
         List<Video> videoList = videoService.getAllVideos();
         model.addAttribute("videoList", videoList);
         model.addAttribute("course", courseName);
-
         model.addAttribute("msg", "Deleted!!");
         return "redirect:/admin/editVideo/" + course.getId();
     }
@@ -264,7 +259,6 @@ public class AdminController {
             throws IOException {
         userService.deleteUserById(id);
         return "redirect:/admin/student-table";
-
     }
 
     @GetMapping("/editStudent/{id}")
@@ -286,7 +280,6 @@ public class AdminController {
             throws IOException {
         examService.deleteExamById(id);
         return "redirect:/admin/exam-table";
-
     }
 
     @GetMapping("/teacher-table")

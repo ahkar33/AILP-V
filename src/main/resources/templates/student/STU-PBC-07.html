@@ -13,11 +13,11 @@
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-    <div id="app" style="width: 100%;" class="container-fluid h-100 mb-5 mb-md-0 pe-1 ps-1">
+    <div id="app" style="width: 90%;" class="container-fluid h-100 mb-5 mb-md-0 pe-1 ps-1">
 
-        <input id="userName" type="hidden" th:value="${session?.userInfo?.name}">
-        <input id="batchId" type="hidden" th:value="${session?.userInfo?.batchId}">
-        <input id="userId" type="hidden" th:value="${session?.userInfo?.id}">
+        <input id="userName" type="hidden" th:value="${username}">
+        <input id="batchId" type="hidden" th:value="${batchId}">
+        <input id="userId" type="hidden" th:value="${userId}">
 
         <div class="d-flex justify-content-center row">
             <div class="col-12 col-lg-8 col-md-12 col-sm-12 col-xl-8">
@@ -34,15 +34,16 @@
                                         </div>
                                         <div class="col-9 col-lg-10 col-md-4 col-sm-11 g-0">
                                             <h6 class="fs-5 fw-normal m-b-0 mb-0 text-light"
-                                                style="font-family: 'Roboto', sans-serif;">Web Development with JAVA
-                                                Batch 01</h6>
+                                                style="font-family: 'Roboto', sans-serif;">
+                                                [[${batchName}]]
+                                            </h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id="messages" class="chat-history mb-0 mt-0 pb-0 pt-0"
-                            style="overflow: scroll; height: 500px;">
+                            style="overflow: auto; height: 500px;">
                             <!-- <p class="mb-4 mt-4 text-center" style="font-size: 13px;">Today 10:45AM</p> -->
                             <ul class="m-b-0">
                                 <span v-for="(message, index) in messageList" :key="index">
@@ -122,100 +123,7 @@
 
     <div th:insert="/student/student-fragments :: footer" />
 
-    <script>
-        const app = Vue.createApp({
-            data() {
-                return {
-                    isEmpty: null,
-                    messageListLength: '',
-                    batchId: '',
-                    userId: '',
-                    userName: '',
-                    message: '',
-                    messageList: []
-                }
-            },
-            methods: {
-                isToday(date) {
-                    let today = new Date();
-                    if (today.toLocaleDateString() == date.substring(0, 9)) {
-                        return true;
-                    }
-                    return false;
-                },
-                isYesterday(date) {
-                    let today = new Date();
-                    let yesterday = new Date();
-                    yesterday.setDate(today.getDate() - 1);
-                    if (yesterday.toLocaleDateString() == date.substring(0, 9)) {
-                        return true;
-                    }
-                    return false;
-                },
-                handleSend() {
-                    this.isEmpty = false;
-                    if (this.message.replace(/\s/g, "").length == 0) {
-                        this.isEmpty = true;
-                    }
-                    if (!this.isEmpty) {
-                        let data = {
-                            message: this.message,
-                            userId: this.userId,
-                            batchId: this.batchId,
-                            dateTime: new Date().toLocaleString()
-                        }
-
-                        this.message = "";
-
-                        axios
-                            .post('http://localhost:8080/api/message/addMessage/', data)
-                            .then(() => {
-                                console.log("success");
-                                this.getAllMessages();
-                            })
-                            .catch(error => console.log(error));
-                    }
-
-                },
-                getAllMessages() {
-                    axios.
-                        get(`http://localhost:8080/api/message/getMessagesByBatchId/${this.batchId}`)
-                        .then(res => {
-                            this.messageList = [...res.data];
-                            this.messageList = this.messageList.map(msg => {
-                                let resDateTime = msg.dateTime;
-                                if (this.isToday(resDateTime)) {
-                                    var dateTime = "Today at " + resDateTime.substring(11, 16) + " " + resDateTime.substring(20);
-                                } else if (this.isYesterday(resDateTime)) {
-                                    var dateTime = "Yesterday at " + resDateTime.substring(11, 16) + " " + resDateTime.substring(20);
-                                } else {
-                                    var dateTime = resDateTime.substring(0, 9);
-                                }
-                                return { ...msg, dateTime: dateTime };
-                            });
-                            let messageLength = this.messageList.length
-                            if (this.messageListLength < messageLength) {
-                                setTimeout(() => {
-                                    let objDiv = document.getElementById("messages");
-                                    objDiv.scrollTop = objDiv.scrollHeight;
-                                }, 0);
-                            }
-                            this.messageListLength = messageLength;
-                        })
-                        .catch(error => console.log(error));
-                }
-            },
-            mounted() {
-                this.batchId = document.getElementById('batchId').value;
-                this.userId = document.getElementById('userId').value;
-                setInterval(() => {
-                    this.getAllMessages();
-                }, 1000);
-                this.userName = document.getElementById('userName').value;
-            }
-        })
-        app.mount('#app');
-    </script>
+    <script src="/assets/js/group-chat.js"></script>
 
 </body>
 

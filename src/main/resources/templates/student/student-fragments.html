@@ -37,7 +37,7 @@
         style="background-color: #32499a;">
         <div class="container">
             <a href="student-home-page.html">
-                <img src="../assets/img/logo.png" style="width: 200px;" />
+                <img src="/assets/img/logo.png" style="width: 200px;" />
             </a>
             <ul class="navbar-nav flex-nowrap ms-auto">
                 <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Home Page"
@@ -59,7 +59,7 @@
                 </li>
                 <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Group Chat"
                     style="margin-right: 3px;margin-left: 3px;">
-                    <a class="nav-link" href="student-public-chat.html">
+                    <a class="nav-link" th:href="@{/student/student-public-chat}">
                         <i class="icon ion-chatboxes" style="font-size: 24px;margin-top: 2px;">
                         </i>
                     </a>
@@ -69,9 +69,10 @@
                     <div class="nav-item dropdown no-arrow">
                         <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
                             <span class="d-lg-inline d-none me-2 small text-light"
-                                style="font-size: 15px;font-weight: bold;">Zar Zar Soe
+                                style="font-size: 15px;font-weight: bold;">
+                                [[${session.userInfo.name}]]
                             </span>
-                            <img class="rounded-circle img-profile" src="../assets/img/zzs_profile.jpg"
+                            <img class="rounded-circle img-profile" src="/assets/img/zzs_profile.jpg"
                                 style="width: 35px; height: 35px;" />
                         </a>
                         <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
@@ -137,6 +138,11 @@
 
     <div th:fragment="footer">
 
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
         <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="/assets/js/bs-init.js"></script>
         <script src="/assets/js/theme.js"></script>
@@ -145,16 +151,17 @@
         <script src="https://code.jquery.com/jquery-3.6.0.js"
             integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <!-- sweet alert -->
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+        <script src="/assets/js/sweetAlert.js"></script>
         <!-- datatable-js -->
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
         <!-- axios -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <!-- vue3 -->
-        <script src="https://unpkg.com/vue@3"></script>
+        <!-- <script src="https://unpkg.com/vue@3"></script> -->
+        <script src="/assets/js/vue.js"></script>
         <script>
             const handleLogout = () => {
-                console.log("hello")
                 Swal.fire({
                     title: 'Are you sure want to Logout?',
                     icon: 'question',

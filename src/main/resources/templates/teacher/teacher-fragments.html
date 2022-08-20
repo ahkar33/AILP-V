@@ -11,6 +11,18 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap" />
     <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Bangla&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Kannada&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arimo&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Average+Sans&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dangrek&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+KR&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inria+Sans&amp;display=swap" />
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
     <!-- datatable-css -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
@@ -30,7 +42,7 @@
                     <div class="nav-item dropdown no-arrow">
                         <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
                             <span class="d-lg-inline d-none fw-bold me-2 small text-black-50 text-gray-600">
-                                [[${session?.userInfo.name}]]
+                                [[${session?.userInfo?.name}]]
                             </span>
                             <img class="border rounded-circle img-profile" src="/assets/img/zzs_profile.jpg"
                                 style="width: 35px; height: 35px;" />
@@ -41,10 +53,10 @@
                                 &nbsp;Profile
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item fs-6 text-dark" onclick="handleLogout()">
+                            <button class="dropdown-item fs-6 text-dark" onclick="handleLogout()">
                                 <i class="fa-fw fa-sign-out-alt fa-sm fas me-2 text-dark"></i>
                                 &nbsp;Logout
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </li>
@@ -79,23 +91,24 @@
 
                     <!-- side bar link start -->
                     <li class="nav-item">
-                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" href="post-content.html"
-                            style="font-size: 15.6px;">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
+                            th:href="@{/teacher/uploadResource}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
                                 <i class="fa-photo-video fas fs-4"></i>
                                 <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Post Content</p>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Upload Resource</p>
                                 </div>
                             </div>
                         </a>
-                        <a class="d-flex d-md-flex nav-link" data-bss-hover-animate="pulse" href="student-table.html"
-                            style="font-size: 15.6px;">
+                        <a class="d-flex d-md-flex nav-link" data-bss-hover-animate="pulse"
+                            th:href="@{/teacher/student-table}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
                                 <i class="fa-users fas fs-4"></i>
                                 <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">&nbsp;Student Table
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">&nbsp;
+                                        Student Table
                                     </p>
                                 </div>
                             </div>
@@ -201,13 +214,15 @@
         <script src="https://code.jquery.com/jquery-3.6.0.js"
             integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <!-- sweet alert -->
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+        <script src="/assets/js/sweetAlert.js"></script>
         <!-- datatable-js -->
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
         <!-- axios -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <!-- vue3 -->
-        <script src="https://unpkg.com/vue@3"></script>
+        <!-- <script src="https://unpkg.com/vue@3"></script> -->
+        <script src="/assets/js/vue.js"></script>
         <script>
             const handleLogout = () => {
                 console.log("hello")

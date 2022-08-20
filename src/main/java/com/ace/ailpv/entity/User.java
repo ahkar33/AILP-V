@@ -44,6 +44,9 @@ public class User {
     @Transient
     private String batchId;
 
+    @Transient
+    private String batchName;
+
     @OneToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "messageUser")
     @JsonIgnore
     private Set<Message> messageList = new HashSet<>();
