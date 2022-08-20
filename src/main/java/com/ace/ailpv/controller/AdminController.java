@@ -271,6 +271,8 @@ public class AdminController {
 
     @PostMapping("/editStudent")
     public String editStudent(@ModelAttribute("student") User student) {
+        User resStudent = userService.getUserById(student.getId());
+        student.setIsMute(resStudent.getIsMute());
         userService.addUser(student);
         return "redirect:/admin/student-table";
     }
@@ -310,6 +312,8 @@ public class AdminController {
 
     @PostMapping("/editTeacher")
     public String editTeacher(@ModelAttribute("teacher") User teacher) {
+        User resTeacher = userService.getUserById(teacher.getId());
+        teacher.setIsMute(resTeacher.getIsMute());
         userService.addUser(teacher);
         return "redirect:/admin/teacher-table";
     }
