@@ -3,6 +3,9 @@
 
 <link rel="stylesheet" href="/assets/css/emojionearea.min.css">
 <link rel="stylesheet" href="/assets/css/student-public-chat.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <head th:insert="/student/student-fragments :: student_head">
     <title>Public Chat</title>
@@ -37,6 +40,14 @@
                                             <h6 class="fs-5 fw-normal m-b-0 mb-0 text-light"
                                                 style="font-family: 'Roboto', sans-serif;">
                                                 [[${batchName}]]
+                                                <span @click="toggleMute()" class="ms-1">
+                                                    <span v-if="isMute">
+                                                        <i class="fa-solid fa-bell-slash"></i>
+                                                    </span>
+                                                    <span v-else>
+                                                        <i class="fa-solid fa-bell"></i>
+                                                    </span>
+                                                </span>
                                             </h6>
                                         </div>
                                     </div>
@@ -77,7 +88,8 @@
                                                 <div class="col-1 col-lg-2 col-md-4 col-sm-1 pe-0 w-auto">
                                                     <h6 class="fw-bold mb-auto">
                                                         {{message.messageUser.name}}
-                                                        <span v-show="message.messageUser.role == 'teacher'" class="text-info"> (Teacher)</span>
+                                                        <span v-show="message.messageUser.role == 'teacher'"
+                                                            class="text-info"> (Teacher)</span>
                                                     </h6>
                                                 </div>
                                             </div>
