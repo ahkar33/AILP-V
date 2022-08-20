@@ -123,8 +123,7 @@ const app = Vue.createApp({
         }
     },
     mounted() {
-        $("#inputMessage").emojioneArea({
-        });
+        window.that = this;
         this.batchId = document.getElementById('batchId').value;
         this.userId = document.getElementById('userId').value;
         this.userName = document.getElementById('userName').value;
@@ -134,6 +133,17 @@ const app = Vue.createApp({
         setInterval(() => {
             this.getAllMessages();
         }, 1000);
+        $("#inputMessage").emojioneArea({
+            events: {
+                keyup: function (editor, event) {
+                    if (event.which == 13) {
+                        document.activeElement.blur();
+                        window.that.handleSend();
+                        $("#inputMessage").data("emojioneArea").editor.focus();
+                    }
+                },
+            }
+        });
     }
 })
 app.mount('#app');
