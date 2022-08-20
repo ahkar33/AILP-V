@@ -101,9 +101,9 @@ public class UserServiceTest {
     @Test
     public void getStudentListByTeacherIdTest(){
         User User = getUserInfo();
-        Set<Batch> batchList = User.getBatchList();
+        List<Batch> batchList = User.getBatchList();
 
-        Set<Batch> testbatchList = new HashSet<>();
+        List<Batch> testbatchList = new ArrayList<>();
         Batch batch1 = getBatchInfo();
         Batch batch2 = getBatchInfo();
         testbatchList.add(batch1);
@@ -125,7 +125,7 @@ public class UserServiceTest {
         user.setRole("admin");
         user.setBatchId("batch01");
         
-        user.setBatchList(new HashSet<>());
+        user.setBatchList(new ArrayList<>());
 
         return user;
     }
@@ -140,7 +140,7 @@ public class UserServiceTest {
         user.setPassword("password");
         user.setRole("admin");
         user.setBatchId("batch01");
-        user.setBatchList(new HashSet<>());
+        user.setBatchList(new ArrayList<>());
 
         User user1 = new User();
         user1.setId("usr001");
@@ -148,7 +148,7 @@ public class UserServiceTest {
         user1.setPassword("password");
         user1.setRole("student");
         user1.setBatchId("batch01");
-        user1.setBatchList(new HashSet<>());
+        user1.setBatchList(new ArrayList<>());
 
         User user2 = new User();
         user2.setId("usr001");
@@ -156,7 +156,7 @@ public class UserServiceTest {
         user2.setPassword("password");
         user2.setRole("teacher");
         user2.setBatchId("batch01");
-        user2.setBatchList(new HashSet<>());
+        user2.setBatchList(new ArrayList<>());
 
         userList.add(user);
         userList.add(user1);

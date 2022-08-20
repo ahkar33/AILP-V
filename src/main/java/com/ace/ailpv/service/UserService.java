@@ -62,7 +62,7 @@ public class UserService {
 
     public List<User> getStudentListByTeacherId(String id) {
         User resUser = getUserById(id);
-        Set<Batch> bathList = resUser.getBatchList();
+        List<Batch> bathList = resUser.getBatchList();
         List<User> userList = new ArrayList<>();
         for (Batch batch : bathList) {
             for (User user : batch.getUserList()) {
@@ -86,10 +86,7 @@ public class UserService {
 
     public List<Batch> getTeacherBatchListById(String id) {
         User teacher = userRepository.findById(id).orElse(null);
-        // return teacher.getBatchList();
-        List<Batch> batchList = new ArrayList<>();
-        batchList.addAll(teacher.getBatchList());
-        return batchList;
+        return teacher.getBatchList();
     }
 
     public Set<Course> getTeacherCourseListById(String id) {
