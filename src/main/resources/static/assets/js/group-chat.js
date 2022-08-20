@@ -1,6 +1,7 @@
 const app = Vue.createApp({
     data() {
         return {
+            audio: new Audio('/assets/mp3/noti.mp3'),
             userList: [],
             isMute: null,
             isFirstTime: true,
@@ -15,8 +16,7 @@ const app = Vue.createApp({
     },
     methods: {
         playNoti() {
-            var audio = new Audio('/assets/mp3/noti.mp3');
-            audio.play();
+            this.audio.play();
         },
         toggleMute() {
             let data = { id: this.userId, isMute: !this.isMute };
@@ -29,19 +29,13 @@ const app = Vue.createApp({
         },
         isToday(date) {
             let today = new Date();
-            if (today.toLocaleDateString() == date.substring(0, 9)) {
-                return true;
-            }
-            return false;
+            return today.toLocaleDateString() == date.substring(0, 9) ? true : false;
         },
         isYesterday(date) {
             let today = new Date();
             let yesterday = new Date();
             yesterday.setDate(today.getDate() - 1);
-            if (yesterday.toLocaleDateString() == date.substring(0, 9)) {
-                return true;
-            }
-            return false;
+            return yesterday.toLocaleDateString() == date.substring(0, 9) ? true : false;
         },
         handleSend() {
             this.message = document.getElementById('inputMessage').value;
@@ -88,18 +82,12 @@ const app = Vue.createApp({
                     this.messageList = [...res.data];
                     this.messageList = this.messageList.map(msg => {
                         let resDateTime = msg.dateTime;
+                        let shortTime = resDateTime.substring(11, 15) + " " + resDateTime.slice(-2);
+                        let longTime = resDateTime.substring(11, 16) + " " + resDateTime.slice(-2);
                         if (this.isToday(resDateTime)) {
-                            if (resDateTime.length == 21) {
-                                var dateTime = "Today at " + resDateTime.substring(11, 15) + " " + resDateTime.slice(-2);
-                            } else {
-                                var dateTime = "Today at " + resDateTime.substring(11, 16) + " " + resDateTime.slice(-2);
-                            }
+                            var dateTime = (resDateTime.length == 21) ? "Today at " + shortTime : "Today at " + longTime;
                         } else if (this.isYesterday(resDateTime)) {
-                            if (resDateTime.length == 21) {
-                                var dateTime = "Yesterday at " + resDateTime.substring(11, 15) + " " + resDateTime.slice(-2);
-                            } else {
-                                var dateTime = "Yesterday at " + resDateTime.substring(11, 16) + " " + resDateTime.slice(-2);
-                            }
+                            var dateTime = (resDateTime.length == 21) ? "Yesterday at " + shortTime : "Yesterday at " + longTime;
                         } else {
                             var dateTime = resDateTime.substring(0, 9);
                         }
@@ -147,6 +135,3 @@ const app = Vue.createApp({
     }
 })
 app.mount('#app');
-
-
-
