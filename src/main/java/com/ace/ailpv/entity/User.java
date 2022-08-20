@@ -1,6 +1,8 @@
 package com.ace.ailpv.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -40,7 +42,7 @@ public class User {
     @ManyToMany
     @JsonIgnore
     @JoinTable(name = "batch_has_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "batch_id"))
-    Set<Batch> batchList = new HashSet<>();
+    List<Batch> batchList = new ArrayList<>(); 
 
     @Transient
     private String batchId;
