@@ -28,6 +28,7 @@ const app = Vue.createApp({
             return false;
         },
         handleSend() {
+            this.message = document.getElementById('inputMessage').value;
             this.isEmpty = false;
             if (this.message.replace(/\s/g, "").length == 0) {
                 this.isEmpty = true;
@@ -40,7 +41,7 @@ const app = Vue.createApp({
                     dateTime: new Date().toLocaleString()
                 }
 
-                this.message = "";
+                $("#inputMessage").data("emojioneArea").setText('');
 
                 axios
                     .post('http://localhost:8080/api/message/addMessage/', data)
@@ -88,6 +89,8 @@ const app = Vue.createApp({
         }
     },
     mounted() {
+        $("#inputMessage").emojioneArea({
+        });
         this.batchId = document.getElementById('batchId').value;
         this.userId = document.getElementById('userId').value;
         this.userName = document.getElementById('userName').value;
@@ -97,3 +100,4 @@ const app = Vue.createApp({
     }
 })
 app.mount('#app');
+

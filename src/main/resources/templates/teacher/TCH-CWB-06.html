@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 
+<link rel="stylesheet" href="/assets/css/emojionearea.min.css">
 <link rel="stylesheet" href="/assets/css/student-public-chat.css">
 
 <head th:insert="/teacher/teacher-fragments :: teacher_head">
@@ -148,10 +149,9 @@
                                         <div class="input-group mb-0 pb-0 pt-2" style="height: 80px;">
                                             <div class="input-group-prepend">
                                             </div>
-                                            <input v-model="message" type="text" class="form-control"
-                                                style="height: 59px;">
+                                            <input id="inputMessage" type="text" class="form-control">
                                             <button @click="handleSend()" class="btn text-light"
-                                                style="border-top-right-radius: 5px; border-bottom-right-radius: 5px; line-height: 30px; height: 59px; width: 48px; background-color: #32499a;">
+                                                style="border-top-right-radius: 5px; border-bottom-right-radius: 5px; line-height: 30px; height: 50px; width: 48px; background-color: #32499a;">
                                                 <i class="fa fa-send"></i>
                                             </button>
                                         </div>
@@ -170,6 +170,7 @@
         </div>
         <div th:insert="/teacher/teacher-fragments :: footer" />
 
+        <script src="/assets/js/emojionearea.min.js"></script>
         <script src="/assets/js/group-chat.js"></script>
 
 </body>
