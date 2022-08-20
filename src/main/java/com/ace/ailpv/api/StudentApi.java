@@ -31,6 +31,7 @@ public class StudentApi {
             student.getBatchList().add(batch);
             student.setPassword("ailp123");
             student.setRole("student");
+            student.setIsMute(false);
             userService.addUser(student);
         }
     }

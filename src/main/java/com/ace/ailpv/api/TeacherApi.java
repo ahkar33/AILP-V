@@ -40,11 +40,13 @@ public class TeacherApi {
                 teacher.getBatchList().addAll(teacherBatchList);
                 teacher.setPassword("ailp123");
                 teacher.setRole("teacher");
+                teacher.setIsMute(false);
                 userService.addUser(teacher);
             } else {
                 teacher.getBatchList().add(batch);
                 teacher.setPassword("ailp123");
                 teacher.setRole("teacher");
+                teacher.setIsMute(false);
                 userService.addUser(teacher);
             }
         }
