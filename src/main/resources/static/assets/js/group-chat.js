@@ -1,6 +1,7 @@
 const app = Vue.createApp({
     data() {
         return {
+            isFirstTime: true,
             isEmpty: null,
             messageListLength: '',
             batchId: '',
@@ -11,6 +12,10 @@ const app = Vue.createApp({
         }
     },
     methods: {
+        playNoti() {
+            var audio = new Audio('/assets/mp3/noti.mp3');
+            audio.play();
+        },
         isToday(date) {
             let today = new Date();
             if (today.toLocaleDateString() == date.substring(0, 9)) {
@@ -78,11 +83,18 @@ const app = Vue.createApp({
                     });
                     let messageLength = this.messageList.length
                     if (this.messageListLength < messageLength) {
+                        if (!this.isFirstTime) {
+                            if (this.messageList.at(-1).messageUser.id !== this.userId) {
+                                this.playNoti();
+                                console.log("play")
+                            }
+                        }
                         setTimeout(() => {
                             let objDiv = document.getElementById("messages");
                             objDiv.scrollTop = objDiv.scrollHeight;
                         }, 0);
                     }
+                    this.isFirstTime = false;
                     this.messageListLength = messageLength;
                 })
                 .catch(error => console.log(error));
@@ -100,4 +112,6 @@ const app = Vue.createApp({
     }
 })
 app.mount('#app');
+
+
 
