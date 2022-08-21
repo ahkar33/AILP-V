@@ -44,11 +44,6 @@ public class StudentController {
         Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
         List<BatchHasResource> batchHasResourceList = batchHasResourceService
                 .getAllBatchHasResourcesByBatchId(studentBatchId);
-        // for(BatchHasResource batchHasResource: BatchHasResourceList) {
-        //     System.out.println(batchHasResource.getResource().getName());
-        //     System.out.println(batchHasResource.getSchedule());
-        //     System.out.println("----------------------------------------");
-        // }
         model.addAttribute("batchHasResourceList", batchHasResourceList);
         return "/student/STU-REC-09";
     }
