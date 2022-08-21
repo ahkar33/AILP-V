@@ -42,7 +42,7 @@
             <ul class="navbar-nav flex-nowrap ms-auto">
                 <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Home Page"
                     style="margin-right: 3px;margin-left: 3px;">
-                    <a class="active nav-link" href="student-home-page.html">
+                    <a class="active nav-link" th:href="@{/student/student-home}">
                         <i class="icon ion-ios-home" style="font-size: 25px;"></i>
                     </a>
                 </li>
@@ -100,7 +100,7 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"
                         style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
-                        <a class="nav-link" href="student-home-page.html" style="margin-right: 1px;"><i
+                        <a class="nav-link" th:href="@{/student/student-home}" style="margin-right: 1px;"><i
                                 class="la la-home"
                                 style="margin-right: 1px;color: rgba(241,241,241,0.55);border-color: rgba(241,241,241,0.55);"></i>
                         </a>
@@ -114,7 +114,7 @@
                     </li>
                     <li class="nav-item"
                         style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
-                        <a class="nav-link" href="student-resources.html"><i class="la la-file-zip-o"
+                        <a class="nav-link" th:href="@{/student/getResources}"><i class="la la-file-zip-o"
                                 style="color: rgba(241,241,241,0.55);"></i>
                         </a>
                     </li>

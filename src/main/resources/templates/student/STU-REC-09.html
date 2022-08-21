@@ -19,7 +19,8 @@
                 <div id="content" style="margin-top: -19px;background: #ffffff;margin-bottom: 80px;">
                     <div class="row d-flex flex-wrap" style="padding-right: 10px;padding-left: 10px;margin-top: 38px;">
 
-                        <div th:each="batchResource : ${batchHasResourceList}" class="col-sm-6 col-md-6 col-lg-4 mb-5">
+                        <a th:href="@{ ${'/courses/' + batchResource?.resource?.resourceCourse?.name + '/resource/' + batchResource?.resource?.name} }"
+                            th:each="batchResource : ${batchHasResourceList}" class="col-sm-6 col-md-6 col-lg-4 mb-5 text-decoration-none">
                             <p class="mb-1">[[${batchResource?.schedule.toString.substring(0, 10)}]]</p>
                             <!-- [[${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 )}]] -->
                             <div class="card shadow-sm border-start-primary py-2"
@@ -55,8 +56,7 @@
                                             </svg>
                                         </div>
 
-                                        <div th:if="${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 ) == 'rar' 
-                                                || batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 ) == 'zip'}"
+                                        <div th:if="${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 ) == 'rar'}"
                                             class="col-auto">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em"
                                                 height="1em" fill="currentColor" class="fa-2x"
@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
 
                     </div>
                 </div>
