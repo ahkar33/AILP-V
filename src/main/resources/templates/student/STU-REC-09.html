@@ -20,6 +20,7 @@
                     <div class="row d-flex flex-wrap" style="padding-right: 10px;padding-left: 10px;margin-top: 38px;">
 
                         <a th:href="@{ ${'/courses/' + batchResource?.resource?.resourceCourse?.name + '/resource/' + batchResource?.resource?.name} }"
+                            target="_blank"
                             th:each="batchResource : ${batchHasResourceList}" class="col-sm-6 col-md-6 col-lg-4 mb-5 text-decoration-none">
                             <p class="mb-1">[[${batchResource?.schedule.toString.substring(0, 10)}]]</p>
                             <!-- [[${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 )}]] -->
