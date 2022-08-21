@@ -10,7 +10,7 @@ public interface BatchHasResourceRepository extends JpaRepository<BatchHasResour
   
     List<BatchHasResource> findByBatch_Id(Long id);
 
-    // Boolean existsByBatchIdAndBatchIdAndSchedule(Long batchId, Long resourceId, LocalDateTime schedule);    
+    // Boolean existsByBatchIdAndResourceIdAndSchedule(Long batchId, Long resourceId, LocalDateTime schedule);    
 
     BatchHasResource findByBatchIdAndResourceId(Long batchId, Long resourceId);    
 
