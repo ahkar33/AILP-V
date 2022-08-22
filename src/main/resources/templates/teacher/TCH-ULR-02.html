@@ -23,7 +23,7 @@
                     </h1>
                     <div class="card shadow">
                         <div class="card-body text-dark">
-                            <h2 class="text-success text-center">[[${msg}]]</h2>
+                            <input type="hidden" th:value="${successMsg}" id="successMsg">
                             <table id="dataTable" class="display p-2">
                                 <thead>
                                     <th>Course</th>
@@ -36,8 +36,7 @@
                                             <td th:value="${course?.id}">[[${course?.name}]]</td>
                                             <td th:value="${resource?.id}">[[${resource?.name}]]</td>
                                             <td>
-                                                <a  
-                                                    class="btn btn-primary"
+                                                <a class="btn btn-primary"
                                                     th:href="@{'/teacher/uploadResourceForm/' + ${resource?.id}  + '/' + ${course?.id} + '/' + ${resource?.name} }">
                                                     Upload
                                                 </a>
@@ -61,7 +60,18 @@
     <script>
         $(document).ready(function () {
             $('#dataTable').DataTable();
+            let successMsg = document.getElementById("successMsg").value;
+            if (successMsg) {
+                alertSuccess();
+            }
         });
+        const alertSuccess = () => {
+            Swal.fire(
+                'Successfully Uploaded!',
+                '',
+                'success'
+            )
+        }
     </script>
 </body>
 

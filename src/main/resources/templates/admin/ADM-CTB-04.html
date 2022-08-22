@@ -15,7 +15,7 @@
                 <!-- this is where nav bar is -->
                 <div th:insert="/admin/admin-fragments :: navbar" />
 
-                <div class="container-fluid">
+                <div class="container-fluid" id="app">
                     <div>
                         <h1 class="text-start"
                             style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
@@ -69,7 +69,8 @@
 
                                                 <label for="">Resource</label>
                                                 <input type="file" class="form-control mb-3" multiple
-                                                    th:field="*{resources}" accept=".pdf, .pptx, .xlsx, .zip, .rar" required>
+                                                    th:field="*{resources}" accept=".pdf, .pptx, .xlsx, .zip, .rar"
+                                                    required>
 
                                             </div>
                                             <div class="modal-footer" style="background: #f8f9fc;">
@@ -85,8 +86,8 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" th:value="${errorMsg}" id="errorMsg">
                     <div class="card shadow text-dark">
-                        <h2 class="text-danger text-center">[[${msg}]]</h2>
                         <div class="card-body">
                             <table id="dataTable">
                                 <thead class="table">
@@ -194,14 +195,22 @@
 
             </div>
         </div>
-        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
 
     <div th:insert="/admin/admin-fragments :: footer" />
 
     <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+
         $(document).ready(function () {
             $('#dataTable').DataTable();
+            let errorMsg = document.getElementById("errorMsg").value;
+            if (errorMsg) {
+                alertError();
+            }
         });
 
         const handleDelete = (courseId) => {
@@ -219,14 +228,20 @@
                     window.location = `http://localhost:8080/admin/deleteCourse/${courseId}`;
                 }
             })
+        };
+
+        const alertError = () => {
+            Swal.fire({
+                icon: 'info',
+                title: 'Course Name Already Exists!',
+                text: '',
+            })
         }
+
     </script>
-    <script>
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-    </script>
+
+
+
 
 </body>
 
