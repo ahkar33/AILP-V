@@ -3,6 +3,7 @@ package com.ace.ailpv.controller;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,9 @@ import com.ace.ailpv.service.VideoService;
 public class AdminController {
 
     @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
     private CourseService courseService;
 
     @Autowired
@@ -51,6 +55,7 @@ public class AdminController {
     @Autowired
     private ResourceService resourceService;
 
+
     String path = "D:\\ACE(OJT)\\AILP(V)\\AILP(V)\\AILP-V\\src\\main\\resources\\static\\courses\\";
 
     @GetMapping("/dashboard")
@@ -61,7 +66,6 @@ public class AdminController {
        model.addAttribute("courseCount",courseService.getAllCourses().size());
         return "/admin/admin-dashboard";
     }
-
 
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {
@@ -327,7 +331,5 @@ public class AdminController {
         userService.addUser(teacher);
         return "redirect:/admin/teacher-table";
     }
-
-
 
 }

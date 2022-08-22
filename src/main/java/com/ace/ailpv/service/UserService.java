@@ -110,4 +110,16 @@ public class UserService {
         return teacherFilteredBatchList;
     }
 
+    public void updateByUserName(String name, String uid) {
+        userRepository.updateNameById(name, uid);
+    }
+
+    public void updatePictureByUserId(String pictureName, String uid) {
+        userRepository.updatePictureById(pictureName, uid);
+    }
+
+    public void updatePasswordByUserId(String newPassword, String uid) {
+        userRepository.updatePasswordById(newPassword, uid);
+    }
+
 }

@@ -35,6 +35,7 @@ public class User {
     private String name;
     private String password;
     private String role;
+    private String profile_pic;
 
     @Column(nullable = false, columnDefinition = "TINYINT(0)")
     private Boolean isMute;
