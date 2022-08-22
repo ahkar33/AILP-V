@@ -111,6 +111,7 @@ public class AdminController {
         model.addAttribute("videoList", videoList);
         model.addAttribute("course", course);
         return "/admin/ADM-VTB-14";
+        
     }
 
     @GetMapping("/editResource/{id}")
