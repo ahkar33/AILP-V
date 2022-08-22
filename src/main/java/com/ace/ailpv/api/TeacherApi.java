@@ -1,6 +1,7 @@
 package com.ace.ailpv.api;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +35,18 @@ public class TeacherApi {
         batchList.add(batch);
         for (User teacher : teacherList) {
             if (userService.checkUserId(teacher.getId())) {
-                Set<Batch> teacherBatchList = userService.getUserById(teacher.getId()).getBatchList();
+                List<Batch> teacherBatchList = userService.getUserById(teacher.getId()).getBatchList();
                 teacherBatchList.addAll(batchList);
                 teacher.getBatchList().addAll(teacherBatchList);
                 teacher.setPassword("ailp123");
                 teacher.setRole("teacher");
+                teacher.setIsMute(false);
                 userService.addUser(teacher);
             } else {
                 teacher.getBatchList().add(batch);
                 teacher.setPassword("ailp123");
                 teacher.setRole("teacher");
+                teacher.setIsMute(false);
                 userService.addUser(teacher);
             }
         }

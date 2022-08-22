@@ -13,7 +13,7 @@
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <!-- this is where nav bar is -->
-                <div th:insert="/admin/admin-fragments :: navbar" />    
+                <div th:insert="/admin/admin-fragments :: navbar" />
 
                 <div class="container-fluid">
                     <div>
@@ -29,10 +29,13 @@
                             <a class="btn btn-primary btn-lg" role="button" href="#add-course-button"
                                 data-bs-toggle="modal"
                                 style="width: 176.1px;font-size: 16px;height: 44px;margin-bottom: 12px; padding-top: 3px;">
-                                <i class="fa-photo-video fas fs-5" style="padding-bottom: 7px; padding-top: 6px;"></i><span style="font-size: 20px;"><b>&nbsp;</b></span>
+                                <i class="fa-photo-video fas fs-5"
+                                    style="padding-bottom: 7px; padding-top: 6px;"></i><span
+                                    style="font-size: 20px;"><b>&nbsp;</b></span>
                                 Create Course
                             </a>
-                            <div class="fw-bold modal fade" style="font-family: 'Roboto', sans-serif;" role="dialog" tabindex="-1" id="add-course-button">
+                            <div class="fw-bold modal fade" style="font-family: 'Roboto', sans-serif;" role="dialog"
+                                tabindex="-1" id="add-course-button">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content text-dark">
                                         <form th:action="@{/admin/addCourse}" th:object="${course}" method="post"
@@ -53,20 +56,20 @@
                                                     maxlength="100" minlength="1">
 
                                                 <label for="">Fee</label>
-                                                <input type="number" class="form-control mb-3" th:field="*{fee}" required
-                                                    maxlength="20">
+                                                <input type="number" class="form-control mb-3" th:field="*{fee}"
+                                                    required maxlength="20">
 
                                                 <label for="">Description</label>
                                                 <input type="text" class="form-control mb-3" th:field="*{description}"
                                                     required maxlength="1000">
 
                                                 <label for="">Video</label>
-                                                <input type="file" class="form-control mb-3" multiple th:field="*{videos}"
-                                                    accept="video/*" required>
+                                                <input type="file" class="form-control mb-3" multiple
+                                                    th:field="*{videos}" accept="video/*" required>
 
                                                 <label for="">Resource</label>
-                                                <input type="file" class="form-control mb-3" multiple th:field="*{resources}"
-                                                    accept=".pdf, .pptx, .xlsx," required>
+                                                <input type="file" class="form-control mb-3" multiple
+                                                    th:field="*{resources}" accept=".pdf, .pptx, .xlsx, .zip, .rar" required>
 
                                             </div>
                                             <div class="modal-footer" style="background: #f8f9fc;">
@@ -108,65 +111,73 @@
                                             </a> -->
 
                                             <!-- my modal -->
-                    <div class="modal fade" role="dialog" tabindex="-1" th:attr="id='edit-course-button' + ${course.id}">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="fw-bold modal-content" style="font-family: 'Roboto', sans-serif;">
-                                <form th:action="@{/admin/editCourse}" method="post"
-                                    >
-                                    <div class="modal-header" style="background: #f8f9fc;">
-                                        <h4
-                                            style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif;font-weight: bold;margin-top: 5px;margin-bottom: 2px;">
-                                            Edit Course
-                                        </h4>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close">
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <input type="hidden" name="id" th:value="${course?.id}">
-                                        <label for="">Course Name</label>
-                                        <input type="text" name="name" class="form-control mb-3"  required
-                                            maxlength="100" minlength="1" th:value="${course?.name}">
+                                            <div class="modal fade" role="dialog" tabindex="-1"
+                                                th:attr="id='edit-course-button' + ${course.id}">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="fw-bold modal-content"
+                                                        style="font-family: 'Roboto', sans-serif;">
+                                                        <form th:action="@{/admin/editCourse}" method="post">
+                                                            <div class="modal-header" style="background: #f8f9fc;">
+                                                                <h4
+                                                                    style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif;font-weight: bold;margin-top: 5px;margin-bottom: 2px;">
+                                                                    Edit Course
+                                                                </h4>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close">
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <input type="hidden" name="id" th:value="${course?.id}">
+                                                                <label for="">Course Name</label>
+                                                                <input type="text" name="name" class="form-control mb-3"
+                                                                    required maxlength="100" minlength="1"
+                                                                    th:value="${course?.name}">
 
-                                        <label for="">Fee</label>
-                                        <input type="number" name="fee" class="form-control mb-3"  th:value="${course?.fee}" required
-                                            maxlength="20">
+                                                                <label for="">Fee</label>
+                                                                <input type="number" name="fee"
+                                                                    class="form-control mb-3" th:value="${course?.fee}"
+                                                                    required maxlength="20">
 
-                                        <label for="">Description</label>
-                                        <input type="text" name="desc" class="form-control mb-3"  th:value="${course?.description}"
-                                            required maxlength="1000">
+                                                                <label for="">Description</label>
+                                                                <input type="text" name="desc" class="form-control mb-3"
+                                                                    th:value="${course?.description}" required
+                                                                    maxlength="1000">
 
-                                    </div>
-                                    <div class="modal-footer" style="background: #f8f9fc;">
-                                        <button class="btn btn-light" data-bs-dismiss="modal"
-                                            style="margin-right: 13px;">Cancel</button>
-                                        <button class="btn btn-primary" type="submit">
-                                            Update
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                                                            </div>
+                                                            <div class="modal-footer" style="background: #f8f9fc;">
+                                                                <button class="btn btn-light" data-bs-dismiss="modal"
+                                                                    style="margin-right: 13px;">Cancel</button>
+                                                                <button class="btn btn-primary" type="submit">
+                                                                    Update
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <a class="btn btn-warning me-2 fw-bold"
-                                                th:attr="href='#edit-course-button' + ${course.id}" data-bs-toggle="modal"
-                                                >
-                                                Course   <i class="fa-edit fas"></i>
+                                                th:attr="href='#edit-course-button' + ${course.id}"
+                                                data-bs-toggle="modal">
+                                                Course <i class="fa-edit fas"></i>
                                             </a>
 
-                                            
-                                            <a class="btn btn-success me-2 fw-bold" title="Edit Video" data-bs-placement="top" data-bs-toggle="tooltip"
+
+                                            <a class="btn btn-success me-2 fw-bold" title="Edit Video"
+                                                data-bs-placement="top" data-bs-toggle="tooltip"
                                                 th:href="@{'/admin/editVideo/' + ${course?.id} }">
-                                                Video    <i class="fa-edit fas"></i>
+                                                Video <i class="fa-edit fas"></i>
                                             </a>
-                                            <a class="btn btn-info me-2 fw-bold" title="Edit Resource" data-bs-placement="top" data-bs-toggle="tooltip"
+                                            <a class="btn btn-info me-2 fw-bold" title="Edit Resource"
+                                                data-bs-placement="top" data-bs-toggle="tooltip"
                                                 th:href="@{'/admin/editResource/' + ${course?.id} }">
-                                                Resource    <i class="fa-edit fas"></i>
+                                                Resource <i class="fa-edit fas"></i>
                                             </a>
 
-                                            <a class="btn btn-outline-danger" title="Remove" data-bs-placement="top" data-bs-toggle="tooltip"
-                                                th:attr="onclick=|handleDelete('${course.id}' + '/' + '${course.name}')|"><i class="fa-trash-alt fas"></i>
+                                            <a class="btn btn-outline-danger" title="Remove" data-bs-placement="top"
+                                                data-bs-toggle="tooltip"
+                                                th:attr="onclick=|handleDelete('${course.id}' + '/' + '${course.name}')|"><i
+                                                    class="fa-trash-alt fas"></i>
                                             </a>
 
                                             <!-- <a class="btn btn-outline-danger"
@@ -212,9 +223,9 @@
     </script>
     <script>
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
     </script>
 
 </body>
