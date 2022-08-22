@@ -20,6 +20,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public List<User> countUser(){
+        return userRepository.findAll();
+    }
+
     public Boolean checkLogin(String id, String password) {
         return userRepository.existsByIdAndPassword(id, password);
     }

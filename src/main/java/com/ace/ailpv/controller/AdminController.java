@@ -51,7 +51,17 @@ public class AdminController {
     @Autowired
     private ResourceService resourceService;
 
-    String path = "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\AILP-V\\src\\main\\resources\\static\\courses\\";
+    String path = "D:\\ACE(OJT)\\AILP(V)\\AILP(V)\\AILP-V\\src\\main\\resources\\static\\courses\\";
+
+    @GetMapping("/dashboard")
+    public String setupDashborad(ModelMap model) {
+       model.addAttribute("studentCount",userService.getAllStudents().size());
+       model.addAttribute("teacherCount",userService.getAllTeachers().size());
+       model.addAttribute("batchCount",batchService.getAllBatches().size());
+       model.addAttribute("courseCount",courseService.getAllCourses().size());
+        return "/admin/admin-dashboard";
+    }
+
 
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {
@@ -317,5 +327,7 @@ public class AdminController {
         userService.addUser(teacher);
         return "redirect:/admin/teacher-table";
     }
+
+
 
 }
