@@ -3,6 +3,7 @@ package com.ace.ailpv.controller;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,9 @@ import com.ace.ailpv.service.VideoService;
 public class AdminController {
 
     @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
     private CourseService courseService;
 
     @Autowired
@@ -51,7 +55,7 @@ public class AdminController {
     @Autowired
     private ResourceService resourceService;
 
-    String path = "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\AILP-V\\src\\main\\resources\\static\\courses\\";
+    String path = "S:\\ACESTUFF\\AILP-V\\src\\main\\resources\\static\\assets\\courses\\";
 
     @GetMapping("/course-table")
     public String setupCourseTable(ModelMap model) {
@@ -316,6 +320,24 @@ public class AdminController {
         teacher.setIsMute(resTeacher.getIsMute());
         userService.addUser(teacher);
         return "redirect:/admin/teacher-table";
+    }
+
+    // to delete after admin account created
+    @GetMapping("/register")
+    public String setupRegister() {
+        return "/admin/register.html";
+    }
+
+    @PostMapping("/register")
+    public String setupRegister(@RequestParam("id") String id, @RequestParam("name") String name, @RequestParam("password") String password ) {
+        User user = new User();
+        user.setId(id);
+        user.setName(name);
+        user.setPassword(passwordEncoder.encode(password));
+        user.setIsMute(false);
+
+        userService.addUser(user);
+        return "redirect:/auth/login";
     }
 
 }

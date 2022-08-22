@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
+    <title>New NEw (3</title>
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Bangla&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Kannada&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arimo&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Average+Sans&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dangrek&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+KR&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inria+Sans&amp;display=swap"/>
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css"/>
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../assets/fonts/ionicons.min.css"/>
+    <link rel="stylesheet" href="../assets/fonts/line-awesome.min.css"/>
+    <link rel="stylesheet" href="../assets/fonts/material-icons.min.css"/>
+    <link rel="stylesheet" href="../assets/fonts/fontawesome5-overrides.min.css"/>
+    <link rel="stylesheet" href="../assets/css/custom-nav-hide.css"/>
+    <link rel="stylesheet" href="../assets/css/custom.css"/>
+    <link rel="stylesheet" href="../assets/css/Dark-footer-with-social-media-icons.css"/>
+    <link rel="stylesheet" href="../assets/css/Dark-Mode-Switch.css"/>
+    <link rel="stylesheet" href="../assets/css/dh-header-cover-image-button.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
+</head>
+
+<body><nav class="mb-4 navbar navbar-expand navbar-light shadow static-top topbar" style="background-color: #32499a;"> 
+            <div class="container"> <a href="student-home-page.html"><img src="../assets/img/logo.png" style="width: 200px;"/></a> 
+                <ul class="navbar-nav flex-nowrap ms-auto"> 
+                    <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Home Page" style="margin-right: 3px;margin-left: 3px;"> <a class="active nav-link" href="student-home-page.html"><i class="icon ion-ios-home" style="font-size: 25px;"></i> </a> 
+                    </li>                     
+                    <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Videos" style="margin-right: 3px;margin-left: 3px;"> <a class="nav-link" href="student-course-videos.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-play-circle-fill" style="font-size: 20px;"> 
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"> 
+</path>                                 
+                            </svg> </a> 
+                    </li>     
+                    <form id="logout" th:action="@{/logout}" method="post">
+                                
+                    </form>                
+                    <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Group Chat" style="margin-right: 3px;margin-left: 3px;"> <a class="nav-link" href="student-public-chat.html"><i class="icon ion-chatboxes" style="font-size: 24px;margin-top: 2px;"></i> </a> 
+                    </li>                     
+                    <div class="d-none d-sm-block topbar-divider"></div>                     
+                    <li class="nav-item dropdown no-arrow"> 
+                        <div class="nav-item dropdown no-arrow"> <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-lg-inline d-none me-2 small text-light" style="font-size: 15px;font-weight: bold;">[[${session?.name}]]</span><img class="rounded-circle img-profile" th:src="@{${'/profile_pics/' + session?.profile_pic}}" style="width: 35px; height: 35px;"/> </a> 
+                            <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"> <a class="dropdown-item fs-6 mb-1" th:href="@{/user/profile}"><i class="fa-fw fa-sm fa-user fas me-2 text-dark"></i>&nbsp;Profile
+ </a> <a class="dropdown-item fs-6 mb-1" href="javascript:document.forms.logout.submit()" data-bs-target="#logout-modal-button-1" data-bs-toggle="modal"><i class="fa-fw fa-sign-out-alt fa-sm fas me-2 text-dark"></i>&nbsp;Logout</a> 
+                            </div> 
+                                                        
+                        </div>                         
+                    </li>                     
+                </ul>                 
+            </div>             
+        </nav>
+    
+
+
+    <div class="container" style="margin-bottom: 95px;">
+        <div class="d-sm-flex justify-content-between align-items-center mb-2 mt-2" style="margin-top: 35px;">
+            <h3 class="mb-0" style="font-weight: bold;font-family: 'Anek Kannada', sans-serif;font-size: 30px;color: rgb(103,103,103);">
+                Profile
+            </h3>
+        </div>
+        <div class="row mb-3">
+            <div class="col-lg-4">
+                <div class="card mb-3">
+                    <div class="card-body text-center shadow">
+                        <img class="rounded-circle mb-3 mt-4" th:src="@{${'/profile_pics/' + session?.profile_pic}}" width="160" height="160"/>
+                        <a class="text-decoration-none text-dark" href="#profile-name-upload" data-bs-target="#profile-name-upload" data-bs-toggle="modal">
+                            <div class="pb-2">
+                                <h3 class="fw-bold" style="font-size: 20.8px;font-family: 'IBM Plex Sans KR', sans-serif;">
+                                    [[${session?.name}]] &nbsp;&nbsp;
+                                    <i class="far fa-edit text-secondary" style="font-size: 15.8px;"></i>
+                                </h3>
+                            </div>
+                        </a>
+                        <div class="modal fade" role="dialog" tabindex="-1" id="profile-name-upload">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <form method="post" th:action="@{/user/change-name}">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-dark">
+                                                Change Your Profile Name
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="input-group">
+                                                <input class="form-control" type="text" name="name" style="height: 38px;" required=""/>
+                                                <button class="btn btn-primary" type="submit">
+                                                    Change
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <a class="btn btn-primary btn-sm" role="button" data-bs-target="#modal-2" data-bs-toggle="modal" href="#modal-2">
+                                Change Photo
+                            </a>
+                            <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <form th:action="@{/user/upload}" method="post" enctype="multipart/form-data">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-dark">
+                                                    Change Your Profile Photo
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="input-group">
+                                                    <input class="form-control" name="profile_pic" type="file" style="height: 38px;" required=""/>
+                                                    <button class="btn btn-primary" type="submit">
+                                                        Change
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="text-primary fw-bold m-0" style="font-family: 'IBM Plex Sans KR', sans-serif;">Grade
+                            Overview</h6>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="small fw-bold" style="font-family: Arimo, sans-serif;">Total Assignment Result<span class="float-end">20%</span></h4>
+                        <div class="progress progress-sm mb-3">
+                            <div class="progress-bar bg-success" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"><span class="visually-hidden">80%</span></div>
+                        </div>
+                        <h4 class="small fw-bold" style="font-family: Arimo, sans-serif;">Total Exam Result<span class="float-end">40%</span></h4>
+                        <div class="progress progress-sm mb-3">
+                            <div class="progress-bar bg-warning" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="visually-hidden">40%</span></div>
+                        </div>
+                        <h4 class="small fw-bold" style="font-family: Arimo, sans-serif;">Attendance<span class="float-end">60%</span></h4>
+                        <div class="progress progress-sm mb-3">
+                            <div class="progress-bar bg-primary" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="visually-hidden">60%</span></div>
+                        </div>
+                        <h4 class="small fw-bold" style="font-family: Arimo, sans-serif;">Activity<span class="float-end">60%</span></h4>
+                        <div class="progress progress-sm mb-3">
+                            <div class="progress-bar bg-danger" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"><span class="visually-hidden">90%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- setting div start -->
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <p class="text-primary m-0 fw-bold" style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                    Settings
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <form method="post" th:action="@{/user/change-password}">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="course" style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                    <strong>Batch</strong>
+                                                </label>
+                                                <input class="form-control" type="text" id="username-1" name="course" disabled th:value="${batchName}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="old-password" style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                    <strong>Old Password</strong>
+                                                </label>
+                                                <input class="form-control" type="password" name="oldPassword" placeholder="Type Your Old Password" required=""/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="old-password" style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                    <strong>New Password</strong>
+                                                </label>
+                                                <input class="form-control" type="password" name="newPassword" placeholder="Type Your New Password" required=""/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="old-password" style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                    <strong>Confirm Password</strong>
+                                                </label>
+                                                <input class="form-control" type="password" name="confirmPassword" placeholder="Type Confirm Password" required=""/>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit" style="margin-left: 0px;margin-bottom: 0px;">Change Password</button></div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- <div class="card shadow">
+                            <div class="card-header py-3">
+                                <p class="text-primary m-0 fw-bold"
+                                    style="font-family: 'IBM Plex Sans KR', sans-serif;">System Setting</p>
+                            </div>
+                            <div class="card-body">
+                                <div
+                                    class="text-nowrap d-flex d-lg-flex justify-content-start justify-content-lg-start">
+                                    <div class="custom-control custom-switch"><input class="custom-control-input"
+                                            type="checkbox" id="darkSwitch" /><label class="custom-control-label"
+                                            for="darkSwitch"></label></div>
+                                    <p class="text-dark" style="font-size: 14px;font-weight: bold;">&nbsp; &nbsp;Dark
+                                        Mode</p>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" role="dialog" tabindex="-1" id="logout-modal-button">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p class="lead fw-bold text-center text-dark pt-2" style="font-size: 23px;font-family: 'IBM Plex Sans KR', sans-serif;">Are you sure you want
+                            to log out?</p>
+                    </div>
+                    <div class="modal-footer" style="padding: 0px;"><button class="btn btn-light border rounded-0" type="button" data-bs-dismiss="modal" style="margin: 0px;width: 50%;height: 46px;">Cancel</button><button class="btn btn-danger border rounded-0" type="button" style="margin: 0px;width: 50%;height: 46px;">Log Out</button></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" role="dialog" tabindex="-1" id="logout-modal-button-1">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p class="lead fw-bold text-center text-dark pt-4 pb-2" style="font-size: 20px;font-family: 'IBM Plex Sans KR', sans-serif;">Are you sure you want
+                            to log out?</p>
+                    </div>
+                    <div class="modal-footer" style="padding: 0px;"><button class="btn btn-light border rounded-0 border-0" type="button" data-bs-dismiss="modal" style="margin: 0px;width: 50%;height: 50px;">Cancel</button><button class="btn btn-danger border rounded-0 border-0" onclick="javascript:document.forms.logout.submit()" style="margin: 0px;width: 50%;height: 50px;">Log Out</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- mobile view nav bar -->
+    <nav class="navbar navbar-light navbar-expand fixed-bottom shadow hide-on-mobile" style="font-size: 29px;background: linear-gradient(180deg, rgb(50, 73, 154) 0%, rgb(25, 43, 106) 100%);border-radius: 35px;margin-bottom: 18px;margin-right: 15px;margin-left: 15px;height: 51.5px;padding-top: 15px;color: rgb(255,255,255);">
+        <div class="container-fluid"><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item" style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
+                        <a class="nav-link" href="student-home-page.html" style="margin-right: 1px;"><i class="la la-home" style="margin-right: 1px;color: rgba(241,241,241,0.55);border-color: rgba(241,241,241,0.55);"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
+                        <a class="nav-link" href="student-course-videos.html" style="margin-right: 1px;"><i class="la la-play-circle" style="margin-right: 1px;color: rgba(241,241,241,0.55);border-color: rgba(241,241,241,0.55);"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
+                        <a class="nav-link" href="student-resources.html"><i class="la la-file-zip-o" style="color: rgba(241,241,241,0.55);"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
+                        <a class="nav-link" href="student-assignment.html" style="margin-right: 1px;"><i class="la la-paste" style="margin-right: 1px;color: rgba(241,241,241,0.55);"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
+                        <a class="nav-link" href="student-gradebook.html"><i class="la la-book" style="color: rgba(241,241,241,0.55);"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/js/theme.js"></script>
+</body>
+
+</html>

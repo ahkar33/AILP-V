@@ -7,14 +7,19 @@ import org.apache.tika.detect.Detector;
 import org.apache.tika.io.TikaInputStream;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.metadata.TikaCoreProperties;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 
-
+@Service
 public class FileValidationService {
     
-    public static final String[] allowExtensionList = {"pdf", "png", "jpeg", "jpg"};
-    public static final String[] allowMimeList = {"application/pdf", "image/png", "image/jpeg", "image/jpg"};
+    public static final String[] allowResourceExtensionList = {"pdf", "png", "jpeg", "jpg"};
+    public static final String[] allowResourceMimeList = {"application/pdf", "image/png", "image/jpeg", "image/jpg"};
+
+    public static final String[] allowPictureExtensionList = {"png", "jpeg", "jpg"};
+    public static final String[] allowPictureMimeList = {"image/png", "image/jpeg", "image/jpg"};
+
 
     public static String getExtension(String filename) {
        
