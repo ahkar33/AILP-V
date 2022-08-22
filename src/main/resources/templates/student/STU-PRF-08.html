@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="/student/student-fragments :: student_head">
+    <title>Student Profile</title>
+</head>
+
+<body>
+
+    <div th:insert="/student/student-fragments :: pc-navbar" />
+
+    <div th:insert="/student/student-fragments :: mobile-navbar" />
+
+    <div class="container" style="margin-bottom: 95px;">
+        <div class="d-sm-flex justify-content-between align-items-center mb-2 mt-2" style="margin-top: 35px;">
+            <h3 class="mb-0"
+                style="font-weight: bold;font-family: 'Anek Kannada', sans-serif;font-size: 30px;color: rgb(103,103,103);">
+                Profile
+            </h3>
+        </div>
+        <div class="row mb-3">
+            <div class="col-lg-4">
+                <div class="card mb-3">
+                    <div class="card-body text-center shadow">
+                        <img class="rounded-circle mb-3 mt-4" th:src="@{${'/profile_pics/' + session?.profile_pic}}"
+                            width="160" height="160" />
+                        <a class="text-decoration-none text-dark" href="#profile-name-upload"
+                            data-bs-target="#profile-name-upload" data-bs-toggle="modal">
+                            <div class="pb-2">
+                                <h3 class="fw-bold"
+                                    style="font-size: 20.8px;font-family: 'IBM Plex Sans KR', sans-serif;">
+                                    [[${session?.name}]] &nbsp;&nbsp;
+                                    <i class="far fa-edit text-secondary" style="font-size: 15.8px;"></i>
+                                </h3>
+                            </div>
+                        </a>
+                        <div class="modal fade" role="dialog" tabindex="-1" id="profile-name-upload">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <form method="post" th:action="@{/user/change-name}">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-dark">
+                                                Change Your Profile Name
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="input-group">
+                                                <input class="form-control" type="text" name="name"
+                                                    style="height: 38px;" required="" />
+                                                <button class="btn btn-primary" type="submit">
+                                                    Change
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <a class="btn btn-primary btn-sm" role="button" data-bs-target="#modal-2"
+                                data-bs-toggle="modal" href="#modal-2">
+                                Change Photo
+                            </a>
+                            <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <form th:action="@{/user/upload}" method="post" enctype="multipart/form-data">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-dark">
+                                                    Change Your Profile Photo
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close">
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="input-group">
+                                                    <input class="form-control" name="profile_pic" type="file"
+                                                        style="height: 38px;" required="" />
+                                                    <button class="btn btn-primary" type="submit">
+                                                        Change
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="text-primary fw-bold m-0" style="font-family: 'IBM Plex Sans KR', sans-serif;">Grade
+                            Overview</h6>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="small fw-bold" style="font-family: Arimo, sans-serif;">Total Assignment Result<span
+                                class="float-end">20%</span></h4>
+                        <div class="progress progress-sm mb-3">
+                            <div class="progress-bar bg-success" aria-valuenow="80" aria-valuemin="0"
+                                aria-valuemax="100" style="width: 80%;"><span class="visually-hidden">80%</span></div>
+                        </div>
+                        <h4 class="small fw-bold" style="font-family: Arimo, sans-serif;">Total Exam Result<span
+                                class="float-end">40%</span></h4>
+                        <div class="progress progress-sm mb-3">
+                            <div class="progress-bar bg-warning" aria-valuenow="40" aria-valuemin="0"
+                                aria-valuemax="100" style="width: 40%;"><span class="visually-hidden">40%</span></div>
+                        </div>
+                        <h4 class="small fw-bold" style="font-family: Arimo, sans-serif;">Attendance<span
+                                class="float-end">60%</span></h4>
+                        <div class="progress progress-sm mb-3">
+                            <div class="progress-bar bg-primary" aria-valuenow="60" aria-valuemin="0"
+                                aria-valuemax="100" style="width: 60%;"><span class="visually-hidden">60%</span></div>
+                        </div>
+                        <h4 class="small fw-bold" style="font-family: Arimo, sans-serif;">Activity<span
+                                class="float-end">60%</span></h4>
+                        <div class="progress progress-sm mb-3">
+                            <div class="progress-bar bg-danger" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+                                style="width: 90%;"><span class="visually-hidden">90%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- setting div start -->
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <p class="text-primary m-0 fw-bold"
+                                    style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                    Settings
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <form method="post" th:action="@{/user/change-password}">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="course"
+                                                    style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                    <strong>Batch</strong>
+                                                </label>
+                                                <input class="form-control" type="text" id="username-1" name="course"
+                                                    disabled th:value="${batchName}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="old-password"
+                                                    style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                    <strong>Old Password</strong>
+                                                </label>
+                                                <input class="form-control" type="password" name="oldPassword"
+                                                    placeholder="Type Your Old Password" required="" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="old-password"
+                                                    style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                    <strong>New Password</strong>
+                                                </label>
+                                                <input class="form-control" type="password" name="newPassword"
+                                                    placeholder="Type Your New Password" required="" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="old-password"
+                                                    style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                    <strong>Confirm Password</strong>
+                                                </label>
+                                                <input class="form-control" type="password" name="confirmPassword"
+                                                    placeholder="Type Confirm Password" required="" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary btn-sm" type="submit"
+                                            style="margin-left: 0px;margin-bottom: 0px;">
+                                            Change Password
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" role="dialog" tabindex="-1" id="logout-modal-button">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p class="lead fw-bold text-center text-dark pt-2"
+                            style="font-size: 23px;font-family: 'IBM Plex Sans KR', sans-serif;">Are you sure you want
+                            to log out?
+                        </p>
+                    </div>
+                    <div class="modal-footer" style="padding: 0px;">
+                        <button class="btn btn-light border rounded-0" type="button" data-bs-dismiss="modal"
+                            style="margin: 0px;width: 50%;height: 46px;">
+                            Cancel
+                        </button>
+                        <button class="btn btn-danger border rounded-0" type="button"
+                            style="margin: 0px;width: 50%;height: 46px;">
+                            Log Out
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:insert="/student/student-fragments :: footer" />
+</body>
+
+</html>

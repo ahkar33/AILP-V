@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ace.ailpv.entity.BatchHasResource;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.service.BatchHasResourceService;
+import com.ace.ailpv.service.UserService;
 
 @Controller
 @RequestMapping("/student")
@@ -21,6 +22,9 @@ public class StudentController {
     @Autowired
     private BatchHasResourceService batchHasResourceService;
 
+    @Autowired
+    private UserService usersService;
+
     @GetMapping("/student-home")
     public String showStudentHomePage() {
         return "/student/STU-HOM-01";
@@ -28,7 +32,8 @@ public class StudentController {
 
     @GetMapping("/student-public-chat")
     public String setupStudentPublicChat(HttpSession session, ModelMap model) {
-        User userInfo = (User) session.getAttribute("userInfo");
+        String studentId =  (String) session.getAttribute("uid");
+        User userInfo = usersService.getUserById(studentId);
         userInfo.setBatchId(userInfo.getBatchList().iterator().next().getId().toString());
         userInfo.setBatchName(userInfo.getBatchList().iterator().next().getName().toLowerCase());
         model.addAttribute("userId", userInfo.getId());

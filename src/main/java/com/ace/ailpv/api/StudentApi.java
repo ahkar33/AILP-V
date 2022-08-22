@@ -19,7 +19,7 @@ import com.ace.ailpv.service.UserService;
 public class StudentApi {
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private BatchService batchService;
@@ -40,5 +40,5 @@ public class StudentApi {
             userService.addUser(student);
         }
     }
-    
+
 }

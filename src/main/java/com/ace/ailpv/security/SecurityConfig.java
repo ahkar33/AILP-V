@@ -7,15 +7,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+// import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+// import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
+@SuppressWarnings({"deprecated"})
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
@@ -42,8 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             .authorizeRequests()
                 .antMatchers("/assets/**", "/auth/**", "/login", "/logout", "/admin/register").permitAll()
                 .antMatchers("/admin/**", "/api/**").hasRole("ADMIN")
-                .antMatchers("/teacher/**").hasAnyRole("ADMIN", "TEACHER")
-                .antMatchers("/student/**").hasAnyRole("ADMIN", "TEACHER", "STUDENT")
+                .antMatchers("/teacher/**", "/api/**").hasAnyRole("ADMIN", "TEACHER")
+                .antMatchers("/student/**", "/api/**").hasAnyRole("ADMIN", "TEACHER", "STUDENT")
                 .anyRequest()
                     .authenticated()
         .and()
@@ -68,7 +66,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
-        // TODO Auto-generated method stub
         return super.authenticationManagerBean();
     }
     

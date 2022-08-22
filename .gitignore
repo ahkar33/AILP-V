@@ -40,6 +40,14 @@ build/
 *.xlsx
 *.pptx
 *.zip
+*.rar
+
+### ignore images
+*.png
+*.jpeg
+*.jpg
+*.jfif
+
 
 ### ignore property files ###
 application.properties

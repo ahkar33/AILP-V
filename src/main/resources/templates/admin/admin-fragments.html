@@ -32,11 +32,11 @@
                             <span class="d-lg-inline d-none fw-bold me-2 small text-black-50 text-gray-600">
                                 [[${session?.name}]]
                             </span>
-                            <img class="border rounded-circle img-profile" th:src="@{${'/profile_pics/' + session?.profile_pic}}"
+                            <img class="border rounded-circle img-profile" th:src="@{${'/profile_pics/' + session?.profile_pic} }"
                                 style="width: 35px; height: 35px;" />
                         </a>
                         <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                            <a class="dropdown-item fs-6 text-dark" href="/user/profile">
+                            <a class="dropdown-item fs-6 text-dark" th:href="@{/user/profile}">
                                 <i class="fa-fw fa-sm fa-user fas me-2 text-dark"></i>
                                 &nbsp;Profile
                             </a>
