@@ -61,7 +61,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         if (roles.contains("ROLE_ADMIN")) 
             url = "/admin/dashboard";
         else if(roles.contains("ROLE_TEACHER")) 
-            url = "/teacher/teacher-table"; 
+            url = "/teacher/teacher-public-chat"; 
         else if (roles.contains("ROLE_STUDENT")) 
             url = "/student/student-home";
            
