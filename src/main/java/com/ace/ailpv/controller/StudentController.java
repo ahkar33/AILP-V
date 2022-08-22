@@ -35,7 +35,7 @@ public class StudentController {
         String studentId =  (String) session.getAttribute("uid");
         User userInfo = usersService.getUserById(studentId);
         userInfo.setBatchId(userInfo.getBatchList().iterator().next().getId().toString());
-        userInfo.setBatchName(userInfo.getBatchList().iterator().next().getName().toLowerCase());
+        userInfo.setBatchName(userInfo.getBatchList().iterator().next().getName());
         model.addAttribute("userId", userInfo.getId());
         model.addAttribute("username", userInfo.getName());
         model.addAttribute("batchId", userInfo.getBatchId());

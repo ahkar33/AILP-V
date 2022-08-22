@@ -63,7 +63,7 @@ public class AdminController {
         model.addAttribute("teacherCount", userService.getAllTeachers().size());
         model.addAttribute("batchCount", batchService.getAllBatches().size());
         model.addAttribute("courseCount", courseService.getAllCourses().size());
-        return "/admin/admin-dashboard";
+        return "/admin/ADM-DSB-01";
     }
 
     @GetMapping("/course-table")

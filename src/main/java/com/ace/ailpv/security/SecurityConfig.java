@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             .rememberMe()
                 .authenticationSuccessHandler(remembermeSuccessHandler)
             
-                .tokenValiditySeconds(3600);
+                .tokenValiditySeconds(2592000);
                 
              ;
     }
