@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -99,7 +100,8 @@ public class UserController extends Thread {
     @PostMapping("/upload")
     public String uploadProfilePic(@RequestParam("profile_pic") MultipartFile profile_pic, HttpServletRequest request)
             throws IOException, InterruptedException {
-
+        
+        String profilePath = "S:\\ACESTUFF\\AILP-V\\src\\main\\resources\\static\\profile_pics\\";
         boolean isValidFile = false;
         String randomName = fileService
                 .generateFileName(fileValidationService.getExtension(profile_pic.getOriginalFilename()));
@@ -122,24 +124,23 @@ public class UserController extends Thread {
         }
 
         if (isValidFile) {
-            profile_pic.transferTo(
-                    new File(
-                            "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\AILP-V\\src\\main\\resources\\static\\profile_pics"
-                                    + "\\" + randomName));
-
-            String uid = (String) request.getSession(false).getAttribute("uid");
+            profile_pic.transferTo(new File(profilePath +  randomName));
+            
+            HttpSession session = request.getSession(false);
+            String uid = (String) session.getAttribute("uid");
             userService.updatePictureByUserId(randomName, uid);
-            request.getSession(false).setAttribute("profile_pic", randomName);
+
+            if (!session.getAttribute("profile_pic").equals("profile.png")) {
+                fileService.deleteFile(profilePath + session.getAttribute("profile_pic"));
+            }
+            session.setAttribute("profile_pic", randomName);
+            
 
         } else {
             System.out.println("Invalid file!");
         }
         Thread.sleep(1500);
         return "redirect:/user/profile";
-    }
-
-    public synchronized void transferFile() {
-
     }
 }
 
