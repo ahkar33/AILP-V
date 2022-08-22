@@ -70,13 +70,13 @@
                         <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
                             <span class="d-lg-inline d-none me-2 small text-light"
                                 style="font-size: 15px;font-weight: bold;">
-                                [[${session.userInfo.name}]]
+                                [[${session.name}]]
                             </span>
-                            <img class="rounded-circle img-profile" src="/assets/img/zzs_profile.jpg"
+                            <img class="rounded-circle img-profile" th:src="@{${'/profile_pics/' + session?.profile_pic} }"
                                 style="width: 35px; height: 35px;" />
                         </a>
                         <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                            <a class="dropdown-item fs-6 mb-1" href="student-profile.html">
+                            <a class="dropdown-item fs-6 mb-1" th:href="@{/user/profile}">
                                 <i class="fa-fw fa-sm fa-user fas me-2 text-dark"></i>
                                 &nbsp;Profile
                             </a>
@@ -171,7 +171,7 @@
                     confirmButtonText: 'Logout'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location = "http://localhost:8080/auth/logout";
+                        window.location = "http://localhost:8080/logout";
                     }
                 })
             }

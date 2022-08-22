@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FileService {
 
-    String courseFilePath = "S:\\ACESTUFF\\AILP-V\\src\\main\\resources\\static\\assets\\courses\\";
+    String courseFilePath = "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\AILP-V\\src\\main\\resources\\static\\courses\\";
 
 
     public void createFolderForCourse(String courseName) {
@@ -54,8 +54,8 @@ public class FileService {
         return isDeleted;
     }
 
-    public static String  generateFileName(String fileExtension) {
-        return "".join("", UUID.randomUUID().toString().split("-")) + "." + fileExtension;
+    public String generateFileName(String fileExtension) {
+        return String.join("", UUID.randomUUID().toString().split("-")) + "." + fileExtension;
     }
 
 }

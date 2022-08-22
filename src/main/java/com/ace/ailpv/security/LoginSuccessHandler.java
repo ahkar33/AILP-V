@@ -2,14 +2,14 @@ package com.ace.ailpv.security;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+// import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+// import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -59,11 +59,11 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         
         // check user role and decide the redirect url
         if (roles.contains("ROLE_ADMIN")) 
-            url = "/admin/exam-table";
+            url = "/admin/dashboard";
         else if(roles.contains("ROLE_TEACHER")) 
-            url = "/admin/teacher-table"; 
+            url = "/teacher/teacher-table"; 
         else if (roles.contains("ROLE_STUDENT")) 
-            url = "/admin/student-table";
+            url = "/student/student-home";
            
         return url;
     }

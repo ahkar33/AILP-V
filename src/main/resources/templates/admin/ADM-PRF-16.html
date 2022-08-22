@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/admin/admin-fragments :: admin_head">
+    <title>Course Table</title>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <!-- this is where side bar is -->
+        <div th:insert="/admin/admin-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <!-- this is where nav bar is -->
+                <div th:insert="/admin/admin-fragments :: navbar" />
+
+                <div class="container" style="margin-bottom: 95px;">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-2 mt-2"
+                        style="margin-top: 35px;">
+                        <h3 class="mb-0"
+                            style="font-weight: bold;font-family: 'Anek Kannada', sans-serif;font-size: 30px;color: rgb(103,103,103);">
+                            Profile
+                        </h3>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-4">
+                            <div class="card mb-3">
+                                <div class="card-body text-center shadow">
+                                    <img class="rounded-circle mb-3 mt-4"
+                                        th:src="@{${'/profile_pics/' + session?.profile_pic} }" width="160"
+                                        height="160" />
+                                    <a class="text-decoration-none text-dark" href="#profile-name-upload"
+                                        data-bs-target="#profile-name-upload" data-bs-toggle="modal">
+                                        <div class="pb-2">
+                                            <h3 class="fw-bold"
+                                                style="font-size: 20.8px;font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                [[${session?.name}]] &nbsp;&nbsp;
+                                                <i class="far fa-edit text-secondary" style="font-size: 15.8px;"></i>
+                                            </h3>
+                                        </div>
+                                    </a>
+                                    <div class="modal fade" role="dialog" tabindex="-1" id="profile-name-upload">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <form method="post" th:action="@{/user/change-name}">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title text-dark">
+                                                            Change Your Profile Name
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="input-group">
+                                                            <input class="form-control" type="text" name="name"
+                                                                style="height: 38px;" required="" />
+                                                            <button class="btn btn-primary" type="submit">
+                                                                Change
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <a class="btn btn-primary btn-sm" role="button" data-bs-target="#modal-2"
+                                            data-bs-toggle="modal" href="#modal-2">
+                                            Change Photo
+                                        </a>
+                                        <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <form th:action="@{/user/upload}" method="post"
+                                                        enctype="multipart/form-data">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title text-dark">
+                                                                Change Your Profile Photo
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close">
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="input-group">
+                                                                <input class="form-control" name="profile_pic"
+                                                                    type="file" style="height: 38px;" required="" />
+                                                                <button class="btn btn-primary" type="submit">
+                                                                    Change
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- setting div start -->
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card shadow mb-3">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 fw-bold"
+                                                style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                Settings
+                                            </p>
+                                        </div>
+                                        <div class="card-body">
+                                            <form method="post" th:action="@{/user/change-password}">
+    
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="old-password"
+                                                                style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                                <strong>Old Password</strong>
+                                                            </label>
+                                                            <input class="form-control" type="password"
+                                                                name="oldPassword" placeholder="Type Your Old Password"
+                                                                required="" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="old-password"
+                                                                style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                                <strong>New Password</strong>
+                                                            </label>
+                                                            <input class="form-control" type="password"
+                                                                name="newPassword" placeholder="Type Your New Password"
+                                                                required="" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="old-password"
+                                                                style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                                <strong>Confirm Password</strong>
+                                                            </label>
+                                                            <input class="form-control" type="password"
+                                                                name="confirmPassword"
+                                                                placeholder="Type Confirm Password" required="" />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="mb-3">
+                                                    <button class="btn btn-primary btn-sm" type="submit"
+                                                        style="margin-left: 0px;margin-bottom: 0px;">Change
+                                                        Password
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+    <div th:insert="/admin/admin-fragments :: footer" />
+
+</body>
+
+</html>

@@ -38,13 +38,13 @@ public class UserService {
 
     public List<User> getAllStudents() {
         List<User> studentList = getAllUsers().stream()
-                .filter(user -> user.getRole().equals("student")).collect(Collectors.toList());
+                .filter(user -> user.getRole().equals("ROLE_STUDENT")).collect(Collectors.toList());
         return studentList;
     }
 
     public List<User> getAllTeachers() {
         List<User> teacherList = getAllUsers().stream()
-                .filter(user -> user.getRole().equals("teacher")).collect(Collectors.toList());
+                .filter(user -> user.getRole().equals("ROLE_TEACHER")).collect(Collectors.toList());
         return teacherList;
     }
 
@@ -74,7 +74,7 @@ public class UserService {
             }
         }
         List<User> stduentList = userList.stream()
-                .filter(user -> user.getRole().equals("student"))
+                .filter(user -> user.getRole().equals("ROLE_STUDENT"))
                 .collect(Collectors.toList());
         return stduentList;
     }

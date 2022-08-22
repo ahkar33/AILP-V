@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,9 @@ import com.ace.ailpv.service.UserService;
 @RequestMapping("/api/teacher")
 @CrossOrigin(origins = "*")
 public class TeacherApi {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private BatchService batchService;
@@ -38,15 +42,17 @@ public class TeacherApi {
                 List<Batch> teacherBatchList = userService.getUserById(teacher.getId()).getBatchList();
                 teacherBatchList.addAll(batchList);
                 teacher.getBatchList().addAll(teacherBatchList);
-                teacher.setPassword("ailp123");
-                teacher.setRole("teacher");
+                teacher.setPassword(passwordEncoder.encode("ailp123"));
+                teacher.setRole("ROLE_TEACHER");
                 teacher.setIsMute(false);
+                teacher.setProfile_pic("profile.png");
                 userService.addUser(teacher);
             } else {
                 teacher.getBatchList().add(batch);
-                teacher.setPassword("ailp123");
-                teacher.setRole("teacher");
+                teacher.setPassword(passwordEncoder.encode("ailp123"));
+                teacher.setRole("ROLE_TEACHER");
                 teacher.setIsMute(false);
+                teacher.setProfile_pic("profile.png");
                 userService.addUser(teacher);
             }
         }
