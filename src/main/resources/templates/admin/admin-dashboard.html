@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+    <head th:insert="/admin/admin-fragments :: admin_head">
+        <title>Dashboard</title>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <!-- this is where side bar is -->
+        <div th:insert="/admin/admin-fragments :: sidebar" />
+
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div th:insert="/admin/admin-fragments :: navbar" />
+
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4" style="margin-top: 35px;">
+                        <h3 class="mb-0"
+                            style="font-weight: bold;font-family: 'Anek Kannada', sans-serif;font-size: 30px;"><img
+                                src="../assets/img/admin_dashboard_logo/clipboard-image-7.png"
+                                style="width: 38px;margin-right: 16px;filter: hue-rotate(0deg);">Dashboard</h3><a
+                            class="btn btn-primary btn-sm shadow d-none d-sm-inline-block" role="button" href="#"
+                            style="width: 153.016px;height: 39px;padding-top: 9px;"><i
+                                class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a>
+                    </div>
+                    <div class="row" style="margin-top: 31px;">
+                        <div class="col-md-6 col-xl-4 col-xxl-3 mb-4"><a class="text-decoration-none"
+                                href="student-table.html">
+                                <div class="card shadow border-start-primary py-2" data-bss-hover-animate="pulse">
+                                    <div class="card-body">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col me-2">
+                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                                    <p
+                                                        style="font-size: 18.2px;font-weight: bold;font-family: 'Anek Bangla', sans-serif;border-color: #4e73df;">
+                                                        Total Student</p>
+                                                </div>
+                                                <div class="text-dark fw-bold h5 mb-0"><span
+                                                        style="color: #3d3d3d;font-size: 22px;">[[${studentCount}]]</span></div>
+                                            </div>
+                                            <div class="col-auto"><img
+                                                    src="../assets/img/admin_dashboard_logo/students_logo.png"
+                                                    style="width: 57px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a></div>
+                        <div class="col-md-6 col-xl-4 col-xxl-3 mb-4"><a class="text-decoration-none"
+                                href="teacher-table.html">
+                                <div class="card shadow border-start-primary py-2" data-bss-hover-animate="pulse">
+                                    <div class="card-body">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col me-2">
+                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                                    <p
+                                                        style="font-size: 18.2px;font-weight: bold;font-family: 'Anek Bangla', sans-serif;border-color: #4e73df;">
+                                                        Total Teacher</p>
+                                                </div>
+                                                <div class="text-dark fw-bold h5 mb-0"><span
+                                                        style="color: #3d3d3d;font-size: 22px;">[[${teacherCount}]]</span></div>
+                                            </div>
+                                            <div class="col-auto"><img
+                                                    src="../assets/img/admin_dashboard_logo/teachers_logo.png"
+                                                    style="width: 57px;filter: brightness(88%);"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a></div>
+                        <div class="col-md-6 col-xl-4 col-xxl-3 mb-4"><a class="text-decoration-none"
+                                href="batch-table.html">
+                                <div class="card shadow border-start-primary py-2" data-bss-hover-animate="pulse">
+                                    <div class="card-body">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col me-2">
+                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                                    <p
+                                                        style="font-size: 18.2px;font-weight: bold;font-family: 'Anek Bangla', sans-serif;color: #edba39;">
+                                                        Total Batch</p>
+                                                </div>
+                                                <div class="text-dark fw-bold h5 mb-0"><span
+                                                        style="color: #3d3d3d;font-size: 22px;">[[${batchCount}]]</span></div>
+                                            </div>
+                                            <div class="col-auto"><img
+                                                    src="../assets/img/admin_dashboard_logo/batches_logo.png"
+                                                    style="width: 57px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a></div>
+                        <div class="col-md-6 col-xl-4 col-xxl-3 mb-4"><a class="text-decoration-none"
+                                href="course-table.html">
+                                <div class="card shadow border-start-primary py-2" data-bss-hover-animate="pulse">
+                                    <div class="card-body">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col me-2">
+                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                                    <p
+                                                        style="font-size: 18.2px;font-weight: bold;font-family: 'Anek Bangla', sans-serif;border-color: #4e73df;">
+                                                        Total Course</p>
+                                                </div>
+                                                <div class="text-dark fw-bold h5 mb-0"><span
+                                                        style="color: #3d3d3d;font-size: 22px;">[[${courseCount}]]</span></div>
+                                            </div>
+                                            <div class="col-auto"><img
+                                                    src="../assets/img/admin_dashboard_logo/clipboard-image-8.png"
+                                                    style="width: 57px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-7 col-xl-8">
+                            <canvas id="chartOne"></canvas>
+                        </div>
+                        <div class="col-lg-5 col-xl-4">
+                            <canvas id="chartTwo"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="../assets/js/theme.js"></script>
+    <!-- chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+    <script src="../assets/js/adminDashboard.js"></script>
+</body>
+
+</html>

@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FileService {
-    String courseFilePath = "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\AILP-V\\src\\main\\resources\\static\\courses\\";
+
+    String courseFilePath = "S:\\ACESTUFF\\AILP-V\\src\\main\\resources\\static\\assets\\courses\\";
+
 
     public void createFolderForCourse(String courseName) {
         File theDir = new File(courseFilePath + courseName);
@@ -49,6 +52,10 @@ public class FileService {
     public boolean deleteFile(String fileName) throws IOException {
         boolean isDeleted = new File(fileName).delete();
         return isDeleted;
+    }
+
+    public static String  generateFileName(String fileExtension) {
+        return "".join("", UUID.randomUUID().toString().split("-")) + "." + fileExtension;
     }
 
 }

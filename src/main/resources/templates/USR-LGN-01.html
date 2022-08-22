@@ -59,15 +59,15 @@
                                         </p>
                                     </div>
                                     <!-- form start -->
-                                    <form th:action="@{/auth/login}" th:object="${user}" method="post" class="user"
+                                    <form th:action="@{/login}"  method="post" class="user"
                                         style="margin-top: -8px;">
                                         <div class="mb-3">
-                                            <input th:field="*{id}"
+                                            <input 
                                                 class="border rounded border-1 border-secondary shadow-sm form-control form-control-user"
-                                                type="text" placeholder="Enter Username or ID" required>
+                                                type="text" name="username" placeholder="Enter Username or ID" required>
                                         </div>
                                         <div class="mb-3">
-                                            <input th:field="*{password}"
+                                            <input  name="password"
                                                 class="border rounded border-1 border-secondary shadow-sm form-control form-control-user"
                                                 type="password" placeholder="Enter Password" required>
                                         </div>
@@ -75,7 +75,7 @@
                                             <div class="custom-control custom-checkbox small">
                                                 <div class="form-check"><input
                                                         class="form-check-input custom-control-input" type="checkbox"
-                                                        id="formCheck-1" style="font-size: 15px;">
+                                                        id="formCheck-1" name="remember-me" style="font-size: 15px;">
                                                     <label class="form-check-label custom-control-label"
                                                         for="formCheck-1" style="color: rgb(82,82,82);font-size: 15px;">
                                                         Remember Me

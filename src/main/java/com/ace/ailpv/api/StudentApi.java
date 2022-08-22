@@ -1,6 +1,7 @@
 package com.ace.ailpv.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,9 @@ import com.ace.ailpv.service.UserService;
 public class StudentApi {
 
     @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
     private BatchService batchService;
 
     @Autowired
@@ -29,9 +33,10 @@ public class StudentApi {
         Batch batch = batchService.getBatchById(batchId);
         for (User student : studentList) {
             student.getBatchList().add(batch);
-            student.setPassword("ailp123");
-            student.setRole("student");
+            student.setPassword(passwordEncoder.encode("ailp123"));
+            student.setRole("ROLE_STUDENT");
             student.setIsMute(false);
+            student.setProfile_pic("profile.png");
             userService.addUser(student);
         }
     }

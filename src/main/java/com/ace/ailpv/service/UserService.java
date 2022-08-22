@@ -20,6 +20,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public List<User> countUser(){
+        return userRepository.findAll();
+    }
+
     public Boolean checkLogin(String id, String password) {
         return userRepository.existsByIdAndPassword(id, password);
     }
@@ -104,6 +108,18 @@ public class UserService {
                 .filter(batch -> batch.getBatchCourse().getId() == courseId)
                 .collect(Collectors.toSet());
         return teacherFilteredBatchList;
+    }
+
+    public void updateByUserName(String name, String uid) {
+        userRepository.updateNameById(name, uid);
+    }
+
+    public void updatePictureByUserId(String pictureName, String uid) {
+        userRepository.updatePictureById(pictureName, uid);
+    }
+
+    public void updatePasswordByUserId(String newPassword, String uid) {
+        userRepository.updatePasswordById(newPassword, uid);
     }
 
 }

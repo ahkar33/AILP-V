@@ -30,18 +30,24 @@
                     <div class="nav-item dropdown no-arrow">
                         <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
                             <span class="d-lg-inline d-none fw-bold me-2 small text-black-50 text-gray-600">
-                                [[${session?.userInfo?.name}]]
+                                [[${session?.name}]]
                             </span>
-                            <img class="border rounded-circle img-profile" src="/assets/img/zzs_profile.jpg"
+                            <img class="border rounded-circle img-profile" th:src="@{${'/profile_pics/' + session?.profile_pic}}"
                                 style="width: 35px; height: 35px;" />
                         </a>
                         <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                            <a class="dropdown-item fs-6 text-dark" href="/student/student-profile.html">
+                            <a class="dropdown-item fs-6 text-dark" href="/user/profile">
                                 <i class="fa-fw fa-sm fa-user fas me-2 text-dark"></i>
                                 &nbsp;Profile
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item fs-6 text-dark" onclick="handleLogout()">
+
+                            
+
+                            <form id="logout" th:action="@{/logout}" method="post">
+                                
+                            </form>
+                            <a class="dropdown-item fs-6 text-dark" href="javascript:document.forms.logout.submit()">
                                 <i class="fa-fw fa-sign-out-alt fa-sm fas me-2 text-dark"></i>
                                 &nbsp;Logout
                             </a>
@@ -60,7 +66,7 @@
             <hr class="sidebar-divider my-0" />
             <ul class="navbar-nav text-light mt-4" id="accordionSidebar">
                 <li class="nav-item">
-                    <a class="d-flex d-md-flex nav-link" data-bss-hover-animate="pulse" href="admin-dashboard.html"
+                    <a class="d-flex d-md-flex nav-link" data-bss-hover-animate="pulse" th:href="@{/admin/dashboard}"
                         style="font-size: 15.6px;">
                         <div
                             class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
@@ -165,15 +171,13 @@
         <script src="https://code.jquery.com/jquery-3.6.0.js"
             integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <!-- sweet alert -->
-        <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-        <script src="/assets/js/sweetAlert.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- datatable-js -->
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
         <!-- axios -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <!-- vue3 -->
-        <!-- <script src="https://unpkg.com/vue@3"></script> -->
-        <script src="/assets/js/vue.js"></script>
+        <script src="https://unpkg.com/vue@3"></script>
         <script>
             const handleLogout = () => {
                 console.log("hello")
