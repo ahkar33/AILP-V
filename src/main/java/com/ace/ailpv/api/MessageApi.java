@@ -47,4 +47,9 @@ public class MessageApi {
         return messageService.getMessageListByBatchId(batchId);
     }
 
+    @GetMapping("/lastInsertedId")
+    public Long getLastInsertedId() {
+        return messageService.getLastInsertedId();
+    }
+
 }

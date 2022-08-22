@@ -22,4 +22,8 @@ public class MessageService {
         return messageRepository.findByMessageBatch_IdOrderByIdAsc(id);
     }
 
+    public Long getLastInsertedId() {
+        return messageRepository.findLastId();
+    }
+
 }
