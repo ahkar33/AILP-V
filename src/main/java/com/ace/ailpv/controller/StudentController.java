@@ -45,7 +45,8 @@ public class StudentController {
 
     @GetMapping("/getResources")
     public String getResources(ModelMap model, HttpSession session) {
-        User studentInfo = (User) session.getAttribute("userInfo");
+        String studentId =  (String) session.getAttribute("uid");
+        User studentInfo = usersService.getUserById(studentId);
         Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
         List<BatchHasResource> batchHasResourceList = batchHasResourceService
                 .getAllBatchHasResourcesByBatchId(studentBatchId);

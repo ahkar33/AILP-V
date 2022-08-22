@@ -79,7 +79,8 @@ public class TeacherController {
 
     @GetMapping("/teacher-public-chat")
     public String setupTeacherPublicChat(HttpSession session, ModelMap model) {
-        User teacherInfo = (User) session.getAttribute("userInfo");
+        String teacherId = (String) session.getAttribute("uid");
+        User teacherInfo = userService.getUserById(teacherId);
         List<Batch> batchList = userService.getTeacherBatchListById(teacherInfo.getId());
         Batch firstBatch = batchList.get(0);
         model.addAttribute("userId", teacherInfo.getId());

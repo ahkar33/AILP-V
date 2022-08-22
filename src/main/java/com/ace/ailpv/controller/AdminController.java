@@ -88,12 +88,19 @@ public class AdminController {
     public String editCourse(@RequestParam("id") String id, @RequestParam("name") String name,
             @RequestParam("fee") String fee, @RequestParam("desc") String description, RedirectAttributes redirectAttrs)
             throws IllegalStateException, IOException {
+
+        String oldCourseName = courseService.getCourseById(Long.parseLong(id)).getName();
+        
         Course updateCourse = new Course();
         updateCourse.setId(Long.parseLong(id));
         updateCourse.setName(name);
         updateCourse.setFee(Double.parseDouble(fee));
         updateCourse.setDescription(description);
         courseService.updateCourse(updateCourse);
+
+        fileService.renameDir(oldCourseName, updateCourse.getName());
+
+
         return "redirect:/admin/course-table";
     }
 
@@ -104,6 +111,7 @@ public class AdminController {
         model.addAttribute("videoList", videoList);
         model.addAttribute("course", course);
         return "/admin/ADM-VTB-14";
+        
     }
 
     @GetMapping("/editResource/{id}")
@@ -336,7 +344,7 @@ public class AdminController {
     public String setupRegister() {
         return "/admin/register.html";
     }
-
+    
     @PostMapping("/register")
     public String setupRegister(@RequestParam("id") String id, @RequestParam("name") String name,
             @RequestParam("password") String password) {

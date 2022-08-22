@@ -32,7 +32,8 @@
                             <span class="d-lg-inline d-none fw-bold me-2 small text-black-50 text-gray-600">
                                 [[${session?.name}]]
                             </span>
-                            <img class="border rounded-circle img-profile" th:src="@{${'/profile_pics/' + session?.profile_pic} }"
+                            <img class="border rounded-circle img-profile"
+                                th:src="@{${'/profile_pics/' + session?.profile_pic} }"
                                 style="width: 35px; height: 35px;" />
                         </a>
                         <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
@@ -41,16 +42,13 @@
                                 &nbsp;Profile
                             </a>
                             <div class="dropdown-divider"></div>
-
-                            
-
                             <form id="logout" th:action="@{/logout}" method="post">
-                                
+
                             </form>
-                            <a class="dropdown-item fs-6 text-dark" href="javascript:document.forms.logout.submit()">
+                            <button class="dropdown-item fs-6 text-dark" onclick="handleLogout()">
                                 <i class="fa-fw fa-sign-out-alt fa-sm fas me-2 text-dark"></i>
                                 &nbsp;Logout
-                            </a>
+                                </butoon>
                         </div>
                     </div>
                 </li>
@@ -190,7 +188,7 @@
                     confirmButtonText: 'Logout'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location = "http://localhost:8080/auth/logout";
+                        window.location = "http://localhost:8080/logout";
                     }
                 })
             }
