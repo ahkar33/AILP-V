@@ -336,7 +336,7 @@ public class AdminController {
     public String setupRegister() {
         return "/admin/register.html";
     }
-
+    
     @PostMapping("/register")
     public String setupRegister(@RequestParam("id") String id, @RequestParam("name") String name,
             @RequestParam("password") String password) {

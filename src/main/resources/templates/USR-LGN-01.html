@@ -39,9 +39,9 @@
                                         <img src="/assets/img/logo_blue.png"
                                             style="width: 229px;margin-bottom: 33px;margin-top: 12px;">
                                     </div>
-                                    <span th:if="${message != null}">
+                                    <span th:if="${param.error}">
                                         <div class="alert alert-danger">
-                                            [[${message}]]
+                                            Incorrect ID or Password
                                         </div>
                                     </span>
                                     <div class="text-start" style="margin-top: -12px;">
@@ -59,15 +59,14 @@
                                         </p>
                                     </div>
                                     <!-- form start -->
-                                    <form th:action="@{/login}"  method="post" class="user"
-                                        style="margin-top: -8px;">
+                                    <form th:action="@{/login}" method="post" class="user" style="margin-top: -8px;">
                                         <div class="mb-3">
-                                            <input 
+                                            <input
                                                 class="border rounded border-1 border-secondary shadow-sm form-control form-control-user"
                                                 type="text" name="username" placeholder="Enter Username or ID" required>
                                         </div>
                                         <div class="mb-3">
-                                            <input  name="password"
+                                            <input name="password"
                                                 class="border rounded border-1 border-secondary shadow-sm form-control form-control-user"
                                                 type="password" placeholder="Enter Password" required>
                                         </div>
