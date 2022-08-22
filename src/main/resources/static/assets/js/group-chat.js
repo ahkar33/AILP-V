@@ -1,6 +1,7 @@
 const app = Vue.createApp({
     data() {
         return {
+            lastId: null,
             audio: new Audio('/assets/mp3/noti.mp3'),
             userList: [],
             isMute: null,
@@ -62,6 +63,17 @@ const app = Vue.createApp({
                     .catch(error => console.log(error));
             }
         },
+        getLastInsertedId() {
+            axios
+                .get('http://localhost:8080/api/message/lastInsertedId')
+                .then(res => {
+                    if (res.data > this.lastId) {
+                        this.getAllMessages();
+                    }
+                    this.lastId = res.data;
+                })
+                .catch(error => console.log(error));
+        },
         getUserList() {
             axios
                 .get('http://localhost:8080/api/user/getUserList')
@@ -115,12 +127,11 @@ const app = Vue.createApp({
         this.batchId = document.getElementById('batchId').value;
         this.userId = document.getElementById('userId').value;
         this.userName = document.getElementById('userName').value;
+        this.getAllMessages();
         setInterval(() => {
             this.getUserList();
+            this.getLastInsertedId();
         }, 100);
-        setInterval(() => {
-            this.getAllMessages();
-        }, 1000);
         $("#inputMessage").emojioneArea({
             events: {
                 keyup: function (editor, event) {
