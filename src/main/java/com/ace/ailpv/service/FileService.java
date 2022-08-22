@@ -3,6 +3,9 @@ package com.ace.ailpv.service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -14,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FileService {
 
-    String courseFilePath = "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\AILP-V\\src\\main\\resources\\static\\courses\\";
+    String courseFilePath = "S:\\ACESTUFF\\AILP-V\\src\\main\\resources\\static\\courses\\";
 
 
     public void createFolderForCourse(String courseName) {
@@ -52,6 +55,11 @@ public class FileService {
     public boolean deleteFile(String fileName) throws IOException {
         boolean isDeleted = new File(fileName).delete();
         return isDeleted;
+    }
+
+    public void renameDir(String oldDir, String newDir) throws IOException {
+        Path source = Paths.get(courseFilePath, oldDir);
+        Files.move(source, source.resolveSibling(newDir));
     }
 
     public String generateFileName(String fileExtension) {
