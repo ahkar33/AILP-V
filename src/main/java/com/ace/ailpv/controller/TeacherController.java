@@ -93,12 +93,12 @@ public class TeacherController {
 
     @GetMapping("/chatWithBatch/{batchId}/{batchName}")
     public String setupChatWithBatch(
-        @PathVariable("batchId") Long batchId,
-        @PathVariable("batchName") String batchName,
-        HttpSession session,
-        ModelMap model
-        ) {
-        User teacherInfo = (User) session.getAttribute("userInfo");
+            @PathVariable("batchId") Long batchId,
+            @PathVariable("batchName") String batchName,
+            HttpSession session,
+            ModelMap model) {
+        String teacherId = (String) session.getAttribute("uid");
+        User teacherInfo = userService.getUserById(teacherId);
         model.addAttribute("userId", teacherInfo.getId());
         model.addAttribute("username", teacherInfo.getName());
         model.addAttribute("batchId", batchId);
