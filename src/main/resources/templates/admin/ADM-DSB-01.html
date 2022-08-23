@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Dashboard - Brand</title>
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Bangla&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Kannada&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Average+Sans&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inria+Sans&amp;display=swap" />
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="../assets/fonts/ionicons.min.css" />
+    <link rel="stylesheet" href="../assets/fonts/material-icons.min.css" />
+    <link rel="stylesheet" href="../assets/fonts/fontawesome5-overrides.min.css" />
+    <link rel="stylesheet" href="../assets/css/Dark-footer-with-social-media-icons.css" />
+    <link rel="stylesheet" href="../assets/css/dh-header-cover-image-button.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+
+        <div th:insert="/admin/admin-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div th:insert="/admin/admin-fragments :: navbar" />
+                <div class="container-fluid text-primary">
+                    <div class="mb-5 mt-4 row">
+                        <div class="col-12 col-lg-8 col-md-12 col-sm-12 col-xl-8">
+                            <div class="align-items-center d-inline-flex flex-row"> <i
+                                    class="d-inline-flex fa-2x fa-chart-bar fas fs-3 mb-2 me-2 text-primary"></i>
+                                <h3 class="d-inline-flex fs-3 mb-2 text-dark"
+                                    style="font-weight: bold;font-family: 'Roboto', sans-serif;font-size: 30px;">
+                                    &nbsp;Admin Dashboard
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-lg-end text-start text-xl-end">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-primary dropdown-toggle fs-6"
+                                    data-bs-toggle="dropdown" aria-expanded="false">Generate Report</button>
+                                <ul class="dropdown-menu" style="margin: 0px;">
+                                    <li>
+                                        <a class="dropdown-item fs-6" href="#">.pdf file</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item fs-6" href="#">.xlsx file</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 31px;">
+                        <div class="col-md-6 col-xl-4 col-xxl-3 mb-4">
+                            <a class="text-decoration-none" th:href="@{/admin/student-table}">
+                                <div class="card shadow border-start-primary py-2" data-bss-hover-animate="pulse">
+                                    <div class="card-body">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col me-2">
+                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                                    <p style="font-size: 18.2px;font-weight: bold;font-family: 'Anek Bangla', sans-serif;border-color: #4e73df;"
+                                                        class="text-danger">
+                                                        Total Student
+                                                    </p>
+                                                </div>
+                                                <div class="text-dark fw-bold h5 mb-0">
+                                                    <span style="color: #3d3d3d;font-size: 22px;">
+                                                        [[${studentCount}]]
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto"><i class="fa-2x fa-users fas text-danger"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-6 col-xl-4 col-xxl-3 mb-4">
+                            <a class="text-decoration-none" th:href="@{/admin/teacher-table}">
+                                <div class="card shadow border-start-primary py-2" data-bss-hover-animate="pulse">
+                                    <div class="card-body">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col me-2">
+                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                                    <p style="font-size: 18.2px;font-weight: bold;font-family: 'Anek Bangla', sans-serif;border-color: #4e73df;"
+                                                        class="text-warning">
+                                                        Total Teacher
+                                                    </p>
+                                                </div>
+                                                <div class="text-dark fw-bold h5 mb-0">
+                                                    <span style="color: #3d3d3d;font-size: 22px;">
+                                                        [[${teacherCount}]]
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fa-2x fa-chalkboard-teacher fas text-warning"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-6 col-xl-4 col-xxl-3 mb-4">
+                            <a class="text-decoration-none" th:href="@{/admin/batch-table}">
+                                <div class="card shadow border-start-primary py-2" data-bss-hover-animate="pulse">
+                                    <div class="card-body">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col me-2">
+                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                                    <p style="font-size: 18.2px;font-weight: bold;font-family: 'Anek Bangla', sans-serif;color: #edba39;"
+                                                        class="text-primary">
+                                                        Total Batch
+                                                    </p>
+                                                </div>
+                                                <div class="text-dark fw-bold h5 mb-0">
+                                                    <span style="color: #3d3d3d;font-size: 22px;">
+                                                        [[${batchCount}]]
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fa fa-2x fa-paste fa-photo-video fas text-primary"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-6 col-xl-4 col-xxl-3 mb-4">
+                            <a class="text-decoration-none" th:href="@{/admin/course-table}">
+                                <div class="card shadow border-start-primary py-2" data-bss-hover-animate="pulse">
+                                    <div class="card-body">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col me-2">
+                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                                    <p style="font-size: 18.2px;font-weight: bold;font-family: 'Anek Bangla', sans-serif;border-color: #4e73df;"
+                                                        class="text-info">
+                                                        Total Course
+                                                    </p>
+                                                </div>
+                                                <div class="text-dark fw-bold h5 mb-0">
+                                                    <span style="color: #3d3d3d;font-size: 22px;">
+                                                        [[${courseCount}]]
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fa-2x fa-photo-video fas text-info"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-7 col-xl-8">
+                            <canvas id="chartOne"></canvas>
+                        </div>
+                        <div class="col-lg-5 col-xl-4">
+                            <canvas id="chartTwo"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <div th:insert="/admin/admin-fragments :: footer" />
+    <!-- chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+    <script src="/assets/js/adminDashboard.js"></script>
+</body>
+
+</html>

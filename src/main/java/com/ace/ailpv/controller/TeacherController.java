@@ -34,14 +34,16 @@ public class TeacherController {
 
     @GetMapping("/student-table")
     public String setupStudentTable(ModelMap model, HttpSession session) {
-        User teacher = (User) session.getAttribute("userInfo");
-        model.addAttribute("studentList", userService.getStudentListByTeacherId(teacher.getId()));
+        String teacherId = (String) session.getAttribute("uid");
+        User teacherInfo = userService.getUserById(teacherId);
+        model.addAttribute("studentList", userService.getStudentListByTeacherId(teacherInfo.getId()));
         return "/teacher/TCH-STB-11";
     }
 
     @GetMapping("/uploadResource")
     public String setupUploadResource(ModelMap model, HttpSession session) {
-        User teacherInfo = (User) session.getAttribute("userInfo");
+        String teacherId = (String) session.getAttribute("uid");
+        User teacherInfo = userService.getUserById(teacherId);
         Set<Course> teacherCourseList = userService.getTeacherCourseListById(teacherInfo.getId());
         model.addAttribute("teacherCourseList", teacherCourseList);
         return "/teacher/TCH-ULR-02";
@@ -53,7 +55,8 @@ public class TeacherController {
             @PathVariable("courseId") Long courseId,
             @PathVariable("resourceName") String resourceName,
             ModelMap model, HttpSession session) {
-        User teacherInfo = (User) session.getAttribute("userInfo");
+        String teacherId = (String) session.getAttribute("uid");
+        User teacherInfo = userService.getUserById(teacherId);
         Set<Batch> teacherBathList = userService.getTeacherBatchListByTeacherIdAndCourseId(teacherInfo.getId(),
                 courseId);
         model.addAttribute("teacherBatchList", teacherBathList);
@@ -73,7 +76,7 @@ public class TeacherController {
             batchHasResourceService.deleteBatchHasResourceById(resBatchHasResource.getId());
         }
         batchHasResourceService.addBatchHasResource(batchHasResource);
-        redirectAttrs.addFlashAttribute("msg", "Successfully Uploaded");
+        redirectAttrs.addFlashAttribute("successMsg", true);
         return "redirect:/teacher/uploadResource";
     }
 

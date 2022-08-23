@@ -63,7 +63,7 @@ public class AdminController {
         model.addAttribute("teacherCount", userService.getAllTeachers().size());
         model.addAttribute("batchCount", batchService.getAllBatches().size());
         model.addAttribute("courseCount", courseService.getAllCourses().size());
-        return "/admin/admin-dashboard";
+        return "/admin/ADM-DSB-01";
     }
 
     @GetMapping("/course-table")
@@ -77,7 +77,7 @@ public class AdminController {
     public String addCourse(@ModelAttribute("course") Course course, RedirectAttributes redirectAttrs)
             throws IllegalStateException, IOException {
         if (courseService.checkCourseName(course.getName())) {
-            redirectAttrs.addFlashAttribute("msg", "course name already exists");
+            redirectAttrs.addFlashAttribute("errorMsg", true);
             return "redirect:/admin/course-table";
         }
         courseService.addCourse(course);
