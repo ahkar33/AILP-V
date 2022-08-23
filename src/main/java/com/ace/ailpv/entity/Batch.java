@@ -1,8 +1,8 @@
 package com.ace.ailpv.entity;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -50,11 +50,11 @@ public class Batch {
 
     @ManyToMany(cascade = { CascadeType.PERSIST }, mappedBy = "batchList")
     @JsonIgnore
-    Set<User> userList = new HashSet<>();
+    List<User> userList = new ArrayList<>();
 
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "batch")
     @JsonIgnore
-    private Set<BatchHasResource> batchHasResourceList = new HashSet<>();
+    private List<BatchHasResource> batchHasResourceList = new ArrayList<>();
 
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean isActive;

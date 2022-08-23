@@ -1,9 +1,7 @@
 package com.ace.ailpv.entity;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -43,7 +41,7 @@ public class User {
     @ManyToMany
     @JsonIgnore
     @JoinTable(name = "batch_has_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "batch_id"))
-    List<Batch> batchList = new ArrayList<>(); 
+    List<Batch> batchList = new ArrayList<>();
 
     @Transient
     private String batchId;
@@ -53,6 +51,10 @@ public class User {
 
     @OneToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "messageUser")
     @JsonIgnore
-    private Set<Message> messageList = new HashSet<>();
+    private List<Message> messageList = new ArrayList<>();
+
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "user")
+    @JsonIgnore
+    private List<UserSchedule> userScheduleList = new ArrayList<>();
 
 }
