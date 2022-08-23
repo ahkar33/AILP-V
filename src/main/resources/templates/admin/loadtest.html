@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/assets/css/loading.css">
+</head>
+
+<body>
+    <div class="loader-container">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="main-content">
+        <h1>Hello World!</h1>
+        <p>
+            This is a demo Project to show how to add animated loading with Vanilla
+            JavaScript.
+        </p>
+        <div class="buttons">
+            <button class="btn"><a href="#">Read Article</a></button>
+            <button class="btn get-quote">Generate Quote</button>
+        </div>
+        <div class="quote-section">
+            <blockquote class="quote">
+                If you do not express your own original ideas, if you do not listen to
+                your own being, you will have betrayed yourself.
+            </blockquote>
+            <span class="author">- Rollo May</span>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('load', () => {
+            loaderContainer.classList.add('loader-container-hidden');
+        });
+
+        window.addEventListener('load', () => {
+            loaderContainer.parentElement.removeChild(loaderContainer);
+        });
+        const getQuoteBtn = document.querySelector('.get-quote');
+        const displayLoading = () => {
+            loaderContainer.style.display = 'block';
+        };
+
+        const hideLoading = () => {
+            loaderContainer.style.display = 'none';
+        };
+        getQuoteBtn.addEventListener('click', () => {
+            displayLoading();
+            fetch('https://api.quotable.io/random')
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    hideLoading();
+                    const quote = document.querySelector('.quote');
+                    const author = document.querySelector('.author');
+                    quote.innerHTML = data.content;
+                    author.innerHTML = data.author;
+                });
+        });
+
+
+    </script>
+
+</body>
+
+</html>

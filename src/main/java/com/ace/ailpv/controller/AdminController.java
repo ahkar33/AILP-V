@@ -55,7 +55,7 @@ public class AdminController {
     @Autowired
     private ResourceService resourceService;
 
-    String path = "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\AILP-V\\src\\main\\resources\\static\\courses\\";
+    String path = "D:\\ACE(OJT)\\AILP(V)\\AILP(V)\\AILP-V\\src\\main\\resources\\static\\courses\\";
 
     @GetMapping("/dashboard")
     public String setupDashborad(ModelMap model) {
@@ -90,7 +90,7 @@ public class AdminController {
             throws IllegalStateException, IOException {
 
         String oldCourseName = courseService.getCourseById(Long.parseLong(id)).getName();
-        
+
         Course updateCourse = new Course();
         updateCourse.setId(Long.parseLong(id));
         updateCourse.setName(name);
@@ -99,7 +99,6 @@ public class AdminController {
         courseService.updateCourse(updateCourse);
 
         fileService.renameDir(oldCourseName, updateCourse.getName());
-
 
         return "redirect:/admin/course-table";
     }
@@ -111,7 +110,7 @@ public class AdminController {
         model.addAttribute("videoList", videoList);
         model.addAttribute("course", course);
         return "/admin/ADM-VTB-14";
-        
+
     }
 
     @GetMapping("/editResource/{id}")
@@ -342,21 +341,34 @@ public class AdminController {
     // to delete after admin account created
     @GetMapping("/register")
     public String setupRegister() {
-        return "/admin/register.html";
+        return "/admin/admin-register.html";
     }
-    
+
     @PostMapping("/register")
     public String setupRegister(@RequestParam("id") String id, @RequestParam("name") String name,
-            @RequestParam("password") String password) {
-        User user = new User();
-        user.setId(id);
-        user.setName(name);
-        user.setPassword(passwordEncoder.encode(password));
-        user.setIsMute(false);
-        user.setRole("ROLE_ADMIN");
-        user.setProfile_pic("profile.png");
-        userService.addUser(user);
-        return "redirect:/auth/login";
+            @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword,
+            @RequestParam("pin") String pin,RedirectAttributes redirectAttr) {
+        if (password.equals(confirmPassword)) {
+
+            if (pin.equals("1337")) {
+                System.out.println("equal pin");
+                User user = new User();
+                user.setId(id);
+                user.setName(name);
+                user.setPassword(passwordEncoder.encode(password));
+                user.setIsMute(false);
+                user.setRole("ROLE_ADMIN");
+                user.setProfile_pic("profile.png");
+                userService.addUser(user);
+                return "redirect:/auth/login";
+            } else {
+                redirectAttr.addFlashAttribute("errorMsg","Invalid Pin!");
+            }
+        } else {
+            redirectAttr.addFlashAttribute("errorMsg","Unmatch Password!");
+        }
+
+        return "redirect:/admin/register";
     }
 
 }
