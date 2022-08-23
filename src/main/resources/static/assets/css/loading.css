@@ -28,10 +28,4 @@
     100% {
         transform: rotate(360deg);
     }
-
-    
-}
-
-.loader-container-hidden {
-    display: none;
 }
