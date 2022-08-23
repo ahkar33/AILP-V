@@ -1,7 +1,7 @@
 package com.ace.ailpv.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -37,7 +37,7 @@ public class Exam {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "exam_id", referencedColumnName = "id")
-    private Set<Question> questionList = new HashSet<>();
+    private List<Question> questionList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
