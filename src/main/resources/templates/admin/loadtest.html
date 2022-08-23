@@ -10,29 +10,67 @@
 </head>
 
 <body>
-    <div class="loader-container">
-        <div class="spinner"></div>
+
+    <div id="app">
+
+        <div v-show="isLoading" class="loader-container">
+            <div class="spinner"></div>
+        </div>
+
+        <div class="main-content">
+            <h1>Hello World!</h1>
+            <p>
+                This is a demo Project to show how to add animated loading with Vanilla
+                JavaScript.
+            </p>
+            <div class="buttons">
+                <button @click="generateQuote()" class="btn get-quote">Generate Quote</button>
+            </div>
+            <div>
+                <blockquote>
+                    {{ content }} 
+                </blockquote>
+                <span v-show="author"> - {{  author }} </span>
+            </div>
+        </div>
     </div>
 
-    <div class="main-content">
-        <h1>Hello World!</h1>
-        <p>
-            This is a demo Project to show how to add animated loading with Vanilla
-            JavaScript.
-        </p>
-        <div class="buttons">
-            <button class="btn"><a href="#">Read Article</a></button>
-            <button class="btn get-quote">Generate Quote</button>
-        </div>
-        <div class="quote-section">
-            <blockquote class="quote">
-                If you do not express your own original ideas, if you do not listen to
-                your own being, you will have betrayed yourself.
-            </blockquote>
-            <span class="author">- Rollo May</span>
-        </div>
-    </div>
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- vue3 -->
+    <script src="https://unpkg.com/vue@3"></script>
     <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    content: '',
+                    author: '',
+                    isLoading: false
+                }
+            },
+            methods: {
+                generateQuote() {
+                    this.isLoading = true;
+                    axios
+                        .get('https://api.quotable.io/random')
+                        .then(res => {
+                           this.content = res.data.content;
+                           this.author = res.data.author; 
+                        }) 
+                        .then(() => this.isLoading = false)
+                        .catch(error => console.log(error));
+                }
+            },
+            mounted() {
+            },
+        });
+
+        app.mount('#app');
+    </script>
+
+
+    <!-- <script>
         window.addEventListener('load', () => {
             loaderContainer.classList.add('loader-container-hidden');
         });
@@ -64,7 +102,7 @@
         });
 
 
-    </script>
+    </script> -->
 
 </body>
 
