@@ -55,8 +55,12 @@
                             <tbody>
                                 <tr v-for="(inputField, index) in inputFields" :key="index">
                                     <td>
-                                        <input v-model="inputField.id" class="form-control" type="text"
+                                        <input v-model="inputField.id" class="form-control"
+                                            :class="{'border-danger border-2': inputField.isExist }" type="text"
                                             placeholder="id" />
+                                        <p v-show="inputField.isExist" class="text-danger">
+                                            Id Already Exists
+                                        </p>
                                     </td>
                                     <td>
                                         <input v-model="inputField.name" class="form-control" type="text"
@@ -96,7 +100,7 @@
                     isEmpty: null,
                     batch: 'Choose One Batch',
                     inputFields: [
-                        { id: '', name: '', batch: '' },
+                        { id: '', name: '', batch: '', isExist: false },
                     ],
                 }
             },
@@ -187,6 +191,22 @@
                     })
                     .catch(error => console.log(error));
             },
+            watch: {
+                inputFields: {
+                    handler: function (newValue, oldValue) {
+                        newValue.forEach((user) => {
+                            setTimeout(() => {
+                                user.isExist = false;
+                            }, 10);
+                            if (this.userIdList.includes(user.id)) {
+                                let index = this.inputFields.indexOf(user);
+                                this.inputFields[index].isExist = true;
+                            }
+                        });
+                    },
+                    deep: true
+                }
+            }
         });
 
         app.mount('#teacher-grid');
