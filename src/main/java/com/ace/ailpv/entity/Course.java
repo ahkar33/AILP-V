@@ -1,7 +1,7 @@
 package com.ace.ailpv.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
-
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,12 +40,12 @@ public class Course {
     private MultipartFile resources[];
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "batchCourse")
-    Set<Batch> batchList = new HashSet<>();
+    List<Batch> batchList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "videoCourse")
-    Set<Video> videoList = new HashSet<>();
+    List<Video> videoList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "resourceCourse")
-    Set<Resource> resourceList = new HashSet<>();
+    List<Resource> resourceList = new ArrayList<>();
 
 }

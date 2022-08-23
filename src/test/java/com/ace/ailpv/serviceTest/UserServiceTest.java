@@ -7,10 +7,8 @@ import static org.mockito.Mockito.verify;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -167,7 +165,7 @@ public class UserServiceTest {
 
     private Batch getBatchInfo(){
 
-        Set<User> userList = new HashSet<>();
+        List<User> userList = new ArrayList<>();
         User user1 = getUserInfo();
         User user2 = getUserInfo();
         userList.add(user1);
@@ -193,11 +191,11 @@ public class UserServiceTest {
         course.setName("courseName");
         course.setFee(1000.0);
         course.setDescription("course description");
-        Set<Batch> batchList = new HashSet<>();
+        List<Batch> batchList = new ArrayList<>();
         course.setBatchList(batchList);
-        Set<Video> videoList = new HashSet<>();
+        List<Video> videoList = new ArrayList<>();
         course.setVideoList(videoList);
-        Set<Resource> resourceList = new HashSet<>();
+        List<Resource> resourceList = new ArrayList<>();
         course.setResourceList(resourceList);
 
         return course;

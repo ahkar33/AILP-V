@@ -1,7 +1,6 @@
 package com.ace.ailpv.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -44,7 +43,7 @@ public class TeacherController {
     public String setupUploadResource(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
         User teacherInfo = userService.getUserById(teacherId);
-        Set<Course> teacherCourseList = userService.getTeacherCourseListById(teacherInfo.getId());
+        List<Course> teacherCourseList = userService.getTeacherCourseListById(teacherInfo.getId());
         model.addAttribute("teacherCourseList", teacherCourseList);
         return "/teacher/TCH-ULR-02";
     }
@@ -57,7 +56,7 @@ public class TeacherController {
             ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
         User teacherInfo = userService.getUserById(teacherId);
-        Set<Batch> teacherBathList = userService.getTeacherBatchListByTeacherIdAndCourseId(teacherInfo.getId(),
+        List<Batch> teacherBathList = userService.getTeacherBatchListByTeacherIdAndCourseId(teacherInfo.getId(),
                 courseId);
         model.addAttribute("teacherBatchList", teacherBathList);
         model.addAttribute("resourceId", resourceId);
