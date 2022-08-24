@@ -7,6 +7,8 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,6 +58,11 @@ public class TeacherApi {
                 userService.addUser(teacher);
             }
         }
+    }
+
+    @GetMapping("/getStudentListByTeacherId/{id}")
+    public List<User> getStudentListByTeacherId(@PathVariable("id") String id) {
+        return userService.getStudentListByTeacherId(id);
     }
 
 }

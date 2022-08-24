@@ -39,7 +39,7 @@ public class User {
     private Boolean isMute;
 
     @ManyToMany
-    @JsonIgnore
+    // @JsonIgnore
     @JoinTable(name = "batch_has_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "batch_id"))
     List<Batch> batchList = new ArrayList<>();
 
@@ -48,6 +48,9 @@ public class User {
 
     @Transient
     private String batchName;
+
+    @Transient
+    private String status = "Present";
 
     @OneToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "messageUser")
     @JsonIgnore

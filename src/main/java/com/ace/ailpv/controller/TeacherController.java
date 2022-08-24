@@ -110,4 +110,14 @@ public class TeacherController {
         return "/teacher/TCH-CWB-06";
     }
 
+    @GetMapping("/modifyAttendance")
+    public String setupModifyAttendance(ModelMap model, HttpSession session) {
+        String teacherId = (String) session.getAttribute("uid");
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+        // User teacherInfo = userService.getUserById(teacherId);
+        // model.addAttribute("studentList", userService.getStudentListByTeacherId(teacherInfo.getId()));
+        model.addAttribute("batchList", batchList);
+        return "/teacher/TCH-MDA-07";
+    }
+
 }

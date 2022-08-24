@@ -18,7 +18,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> countUser(){
+    public List<User> countUser() {
         return userRepository.findAll();
     }
 
@@ -75,6 +75,14 @@ public class UserService {
                 .filter(user -> user.getRole().equals("ROLE_STUDENT"))
                 .collect(Collectors.toList());
         return stduentList;
+    }
+
+    public List<User> getStudentListByBatchId(Long batchId) {
+        List<User> userList = findUserByBatchId(batchId);
+        List<User> studentList = userList.stream()
+                .filter(user -> user.getRole().equals("ROLE_STUDENT"))
+                .collect(Collectors.toList());
+        return studentList;
     }
 
     public List<String> getUserIdList() {
