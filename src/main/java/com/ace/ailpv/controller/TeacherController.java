@@ -1,6 +1,7 @@
 package com.ace.ailpv.controller;
-
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -30,6 +31,17 @@ public class TeacherController {
 
     @Autowired
     private BatchHasResourceService batchHasResourceService;
+
+    @GetMapping("/dashboard")
+    public String setupTeacherDashboard(ModelMap model, HttpSession session) {
+        String teacherId=(String) session.getAttribute("uid");
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+
+        model.addAttribute("batchList", batchList);
+
+
+        return "/teacher/TCH-DSB-01";
+    }
 
     @GetMapping("/student-table")
     public String setupStudentTable(ModelMap model, HttpSession session) {
@@ -84,6 +96,7 @@ public class TeacherController {
         String teacherId = (String) session.getAttribute("uid");
         User teacherInfo = userService.getUserById(teacherId);
         List<Batch> batchList = userService.getTeacherBatchListById(teacherInfo.getId());
+        batchList= batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
         Batch firstBatch = batchList.get(0);
         model.addAttribute("userId", teacherInfo.getId());
         model.addAttribute("username", teacherInfo.getName());
@@ -106,6 +119,7 @@ public class TeacherController {
         model.addAttribute("batchId", batchId);
         model.addAttribute("batchName", batchName);
         List<Batch> batchList = userService.getTeacherBatchListById(teacherInfo.getId());
+        batchList= batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
         model.addAttribute("batchList", batchList);
         return "/teacher/TCH-CWB-06";
     }
