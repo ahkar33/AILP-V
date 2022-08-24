@@ -64,7 +64,7 @@ public class UserController extends Thread {
         if (user.getRole().equals("ROLE_ADMIN")) {
             return "/admin/ADM-PRF-16";
         } else if (user.getRole().equals("ROLE_TEACHER")) {
-            return "/teacher/STU-PRF-08";
+            return "/teacher/TCH-PRF-08";
         } else {
             return "/student/STU-PRF-08";
         }
@@ -101,7 +101,7 @@ public class UserController extends Thread {
     public String uploadProfilePic(@RequestParam("profile_pic") MultipartFile profile_pic, HttpServletRequest request)
             throws IOException, InterruptedException {
         
-        String profilePath = "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\AILP-V\\src\\main\\resources\\static\\profile_pics\\";
+        String profilePath = "D:\\ACE(OJT)\\AILP(V)\\AILP(V)\\AILP-V\\src\\main\\resources\\static\\profile_pics\\";
         boolean isValidFile = false;
         String randomName = fileService
                 .generateFileName(fileValidationService.getExtension(profile_pic.getOriginalFilename()));

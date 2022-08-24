@@ -55,7 +55,7 @@ public class AdminController {
     @Autowired
     private ResourceService resourceService;
 
-    String path = "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\AILP-V\\src\\main\\resources\\static\\courses\\";
+    String path = "D:\\ACE(OJT)\\AILP(V)\\AILP(V)\\AILP-V\\src\\main\\resources\\static\\courses\\";
 
     @GetMapping("/dashboard")
     public String setupDashborad(ModelMap model) {
@@ -234,6 +234,7 @@ public class AdminController {
         Batch batch = batchService.getBatchById(id);
         if (batch.getIsActive()) {
             batch.setIsActive(false);
+
         } else {
             batch.setIsActive(true);
         }
@@ -341,7 +342,7 @@ public class AdminController {
     // to delete after admin account created
     @GetMapping("/register")
     public String setupRegister() {
-        return "/admin/admin-register.html";
+        return "/admin/ADM-REG-17";
     }
 
     @PostMapping("/register")
