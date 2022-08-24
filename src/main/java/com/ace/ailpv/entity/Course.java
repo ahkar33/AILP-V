@@ -31,6 +31,7 @@ public class Course {
 
     private String name;
     private Double fee;
+    
     private String description;
 
     @Transient

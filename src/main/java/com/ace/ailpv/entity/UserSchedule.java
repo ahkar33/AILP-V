@@ -1,11 +1,15 @@
 package com.ace.ailpv.entity;
 
-import javax.persistence.Column;
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,10 +30,16 @@ public class UserSchedule {
     @ManyToOne
     private User user;
 
+    @Transient
+    private String studentId;
+
     @ManyToOne
     private Schedule schedule;
 
-    @Column(columnDefinition = "TINYINT(1)")
-    private Boolean isPresent;
+    @Transient
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
+
+    private String status;
 
 }

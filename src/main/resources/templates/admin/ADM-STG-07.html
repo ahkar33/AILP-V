@@ -39,7 +39,7 @@
                                             :class="{'border-danger border-2': inputField.isExist }" type="text"
                                             placeholder="id" />
                                         <p v-show="inputField.isExist" class="text-danger">
-                                            Id Already Exists 
+                                            Id Already Exists
                                         </p>
                                     </td>
                                     <td>
@@ -168,20 +168,23 @@
                     })
                     .catch(error => console.log(error));
             },
+            computed: {
+                id() {
+                    return this.inputFields.map(input => input.id);
+                }
+            },
             watch: {
                 inputFields: {
                     handler: function (newValue, oldValue) {
                         newValue.forEach((user) => {
-                            setTimeout(() => {
-                                user.isExist = false;
-                            }, 10);
-                            if (this.userIdList.includes(user.id)) {
+                            user.isExist = false;
+                            if (this.userIdList.includes(user.id.replace(/\s/g, ""))) {
                                 let index = this.inputFields.indexOf(user);
                                 this.inputFields[index].isExist = true;
                             }
                         });
                     },
-                    deep: true
+                    deep: true,
                 }
             }
         });

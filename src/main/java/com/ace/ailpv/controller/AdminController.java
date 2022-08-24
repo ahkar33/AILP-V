@@ -213,7 +213,7 @@ public class AdminController {
         model.addAttribute("batch", new Batch());
         model.addAttribute("editBatch", new Batch());
         model.addAttribute("batchList", batchService.getAllBatches());
-        return "/admin/ADM-BTB-05";
+        return "/admin/ADM-BTB-03";
     }
 
     @PostMapping("/addBatch")
