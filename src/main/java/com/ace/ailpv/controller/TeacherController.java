@@ -1,6 +1,7 @@
 package com.ace.ailpv.controller;
+
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
@@ -18,8 +19,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasResource;
 import com.ace.ailpv.entity.Course;
+import com.ace.ailpv.entity.Schedule;
 import com.ace.ailpv.entity.User;
+import com.ace.ailpv.entity.UserSchedule;
 import com.ace.ailpv.service.BatchHasResourceService;
+import com.ace.ailpv.service.ScheduleService;
+import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
 
 @Controller
@@ -32,13 +37,18 @@ public class TeacherController {
     @Autowired
     private BatchHasResourceService batchHasResourceService;
 
+    @Autowired
+    private UserScheduleService userScheduleService;
+
+    @Autowired
+    private ScheduleService scheduleService;
+
     @GetMapping("/dashboard")
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
-        String teacherId=(String) session.getAttribute("uid");
+        String teacherId = (String) session.getAttribute("uid");
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
 
         model.addAttribute("batchList", batchList);
-
 
         return "/teacher/TCH-DSB-01";
     }
@@ -96,7 +106,7 @@ public class TeacherController {
         String teacherId = (String) session.getAttribute("uid");
         User teacherInfo = userService.getUserById(teacherId);
         List<Batch> batchList = userService.getTeacherBatchListById(teacherInfo.getId());
-        batchList= batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
+        batchList = batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
         Batch firstBatch = batchList.get(0);
         model.addAttribute("userId", teacherInfo.getId());
         model.addAttribute("username", teacherInfo.getName());
@@ -119,7 +129,7 @@ public class TeacherController {
         model.addAttribute("batchId", batchId);
         model.addAttribute("batchName", batchName);
         List<Batch> batchList = userService.getTeacherBatchListById(teacherInfo.getId());
-        batchList= batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
+        batchList = batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
         model.addAttribute("batchList", batchList);
         return "/teacher/TCH-CWB-06";
     }
@@ -128,10 +138,53 @@ public class TeacherController {
     public String setupModifyAttendance(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
-        // User teacherInfo = userService.getUserById(teacherId);
-        // model.addAttribute("studentList", userService.getStudentListByTeacherId(teacherInfo.getId()));
         model.addAttribute("batchList", batchList);
         return "/teacher/TCH-MDA-07";
+    }
+
+    @GetMapping("/attendance-table")
+    public String setupAttendanceTable(ModelMap model, HttpSession session) {
+        String teacherId = (String) session.getAttribute("uid");
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+        List<UserSchedule> userScheduleList = userScheduleService.getAllUserSchedules();
+        model.addAttribute("userScheduleList", userScheduleList);
+        model.addAttribute("batchList", batchList);
+        model.addAttribute("data", new UserSchedule());
+        return "/teacher/TCH-ATB-08";
+    }
+
+    @PostMapping("/searchUserScheduleList")
+    public String searchUserScheduleList(@ModelAttribute("data") UserSchedule userSchedule, ModelMap model,
+            HttpSession session) {
+        Long batchId = userSchedule.getUser().getBatchList().get(0).getId();
+        if (userSchedule.getDate() != null) {
+            Schedule resSchedule = scheduleService.getScheduleByDate(userSchedule.getDate());
+            if (resSchedule == null) {
+                String teacherId = (String) session.getAttribute("uid");
+                List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+                model.addAttribute("userScheduleList", new ArrayList<>());
+                model.addAttribute("batchList", batchList);
+                model.addAttribute("data", new UserSchedule());
+                return "/teacher/TCH-ATB-08";
+
+            }
+            List<UserSchedule> list = userScheduleService.getUserScheduleListByBatchIdAndScheduleId(batchId,
+                    resSchedule.getId());
+            String teacherId = (String) session.getAttribute("uid");
+            List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+            model.addAttribute("userScheduleList", list);
+            model.addAttribute("batchList", batchList);
+            model.addAttribute("data", new UserSchedule());
+            return "/teacher/TCH-ATB-08";
+        } else {
+            List<UserSchedule> list = userScheduleService.getUserScheduleListByBatchIdOrScheduleId(batchId);
+            String teacherId = (String) session.getAttribute("uid");
+            List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+            model.addAttribute("userScheduleList", list);
+            model.addAttribute("batchList", batchList);
+            model.addAttribute("data", userSchedule);
+            return "/teacher/TCH-ATB-08";
+        }
     }
 
 }
