@@ -55,7 +55,7 @@
                             </a>
                             <div class="dropdown-divider"></div>
                             <form id="logout" th:action="@{/logout}" method="post">
-                                </form>
+                            </form>
                             <button class="dropdown-item fs-6 text-dark" onclick="handleLogout()">
                                 <i class="fa-fw fa-sign-out-alt fa-sm fas me-2 text-dark"></i>
                                 &nbsp;Logout
@@ -116,8 +116,8 @@
                                 </div>
                             </div>
                         </a>
-                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" href="attendance-table.html"
-                            style="font-size: 15.6px;">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
+                            th:href="@{/teacher/attendance-table}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
                                 <i class="fa-user-check fas fs-4"></i>
@@ -127,8 +127,8 @@
                                 </div>
                             </div>
                         </a>
-                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" th:href="@{/teacher/modifyAttendance}"
-                            style="font-size: 15.6px;">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
+                            th:href="@{/teacher/modifyAttendance}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
                                 <i class="fa-users-cog fas fs-4"></i>
@@ -143,8 +143,8 @@
 
                     <!-- side bar link start -->
                     <li class="nav-item">
-                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" href="assignment-table.html"
-                            style="font-size: 15.6px;">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
+                            th:href="@{/teacher/assignment-table}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
                                 <i class="fa-clipboard-list fas fs-4"></i>

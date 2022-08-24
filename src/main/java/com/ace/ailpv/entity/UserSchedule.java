@@ -11,6 +11,7 @@ import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,12 +29,15 @@ public class UserSchedule {
     private Long id;
 
     @ManyToOne
+    // @JsonIgnoreProperties("userScheduleList")
+    // @JsonIgnore
     private User user;
 
     @Transient
     private String studentId;
 
     @ManyToOne
+    // @JsonIgnoreProperties("userScheduleList")
     private Schedule schedule;
 
     @Transient
