@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FileService {
 
-    String courseFilePath = "S:\\ACESTUFF\\AILP-V\\src\\main\\resources\\static\\courses\\";
+    String courseFilePath = "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\AILP-V\\src\\main\\resources\\static\\courses\\";
 
     public void createFolderForCourse(String courseName) {
         File theDir = new File(courseFilePath + courseName);
