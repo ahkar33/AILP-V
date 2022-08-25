@@ -55,4 +55,7 @@ public class User {
     @JsonIgnore
     private Set<Message> messageList = new HashSet<>();
 
+    @Column(nullable = false, columnDefinition = "TINYINT(0)")
+    private Boolean enabled;
+
 }

@@ -2,6 +2,8 @@ package com.ace.ailpv.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -55,7 +57,7 @@ public class AdminController {
     @Autowired
     private ResourceService resourceService;
 
-    String path = "C:\\Users\\Ahkar Toe Maw\\Documents\\AILP-V\\AILP-V\\src\\main\\resources\\static\\courses\\";
+    String path = "S:\\ACESTUFF\\AILP-V\\src\\main\\resources\\static\\courses\\";
 
     @GetMapping("/dashboard")
     public String setupDashborad(ModelMap model) {
@@ -233,11 +235,43 @@ public class AdminController {
     @GetMapping("/toggleDisableBatch/{id}")
     public String disableBatch(@PathVariable("id") Long id) {
         Batch batch = batchService.getBatchById(id);
+        List<User> studentList = batch.getUserList().stream()
+                .filter(user -> user.getRole().equals("ROLE_STUDENT"))
+                .collect(Collectors.toList());
+
         if (batch.getIsActive()) {
             batch.setIsActive(false);
+
+            for (User user: studentList) {
+                boolean isEnable = true;
+                if (user.getBatchList().size() == 1) {
+                    isEnable = false;
+                } else {
+                    for (int i = 1; i <= user.getBatchList().size(); i++) {
+                        if (user.getBatchList().get(i).getIsActive()) {
+                            isEnable = true;
+                            break;
+                        } else {
+                            isEnable = false;
+                        }
+
+                    }
+                }
+
+                if (!isEnable)
+                    userService.doToggleAccountStatus(isEnable, user.getId());
+                
+            }
+
+            
         } else {
             batch.setIsActive(true);
+
+            for (User user: studentList) {
+                if (!user.getEnabled())
+                    userService.doToggleAccountStatus(true, user.getId());
         }
+    }
         batchService.addBatch(batch);
         return "redirect:/admin/batch-table";
     }

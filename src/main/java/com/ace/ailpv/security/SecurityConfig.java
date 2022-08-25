@@ -25,6 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     CustomUserDetailsService customUserDetailsService;
 
+    @Autowired
+    CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -49,6 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .loginPage("/auth/login")
                 .loginProcessingUrl("/login")
                 .successHandler(loginSuccessHandler)
+                .failureHandler(customAuthenticationFailureHandler)
         .and()
             .rememberMe()
                 .authenticationSuccessHandler(remembermeSuccessHandler)
