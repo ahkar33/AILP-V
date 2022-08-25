@@ -22,9 +22,9 @@
             <div class="col-lg-4">
                 <div class="card mb-3">
                     <div class="card-body text-center shadow">
-                        <img class="rounded-circle mb-3 mt-4" th:src="@{${'/profile_pics/' + session?.profile_pic}}"
+                        <img class="rounded-circle mb-3 mt-4" th:src="@{${'/profile_pics/' + session?.profile_pic} }"
                             width="160" height="160" />
-                        <a class="text-decoration-none text-dark" href="#profile-name-upload"
+                        <a class="text-decoration-none text-dark" href="#profile-name-upload" id="changeNameIcon"
                             data-bs-target="#profile-name-upload" data-bs-toggle="modal">
                             <div class="pb-2">
                                 <h3 class="fw-bold"
@@ -48,9 +48,9 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="input-group">
-                                                <input class="form-control" type="text" name="name"
+                                                <input class="form-control" type="text" name="name" id="changeNameInput"
                                                     style="height: 38px;" required="" />
-                                                <button class="btn btn-primary" type="submit">
+                                                <button class="btn btn-primary" type="submit" id="changeName">
                                                     Change
                                                 </button>
                                             </div>

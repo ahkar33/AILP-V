@@ -32,6 +32,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
             throws IOException, ServletException {
         System.out.println("auth invoked");
         User user = userService.getUserById(authentication.getName());
+       
         
 
         request.getSession().setAttribute("uid", user.getId());
