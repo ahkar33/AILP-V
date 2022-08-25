@@ -57,7 +57,9 @@ public class AdminController {
     @Autowired
     private ResourceService resourceService;
 
+
     String path = "D:\\ACE(OJT)\\AILP(V)\\AILP(V)\\AILP-V\\src\\main\\resources\\static\\courses\\";
+
 
     @GetMapping("/dashboard")
     public String setupDashborad(ModelMap model) {
@@ -393,6 +395,7 @@ public class AdminController {
                 user.setName(name);
                 user.setPassword(passwordEncoder.encode(password));
                 user.setIsMute(false);
+                user.setEnabled(true);
                 user.setRole("ROLE_ADMIN");
                 user.setProfile_pic("profile.png");
                 userService.addUser(user);

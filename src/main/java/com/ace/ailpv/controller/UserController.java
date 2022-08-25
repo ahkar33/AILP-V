@@ -100,8 +100,10 @@ public class UserController extends Thread {
     @PostMapping("/upload")
     public String uploadProfilePic(@RequestParam("profile_pic") MultipartFile profile_pic, HttpServletRequest request)
             throws IOException, InterruptedException {
+
         
         String profilePath = "D:\\ACE(OJT)\\AILP(V)\\AILP(V)\\AILP-V\\src\\main\\resources\\static\\profile_pics\\";
+
         boolean isValidFile = false;
         String randomName = fileService
                 .generateFileName(fileValidationService.getExtension(profile_pic.getOriginalFilename()));
@@ -124,8 +126,8 @@ public class UserController extends Thread {
         }
 
         if (isValidFile) {
-            profile_pic.transferTo(new File(profilePath +  randomName));
-            
+            profile_pic.transferTo(new File(profilePath + randomName));
+
             HttpSession session = request.getSession(false);
             String uid = (String) session.getAttribute("uid");
             userService.updatePictureByUserId(randomName, uid);
@@ -134,7 +136,6 @@ public class UserController extends Thread {
                 fileService.deleteFile(profilePath + session.getAttribute("profile_pic"));
             }
             session.setAttribute("profile_pic", randomName);
-            
 
         } else {
             System.out.println("Invalid file!");
@@ -143,4 +144,3 @@ public class UserController extends Thread {
         return "redirect:/user/profile";
     }
 }
-
