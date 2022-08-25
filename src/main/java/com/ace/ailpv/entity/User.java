@@ -55,12 +55,9 @@ public class User {
     @Transient
     private String status = "Present";
 
-    @OneToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "messageUser")
-    @JsonIgnore
-    private List<Message> messageList = new ArrayList<>();
+   
 
-    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "user")
-    @JsonIgnore
-    private List<UserSchedule> userScheduleList = new ArrayList<>();
+    @Column(nullable = false, columnDefinition = "TINYINT(0)")
+    private Boolean enabled;
 
 }

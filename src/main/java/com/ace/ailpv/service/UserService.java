@@ -127,5 +127,9 @@ public class UserService {
     public void updatePasswordByUserId(String newPassword, String uid) {
         userRepository.updatePasswordById(newPassword, uid);
     }
+    
+    public void doToggleAccountStatus(Boolean status, String uid) {
+        userRepository.toggleAccountStatus(status, uid);
+    }
 
 }
