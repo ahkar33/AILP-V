@@ -37,10 +37,10 @@ public class RemembermeSuccessHandler  implements AuthenticationSuccessHandler {
         request.getSession().setAttribute("profile_pic", user.getProfile_pic());
                 
         if(user.getRole().equals("ROLE_ADMIN")) {
-            response.sendRedirect("/admin/student-table");
+            response.sendRedirect("/admin/dashboard");
         }
         if(user.getRole().equals("ROLE_TEACHER")) {
-            response.sendRedirect("/admin/student-table");
+            response.sendRedirect("/teacher/dashboard");
         }
         if(user.getRole().equals("ROLE_STUDENT")) {
             response.sendRedirect("/student/student-home");
