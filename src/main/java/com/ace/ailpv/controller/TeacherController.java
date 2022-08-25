@@ -47,9 +47,10 @@ public class TeacherController {
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
-
+        batchList= batchList.stream()
+            .filter(batch -> batch.getIsActive())
+            .collect(Collectors.toList());
         model.addAttribute("batchList", batchList);
-
         return "/teacher/TCH-DSB-01";
     }
 
