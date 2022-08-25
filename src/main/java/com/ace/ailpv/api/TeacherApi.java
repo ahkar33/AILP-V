@@ -47,6 +47,7 @@ public class TeacherApi {
                 teacher.setPassword(passwordEncoder.encode("ailp123"));
                 teacher.setRole("ROLE_TEACHER");
                 teacher.setIsMute(false);
+                teacher.setEnabled(true);
                 teacher.setProfile_pic("profile.png");
                 userService.addUser(teacher);
             } else {
@@ -54,6 +55,7 @@ public class TeacherApi {
                 teacher.setPassword(passwordEncoder.encode("ailp123"));
                 teacher.setRole("ROLE_TEACHER");
                 teacher.setIsMute(false);
+                teacher.setEnabled(true);
                 teacher.setProfile_pic("profile.png");
                 userService.addUser(teacher);
             }
