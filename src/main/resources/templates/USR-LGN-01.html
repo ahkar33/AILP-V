@@ -40,10 +40,20 @@
                                             style="width: 229px;margin-bottom: 33px;margin-top: 12px;">
                                     </div>
                                     <span th:if="${param.error}">
-                                        <div class="alert alert-danger">
-                                            Incorrect ID or Password
-                                        </div>
+                                        <span th:if="${param.error[0] == 'error'}">
+                                            <div class="alert alert-danger">
+                                                Incorrect ID or Password
+                                            </div>
+                                        </span>
+    
+                                        <span th:if="${param.error[0] == 'disabled'}">
+                                            <div class="alert alert-danger">
+                                                Account has been disabled!
+                                            </div>
+                                        </span>
                                     </span>
+                                    
+
                                     <div class="text-start" style="margin-top: -12px;">
                                         <p
                                             style="font-family: 'Average Sans', sans-serif;font-size: 34px;color: rgb(101,99,99);">
