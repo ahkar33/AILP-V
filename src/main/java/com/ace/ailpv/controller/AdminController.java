@@ -57,8 +57,7 @@ public class AdminController {
     @Autowired
     private ResourceService resourceService;
 
-
-    String path = "D:\\ACE(OJT)\\AILP(V)\\AILP(V)\\AILP-V\\src\\main\\resources\\static\\courses\\";
+    String path = "C:\\AILP-V\\src\\main\\resources\\static\\courses\\";
 
 
     @GetMapping("/dashboard")

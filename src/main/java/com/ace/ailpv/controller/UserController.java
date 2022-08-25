@@ -102,7 +102,7 @@ public class UserController extends Thread {
             throws IOException, InterruptedException {
 
         
-        String profilePath = "D:\\ACE(OJT)\\AILP(V)\\AILP(V)\\AILP-V\\src\\main\\resources\\static\\profile_pics\\";
+        String profilePath = "C:\\AILP-V\\src\\main\\resources\\static\\profile_pics\\";
 
         boolean isValidFile = false;
         String randomName = fileService
