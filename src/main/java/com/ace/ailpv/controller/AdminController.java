@@ -327,6 +327,7 @@ public class AdminController {
     public String editStudent(@ModelAttribute("student") User student) {
         User resStudent = userService.getUserById(student.getId());
         student.setIsMute(resStudent.getIsMute());
+        student.setEnabled(resStudent.getEnabled());
         userService.addUser(student);
         return "redirect:/admin/student-table";
     }
@@ -368,6 +369,7 @@ public class AdminController {
     public String editTeacher(@ModelAttribute("teacher") User teacher) {
         User resTeacher = userService.getUserById(teacher.getId());
         teacher.setIsMute(resTeacher.getIsMute());
+        teacher.setEnabled(resTeacher.getEnabled());
         userService.addUser(teacher);
         return "redirect:/admin/teacher-table";
     }
