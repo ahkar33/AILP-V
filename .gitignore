@@ -50,4 +50,5 @@ build/
 
 
 ### ignore property files ###
+*.properties
 application.properties
