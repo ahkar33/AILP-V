@@ -102,6 +102,7 @@ public class UserController extends Thread {
             throws IOException, InterruptedException {
 
         String profilePath = "C:\\AILP-V\\src\\main\\resources\\static\\profile_pics\\";
+        
         boolean isValidFile = false;
         String randomName = fileService
                 .generateFileName(fileValidationService.getExtension(profile_pic.getOriginalFilename()));
