@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Login - Brand</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Bangla&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Kannada&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arimo&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Average+Sans&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dangrek&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+KR&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inria+Sans&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+</head>
+
+<body class="bg-gradient-primary d-xl-flex" style="background: rgb(55,81,162);">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-8 col-xl-4 pe-0 ps-0">
+                <div class="border-0 card my-5 o-hidden shadow-lg">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div style="padding-left: 0px;padding-right: 0px;" class="col-lg-12 col-sm-12">
+                                <div style="margin-top: -25px;margin-bottom: -17px;"
+                                    class="mb-0 mb-md-0 me-3 me-md-2 ms-3 ms-md-2 mt-3 mt-md-2 pb-2 pb-md-3 pe-3 pe-md-5 ps-3 ps-md-5 pt-2 pt-md-2">
+                                    <div class="mb-2 text-center">
+                                        <img src="/assets/img/logo_blue.png"
+                                            style="width: 247px; margin-bottom: 33px; margin-top: 12px;" />
+                                    </div>
+                                    <div class="text-start">
+                                        <p style="font-family: 'Anek Bangla', sans-serif; font-size: 19px; color: rgb(101,99,99); margin-bottom: 11px; margin-top: -17px;"
+                                            class="fs-5 text-muted">Create your account by filling the form below.<br />
+                                        </p>
+                                    </div>
+                                    <div th:if="${errorMsg != null}" class="alert alert-danger">
+                                        [[${errorMsg}]]
+                                    </div>
+
+                                    <form class="user" style="margin-top: -8px;" action="/admin/register" method="post">
+                                        <div class="mb-2">
+                                            <input
+                                                class="border border-1 border-secondary form-control form-control-user  rounded shadow-none"
+                                                type="text" id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter ID" name="id" required=""
+                                                style="padding-top: 13px; padding-bottom: 13px; margin-bottom: 10px; font-size: 14px;" />
+                                        </div>
+                                        <div class="mb-2">
+                                            <input
+                                                class="border border-1 border-secondary form-control form-control-user  rounded shadow-none"
+                                                type="text" id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter Username" name="name" required=""
+                                                style="padding-top: 13px; padding-bottom: 13px; margin-bottom: 10px; font-size: 14px;" />
+                                        </div>
+                                        <div class="mb-2">
+                                            <input
+                                                class="border border-1 border-secondary form-control form-control-user  rounded shadow-none"
+                                                type="password" id="exampleInputPassword" placeholder="Enter Password"
+                                                name="password" required=""
+                                                style="padding-top: 13px; padding-bottom: 13px; margin-bottom: 10px; font-size: 14px;" />
+                                        </div>
+                                        <div class="mb-2">
+                                            <input
+                                                class="border border-1 border-secondary form-control form-control-user  rounded shadow-none"
+                                                type="password" id="exampleInputPassword" placeholder="Confirm Password"
+                                                name="confirmPassword" required=""
+                                                style="padding-top: 13px; padding-bottom: 13px; margin-bottom: 10px; font-size: 14px;" />
+                                        </div>
+                                        <div class="mb-2">
+                                            <input
+                                                class="border border-1 border-secondary form-control form-control-user mb-3 rounded shadow-none"
+                                                type="number" id="exampleInputPassword" name="pin"
+                                                placeholder="Enter Pin To Create Admin Account" required=""
+                                                style="padding-top: 13px; padding-bottom: 13px; font-size: 14px;" />
+                                        </div> <button
+                                            class="btn btn-primary border rounded shadow-sm d-block btn-user w-100"
+                                            type="submit" role="button" data-bss-hover-animate="pulse"
+                                            style="background: rgb(55,81,162); border-radius: 9px; margin-bottom: 18px; margin-left: 0px; font-size: 14px;">Register</button>
+                                    </form>
+                                    <p class="text-center text-dark">Have already an account? <a
+                                            href="/auth/login"><span><b>Login here</b></span></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bs-init.js"></script>
+    <script src="/assets/js/theme.js"></script>
+</body>
+
+</html>

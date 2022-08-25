@@ -1,9 +1,7 @@
 package com.ace.ailpv.entity;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,7 +31,10 @@ public class User {
     private String id;
 
     private String name;
+
+    @JsonIgnore
     private String password;
+
     private String role;
     private String profile_pic;
 
@@ -41,9 +42,9 @@ public class User {
     private Boolean isMute;
 
     @ManyToMany
-    @JsonIgnore
+    // @JsonIgnore
     @JoinTable(name = "batch_has_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "batch_id"))
-    List<Batch> batchList = new ArrayList<>(); 
+    List<Batch> batchList = new ArrayList<>();
 
     @Transient
     private String batchId;
@@ -51,9 +52,10 @@ public class User {
     @Transient
     private String batchName;
 
-    @OneToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "messageUser")
-    @JsonIgnore
-    private Set<Message> messageList = new HashSet<>();
+    @Transient
+    private String status = "Present";
+
+   
 
     @Column(nullable = false, columnDefinition = "TINYINT(0)")
     private Boolean enabled;

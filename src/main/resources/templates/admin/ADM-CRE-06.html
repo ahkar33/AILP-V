@@ -19,8 +19,8 @@
 
                 <div class="container-fluid pb-5 pe-5 ps-5 pt-2" id="app" style="max-width: 45rem;">
                     <h1 class="mb-2 text-start"
-                    style="font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
-                    Create Exam</h1>
+                        style="font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
+                        Create Exam</h1>
                     <form action="">
                         <div class="card mb-4 shadow-sm">
                             <div class="card-body p-4 fw-bold text-dark">
@@ -29,12 +29,9 @@
                                     <option value="" disabled>Choose Course</option>
                                     <span th:each="course : ${courseList}">
                                         <option th:value="${course.id}">
-                                            [[${course?.name}]] 
+                                            [[${course?.name}]]
                                         </option>
                                     </span>
-                                    <!-- <option v-for="(course, index) in courseList" :key="index">
-                                        {{course}}
-                                    </option> -->
                                 </select>
 
                                 <div class="input-group mb-3">
@@ -55,44 +52,27 @@
                                         </div>
                                         <div class="mb-4">
                                             <div class="form-check">
-                                                <input class="form-check-input fs-5" type="radio" disabled
-                                                    name="inlineRadioOptions" id="formInput8" value="option1" />
-                                                <div class="input-group mb-3">
-                                                    <input v-model="question.firstRadioValue" type="text" required
-                                                        class="form-control" placeholder="Option1" />
+                                                <div v-for="(radio, indes) in question.radioList" :key="indes"
+                                                    class="input-group mb-3">
+                                                    <input v-model="radio.radioValue" type="text" required
+                                                        class="form-control" :placeholder="'Option ' + (++indes)" />
+                                                    <button @click.prevent="removeRadio(index, --indes)" type="button"
+                                                        class="btn btn-danger fw-bold rounded ms-2">
+                                                        -
+                                                    </button>
+                                                    <button @click.prevent="addRadio(index)" type="button"
+                                                        class="btn btn-primary fw-bold rounded ms-2">
+                                                        +
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input fs-5" type="radio" disabled
-                                                    name="inlineRadioOptions" id="formInput8" value="option1" />
-                                                <div class="input-group mb-3">
-                                                    <input v-model="question.secondRadioValue" type="text" required
-                                                        class="form-control" placeholder="Option2" />
-                                                </div>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input fs-5" type="radio" disabled
-                                                    name="inlineRadioOptions" id="formInput8" value="option1" />
-                                                <div class="input-group mb-3">
-                                                    <input v-model="question.thirdRadioValue" type="text" required
-                                                        class="form-control" placeholder="Option3" />
-                                                </div>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input fs-5" type="radio" disabled
-                                                    name="inlineRadioOptions" id="formInput8" value="option1" />
-                                                <div class="input-group mb-3">
-                                                    <input v-model="question.fourthRadioValue" type="text" required
-                                                        class="form-control" placeholder="Option4" />
-                                                </div>
-                                            </div>
+
                                         </div>
                                         <input v-model="question.rightAnswer" class="form-control" required
                                             placeholder="Enter the right answer" />
                                         <div class="text-end mt-3">
                                             <button @click.prevent="removeQuestion(index)" type="button"
-                                                class="btn btn-danger fw-bold me-3"
-                                                style="width: 40px;">-</button>
+                                                class="btn btn-danger fw-bold me-3" style="width: 40px;">-</button>
                                             <button @click.prevent="addQuestion()" type="button"
                                                 class="btn btn-primary fw-bold" style="width: 40px;">+</button>
                                         </div>
@@ -134,13 +114,14 @@
                     questionList: [
                         {
                             examQuestion: '',
-                            firstRadioValue: '',
-                            secondRadioValue: '',
-                            thirdRadioValue: '',
-                            fourthRadioValue: '',
-                            rightAnswer: ''
+                            rightAnswer: '',
+                            radioList: [
+                                {
+                                    radioValue: ''
+                                }
+                            ]
                         }
-                    ]
+                    ],
                 }
             },
             methods: {
@@ -148,11 +129,12 @@
                     this.questionList = [...this.questionList,
                     {
                         examQuestion: '',
-                        firstRadioValue: '',
-                        secondRadioValue: '',
-                        thirdRadioValue: '',
-                        fourthRadioValue: '',
-                        rightAnswer: ''
+                        rightAnswer: '',
+                        radioList: [
+                            {
+                                radioValue: ''
+                            }
+                        ]
                     }
                     ];
                 },
@@ -163,16 +145,38 @@
                         this.questionList = values;
                     }
                 },
+                addRadio(index) {
+                    this.questionList[index].radioList = [...this.questionList[index].radioList,
+                    {
+                        radioValue: ''
+                    }
+                    ]
+                },
+                removeRadio(index, indes) {
+                    if (this.questionList[index].radioList.length > 1) {
+                        let values = [...this.questionList[index].radioList]
+                        values.splice(indes, 1);
+                        this.questionList[index].radioList = values;
+                    }
+                },
                 createExam() {
                     this.isEmpty = false;
-                    this.questionList.forEach(element => {
+                    this.questionList.forEach(question => {
+
+                        question.radioList.forEach(radio => {
+                            if (radio.radioValue.replace(/\s/g, "").length == 0) {
+                                this.isEmpty = true;
+                                Swal.fire(
+                                    'Please Fill All Radio Options!',
+                                    '',
+                                    'info'
+                                )
+                            }
+                        });
+
                         if (
-                            element.examQuestion.replace(/\s/g, "").length == 0 ||
-                            element.firstRadioValue.replace(/\s/g, "").length == 0 ||
-                            element.secondRadioValue.replace(/\s/g, "").length == 0 ||
-                            element.thirdRadioValue.replace(/\s/g, "").length == 0 ||
-                            element.fourthRadioValue.replace(/\s/g, "").length == 0 ||
-                            element.rightAnswer.replace(/\s/g, "").length == 0
+                            question.examQuestion.replace(/\s/g, "").length == 0 ||
+                            question.rightAnswer.replace(/\s/g, "").length == 0
                         ) {
                             this.isEmpty = true;
                             Swal.fire(

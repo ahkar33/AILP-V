@@ -35,14 +35,18 @@
                             <tbody>
                                 <tr v-for="(inputField, index) in inputFields" :key="index">
                                     <td>
-                                        <input v-model="inputField.id" class="form-control" type="text"
+                                        <input v-model="inputField.id" class="form-control"
+                                            :class="{'border-danger border-2': inputField.isExist }" type="text"
                                             placeholder="id" />
+                                        <p v-show="inputField.isExist" class="text-danger">
+                                            Id Already Exists
+                                        </p>
                                     </td>
                                     <td>
                                         <input v-model="inputField.name" class="form-control" type="text"
                                             placeholder="name" />
                                     </td>
-                                    <td class="d-inline-flex flex-lg-wrap">
+                                    <td>
                                         <button @click.prevent="handleRemoveField(index)"
                                             class="btn btn-danger m-1">-</button>
                                         <button @click.prevent="handleAddField()" class="btn btn-success m-1">+</button>
@@ -61,7 +65,7 @@
                     <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
                 </div>
             </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
     </div>
 
     <div th:insert="/admin/admin-fragments :: footer" />
@@ -74,7 +78,7 @@
                     isEmpty: null,
                     batch: 'Choose One Batch',
                     inputFields: [
-                        { id: '', name: '', batchId: '' },
+                        { id: '', name: '', batchId: '', isExist: false },
                     ],
                 }
             },
@@ -164,6 +168,25 @@
                     })
                     .catch(error => console.log(error));
             },
+            computed: {
+                id() {
+                    return this.inputFields.map(input => input.id);
+                }
+            },
+            watch: {
+                inputFields: {
+                    handler: function (newValue, oldValue) {
+                        newValue.forEach((user) => {
+                            user.isExist = false;
+                            if (this.userIdList.includes(user.id.replace(/\s/g, ""))) {
+                                let index = this.inputFields.indexOf(user);
+                                this.inputFields[index].isExist = true;
+                            }
+                        });
+                    },
+                    deep: true,
+                }
+            }
         });
 
         app.mount('#student-grid');
