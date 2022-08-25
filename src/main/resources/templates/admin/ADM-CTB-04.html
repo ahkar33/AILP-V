@@ -140,14 +140,18 @@
                                                                     required maxlength="20">
 
                                                                 <label for="">Description</label>
-                                                                <textarea type="text" name="desc" class="form-control mb-3"
+                                                                <textarea type="text" name="desc"
+                                                                    class="form-control mb-3"
                                                                     th:text="${course?.description}" required
                                                                     maxlength="1000"> </textarea>
 
                                                             </div>
                                                             <div class="modal-footer" style="background: #f8f9fc;">
-                                                                <button class="btn btn-light" data-bs-dismiss="modal"
-                                                                    style="margin-right: 13px;">Cancel</button>
+                                                                <button type="button" class="btn btn-light"
+                                                                    data-bs-dismiss="modal" aria-label="Close"
+                                                                    style="margin-right: 13px;">
+                                                                    Cancel
+                                                                </button>
                                                                 <button class="btn btn-primary" type="submit">
                                                                     Update
                                                                 </button>

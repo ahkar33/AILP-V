@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Course;
+import com.ace.ailpv.entity.Exam;
 import com.ace.ailpv.entity.Resource;
 import com.ace.ailpv.entity.Video;
 import com.ace.ailpv.repository.CourseRepository;
@@ -30,6 +31,9 @@ public class CourseService {
 
     @Autowired
     private ResourceService resourceService;
+
+    @Autowired
+    private ExamService examService;
 
     public void addCourse(Course course) throws IllegalStateException, IOException {
 
@@ -73,6 +77,10 @@ public class CourseService {
         List<Batch> batchList =  batchService.getBatchesByCourseId(courseId);
         for(Batch batch : batchList) {
             batchService.deleteBatchById(batch.getId());
+        }
+        List<Exam> examList = examService.getExamListByBatchId(courseId);
+        for(Exam exam: examList) {
+            examService.deleteExamById(exam.getId());
         }
         courseRepository.deleteById(courseId);
     }
