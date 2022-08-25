@@ -49,6 +49,7 @@ public class StudentApi {
             student.getBatchList().add(batch);
             student.setPassword(passwordEncoder.encode("ailp123"));
             student.setRole("ROLE_STUDENT");
+            student.setEnabled(true);
             student.setIsMute(false);
             student.setProfile_pic("profile.png");
             userService.addUser(student);
