@@ -47,9 +47,9 @@ public class TeacherController {
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
-        batchList= batchList.stream()
-            .filter(batch -> batch.getIsActive())
-            .collect(Collectors.toList());
+        batchList = batchList.stream()
+                .filter(batch -> batch.getIsActive())
+                .collect(Collectors.toList());
         model.addAttribute("batchList", batchList);
         return "/teacher/TCH-DSB-01";
     }
@@ -186,6 +186,14 @@ public class TeacherController {
             model.addAttribute("data", userSchedule);
             return "/teacher/TCH-ATB-08";
         }
+    }
+
+    @GetMapping("/postResource")
+    public String setupPostResource(HttpSession session, ModelMap model) {
+        String teacherId = (String) session.getAttribute("uid");
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+        model.addAttribute("batchList", batchList);
+        return "/teacher/upload-resource";
     }
 
 }

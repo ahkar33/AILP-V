@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,12 +43,15 @@ public class Course {
     private MultipartFile resources[];
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "batchCourse")
+    @JsonIgnore
     List<Batch> batchList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "videoCourse")
+    @JsonIgnore
     List<Video> videoList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "resourceCourse")
+    @JsonIgnore
     List<Resource> resourceList = new ArrayList<>();
 
 }
