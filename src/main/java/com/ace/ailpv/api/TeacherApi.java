@@ -1,8 +1,11 @@
 package com.ace.ailpv.api;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,14 +18,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ace.ailpv.entity.Batch;
+import com.ace.ailpv.entity.BatchHasResource;
+import com.ace.ailpv.entity.Course;
+import com.ace.ailpv.entity.Resource;
 import com.ace.ailpv.entity.User;
+import com.ace.ailpv.service.BatchHasResourceService;
 import com.ace.ailpv.service.BatchService;
+import com.ace.ailpv.service.ResourceService;
 import com.ace.ailpv.service.UserService;
 
 @RestController
 @RequestMapping("/api/teacher")
 @CrossOrigin(origins = "*")
 public class TeacherApi {
+
+    @Autowired
+    private ResourceService resourceService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -32,6 +43,9 @@ public class TeacherApi {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BatchHasResourceService batchHasResourceService;
 
     @PostMapping("/addTeachers")
     public void addTeachers(@RequestBody User[] teacherList) {
@@ -65,6 +79,44 @@ public class TeacherApi {
     @GetMapping("/getStudentListByTeacherId/{id}")
     public List<User> getStudentListByTeacherId(@PathVariable("id") String id) {
         return userService.getStudentListByTeacherId(id);
+    }
+
+    @GetMapping("/getResourceListByBatchId/{batchId}")
+    public List<Resource> getResourceListByBatchId(@PathVariable("batchId") Long batchId) {
+        Batch batch = batchService.getBatchById(batchId);
+        Long courseId = batch.getBatchCourse().getId();
+        List<Resource> resourceList = resourceService.getResourceByCourseId(courseId);
+        return resourceList;
+    }
+
+    @GetMapping("/getResourceListByTeacherId")
+    public List<Resource> getResourceListByTeacher(HttpSession session) {
+        String teacherId = (String) session.getAttribute("uid");
+        User teacherInfo = userService.getUserById(teacherId);
+        List<Course> teacherCourseList = userService.getTeacherCourseListById(teacherInfo.getId());
+        List<Resource> resourceList = new ArrayList<>();
+        for (Course course : teacherCourseList) {
+            resourceList.addAll(course.getResourceList());
+        }
+        return resourceList;
+    }
+
+    @PostMapping("/postResourceForBatch")
+    public void postResourceForBatch(@RequestBody BatchHasResource[] bhrList) {
+        for (BatchHasResource bhr : bhrList) {
+            BatchHasResource resBatchHasResource = batchHasResourceService.getBatchHasResourceByBatchIdAndResourceId(
+                    bhr.getBhrBatchId(), bhr.getBhrResourceId());
+            if (resBatchHasResource != null) {
+                batchHasResourceService.deleteBatchHasResourceById(resBatchHasResource.getId());
+            }
+            Batch batch = batchService.getBatchById(bhr.getBhrBatchId());
+            Resource resource = resourceService.getResourceById(bhr.getBhrResourceId());
+            BatchHasResource batchHasResource = new BatchHasResource();
+            batchHasResource.setBatch(batch);
+            batchHasResource.setResource(resource);
+            batchHasResource.setSchedule(bhr.getSchedule());
+            batchHasResourceService.addBatchHasResource(batchHasResource);
+        }
     }
 
 }
