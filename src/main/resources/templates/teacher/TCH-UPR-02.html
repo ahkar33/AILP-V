@@ -26,7 +26,7 @@
                                 <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                     <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
                                         <label for="exampleInputEmail1" class="form-label">Date</label>
-                                        <input type="datetime-local" class="form-control" v-model="date" />
+                                        <input type="datetime-local" class="form-control" v-model="date" required />
                                     </div>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                                 <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                     <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
                                         <label class="form-label">Batch</label>
-                                        <select v-model="batchId" class="form-select"
+                                        <select v-model="batchId" class="form-select" required
                                             aria-label="Default select example">
                                             <option disabled>Choose One Batch</option>
                                             <span th:each="batch : ${batchList}">
@@ -51,7 +51,6 @@
 
                     <div class="card shadow">
                         <div class="card-body text-dark">
-                            <input type="hidden" th:value="${successMsg}" id="successMsg">
                             <table id="dataTable" class="display p-2">
                                 <thead>
                                     <th>Course</th>
@@ -65,7 +64,7 @@
                                         <td class="form-check">
                                             <input type="checkbox" :value="resource.id" 
                                             v-model="resourceId"
-                                            class="form-check-input" >
+                                            class="form-check-input border-dark" >
                                         </td>
                                     </tr>
                                 </tbody>
