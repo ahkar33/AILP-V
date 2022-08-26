@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.User;
@@ -81,17 +82,17 @@ public class UserController extends Thread {
     @PostMapping("/change-password")
     public String changePassword(@RequestParam("oldPassword") String oldPassword,
             @RequestParam("newPassword") String newPassword, @RequestParam("confirmPassword") String confirmPassword,
-            HttpServletRequest request) {
+            HttpServletRequest request, RedirectAttributes redirectAttrs) {
         String uid = (String) request.getSession(false).getAttribute("uid");
-        if (passwordEncoder.matches(oldPassword, userService.getUserById(uid).getPassword())) {
+        if (!passwordEncoder.matches(oldPassword, userService.getUserById(uid).getPassword())) {
+            redirectAttrs.addFlashAttribute("msg", "Old password is incorrect");
+        } else {
             if (newPassword.equals(confirmPassword)) {
                 userService.updatePasswordByUserId(passwordEncoder.encode(newPassword), uid);
-                System.out.println("ok");
+                redirectAttrs.addFlashAttribute("isSuccess", true);
             } else {
-                System.out.println("Password Unmatched!");
+                redirectAttrs.addFlashAttribute("msg", "New password and confirm password do not match");
             }
-        } else {
-            System.out.println("Invalid Password!");
         }
         return "redirect:/user/profile";
 
@@ -102,7 +103,7 @@ public class UserController extends Thread {
             throws IOException, InterruptedException {
 
         String profilePath = "C:\\AILP-V\\src\\main\\resources\\static\\profile_pics\\";
-        
+
         boolean isValidFile = false;
         String randomName = fileService
                 .generateFileName(fileValidationService.getExtension(profile_pic.getOriginalFilename()));
