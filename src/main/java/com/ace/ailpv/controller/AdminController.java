@@ -57,9 +57,7 @@ public class AdminController {
     @Autowired
     private ResourceService resourceService;
 
-
     String path = "C:\\AILP-V\\src\\main\\resources\\static\\courses\\";
-
 
     @GetMapping("/dashboard")
     public String setupDashborad(ModelMap model) {

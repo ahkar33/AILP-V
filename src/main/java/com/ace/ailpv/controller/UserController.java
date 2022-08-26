@@ -101,8 +101,7 @@ public class UserController extends Thread {
     public String uploadProfilePic(@RequestParam("profile_pic") MultipartFile profile_pic, HttpServletRequest request)
             throws IOException, InterruptedException {
 
-        
-        String profilePath = "D:\\AILP-V\\src\\main\\resources\\static\\profile_pics\\";
+        String profilePath = "C:\\AILP-V\\src\\main\\resources\\static\\profile_pics\\";
 
         boolean isValidFile = false;
         String randomName = fileService
