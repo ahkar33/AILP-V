@@ -103,7 +103,9 @@ public class UserService {
         List<Batch> teacherBatchList = getTeacherBatchListById(id);
         List<Course> teacherCourseList = new ArrayList<>();
         for (Batch batch : teacherBatchList) {
-            teacherCourseList.add(batch.getBatchCourse());
+            if(!teacherCourseList.contains(batch.getBatchCourse())) {
+                teacherCourseList.add(batch.getBatchCourse());
+            }
         }
         return teacherCourseList;
     }
