@@ -13,8 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 // import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
-@SuppressWarnings({"deprecated"})
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+@SuppressWarnings({ "deprecated" })
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     LoginSuccessHandler loginSuccessHandler;
@@ -32,34 +32,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.userDetailsService(customUserDetailsService);
-        
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
-        
-            .authorizeRequests()
+                .csrf().disable()
+
+                .authorizeRequests()
                 .antMatchers("/assets/**", "/auth/**", "/login", "/logout", "/admin/register", "/api/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/teacher/**").hasRole("TEACHER")
                 .antMatchers("/student/**").hasRole("STUDENT")
                 .anyRequest()
-                    .authenticated()
-        .and()
-            .formLogin()
+                .authenticated()
+                .and()
+                .formLogin()
                 .loginPage("/auth/login")
                 .loginProcessingUrl("/login")
                 .successHandler(loginSuccessHandler)
                 .failureHandler(customAuthenticationFailureHandler)
-        .and()
-            .rememberMe()
+                .and()
+                .rememberMe()
                 .authenticationSuccessHandler(remembermeSuccessHandler)
-            
-                .tokenValiditySeconds(2592000);
-                
-             ;
+                .tokenValiditySeconds(2592000)
+                .and()
+                .exceptionHandling().accessDeniedPage("/user/403");
     }
 
     @Bean
@@ -72,5 +71,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-    
+
 }

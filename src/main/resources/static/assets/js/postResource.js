@@ -5,33 +5,59 @@ const app = Vue.createApp({
             batchId: 'Choose One Batch',
             date: '',
             resourceList: [],
-            resourceId: []
+            resourceId: [],
+            isEmpty: false
         }
     },
     methods: {
         handleSubmit() {
-            let data = [];
-            this.resourceId.forEach(id => {
-                data = [...data, {
-                    bhrResourceId: id,
-                    bhrBatchId: this.batchId,
-                    schedule: this.date
-                }]
-            });
 
-            console.log(data);
+            this.isEmpty = false;
 
-            axios
-                .post(`http://localhost:8080/api/teacher/postResourceForBatch`, data)
-                .then(() => {
-                    Swal.fire(
-                        'Successfully Uploaded!',
-                        '',
-                        'success'
-                    ).then(() => window.location = "http://localhost:8080/teacher/postResource");
-                })
-                .catch(error => console.log(error));
+            console.log(this.batchId);
+            if (this.batchId === 'Choose One Batch' || this.batchId.length === 0) {
+                this.isEmpty = true;
+                Swal.fire(
+                    'Please Choose Batch!',
+                    '',
+                    'info'
+                )
+            } else if (this.date.length === 0) {
+                this.isEmpty = true;
+                Swal.fire(
+                    'Please Choose Date!',
+                    '',
+                    'info'
+                )
+            } else if(this.resourceId.length == 0) {
+                this.isEmpty = true;
+                Swal.fire(
+                    'Please Check At Least One Resource!',
+                    '',
+                    'info'
+                )
+            }
 
+            if (!this.isEmpty) {
+                let data = [];
+                this.resourceId.forEach(id => {
+                    data = [...data, {
+                        bhrResourceId: id,
+                        bhrBatchId: this.batchId,
+                        schedule: this.date
+                    }]
+                });
+                axios
+                    .post(`http://localhost:8080/api/teacher/postResourceForBatch`, data)
+                    .then(() => {
+                        Swal.fire(
+                            'Successfully Uploaded!',
+                            '',
+                            'success'
+                        ).then(() => window.location = "http://localhost:8080/teacher/postResource");
+                    })
+                    .catch(error => console.log(error));
+            }
         }
     },
     watch: {
