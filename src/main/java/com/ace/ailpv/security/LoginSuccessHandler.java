@@ -30,10 +30,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Override
     protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-        System.out.println("auth invoked");
         User user = userService.getUserById(authentication.getName());
-       
-        
 
         request.getSession().setAttribute("uid", user.getId());
         request.getSession().setAttribute("name", user.getName());
@@ -53,19 +50,18 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         List<String> roles = new ArrayList<>();
         for (GrantedAuthority a : authorities) {
-            
+
             roles.add(a.getAuthority());
         }
 
-        
         // check user role and decide the redirect url
-        if (roles.contains("ROLE_ADMIN")) 
+        if (roles.contains("ROLE_ADMIN"))
             url = "/admin/dashboard";
-        else if(roles.contains("ROLE_TEACHER")) 
-            url = "/teacher/dashboard"; 
-        else if (roles.contains("ROLE_STUDENT")) 
+        else if (roles.contains("ROLE_TEACHER"))
+            url = "/teacher/dashboard";
+        else if (roles.contains("ROLE_STUDENT"))
             url = "/student/student-home";
-           
+
         return url;
     }
 }

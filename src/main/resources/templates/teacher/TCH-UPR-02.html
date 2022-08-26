@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/teacher/teacher-fragments :: teacher_head">
+    <title>Student Table</title>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <!-- this is where side bar is -->
+        <div th:insert="/teacher/teacher-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <!-- this is where nav bar is -->
+                <div th:insert="/teacher/teacher-fragments :: navbar" />
+
+                <div class="container-fluid" id="app">
+                    <h1 class="fs-3 mb-4 text-start"
+                        style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
+                        Upload Resource
+                    </h1>
+                    <div class="card-header d-flex d-lg-flex flex-lg-wrap flex-wrap py-3">
+                        <form>
+                            <div class="me-3">
+                                <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                        <label for="exampleInputEmail1" class="form-label">Date</label>
+                                        <input type="datetime-local" class="form-control" v-model="date" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <form>
+                            <div class="">
+                                <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                        <label class="form-label">Batch</label>
+                                        <select v-model="batchId" class="form-select" required
+                                            aria-label="Default select example">
+                                            <option disabled>Choose One Batch</option>
+                                            <span th:each="batch : ${batchList}">
+                                                <option th:value="${batch?.id}">[[${batch?.name}]]</option>
+                                            </span>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card shadow">
+                        <div class="card-body text-dark">
+                            <table id="dataTable" class="display p-2">
+                                <thead>
+                                    <th>Course</th>
+                                    <th>Resource</th>
+                                    <th>Action</th>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(resource, index) in resourceList" :key="index">
+                                        <td>{{ resource.resourceCourse.name}} </td>
+                                        <td>{{ resource.name }}</td>
+                                        <td class="form-check">
+                                            <input type="checkbox" :value="resource.id" 
+                                            v-model="resourceId"
+                                            class="form-check-input border-dark" >
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button @click.prevent="handleSubmit()" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <div th:insert="/teacher/teacher-fragments :: footer" />
+    <script src="/assets/js/postResource.js"></script>
+
+</body>
+
+</html>

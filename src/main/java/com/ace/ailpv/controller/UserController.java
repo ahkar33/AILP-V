@@ -142,4 +142,10 @@ public class UserController extends Thread {
         Thread.sleep(1500);
         return "redirect:/user/profile";
     }
+
+    @GetMapping("/403")
+    public String show403() {
+        return "/error/403";
+    }
+
 }
