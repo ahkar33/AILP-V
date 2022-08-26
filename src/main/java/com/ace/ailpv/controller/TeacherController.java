@@ -149,4 +149,26 @@ public class TeacherController {
         return "/teacher/TCH-UPR-02";
     }
 
+
+    //added by me
+    @GetMapping("/assignment-table")
+    public String setupAssignmentTable(HttpSession session, ModelMap model) {
+        String teacherId = (String) session.getAttribute("uid");
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+        model.addAttribute("batchList", batchList);
+        return "/teacher/TCH-ASG-00";
+    }
+
+    // @PostMapping("/addCourse")
+    // public String addCourse(@ModelAttribute("course") Course course, RedirectAttributes redirectAttrs)
+    //         throws IllegalStateException, IOException {
+    //     if (courseService.checkCourseName(course.getName())) {
+    //         redirectAttrs.addFlashAttribute("errorMsg", true);
+    //         return "redirect:/admin/course-table";
+    //     }
+    //     courseService.addCourse(course);
+    //     return "redirect:/admin/course-table";
+    // }
+    //end
+
 }
