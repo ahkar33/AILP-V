@@ -55,7 +55,7 @@ public class User {
     @Transient
     private String status = "Present";
 
-    private Long oldMessagesCount;
+    private Long readMessagesCount;
 
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean enabled;

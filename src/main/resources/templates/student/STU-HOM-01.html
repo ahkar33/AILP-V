@@ -5,6 +5,12 @@
     <title>Student Home</title>
 </head>
 
+<style>
+    [v-cloak] {
+        display: none
+    }
+</style>
+
 <body id="page-top" style="background: rgb(255,255,255);">
 
     <div th:insert="/student/student-fragments :: pc-navbar" />
@@ -139,10 +145,16 @@
                                             </div>
                                             <div
                                                 class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
-                                                <span v-if="unreadMessagesCount != 0"
-                                                    class="fw-bold me-1 text-danger">{{unreadMessagesCount }}</span>
                                                 <i class="icon ion-chatboxes d-flex d-md-flex justify-content-md-center align-items-md-center"
-                                                    style="font-size: 26px;color: #00518c;"></i><span class="badge bg-danger rounded-pill" style="top: 11px; position: absolute; right: 11px; font-size: 10px;">9</span>
+                                                    style="font-size: 26px;color: #00518c;"></i>
+                                                <span v-cloak v-if="unreadMessagesCount != 0"
+                                                    class="badge bg-danger rounded-pill"
+                                                    style="top: 11px; position: absolute; right: 11px; font-size: 10px;">
+                                                    <span v-if="unreadMessagesCount <= 99">
+                                                        {{ unreadMessagesCount }}
+                                                    </span>
+                                                    <span v-else> 99+ </span>
+                                                </span>
                                             </div>
                                         </div>
                                         <p class="text-secondary card-text">
@@ -305,7 +317,7 @@
                 },
                 getOldMessagesCount() {
                     axios
-                        .get(`http://localhost:8080/api/user/getUserOldMessagesCountById/${this.userId}`)
+                        .get(`http://localhost:8080/api/user/getUserReadMessagesCountById/${this.userId}`)
                         .then(res => this.oldMessagesCount = res.data)
                         .catch(error => console.log(error));
                 }

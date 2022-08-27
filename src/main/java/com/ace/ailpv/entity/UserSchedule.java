@@ -46,4 +46,7 @@ public class UserSchedule {
 
     private String status;
 
+    @ManyToOne
+    private Batch userScheduleBatch;
+
 }

@@ -39,9 +39,9 @@ public class UserApi {
         userService.addUser(resUser);
     }
 
-    @GetMapping("/getUserOldMessagesCountById/{userId}")
-    public Long getUserOldMessagesCount(@PathVariable("userId") String userID) {
-        return userService.getUserOldMessagesCountById(userID);
+    @GetMapping("/getUserReadMessagesCountById/{userId}")
+    public Long getUserReadMessagesCount(@PathVariable("userId") String userID) {
+        return userService.getUserReadMessagesCountById(userID);
     }
 
 }
