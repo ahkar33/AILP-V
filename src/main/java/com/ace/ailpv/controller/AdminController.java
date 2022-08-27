@@ -59,6 +59,7 @@ public class AdminController {
 
     String path = "C:\\AILP-V\\src\\main\\resources\\static\\courses\\";
 
+
     @GetMapping("/dashboard")
     public String setupDashborad(ModelMap model) {
         model.addAttribute("studentCount", userService.getAllStudents().size());
