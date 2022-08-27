@@ -138,4 +138,8 @@ public class UserService {
         return userRepository.findUserOldMessagesCountById(id);
     }
 
+    public int getUserCountByUserRole(String userRole){
+        return userRepository.userCountByUserRole(userRole);
+    }
+
 }

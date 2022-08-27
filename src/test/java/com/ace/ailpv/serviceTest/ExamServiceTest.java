@@ -3,7 +3,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.ace.ailpv.entity.Exam;
 import com.ace.ailpv.repository.ExamRepository;
 import com.ace.ailpv.service.ExamService;
 
@@ -19,11 +18,11 @@ public class ExamServiceTest {
 
     }
 
-    private Exam getExam(){
-        Exam exam=new Exam();
-        exam.setId(1L);
-        exam.setName("first term");
+    // private Exam getExam(){
+    //     Exam exam=new Exam();
+    //     exam.setId(1L);
+    //     exam.setName("first term");
 
-        return exam;
-    }
+    //     return exam;
+    // }
 }
