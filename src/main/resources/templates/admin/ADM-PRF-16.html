@@ -115,9 +115,13 @@
                                                 Settings
                                             </p>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body" id="app">
                                             <form method="post" th:action="@{/user/change-password}">
-    
+                                                <input type="hidden" th:value="${isSuccess}" id="isSuccess">
+                                                <div th:if="${!#strings.isEmpty(msg)}" class="alert alert-danger"
+                                                    role="alert">
+                                                    [[${msg}]]
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="mb-3">
@@ -137,8 +141,18 @@
                                                                 <strong>New Password</strong>
                                                             </label>
                                                             <input class="form-control" type="password"
-                                                                name="newPassword" placeholder="Type Your New Password"
-                                                                required="" />
+                                                                name="newPassword" v-model="password"
+                                                                placeholder="Type Your New Password" required="" />
+                                                            <span v-cloak v-if="password">
+                                                                <div class="progress mt-2">
+                                                                    <div class="progress-bar" :class="background"
+                                                                        role="progressbar" aria-label="Danger example"
+                                                                        :style="{width: value}" aria-valuenow="100"
+                                                                        aria-valuemin="0" aria-valuemax="100">
+                                                                    </div>
+                                                                </div>
+                                                                <p class="fw-bold" :class="textColor">{{ strength }}</p>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
@@ -176,6 +190,56 @@
     </div>
 
     <div th:insert="/admin/admin-fragments :: footer" />
+
+    <script>
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    password: '',
+                    strength: '',
+                    textColor: '',
+                    background: '',
+                    value: ''
+                }
+            },
+            methods: {
+            },
+            watch: {
+                password: function (newPassword) {
+                    var strongRegex = new RegExp("^(?=.{14,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+                    var mediumRegex = new RegExp("^(?=.{10,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+                    if (strongRegex.test(newPassword)) {
+                        this.strength = 'Strong';
+                        this.background = 'bg-success';
+                        this.textColor = 'text-success'
+                        this.value = '100%';
+                    } else if (mediumRegex.test(newPassword)) {
+                        this.strength = 'Medium';
+                        this.background = 'bg-warning'
+                        this.textColor = 'text-warning'
+                        this.value = '66%';
+                    } else {
+                        this.strength = 'Weak';
+                        this.background = 'bg-danger'
+                        this.textColor = 'text-danger'
+                        this.value = '33%';
+                    }
+                }
+            },
+        })
+        app.mount('#app');
+
+        let isSuccess = document.getElementById("isSuccess").value;
+        if (isSuccess) {
+            Swal.fire(
+                'Password Updated!',
+                'Your password has been changed successfully.',
+                'success'
+            )
+        }
+
+    </script>
 
 </body>
 
