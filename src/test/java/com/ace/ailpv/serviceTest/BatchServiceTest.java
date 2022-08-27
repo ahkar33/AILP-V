@@ -17,6 +17,7 @@ import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.repository.BatchRepository;
 import com.ace.ailpv.service.BatchService;
+import com.ace.ailpv.service.UserService;
 
 @SpringBootTest
 public class BatchServiceTest {
@@ -25,18 +26,21 @@ public class BatchServiceTest {
     BatchRepository batchRepository;
     @InjectMocks
     BatchService batchService;
+    @Mock
+    UserService userService;
 
     @Test
     public void addBatchTest(){
         Batch batch=getOneBatch();
         batchService.addBatch(batch);
-        when(batchRepository.save(batch)).thenReturn(batch);
        verify(batchRepository, times(1)).save(batch);
     }
 
     @Test
     public void deleteBatchByIdTest(){
         Batch batch=getOneBatch();
+        List<User>userList=getUserList();
+        when(userService.findUserByBatchId(batch.getId())).thenReturn(userList);
         batchService.deleteBatchById(batch.getId());
         verify(batchRepository, times(1)).deleteById(batch.getId());
     }
@@ -44,16 +48,25 @@ public class BatchServiceTest {
     @Test
     public void getBatchByIdTest(){
         Batch batch=getOneBatch();
-       when(batchRepository.findById(1L)).thenReturn(Optional.of(batch));
-       Batch selectBach=batchService.getBatchById(1L);
+       when(batchRepository.findById(batch.getId())).thenReturn(Optional.of(batch));
+       Batch selectBach=batchService.getBatchById(batch.getId());
        assertEquals(batch.getName(), selectBach.getName());
        assertEquals(batch.getStartDate(), selectBach.getStartDate());
        assertEquals(batch.getEndDate(), selectBach.getEndDate());
        assertEquals(batch.getBatchCourse(), selectBach.getBatchCourse());
        assertEquals(batch.getUserList(), selectBach.getUserList());
-       verify(batchRepository, times(1)).findById(1L);
+       verify(batchRepository, times(1)).findById(batch.getId());
 
     }
+
+    @Test
+    public void getBatchByUserIdTest(){
+     Batch batch= batchService.getBatchByUserId("id");
+     assertEquals(batch,null);
+
+    }
+
+
 
     @Test
     public void getAllBatchesTest(){

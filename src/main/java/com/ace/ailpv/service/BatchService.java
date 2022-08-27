@@ -21,7 +21,12 @@ public class BatchService {
     private UserService userService;
 
     public void addBatch(Batch batch) {
-        batchRepository.save(batch);
+        try {
+            batchRepository.save(batch);
+            
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 
     public void deleteBatchById(Long id) {
