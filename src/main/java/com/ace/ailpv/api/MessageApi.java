@@ -2,6 +2,8 @@ package com.ace.ailpv.api;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ace.ailpv.entity.Batch;
@@ -52,4 +55,16 @@ public class MessageApi {
         return messageService.getLastInsertedId();
     }
 
+    @GetMapping("/countMessagesByBatchId/{id}")
+    public Long getMessagesByBatchId(@PathVariable("id") Long batchId) {
+        return messageService.countMessagesByBatchId(batchId);
+    }
+
+    @PostMapping("/sendOldMessagesCount")
+    public void sendOldMessagesCount(@RequestParam("count") Long count, HttpSession session) {
+        String userId = (String) session.getAttribute("uid");
+        User user = userService.getUserById(userId);
+        user.setOldMessagesCount(count);
+        userService.addUser(user);
+    }
 }
