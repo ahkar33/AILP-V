@@ -15,22 +15,22 @@
                 <!-- this is where nav bar is -->
                 <div th:insert="/admin/admin-fragments :: navbar" />
 
-                <div class="container-fluid">
+                <div class="container-fluid mb-4">
                     <div>
-                        <h1 class="text-start"
-                            style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Anek Kannada', sans-serif;"
+                        <h1 class="fs-3 mb-4 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;"
                             th:text="${course?.name}">
 
                         </h1>
                     </div>
                     <div
-                        class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center mb-3">
+                        class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop" style="width: 176.1px;font-size: 16px;height: 44px;margin-bottom: 5px;">
-                            <i class="fa-photo-video fas fs-5"></i>
-                            Upload Video
+                        <button type="button" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop" class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm" style="width: 149.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;">
+                            <i class="fa-photo-video fas" style="padding-bottom: 7px; padding-top: 9px;"></i>
+                            &nbsp;Upload Video
                         </button>
 
                         <!-- Modal -->
@@ -65,9 +65,9 @@
 
 
 
-                    <div class="card shadow text-dark">
+                    <div class="card shadow-sm text-dark">
                         <h2 class="text-danger text-center">[[${msg}]]</h2>
-                        <div class="card-body">
+                        <div class="card-body pt-4">
                             <table id="dataTable">
                                 <thead class="table">
                                     <tr>
@@ -88,9 +88,10 @@
                                                 Remove
                                             </a> -->
 
-                                            <a class=" fw-bold btn btn-outline-danger"
+                                            <a class="btn btn-danger btn" title="Remove" data-bs-placement="top"
+                                            data-bs-toggle="tooltip"
                                             th:attr="onclick=|handleDelete('${video.id}' + '/' + '${course.name}')|">
-                                            Remove
+                                            <i class="fa-trash-alt fas"></i>
                                         </a>
                                         </td>
                                     </tr>
@@ -108,6 +109,11 @@
     <div th:insert="/admin/admin-fragments :: footer" />
 
     <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });
