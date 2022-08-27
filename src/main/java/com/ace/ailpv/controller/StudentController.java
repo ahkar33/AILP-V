@@ -26,7 +26,12 @@ public class StudentController {
     private UserService usersService;
 
     @GetMapping("/student-home")
-    public String showStudentHomePage() {
+    public String showStudentHomePage(HttpSession session, ModelMap model) {
+        String studentId =  (String) session.getAttribute("uid");
+        User userInfo = usersService.getUserById(studentId);
+        userInfo.setBatchId(userInfo.getBatchList().iterator().next().getId().toString());
+        model.addAttribute("userId", userInfo.getId());
+        model.addAttribute("batchId", userInfo.getBatchId());
         return "/student/STU-HOM-01";
     }
 

@@ -26,4 +26,8 @@ public class MessageService {
         return messageRepository.findLastId();
     }
 
+    public Long countMessagesByBatchId(Long batchId) {
+        return messageRepository.countMessagesByBatchId(batchId);
+    }
+
 }

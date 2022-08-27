@@ -124,6 +124,8 @@
                         <!-- card start -->
                         <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" id="chat"
                             style="padding-left: 5px;padding-right: 5px;">
+                            <input id="batchId" type="hidden" th:value="${batchId}">
+                            <input id="userId" type="hidden" th:value="${userId}">
                             <a class="text-decoration-none text-dark" th:href="@{/student/student-public-chat}">
                                 <div class="card shadow-sm">
                                     <div class="card-body">
@@ -137,8 +139,10 @@
                                             </div>
                                             <div
                                                 class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
+                                                <span v-if="unreadMessagesCount != 0"
+                                                    class="fw-bold me-1 text-danger">{{unreadMessagesCount }}</span>
                                                 <i class="icon ion-chatboxes d-flex d-md-flex justify-content-md-center align-items-md-center"
-                                                    style="font-size: 25px;color: #00518c;"></i>
+                                                    style="font-size: 26px;color: #00518c;"></i><span class="badge bg-danger rounded-pill" style="top: 11px; position: absolute; right: 11px; font-size: 10px;">9</span>
                                             </div>
                                         </div>
                                         <p class="text-secondary card-text">
@@ -279,6 +283,46 @@
     </div>
 
     <div th:insert="/student/student-fragments :: footer" />
+
+    <script>
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    userId: '',
+                    batchId: '',
+                    newMessagesCount: 0,
+                    oldMessagesCount: 0,
+                    unreadMessagesCount: 0
+                }
+            },
+            methods: {
+                getNewMessagesCount() {
+                    axios
+                        .get(`http://localhost:8080/api/message/countMessagesByBatchId/${this.batchId}`)
+                        .then(res => this.newMessagesCount = res.data)
+                        .catch(error => console.log(error));
+                },
+                getOldMessagesCount() {
+                    axios
+                        .get(`http://localhost:8080/api/user/getUserOldMessagesCountById/${this.userId}`)
+                        .then(res => this.oldMessagesCount = res.data)
+                        .catch(error => console.log(error));
+                }
+            },
+            mounted() {
+                this.batchId = document.getElementById('batchId').value;
+                this.userId = document.getElementById('userId').value;
+                setInterval(() => {
+                    this.getNewMessagesCount();
+                    this.getOldMessagesCount();
+                    this.unreadMessagesCount = this.newMessagesCount - this.oldMessagesCount;
+                }, 1000);
+            },
+        })
+        app.mount('#chat');
+
+    </script>
 
 </body>
 

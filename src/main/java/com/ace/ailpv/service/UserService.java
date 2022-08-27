@@ -134,4 +134,8 @@ public class UserService {
         userRepository.toggleAccountStatus(status, uid);
     }
 
+    public Long getUserOldMessagesCountById(String id) {
+        return userRepository.findUserOldMessagesCountById(id);
+    }
+
 }
