@@ -29,16 +29,16 @@ public class CourseServiceTest {
     @InjectMocks
     FileService fileService;
 
-    @Test
-    public void addCourseTest() {
-        Course course = getOneCourse();
-        try {
-            fileService.createFolderForCourse("java");
-        } catch (IllegalStateException e) {
-            return;
+    // @Test
+    // public void addCourseTest() {
+    //     Course course = getOneCourse();
+    //     try {
+    //         fileService.createFolderForCourse("java");
+    //     } catch (IllegalStateException e) {
+    //         return;
 
-        }
-    }
+    //     }
+    // }
 
     @Test
     public void getAllCoursesTest() {

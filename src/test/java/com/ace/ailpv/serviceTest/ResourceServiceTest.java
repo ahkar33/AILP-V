@@ -24,10 +24,10 @@ public class ResourceServiceTest {
     ResourceRepository resourceRepository;
     @InjectMocks
     ResourceService resourceService;
-    @Test
-    public void isExistByResourceNameTest(){
-        Resource resource=getOneResource();
-    }
+    // @Test
+    // public void isExistByResourceNameTest(){
+    //     Resource resource=getOneResource();
+    // }
 
     @Test
     public void getAllResourcesTest(){
