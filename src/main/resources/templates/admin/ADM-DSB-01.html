@@ -34,28 +34,14 @@
             <div id="content">
                 <div th:insert="/admin/admin-fragments :: navbar" />
                 <div class="container-fluid text-primary">
-                    <div class="mb-5 mt-4 row">
+                    <div class="mb-3 mt-4 row">
                         <div class="col-12 col-lg-8 col-md-12 col-sm-12 col-xl-8">
                             <div class="align-items-center d-inline-flex flex-row"> <i
                                     class="d-inline-flex fa-2x fa-chart-bar fas fs-3 mb-2 me-2 text-primary"></i>
-                                <h3 class="d-inline-flex fs-3 mb-2 text-dark"
-                                    style="font-weight: bold;font-family: 'Roboto', sans-serif;font-size: 30px;">
+                                <h3 class="fs-3 text-secondary"
+                                style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
                                     &nbsp;Admin Dashboard
                                 </h3>
-                            </div>
-                        </div>
-                        <div class="col-md-4 text-lg-end text-start text-xl-end">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-outline-primary dropdown-toggle fs-6"
-                                    data-bs-toggle="dropdown" aria-expanded="false">Generate Report</button>
-                                <ul class="dropdown-menu" style="margin: 0px;">
-                                    <li>
-                                        <a class="dropdown-item fs-6" href="#">.pdf file</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item fs-6" href="#">.xlsx file</a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -63,7 +49,7 @@
                     <div class="row" style="margin-top: 31px;">
                         <div class="col-md-6 col-xl-4 col-xxl-3 mb-4">
                             <a class="text-decoration-none" th:href="@{/admin/student-table}">
-                                <div class="card shadow border-start-primary py-2" data-bss-hover-animate="pulse">
+                                <div class="card shadow-sm border-start-primary py-2" data-bss-hover-animate="pulse">
                                     <div class="card-body">
                                         <div class="row align-items-center no-gutters">
                                             <div class="col me-2">
@@ -87,7 +73,7 @@
                         </div>
                         <div class="col-md-6 col-xl-4 col-xxl-3 mb-4">
                             <a class="text-decoration-none" th:href="@{/admin/teacher-table}">
-                                <div class="card shadow border-start-primary py-2" data-bss-hover-animate="pulse">
+                                <div class="card shadow-sm border-start-primary py-2" data-bss-hover-animate="pulse">
                                     <div class="card-body">
                                         <div class="row align-items-center no-gutters">
                                             <div class="col me-2">
@@ -113,7 +99,7 @@
                         </div>
                         <div class="col-md-6 col-xl-4 col-xxl-3 mb-4">
                             <a class="text-decoration-none" th:href="@{/admin/batch-table}">
-                                <div class="card shadow border-start-primary py-2" data-bss-hover-animate="pulse">
+                                <div class="card shadow-sm border-start-primary py-2" data-bss-hover-animate="pulse">
                                     <div class="card-body">
                                         <div class="row align-items-center no-gutters">
                                             <div class="col me-2">
@@ -139,7 +125,7 @@
                         </div>
                         <div class="col-md-6 col-xl-4 col-xxl-3 mb-4">
                             <a class="text-decoration-none" th:href="@{/admin/course-table}">
-                                <div class="card shadow border-start-primary py-2" data-bss-hover-animate="pulse">
+                                <div class="card shadow-sm border-start-primary py-2" data-bss-hover-animate="pulse">
                                     <div class="card-body">
                                         <div class="row align-items-center no-gutters">
                                             <div class="col me-2">
