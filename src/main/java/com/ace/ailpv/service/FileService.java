@@ -19,6 +19,7 @@ public class FileService {
 
     String courseFilePath = "C:\\AILP-V\\src\\main\\resources\\static\\courses\\";
 
+
     public void createFolderForCourse(String courseName) {
         File theDir = new File(courseFilePath + courseName);
         if (!theDir.exists()) {
