@@ -60,11 +60,11 @@ public class MessageApi {
         return messageService.countMessagesByBatchId(batchId);
     }
 
-    @PostMapping("/sendOldMessagesCount")
+    @PostMapping("/sendReadMessagesCount")
     public void sendOldMessagesCount(@RequestParam("count") Long count, HttpSession session) {
         String userId = (String) session.getAttribute("uid");
         User user = userService.getUserById(userId);
-        user.setOldMessagesCount(count);
+        user.setReadMessagesCount(count);
         userService.addUser(user);
     }
 }
