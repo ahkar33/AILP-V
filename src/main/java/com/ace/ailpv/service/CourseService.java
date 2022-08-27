@@ -93,4 +93,8 @@ public class CourseService {
         courseRepository.save(course);
     }
 
+    public int getCourseCount(){
+        return courseRepository.courseCount();
+    }
+
 }

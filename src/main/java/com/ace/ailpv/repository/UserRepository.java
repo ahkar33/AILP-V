@@ -41,4 +41,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query(value = "select user.read_messages_count from user where user.id = ?1", nativeQuery = true)
     Long findUserReadMessagesCountById(String id);
 
+    @Query(value = "select count(id) from user where role=?1",nativeQuery = true)
+    int userCountByUserRole(String userRole);
+
 }

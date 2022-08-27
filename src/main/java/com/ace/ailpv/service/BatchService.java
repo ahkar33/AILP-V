@@ -62,4 +62,9 @@ public class BatchService {
         return batchRepository.findByBatchCourse_Id(id);
     }
 
+    public int getBatchCount(){
+        return batchRepository.batchCount();
+    }
+
+
 }
