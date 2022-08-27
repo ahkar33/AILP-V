@@ -97,7 +97,7 @@ const app = Vue.createApp({
         sendOldMesssagesCount() {
             let count = this.oldMessagesCount;
             axios
-                .post(`http://localhost:8080/api/message/sendOldMessagesCount?count=${count}`)
+                .post(`http://localhost:8080/api/message/sendReadMessagesCount?count=${count}`)
                 .catch(error => console.log(error));
         },
         getAllMessages() {
