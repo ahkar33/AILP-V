@@ -1,6 +1,6 @@
 package com.ace.ailpv.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,31 +21,25 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserSchedule {
-
+public class BatchHasVideo {
+   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    // @JsonIgnoreProperties("userScheduleList")
-    // @JsonIgnore
-    private User user;
+    private Video video;
 
     @Transient
-    private String studentId;
+    private Long bhvBatchId;
 
     @ManyToOne
-    // @JsonIgnoreProperties("userScheduleList")
-    private Schedule schedule;
+    private Batch bhvBatch;
 
     @Transient
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date;
+    private Long bhvVideoId;
 
-    private String status;
-
-    @ManyToOne
-    private Batch userScheduleBatch;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime schedule;    
 
 }

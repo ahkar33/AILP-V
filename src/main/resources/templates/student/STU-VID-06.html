@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/student/student-fragments :: student_head">
+    <title>Video</title>
+</head>
+
+<body id="page-top" class="bg-opacity-25" style="background-color: #f4f4f4;">
+
+    <div th:insert="/student/student-fragments :: pc-navbar" />
+
+    <div th:insert="/student/student-fragments :: mobile-navbar" />
+
+    <div class="container mb-3">
+        <h1 class="h2 mb-2 mt-4 text-dark"
+            style="font-weight: bold;font-family: 'Roboto', sans-serif;margin-bottom: 3px;">
+            [[${courseName}]]
+        </h1>
+        <i class="fa-chalkboard-teacher fas " style="margin-right: 10px;"></i>
+        <span class="text-primary fs-6 fw-bold mb-2" style="font-family: Arimo, sans-serif;margin-right: 8px;">
+            Daw Mo Yee Rose,
+        </span>
+        <span class="text-primary fw-bold mb-2" style="font-family: Arimo, sans-serif;">
+            Daw May Zwei
+        </span>
+
+        <div class="row">
+            <!-- th:if="${videoName != null}" -->
+            <div class="col-lg-8 pb-3" style="margin-bottom: 25px;border-bottom: 1px solid rgb(234,234,234) ;">
+                <video width="100%" height="100%" controls controlsList="nodownload" autoplay>
+                    <source th:src="@{${'/courses/' + courseName + '/video/' + videoName} }" type="video/mp4" />
+                </video>
+            </div>
+
+            <div class="col pb-3" style="width: 100%;margin-bottom: 25px;border-bottom: 1px solid rgb(234,234,234) ;">
+                <div class="row">
+                    <div class="col course-accordion">
+                        <div class="list-group">
+
+                            <span th:each="batchHasVideo, iter : ${batchHasVideoList}">
+                                <a th:href="@{${'/student/showClickedVideo/' + courseName + '/' + batchHasVideo?.video?.name} }"
+                                    class="list-group-item list-group-item-action pb-3 pe-1 pt-3">
+                                    <div class="col-sm-12 d-flex d-lg-flex justify-content-between w-100">
+                                        <div
+                                            class="col-12 col-md-12 col-sm-12 justify-content-between justify-content-lg-between row">
+                                            <div class="col-9 col-lg-8 col-md-10 col-sm-10 col-xl-9">
+                                                <h5 class="fs-6 lh-base mb-1">
+                                                    [[${batchHasVideo?.video?.name.substring(0,
+                                                    batchHasVideo.video.name.length - 4)}]]
+                                                </h5>
+                                            </div>
+                                            <div
+                                                class="align-self-start col-1 col-lg-1 col-md-1 col-sm-1 col-xl-1 flex-fill pe-0 ps-0 text-end text-sm-end">
+                                                <small class="text-muted">
+                                                    <i class="fa fa-play-circle"></i>&nbsp;
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 76px;height: auto;">
+                <div id="tabs-section" class="pt-3" style="height: auto;">
+                    <ul class="fs-6 fw-bolder mb-4 nav nav-pills text-dark" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-1">Overview
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-2">Discussions
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade" role="tabpanel" id="tab-1">
+                            <h4 class="fw-bold mb-2 text-dark" style="margin-top: 22px;">About This Class</h4>
+                            <p class="text-dark">From this course, you can learn Java Collections Framework, together
+                                with Generics, Lambda Functions, Method References, and Stream API.<br /><br />There are
+                                a
+                                lot of other courses on this topic. So, why would you choose exactly this
+                                course?&nbsp;Here are just a few reasons<br /><br /><strong>- Coding
+                                    examples</strong><br />To
+                                learn to program is not enough just watching videos and reading books. You also need to
+                                have a lot of practice. In this training course, you will review multiple practical
+                                tasks and coding examples which will help you learn and understand Java
+                                better.<br /><br /><strong>- Open source code</strong><br />We hide nothing from our
+                                students!
+                                Including the source code for the home task solutions and source code of examples that
+                                were shared during the lesson. Having the source code you can just copy and paste it to
+                                run it on your local computer to understand how things work better.<br /><br />You are
+                                allowed to use all source code examples for learning purposes. This helps significantly
+                                to configure the environment and make tests work, especially in case students didn't
+                                work with any testing framework in the past.<br />
+                            </p>
+                        </div>
+
+                        <div class="tab-pane fade show active" role="tabpanel" id="tab-2">
+                            <h4 class="fw-bold mb-2 mt-3 text-dark" style="margin-bottom: 20px;">Discussion Forums</h4>
+                            <p class="fs-5 fw-bold text-dark text-end"
+                                style="margin-bottom: -2px;font-family: 'Anek Bangla', sans-serif;">Ask
+                                Question?<a class="btn btn-secondary border rounded" role="button"
+                                    style="margin-top: 15px;" href="#discussion-send-button"
+                                    data-bs-target="#discussion-send-button" data-bs-toggle="modal"><i
+                                        class="icon ion-android-send"></i></a></p>
+                            <div class="modal fade" role="dialog" tabindex="-1" id="discussion-send-button">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="fs-5 modal-title text-dark" style="font-size: 15.9px;"><img
+                                                    class="border me-2 rounded-circle"
+                                                    style="width: 35px;height: 35px;margin-top: -4px;"
+                                                    src="../assets/img/zzs_profile.jpg" />Zar Zar
+                                                Soe</h4>
+                                            <div></div><button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="field"><textarea class="form-control form-control-lg"
+                                                        name="float-textarea"
+                                                        style="border: 0; border-bottom: 1px solid #E0E0E0;"
+                                                        placeholder=" " required="" rows="15"></textarea><label
+                                                        class="form-label fw-normal mb-0" for="float-textarea"
+                                                        style="font-family: 'IBM Plex Sans KR', sans-serif;">Here, write
+                                                        your message.</label></div>
+                                                <button class="btn btn-primary text-center" type="button"
+                                                    style="width: 100%;margin-left: 0px;"><i
+                                                        class="icon ion-android-send"></i>&nbsp; &nbsp;
+                                                    &nbsp;Send</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col course-disscusion-reply">
+                                <ul class="list-group">
+
+                                    <!-- comment start -->
+                                    <li class="list-group-item mb-0 mt-0 pb-3 pt-3" style="margin-bottom:6px;">
+                                        <div class="d-flex media" style="overflow:visible;">
+                                            <div>
+                                                <img class="border rounded-circle me-3"
+                                                    style="width: 30px;height: 30px;"
+                                                    src="/assets/img/zzs_profile.jpg" />
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p class="text-break">
+                                                        <a class="text-decoration-none" href="#">Zar
+                                                            Zar Soe:
+                                                        </a> This guy has been dsadsadasdsadsadsad100+ MPH
+                                                        on side streets.<br />&nbsp;This guy has been
+                                                        dsadsadasdsadsadsad100+ MPH on side streets.&nbsp;&nbsp;This guy
+                                                        has been&nbsp;<br /><br /><small class="text-muted">August 6,
+                                                            2016 @
+                                                            10:35am </small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="border d-flex media rounded rounded-3"
+                                            style="margin-left: 39px;background: #f2f2f2;padding: 14px;">
+                                            <div class="d-flex media" style="overflow:visible;">
+                                                <div>
+                                                    <img class="border rounded-circle me-3"
+                                                        style="width: 30px;height: 30px;"
+                                                        src="../assets/img/mock_profile.jpg" />
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <p class="mb-0 text-break"><a class="text-decoration-none"
+                                                                href="#">Daw May Zwei:</a> This guy has been
+                                                            dsadsadasdsadsadsad100+ MPH on side streets.<br />&nbsp;This
+                                                            guy has been dsadsadasdsadsadsad100+ MPH on side
+                                                            streets.&nbsp;&nbsp;This guy has
+                                                            been&nbsp;<br /><br /><small class="text-muted">August 6,
+                                                                2016 @ 10:35am </small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- comment end -->
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="hide-on-desktop">
+        <a class="border rounded d-inline scroll-to-top" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    </div>
+
+    <div th:insert="/student/student-fragments :: footer" />
+
+</body>
+
+</html>

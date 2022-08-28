@@ -5,6 +5,12 @@
     <title>Student Profile</title>
 </head>
 
+<style>
+    [v-cloak] {
+        display: none
+    }
+</style>
+
 <body>
 
     <div th:insert="/student/student-fragments :: pc-navbar" />
@@ -184,7 +190,7 @@
                                                 <input class="form-control" type="password" name="newPassword"
                                                     v-model="password" placeholder="Type Your New Password"
                                                     required="" />
-                                                <span v-if="password">
+                                                <span v-cloak v-if="password">
                                                     <div class="progress mt-2">
                                                         <div class="progress-bar" :class="background" role="progressbar"
                                                             aria-label="Danger example" :style="{width: value}"
@@ -285,20 +291,14 @@
         })
         app.mount('#app');
 
-        $(document).ready(function () {
-            $('#dataTable').DataTable();
-            let isSuccess = document.getElementById("isSuccess").value;
-            if (isSuccess) {
-                Swal.fire(
-                    'Password Updated!',
-                    'Your password has been changed successfully.',
-                    'success'
-                )
-            }
-        });
-        // var alertSuccess = () => {
-
-        // }
+        let isSuccess = document.getElementById("isSuccess").value;
+        if (isSuccess) {
+            Swal.fire(
+                'Password Updated!',
+                'Your password has been changed successfully.',
+                'success'
+            )
+        }
 
     </script>
 

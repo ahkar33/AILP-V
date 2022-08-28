@@ -1,12 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-   <h2>This is 403 page</h2> 
-</body>
+<!DOCTYPE html> 
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> 
+    <head> 
+        <meta charset="UTF-8"/> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+        <title>Document</title>         
+        <link rel="stylesheet" href="/assets/css/403.css"/> 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
+    </head>     
+    <body> 
+        <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+            <defs> 
+                <filter id="squiggly-0"> 
+                    <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="0"/> 
+                    <feDisplacementMap id="displacement" in="SourceGraphic" in2="noise" scale="2"/> 
+                </filter>                 
+                <filter id="squiggly-1"> 
+                    <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="1"/> 
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/> 
+                </filter>                 
+                <filter id="squiggly-2"> 
+                    <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="2"/> 
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/> 
+                </filter>                 
+                <filter id="squiggly-3"> 
+                    <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="3"/> 
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/> 
+                </filter>                 
+                <filter id="squiggly-4"> 
+                    <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="4"/> 
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="1"/> 
+                </filter>                 
+            </defs>             
+        </svg>         
+        <section class="bg-opacity-25 bg-primary error"> 
+            <div class="stage"> 
+                <div class="key"> 
+                    <div class="key__head"> 
+                        <div class="key__eye"></div>                         
+                        <div class="key__eye"></div>                         
+                        <div class="key__mouth"></div>                         
+                    </div>                     
+                    <div class="key__body"> 
+                        <div class="key__indentation"></div>                         
+                        <div class="key__indentation" style="top: 80px;"></div>                         
+                        <div class="key__indentation" style="left: 31px;"></div>                         
+                        <div class="key__arm key__arm--left"></div>                         
+                        <div class="key__arm key__arm--right"></div>                         
+                    </div>                     
+                </div>                 
+                <div class="lock"></div>                 
+            </div>             
+            <h1 class="error__header">403</h1> 
+            <h2 class="error__header error__header--secondary">Access denied</h2> 
+            <p class="error__description">Sorry, buddy, you really shouldn't be here.</p>
+
+            <span th:if="${session?.role == 'ROLE_STUDENT'}">
+                <a type="button" th:href="@{/student/student-home}" class="bg-gradient btn btn-lg btn-primary rounded-pill ">Back To Home Page</a>             
+            </span>
+            <span th:if="${session?.role == 'ROLE_TEACHER'}">
+                <a type="button" th:href="@{/teacher/dashboard}" class="bg-gradient btn btn-lg btn-primary rounded-pill ">Back To Dashboard</a>             
+            </span>
+
+        </section>         
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    </body>     
 </html>

@@ -12,6 +12,12 @@
     <title>Public Chat</title>
 </head>
 
+<style>
+    [v-cloak] {
+        display: none
+    }
+</style>
+
 <body style="background-color: #f4f4f4;">
 
     <div th:insert="/student/student-fragments :: pc-navbar" />
@@ -42,10 +48,10 @@
                                                 style="font-family: 'Roboto', sans-serif;">
                                                 [[${batchName}]]
                                                 <span @click="toggleMute()" class="ms-1" id="toggleMute">
-                                                    <span v-if="isMute">
+                                                    <span v-cloak v-if="isMute">
                                                         <i class="fa-solid fa-bell-slash"></i>
                                                     </span>
-                                                    <span v-else>
+                                                    <span v-cloak v-else>
                                                         <i class="fa-solid fa-bell"></i>
                                                     </span>
                                                 </span>
@@ -59,7 +65,7 @@
                             style="overflow: auto; height: 500px;">
                             <!-- <p class="mb-4 mt-4 text-center" style="font-size: 13px;">Today 10:45AM</p> -->
                             <ul class="m-b-0">
-                                <span v-for="(message, index) in messageList" :key="index">
+                                <span v-cloak v-for="(message, index) in messageList" :key="index">
                                     <span v-if="userName == message.messageUser.name">
                                         <li
                                             class="align-items-start clearfix d-flex flex-column flex-nowrap g-0 mb-3 text-start">
@@ -82,7 +88,7 @@
                                             </div>
                                         </li>
                                     </span>
-                                    <span v-else>
+                                    <span v-cloak v-else>
                                         <li
                                             class="align-items-start clearfix d-flex flex-column flex-nowrap g-0 mb-3 text-start">
                                             <div class="d-flex mw-100 row w-100" style="max-width: 508px;">
@@ -96,7 +102,7 @@
                                             </div>
                                             <div class="d-flex mw-100 row w-100" style="max-width: 508px;">
                                                 <div class="col-1 col-lg-2 col-md-4 col-sm-1 pe-0 w-auto">
-                                                    <img :src=`/profile_pics/${message.messageUser.profile_pic}` 
+                                                    <img :src=`/profile_pics/${message.messageUser.profile_pic}`
                                                         alt="avatar" class="me-2"
                                                         style="width: 40px; height: 40px; border-radius: 50%;" />
                                                 </div>

@@ -15,22 +15,24 @@
                 <!-- this is where nav bar is -->
                 <div th:insert="/admin/admin-fragments :: navbar" />
 
-                <div class="container-fluid">
+                <div class="container-fluid mb-4">
                     <div>
-                        <h1 class="text-start"
-                            style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Anek Kannada', sans-serif;"
+                        <h1 class="fs-3 mb-4 text-secondary"
+                            style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;"
                             th:text="${course?.name}">
 
                         </h1>
                     </div>
                     <div
-                        class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center mb-3">
+                        class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop" style="width: 176.1px;font-size: 16px;height: 44px;margin-bottom: 5px;">
-                            <i class="fa-photo-video fas fs-5"></i>
-                            Upload Video
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                            class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
+                            style="width: 159.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;">
+                            <i class="fa-photo-video fas"
+                                style="padding-bottom: 7px; padding-top: 6px; font-size: 17px;"></i>
+                            &nbsp;Upload Video
                         </button>
 
                         <!-- Modal -->
@@ -40,20 +42,28 @@
                                 <div class="modal-content">
                                     <form th:action="@{/admin/uploadCourseVideo}" method="post"
                                         enctype="multipart/form-data">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Upload Video</h5>
+                                        <div class="border border-0 modal-header rounded rounded-0"
+                                            style="background: #f8f9fc; background-color: #324da0; padding-top: 14px; padding-bottom: 14px;">
+                                            <h5 style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif; margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
+                                                class="text-light">Upload Video</h5>
                                             <input type="hidden" name="courseId" th:value="${course?.id}">
 
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                            <button type="button" class="btn-close btn-close-white"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <input class="form-control" type="file" name="file" multiple accept="video/*" required>
+                                            <label class="text-dark" style="font-family: 'Roboto', sans-serif;">Choose
+                                                at least one video</label>
+                                            <input class="form-control" type="file" name="file" multiple
+                                                accept="video/*" required>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Upload</button>
+                                        <div class="modal-footer m-0 p-0" style="background: #f8f9fc;">
+                                            <button type="button" data-bs-dismiss="modal"
+                                                class="border border-0 btn btn-light m-0 rounded-0 w-50"
+                                                style="margin-right: 13px; height: 45px; background-color: #eaeaea;">Close</button>
+                                            <button type="submit"
+                                                class="border border-0 btn btn-primary m-0 rounded-0 w-50"
+                                                style="margin-right: 13px; height: 45px; background-color: #324da0;">Upload</button>
                                         </div>
                                     </form>
 
@@ -65,9 +75,9 @@
 
 
 
-                    <div class="card shadow text-dark">
+                    <div class="card shadow-sm text-dark">
                         <h2 class="text-danger text-center">[[${msg}]]</h2>
-                        <div class="card-body">
+                        <div class="card-body pt-4">
                             <table id="dataTable">
                                 <thead class="table">
                                     <tr>
@@ -88,10 +98,11 @@
                                                 Remove
                                             </a> -->
 
-                                            <a class=" fw-bold btn btn-outline-danger"
-                                            th:attr="onclick=|handleDelete('${video.id}' + '/' + '${course.name}')|">
-                                            Remove
-                                        </a>
+                                            <a class="btn btn-danger bg-gradient" title="Remove" data-bs-placement="top"
+                                                data-bs-toggle="tooltip"
+                                                th:attr="onclick=|handleDelete('${video.id}' + '/' + '${course.name}')|">
+                                                <i class="fa-trash-alt fas"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -108,6 +119,11 @@
     <div th:insert="/admin/admin-fragments :: footer" />
 
     <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });

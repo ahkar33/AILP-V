@@ -20,18 +20,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ace.ailpv.SecretConfigProperties;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasResource;
+import com.ace.ailpv.entity.BatchHasVideo;
 import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.entity.Resource;
 import com.ace.ailpv.entity.User;
+import com.ace.ailpv.entity.Video;
 import com.ace.ailpv.service.BatchHasResourceService;
+import com.ace.ailpv.service.BatchHasVideoService;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.ResourceService;
 import com.ace.ailpv.service.UserService;
+import com.ace.ailpv.service.VideoService;
 
 @RestController
 @RequestMapping("/api/teacher")
 @CrossOrigin(origins = "*")
 public class TeacherApi {
+
+    @Autowired
+    private VideoService videoService;
 
     @Autowired
     private ResourceService resourceService;
@@ -46,7 +53,11 @@ public class TeacherApi {
     private UserService userService;
 
     @Autowired
+<<<<<<< HEAD
     private SecretConfigProperties secretConfigProperties;
+=======
+    private BatchHasVideoService batchHasVideoService;
+>>>>>>> 633bca7d6c0fc20248e37ad67baf5fcdd81e2b1d
 
     @Autowired
     private BatchHasResourceService batchHasResourceService;
@@ -120,6 +131,46 @@ public class TeacherApi {
             batchHasResource.setResource(resource);
             batchHasResource.setSchedule(bhr.getSchedule());
             batchHasResourceService.addBatchHasResource(batchHasResource);
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------------------
+
+    @GetMapping("/getVideoListByBatchId/{batchId}")
+    public List<Video> getVideoListByBatchId(@PathVariable("batchId") Long batchId) {
+        Batch batch = batchService.getBatchById(batchId);
+        Long courseId = batch.getBatchCourse().getId();
+        List<Video> videoList = videoService.getVideoByCourseId(courseId);
+        return videoList;
+    }
+
+    @GetMapping("/getVideoListByTeacherId")
+    public List<Video> getVideoListByTeacher(HttpSession session) {
+        String teacherId = (String) session.getAttribute("uid");
+        User teacherInfo = userService.getUserById(teacherId);
+        List<Course> teacherCourseList = userService.getTeacherCourseListById(teacherInfo.getId());
+        List<Video> videoList = new ArrayList<>();
+        for (Course course : teacherCourseList) {
+            videoList.addAll(course.getVideoList());
+        }
+        return videoList;
+    }
+
+    @PostMapping("/postVideoForBatch")
+    public void postVideoForBatch(@RequestBody BatchHasVideo[] bhvList) {
+        for (BatchHasVideo bhv : bhvList) {
+            BatchHasVideo resBatchHasVideo = batchHasVideoService.getBatchHasVideoyBatchIdAndVideoId(
+                    bhv.getBhvBatchId(), bhv.getBhvVideoId());
+            if (resBatchHasVideo != null) {
+                batchHasVideoService.deleteBatchHasVideoById(resBatchHasVideo.getId());
+            }
+            Batch batch = batchService.getBatchById(bhv.getBhvBatchId());
+            Video video = videoService.getVideoById(bhv.getBhvVideoId());
+            BatchHasVideo batchHasVideo = new BatchHasVideo();
+            batchHasVideo.setBhvBatch(batch);
+            batchHasVideo.setVideo(video);
+            batchHasVideo.setSchedule(bhv.getSchedule());
+            batchHasVideoService.addBatchHasVideo(batchHasVideo);
         }
     }
 

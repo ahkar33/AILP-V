@@ -35,6 +35,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         request.getSession().setAttribute("uid", user.getId());
         request.getSession().setAttribute("name", user.getName());
         request.getSession().setAttribute("profile_pic", user.getProfile_pic());
+        request.getSession().setAttribute("role", user.getRole());
 
         String targetUrl = determineTargetUrl(authentication);
         if (response.isCommitted()) {
