@@ -17,18 +17,20 @@
 
                 <div class="container-fluid mb-4" id="app">
                     <div>
-                        <h5 style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;" class="fs-3 mb-4 text-secondary">
+                        <h5 style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;"
+                            class="fs-3 mb-4 text-secondary">
                             Course Table
- </h5> 
+                        </h5>
                     </div>
 
                     <div
                         class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
                         <div>
-                            <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm" role="button" href="#add-course-button"
-                                data-bs-toggle="modal"
-                                style="width: 149.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;">
-                                <i class="fa-photo-video fas" style="padding-bottom: 7px; padding-top: 6px;"></i><span
+                            <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm" role="button"
+                                href="#add-course-button" data-bs-toggle="modal"
+                                style="width: 159.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;">
+                                <i class="fa-photo-video fas"
+                                    style="padding-bottom: 7px; padding-top: 6px; font-size: 17px;"></i><span
                                     style="font-size: 20px;"><b>&nbsp;</b></span>
                                 Create Course
                             </a>
@@ -38,13 +40,14 @@
                                     <div class="modal-content text-dark">
                                         <form th:action="@{/admin/addCourse}" th:object="${course}" method="post"
                                             enctype="multipart/form-data">
-                                            <div class="border border-0 modal-header rounded rounded-0" style="background: #f8f9fc; background-color: #324da0; padding-top: 14px; padding-bottom: 14px;">
-                                                <h4
-                                                style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif; margin-top: 5px; margin-bottom: 2px; font-size: 22px;" class="text-light">
+                                            <div class="border border-0 modal-header rounded rounded-0"
+                                                style="background: #f8f9fc; background-color: #324da0; padding-top: 14px; padding-bottom: 14px;">
+                                                <h4 style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif; margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
+                                                    class="text-light">
                                                     Create Course
                                                 </h4>
-                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                                    aria-label="Close">
+                                                <button type="button" class="btn-close btn-close-white"
+                                                    data-bs-dismiss="modal" aria-label="Close">
                                                 </button>
                                             </div>
                                             <div class="modal-body fw-normal">
@@ -54,27 +57,31 @@
                                                     maxlength="100" minlength="1" style="margin-bottom: 12px;">
 
                                                 <label for="">Fee</label>
-                                                <input type="number" class="form-control" th:field="*{fee}"
-                                                    required maxlength="20" style="margin-bottom: 12px;">
+                                                <input type="number" class="form-control" th:field="*{fee}" required
+                                                    maxlength="20" style="margin-bottom: 12px;">
 
                                                 <label for="">Description</label>
                                                 <input type="text" class="form-control" th:field="*{description}"
                                                     required maxlength="1000" style="margin-bottom: 12px;">
 
                                                 <label for="">Video</label>
-                                                <input type="file" class="form-control" multiple
-                                                    th:field="*{videos}" accept="video/*" required style="margin-bottom: 12px;">
+                                                <input type="file" class="form-control" multiple th:field="*{videos}"
+                                                    accept="video/*" required style="margin-bottom: 12px;">
 
                                                 <label for="">Resource</label>
-                                                <input type="file" class="form-control" multiple
-                                                    th:field="*{resources}" accept=".pdf, .pptx, .xlsx, .zip, .rar" style="margin-bottom: 12px;"
-                                                    required >
+                                                <input type="file" class="form-control" multiple th:field="*{resources}"
+                                                    accept=".pdf, .pptx, .xlsx, .zip, .rar" style="margin-bottom: 12px;"
+                                                    required>
 
                                             </div>
-                                            <div class="bg-transparent mb-0 modal-footer  p-0" style="background: #f8f9fc;">
-                                                <button class="border border-0 btn btn-light m-0 rounded-0 w-50"  data-bs-dismiss="modal"
-                                                style="margin-right: 13px; height: 45px; background-color: #eaeaea;">Cancel</button>
-                                                <button class="border border-0 btn btn-primary m-0 rounded-0 w-50" style="margin-right: 13px; height: 45px; background-color: #324da0;" type="submit">
+                                            <div class="bg-transparent mb-0 modal-footer  p-0"
+                                                style="background: #f8f9fc;">
+                                                <button class="border border-0 btn btn-light m-0 rounded-0 w-50"
+                                                    data-bs-dismiss="modal"
+                                                    style="margin-right: 13px; height: 45px; background-color: #eaeaea;">Cancel</button>
+                                                <button class="border border-0 btn btn-primary m-0 rounded-0 w-50"
+                                                    style="margin-right: 13px; height: 45px; background-color: #324da0;"
+                                                    type="submit">
                                                     Create
                                                 </button>
                                             </div>
@@ -90,7 +97,7 @@
                             <table id="dataTable">
                                 <thead class="table">
                                     <tr>
-                                        <th>Course Id</th>
+                                        <th>Course ID</th>
                                         <th>Course Name</th>
                                         <th>Fee</th>
                                         <th>Description</th>
@@ -102,8 +109,10 @@
                                         <td class="pb-1 pt-2">[[${course?.id}]]</td>
                                         <td class="pb-1 pt-2">[[${course?.name}]]</td>
                                         <td class="pb-1 pt-2">[[${course?.fee}]]</td>
-                                        <td class=" pb-1 pt-2 text-truncate" style="max-width: 193px;">[[${course?.description}]]</td>
-                                        <td class="d-inline-flex d-lg-flex flex-column flex-lg-nowrap flex-lg-row justify-content-lg-start pb-1 pt-2">
+                                        <td class=" pb-1 pt-2 text-truncate" style="max-width: 193px;">
+                                            [[${course?.description}]]</td>
+                                        <td
+                                            class="d-inline-flex d-lg-flex flex-column flex-lg-nowrap flex-lg-row justify-content-lg-start pb-1 pt-2">
                                             <!-- <a th:href="@{'/admin/deleteCourse/' + ${course?.id} + '/' + ${course?.name}}"
                                                 class="btn btn-outline-danger">
                                                 Remove
@@ -113,12 +122,13 @@
                                             <div class="modal fade" role="dialog" tabindex="-1"
                                                 th:attr="id='edit-course-button' + ${course.id}">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="fw-bold modal-content"
+                                                    <div class="modal-content"
                                                         style="font-family: 'Roboto', sans-serif;">
                                                         <form th:action="@{/admin/editCourse}" method="post">
-                                                            <div class="border border-0 modal-header rounded rounded-0" style="background: #f8f9fc; background-color: #324da0; padding-top: 14px; padding-bottom: 14px;">
-                                                                <h4
-                                                                    style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif; margin-top: 5px; margin-bottom: 2px; font-size: 22px;" class="text-light">
+                                                            <div class="border border-0 modal-header rounded rounded-0"
+                                                                style="background: #f8f9fc; background-color: #324da0; padding-top: 14px; padding-bottom: 14px;">
+                                                                <h4 style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif; margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
+                                                                    class="text-light">
                                                                     Edit Course
                                                                 </h4>
                                                                 <button type="button" class="btn-close btn-close-white"
@@ -128,29 +138,35 @@
                                                             <div class="modal-body fw-normal">
                                                                 <input type="hidden" name="id" th:value="${course?.id}">
                                                                 <label for="">Course Name</label>
-                                                                <input type="text" name="name" class="form-control" style="margin-bottom: 12px;"
-                                                                    required maxlength="100" minlength="1"
+                                                                <input type="text" name="name" class="form-control"
+                                                                    style="margin-bottom: 12px;" required
+                                                                    maxlength="100" minlength="1"
                                                                     th:value="${course?.name}">
 
                                                                 <label for="">Fee</label>
-                                                                <input type="number" name="fee"
-                                                                    class="form-control" style="margin-bottom: 12px;" th:value="${course?.fee}"
-                                                                    required maxlength="20">
+                                                                <input type="number" name="fee" class="form-control"
+                                                                    style="margin-bottom: 12px;"
+                                                                    th:value="${course?.fee}" required maxlength="20">
 
                                                                 <label for="">Description</label>
-                                                                <textarea type="text" name="desc"
-                                                                    class="form-control" style="margin-bottom: 12px;"
+                                                                <textarea type="text" name="desc" class="form-control"
+                                                                    style="margin-bottom: 12px;"
                                                                     th:text="${course?.description}" required
                                                                     maxlength="1000"> </textarea>
 
                                                             </div>
-                                                            <div class="modal-footer m-0 p-0" style="background: #f8f9fc;">
-                                                                <button type="button" class="border border-0 btn btn-light m-0 rounded-0 w-50"
-                                                                    data-bs-dismiss="modal" aria-label="Close"
+                                                            <div class="modal-footer m-0 p-0"
+                                                                style="background: #f8f9fc;">
+                                                                <button type="button" data-bs-dismiss="modal"
+                                                                    aria-label="Close"
+                                                                    class="border border-0 btn btn-light m-0 rounded-0 w-50"
                                                                     style="margin-right: 13px; height: 45px; background-color: #eaeaea;">
                                                                     Cancel
                                                                 </button>
-                                                                <button class="border border-0 btn btn-primary m-0 rounded-0 w-50" style="margin-right: 13px; height: 45px; background-color: #324da0;" type="submit">
+                                                                <button
+                                                                    class="border border-0 btn btn-primary m-0 rounded-0 w-50"
+                                                                    style="margin-right: 13px; height: 45px; background-color: #324da0;"
+                                                                    type="submit">
                                                                     Update
                                                                 </button>
                                                             </div>
@@ -159,26 +175,29 @@
                                                 </div>
                                             </div>
 
-                                            <a class="bg-gradient align-items-lg-center btn btn-sm btn-warning d-lg-inline-flex mb-1 me-xl-2  text-nowrap" 
+                                            <a class="bg-gradient align-items-lg-center btn btn-sm btn-warning d-lg-inline-flex mb-1 me-xl-2  text-nowrap"
                                                 th:attr="href='#edit-course-button' + ${course.id}"
-                                                data-bs-toggle="modal"><i class="fa-edit fas" style="font-size: 13px;"></i>
-                                                &nbsp;Course 
+                                                data-bs-toggle="modal"><i class="fa-edit fas"
+                                                    style="font-size: 12px;"></i>
+                                                &nbsp;Course
                                             </a>
 
 
-                                            <a class="bg-gradient align-items-lg-center btn btn-sm btn-success d-lg-inline-flex mb-1 me-xl-2" title="Edit Video"
-                                                data-bs-placement="top" data-bs-toggle="tooltip"
-                                                th:href="@{'/admin/editVideo/' + ${course?.id} }"><i class="fa-edit fas" style="font-size: 13px;"></i>
+                                            <a class="bg-gradient align-items-lg-center btn btn-sm btn-success d-lg-inline-flex mb-1 me-xl-2"
+                                                title="Edit Video" data-bs-placement="top" data-bs-toggle="tooltip"
+                                                th:href="@{'/admin/editVideo/' + ${course?.id} }"><i class="fa-edit fas"
+                                                    style="font-size: 12px;"></i>
                                                 &nbsp;Video
                                             </a>
-                                            <a class="bg-gradient align-items-center align-items-lg-center btn btn-info btn-sm d-inline-flex d-lg-inline-flex mb-1 me-xl-2" title="Edit Resource"
-                                                data-bs-placement="top" data-bs-toggle="tooltip"
-                                                th:href="@{'/admin/editResource/' + ${course?.id} }"><i class="fa-edit fas" style="font-size: 13px;"></i>
+                                            <a class="bg-gradient align-items-center align-items-lg-center btn btn-dark btn-sm d-inline-flex d-lg-inline-flex mb-1 me-xl-2"
+                                                title="Edit Resource" data-bs-placement="top" data-bs-toggle="tooltip"
+                                                th:href="@{'/admin/editResource/' + ${course?.id} }"><i
+                                                    class="fa-edit fas" style="font-size: 12px;"></i>
                                                 &nbsp;Resource
                                             </a>
 
-                                            <a class="btn btn-danger btn-sm mb-1" title="Remove" data-bs-placement="top"
-                                                data-bs-toggle="tooltip"
+                                            <a class="btn btn-danger btn-sm mb-1 bg-gradient" title="Remove"
+                                                data-bs-placement="top" data-bs-toggle="tooltip"
                                                 th:attr="onclick=|handleDelete('${course.id}' + '/' + '${course.name}')|"><i
                                                     class="fa-trash-alt fas"></i>
                                             </a>

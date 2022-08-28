@@ -8,7 +8,7 @@
 <body id="page-top">
     <div id="wrapper">
         <!-- this is where side bar is -->
-          <div th:insert="/admin/admin-fragments :: sidebar" />
+        <div th:insert="/admin/admin-fragments :: sidebar" />
 
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content" class="fs-6">
@@ -17,22 +17,23 @@
 
                 <div class="container-fluid pb-5 pe-5 ps-5 pt-2" style="max-width: 45rem;">
                     <div>
-                        <h1 class="text-start"
-                            style="margin-bottom: 10px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
+                        <h1 class="fs-3 mb-2 text-secondary"
+                            style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
                             Edit Batch
                         </h1>
                     </div>
                     <div class="card mb-4 shadow-sm">
                         <form th:action="@{/admin/editBatch}" th:object="${batch}" method="post">
-                            <div class="card-body p-4 text-dark fw-bold">
+                            <div class="card-body p-4 text-dark">
                                 <div class="dropdown">
                                     <div class="mb-3">
                                         <input th:field="*{id}" type="hidden">
-                                        <label for="formInput6" class="fs-6" style="font-family: 'Roboto';">Course</label>
-                                        <select id="formInput6" class="form-select mb-4"
-                                            th:field="*{batchCourse.id}"
+                                        <label for="formInput6" class="fs-6"
+                                            style="font-family: 'Roboto';">Course</label>
+                                        <select id="formInput6" class="form-select mb-4" th:field="*{batchCourse.id}"
                                             aria-label="Default select example">
-                                            <option th:value="${batch?.batchCourse.id}">[[${batch.batchCourse.name}]]</option>
+                                            <option th:value="${batch?.batchCourse.id}">[[${batch.batchCourse.name}]]
+                                            </option>
                                             <span th:each="course : ${courseList}">
                                                 <span th:if="${course?.id != batch?.batchCourse.id}">
                                                     <option th:value="${course?.id}">[[${course?.name}]]</option>
@@ -43,25 +44,22 @@
                                 </div>
                                 <label class="fs-6" style="font-family: 'Roboto';">Batch name</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control mb-2"
-                                    th:field="*{name}"
-                                     placeholder="Enter batch name"
-                                         required="true" />
+                                    <input type="text" class="form-control mb-2" th:field="*{name}"
+                                        placeholder="Enter batch name" required="true" />
                                 </div>
                                 <label class="fs-6" style="font-family: 'Roboto';">Start Date</label>
                                 <div class="input-group mb-3">
-                                    <input type="date" class="form-control mb-2"
-                                    th:field="*{startDate}" 
-                                         required="true" />
+                                    <input type="date" class="form-control mb-2" th:field="*{startDate}"
+                                        required="true" />
                                 </div>
                                 <label class="fs-6" style="font-family: 'Roboto';">End Date</label>
                                 <div class="input-group mb-3">
-                                    <input type="date" class="form-control mb-2"
-                                    th:field="*{endDate}"
+                                    <input type="date" class="form-control mb-2" th:field="*{endDate}"
                                         required="true" />
                                 </div>
                                 <div class="text-end">
-                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                    <button type="submit"
+                                        class="btn btn-primary bg-gradient shadow-sm w-25">Edit</button>
                                 </div>
                             </div>
                         </form>
@@ -72,7 +70,7 @@
         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
 
-     <div th:insert="/admin/admin-fragments :: footer" />
+    <div th:insert="/admin/admin-fragments :: footer" />
 
 </body>
 
