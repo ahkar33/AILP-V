@@ -37,8 +37,8 @@
                 <div id="teacher-grid">
                     <div class="container-fluid">
                         <!-- this is where i write grid -->
-                        <select v-model="batch" class="form-select" aria-label="Default select example"
-                            style="width: 12rem;">
+                        <select v-model="batch" class="form-select mb-4 mt-5 shadow-sm"
+                            aria-label="Default select example" style="width: 12rem;">
                             <option selected disabled>Choose One Batch</option>
                             <span th:each="batch : ${batchList}">
                                 <option th:value="${batch?.id}">[[${batch?.name}]]</option>
@@ -47,7 +47,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Teacher Id</th>
+                                    <th>Teacher ID</th>
                                     <th>Teacher Name</th>
                                     <th>Action</th>
                                 </tr>
@@ -59,7 +59,7 @@
                                             :class="{'border-danger border-2': inputField.isExist }" type="text"
                                             placeholder="id" />
                                         <p v-show="inputField.isExist" class="text-danger">
-                                            Id Already Exists
+                                            ID Already Exists
                                         </p>
                                     </td>
                                     <td>
@@ -75,8 +75,9 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-start ms-2">
-                            <button @click.prevent="handleSend()" class="btn btn-primary d-flex d-lg-flex"
-                                style="width: 67px; padding-left: 16px;">Add</button>
+                            <button @click.prevent="handleSend()" class="btn btn-primary bg-gradient shadow-sm"
+                                style="width:130px;"><i class="fa fa-user-plus fas fa-lg"
+                                    style="padding-bottom: 7px; padding-top: 6px; font-size:17px"></i>&nbsp;&nbsp;Add</button>
                         </div>
                     </div>
                 </div>
