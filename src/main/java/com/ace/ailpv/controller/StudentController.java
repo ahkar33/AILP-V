@@ -10,8 +10,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ace.ailpv.entity.Assignment;
 import com.ace.ailpv.entity.BatchHasResource;
 import com.ace.ailpv.entity.User;
+import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.BatchHasResourceService;
 import com.ace.ailpv.service.UserService;
 
@@ -21,6 +23,10 @@ public class StudentController {
 
     @Autowired
     private BatchHasResourceService batchHasResourceService;
+
+    //added by me
+    @Autowired
+    private AssignmentService assignmentService;
 
     @Autowired
     private UserService usersService;
@@ -52,6 +58,18 @@ public class StudentController {
                 .getAllBatchHasResourcesByBatchId(studentBatchId);
         model.addAttribute("batchHasResourceList", batchHasResourceList);
         return "/student/STU-REC-09";
+    }
+
+    //added by me
+    @GetMapping("/studentAssignment")
+    public String studentAssignment(ModelMap model, HttpSession session){
+        String studentId =  (String) session.getAttribute("uid");
+        User studentInfo = usersService.getUserById(studentId);
+        Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
+        List<Assignment> assignmentList = assignmentService.getAllAssignmentByBatchId(studentBatchId);
+
+        model.addAttribute("assignmentList", assignmentList);       
+        return "/student/STU-ASG-00";
     }
 
 }

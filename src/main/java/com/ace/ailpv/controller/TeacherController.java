@@ -1,5 +1,6 @@
 package com.ace.ailpv.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,11 +15,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ace.ailpv.entity.Assignment;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Schedule;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
+import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.ScheduleService;
 import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
@@ -35,6 +39,10 @@ public class TeacherController {
 
     @Autowired
     private ScheduleService scheduleService;
+
+    //added by me
+    @Autowired
+    private AssignmentService assignmentService;
 
     @GetMapping("/dashboard")
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
@@ -155,20 +163,28 @@ public class TeacherController {
     public String setupAssignmentTable(HttpSession session, ModelMap model) {
         String teacherId = (String) session.getAttribute("uid");
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+        model.addAttribute("assignment", new Assignment());
         model.addAttribute("batchList", batchList);
+        model.addAttribute("assignmentList", assignmentService.getAllAssignment());
         return "/teacher/TCH-ASG-00";
     }
 
-    // @PostMapping("/addCourse")
-    // public String addCourse(@ModelAttribute("course") Course course, RedirectAttributes redirectAttrs)
-    //         throws IllegalStateException, IOException {
-    //     if (courseService.checkCourseName(course.getName())) {
-    //         redirectAttrs.addFlashAttribute("errorMsg", true);
-    //         return "redirect:/admin/course-table";
-    //     }
-    //     courseService.addCourse(course);
-    //     return "redirect:/admin/course-table";
-    // }
+    @PostMapping("/createAssignment")
+    public String createAssignment(@ModelAttribute("assignment") Assignment assignment, RedirectAttributes redirectAttrs)
+            throws IllegalStateException, IOException {
+        // if (courseService.checkCourseName(course.getName())) {
+        //     redirectAttrs.addFlashAttribute("errorMsg", true);
+        //     return "redirect:/admin/course-table";
+        // }
+        
+        assignmentService.addAssignment(assignment);
+        return "redirect:/teacher/assignment-table";
+    }
+
+    @GetMapping("/checkAssignment/{assignmentId}")
+    public String checkAssignment(@PathVariable("assignmentId")Long assignmenId){
+        return "/teacher/TCH-ASD-00.html";
+    }
     //end
 
 }

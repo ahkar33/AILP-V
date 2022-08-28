@@ -1,56 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-    />
-    <title>Table - Brand</title>
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Anek+Bangla&amp;display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Anek+Kannada&amp;display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Average+Sans&amp;display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=EB+Garamond&amp;display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Inria+Sans&amp;display=swap"
-    />
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
-    />
-    <!-- datatable-css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-    />
-  </head>
+
+<head th:insert="/teacher/teacher-fragments :: teacher_head">
+    <title>Assignment Table</title>
+</head>
 
   <body id="page-top">
     <div id="wrapper">
@@ -83,7 +36,7 @@
                 <a
                   class="btn btn-primary m-2"
                   role="button"
-                  href="#add-exam-button"
+                  href="#create-assignment-button"
                   data-bs-toggle="modal"
                   ><i class="fa-clipboard-list fas fs-4"></i>&nbsp; &nbsp;
                   Create Assignment
@@ -92,14 +45,19 @@
                   class="modal fade"
                   role="dialog"
                   tabindex="-1"
-                  id="add-exam-button"
+                  id="create-assignment-button"
                 >
                   <div
                     class="modal-dialog modal-dialog-centered"
                     role="document"
                   >
                     <div class="modal-content">
-                      <form th:action="@{/teacher/createAssignment}" th:object="${assignment}" method="post">
+                      <form
+                        th:action="@{/teacher/createAssignment}"
+                        th:object="${assignment}"
+                        method="post"
+                        enctype="multipart/form-data"
+                      >
                         <div class="modal-header" style="background: #f8f9fc">
                           <h4
                             style="
@@ -123,13 +81,13 @@
                           <label for="" class="mb-auto">Assignment Name</label>
                           <input
                             type="text"
+                            th:field="*{name}"
                             class="border border-secondary form-control mb-3"
-                            value=""
                           />
 
                           <label for="" class="mb-auto">Batch</label>
                           <select
-                            
+                            th:field="*{batch.id}"
                             class="form-select mb-3"
                             aria-label="Default select example"
                             required
@@ -141,15 +99,17 @@
                             </span>
                           </select>
 
-                          <label class="form-label mb-auto">Schedule</label>
+                          <label class="form-label mb-auto">Start Time</label>
                           <input
                             type="datetime-local"
+                            th:field="*{startTime}"
                             class="border border-secondary form-control mb-3"
                           />
 
-                          <label class="form-label mb-auto">Due Date</label>
+                          <label class="form-label mb-auto">End Time</label>
                           <input
                             type="datetime-local"
+                            th:field="*{endTime}"
                             class="border border-secondary form-control mb-3"
                           />
 
@@ -157,14 +117,14 @@
                           <input
                             type="file"
                             class="border border-secondary form-control mb-3"
-                            value=""
+                            th:field="*{assignmentFile}"
                             multiple
                           />
+
                         </div>
                         <div class="modal-footer" style="background: #f8f9fc">
                           <button
                             class="btn btn-light"
-                            type="submit"
                             data-bs-dismiss="modal"
                             style="margin-right: 13px"
                           >
@@ -215,13 +175,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>001</td>
-                      <td>OOP Assignment</td>
-                      <td>Java Web Batch-01</td>
+                    <tr th:each="assignment:${assignmentList}">
+                      <td>[[${assignment?.id}]]</td>
+                      <td>[[${assignment?.name}]]</td>
+                      <td>[[${assignment?.batch.name}]]</td>
                       <td>
                         <a
-                          href="assignment-detail.html"
+                        th:href="@{/teacher/checkAssignment/} + ${assignment?.id}"
                           class="text-decoration-none"
                         >
                           <button class="btn btn-primary">Check</button>
@@ -231,9 +191,14 @@
                   </tbody>
                 </table>
               </div>
-            </div>
+            </div> 
           </div>
         </div>
+        <footer class="bg-white sticky-footer">
+          <div class="container my-auto">
+              <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
+          </div>
+      </footer>
       </div>
       <a class="border rounded d-inline scroll-to-top" href="#page-top"
         ><i class="fas fa-angle-up"></i
