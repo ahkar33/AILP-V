@@ -65,9 +65,7 @@ public class BatchServiceTest {
      assertEquals(batch,null);
 
     }
-
-
-
+    
     @Test
     public void getAllBatchesTest(){
         List<Batch>batch= getBatchList();
