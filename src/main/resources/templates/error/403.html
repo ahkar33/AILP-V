@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html lang="en"> 
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> 
     <head> 
         <meta charset="UTF-8"/> 
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/> 
@@ -54,7 +54,14 @@
             <h1 class="error__header">403</h1> 
             <h2 class="error__header error__header--secondary">Access denied</h2> 
             <p class="error__description">Sorry, buddy, you really shouldn't be here.</p>
-            <a type="button" class="bg-gradient btn btn-lg btn-primary rounded-pill">Go Back Home</a>             
+
+            <span th:if="${session?.role == 'ROLE_STUDENT'}">
+                <a type="button" th:href="@{/student/student-home}" class="bg-gradient btn btn-lg btn-primary rounded-pill ">Back To Home Page</a>             
+            </span>
+            <span th:if="${session?.role == 'ROLE_TEACHER'}">
+                <a type="button" th:href="@{/teacher/dashboard}" class="bg-gradient btn btn-lg btn-primary rounded-pill ">Back To Dashboard</a>             
+            </span>
+
         </section>         
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
