@@ -134,4 +134,12 @@ public class UserService {
         userRepository.toggleAccountStatus(status, uid);
     }
 
+    public Long getUserReadMessagesCountById(String id) {
+        return userRepository.findUserReadMessagesCountById(id);
+    }
+
+    public int getUserCountByUserRole(String userRole){
+        return userRepository.userCountByUserRole(userRole);
+    }
+
 }

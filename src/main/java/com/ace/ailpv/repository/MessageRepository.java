@@ -17,4 +17,7 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     @Query(value = "SELECT id FROM message ORDER BY id DESC LIMIT 1", nativeQuery = true)
     Long findLastId();
 
+    @Query(value = "SELECT count(message.id) FROM message WHERE message.batch_id = ?1", nativeQuery = true)
+    Long countMessagesByBatchId(Long batchId); 
+
 }

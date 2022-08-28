@@ -12,7 +12,8 @@ const app = Vue.createApp({
             userId: '',
             userName: '',
             message: '',
-            messageList: []
+            messageList: [],
+            oldMessagesCount: 0
         }
     },
     methods: {
@@ -87,6 +88,18 @@ const app = Vue.createApp({
                 })
                 .catch(error => console.log(error));
         },
+        getMessagesCount() {
+            axios
+                .get(`http://localhost:8080/api/message/countMessagesByBatchId/${this.batchId}`)
+                .then(res => this.oldMessagesCount = res.data)
+                .catch(error => console.log(error));
+        },
+        sendOldMesssagesCount() {
+            let count = this.oldMessagesCount;
+            axios
+                .post(`http://localhost:8080/api/message/sendReadMessagesCount?count=${count}`)
+                .catch(error => console.log(error));
+        },
         getAllMessages() {
             axios.
                 get(`http://localhost:8080/api/message/getMessagesByBatchId/${this.batchId}`)
@@ -132,6 +145,10 @@ const app = Vue.createApp({
             this.getUserList();
             this.getLastInsertedId();
         }, 100);
+        setInterval(() => {
+            this.getMessagesCount();
+            this.sendOldMesssagesCount();
+        }, 1000);
         $("#inputMessage").emojioneArea({
             events: {
                 keyup: function (editor, event) {
@@ -143,6 +160,6 @@ const app = Vue.createApp({
                 },
             }
         });
-    }
+    },
 })
 app.mount('#app');

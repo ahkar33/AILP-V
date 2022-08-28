@@ -61,10 +61,10 @@ public class AdminController {
 
     @GetMapping("/dashboard")
     public String setupDashborad(ModelMap model) {
-        model.addAttribute("studentCount", userService.getAllStudents().size());
-        model.addAttribute("teacherCount", userService.getAllTeachers().size());
-        model.addAttribute("batchCount", batchService.getAllBatches().size());
-        model.addAttribute("courseCount", courseService.getAllCourses().size());
+        model.addAttribute("studentCount", userService.getUserCountByUserRole("ROLE_STUDENT"));
+        model.addAttribute("teacherCount", userService.getUserCountByUserRole("ROLE_TEACHER"));
+        model.addAttribute("batchCount", batchService.getBatchCount());
+        model.addAttribute("courseCount", courseService.getCourseCount());
         return "/admin/ADM-DSB-01";
     }
 
@@ -240,7 +240,7 @@ public class AdminController {
 
         if (batch.getIsActive()) {
             batch.setIsActive(false);
-            for (User user: studentList) {
+            for (User user : studentList) {
                 boolean isEnable = true;
                 if (user.getBatchList().size() == 1) {
                     isEnable = false;
@@ -258,19 +258,17 @@ public class AdminController {
 
                 if (!isEnable)
                     userService.doToggleAccountStatus(isEnable, user.getId());
-                
-            }
 
-            
+            }
 
         } else {
             batch.setIsActive(true);
 
-            for (User user: studentList) {
+            for (User user : studentList) {
                 if (!user.getEnabled())
                     userService.doToggleAccountStatus(true, user.getId());
+            }
         }
-    }
         batchService.addBatch(batch);
         return "redirect:/admin/batch-table";
     }
@@ -383,7 +381,7 @@ public class AdminController {
     @PostMapping("/register")
     public String setupRegister(@RequestParam("id") String id, @RequestParam("name") String name,
             @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword,
-            @RequestParam("pin") String pin,RedirectAttributes redirectAttr) {
+            @RequestParam("pin") String pin, RedirectAttributes redirectAttr) {
         if (password.equals(confirmPassword)) {
 
             if (pin.equals("1337")) {
@@ -399,10 +397,10 @@ public class AdminController {
                 userService.addUser(user);
                 return "redirect:/auth/login";
             } else {
-                redirectAttr.addFlashAttribute("errorMsg","Invalid Pin!");
+                redirectAttr.addFlashAttribute("errorMsg", "Invalid Pin!");
             }
         } else {
-            redirectAttr.addFlashAttribute("errorMsg","Unmatch Password!");
+            redirectAttr.addFlashAttribute("errorMsg", "Unmatch Password!");
         }
 
         return "redirect:/admin/register";
