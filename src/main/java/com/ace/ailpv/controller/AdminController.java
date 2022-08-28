@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.ace.ailpv.SecretConfigProperties;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.entity.Resource;
@@ -34,7 +36,10 @@ import com.ace.ailpv.service.VideoService;
 public class AdminController {
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private SecretConfigProperties secretConfigProperties;
 
     @Autowired
     private CourseService courseService;
@@ -386,7 +391,7 @@ public class AdminController {
             @RequestParam("pin") String pin,RedirectAttributes redirectAttr) {
         if (password.equals(confirmPassword)) {
 
-            if (pin.equals("1337")) {
+            if (pin.equals(secretConfigProperties.getDefaultPin())) {
                 System.out.println("equal pin");
                 User user = new User();
                 user.setId(id);

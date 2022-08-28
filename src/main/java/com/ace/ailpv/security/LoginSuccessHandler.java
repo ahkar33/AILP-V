@@ -46,6 +46,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     protected String determineTargetUrl(Authentication authentication) {
         String url = "/login?error=true";
+
         // fetch the roles from Authenication object
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         List<String> roles = new ArrayList<>();
@@ -53,6 +54,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
             roles.add(a.getAuthority());
         }
+
 
         // check user role and decide the redirect url
         if (roles.contains("ROLE_ADMIN"))
