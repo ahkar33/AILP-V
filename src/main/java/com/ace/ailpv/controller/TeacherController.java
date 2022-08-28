@@ -149,4 +149,12 @@ public class TeacherController {
         return "/teacher/TCH-UPR-02";
     }
 
+    @GetMapping("/postVideo")
+    public String setupPostVideo(HttpSession session, ModelMap model) {
+        String teacherId = (String) session.getAttribute("uid");
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+        model.addAttribute("batchList", batchList);
+        return "/teacher/TCH-UPV-03";
+    }
+
 }
