@@ -14,17 +14,19 @@
                 <!-- this is wherer nav bar is -->
                 <div th:insert="/admin/admin-fragments :: navbar" />
                 <div class="container-fluid">
-                    <h1 class="text-start"
-                        style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Anek Kannada', sans-serif;">
+                    <h1 class="fs-3 mb-2 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
                         Exam Table
                     </h1>
                     <div
                         class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
                         <div>
-                            <a class="btn btn-primary btn-lg" role="button" th:href="@{/admin/create-exam}"
-                                style="width: 176.1px;font-size: 16px;height: 44px;margin-bottom: 12px;">
-                                <i class="fa-file-alt fas fs-4"></i>
-                                Create Exam
+                            <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
+                                style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
+                                role="button" th:href="@{/admin/create-exam}">
+                                <i class="fa fa-file-alt fas fa-lg"
+                                    style="padding-bottom: 7px; padding-top: 9px; font-size:18px"></i>
+                                &nbsp;Create Exam
                             </a>
                         </div>
                     </div>
@@ -52,7 +54,7 @@
                                 </div>
                             </form>
                         </div> -->
-                        <div class="card-body text-dark">
+                        <div class="card-body text-dark pt-4">
 
 
                             <!-- this is where to write datatable -->
@@ -73,9 +75,10 @@
                                         <td>[[${exam?.examCourse.name}]]</td>
                                         <td>[[${exam?.fullMark}]]</td>
                                         <td>
-                                            <a class="btn btn-outline-danger"
+                                            <a class="btn btn-danger btn bg-gradient" title="Remove"
+                                                data-bs-placement="top" data-bs-toggle="tooltip"
                                                 th:attr="onclick=|handleDelete('${exam.id}')|">
-                                                Remove
+                                                <i class="fa-trash-alt fas"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -97,8 +100,13 @@
     </div>
 
     <div th:insert="/admin/admin-fragments :: footer" />
-   
+
     <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });
