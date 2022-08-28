@@ -6,6 +6,8 @@ import static org.mockito.Mockito.when;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -24,10 +26,14 @@ public class ResourceServiceTest {
     ResourceRepository resourceRepository;
     @InjectMocks
     ResourceService resourceService;
-    // @Test
-    // public void isExistByResourceNameTest(){
-    //     Resource resource=getOneResource();
-    // }
+
+    @Test
+    public void isExistByResourceNameTest(){
+        Resource resource=getOneResource();
+        when(resourceRepository.existsByNameAndResourceCourse_id(resource.getName(),resource.getId())).thenReturn(true);
+        resourceService.isExistByResourceNameAndCourseId(resource.getName(),resource.getId());
+        verify(resourceRepository,times(1)).existsByNameAndResourceCourse_id(resource.getName(), resource.getId());
+    }
 
     @Test
     public void getAllResourcesTest(){
@@ -40,12 +46,21 @@ public class ResourceServiceTest {
 
     @Test
     public void getResourceByCourseIdTest(){
-
+        List<Resource>resource=getResourceList();
+        when(resourceRepository.findByResourceCourse_id(1L)).thenReturn(resource);
+        List<Resource>resourceList=resourceService.getResourceByCourseId(1L);
+        assertEquals(resource.size(), resourceList.size());
+        verify(resourceRepository.findByResourceCourse_id(1L));
     }
 
     @Test
     public void getResourceByIdTest(){
-
+        Resource resource=getOneResource();
+        when(resourceRepository.findById(resource.getId())).thenReturn(Optional.of(resource));
+        Resource selectResource=resourceService.getResourceById(resource.getId());
+        assertEquals(resource.getName(), selectResource.getName());
+        assertEquals(resource.getResourceCourse(), selectResource.getResourceCourse());
+        verify(resourceRepository,times(1)).findById(resource.getId());
     }
 
     @Test
