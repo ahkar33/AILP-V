@@ -16,14 +16,14 @@
                 <div th:insert="/admin/admin-fragments :: navbar" />
 
                 <div class="container-fluid pb-5 pe-5 ps-5 pt-2" style="max-width: 45rem;">
-                    <h1 class="mb-2 text-start"
-                    style="font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
-                    Edit Student</h1>
+                    <h1 class="fs-3 mb-2 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        Edit Student</h1>
                     <div class="card mb-4 shadow-sm">
                         <form th:action="@{/admin/editStudent}" th:object="${student}" method="post">
-                            <div class="card-body p-4 text-dark fw-bold">
+                            <div class="card-body p-4 text-dark" style="font-family: 'Roboto', sans-serif;">
 
-                                <label class="fs-6">Student Id</label>
+                                <label class="fs-6">Student ID</label>
                                 <div class="input-group mb-3">
                                     <input class="form-control mb-2" th:field="*{id}" readonly />
                                 </div>
@@ -40,13 +40,14 @@
                                     <select th:field="*{batchList}" class="form-select mb-3"
                                         aria-label="Default select example" required>
                                         <span th:each="batch : ${batchList}">
-                                                <option th:value="${batch.id}">[[${batch.name}]]</option>
+                                            <option th:value="${batch.id}">[[${batch.name}]]</option>
                                         </span>
                                     </select>
                                 </div>
 
                                 <div class="text-end">
-                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                    <button type="submit"
+                                        class="btn btn-primary w-25 bg-gradient shadow-sm">Edit</button>
                                 </div>
                             </div>
                         </form>

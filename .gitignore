@@ -48,7 +48,7 @@ build/
 *.jpg
 *.jfif
 
-
 ### ignore property files ###
-*.properties
-application.properties
+secrets.properties
+
+

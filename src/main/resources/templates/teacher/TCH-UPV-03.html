@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/teacher/teacher-fragments :: teacher_head">
-    <title>Upload Resource</title>
+    <title>Upload Video</title>
 </head>
 
 <body id="page-top">
@@ -18,7 +18,7 @@
                 <div class="container-fluid" id="app">
                     <h1 class="fs-3 mb-4 text-start"
                         style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
-                        Upload Resource
+                        Upload Video 
                     </h1>
                     <div class="card-header d-flex d-lg-flex flex-lg-wrap flex-wrap py-3">
                         <form>
@@ -58,12 +58,12 @@
                                     <th>Action</th>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(resource, index) in resourceList" :key="index">
-                                        <td>{{ resource.resourceCourse.name}} </td>
-                                        <td>{{ resource.name }}</td>
+                                    <tr v-for="(video, index) in videoList" :key="index">
+                                        <td>{{ video.videoCourse.name}} </td>
+                                        <td>{{ video.name }}</td>
                                         <td class="form-check">
-                                            <input type="checkbox" :value="resource.id" 
-                                            v-model="resourceId"
+                                            <input type="checkbox" :value="video.id" 
+                                            v-model="videoId"
                                             class="form-check-input border-dark" >
                                         </td>
                                     </tr>
@@ -73,6 +73,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
@@ -82,7 +83,7 @@
         </div>
     </div>
     <div th:insert="/teacher/teacher-fragments :: footer" />
-    <script src="/assets/js/postResource.js"></script>
+    <script src="/assets/js/postVideo.js"></script>
 
 </body>
 

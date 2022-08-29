@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/admin/admin-fragments :: admin_head">
-    <title>Batch Table</title>
+    <title>Student Table</title>
 </head>
 
 <body id="page-top">
@@ -17,20 +17,22 @@
                 <div th:insert="/admin/admin-fragments :: navbar" />
 
                 <div class="container-fluid">
-                    <h1 class="mb-4 text-start"
-                        style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
+                    <h1 class="fs-3 mb-4 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
                         Student Table</h1>
                     <div
                         class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
                         <div>
-                            <a class="btn btn-lg btn-primary fs-6" role="button" th:href="@{/admin/studentRegister}"
-                                style="width: 179.1px;font-size: 18px;height: 44px;margin-bottom: 12px; padding-top: 10px">
-                                <i class="fa fa-user-plus fas fs-5"></i>&nbsp;
+                            <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
+                                style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
+                                role="button" th:href="@{/admin/studentRegister}">
+                                <i class="fa fa-user-plus fas fa-lg"
+                                    style="padding-bottom: 7px; padding-top: 9px; font-size:18px"></i>&nbsp;
                                 Add Student
                             </a>
                         </div>
                     </div>
-                    <div class="card shadow">
+                    <div class="card shadow-sm">
                         <!-- <div class="card-header py-3">
                             <form>
                                 <div class="row">
@@ -67,7 +69,7 @@
                                 </div>
                             </form>
                         </div> -->
-                        <div class="card-body text-dark" >
+                        <div class="card-body text-dark pt-4">
 
                             <!-- where I have to write table -->
                             <table id="dataTable">
@@ -90,18 +92,19 @@
 
                                         <td>
                                             <a th:href="@{/admin/editStudent/} + ${student?.id}"
-                                                class="btn btn-primary me-1">
+                                                class="btn btn-primary me-1 bg-gradient">
                                                 Edit
                                             </a>
-                                            <a class="btn btn-outline-danger"
+                                            <a class="btn btn-outline-danger btn bg-gradient" title="Remove"
+                                                data-bs-placement="top" data-bs-toggle="tooltip"
                                                 th:attr="onclick=|handleDelete('${student.id}')|">
-                                                Remove
+                                                <i class="fa-trash-alt fas"></i>
                                             </a>
                                         </td>
                                         <td class="flex-lg-nowrap flex-nowrap">
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop2">
+                                            <button type="button" class="btn btn-warning bg-gradient"
+                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
                                                 Detail
                                             </button>
 
@@ -126,6 +129,11 @@
     <div th:insert="/admin/admin-fragments :: footer" />
 
     <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });
