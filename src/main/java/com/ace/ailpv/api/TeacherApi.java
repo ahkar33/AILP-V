@@ -53,11 +53,8 @@ public class TeacherApi {
     private UserService userService;
 
     @Autowired
-<<<<<<< HEAD
     private SecretConfigProperties secretConfigProperties;
-=======
     private BatchHasVideoService batchHasVideoService;
->>>>>>> 633bca7d6c0fc20248e37ad67baf5fcdd81e2b1d
 
     @Autowired
     private BatchHasResourceService batchHasResourceService;

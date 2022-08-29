@@ -50,7 +50,7 @@ public class ResourceServiceTest {
         when(resourceRepository.findByResourceCourse_id(1L)).thenReturn(resource);
         List<Resource>resourceList=resourceService.getResourceByCourseId(1L);
         assertEquals(resource.size(), resourceList.size());
-        verify(resourceRepository.findByResourceCourse_id(1L));
+        verify(resourceRepository,times(1)).findByResourceCourse_id(1L);
     }
 
     @Test
@@ -85,7 +85,7 @@ public class ResourceServiceTest {
         Video video=new Video();
         video.setId(1L);
         video.setName("Java");
-        video.setVideoCourse(getOneCourse());
+        video.setVideoCourse(new Course());
         videoList.add(video);
         return videoList;
     }
@@ -104,7 +104,7 @@ public class ResourceServiceTest {
         batch1.setName("Batch01");
         batch1.setStartDate(LocalDate.of(2022, 10, 10));
         batch1.setEndDate(LocalDate.of(2022, 10, 10));
-        batch1.setBatchCourse(getOneCourse());
+        batch1.setBatchCourse(new Course());
         batchList.add(batch);
         batchList.add(batch1);
         return batchList;
@@ -119,9 +119,9 @@ public class ResourceServiceTest {
         course1.setDescription("asddf");
         course1.setVideos(new MultipartFile[] {});
         course1.setResources(new MultipartFile[] {});
-        course1.setBatchList(getBatchList());
-        course1.setVideoList(getVideoList());
-        course1.setResourceList(getResourceList());
+        course1.setBatchList(new ArrayList<>());
+        course1.setVideoList(new ArrayList<>());
+        course1.setResourceList(new ArrayList<>());
         return course1;
     }
 
@@ -129,7 +129,7 @@ public class ResourceServiceTest {
         Resource resource=new Resource();
         resource.setId(1L);
         resource.setName("ppt");
-        resource.setResourceCourse(getOneCourse());
+        resource.setResourceCourse(new Course());
         return resource;
     }
 
@@ -138,7 +138,7 @@ public class ResourceServiceTest {
         Resource resource=new Resource();
         resource.setId(1L);
         resource.setName("ppt");
-        resource.setResourceCourse(getOneCourse());
+        resource.setResourceCourse(new Course());
         resourseList.add(resource);
         return resourseList;
     }
