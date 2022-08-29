@@ -1,6 +1,5 @@
 package com.ace.ailpv.controller;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
