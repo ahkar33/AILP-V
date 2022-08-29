@@ -58,7 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationSuccessHandler(remembermeSuccessHandler)
                 .tokenValiditySeconds(2592000)
                 .and()
-                .exceptionHandling().accessDeniedPage("/user/403");
+                .exceptionHandling().accessDeniedPage("/user/403")
+                ;
     }
 
     @Bean

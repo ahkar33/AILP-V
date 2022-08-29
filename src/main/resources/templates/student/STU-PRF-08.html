@@ -18,6 +18,9 @@
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
     <div class="container" style="margin-bottom: 95px;">
+        <div class="alert alert-danger text-center mt-3" th:if="${dpwarn != null}">
+            [[${dpwarn}]]
+        </div>
         <div class="d-sm-flex justify-content-between align-items-center mb-2 mt-2" style="margin-top: 35px;">
             <h3 class="mb-0"
                 style="font-weight: bold;font-family: 'Anek Kannada', sans-serif;font-size: 30px;color: rgb(103,103,103);">
@@ -40,6 +43,9 @@
                                 </h3>
                             </div>
                         </a>
+
+                        
+
                         <div class="modal fade" role="dialog" tabindex="-1" id="profile-name-upload">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
