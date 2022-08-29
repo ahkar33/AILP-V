@@ -32,7 +32,7 @@
                                     <input type="text" class="form-control mb-2" th:field="*{name}"
                                         placeholder="Enter Student name" required="true" />
                                 </div>
-                                <input type="hidden" th:field="*{password}">
+                                <!-- <input type="hidden" th:field="*{password}"> -->
                                 <input type="hidden" th:field="*{role}">
                                 <label class="fs-6">Teacher Batch</label>
                                 <div class="input-group mb-3">
@@ -44,6 +44,12 @@
                                         </span>
                                     </select>
                                 </div>
+
+                                <a th:href="@{'/admin/changePassword/'+${teacher.id}}">
+                                    <button type="button" class="btn btn-danger w-25 bg-gradient shadow-sm">Reset
+                                        Pasword</button>
+
+                                </a>
 
                                 <div class="text-end">
                                     <button type="submit"
