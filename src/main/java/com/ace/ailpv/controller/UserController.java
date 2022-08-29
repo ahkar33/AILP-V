@@ -1,6 +1,5 @@
 package com.ace.ailpv.controller;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +21,7 @@ import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.FileService;
+import com.ace.ailpv.service.FileUploadUtilService;
 import com.ace.ailpv.service.FileValidationService;
 import com.ace.ailpv.service.UserService;
 
@@ -33,6 +33,9 @@ public class UserController extends Thread {
 
     @Autowired
     FileValidationService fileValidationService;
+
+    @Autowired
+    FileUploadUtilService fileUploadUtilService;
 
     @Autowired
     FileService fileService;
@@ -119,7 +122,7 @@ public class UserController extends Thread {
     public String uploadProfilePic(@RequestParam("profile_pic") MultipartFile profile_pic, HttpServletRequest request)
             throws IOException, InterruptedException {
 
-        String profilePath = "C:\\AILP-V\\src\\main\\resources\\static\\profile_pics\\";
+        String profilePath = "src\\main\\resources\\static\\profile_pics\\";
 
         boolean isValidFile = false;
         String randomName = fileService
@@ -143,7 +146,7 @@ public class UserController extends Thread {
         }
 
         if (isValidFile) {
-            profile_pic.transferTo(new File(profilePath + randomName));
+            fileUploadUtilService.saveFile(profilePath, randomName, profile_pic);
 
             HttpSession session = request.getSession(false);
             String uid = (String) session.getAttribute("uid");
