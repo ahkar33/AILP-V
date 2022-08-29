@@ -53,6 +53,7 @@ public class TeacherApi {
     private UserService userService;
 
     @Autowired
+
     private SecretConfigProperties secretConfigProperties;
 
     @Autowired
