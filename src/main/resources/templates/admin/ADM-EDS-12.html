@@ -44,18 +44,19 @@
                                         </span>
                                     </select>
                                 </div>
+                                <div>
+                                    <a th:href="@{'/admin/changePassword/'+${student.id}}">
+                                        <button type="button" class="btn btn-danger w-25 bg-gradient shadow-sm">Reset
+                                            Pasword</button>
 
-                                <label class="fs-6">Reset Password</label>
-                                <a th:href="@{'/admin/changePassword/'+${student.id}}">
-                                    <button type="button"  class="btn btn-danger w-25 bg-gradient shadow-sm" >Reset</button>
+                                    </a>
 
-                                </a>
-                                
 
-                                <div class="text-end">
                                     <button type="submit"
-                                        class="btn btn-primary w-25 bg-gradient shadow-sm">Edit</button>
+                                        class="btn btn-primary w-25 bg-gradient shadow-sm float-end">Edit</button>
                                 </div>
+
+
                             </div>
                         </form>
                     </div>
