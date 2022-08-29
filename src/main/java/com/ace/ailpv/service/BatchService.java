@@ -20,6 +20,7 @@ public class BatchService {
     @Autowired
     private UserService userService;
 
+
     public void addBatch(Batch batch) {
         try {
             batchRepository.save(batch);

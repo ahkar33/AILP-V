@@ -75,52 +75,6 @@ public class ResourceServiceTest {
     }
 
 
-
-    // private List<Video>getVideoList(){
-    //     List<Video>videoList=new ArrayList<>();
-    //     Video video=new Video();
-    //     video.setId(1L);
-    //     video.setName("Java");
-    //     video.setVideoCourse(new Course());
-    //     videoList.add(video);
-    //     return videoList;
-    // }
-
-    
-    // private List<Batch>getBatchList(){
-    //     Batch batch=new Batch();
-    //     List<Batch>batchList=new ArrayList<>();
-    //     batch.setId(1L);
-    //     batch.setName("Batch01");
-    //     batch.setStartDate(LocalDate.of(2022, 10, 10));
-    //     batch.setEndDate(LocalDate.of(2022, 10, 10));
-    //     batch.setBatchCourse(getOneCourse());
-    //     Batch batch1=new Batch();
-    //     batch1.setId(1L);
-    //     batch1.setName("Batch01");
-    //     batch1.setStartDate(LocalDate.of(2022, 10, 10));
-    //     batch1.setEndDate(LocalDate.of(2022, 10, 10));
-    //     batch1.setBatchCourse(new Course());
-    //     batchList.add(batch);
-    //     batchList.add(batch1);
-    //     return batchList;
-
-    // }
-    
-    // private Course getOneCourse() {
-    //     Course course1 = new Course();
-    //     course1.setId(1L);
-    //     course1.setName("java");
-    //     course1.setFee(100.00);
-    //     course1.setDescription("asddf");
-    //     course1.setVideos(new MultipartFile[] {});
-    //     course1.setResources(new MultipartFile[] {});
-    //     course1.setBatchList(new ArrayList<>());
-    //     course1.setVideoList(new ArrayList<>());
-    //     course1.setResourceList(new ArrayList<>());
-    //     return course1;
-    // }
-
     private Resource getOneResource(){
         Resource resource=new Resource();
         resource.setId(1L);
