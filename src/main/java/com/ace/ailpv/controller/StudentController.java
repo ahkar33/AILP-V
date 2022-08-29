@@ -1,5 +1,7 @@
 package com.ace.ailpv.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,11 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ace.ailpv.entity.Assignment;
+import com.ace.ailpv.entity.AssignmentAnswer;
 import com.ace.ailpv.entity.BatchHasResource;
 import com.ace.ailpv.entity.User;
+import com.ace.ailpv.service.AssignmentAnswerService;
 import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.BatchHasResourceService;
 import com.ace.ailpv.service.UserService;
@@ -29,7 +36,11 @@ public class StudentController {
     private AssignmentService assignmentService;
 
     @Autowired
+    private AssignmentAnswerService assignmentAnswerService;
+
+    @Autowired
     private UserService usersService;
+
 
     @GetMapping("/student-home")
     public String showStudentHomePage() {
@@ -67,9 +78,29 @@ public class StudentController {
         User studentInfo = usersService.getUserById(studentId);
         Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
         List<Assignment> assignmentList = assignmentService.getAllAssignmentByBatchId(studentBatchId);
-
-        model.addAttribute("assignmentList", assignmentList);       
+        model.addAttribute("assignmentList", assignmentList);      
         return "/student/STU-ASG-00";
+    }
+
+    @PostMapping("/submitAssignment")
+    public String submitAssignment(@RequestParam("answerFile") MultipartFile multipartFileName
+                , @RequestParam("assignmentId") Long id
+                , @RequestParam("questionFileId") Long fileId
+                , HttpSession session){
+        String studentId =  (String) session.getAttribute("uid");
+        String fileName = multipartFileName.getOriginalFilename();
+        AssignmentAnswer answer = new AssignmentAnswer();
+        answer.setAnswerFile(fileName);
+        answer.setAssignment_id(id);
+        answer.setQuestion_file_id(fileId);
+        answer.setStudent_id(studentId);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        answer.setSubmitTime(now);
+
+        assignmentAnswerService.addStudentAnswer(answer);
+        
+        return "redirect:/student/studentAssignment";
     }
 
 }

@@ -25,23 +25,33 @@
                             <th>Action</th>
                         </tr>
                     <tbody>
-                        <tr th:each="assignment:${assignmentList}">
-                            <td>[[${assignment.name}]]</td>
-                            <td>
-                                <a href="" class="btn btn-info">Download</a>
-                            </td>
-                            <td>[[${assignment.endTime}]]</td>
-                            <form action="">
-                                <td>
-                                    <input type="file" multiple/>
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary">Submit</button>
-                                </td>
-                            </form>
-                        </tr>
                         
-                        
+                            <tr th:each="assignment:${assignmentList}">
+                                <form th:action="@{/student/submitAssignment}" method="post" enctype="multipart/form-data">
+                                    
+                                    <td>[[${assignment.name}]]</td>
+                                    <td >
+                                        <a th:href="@{ ${'/courses/' + assignment?.name + '/assignment/' + file?.name} }"
+                                            target="_blank"
+                                            class="btn btn-info" 
+                                            th:each="file:${assignment.assignmentFileList}">
+                                            <input type="hidden" th:name="questionFileId" th:value="${file.id}">
+                                            [[${file.name}]]       
+                                        </a>
+                                    </td>
+                                    <td>[[${assignment.endTime}]]</td>
+                                    
+                                        <input type="hidden" th:name="assignmentId" th:value="${assignment.id}">
+                                        
+                                        <td>
+                                            <input type="file" name="answerFile" multiple  />
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </td>
+                                </form>
+                            </tr>
+                          
                     </tbody>
                     </thead>
                 </table>
