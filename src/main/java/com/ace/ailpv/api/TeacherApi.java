@@ -53,11 +53,11 @@ public class TeacherApi {
     private UserService userService;
 
     @Autowired
-<<<<<<< HEAD
+
     private SecretConfigProperties secretConfigProperties;
-=======
+
     private BatchHasVideoService batchHasVideoService;
->>>>>>> 633bca7d6c0fc20248e37ad67baf5fcdd81e2b1d
+
 
     @Autowired
     private BatchHasResourceService batchHasResourceService;
@@ -81,7 +81,7 @@ public class TeacherApi {
                 userService.addUser(teacher);
             } else {
                 teacher.getBatchList().add(batch);
-                teacher.setPassword(passwordEncoder.encode("ailp123"));
+                teacher.setPassword(passwordEncoder.encode(secretConfigProperties.getDefaultTchPassword()));
                 teacher.setRole("ROLE_TEACHER");
                 teacher.setIsMute(false);
                 teacher.setEnabled(true);
