@@ -1,7 +1,6 @@
 package com.ace.ailpv.controller;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -89,12 +88,12 @@ public class StudentController {
                 , HttpSession session){
         String studentId =  (String) session.getAttribute("uid");
         String fileName = multipartFileName.getOriginalFilename();
+        Long assignmentId = id;
         AssignmentAnswer answer = new AssignmentAnswer();
         answer.setAnswerFile(fileName);
-        answer.setAssignment_id(id);
         answer.setQuestion_file_id(fileId);
         answer.setStudent_id(studentId);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         answer.setSubmitTime(now);
 

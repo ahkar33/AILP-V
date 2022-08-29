@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ace.ailpv.entity.Assignment;
+import com.ace.ailpv.entity.AssignmentAnswer;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Schedule;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
+import com.ace.ailpv.service.AssignmentAnswerService;
 import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.ScheduleService;
 import com.ace.ailpv.service.UserScheduleService;
@@ -43,6 +45,9 @@ public class TeacherController {
     //added by me
     @Autowired
     private AssignmentService assignmentService;
+
+    @Autowired
+    private AssignmentAnswerService assignmentAnswerService;
 
     @GetMapping("/dashboard")
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
@@ -172,17 +177,14 @@ public class TeacherController {
     @PostMapping("/createAssignment")
     public String createAssignment(@ModelAttribute("assignment") Assignment assignment, RedirectAttributes redirectAttrs)
             throws IllegalStateException, IOException {
-        // if (courseService.checkCourseName(course.getName())) {
-        //     redirectAttrs.addFlashAttribute("errorMsg", true);
-        //     return "redirect:/admin/course-table";
-        // }
-        
         assignmentService.addAssignment(assignment);
         return "redirect:/teacher/assignment-table";
     }
 
     @GetMapping("/checkAssignment/{assignmentId}")
-    public String checkAssignment(@PathVariable("assignmentId")Long assignmenId){
+    public String checkAssignment(@PathVariable("assignmentId")Long assignmentId, ModelMap model){
+        //List<AssignmentAnswer> answerList= assignmentAnswerService.getAssignmentAnswerByAssignmentId(assignmentId);
+        //model.addAttribute("answerList", answerList);
         return "/teacher/TCH-ASD-00.html";
     }
     //end

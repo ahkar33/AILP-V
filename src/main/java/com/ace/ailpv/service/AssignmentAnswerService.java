@@ -1,5 +1,7 @@
 package com.ace.ailpv.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,9 @@ public class AssignmentAnswerService {
     public void addStudentAnswer(AssignmentAnswer answer) {
         assignmentAnswerRepository.save(answer);
     }
+
+    // public List<AssignmentAnswer> getAssignmentAnswerByAssignmentId(Long assignmentId){
+    //     return assignmentAnswerRepository.findByAssignmentId(assignmentId);
+    // }
     
 }
