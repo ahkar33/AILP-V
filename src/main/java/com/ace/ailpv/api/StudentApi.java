@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
+import com.ace.ailpv.SecretConfigProperties;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Schedule;
 import com.ace.ailpv.service.BatchService;
@@ -41,6 +42,9 @@ public class StudentApi {
     private ScheduleService scheduleService;
 
     @Autowired
+    private SecretConfigProperties secretConfigProperties;
+
+    @Autowired
     private UserScheduleService userScheduleService;
 
     @PostMapping("/addStudents")
@@ -49,7 +53,7 @@ public class StudentApi {
         Batch batch = batchService.getBatchById(batchId);
         for (User student : studentList) {
             student.getBatchList().add(batch);
-            student.setPassword(passwordEncoder.encode("ailp123"));
+            student.setPassword(passwordEncoder.encode(secretConfigProperties.getDefaultStdPassword()));
             student.setRole("ROLE_STUDENT");
             student.setEnabled(true);
             student.setIsMute(false);

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ace.ailpv.SecretConfigProperties;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.service.BatchService;
@@ -40,15 +41,29 @@ public class UserController extends Thread {
     UserService userService;
 
     @Autowired
+    private SecretConfigProperties secretConfigProperties;
+
+    @Autowired
     BatchService batchService;
 
     @GetMapping("/profile")
     public String getProfile(HttpServletRequest request, ModelMap model) {
 
         String batches = "";
+       
 
         String uid = (String) request.getSession(false).getAttribute("uid");
         User user = userService.getUserById(uid);
+
+        if (user.getRole().equals("ROLE_TEACHER"))
+            if (passwordEncoder.matches(secretConfigProperties.getDefaultTchPassword(), user.getPassword())) 
+                model.addAttribute("dpwarn", "Default password must be changed for security reason!");
+        else if (user.getRole().equals("ROLE_STUDENT"))
+            if (passwordEncoder.matches(secretConfigProperties.getDefaultStdPassword(), user.getPassword()))  
+                model.addAttribute("dpwarn", "Default password must be changed for security reason!");
+
+        
+
 
         if (user.getBatchList().size() > 0) {
             if (user.getBatchList().size() > 1) {

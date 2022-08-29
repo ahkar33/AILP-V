@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ace.ailpv.SecretConfigProperties;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasResource;
 import com.ace.ailpv.entity.BatchHasVideo;
@@ -52,7 +53,11 @@ public class TeacherApi {
     private UserService userService;
 
     @Autowired
+<<<<<<< HEAD
+    private SecretConfigProperties secretConfigProperties;
+=======
     private BatchHasVideoService batchHasVideoService;
+>>>>>>> 633bca7d6c0fc20248e37ad67baf5fcdd81e2b1d
 
     @Autowired
     private BatchHasResourceService batchHasResourceService;
@@ -68,7 +73,7 @@ public class TeacherApi {
                 List<Batch> teacherBatchList = userService.getUserById(teacher.getId()).getBatchList();
                 teacherBatchList.addAll(batchList);
                 teacher.getBatchList().addAll(teacherBatchList);
-                teacher.setPassword(passwordEncoder.encode("ailp123"));
+                teacher.setPassword(passwordEncoder.encode(secretConfigProperties.getDefaultTchPassword()));
                 teacher.setRole("ROLE_TEACHER");
                 teacher.setIsMute(false);
                 teacher.setEnabled(true);
