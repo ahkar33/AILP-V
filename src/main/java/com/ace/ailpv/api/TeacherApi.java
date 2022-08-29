@@ -54,6 +54,8 @@ public class TeacherApi {
 
     @Autowired
     private SecretConfigProperties secretConfigProperties;
+
+    @Autowired
     private BatchHasVideoService batchHasVideoService;
 
     @Autowired
@@ -78,7 +80,7 @@ public class TeacherApi {
                 userService.addUser(teacher);
             } else {
                 teacher.getBatchList().add(batch);
-                teacher.setPassword(passwordEncoder.encode("ailp123"));
+                teacher.setPassword(passwordEncoder.encode(secretConfigProperties.getDefaultTchPassword()));
                 teacher.setRole("ROLE_TEACHER");
                 teacher.setIsMute(false);
                 teacher.setEnabled(true);
@@ -156,6 +158,7 @@ public class TeacherApi {
     @PostMapping("/postVideoForBatch")
     public void postVideoForBatch(@RequestBody BatchHasVideo[] bhvList) {
         for (BatchHasVideo bhv : bhvList) {
+            System.out.println(bhv.getBhvBatchId() + " " + bhv.getBhvVideoId());
             BatchHasVideo resBatchHasVideo = batchHasVideoService.getBatchHasVideoyBatchIdAndVideoId(
                     bhv.getBhvBatchId(), bhv.getBhvVideoId());
             if (resBatchHasVideo != null) {
