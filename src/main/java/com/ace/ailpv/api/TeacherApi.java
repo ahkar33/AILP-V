@@ -54,6 +54,8 @@ public class TeacherApi {
 
     @Autowired
     private SecretConfigProperties secretConfigProperties;
+
+    @Autowired
     private BatchHasVideoService batchHasVideoService;
 
     @Autowired
