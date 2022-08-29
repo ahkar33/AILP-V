@@ -27,7 +27,7 @@
         <div class="row">
             <!-- th:if="${videoName != null}" -->
             <div class="col-lg-8 pb-3" style="margin-bottom: 25px;border-bottom: 1px solid rgb(234,234,234) ;">
-                <video width="100%" height="100%" controls controlsList="nodownload" autoplay>
+                <video width="100%" height="100%" controls controlsList="nodownload">
                     <source th:src="@{${'/courses/' + courseName + '/video/' + videoName} }" type="video/mp4" />
                 </video>
             </div>
