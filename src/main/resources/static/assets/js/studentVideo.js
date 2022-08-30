@@ -1,6 +1,7 @@
 const app = Vue.createApp({
     data() {
         return {
+            isClickInput: false,
             userId: '',
             videoId: '',
             batchId: '',
@@ -10,6 +11,35 @@ const app = Vue.createApp({
         }
     },
     methods: {
+        convertDateTime(timeMiliSecond) {
+            if (timeMiliSecond <= 60000) {
+                return commentedTime = 'JUST NOW';
+            } else if (timeMiliSecond > 60000 && timeMiliSecond < 3600000) {
+                let minute = Math.round((timeMiliSecond / 1000) / 60);
+                return commentedTime = minute + ' minutes ago';
+            } else if (timeMiliSecond > 3600000 && timeMiliSecond < 86400000) {
+                let hour = Math.round(((timeMiliSecond / (1000 * 60 * 60)) % 24));
+                return commentedTime = hour <= 1 ? `${hour} hour ago` : `${hour} hours ago`;
+            } else if (timeMiliSecond > 86400000 && timeMiliSecond < 2629800000) {
+                let day = Math.round(timeMiliSecond / 86400000);
+                return commentedTime = day <= 1 ? `${day} day ago` : `${day} days ago`;
+            } else if (timeMiliSecond > 2629800000 && timeMiliSecond < 31556952000) {
+                let month = Math.round(timeMiliSecond / 2629746000);
+                return commentedTime = month <= 1 ? `${month} month ago` : `${month} months ago`;
+            } else if (timeMiliSecond > 31556952000) {
+                let year = Math.round(timeMiliSecond / 31556952000);
+                return commentedTime = year <= 1 ? `${year} year ago` : `${year} years ago`;
+            }
+        },
+        clickInput() {
+            this.isClickInput = true;
+            let strDate = new Date().toLocaleString();
+            let date = new Date(strDate);
+            console.log(date);
+        },
+        handleCancelInput() {
+            this.isClickInput = false;
+        },
         sendComment() {
             let data = {
                 userId: this.userId,
@@ -53,7 +83,21 @@ const app = Vue.createApp({
                     this.commentList.length = 0;
                     this.commentList = res.data.map(cmt => {
                         return { ...cmt, replyText: '' }
-                    })
+                    });
+                    this.commentList = this.commentList.map(cmt => {
+                        cmt.replyList = cmt.replyList.map(reply => {
+                            let currentTime = new Date();
+                            let date = new Date(reply.dateTime);
+                            let timeMiliSecond = currentTime - date;
+                            let commentedTime = this.convertDateTime(timeMiliSecond);
+                            return { ...reply, dateTime: commentedTime };
+                        });
+                        let currentTime = new Date();
+                        let date = new Date(cmt.dateTime);
+                        let timeMiliSecond = currentTime - date;
+                        let commentedTime = this.convertDateTime(timeMiliSecond);
+                        return { ...cmt, dateTime: commentedTime };
+                    });
                     if (index >= 0) {
                         this.commentList[index].isReplyShow = true;
                     }
