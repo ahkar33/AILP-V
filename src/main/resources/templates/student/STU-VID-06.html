@@ -88,12 +88,14 @@
                             <div class="d-flex mb-2 mt-3">
                                 <img class="img-profile me-3 rounded-circle" src="/profile_pics/profile.png"
                                     style="width: 40px; height: 40px;" />
-                                <textarea v-model="commentText"
+                                <textarea @keyup.enter="sendComment()" v-model="commentText"
+                                    @click.prevent="clickInput()"
                                     class="bg-transparent border-0 border-2 border-bottom border-secondary form-control fs-6"
                                     id="formInput4" rows="2" placeholder="Add a comment..."></textarea>
                             </div>
-                            <div class="text-end">
-                                <button type="button" class="btn btn-light">Cancel</button>
+                            <div v-if="isClickInput" class="text-end">
+                                <button @click.prevent="handleCancelInput()" type="button"
+                                    class="btn btn-light">Cancel</button>
                                 <button @click.prevent="sendComment()" type="submit"
                                     class="btn btn-primary">Comment</button>
                             </div>
@@ -134,7 +136,13 @@
                                                     <p
                                                         style="font-family: 'Roboto', sans-serif; font-size: 15px; padding-top: 5px;">
                                                         &nbsp;
-                                                        5 Replies
+                                                        <span v-if="comment.replyList.length == 0">
+                                                            REPLY
+                                                        </span>
+                                                        <span v-else>
+                                                            {{comment.replyList.length}}
+                                                            {{ comment.replyList.length == 1 ? 'REPLY' : 'REPLIES'}}
+                                                        </span>
                                                     </p>
                                                 </i>
 
@@ -145,9 +153,10 @@
                                                 <div class="mb-1 mt-0">
                                                     <div class="d-flex mb-1 mt-0">
                                                         <img class="img-profile me-2 rounded-circle"
-                                                            :src=`/profile_pics/${comment.commentUser.profile_pic}`
+                                                            th:src="@{'/profile_pics/' + ${session?.profile_pic} }"
                                                             style="width: 30px; height: 30px;" />
                                                         <textarea v-model="comment.replyText"
+                                                            @keyup.enter="sendReply(comment.id, index)"
                                                             class="bg-transparent border-0 border-2 border-bottom border-secondary form-control fs-6"
                                                             id="formInput4" rows="1" cols="58"
                                                             placeholder="Add a comment..."></textarea>
