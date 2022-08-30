@@ -24,6 +24,7 @@
                     </div>
                     <div class="card mb-4 shadow-sm">
                         <form th:action="@{/admin/editBatch}" th:object="${batch}" method="post">
+                            <input type="hidden" th:value="${successMsg}" id="successMsg">
                             <div class="card-body p-4 text-dark">
                                 <div class="dropdown">
                                     <div class="mb-3">
@@ -59,7 +60,9 @@
                                 </div>
                                 <div class="text-end">
                                     <button type="submit"
-                                        class="btn btn-primary bg-gradient shadow-sm w-25">Edit</button>
+                                        class="btn btn-primary bg-gradient shadow-sm w-25">                                                                            
+                                        Edit</button>
+
                                 </div>
                             </div>
                         </form>
@@ -71,6 +74,7 @@
     </div>
 
     <div th:insert="/admin/admin-fragments :: footer" />
+    <script src="/assets/js/alert.js"></script>
 
 </body>
 
