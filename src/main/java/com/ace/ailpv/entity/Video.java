@@ -43,4 +43,8 @@ public class Video {
     @JsonIgnore
     private List<BatchHasVideo> batchHasVideoList = new ArrayList<>();
 
+    @OneToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "commentVideo")
+    @JsonIgnore
+    private List<Comment> videoCommentList = new ArrayList<>();
+
 }
