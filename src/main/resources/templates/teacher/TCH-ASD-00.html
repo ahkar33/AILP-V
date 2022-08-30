@@ -24,19 +24,19 @@
                     style="font-family: 'Roboto', sans-serif"
                     class="fs-2 fw-bold text-dark"
                   >
-                    OOP Assignment
+                    [[${assignmentName}]]
                   </h3>
                   <div class="row">
                     <div class="col-12 mt-4">
                       <div class="row">
                         <!-- assigment div start -->
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xl-3 mb-4">
+                        <div class="col-lg-4 col-md-6 col-sm-12 col-xl-3 mb-4" th:each="asgmAnswer : ${answerList}">
                           <!-- card start -->
-                          <div
+                          <div 
                             class="border border-secondary card p-3 shadow-sm"
                           >
-                            <div class="card-body">
-                              <p class="card-text fs-4 text-center">Penny</p>
+                            <div class="card-body" >
+                              <p class="card-text fs-4 text-center">[[${asgmAnswer.student_name}]]</p>
                               <div class="d-flex justify-content-center">
                                 <a href="#" class="btn btn-warning m-1">Open</a>
                                 <a href="#" class="btn btn-success m-1"
@@ -44,19 +44,21 @@
                                 >
                               </div>
                             </div>
-                            <form action="">
+                            <form th:action="@{'/teacher/assignmentFeedBack/'+${asgmAnswer.id}}" method="post">
                               <input
                                 class="border border-secondary form-control mb-2"
                                 type="text"
+                                name="comment"
                                 placeholder="Comment"
                               />
                               <input
                                 class="border border-secondary form-control mb-2"
                                 type="text"
+                                name="mark"
                                 placeholder="Mark"
                               />
                               <div class="d-flex justify-content-center m-1">
-                                <button class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary">
                                   <i class="fa-paper-plane fas"></i>
                                   Send
                                 </button>

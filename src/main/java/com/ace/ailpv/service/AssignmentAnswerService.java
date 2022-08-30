@@ -17,8 +17,17 @@ public class AssignmentAnswerService {
         assignmentAnswerRepository.save(answer);
     }
 
-    // public List<AssignmentAnswer> getAssignmentAnswerByAssignmentId(Long assignmentId){
-    //     return assignmentAnswerRepository.findByAssignmentId(assignmentId);
-    // }
+    public List<AssignmentAnswer> getAssignmentAnswerByAssignmentId(Long assignmentId){
+        return assignmentAnswerRepository.getAnswerByAssignmentId(assignmentId);
+    }
+
+    public String getAsssignmentNameByAssignmentId(Long assignmentId){
+        return assignmentAnswerRepository.getAssignmentNameByAssignmentId(assignmentId);
+    }
+
+    public AssignmentAnswer getAssignmentAnswerById(Long asgmAnswerId) {
+        return assignmentAnswerRepository.getById(asgmAnswerId);
+    }
+
     
 }

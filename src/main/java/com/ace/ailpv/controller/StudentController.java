@@ -87,13 +87,15 @@ public class StudentController {
                 , @RequestParam("questionFileId") Long fileId
                 , HttpSession session){
         String studentId =  (String) session.getAttribute("uid");
+        User student = usersService.getUserById(studentId);
+        String studentName = student.getName();
         String fileName = multipartFileName.getOriginalFilename();
         Long assignmentId = id;
         AssignmentAnswer answer = new AssignmentAnswer();
         answer.setAnswerFile(fileName);
         answer.setQuestion_file_id(fileId);
-        answer.setStudent_id(studentId);
-        //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        answer.setStudent_name(studentName);
+        answer.setAssignment_id(assignmentId);
         LocalDateTime now = LocalDateTime.now();
         answer.setSubmitTime(now);
 

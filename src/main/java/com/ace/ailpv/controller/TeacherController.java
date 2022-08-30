@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ace.ailpv.entity.Assignment;
@@ -183,9 +184,28 @@ public class TeacherController {
 
     @GetMapping("/checkAssignment/{assignmentId}")
     public String checkAssignment(@PathVariable("assignmentId")Long assignmentId, ModelMap model){
-        //List<AssignmentAnswer> answerList= assignmentAnswerService.getAssignmentAnswerByAssignmentId(assignmentId);
-        //model.addAttribute("answerList", answerList);
-        return "/teacher/TCH-ASD-00.html";
+        List<AssignmentAnswer> answerList = assignmentAnswerService.getAssignmentAnswerByAssignmentId(assignmentId);
+        Assignment assignment = assignmentService.getAssignmentById(assignmentId);
+        String assignmentName = assignment.getName();
+        model.addAttribute("answerList", answerList);
+        model.addAttribute("assignmentName", assignmentName);
+        return "/teacher/TCH-ASD-00";
+    }
+
+    @PostMapping("/assignmentFeedBack/{asgmAnswerId}")
+    public String assignmentFeedBack(@PathVariable("asgmAnswerId") Long asgmAnswerId
+    , HttpSession session
+    , @RequestParam("comment")String comment
+    ,@RequestParam("mark")String score){
+
+        String teacherId = (String) session.getAttribute("uid");
+        AssignmentAnswer asgmAnswer = assignmentAnswerService.getAssignmentAnswerById(asgmAnswerId);
+        String assignmentId = String.valueOf(asgmAnswer.getAssignment_id());
+        asgmAnswer.setComment(comment);
+        asgmAnswer.setScore(score);
+        asgmAnswer.setTeacher_id(teacherId);
+        assignmentAnswerService.addStudentAnswer(asgmAnswer);
+        return "redirect:/teacher/checkAssignment/"+assignmentId;
     }
     //end
 
