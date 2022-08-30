@@ -44,18 +44,18 @@ const app = Vue.createApp({
         toggleShowReply(index) {
             this.commentList[index].isReplyShow = !this.commentList[index].isReplyShow;
         },
+        handleCancel(index) {
+            this.commentList[index].isReplyShow = false;
+        },
         getMessageList(index) {
             axios.get(`http://localhost:8080/api/comment/getCommentListByBatchIdAndVideoId/${this.batchId}/${this.videoId}`)
-                .then(res => {
+                .then((res = []) => {
                     this.commentList.length = 0;
-                    let resCommentList = [...res.data];
-                    resCommentList.forEach(obj => {
-                        obj = { ...obj, replyText: '' };
-                        this.commentList.push(obj);
-                    });
+                    this.commentList = res.data.map(cmt => {
+                        return { ...cmt, replyText: '' }
+                    })
                     if (index >= 0) {
                         this.commentList[index].isReplyShow = true;
-                        console.log(this.commentList[index].isReplyShow);
                     }
                 })
                 .catch(error => console.log(error));

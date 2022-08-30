@@ -5,6 +5,12 @@
     <title>Video</title>
 </head>
 
+<style>
+    [v-cloak] {
+        display: none
+    }
+</style>
+
 <body id="page-top" class="bg-opacity-25" style="background-color: #f4f4f4;">
 
     <div th:insert="/student/student-fragments :: pc-navbar" />
@@ -68,35 +74,134 @@
 
 
             <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-            <div id="app">
-                <input type="hidden" th:value="${batchId}" id="batchId">
-                <input type="hidden" th:value="${session?.uid}" id="userId">
-                <input type="hidden" th:value="${video?.id}" id="videoId">
-                <input type="text" v-model="commentText">
-                <button @click="sendComment()">send</button>
+            <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 76px;height: auto;" id="app">
+                <div id="tabs-section" class="pt-3" style="height: auto;">
+                    <h4 class="fw-bold mb-2 mt-3 text-dark"
+                        style="margin-bottom: 20px; font-family: 'Roboto', sans-serif;">Discussion Forums</h4>
 
-                <span v-if="commentList.length > 0">
-                    <div v-for="(comment, index) in commentList" :key="comment.id">
-                        <p>
-                            {{ comment.dateTime }}
-                            {{ comment.commentUser.name }} {{ comment.commentText }}
-                            <button @click.prevent="toggleShowReply(index)" class="btn btn-primary">
-                                <span v-if="!comment.isReplyShow">show reply</span>
-                                <span v-else>hide reply</span>
-                            </button>
-                            <span v-if="comment.isReplyShow">
-                                <br>
-                                <input type="text" placeholder="reply" v-model="comment.replyText">
-                                <button @click.prevent="sendReply(comment.id, index)">Send Reply</button>
-                                <br>
-                                <span v-for="reply in comment.replyList" :key="reply.id" class="ms-5">
-                                    {{ reply.dateTime }} {{ reply.replyUser.name}} {{ reply.replyText }}
-                                </span>
-                            </span>
-                        </p>
+                    <input type="hidden" th:value="${batchId}" id="batchId">
+                    <input type="hidden" th:value="${session?.uid}" id="userId">
+                    <input type="hidden" th:value="${video?.id}" id="videoId">
+
+                    <div class="mb-2 mt-4">
+                        <form>
+                            <div class="d-flex mb-2 mt-3">
+                                <img class="img-profile me-3 rounded-circle" src="/profile_pics/profile.png"
+                                    style="width: 40px; height: 40px;" />
+                                <textarea v-model="commentText"
+                                    class="bg-transparent border-0 border-2 border-bottom border-secondary form-control fs-6"
+                                    id="formInput4" rows="2" placeholder="Add a comment..."></textarea>
+                            </div>
+                            <div class="text-end">
+                                <button type="button" class="btn btn-light">Cancel</button>
+                                <button @click.prevent="sendComment()" type="submit"
+                                    class="btn btn-primary">Comment</button>
+                            </div>
+                        </form>
                     </div>
-                </span>
 
+                    <div v-cloak class="col course-disscusion-reply">
+                        <ul class="list-group">
+
+                            <span v-if="commentList.length > 0">
+                                <li v-for="(comment, index) in commentList" :key="comment.id"
+                                    class="bg-white list-group-item mb-0 mt-0 pb-2 pt-3" style="margin-bottom:6px;">
+                                    <div class="d-flex media" style="overflow:visible;">
+                                        <div>
+                                            <img class="border me-2 rounded-circle" style="width: 40px; height: 40px;"
+                                                :src=`/profile_pics/${comment.commentUser.profile_pic}` />
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12">
+
+                                                <a class="fw-bold me-2 text-dark text-decoration-none" href="#"
+                                                    style="font-family: 'Roboto', sans-serif;">
+                                                    {{ comment.commentUser.name }}
+                                                </a>
+                                                <small class="text-muted" style="font-family: 'Roboto', sans-serif;">
+                                                    {{ comment.dateTime }}
+                                                </small>
+                                                <p class="mb-2 text-break" style="font-family: 'Roboto', sans-serif;">
+                                                    {{ comment.commentText }}
+                                                    <br />
+                                                </p>
+                                                <i @click.prevent="toggleShowReply(index)"
+                                                    class="align-items-start d-flex mb-0 pb-0 text-primary"
+                                                    :class="[comment.isReplyShow ? 'fa fa-caret-up' : 'fa fa-caret-down']"
+                                                    style="font-size: 22px; cursor: pointer;">
+                                                    <p
+                                                        style="font-family: 'Roboto', sans-serif; font-size: 15px; padding-top: 5px;">
+                                                        &nbsp;
+                                                        5 Replies
+                                                    </p>
+                                                </i>
+
+                                            </div>
+
+                                            <span v-if="comment.isReplyShow">
+
+                                                <div class="mb-1 mt-0">
+                                                    <div class="d-flex mb-1 mt-0">
+                                                        <img class="img-profile me-2 rounded-circle"
+                                                            :src=`/profile_pics/${comment.commentUser.profile_pic}`
+                                                            style="width: 30px; height: 30px;" />
+                                                        <textarea v-model="comment.replyText"
+                                                            class="bg-transparent border-0 border-2 border-bottom border-secondary form-control fs-6"
+                                                            id="formInput4" rows="1" cols="58"
+                                                            placeholder="Add a comment..."></textarea>
+                                                    </div>
+                                                    <div class="mb-0 text-end">
+                                                        <button type="button" @click.prevent="handleCancel(index)"
+                                                            class="btn btn-light btn-sm mb-0">Cancel</button>
+                                                        <button @click.prevent="sendReply(comment.id, index)"
+                                                            type="submit"
+                                                            class="btn btn-primary btn-sm mb-0">Comment</button>
+
+                                                    </div>
+                                                    <div v-for="reply in comment.replyList.slice().reverse()"
+                                                        :key="reply.id" class="bg-transparent d-flex media pb-1 pt-1"
+                                                        style="margin-left: 39px;background: #f2f2f2;padding: 14px;">
+                                                        <div class="d-flex media" style="overflow:visible;">
+                                                            <div>
+                                                                <img class="border me-2 rounded-circle"
+                                                                    style="width: 40px; height: 40px;"
+                                                                    :src=`/profile_pics/${reply.replyUser.profile_pic}` />
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <a class="fw-bold me-2 text-dark text-decoration-none"
+                                                                        href="#"
+                                                                        style="font-family: 'Roboto', sans-serif;">
+                                                                        {{ reply.replyUser.name}}
+                                                                    </a>
+                                                                    <small class="text-muted"
+                                                                        style="font-family: 'Roboto', sans-serif;">
+                                                                        {{ reply.dateTime }}
+                                                                    </small>
+                                                                    <p class="mb-2 text-break"
+                                                                        style="font-family: 'Roboto', sans-serif;">
+                                                                        {{ reply.replyText }}
+                                                                        <br />
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </span>
+
+                        </ul>
+                    </div>
+                </div>
             </div>
 
 

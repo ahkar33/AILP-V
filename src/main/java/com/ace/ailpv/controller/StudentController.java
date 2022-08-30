@@ -15,10 +15,12 @@ import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasResource;
 import com.ace.ailpv.entity.BatchHasVideo;
 import com.ace.ailpv.entity.User;
+import com.ace.ailpv.entity.Video;
 import com.ace.ailpv.service.BatchHasResourceService;
 import com.ace.ailpv.service.BatchHasVideoService;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.UserService;
+import com.ace.ailpv.service.VideoService;
 
 @Controller
 @RequestMapping("/student")
@@ -35,6 +37,9 @@ public class StudentController {
 
     @Autowired
     private BatchService batchService;
+
+    @Autowired
+    private VideoService videoService;
 
     @GetMapping("/student-home")
     public String showStudentHomePage(HttpSession session, ModelMap model) {
@@ -83,17 +88,19 @@ public class StudentController {
         return "/student/STU-VID-06";
     }
 
-    @GetMapping("/showClickedVideo/{courseName}/{videoName}")
-    public String showClickedVideo(HttpSession session, ModelMap model, @PathVariable("videoName") String videoName,
+    @GetMapping("/showClickedVideo/{courseName}/{videoId}")
+    public String showClickedVideo(HttpSession session, ModelMap model, @PathVariable("videoId") String videoId,
             @PathVariable("courseName") String courseName) {
         String studentId = (String) session.getAttribute("uid");
         User studentInfo = usersService.getUserById(studentId);
         Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
         List<BatchHasVideo> batchHasVideoList = batchHasVideoService
                 .getAllBatchHasVideoByBatchId(studentBatchId);
-        model.addAttribute("videoName", videoName);
+        Video video = videoService.getVideoById(Long.parseLong(videoId));
+        model.addAttribute("video", video);
         model.addAttribute("courseName", courseName);
         model.addAttribute("batchHasVideoList", batchHasVideoList);
+        model.addAttribute("batchId", studentBatchId);
         return "/student/STU-VID-06";
     }
 
