@@ -49,13 +49,13 @@
                                 class="border border-secondary form-control mb-2"
                                 type="text"
                                 name="comment"
-                                placeholder="Comment"
+                                th:attr="placeholder=${asgmAnswer.comment}"
                               />
                               <input
                                 class="border border-secondary form-control mb-2"
                                 type="text"
                                 name="mark"
-                                placeholder="Mark"
+                                th:attr="placeholder=${asgmAnswer.score}"
                               />
                               <div class="d-flex justify-content-center m-1">
                                 <button type="submit" class="btn btn-primary">

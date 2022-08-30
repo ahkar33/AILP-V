@@ -1,5 +1,6 @@
 package com.ace.ailpv.controller;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -85,21 +86,24 @@ public class StudentController {
     public String submitAssignment(@RequestParam("answerFile") MultipartFile multipartFileName
                 , @RequestParam("assignmentId") Long id
                 , @RequestParam("questionFileId") Long fileId
-                , HttpSession session){
+                , HttpSession session) throws IOException{
         String studentId =  (String) session.getAttribute("uid");
         User student = usersService.getUserById(studentId);
         String studentName = student.getName();
         String fileName = multipartFileName.getOriginalFilename();
         Long assignmentId = id;
+
+        Assignment resAssignment = assignmentService.getAssignmentById(assignmentId);
+
         AssignmentAnswer answer = new AssignmentAnswer();
         answer.setAnswerFile(fileName);
         answer.setQuestion_file_id(fileId);
         answer.setStudent_name(studentName);
-        answer.setAssignment_id(assignmentId);
+        answer.setAssignment(resAssignment);
         LocalDateTime now = LocalDateTime.now();
         answer.setSubmitTime(now);
 
-        assignmentAnswerService.addStudentAnswer(answer);
+        assignmentAnswerService.addStudentAnswer(answer, multipartFileName);
         
         return "redirect:/student/studentAssignment";
     }

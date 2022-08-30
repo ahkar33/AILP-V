@@ -43,6 +43,14 @@ public class FileService {
         }
     }
 
+    public void createFolderForAssignmentAnswer(String questionFileName) {
+        File assignmentFolder = new File(courseFilePath + questionFileName + "\\assignment"+ "\\answer");
+        if (!assignmentFolder.exists()) {
+            assignmentFolder.mkdirs();
+        }
+    }
+    //end
+
     public void createFile(MultipartFile file, String folderName) throws IllegalStateException, IOException {
         file.transferTo(
                 new File(courseFilePath + folderName + "\\" + file.getOriginalFilename()));
@@ -73,5 +81,7 @@ public class FileService {
     public String generateFileName(String fileExtension) {
         return String.join("", UUID.randomUUID().toString().split("-")) + "." + fileExtension;
     }
+
+    
 
 }

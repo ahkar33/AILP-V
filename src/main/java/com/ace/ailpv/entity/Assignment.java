@@ -55,7 +55,8 @@ public class Assignment {
     @JsonIgnore
     List<AssignmentFile> assignmentFileList = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "assignment")
     @JsonIgnore
     List<AssignmentAnswer> answerList = new ArrayList<>();
+
 }

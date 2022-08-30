@@ -196,15 +196,15 @@ public class TeacherController {
     public String assignmentFeedBack(@PathVariable("asgmAnswerId") Long asgmAnswerId
     , HttpSession session
     , @RequestParam("comment")String comment
-    ,@RequestParam("mark")String score){
+    , @RequestParam("mark")String score){
 
         String teacherId = (String) session.getAttribute("uid");
         AssignmentAnswer asgmAnswer = assignmentAnswerService.getAssignmentAnswerById(asgmAnswerId);
-        String assignmentId = String.valueOf(asgmAnswer.getAssignment_id());
+        String assignmentId = String.valueOf(asgmAnswer.getAssignment().getId());
         asgmAnswer.setComment(comment);
         asgmAnswer.setScore(score);
         asgmAnswer.setTeacher_id(teacherId);
-        assignmentAnswerService.addStudentAnswer(asgmAnswer);
+        assignmentAnswerService.addTeacherResponse(asgmAnswer);
         return "redirect:/teacher/checkAssignment/"+assignmentId;
     }
     //end

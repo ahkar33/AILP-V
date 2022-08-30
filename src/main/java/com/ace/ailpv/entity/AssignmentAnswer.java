@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,10 +29,13 @@ public class AssignmentAnswer {
     private LocalDateTime submitTime;
     private String score;
     private String comment;
-    private Long assignment_id;
     private String student_name;
     private String teacher_id;
     private Long question_file_id;
+
+    @ManyToOne
+    @JoinColumn(name="assignment_id", referencedColumnName = "id")
+    private Assignment assignment;
 
     
 }
