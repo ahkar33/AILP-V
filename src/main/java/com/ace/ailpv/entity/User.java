@@ -64,6 +64,10 @@ public class User {
     @JsonIgnore
     private List<Message> messageList = new ArrayList<>();
 
+    @OneToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "commentUser")
+    @JsonIgnore
+    private List<Comment> userCommentList = new ArrayList<>();
+
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "user")
     @JsonIgnore
     private List<UserSchedule> userScheduleList = new ArrayList<>();
