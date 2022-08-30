@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -331,7 +333,10 @@ public class AdminController {
         User resStudent = userService.getUserById(student.getId());
         student.setIsMute(resStudent.getIsMute());
         student.setEnabled(resStudent.getEnabled());
+        student.setPassword(resStudent.getPassword());
+        student.setProfile_pic(resStudent.getProfile_pic());
         userService.addUser(student);
+
         return "redirect:/admin/student-table";
     }
 
@@ -373,8 +378,26 @@ public class AdminController {
         User resTeacher = userService.getUserById(teacher.getId());
         teacher.setIsMute(resTeacher.getIsMute());
         teacher.setEnabled(resTeacher.getEnabled());
+        teacher.setPassword(resTeacher.getPassword());
+        teacher.setProfile_pic(resTeacher.getProfile_pic());
         userService.addUser(teacher);
         return "redirect:/admin/teacher-table";
+    }
+
+    @GetMapping("/changePassword/{userId}")
+    public String changePassword(HttpSession session,@PathVariable("userId")String userId){
+       
+       User user=userService.getUserById(userId);
+       if(user.getRole().equals("ROLE_STUDENT")){
+        user.setPassword(secretConfigProperties.getDefaultStdPassword());
+        userService.updatePasswordByUserId(passwordEncoder.encode(user.getPassword()), userId);
+        return "redirect:/admin/student-table";
+       }else if(user.getRole().equals("ROLE_TEACHER")){
+        user.setPassword(secretConfigProperties.getDefaultTchPassword());
+        userService.updatePasswordByUserId(passwordEncoder.encode(user.getPassword()) , userId);
+        return "redirect:/admin/teacher-table";
+       }
+       return "redirect:/admin/dashboard";
     }
 
     // to delete after admin account created
