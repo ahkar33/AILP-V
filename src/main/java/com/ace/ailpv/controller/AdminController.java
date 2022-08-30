@@ -3,9 +3,6 @@ package com.ace.ailpv.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -386,7 +383,7 @@ public class AdminController {
     }
 
     @GetMapping("/changePassword/{userId}")
-    public String changePassword(HttpSession session,@PathVariable("userId")String userId){
+    public String changePassword(@PathVariable("userId")String userId){
        
        User user=userService.getUserById(userId);
        if(user.getRole().equals("ROLE_STUDENT")){
