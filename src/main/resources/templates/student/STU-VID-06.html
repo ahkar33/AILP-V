@@ -5,6 +5,12 @@
     <title>Video</title>
 </head>
 
+<style>
+    [v-cloak] {
+        display: none
+    }
+</style>
+
 <body id="page-top" class="bg-opacity-25" style="background-color: #f4f4f4;">
 
     <div th:insert="/student/student-fragments :: pc-navbar" />
@@ -25,10 +31,11 @@
         </span>
 
         <div class="row">
-            <!-- th:if="${videoName != null}" -->
-            <div class="col-lg-8 pb-3" style="margin-bottom: 25px;border-bottom: 1px solid rgb(234,234,234) ;">
+
+            <div th:if="${video?.id != null}" class="col-lg-8 pb-3"
+                style="margin-bottom: 25px;border-bottom: 1px solid rgb(234,234,234) ;">
                 <video width="100%" height="100%" controls controlsList="nodownload">
-                    <source th:src="@{${'/courses/' + courseName + '/video/' + videoName} }" type="video/mp4" />
+                    <source th:src="@{${'/courses/' + courseName + '/video/' + video?.name} }" type="video/mp4" />
                 </video>
             </div>
 
@@ -38,7 +45,7 @@
                         <div class="list-group">
 
                             <span th:each="batchHasVideo, iter : ${batchHasVideoList}">
-                                <a th:href="@{${'/student/showClickedVideo/' + courseName + '/' + batchHasVideo?.video?.name} }"
+                                <a th:href="@{${'/student/showClickedVideo/' + courseName + '/' + batchHasVideo?.video?.id} }"
                                     class="list-group-item list-group-item-action pb-3 pe-1 pt-3">
                                     <div class="col-sm-12 d-flex d-lg-flex justify-content-between w-100">
                                         <div
@@ -67,140 +74,136 @@
 
 
             <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-
-            <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 76px;height: auto;">
+            <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 76px;height: auto;" id="app">
                 <div id="tabs-section" class="pt-3" style="height: auto;">
-                    <ul class="fs-6 fw-bolder mb-4 nav nav-pills text-dark" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-1">Overview
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-2">Discussions
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade" role="tabpanel" id="tab-1">
-                            <h4 class="fw-bold mb-2 text-dark" style="margin-top: 22px;">About This Class</h4>
-                            <p class="text-dark">From this course, you can learn Java Collections Framework, together
-                                with Generics, Lambda Functions, Method References, and Stream API.<br /><br />There are
-                                a
-                                lot of other courses on this topic. So, why would you choose exactly this
-                                course?&nbsp;Here are just a few reasons<br /><br /><strong>- Coding
-                                    examples</strong><br />To
-                                learn to program is not enough just watching videos and reading books. You also need to
-                                have a lot of practice. In this training course, you will review multiple practical
-                                tasks and coding examples which will help you learn and understand Java
-                                better.<br /><br /><strong>- Open source code</strong><br />We hide nothing from our
-                                students!
-                                Including the source code for the home task solutions and source code of examples that
-                                were shared during the lesson. Having the source code you can just copy and paste it to
-                                run it on your local computer to understand how things work better.<br /><br />You are
-                                allowed to use all source code examples for learning purposes. This helps significantly
-                                to configure the environment and make tests work, especially in case students didn't
-                                work with any testing framework in the past.<br />
-                            </p>
-                        </div>
+                    <h4 class="fw-bold mb-2 mt-3 text-dark"
+                        style="margin-bottom: 20px; font-family: 'Roboto', sans-serif;">Discussion Forums</h4>
 
-                        <div class="tab-pane fade show active" role="tabpanel" id="tab-2">
-                            <h4 class="fw-bold mb-2 mt-3 text-dark" style="margin-bottom: 20px;">Discussion Forums</h4>
-                            <p class="fs-5 fw-bold text-dark text-end"
-                                style="margin-bottom: -2px;font-family: 'Anek Bangla', sans-serif;">Ask
-                                Question?<a class="btn btn-secondary border rounded" role="button"
-                                    style="margin-top: 15px;" href="#discussion-send-button"
-                                    data-bs-target="#discussion-send-button" data-bs-toggle="modal"><i
-                                        class="icon ion-android-send"></i></a></p>
-                            <div class="modal fade" role="dialog" tabindex="-1" id="discussion-send-button">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="fs-5 modal-title text-dark" style="font-size: 15.9px;"><img
-                                                    class="border me-2 rounded-circle"
-                                                    style="width: 35px;height: 35px;margin-top: -4px;"
-                                                    src="../assets/img/zzs_profile.jpg" />Zar Zar
-                                                Soe</h4>
-                                            <div></div><button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="field"><textarea class="form-control form-control-lg"
-                                                        name="float-textarea"
-                                                        style="border: 0; border-bottom: 1px solid #E0E0E0;"
-                                                        placeholder=" " required="" rows="15"></textarea><label
-                                                        class="form-label fw-normal mb-0" for="float-textarea"
-                                                        style="font-family: 'IBM Plex Sans KR', sans-serif;">Here, write
-                                                        your message.</label></div>
-                                                <button class="btn btn-primary text-center" type="button"
-                                                    style="width: 100%;margin-left: 0px;"><i
-                                                        class="icon ion-android-send"></i>&nbsp; &nbsp;
-                                                    &nbsp;Send</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                    <input type="hidden" th:value="${batchId}" id="batchId">
+                    <input type="hidden" th:value="${session?.uid}" id="userId">
+                    <input type="hidden" th:value="${video?.id}" id="videoId">
+
+                    <div class="mb-2 mt-4">
+                        <form>
+                            <div class="d-flex mb-2 mt-3">
+                                <img class="img-profile me-3 rounded-circle" src="/profile_pics/profile.png"
+                                    style="width: 40px; height: 40px;" />
+                                <textarea v-model="commentText"
+                                    class="bg-transparent border-0 border-2 border-bottom border-secondary form-control fs-6"
+                                    id="formInput4" rows="2" placeholder="Add a comment..."></textarea>
                             </div>
+                            <div class="text-end">
+                                <button type="button" class="btn btn-light">Cancel</button>
+                                <button @click.prevent="sendComment()" type="submit"
+                                    class="btn btn-primary">Comment</button>
+                            </div>
+                        </form>
+                    </div>
 
+                    <div v-cloak class="col course-disscusion-reply">
+                        <ul class="list-group">
 
-                            <div class="col course-disscusion-reply">
-                                <ul class="list-group">
-
-                                    <!-- comment start -->
-                                    <li class="list-group-item mb-0 mt-0 pb-3 pt-3" style="margin-bottom:6px;">
-                                        <div class="d-flex media" style="overflow:visible;">
-                                            <div>
-                                                <img class="border rounded-circle me-3"
-                                                    style="width: 30px;height: 30px;"
-                                                    src="/assets/img/zzs_profile.jpg" />
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p class="text-break">
-                                                        <a class="text-decoration-none" href="#">Zar
-                                                            Zar Soe:
-                                                        </a> This guy has been dsadsadasdsadsadsad100+ MPH
-                                                        on side streets.<br />&nbsp;This guy has been
-                                                        dsadsadasdsadsadsad100+ MPH on side streets.&nbsp;&nbsp;This guy
-                                                        has been&nbsp;<br /><br /><small class="text-muted">August 6,
-                                                            2016 @
-                                                            10:35am </small>
-                                                    </p>
-                                                </div>
-                                            </div>
+                            <span v-if="commentList.length > 0">
+                                <li v-for="(comment, index) in commentList" :key="comment.id"
+                                    class="bg-white list-group-item mb-0 mt-0 pb-2 pt-3" style="margin-bottom:6px;">
+                                    <div class="d-flex media" style="overflow:visible;">
+                                        <div>
+                                            <img class="border me-2 rounded-circle" style="width: 40px; height: 40px;"
+                                                :src=`/profile_pics/${comment.commentUser.profile_pic}` />
                                         </div>
-                                        <div class="border d-flex media rounded rounded-3"
-                                            style="margin-left: 39px;background: #f2f2f2;padding: 14px;">
-                                            <div class="d-flex media" style="overflow:visible;">
-                                                <div>
-                                                    <img class="border rounded-circle me-3"
-                                                        style="width: 30px;height: 30px;"
-                                                        src="../assets/img/mock_profile.jpg" />
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <p class="mb-0 text-break"><a class="text-decoration-none"
-                                                                href="#">Daw May Zwei:</a> This guy has been
-                                                            dsadsadasdsadsadsad100+ MPH on side streets.<br />&nbsp;This
-                                                            guy has been dsadsadasdsadsadsad100+ MPH on side
-                                                            streets.&nbsp;&nbsp;This guy has
-                                                            been&nbsp;<br /><br /><small class="text-muted">August 6,
-                                                                2016 @ 10:35am </small>
-                                                        </p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12">
+
+                                                <a class="fw-bold me-2 text-dark text-decoration-none" href="#"
+                                                    style="font-family: 'Roboto', sans-serif;">
+                                                    {{ comment.commentUser.name }}
+                                                </a>
+                                                <small class="text-muted" style="font-family: 'Roboto', sans-serif;">
+                                                    {{ comment.dateTime }}
+                                                </small>
+                                                <p class="mb-2 text-break" style="font-family: 'Roboto', sans-serif;">
+                                                    {{ comment.commentText }}
+                                                    <br />
+                                                </p>
+                                                <i @click.prevent="toggleShowReply(index)"
+                                                    class="align-items-start d-flex mb-0 pb-0 text-primary"
+                                                    :class="[comment.isReplyShow ? 'fa fa-caret-up' : 'fa fa-caret-down']"
+                                                    style="font-size: 22px; cursor: pointer;">
+                                                    <p
+                                                        style="font-family: 'Roboto', sans-serif; font-size: 15px; padding-top: 5px;">
+                                                        &nbsp;
+                                                        5 Replies
+                                                    </p>
+                                                </i>
+
+                                            </div>
+
+                                            <span v-if="comment.isReplyShow">
+
+                                                <div class="mb-1 mt-0">
+                                                    <div class="d-flex mb-1 mt-0">
+                                                        <img class="img-profile me-2 rounded-circle"
+                                                            :src=`/profile_pics/${comment.commentUser.profile_pic}`
+                                                            style="width: 30px; height: 30px;" />
+                                                        <textarea v-model="comment.replyText"
+                                                            class="bg-transparent border-0 border-2 border-bottom border-secondary form-control fs-6"
+                                                            id="formInput4" rows="1" cols="58"
+                                                            placeholder="Add a comment..."></textarea>
+                                                    </div>
+                                                    <div class="mb-0 text-end">
+                                                        <button type="button" @click.prevent="handleCancel(index)"
+                                                            class="btn btn-light btn-sm mb-0">Cancel</button>
+                                                        <button @click.prevent="sendReply(comment.id, index)"
+                                                            type="submit"
+                                                            class="btn btn-primary btn-sm mb-0">Comment</button>
+
+                                                    </div>
+                                                    <div v-for="reply in comment.replyList.slice().reverse()"
+                                                        :key="reply.id" class="bg-transparent d-flex media pb-1 pt-1"
+                                                        style="margin-left: 39px;background: #f2f2f2;padding: 14px;">
+                                                        <div class="d-flex media" style="overflow:visible;">
+                                                            <div>
+                                                                <img class="border me-2 rounded-circle"
+                                                                    style="width: 40px; height: 40px;"
+                                                                    :src=`/profile_pics/${reply.replyUser.profile_pic}` />
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <a class="fw-bold me-2 text-dark text-decoration-none"
+                                                                        href="#"
+                                                                        style="font-family: 'Roboto', sans-serif;">
+                                                                        {{ reply.replyUser.name}}
+                                                                    </a>
+                                                                    <small class="text-muted"
+                                                                        style="font-family: 'Roboto', sans-serif;">
+                                                                        {{ reply.dateTime }}
+                                                                    </small>
+                                                                    <p class="mb-2 text-break"
+                                                                        style="font-family: 'Roboto', sans-serif;">
+                                                                        {{ reply.replyText }}
+                                                                        <br />
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <!-- comment end -->
 
-                                </ul>
-                            </div>
-                        </div>
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </span>
+
+                        </ul>
                     </div>
                 </div>
             </div>
+
 
         </div>
     </div>
@@ -212,6 +215,7 @@
     </div>
 
     <div th:insert="/student/student-fragments :: footer" />
+    <script src="/assets/js/studentVideo.js"></script>
 
 </body>
 

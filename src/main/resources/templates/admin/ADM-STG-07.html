@@ -5,6 +5,12 @@
     <title>Register Student</title>
 </head>
 
+<style>
+    [v-cloak] {
+        display: none
+    }
+</style>
+
 <body id="page-top">
     <div id="wrapper">
         <!-- this is where side bar is -->
@@ -38,7 +44,7 @@
                                         <input v-model="inputField.id" class="form-control"
                                             :class="{'border-danger border-2': inputField.isExist }" type="text"
                                             placeholder="id" />
-                                        <p v-show="inputField.isExist" class="text-danger">
+                                        <p v-cloak v-show="inputField.isExist" class="text-danger">
                                             ID Already Exists
                                         </p>
                                     </td>

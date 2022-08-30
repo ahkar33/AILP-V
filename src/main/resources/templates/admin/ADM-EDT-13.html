@@ -44,16 +44,15 @@
                                         </span>
                                     </select>
                                 </div>
-
-                                <a th:href="@{'/admin/changePassword/'+${teacher.id}}">
-                                    <button type="button" class="btn btn-danger w-25 bg-gradient shadow-sm">Reset
-                                        Pasword</button>
-
-                                </a>
-
                                 <div class="text-end">
+                                    <a href="#">
+                                        <button type="button" class="btn btn-danger w-25 bg-gradient shadow-sm"
+                                        th:attr="onclick=|handleReset('${teacher.id}')|">
+
+                                        Reset Pasword</button>
+                                    </a>
                                     <button type="submit"
-                                        class="btn btn-primary w-25 bg-gradient shadow-sm">Edit</button>
+                                        class="btn btn-primary w-25 bg-gradient shadow-sm float-end">Edit</button>
                                 </div>
                             </div>
                         </form>
@@ -67,6 +66,8 @@
     </div>
 
     <div th:insert="/admin/admin-fragments :: footer" />
+    <script src="/assets/js/alert.js"></script>
+
 
 </body>
 

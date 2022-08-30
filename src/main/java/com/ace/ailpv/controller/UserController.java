@@ -53,19 +53,18 @@ public class UserController extends Thread {
     public String getProfile(HttpServletRequest request, ModelMap model) {
 
         String batches = "";
-       
 
         String uid = (String) request.getSession(false).getAttribute("uid");
         User user = userService.getUserById(uid);
 
 
         if (user.getRole().equals("ROLE_TEACHER")) {
-            if (passwordEncoder.matches(secretConfigProperties.getDefaultTchPassword(), user.getPassword())) 
+            if (passwordEncoder.matches(secretConfigProperties.getDefaultTchPassword(), user.getPassword()))
                 model.addAttribute("dpwarn", "Default password must be changed for security reason!");
         }
-  
+
         else if (user.getRole().equals("ROLE_STUDENT")) {
-            if (passwordEncoder.matches(secretConfigProperties.getDefaultStdPassword(), user.getPassword()))  
+            if (passwordEncoder.matches(secretConfigProperties.getDefaultStdPassword(), user.getPassword()))
                 model.addAttribute("dpwarn", "Default password must be changed for security reason!");
 
         }
