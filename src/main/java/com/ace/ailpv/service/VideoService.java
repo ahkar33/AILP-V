@@ -59,7 +59,7 @@ public class VideoService{
         MultimediaInfo result=instance.getInfo();    
         min=(result.getDuration()/1000)/60;
         ses=(result.getDuration()/1000)%60;      
-      //  file.delete();
+        file.delete();
         return min + ":"+ ses;
     }
 }
