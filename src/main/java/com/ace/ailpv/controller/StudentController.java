@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -92,7 +93,6 @@ public class StudentController {
             Video video = videoService.getFirstVideo();
             model.addAttribute("video", video);
         }
-
         model.addAttribute("teacherList", teacherList);
         model.addAttribute("courseName", studentBatch.getBatchCourse().getName());
         model.addAttribute("batchHasVideoList", batchHasVideoList);

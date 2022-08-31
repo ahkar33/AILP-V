@@ -30,6 +30,7 @@ public class Video {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String length;
 
     public Video(String name) {
         this.name = name;
