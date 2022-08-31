@@ -23,11 +23,8 @@
             [[${courseName}]]
         </h1>
         <i class="fa-chalkboard-teacher fas " style="margin-right: 10px;"></i>
-        <span class="text-primary fs-6 fw-bold mb-2" style="font-family: Arimo, sans-serif;margin-right: 8px;">
-            Daw Mo Yee Rose,
-        </span>
-        <span class="text-primary fw-bold mb-2" style="font-family: Arimo, sans-serif;">
-            Daw May Zwei
+        <span th:each="teacher, loop : ${teacherList}" class="text-primary fs-6 fw-bold mb-2" style="font-family: Arimo, sans-serif;margin-right: 8px;">
+            [[${teacher?.name}]] <span th:if="${loop.index != loop.size-1}">,</span>
         </span>
 
         <div class="row">
@@ -45,26 +42,53 @@
                         <div class="list-group">
 
                             <span th:each="batchHasVideo, iter : ${batchHasVideoList}">
-                                <a th:href="@{${'/student/showClickedVideo/' + courseName + '/' + batchHasVideo?.video?.id} }"
-                                    class="list-group-item list-group-item-action pb-3 pe-1 pt-3">
-                                    <div class="col-sm-12 d-flex d-lg-flex justify-content-between w-100">
-                                        <div
-                                            class="col-12 col-md-12 col-sm-12 justify-content-between justify-content-lg-between row">
-                                            <div class="col-9 col-lg-8 col-md-10 col-sm-10 col-xl-9">
-                                                <h5 class="fs-6 lh-base mb-1">
-                                                    [[${batchHasVideo?.video?.name.substring(0,
-                                                    batchHasVideo.video.name.length - 4)}]]
-                                                </h5>
-                                            </div>
+
+                                <span th:if="${batchHasVideo?.video?.name == video?.name}">
+                                    <a th:href="@{${'/student/showClickedVideo/' + courseName + '/' + batchHasVideo?.video?.id} }"
+                                        class="bg-opacity-10 bg-primary list-group-item list-group-item-action pb-3 pe-1 pt-3">
+                                        <div class="col-sm-12 d-flex d-lg-flex justify-content-between w-100">
                                             <div
-                                                class="align-self-start col-1 col-lg-1 col-md-1 col-sm-1 col-xl-1 flex-fill pe-0 ps-0 text-end text-sm-end">
-                                                <small class="text-muted">
-                                                    <i class="fa fa-play-circle"></i>&nbsp;
-                                                </small>
+                                                class="col-12 col-md-12 col-sm-12 justify-content-between justify-content-lg-between row">
+                                                <div class="col-9 col-lg-8 col-md-10 col-sm-10 col-xl-9">
+                                                    <h5 class="fs-6 lh-base mb-1">
+                                                        [[${batchHasVideo?.video?.name.substring(0,
+                                                        batchHasVideo.video.name.length - 4)}]]
+                                                    </h5>
+                                                </div>
+                                                <div
+                                                    class="align-self-start col-1 col-lg-1 col-md-1 col-sm-1 col-xl-1 flex-fill pe-0 ps-0 text-end text-sm-end">
+                                                    <small class="text-muted">
+                                                        <i class="fa fa-play-circle"></i>&nbsp;
+                                                    </small>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </span>
+
+                                <span th:if="${batchHasVideo?.video?.name != video?.name}">
+                                    <a th:href="@{${'/student/showClickedVideo/' + courseName + '/' + batchHasVideo?.video?.id} }"
+                                        class="list-group-item list-group-item-action pb-3 pe-1 pt-3">
+                                        <div class="col-sm-12 d-flex d-lg-flex justify-content-between w-100">
+                                            <div
+                                                class="col-12 col-md-12 col-sm-12 justify-content-between justify-content-lg-between row">
+                                                <div class="col-9 col-lg-8 col-md-10 col-sm-10 col-xl-9">
+                                                    <h5 class="fs-6 lh-base mb-1">
+                                                        [[${batchHasVideo?.video?.name.substring(0,
+                                                        batchHasVideo.video.name.length - 4)}]]
+                                                    </h5>
+                                                </div>
+                                                <div
+                                                    class="align-self-start col-1 col-lg-1 col-md-1 col-sm-1 col-xl-1 flex-fill pe-0 ps-0 text-end text-sm-end">
+                                                    <small class="text-muted">
+                                                        <i class="fa fa-play-circle"></i>&nbsp;
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </span>
+
                             </span>
 
                         </div>
@@ -74,7 +98,8 @@
 
 
             <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-            <div th:if="${video?.id != null}" class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 76px;height: auto;" id="app">
+            <div th:if="${video?.id != null}" class="col-lg-12 col-md-12 col-sm-12"
+                style="margin-bottom: 76px;height: auto;" id="app">
                 <div id="tabs-section" class="pt-3" style="height: auto;">
                     <h4 class="fw-bold mb-2 mt-3 text-dark"
                         style="margin-bottom: 20px; font-family: 'Roboto', sans-serif;">Discussion Forums</h4>
