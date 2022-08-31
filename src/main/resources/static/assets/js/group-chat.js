@@ -116,7 +116,7 @@ const app = Vue.createApp({
                         } else {
                             var dateTime = resDateTime.substring(0, 9);
                         }
-                        return { ...msg, dateTime: dateTime };
+                        return { ...msg, dateTime: dateTime, isHover: false };
                     });
                     let messageLength = this.messageList.length;
                     if (this.messageListLength < messageLength) {
