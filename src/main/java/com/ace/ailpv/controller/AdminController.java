@@ -30,6 +30,9 @@ import com.ace.ailpv.service.ResourceService;
 import com.ace.ailpv.service.UserService;
 import com.ace.ailpv.service.VideoService;
 
+import ws.schild.jave.EncoderException;
+import ws.schild.jave.InputFormatException;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -81,7 +84,7 @@ public class AdminController {
 
     @PostMapping("/addCourse")
     public String addCourse(@ModelAttribute("course") Course course, RedirectAttributes redirectAttrs)
-            throws IllegalStateException, IOException {
+            throws IllegalStateException, IOException, InputFormatException, EncoderException {
         if (courseService.checkCourseName(course.getName())) {
             redirectAttrs.addFlashAttribute("errorMsg", true);
             return "redirect:/admin/course-table";
@@ -161,7 +164,7 @@ public class AdminController {
 
     @PostMapping("/uploadCourseVideo")
     public String uploadCourseVideo(ModelMap modal, @RequestParam("file") MultipartFile[] files,
-            @RequestParam("courseId") String courseId) throws IllegalStateException, IOException {
+            @RequestParam("courseId") String courseId) throws IllegalStateException, IOException, InputFormatException, EncoderException {
         String courseName = courseService.getCourseById(Long.parseLong(courseId)).getName();
         Course course = courseService.getCourseById(Long.parseLong(courseId));
         for (MultipartFile file : files) {
@@ -170,6 +173,7 @@ public class AdminController {
                 Video newVideo = new Video();
                 newVideo.setName(file.getOriginalFilename());
                 newVideo.setVideoCourse(course);
+                 newVideo.setLength(videoService.getVideoLength(file));
                 videoService.addVideo(newVideo);
             }
         }

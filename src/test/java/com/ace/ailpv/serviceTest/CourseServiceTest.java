@@ -29,6 +29,9 @@ import com.ace.ailpv.service.ExamService;
 import com.ace.ailpv.service.FileService;
 import com.ace.ailpv.service.VideoService;
 
+import ws.schild.jave.EncoderException;
+import ws.schild.jave.InputFormatException;
+
 @SpringBootTest
 public class CourseServiceTest {
 
@@ -48,7 +51,7 @@ public class CourseServiceTest {
     VideoService videoService;
 
     @Test
-    public void addCourseTest() throws IllegalStateException, IOException {
+    public void addCourseTest() throws IllegalStateException, IOException, InputFormatException, EncoderException {
       Course course = getOneCourse(1L);
       when(courseRepository.findById(course.getId())).thenReturn(Optional.of(course));
       courseService.addCourse(course);
