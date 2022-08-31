@@ -36,4 +36,9 @@ public class VideoService{
     public void addVideo(Video video){
         videoRepository.save(video);
     }
+
+    public Video getFirstVideo() {
+        return videoRepository.findFirstVideo();
+    }
+
 }
