@@ -1,10 +1,15 @@
 package com.ace.ailpv.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -207,6 +212,33 @@ public class TeacherController {
         assignmentAnswerService.addTeacherResponse(asgmAnswer);
         return "redirect:/teacher/checkAssignment/"+assignmentId;
     }
+
+    @GetMapping("/downloadAnswer/{asgmAnswerId}")
+    public String downloadAnswer(@PathVariable("asgmAnswerId") Long asgmAnswerId
+    , HttpServletResponse response) throws IOException{
+        AssignmentAnswer asgmAnswer = assignmentAnswerService.getAssignmentAnswerById(asgmAnswerId);
+        String asgmName = asgmAnswer.getAssignment().getName();
+        String fileName = asgmAnswer.getAnswerFile();
+        String filePath = "C:\\AILP-V\\src\\main\\resources\\static\\courses\\"+asgmName+ "\\assignment"+ "\\answer\\"+fileName;
+        File file = new File(filePath);
+        response.setContentType("application/octet-stream");
+        String headerKey = "Content Disposition";
+        String headerValue = "Attachment File Name "+file.getName();
+        response.setHeader(headerKey, headerValue);
+        ServletOutputStream outputStream = response.getOutputStream();
+        BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+
+        byte[] buffer = new byte[8192];//8KB BUFFER
+        int byteRead = -1;
+        while((byteRead = inputStream.read(buffer)) != -1){
+            outputStream.write(buffer,0,byteRead);
+        }
+        inputStream.close();
+        outputStream.close();
+
+        return "redirect:/teacher/assignmentFeedBack/"+asgmAnswerId;
+    }
+
     //end
 
 }

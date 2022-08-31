@@ -39,7 +39,5 @@ public class AssignmentAnswerService {
 
     public void addTeacherResponse(AssignmentAnswer asgmAnswer) {
         assignmentAnswerRepository.save(asgmAnswer);
-    }
-
-    
+    }   
 }
