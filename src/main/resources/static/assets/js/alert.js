@@ -24,12 +24,12 @@ const handleReset = (userId) => {
     })
 }
 
-$(document).ready(function(){
-    let successMsg = document.getElementById("successMsg").value;
-    if(successMsg){
-        alertSuccess();
-    }
-});
+// $(document).ready(function(){
+//     let successMsg = document.getElementById("successMsg").value;
+//     if(successMsg){
+//         alertSuccess();
+//     }
+// });
 
 
 
