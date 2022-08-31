@@ -14,9 +14,9 @@ const app = Vue.createApp({
     },
     methods: {
         convertDateTime(timeMiliSecond) {
-            if (timeMiliSecond <= 60000) {
+            if (timeMiliSecond <= 120000) {
                 return commentedTime = 'JUST NOW';
-            } else if (timeMiliSecond > 60000 && timeMiliSecond < 3600000) {
+            } else if (timeMiliSecond > 120000 && timeMiliSecond < 3600000) {
                 let minute = Math.round((timeMiliSecond / 1000) / 60);
                 return commentedTime = minute + ' minutes ago';
             } else if (timeMiliSecond > 3600000 && timeMiliSecond < 86400000) {

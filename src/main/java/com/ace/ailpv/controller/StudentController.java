@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -88,7 +87,12 @@ public class StudentController {
 
         if (studentInfo.getLastWatchVideoId() != null) {
             Video video = videoService.getVideoById(studentInfo.getLastWatchVideoId());
-            model.addAttribute("video", video);
+            if (video != null) {
+                model.addAttribute("video", video);
+            } else {
+                Video firstVieo = videoService.getFirstVideo();
+                model.addAttribute("video", firstVieo);
+            }
         } else {
             Video video = videoService.getFirstVideo();
             model.addAttribute("video", video);

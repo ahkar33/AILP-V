@@ -31,7 +31,7 @@ public class VideoService{
     }
 
     public Video getVideoById(Long id) {
-        return videoRepository.findById(id).get();
+        return videoRepository.findById(id).orElse(null);
     }
 
     public void deleteVideoById(Long id) {
@@ -51,15 +51,21 @@ public class VideoService{
     }
 
     public String getVideoLength(MultipartFile myFile) throws InputFormatException, EncoderException, IOException{
+      Long hour = 0L;
         Long min=0L;
-        Long ses=0L;
+        // Long ses=0L;
         File file=new File(myFile.getOriginalFilename());
         FileUtils.copyInputStreamToFile(myFile.getInputStream(),file);
         MultimediaObject instance =new MultimediaObject(file);
-        MultimediaInfo result=instance.getInfo();    
+        MultimediaInfo result=instance.getInfo(); 
+        hour = (result.getDuration()/1000)/3600;
         min=(result.getDuration()/1000)/60;
-        ses=(result.getDuration()/1000)%60;      
+        
+        // ses=(result.getDuration()/1000)%60;      
         file.delete();
-        return min + ":"+ ses;
+        if(hour == 0) {
+            return min + "min";
+        }
+        return hour + "hr " + min + "min";
     }
 }
