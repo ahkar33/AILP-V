@@ -87,7 +87,7 @@ const app = Vue.createApp({
             axios
                 .get(`http://localhost:8080/api/message/countMessagesByBatchId/${this.batchId}`)
                 .then(res => {
-                    if (res.data > this.lastMessageCount) {
+                    if (res.data != this.lastMessageCount) {
                         this.getAllMessages();
                     }
                     this.lastMessageCount = res.data;
@@ -133,7 +133,13 @@ const app = Vue.createApp({
                     this.messageListLength = messageLength;
                 })
                 .catch(error => console.log(error));
-        }
+        },
+        deleteMessage(messageId) {
+            axios.
+                get(`http://localhost:8080/api/message/deleteMessageById/${messageId}`)
+                .then(() => console.log("deleted message"))
+                .catch(error => console.log(error));
+        },
     },
     mounted() {
         window.that = this;
