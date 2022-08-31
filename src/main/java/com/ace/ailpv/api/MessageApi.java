@@ -67,4 +67,10 @@ public class MessageApi {
         user.setReadMessagesCount(count);
         userService.addUser(user);
     }
+
+    @GetMapping("/deleteMessageById/{id}")
+    public void deleteMessageById(@PathVariable("id") Long id) {
+        messageService.deleteMessage(id);
+    }
+
 }
