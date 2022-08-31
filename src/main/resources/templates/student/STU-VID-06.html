@@ -45,7 +45,7 @@
 
                                 <span th:if="${batchHasVideo?.video?.name == video?.name}">
                                     <a th:href="@{${'/student/showClickedVideo/' + courseName + '/' + batchHasVideo?.video?.id} }"
-                                        class="bg-opacity-10 bg-primary list-group-item list-group-item-action pb-3 pe-1 pt-3">
+                                        class="bg-opacity-25 bg-primary list-group-item list-group-item-action pb-3 pe-1 pt-3">
                                         <div class="col-sm-12 d-flex d-lg-flex justify-content-between w-100">
                                             <div
                                                 class="col-12 col-md-12 col-sm-12 justify-content-between justify-content-lg-between row">
@@ -58,6 +58,7 @@
                                                 <div
                                                     class="align-self-start col-1 col-lg-1 col-md-1 col-sm-1 col-xl-1 flex-fill pe-0 ps-0 text-end text-sm-end">
                                                     <small class="text-muted">
+                                                        [[${batchHasVideo?.video?.length}]]
                                                         <i class="fa fa-play-circle"></i>&nbsp;
                                                     </small>
                                                 </div>
@@ -81,6 +82,7 @@
                                                 <div
                                                     class="align-self-start col-1 col-lg-1 col-md-1 col-sm-1 col-xl-1 flex-fill pe-0 ps-0 text-end text-sm-end">
                                                     <small class="text-muted">
+                                                        [[${batchHasVideo?.video?.length}]]
                                                         <i class="fa fa-play-circle"></i>&nbsp;
                                                     </small>
                                                 </div>
