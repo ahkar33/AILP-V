@@ -159,7 +159,6 @@ public class TeacherApi {
     @PostMapping("/postVideoForBatch")
     public void postVideoForBatch(@RequestBody BatchHasVideo[] bhvList) {
         for (BatchHasVideo bhv : bhvList) {
-            System.out.println(bhv.getBhvBatchId() + " " + bhv.getBhvVideoId());
             BatchHasVideo resBatchHasVideo = batchHasVideoService.getBatchHasVideoyBatchIdAndVideoId(
                     bhv.getBhvBatchId(), bhv.getBhvVideoId());
             if (resBatchHasVideo != null) {
