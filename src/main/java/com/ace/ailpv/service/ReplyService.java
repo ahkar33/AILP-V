@@ -16,4 +16,8 @@ public class ReplyService {
         replyRepository.save(reply);
     }
 
+    public void deleteReplyById(Long id){
+        replyRepository.deleteById(id);
+    }
+
 }
