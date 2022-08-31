@@ -44,13 +44,14 @@
 
                     <div class="pe-0 ps-0 row">
                         <div class="mb-2">
-                            <h1 style="font-family: 'Roboto', sans-serif;" class="fs-4">Classes you are currently
-                                teaching</h1>
+                            <h1 style="font-family: 'Roboto', sans-serif;" class="fs-4">
+                                Classes you are currently teaching
+                            </h1>
                         </div>
                         
                             <div class="mb-5 me-0 pe-0 row" >
                                 <div class="col-lg-6 col-md-12 col-xl- col-xxl-3 mb-3 me-0" th:each="batch: ${batchList}">
-                                    <a class="text-decoration-none" th:href="@{/student/student-home}">
+                                    <a class="text-decoration-none" th:href="@{'/student/getVideos/' + ${batch.id} }">
                                         <div class="border-start-primary card pb-1 pt-1 py-2 shadow-sm"
                                             data-bss-hover-animate="pulse">
                                             <div class="card-body">
@@ -94,7 +95,6 @@
                                 Attendance</h1><canvas id="chartTwo"></canvas>
                         </div>
                     </div>
-
                 </div>
             </div>
             <!-- <footer class="bg-white sticky-footer">
@@ -102,7 +102,8 @@
                     <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
                 </div>
             </footer> -->
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
 
     <!-- chart.js -->
