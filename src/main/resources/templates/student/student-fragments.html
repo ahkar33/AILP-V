@@ -106,7 +106,7 @@
         </div>
     </nav>
 
-    <nav th:fragment="mobile-navbar" class="navbar navbar-light navbar-expand fixed-bottom shadow hide-on-mobile"
+    <nav th:if="${session?.role == 'ROLE_STUDENT'}" th:fragment="mobile-navbar" class="navbar navbar-light navbar-expand fixed-bottom shadow hide-on-mobile"
         style="font-size: 29px;background: linear-gradient(180deg, rgb(50, 73, 154) 0%, rgb(25, 43, 106) 100%);border-radius: 35px;margin-bottom: 18px;margin-right: 15px;margin-left: 15px;height: 51.5px;padding-top: 15px;color: rgb(255,255,255);">
         <div class="container-fluid"><button data-bs-toggle="collapse" class="navbar-toggler"
                 data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span
@@ -152,8 +152,6 @@
 
 
     <div th:fragment="footer">
-
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
@@ -189,6 +187,7 @@
                         window.location = "http://localhost:8080/logout";
                     }
                 })
+                .catch(error => console.log(error));
             }
         </script>
     </div>
