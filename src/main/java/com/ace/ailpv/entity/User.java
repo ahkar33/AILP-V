@@ -72,4 +72,6 @@ public class User {
     @JsonIgnore
     private List<UserSchedule> userScheduleList = new ArrayList<>();
 
+    private Long LastWatchVideoId;
+
 }

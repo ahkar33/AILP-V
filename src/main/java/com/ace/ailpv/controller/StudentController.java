@@ -83,8 +83,20 @@ public class StudentController {
         Batch studentBatch = batchService.getBatchById(studentBatchId);
         List<BatchHasVideo> batchHasVideoList = batchHasVideoService
                 .getAllBatchHasVideoByBatchId(studentBatchId);
+        List<User> teacherList = usersService.getTeacherListByBatchId(studentBatchId);
+
+        if (studentInfo.getLastWatchVideoId() != null) {
+            Video video = videoService.getVideoById(studentInfo.getLastWatchVideoId());
+            model.addAttribute("video", video);
+        } else {
+            Video video = videoService.getFirstVideo();
+            model.addAttribute("video", video);
+        }
+
+        model.addAttribute("teacherList", teacherList);
         model.addAttribute("courseName", studentBatch.getBatchCourse().getName());
         model.addAttribute("batchHasVideoList", batchHasVideoList);
+        model.addAttribute("batchId", studentBatchId);
         return "/student/STU-VID-06";
     }
 
@@ -96,7 +108,13 @@ public class StudentController {
         Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
         List<BatchHasVideo> batchHasVideoList = batchHasVideoService
                 .getAllBatchHasVideoByBatchId(studentBatchId);
+        List<User> teacherList = usersService.getTeacherListByBatchId(studentBatchId);
         Video video = videoService.getVideoById(Long.parseLong(videoId));
+
+        studentInfo.setLastWatchVideoId(video.getId());
+        usersService.addUser(studentInfo);
+
+        model.addAttribute("teacherList", teacherList);
         model.addAttribute("video", video);
         model.addAttribute("courseName", courseName);
         model.addAttribute("batchHasVideoList", batchHasVideoList);
