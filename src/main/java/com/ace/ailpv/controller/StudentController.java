@@ -75,18 +75,24 @@ public class StudentController {
         return "/student/STU-REC-09";
     }
 
-    @GetMapping("/getVideos")
-    public String getVideos(ModelMap model, HttpSession session) {
-        String studentId = (String) session.getAttribute("uid");
-        User studentInfo = usersService.getUserById(studentId);
-        Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
-        Batch studentBatch = batchService.getBatchById(studentBatchId);
-        List<BatchHasVideo> batchHasVideoList = batchHasVideoService
-                .getAllBatchHasVideoByBatchId(studentBatchId);
-        List<User> teacherList = usersService.getTeacherListByBatchId(studentBatchId);
+    @GetMapping("/getVideos/{batchId}")
+    public String getVideos(ModelMap model, HttpSession session, @PathVariable("batchId") String batchId) {
+        String userId = (String) session.getAttribute("uid");
+        User userInfo = usersService.getUserById(userId);
+        Long userBatchId;
+        if(batchId.equals("AILP")) {
+             userBatchId = userInfo.getBatchList().iterator().next().getId();
+        } else {
+             userBatchId = Long.parseLong(batchId); 
+        }
 
-        if (studentInfo.getLastWatchVideoId() != null) {
-            Video video = videoService.getVideoById(studentInfo.getLastWatchVideoId());
+        Batch studentBatch = batchService.getBatchById(userBatchId);
+        List<BatchHasVideo> batchHasVideoList = batchHasVideoService
+                .getAllBatchHasVideoByBatchId(userBatchId);
+        List<User> teacherList = usersService.getTeacherListByBatchId(userBatchId);
+
+        if (userInfo.getLastWatchVideoId() != null) {
+            Video video = videoService.getVideoById(userInfo.getLastWatchVideoId());
             if (video != null) {
                 model.addAttribute("video", video);
             } else {
@@ -100,7 +106,7 @@ public class StudentController {
         model.addAttribute("teacherList", teacherList);
         model.addAttribute("courseName", studentBatch.getBatchCourse().getName());
         model.addAttribute("batchHasVideoList", batchHasVideoList);
-        model.addAttribute("batchId", studentBatchId);
+        model.addAttribute("batchId", userBatchId);
         return "/student/STU-VID-06";
     }
 
