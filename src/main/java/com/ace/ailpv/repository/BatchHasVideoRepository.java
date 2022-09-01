@@ -12,4 +12,5 @@ public interface BatchHasVideoRepository extends JpaRepository<BatchHasVideo, Lo
 
     BatchHasVideo findByBhvBatch_IdAndVideo_Id(Long batchId, Long resourceId);
 
+
 }

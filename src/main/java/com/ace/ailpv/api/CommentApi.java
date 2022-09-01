@@ -71,4 +71,14 @@ public class CommentApi {
         replyService.addReply(reqReply);
     }
 
+    @GetMapping("/deleteCommentById/{commentId}")
+    public void deleteCommentById(@PathVariable("commentId") Long commentId) {
+        commentService.deleteCommentById(commentId); 
+    }
+
+    @GetMapping("/deleteReplyById/{replyId}")
+    public void deleteReplytById(@PathVariable("replyId") Long replyId) {
+        replyService.deleteReplyById(replyId);
+    }
+
 }

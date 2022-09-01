@@ -18,6 +18,10 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
+    public void deleteCommentById(Long id) {
+        commentRepository.deleteById(id);
+    }
+
     public List<Comment> getCommentListByBatchIdAndVideoId(Long batchId, Long videoId) {
         return commentRepository.findByCommentBatch_IdAndCommentVideoIdOrderByIdDesc(batchId, videoId);
     }
