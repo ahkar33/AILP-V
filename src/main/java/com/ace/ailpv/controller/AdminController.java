@@ -3,7 +3,6 @@ package com.ace.ailpv.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.ace.ailpv.SecretConfigProperties;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.entity.Resource;
@@ -29,12 +30,18 @@ import com.ace.ailpv.service.ResourceService;
 import com.ace.ailpv.service.UserService;
 import com.ace.ailpv.service.VideoService;
 
+import ws.schild.jave.EncoderException;
+import ws.schild.jave.InputFormatException;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private SecretConfigProperties secretConfigProperties;
 
     @Autowired
     private CourseService courseService;
@@ -57,14 +64,14 @@ public class AdminController {
     @Autowired
     private ResourceService resourceService;
 
-    String path = "C:\\AILP-V\\src\\main\\resources\\static\\courses\\";
+    String path = "src\\main\\resources\\static\\courses\\";
 
     @GetMapping("/dashboard")
     public String setupDashborad(ModelMap model) {
-        model.addAttribute("studentCount", userService.getAllStudents().size());
-        model.addAttribute("teacherCount", userService.getAllTeachers().size());
-        model.addAttribute("batchCount", batchService.getAllBatches().size());
-        model.addAttribute("courseCount", courseService.getAllCourses().size());
+        model.addAttribute("studentCount", userService.getUserCountByUserRole("ROLE_STUDENT"));
+        model.addAttribute("teacherCount", userService.getUserCountByUserRole("ROLE_TEACHER"));
+        model.addAttribute("batchCount", batchService.getBatchCount());
+        model.addAttribute("courseCount", courseService.getCourseCount());
         return "/admin/ADM-DSB-01";
     }
 
@@ -77,7 +84,7 @@ public class AdminController {
 
     @PostMapping("/addCourse")
     public String addCourse(@ModelAttribute("course") Course course, RedirectAttributes redirectAttrs)
-            throws IllegalStateException, IOException {
+            throws IllegalStateException, IOException, InputFormatException, EncoderException {
         if (courseService.checkCourseName(course.getName())) {
             redirectAttrs.addFlashAttribute("errorMsg", true);
             return "redirect:/admin/course-table";
@@ -157,7 +164,7 @@ public class AdminController {
 
     @PostMapping("/uploadCourseVideo")
     public String uploadCourseVideo(ModelMap modal, @RequestParam("file") MultipartFile[] files,
-            @RequestParam("courseId") String courseId) throws IllegalStateException, IOException {
+            @RequestParam("courseId") String courseId) throws IllegalStateException, IOException, InputFormatException, EncoderException {
         String courseName = courseService.getCourseById(Long.parseLong(courseId)).getName();
         Course course = courseService.getCourseById(Long.parseLong(courseId));
         for (MultipartFile file : files) {
@@ -166,6 +173,7 @@ public class AdminController {
                 Video newVideo = new Video();
                 newVideo.setName(file.getOriginalFilename());
                 newVideo.setVideoCourse(course);
+                 newVideo.setLength(videoService.getVideoLength(file));
                 videoService.addVideo(newVideo);
             }
         }
@@ -240,7 +248,7 @@ public class AdminController {
 
         if (batch.getIsActive()) {
             batch.setIsActive(false);
-            for (User user: studentList) {
+            for (User user : studentList) {
                 boolean isEnable = true;
                 if (user.getBatchList().size() == 1) {
                     isEnable = false;
@@ -258,19 +266,17 @@ public class AdminController {
 
                 if (!isEnable)
                     userService.doToggleAccountStatus(isEnable, user.getId());
-                
-            }
 
-            
+            }
 
         } else {
             batch.setIsActive(true);
 
-            for (User user: studentList) {
+            for (User user : studentList) {
                 if (!user.getEnabled())
                     userService.doToggleAccountStatus(true, user.getId());
+            }
         }
-    }
         batchService.addBatch(batch);
         return "redirect:/admin/batch-table";
     }
@@ -285,7 +291,7 @@ public class AdminController {
     }
 
     @PostMapping("/editBatch")
-    public String editBatch(@ModelAttribute("batch") Batch batch) {
+    public String editBatch(@ModelAttribute("batch") Batch batch,ModelMap model) {
         Batch resBatch = batchService.getBatchById(batch.getId());
         if (resBatch.getIsActive()) {
             batch.setIsActive(true);
@@ -293,7 +299,8 @@ public class AdminController {
             batch.setIsActive(false);
         }
         batchService.addBatch(batch);
-        return "redirect:/admin/batch-table";
+        model.addAttribute("successMsg",true);
+        return "/admin/ADM-EDB-11";
     }
 
     @GetMapping("/student-table")
@@ -328,7 +335,10 @@ public class AdminController {
         User resStudent = userService.getUserById(student.getId());
         student.setIsMute(resStudent.getIsMute());
         student.setEnabled(resStudent.getEnabled());
+        student.setPassword(resStudent.getPassword());
+        student.setProfile_pic(resStudent.getProfile_pic());
         userService.addUser(student);
+
         return "redirect:/admin/student-table";
     }
 
@@ -370,8 +380,26 @@ public class AdminController {
         User resTeacher = userService.getUserById(teacher.getId());
         teacher.setIsMute(resTeacher.getIsMute());
         teacher.setEnabled(resTeacher.getEnabled());
+        teacher.setPassword(resTeacher.getPassword());
+        teacher.setProfile_pic(resTeacher.getProfile_pic());
         userService.addUser(teacher);
         return "redirect:/admin/teacher-table";
+    }
+
+    @GetMapping("/changePassword/{userId}")
+    public String changePassword(@PathVariable("userId")String userId){
+       
+       User user=userService.getUserById(userId);
+       if(user.getRole().equals("ROLE_STUDENT")){
+        user.setPassword(secretConfigProperties.getDefaultStdPassword());
+        userService.updatePasswordByUserId(passwordEncoder.encode(user.getPassword()), userId);
+        return "redirect:/admin/student-table";
+       }else if(user.getRole().equals("ROLE_TEACHER")){
+        user.setPassword(secretConfigProperties.getDefaultTchPassword());
+        userService.updatePasswordByUserId(passwordEncoder.encode(user.getPassword()) , userId);
+        return "redirect:/admin/teacher-table";
+       }
+       return "redirect:/admin/dashboard";
     }
 
     // to delete after admin account created
@@ -383,10 +411,10 @@ public class AdminController {
     @PostMapping("/register")
     public String setupRegister(@RequestParam("id") String id, @RequestParam("name") String name,
             @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword,
-            @RequestParam("pin") String pin,RedirectAttributes redirectAttr) {
+            @RequestParam("pin") String pin, RedirectAttributes redirectAttr) {
         if (password.equals(confirmPassword)) {
 
-            if (pin.equals("1337")) {
+            if (pin.equals(secretConfigProperties.getDefaultPin())) {
                 System.out.println("equal pin");
                 User user = new User();
                 user.setId(id);
@@ -399,10 +427,10 @@ public class AdminController {
                 userService.addUser(user);
                 return "redirect:/auth/login";
             } else {
-                redirectAttr.addFlashAttribute("errorMsg","Invalid Pin!");
+                redirectAttr.addFlashAttribute("errorMsg", "Invalid Pin!");
             }
         } else {
-            redirectAttr.addFlashAttribute("errorMsg","Unmatch Password!");
+            redirectAttr.addFlashAttribute("errorMsg", "Unmatch Password!");
         }
 
         return "redirect:/admin/register";

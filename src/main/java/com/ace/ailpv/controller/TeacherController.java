@@ -168,7 +168,6 @@ public class TeacherController {
         return "/teacher/TCH-UPR-02";
     }
 
-
     //added by me
     @GetMapping("/assignment-table")
     public String setupAssignmentTable(HttpSession session, ModelMap model) {
@@ -240,5 +239,13 @@ public class TeacherController {
     }
 
     //end
+
+    @GetMapping("/postVideo")
+    public String setupPostVideo(HttpSession session, ModelMap model) {
+        String teacherId = (String) session.getAttribute("uid");
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+        model.addAttribute("batchList", batchList);
+        return "/teacher/TCH-UPV-03";
+    }
 
 }

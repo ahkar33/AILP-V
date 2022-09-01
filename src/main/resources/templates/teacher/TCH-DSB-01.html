@@ -44,88 +44,69 @@
 
                     <div class="pe-0 ps-0 row">
                         <div class="mb-2">
-                            <h1 style="font-family: 'Roboto', sans-serif;" class="fs-4">Classes you are currently
-                                teaching</h1>
+                            <h1 style="font-family: 'Roboto', sans-serif;" class="fs-4">
+                                Classes you are currently teaching
+                            </h1>
                         </div>
-                        
-                            <div class="mb-5 me-0 pe-0 row" >
-                                <div class="col-lg-6 col-md-12 col-xl- col-xxl-3 mb-3 me-0" th:each="batch: ${batchList}">
-                                    <a class="text-decoration-none" th:href="@{/student/student-home}">
-                                        <div class="border-start-primary card pb-1 pt-1 py-2 shadow-sm"
-                                            data-bss-hover-animate="pulse">
-                                            <div class="card-body">
-                                                <div class="row align-items-center no-gutters">
-                                                    <div class="col col-9 me-2">
-                                                        <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                                            <p style="font-size: 18.2px;font-weight: bold;font-family: 'Roboto', sans-serif;color: #edba39;"
-                                                                class="fs-5 text-capitalize text-dark">
-                                                                [[${batch.getBatchCourse().getName()}]]</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto pe-0 ps-0">
-                                                        <i
-                                                            class="fa fa-2x fa-photo-video fa-users fas text-primary"></i>
+
+                        <div class="mb-5 me-0 pe-0 row">
+                            <div class="col-lg-6 col-md-12 col-xl- col-xxl-3 mb-3 me-0" th:each="batch: ${batchList}">
+                                <a class="text-decoration-none" th:href="@{'/student/getVideos/' + ${batch.id} }">
+                                    <div class="border-start-primary card pb-1 pt-1 py-2 shadow-sm"
+                                        data-bss-hover-animate="pulse">
+                                        <div class="card-body">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col col-9 me-2">
+                                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                                        <p style="font-size: 18.2px;font-weight: bold;font-family: 'Roboto', sans-serif;color: #edba39;"
+                                                            class="fs-5 text-capitalize text-dark">
+                                                            [[${batch.getBatchCourse().getName()}]]</p>
                                                     </div>
                                                 </div>
-                                                <div class="row align-items-center no-gutters">
-                                                    <div class="col col-9 me-2">
-                                                        <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                                            <p style="font-size: 18.2px;font-weight: bold;font-family: 'Roboto', sans-serif;color: #edba39;"
-                                                                class="fs-6 mb-0 text-capitalize text-danger">
-                                                                [[${batch.getName()}]]</p>
-                                                        </div>
+                                                <div class="col-auto pe-0 ps-0">
+                                                    <i class="fa fa-2x fa-photo-video fa-users fas text-primary"></i>
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col col-9 me-2">
+                                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                                        <p style="font-size: 18.2px;font-weight: bold;font-family: 'Roboto', sans-serif;color: #edba39;"
+                                                            class="fs-6 mb-0 text-capitalize text-danger">
+                                                            [[${batch.getName()}]]</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
-                        
+                        </div>
 
-
-
-                        <div class="col-lg-12 col-xl-12 mb-5 text-center">
+                        <!-- <div class="col-lg-12 col-xl-12 mb-5 text-center">
                             <h1 class="fw-bold h4 text-dark" style="font-family: 'Roboto', sans-serif;">Batch vs.
-                                Attendance</h1><canvas id="chartOne"></canvas>
+                                Attendance
+                            </h1>
+                            <canvas id="chartOne"></canvas>
                         </div>
                         <div class="col-lg-5 col-xl-4 text-center">
                             <h1 class="fw-bold h4 text-dark" style="font-family: 'Roboto', sans-serif;">Batch vs.
-                                Attendance</h1><canvas id="chartTwo"></canvas>
-                        </div>
-                    </div>
+                                Attendance
+                            </h1>
+                            <canvas id="chartTwo"></canvas>
+                        </div> -->
 
+                    </div>
                 </div>
             </div>
-            <!-- <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
-                </div>
-            </footer> -->
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
     </div>
 
     <!-- chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
-    <script src="/assets/js/teacherDashboard.js"></script>
+    <!-- <script src="/assets/js/teacherDashboard.js"></script> -->
 
     <div th:insert="/teacher/teacher-fragments :: footer" />
-    <script>
-        $(document).ready(function () {
-            $('#dataTable').DataTable();
-            let successMsg = document.getElementById("successMsg").value;
-            if (successMsg) {
-                alertSuccess();
-            }
-        });
-        const alertSuccess = () => {
-            Swal.fire(
-                'Successfully Uploaded!',
-                '',
-                'success'
-            )
-        }
-    </script>
+
 
 </body>
 

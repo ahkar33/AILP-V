@@ -1,5 +1,4 @@
 package com.ace.ailpv.service;
-
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
@@ -10,14 +9,17 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FileService {
 
-    String courseFilePath = "C:\\AILP-V\\src\\main\\resources\\static\\courses\\";
+    @Autowired
+    private FileUploadUtilService fileUploadUtilService;
+
+    String courseFilePath = "src\\main\\resources\\static\\courses\\";
 
     public void createFolderForCourse(String courseName) {
         File theDir = new File(courseFilePath + courseName);
@@ -52,8 +54,7 @@ public class FileService {
     //end
 
     public void createFile(MultipartFile file, String folderName) throws IllegalStateException, IOException {
-        file.transferTo(
-                new File(courseFilePath + folderName + "\\" + file.getOriginalFilename()));
+        fileUploadUtilService.saveFile(courseFilePath + folderName + "\\", file.getOriginalFilename(), file);
     }
 
     public void deleteFolder(String folderName) throws IOException {
@@ -81,7 +82,5 @@ public class FileService {
     public String generateFileName(String fileExtension) {
         return String.join("", UUID.randomUUID().toString().split("-")) + "." + fileExtension;
     }
-
-    
 
 }

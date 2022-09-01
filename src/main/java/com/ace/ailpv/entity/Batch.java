@@ -57,6 +57,10 @@ public class Batch {
     private List<BatchHasResource> batchHasResourceList = new ArrayList<>();
        
 
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "bhvBatch")
+    @JsonIgnore
+    private List<BatchHasVideo> batchHasVideoList = new ArrayList<>();
+
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean isActive;
 

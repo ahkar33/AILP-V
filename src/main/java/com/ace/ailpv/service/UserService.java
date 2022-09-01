@@ -85,6 +85,14 @@ public class UserService {
         return studentList;
     }
 
+    public List<User> getTeacherListByBatchId(Long batchId) {
+        List<User> userList = findUserByBatchId(batchId);
+        List<User> teacherList = userList.stream()
+                .filter(user -> user.getRole().equals("ROLE_TEACHER"))
+                .collect(Collectors.toList());
+        return teacherList;
+    }
+
     public List<String> getUserIdList() {
         List<String> userIdList = new ArrayList<>();
         List<User> userList = userRepository.findAll();
@@ -103,7 +111,7 @@ public class UserService {
         List<Batch> teacherBatchList = getTeacherBatchListById(id);
         List<Course> teacherCourseList = new ArrayList<>();
         for (Batch batch : teacherBatchList) {
-            if(!teacherCourseList.contains(batch.getBatchCourse())) {
+            if (!teacherCourseList.contains(batch.getBatchCourse())) {
                 teacherCourseList.add(batch.getBatchCourse());
             }
         }
@@ -129,9 +137,17 @@ public class UserService {
     public void updatePasswordByUserId(String newPassword, String uid) {
         userRepository.updatePasswordById(newPassword, uid);
     }
-    
+
     public void doToggleAccountStatus(Boolean status, String uid) {
         userRepository.toggleAccountStatus(status, uid);
+    }
+
+    public Long getUserReadMessagesCountById(String id) {
+        return userRepository.findUserReadMessagesCountById(id);
+    }
+
+    public int getUserCountByUserRole(String userRole) {
+        return userRepository.userCountByUserRole(userRole);
     }
 
 }

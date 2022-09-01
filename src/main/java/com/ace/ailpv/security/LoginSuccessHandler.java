@@ -1,16 +1,13 @@
 package com.ace.ailpv.security;
-
 import java.io.IOException;
 import java.util.ArrayList;
 // import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 // import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
@@ -35,6 +32,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         request.getSession().setAttribute("uid", user.getId());
         request.getSession().setAttribute("name", user.getName());
         request.getSession().setAttribute("profile_pic", user.getProfile_pic());
+        request.getSession().setAttribute("role", user.getRole());
 
         String targetUrl = determineTargetUrl(authentication);
         if (response.isCommitted()) {
@@ -46,11 +44,11 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     protected String determineTargetUrl(Authentication authentication) {
         String url = "/login?error=true";
+
         // fetch the roles from Authenication object
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         List<String> roles = new ArrayList<>();
         for (GrantedAuthority a : authorities) {
-
             roles.add(a.getAuthority());
         }
 

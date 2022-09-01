@@ -2,6 +2,8 @@ package com.ace.ailpv.api;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
+import com.ace.ailpv.SecretConfigProperties;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Schedule;
 import com.ace.ailpv.service.BatchService;
@@ -39,6 +42,9 @@ public class StudentApi {
     private ScheduleService scheduleService;
 
     @Autowired
+    private SecretConfigProperties secretConfigProperties;
+
+    @Autowired
     private UserScheduleService userScheduleService;
 
     @PostMapping("/addStudents")
@@ -47,7 +53,7 @@ public class StudentApi {
         Batch batch = batchService.getBatchById(batchId);
         for (User student : studentList) {
             student.getBatchList().add(batch);
-            student.setPassword(passwordEncoder.encode("ailp123"));
+            student.setPassword(passwordEncoder.encode(secretConfigProperties.getDefaultStdPassword()));
             student.setRole("ROLE_STUDENT");
             student.setEnabled(true);
             student.setIsMute(false);
@@ -62,50 +68,35 @@ public class StudentApi {
     }
 
     @PostMapping("/modifyAttendance")
-    public void modifyAttendance(@RequestBody UserSchedule[] userScheduleList) {
+    public void modifyAttendance(@RequestBody UserSchedule[] userScheduleList, HttpSession session) {
         for (UserSchedule userSchedule : userScheduleList) {
             if (!scheduleService.checkSchedule(userSchedule.getDate())) {
 
                 Schedule schedule = new Schedule();
                 schedule.setDate(userSchedule.getDate());
                 scheduleService.addSchedule(schedule);
-
-                User student = userService.getUserById(userSchedule.getStudentId());
-                userSchedule.setUser(student);
-
-                Schedule resSchedule = scheduleService.getScheduleByDate(userSchedule.getDate());
-                userSchedule.setSchedule(resSchedule);
-
-                userSchedule.setStatus(userSchedule.getStatus());
-
-                UserSchedule resUserSchedule = userScheduleService.getUserScheduleByUserIdAndScheduleId(student.getId(),
-                        resSchedule.getId());
-
-                if (resUserSchedule != null) {
-                    userScheduleService.deleteUserScheduleById(resUserSchedule.getId());
-                }
-
-                userScheduleService.addUserSchedule(userSchedule);
-
-            } else {
-                User student = userService.getUserById(userSchedule.getStudentId());
-                userSchedule.setUser(student);
-
-                Schedule resSchedule = scheduleService.getScheduleByDate(userSchedule.getDate());
-                userSchedule.setSchedule(resSchedule);
-
-                userSchedule.setStatus(userSchedule.getStatus());
-
-                UserSchedule resUserSchedule = userScheduleService.getUserScheduleByUserIdAndScheduleId(student.getId(),
-                        resSchedule.getId());
-
-                if (resUserSchedule != null) {
-                    userScheduleService.deleteUserScheduleById(resUserSchedule.getId());
-                }
-
-                userScheduleService.addUserSchedule(userSchedule);
-
             }
+
+            User student = userService.getUserById(userSchedule.getStudentId());
+            userSchedule.setUser(student);
+
+            Batch studentBatch = student.getBatchList().get(0);
+            userSchedule.setUserScheduleBatch(studentBatch);
+
+            Schedule resSchedule = scheduleService.getScheduleByDate(userSchedule.getDate());
+            userSchedule.setSchedule(resSchedule);
+
+            userSchedule.setStatus(userSchedule.getStatus());
+
+            UserSchedule resUserSchedule = userScheduleService.getUserScheduleByUserIdAndScheduleId(student.getId(),
+                    resSchedule.getId());
+
+            if (resUserSchedule != null) {
+                userScheduleService.deleteUserScheduleById(resUserSchedule.getId());
+            }
+
+            userScheduleService.addUserSchedule(userSchedule);
+
         }
     }
 

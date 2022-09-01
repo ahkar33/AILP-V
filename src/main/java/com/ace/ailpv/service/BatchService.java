@@ -20,8 +20,14 @@ public class BatchService {
     @Autowired
     private UserService userService;
 
+
     public void addBatch(Batch batch) {
-        batchRepository.save(batch);
+        try {
+            batchRepository.save(batch);
+            
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 
     public void deleteBatchById(Long id) {
@@ -56,5 +62,10 @@ public class BatchService {
     public List<Batch> getBatchesByCourseId(Long id) {
         return batchRepository.findByBatchCourse_Id(id);
     }
+
+    public int getBatchCount(){
+        return batchRepository.batchCount();
+    }
+
 
 }
