@@ -115,7 +115,7 @@ public class BatchServiceTest {
         batch.setEndDate(LocalDate.of(2022, 10, 10));
         batch.setBatchCourse(getBatchCourse());
         batch.setUserList(getUserList());
-        return batch;
+        return batch;   
     }   
     private List<Batch>getBatchList(){
             Batch batch=new Batch();
