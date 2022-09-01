@@ -1,16 +1,13 @@
 package com.ace.ailpv.security;
-
 import java.io.IOException;
 import java.util.ArrayList;
 // import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 // import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
@@ -52,10 +49,8 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         List<String> roles = new ArrayList<>();
         for (GrantedAuthority a : authorities) {
-
             roles.add(a.getAuthority());
         }
-
 
         // check user role and decide the redirect url
         if (roles.contains("ROLE_ADMIN"))

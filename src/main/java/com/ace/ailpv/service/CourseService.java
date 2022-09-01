@@ -14,6 +14,9 @@ import com.ace.ailpv.entity.Resource;
 import com.ace.ailpv.entity.Video;
 import com.ace.ailpv.repository.CourseRepository;
 
+import ws.schild.jave.EncoderException;
+import ws.schild.jave.InputFormatException;
+
 @Service
 public class CourseService {
 
@@ -35,7 +38,7 @@ public class CourseService {
     @Autowired
     private ExamService examService;
 
-    public void addCourse(Course course) throws IllegalStateException, IOException {
+    public void addCourse(Course course) throws IllegalStateException, IOException, InputFormatException, EncoderException {
 
         fileService.createFolderForCourse(course.getName().trim());
 
@@ -45,6 +48,7 @@ public class CourseService {
         for (MultipartFile video : course.getVideos()) {
             fileService.createFile(video, course.getName().trim() + "\\video");
             Video reqVideo = new Video();
+            reqVideo.setLength(videoService.getVideoLength(video));
             reqVideo.setName(video.getOriginalFilename());
             reqVideo.setVideoCourse(resCourse);
             videoService.addVideo(reqVideo);

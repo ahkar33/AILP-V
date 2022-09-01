@@ -23,7 +23,8 @@
             [[${courseName}]]
         </h1>
         <i class="fa-chalkboard-teacher fas " style="margin-right: 10px;"></i>
-        <span th:each="teacher, loop : ${teacherList}" class="text-primary fs-6 fw-bold mb-2" style="font-family: Arimo, sans-serif;margin-right: 8px;">
+        <span th:each="teacher, loop : ${teacherList}" class="text-primary fs-6 fw-bold mb-2"
+            style="font-family: Arimo, sans-serif;margin-right: 8px;">
             [[${teacher?.name}]] <span th:if="${loop.index != loop.size-1}">,</span>
         </span>
 
@@ -43,50 +44,102 @@
 
                             <span th:each="batchHasVideo, iter : ${batchHasVideoList}">
 
-                                <span th:if="${batchHasVideo?.video?.name == video?.name}">
-                                    <a th:href="@{${'/student/showClickedVideo/' + courseName + '/' + batchHasVideo?.video?.id} }"
-                                        class="bg-opacity-10 bg-primary list-group-item list-group-item-action pb-3 pe-1 pt-3">
-                                        <div class="col-sm-12 d-flex d-lg-flex justify-content-between w-100">
-                                            <div
-                                                class="col-12 col-md-12 col-sm-12 justify-content-between justify-content-lg-between row">
-                                                <div class="col-9 col-lg-8 col-md-10 col-sm-10 col-xl-9">
-                                                    <h5 class="fs-6 lh-base mb-1">
-                                                        [[${batchHasVideo?.video?.name.substring(0,
-                                                        batchHasVideo.video.name.length - 4)}]]
-                                                    </h5>
-                                                </div>
+                                <span th:if="${session?.role == 'ROLE_STUDENT'}">
+                                    <span th:if="${batchHasVideo?.video?.name == video?.name}">
+                                        <a th:href="@{${'/student/showClickedVideo/' + courseName + '/' + batchHasVideo?.video?.id + '/AILP'} }"
+                                            class="bg-opacity-25 bg-primary list-group-item list-group-item-action pb-3 pe-1 pt-3">
+                                            <div class="col-sm-12 d-flex d-lg-flex justify-content-between w-100">
                                                 <div
-                                                    class="align-self-start col-1 col-lg-1 col-md-1 col-sm-1 col-xl-1 flex-fill pe-0 ps-0 text-end text-sm-end">
-                                                    <small class="text-muted">
-                                                        <i class="fa fa-play-circle"></i>&nbsp;
-                                                    </small>
+                                                    class="col-12 col-md-12 col-sm-12 justify-content-between justify-content-lg-between row">
+                                                    <div class="col-9 col-lg-8 col-md-10 col-sm-10 col-xl-9">
+                                                        <h5 class="fs-6 lh-base mb-1">
+                                                            [[${batchHasVideo?.video?.name.substring(0,
+                                                            batchHasVideo.video.name.length - 4)}]]
+                                                        </h5>
+                                                    </div>
+                                                    <div
+                                                        class="align-self-start col-1 col-lg-1 col-md-1 col-sm-1 col-xl-1 flex-fill pe-0 ps-0 text-end text-sm-end">
+                                                        <small class="text-muted">
+                                                            [[${batchHasVideo?.video?.length}]]
+                                                            <i class="fa fa-play-circle"></i>&nbsp;
+                                                        </small>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    </span>
+                                    <span th:if="${batchHasVideo?.video?.name != video?.name}">
+                                        <a th:href="@{${'/student/showClickedVideo/' + courseName + '/' + batchHasVideo?.video?.id + '/AILP'} }"
+                                            class="list-group-item list-group-item-action pb-3 pe-1 pt-3">
+                                            <div class="col-sm-12 d-flex d-lg-flex justify-content-between w-100">
+                                                <div
+                                                    class="col-12 col-md-12 col-sm-12 justify-content-between justify-content-lg-between row">
+                                                    <div class="col-9 col-lg-8 col-md-10 col-sm-10 col-xl-9">
+                                                        <h5 class="fs-6 lh-base mb-1">
+                                                            [[${batchHasVideo?.video?.name.substring(0,
+                                                            batchHasVideo.video.name.length - 4)}]]
+                                                        </h5>
+                                                    </div>
+                                                    <div
+                                                        class="align-self-start col-1 col-lg-1 col-md-1 col-sm-1 col-xl-1 flex-fill pe-0 ps-0 text-end text-sm-end">
+                                                        <small class="text-muted">
+                                                            [[${batchHasVideo?.video?.length}]]
+                                                            <i class="fa fa-play-circle"></i>&nbsp;
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </span>
                                 </span>
 
-                                <span th:if="${batchHasVideo?.video?.name != video?.name}">
-                                    <a th:href="@{${'/student/showClickedVideo/' + courseName + '/' + batchHasVideo?.video?.id} }"
-                                        class="list-group-item list-group-item-action pb-3 pe-1 pt-3">
-                                        <div class="col-sm-12 d-flex d-lg-flex justify-content-between w-100">
-                                            <div
-                                                class="col-12 col-md-12 col-sm-12 justify-content-between justify-content-lg-between row">
-                                                <div class="col-9 col-lg-8 col-md-10 col-sm-10 col-xl-9">
-                                                    <h5 class="fs-6 lh-base mb-1">
-                                                        [[${batchHasVideo?.video?.name.substring(0,
-                                                        batchHasVideo.video.name.length - 4)}]]
-                                                    </h5>
-                                                </div>
+                                <span th:if="${session?.role == 'ROLE_TEACHER'}">
+                                    <span th:if="${batchHasVideo?.video?.name == video?.name}">
+                                        <a th:href="@{${'/student/showClickedVideo/' + courseName + '/' + batchHasVideo?.video?.id + '/' + batchHasVideo?.bhvBatch?.id} }"
+                                            class="bg-opacity-25 bg-primary list-group-item list-group-item-action pb-3 pe-1 pt-3">
+                                            <div class="col-sm-12 d-flex d-lg-flex justify-content-between w-100">
                                                 <div
-                                                    class="align-self-start col-1 col-lg-1 col-md-1 col-sm-1 col-xl-1 flex-fill pe-0 ps-0 text-end text-sm-end">
-                                                    <small class="text-muted">
-                                                        <i class="fa fa-play-circle"></i>&nbsp;
-                                                    </small>
+                                                    class="col-12 col-md-12 col-sm-12 justify-content-between justify-content-lg-between row">
+                                                    <div class="col-9 col-lg-8 col-md-10 col-sm-10 col-xl-9">
+                                                        <h5 class="fs-6 lh-base mb-1">
+                                                            [[${batchHasVideo?.video?.name.substring(0,
+                                                            batchHasVideo.video.name.length - 4)}]]
+                                                        </h5>
+                                                    </div>
+                                                    <div
+                                                        class="align-self-start col-1 col-lg-1 col-md-1 col-sm-1 col-xl-1 flex-fill pe-0 ps-0 text-end text-sm-end">
+                                                        <small class="text-muted">
+                                                            [[${batchHasVideo?.video?.length}]]
+                                                            <i class="fa fa-play-circle"></i>&nbsp;
+                                                        </small>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    </span>
+                                    <span th:if="${batchHasVideo?.video?.name != video?.name}">
+                                        <a th:href="@{${'/student/showClickedVideo/' + courseName + '/' + batchHasVideo?.video?.id + '/' + batchHasVideo?.bhvBatch?.id} }"
+                                            class="list-group-item list-group-item-action pb-3 pe-1 pt-3">
+                                            <div class="col-sm-12 d-flex d-lg-flex justify-content-between w-100">
+                                                <div
+                                                    class="col-12 col-md-12 col-sm-12 justify-content-between justify-content-lg-between row">
+                                                    <div class="col-9 col-lg-8 col-md-10 col-sm-10 col-xl-9">
+                                                        <h5 class="fs-6 lh-base mb-1">
+                                                            [[${batchHasVideo?.video?.name.substring(0,
+                                                            batchHasVideo.video.name.length - 4)}]]
+                                                        </h5>
+                                                    </div>
+                                                    <div
+                                                        class="align-self-start col-1 col-lg-1 col-md-1 col-sm-1 col-xl-1 flex-fill pe-0 ps-0 text-end text-sm-end">
+                                                        <small class="text-muted">
+                                                            [[${batchHasVideo?.video?.length}]]
+                                                            <i class="fa fa-play-circle"></i>&nbsp;
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </span>
                                 </span>
 
                             </span>
@@ -107,6 +160,7 @@
                     <input type="hidden" th:value="${batchId}" id="batchId">
                     <input type="hidden" th:value="${session?.uid}" id="userId">
                     <input type="hidden" th:value="${video?.id}" id="videoId">
+                    <input type="hidden" th:value="${username}" id="userName">
 
                     <div v-cloak class="mb-2 mt-4">
                         <form>
@@ -152,10 +206,19 @@
                                                 <small class="text-muted" style="font-family: 'Roboto', sans-serif;">
                                                     {{ comment.dateTime }}
                                                 </small>
-                                                <p class="mb-2 text-break" style="font-family: 'Roboto', sans-serif;">
+
+                                                <p class="mb-2 text-break" style="font-family: 'Roboto', sans-serif; cursor: pointer;"
+                                                    @mouseleave="comment.isHover = false"
+                                                    @mouseover="comment.isHover = true">
                                                     {{ comment.commentText }}
-                                                    <br />
+                                                    <span v-if="userName == comment.commentUser.name">
+                                                        <button v-show="comment.isHover"
+                                                            @click="deleteComment(comment.id)">
+                                                            Delete Comment
+                                                        </button>
+                                                    </span>
                                                 </p>
+
                                                 <i @click.prevent="toggleShowReply(index)"
                                                     class="align-items-start d-flex mb-0 pb-0 text-primary"
                                                     :class="[comment.isReplyShow ? 'fa fa-caret-up' : 'fa fa-caret-down']"
@@ -218,9 +281,16 @@
                                                                         {{ reply.dateTime }}
                                                                     </small>
                                                                     <p class="mb-2 text-break"
-                                                                        style="font-family: 'Roboto', sans-serif;">
+                                                                        @mouseleave="reply.isHover = false"
+                                                                        @mouseover="reply.isHover = true"
+                                                                        style="font-family: 'Roboto', sans-serif; cursor: pointer;">
                                                                         {{ reply.replyText }}
-                                                                        <br />
+                                                                        <span v-if="userName == reply.replyUser.name">
+                                                                            <button v-show="reply.isHover"
+                                                                                @click="deleteReply(reply.id, index)">Delete
+                                                                                Reply
+                                                                            </button>
+                                                                        </span>
                                                                     </p>
                                                                 </div>
                                                             </div>

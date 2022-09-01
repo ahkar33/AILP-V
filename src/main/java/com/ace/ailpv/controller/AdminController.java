@@ -3,9 +3,6 @@ package com.ace.ailpv.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -32,6 +29,9 @@ import com.ace.ailpv.service.FileService;
 import com.ace.ailpv.service.ResourceService;
 import com.ace.ailpv.service.UserService;
 import com.ace.ailpv.service.VideoService;
+
+import ws.schild.jave.EncoderException;
+import ws.schild.jave.InputFormatException;
 
 @Controller
 @RequestMapping("/admin")
@@ -84,7 +84,7 @@ public class AdminController {
 
     @PostMapping("/addCourse")
     public String addCourse(@ModelAttribute("course") Course course, RedirectAttributes redirectAttrs)
-            throws IllegalStateException, IOException {
+            throws IllegalStateException, IOException, InputFormatException, EncoderException {
         if (courseService.checkCourseName(course.getName())) {
             redirectAttrs.addFlashAttribute("errorMsg", true);
             return "redirect:/admin/course-table";
@@ -164,7 +164,7 @@ public class AdminController {
 
     @PostMapping("/uploadCourseVideo")
     public String uploadCourseVideo(ModelMap modal, @RequestParam("file") MultipartFile[] files,
-            @RequestParam("courseId") String courseId) throws IllegalStateException, IOException {
+            @RequestParam("courseId") String courseId) throws IllegalStateException, IOException, InputFormatException, EncoderException {
         String courseName = courseService.getCourseById(Long.parseLong(courseId)).getName();
         Course course = courseService.getCourseById(Long.parseLong(courseId));
         for (MultipartFile file : files) {
@@ -173,6 +173,7 @@ public class AdminController {
                 Video newVideo = new Video();
                 newVideo.setName(file.getOriginalFilename());
                 newVideo.setVideoCourse(course);
+                 newVideo.setLength(videoService.getVideoLength(file));
                 videoService.addVideo(newVideo);
             }
         }
@@ -386,7 +387,7 @@ public class AdminController {
     }
 
     @GetMapping("/changePassword/{userId}")
-    public String changePassword(HttpSession session,@PathVariable("userId")String userId){
+    public String changePassword(@PathVariable("userId")String userId){
        
        User user=userService.getUserById(userId);
        if(user.getRole().equals("ROLE_STUDENT")){

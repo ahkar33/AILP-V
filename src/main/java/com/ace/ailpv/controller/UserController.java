@@ -1,10 +1,10 @@
 package com.ace.ailpv.controller;
-
+import java.io.File;
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.ace.ailpv.SecretConfigProperties;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.User;
@@ -24,6 +23,12 @@ import com.ace.ailpv.service.FileService;
 import com.ace.ailpv.service.FileUploadUtilService;
 import com.ace.ailpv.service.FileValidationService;
 import com.ace.ailpv.service.UserService;
+
+import ws.schild.jave.EncoderException;
+import ws.schild.jave.InputFormatException;
+import ws.schild.jave.MultimediaInfo;
+import ws.schild.jave.MultimediaObject;
+
 
 @Controller
 @RequestMapping("/user")
@@ -167,5 +172,28 @@ public class UserController extends Thread {
     public String show403() {
         return "/error/403";
     }
+
+    @GetMapping("/test")
+    public String  test() {
+        return "upload.html";
+    }
+
+    @PostMapping(value="/test")
+    public String test1(@RequestParam("myFile") MultipartFile myFile) throws IOException, InputFormatException, EncoderException {
+        Long min=0L;
+        Long ses=0L;
+        File file=new File(myFile.getOriginalFilename());
+        FileUtils.copyInputStreamToFile(myFile.getInputStream(),file);
+        MultimediaObject instance =new MultimediaObject(file);
+        MultimediaInfo result=instance.getInfo();
+        
+        min=(result.getDuration()/1000)/60;
+        ses=(result.getDuration()/1000)%60;
+        System.out.println(min + ":"+ ses);
+        file.delete();
+        return "upload.html";
+    }
+    
+    
 
 }
