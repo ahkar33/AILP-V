@@ -20,9 +20,17 @@ public class AssignmentAnswerService {
 
     public void addStudentAnswer(AssignmentAnswer answer, MultipartFile answerFile)throws IOException {
         String questionFileName = answer.getAssignment().getName();
+        String studentName = answer.getStudentName();
+
         fileService.createFolderForAssignmentAnswer(questionFileName);
         fileService.createFile(answerFile, questionFileName+ "\\assignment"+"\\answer");
-        assignmentAnswerRepository.save(answer);
+        if (!(findByStudentNameAndQuestionFileId(studentName, answer.getQuestionFileId()))) {    
+            assignmentAnswerRepository.save(answer);
+        }      
+    }
+
+    private Boolean findByStudentNameAndQuestionFileId(String studentName, Long Qid) {
+        return assignmentAnswerRepository.existsByStudentNameAndQuestionFileId(studentName, Qid);
     }
 
     public List<AssignmentAnswer> getAssignmentAnswerByAssignmentId(Long assignmentId){

@@ -20,4 +20,6 @@ public interface AssignmentAnswerRepository extends JpaRepository <AssignmentAns
 
     List<AssignmentAnswer> getAnswerByAssignmentId(Long assignmentId);
     
+    Boolean existsByStudentNameAndQuestionFileId(String studentName, Long qId);
+    
 }

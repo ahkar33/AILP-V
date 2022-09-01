@@ -22,6 +22,7 @@ import com.ace.ailpv.entity.User;
 import com.ace.ailpv.service.AssignmentAnswerService;
 import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.BatchHasResourceService;
+import com.ace.ailpv.service.FileValidationService;
 import com.ace.ailpv.service.UserService;
 
 @Controller
@@ -34,6 +35,9 @@ public class StudentController {
     //added by me
     @Autowired
     private AssignmentService assignmentService;
+
+    @Autowired
+    FileValidationService fileValidationService;
 
     @Autowired
     private AssignmentAnswerService assignmentAnswerService;
@@ -93,18 +97,34 @@ public class StudentController {
         String fileName = multipartFileName.getOriginalFilename();
         Long assignmentId = id;
 
-        Assignment resAssignment = assignmentService.getAssignmentById(assignmentId);
+        boolean isValidFile = false;
+        if (!fileValidationService.isLimitExceed(multipartFileName.getSize())){
+            String fileExtension = fileValidationService.getExtension(multipartFileName.getOriginalFilename());
+            for (String ext : fileValidationService.allowResourceExtensionList){
+                if (fileExtension.equals(ext)) {
+                    String fileMimeType = fileValidationService.getContentType(multipartFileName,
+                    multipartFileName.getOriginalFilename());
 
+                    for (String mimeType : fileValidationService.allowResourceMimeList) {
+                        if (fileMimeType.equals(mimeType)) {
+                            isValidFile = true;
+                        }
+                    }
+                }
+            }
+        }
+        Assignment resAssignment = assignmentService.getAssignmentById(assignmentId);
         AssignmentAnswer answer = new AssignmentAnswer();
         answer.setAnswerFile(fileName);
-        answer.setQuestion_file_id(fileId);
-        answer.setStudent_name(studentName);
+        answer.setQuestionFileId(fileId);
+        answer.setStudentName(studentName);
         answer.setAssignment(resAssignment);
         LocalDateTime now = LocalDateTime.now();
         answer.setSubmitTime(now);
 
-        assignmentAnswerService.addStudentAnswer(answer, multipartFileName);
-        
+        if(isValidFile){
+            assignmentAnswerService.addStudentAnswer(answer, multipartFileName);
+        } 
         return "redirect:/student/studentAssignment";
     }
 

@@ -13,8 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileValidationService {
 
-    public final String[] allowResourceExtensionList = { "pdf", "png", "jpeg", "jpg" };
-    public final String[] allowResourceMimeList = { "application/pdf", "image/png", "image/jpeg", "image/jpg" };
+    public final String[] allowResourceExtensionList = { "pdf", "png", "jpeg", "jpg", "zip"};
+    public final String[] allowResourceMimeList = { "application/pdf", "image/png", "image/jpeg", "image/jpg", "application/zip" };
 
     public final String[] allowPictureExtensionList = { "png", "jpeg", "jpg", "jfif" };
     public final String[] allowPictureMimeList = { "image/png", "image/jpeg", "image/jpg", "image/jfif" };

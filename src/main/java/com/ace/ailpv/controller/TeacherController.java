@@ -208,7 +208,7 @@ public class TeacherController {
         String assignmentId = String.valueOf(asgmAnswer.getAssignment().getId());
         asgmAnswer.setComment(comment);
         asgmAnswer.setScore(score);
-        asgmAnswer.setTeacher_id(teacherId);
+        asgmAnswer.setTeacherId(teacherId);
         assignmentAnswerService.addTeacherResponse(asgmAnswer);
         return "redirect:/teacher/checkAssignment/"+assignmentId;
     }

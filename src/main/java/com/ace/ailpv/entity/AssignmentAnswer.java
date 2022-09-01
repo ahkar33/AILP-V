@@ -29,9 +29,9 @@ public class AssignmentAnswer {
     private LocalDateTime submitTime;
     private String score;
     private String comment;
-    private String student_name;
-    private String teacher_id;
-    private Long question_file_id;
+    private String studentName;
+    private String teacherId;
+    private Long questionFileId;
 
     @ManyToOne
     @JoinColumn(name="assignment_id", referencedColumnName = "id")
