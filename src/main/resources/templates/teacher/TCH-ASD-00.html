@@ -36,13 +36,13 @@
                             class="border border-secondary card p-3 shadow-sm"
                           >
                             <div class="card-body" >
-                              <p class="card-text fs-4 text-center">[[${asgmAnswer.student_name}]]</p>
+                              <p class="card-text fs-4 text-center">[[${asgmAnswer?.studentName}]]</p>
                               <div class="d-flex justify-content-center">
                                   <a th:href="@{ ${'/courses/' + asgmAnswer?.assignment?.name + '/assignment' + '/answer/'+asgmAnswer?.answerFile}}"
                                     target="_blank" 
-                                    class="btn btn-warning m-1">Open</a>
-                                <a th:href="@{'/teacher/downloadAnswer/'+${asgmAnswer?.id}}" class="btn btn-success m-1"
-                                  >Download</a
+                                    class="btn btn-warning m-1">Download</a>
+                                <!-- <a th:href="@{'/teacher/downloadAnswer/'+${asgmAnswer?.id}}" class="btn btn-success m-1"
+                                  >Download</a -->
                                 >
                               </div>
                             </div>
