@@ -62,6 +62,13 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>ws.schild</groupId>
+			<artifactId>jave-all-deps</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

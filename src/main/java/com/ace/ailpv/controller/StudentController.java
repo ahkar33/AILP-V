@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasResource;
 import com.ace.ailpv.entity.BatchHasVideo;
 import com.ace.ailpv.entity.User;
+
 import com.ace.ailpv.entity.Video;
+
 import com.ace.ailpv.service.BatchHasResourceService;
 import com.ace.ailpv.service.BatchHasVideoService;
 import com.ace.ailpv.service.BatchService;
@@ -75,33 +78,75 @@ public class StudentController {
         return "/student/STU-REC-09";
     }
 
-    @GetMapping("/getVideos")
-    public String getVideos(ModelMap model, HttpSession session) {
-        String studentId = (String) session.getAttribute("uid");
-        User studentInfo = usersService.getUserById(studentId);
-        Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
-        Batch studentBatch = batchService.getBatchById(studentBatchId);
+
+    @GetMapping("/getVideos/{batchId}")
+    public String getVideos(ModelMap model, HttpSession session, @PathVariable("batchId") String batchId) {
+        String userId = (String) session.getAttribute("uid");
+        User userInfo = usersService.getUserById(userId);
+        Long userBatchId;
+        if (batchId.equals("AILP")) {
+            userBatchId = userInfo.getBatchList().iterator().next().getId();
+        } else {
+            userBatchId = Long.parseLong(batchId);
+        }
+
+        Batch studentBatch = batchService.getBatchById(userBatchId);
         List<BatchHasVideo> batchHasVideoList = batchHasVideoService
-                .getAllBatchHasVideoByBatchId(studentBatchId);
+                .getAllBatchHasVideoByBatchId(userBatchId);
+        List<User> teacherList = usersService.getTeacherListByBatchId(userBatchId);
+
+        if (userInfo.getLastWatchVideoId() != null) {
+            Video video = videoService.getVideoById(userInfo.getLastWatchVideoId());
+            if (video != null) {
+                model.addAttribute("video", video);
+            } else {
+                Video firstVieo = videoService.getFirstVideo();
+                model.addAttribute("video", firstVieo);
+            }
+        } else {
+            BatchHasVideo batchHasVideo = batchHasVideoService.getAllBatchHasVideoByBatchId(userBatchId).get(0);
+            model.addAttribute("video", batchHasVideo.getVideo());
+        }
+        model.addAttribute("teacherList", teacherList);
         model.addAttribute("courseName", studentBatch.getBatchCourse().getName());
         model.addAttribute("batchHasVideoList", batchHasVideoList);
+        model.addAttribute("batchId", userBatchId);
+        model.addAttribute("username", userInfo.getName());
         return "/student/STU-VID-06";
     }
 
-    @GetMapping("/showClickedVideo/{courseName}/{videoId}")
+    @GetMapping("/showClickedVideo/{courseName}/{videoId}/{batchId}")
     public String showClickedVideo(HttpSession session, ModelMap model, @PathVariable("videoId") String videoId,
-            @PathVariable("courseName") String courseName) {
-        String studentId = (String) session.getAttribute("uid");
-        User studentInfo = usersService.getUserById(studentId);
-        Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
+            @PathVariable("courseName") String courseName, @PathVariable("batchId") String batchId) {
+        String userId = (String) session.getAttribute("uid");
+        User userInfo = usersService.getUserById(userId);
+
+        Long userBatchId;
+        if (batchId.equals("AILP")) {
+            userBatchId = userInfo.getBatchList().iterator().next().getId();
+        } else {
+            userBatchId = Long.parseLong(batchId);
+        }
+
         List<BatchHasVideo> batchHasVideoList = batchHasVideoService
-                .getAllBatchHasVideoByBatchId(studentBatchId);
+                .getAllBatchHasVideoByBatchId(userBatchId);
+        List<User> teacherList = usersService.getTeacherListByBatchId(userBatchId);
+
         Video video = videoService.getVideoById(Long.parseLong(videoId));
+
+        if (userInfo.getRole().equals("ROLE_STUDENT")) {
+            userInfo.setLastWatchVideoId(video.getId());
+            usersService.addUser(userInfo);
+        }
+
+        model.addAttribute("teacherList", teacherList);
         model.addAttribute("video", video);
         model.addAttribute("courseName", courseName);
         model.addAttribute("batchHasVideoList", batchHasVideoList);
-        model.addAttribute("batchId", studentBatchId);
+        model.addAttribute("batchId", userBatchId);
+        model.addAttribute("username", userInfo.getName());
         return "/student/STU-VID-06";
+
     }
 
 }

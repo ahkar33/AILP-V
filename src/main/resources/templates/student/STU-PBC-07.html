@@ -71,12 +71,19 @@
                                             class="align-items-start clearfix d-flex flex-column flex-nowrap g-0 mb-3 text-start">
                                             <div class="d-flex justify-content-end mw-100 row w-100"
                                                 style="max-width: 508px;">
-                                                <div
+                                                <div @mouseleave="message.isHover = false"
                                                     class="col-8 col-lg-9 col-md-10 col-sm-10 d-flex justify-content-end pe-0 ps-0">
-                                                    <div class="bg-primary message my-message  pb-2 pe-3 ps-3 pt-2 text-break text-light"
-                                                        style="font-size: 15px; background-color: #efefef;">
-                                                        {{message.message}}
-                                                    </div>
+                                                    <span @mouseover="message.isHover = true"
+                                                        class="align-items-center d-flex"
+                                                        @mouseleave="message.isHover = false">
+                                                        <i v-show="message.isHover" @click="deleteMessage(message.id)"
+                                                            class="fa fa-trash me-2 text-danger ps-3 pb-3 pt-3"
+                                                            style="cursor: pointer; font-size: 20px;"></i>
+                                                        <div class="bg-primary message my-message  pb-2 pe-3 ps-3 pt-2 text-break text-light"
+                                                            style="font-size: 15px; background-color: #efefef;">
+                                                            {{message.message}}
+                                                        </div>
+                                                    </span>
                                                 </div>
                                                 <div
                                                     class="col-8 col-lg-9 col-md-10 col-sm-10 d-flex justify-content-end pe-0 ps-0">

@@ -29,26 +29,69 @@
     <link rel="stylesheet" href="/assets/css/custom.css" />
     <link rel="stylesheet" href="/assets/css/textarea.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
+    <!-- datatable-css -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"/>
 </head>
 
 <body>
 
+    <nav class="mb-4 navbar navbar-expand navbar-light shadow static-top topbar" style="background-color: #32499a;"> 
+        <div class="container">
+            <a href="student-home-page.html"><img src="../assets/img/logo.png" style="width: 200px;"/></a> 
+            <ul class="navbar-nav flex-nowrap ms-auto"> 
+                <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Home Page" style="margin-right: 3px;margin-left: 3px;"> <a class="active nav-link" href="student-home-page.html"><i class="icon ion-ios-home" style="font-size: 25px;"></i>  </a> 
+                </li>                     
+                <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Videos" style="margin-right: 3px;margin-left: 3px;"> <a class="nav-link" href="student-course-videos.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-play-circle-fill" style="font-size: 20px;"> 
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"> 
+                            </path>                                 
+                        </svg>  </a> 
+                </li>                     
+                <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Group Chat" style="margin-right: 3px;margin-left: 3px;"> <a class="nav-link" href="student-public-chat.html"><i class="icon ion-chatboxes" style="font-size: 24px;margin-top: 2px;"></i>  </a> 
+                </li>                     
+                <div class="d-none d-sm-block topbar-divider"></div>                     
+                <li class="nav-item dropdown no-arrow"> 
+                    <div class="nav-item dropdown no-arrow"> <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-lg-inline d-none me-2 small text-light" style="font-size: 15px;font-weight: bold;">Zar Zar Soe</span><img class="rounded-circle img-profile" src="../assets/img/zzs_profile.jpg" style="width: 35px; height: 35px;"/>  </a> 
+                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"> <a class="dropdown-item fs-6 mb-1" href="student-profile.html"><i class="fa-fw fa-sm fa-user fas me-2 text-dark"></i>&nbsp;Profile
+</a> <a class="dropdown-item fs-6 mb-1" href="#logout-modal-button-1" data-bs-target="#logout-modal-button-1" data-bs-toggle="modal"><i class="fa-fw fa-sign-out-alt fa-sm fas me-2 text-dark"></i>&nbsp;Logout</a> 
+                        </div>                             
+                    </div>                         
+                </li>                     
+            </ul>                 
+        </div>             
+    </nav>
+
+<!-- pc view nav bar -->
+
     <nav th:fragment="pc-navbar" class="mb-2 navbar navbar-expand navbar-light shadow static-top topbar"
         style="background-color: #32499a;">
         <div class="container">
-            <a th:href="@{/student/student-home}">
-                <img src="/assets/img/logo.png" style="width: 200px;" />
-            </a>
+            <span th:if="${session?.role == 'ROLE_STUDENT'}">
+                <a th:href="@{/student/student-home}">
+                    <img src="/assets/img/logo.png" style="width: 200px;" />
+                </a>
+            </span>
+            <span th:if="${session?.role == 'ROLE_TEACHER'}">
+                <a th:href="@{/teacher/dashboard}">
+                    <img src="/assets/img/logo.png" style="width: 200px;" />
+                </a>
+            </span>
             <ul class="navbar-nav flex-nowrap ms-auto">
                 <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Home Page"
                     style="margin-right: 3px;margin-left: 3px;">
-                    <a class="active nav-link" th:href="@{/student/student-home}">
-                        <i class="icon ion-ios-home" style="font-size: 25px;"></i>
-                    </a>
+                    <span th:if="${session?.role == 'ROLE_STUDENT'}">
+                        <a class="active nav-link" th:href="@{/student/student-home}">
+                            <i class="icon ion-ios-home" style="font-size: 25px;"></i>
+                        </a>
+                    </span>
+                    <span th:if="${session?.role == 'ROLE_TEACHER'}">
+                        <a class="active nav-link" th:href="@{/teacher/dashboard}">
+                            <i class="icon ion-ios-home" style="font-size: 25px;"></i>
+                        </a>
+                    </span>
                 </li>
-                <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Videos"
-                    style="margin-right: 3px;margin-left: 3px;">
-                    <a class="nav-link" th:href="@{/student/getVideos}">
+                <li th:if="${session?.role == 'ROLE_STUDENT'}" class="nav-item hide-on-desktop" data-bs-toggle="tooltip"
+                    data-bss-tooltip="" title="Videos" style="margin-right: 3px;margin-left: 3px;">
+                    <a class="nav-link" th:href="@{/student/getVideos/AILP}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                             viewBox="0 0 16 16" class="bi bi-play-circle-fill" style="font-size: 20px;">
                             <path
@@ -57,22 +100,23 @@
                         </svg>
                     </a>
                 </li>
-                <li class="nav-item hide-on-desktop" data-bs-toggle="tooltip" data-bss-tooltip="" title="Group Chat"
-                    style="margin-right: 3px;margin-left: 3px;">
+                <li th:if="${session?.role == 'ROLE_STUDENT'}" class="nav-item hide-on-desktop" data-bs-toggle="tooltip"
+                    data-bss-tooltip="" title="Group Chat" style="margin-right: 3px;margin-left: 3px;">
                     <a class="nav-link" th:href="@{/student/student-public-chat}">
                         <i class="icon ion-chatboxes" style="font-size: 24px;margin-top: 2px;">
                         </i>
                     </a>
                 </li>
-                <div class="d-none d-sm-block topbar-divider"></div>
-                <li class="nav-item dropdown no-arrow">
+                <div th:if="${session?.role == 'ROLE_STUDENT'}" class="d-none d-sm-block topbar-divider"></div>
+                <li th:if="${session?.role == 'ROLE_STUDENT'}" class="nav-item dropdown no-arrow">
                     <div class="nav-item dropdown no-arrow" id="profileCircle">
                         <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
                             <span class="d-lg-inline d-none me-2 small text-light"
                                 style="font-size: 15px;font-weight: bold;">
                                 [[${session.name}]]
                             </span>
-                            <img class="rounded-circle img-profile" th:src="@{${'/profile_pics/' + session?.profile_pic} }"
+                            <img class="rounded-circle img-profile"
+                                th:src="@{${'/profile_pics/' + session?.profile_pic} }"
                                 style="width: 35px; height: 35px;" />
                         </a>
                         <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
@@ -87,11 +131,12 @@
                         </div>
                     </div>
                 </li>
+  
             </ul>
         </div>
     </nav>
 
-    <nav th:fragment="mobile-navbar" class="navbar navbar-light navbar-expand fixed-bottom shadow hide-on-mobile"
+    <nav th:if="${session?.role == 'ROLE_STUDENT'}" th:fragment="mobile-navbar" class="navbar navbar-light navbar-expand fixed-bottom shadow hide-on-mobile"
         style="font-size: 29px;background: linear-gradient(180deg, rgb(50, 73, 154) 0%, rgb(25, 43, 106) 100%);border-radius: 35px;margin-bottom: 18px;margin-right: 15px;margin-left: 15px;height: 51.5px;padding-top: 15px;color: rgb(255,255,255);">
         <div class="container-fluid"><button data-bs-toggle="collapse" class="navbar-toggler"
                 data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span
@@ -120,13 +165,13 @@
                     </li>
                     <li class="nav-item"
                         style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
-                        <a class="nav-link" href="student-assignment.html" style="margin-right: 1px;"><i
+                        <a class="nav-link" th:href="@{/student/studentAssignment}" style="margin-right: 1px;"><i
                                 class="la la-paste" style="margin-right: 1px;color: rgba(241,241,241,0.55);"></i>
                         </a>
                     </li>
                     <li class="nav-item"
                         style="margin-right: 0px;padding-right: 4px;margin-left: 0px;padding-left: 4px;">
-                        <a class="nav-link" href="student-gradebook.html"><i class="la la-book"
+                        <a class="nav-link" th:href="@{/student/studentGradeBook}"><i class="la la-book"
                                 style="color: rgba(241,241,241,0.55);"></i>
                         </a>
                     </li>
@@ -137,8 +182,6 @@
 
 
     <div th:fragment="footer">
-
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
@@ -174,6 +217,7 @@
                         window.location = "http://localhost:8080/logout";
                     }
                 })
+                .catch(error => console.log(error));
             }
         </script>
     </div>

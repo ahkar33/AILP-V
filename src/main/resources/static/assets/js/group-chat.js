@@ -1,7 +1,7 @@
 const app = Vue.createApp({
     data() {
         return {
-            lastId: null,
+            lastMessageCount: null,
             audio: new Audio('/assets/mp3/noti.mp3'),
             userList: [],
             isMute: null,
@@ -64,17 +64,6 @@ const app = Vue.createApp({
                     .catch(error => console.log(error));
             }
         },
-        getLastInsertedId() {
-            axios
-                .get('http://localhost:8080/api/message/lastInsertedId')
-                .then(res => {
-                    if (res.data > this.lastId) {
-                        this.getAllMessages();
-                    }
-                    this.lastId = res.data;
-                })
-                .catch(error => console.log(error));
-        },
         getUserList() {
             axios
                 .get('http://localhost:8080/api/user/getUserList')
@@ -92,6 +81,17 @@ const app = Vue.createApp({
             axios
                 .get(`http://localhost:8080/api/message/countMessagesByBatchId/${this.batchId}`)
                 .then(res => this.oldMessagesCount = res.data)
+                .catch(error => console.log(error));
+        },
+        getLastMessageCount() {
+            axios
+                .get(`http://localhost:8080/api/message/countMessagesByBatchId/${this.batchId}`)
+                .then(res => {
+                    if (res.data != this.lastMessageCount) {
+                        this.getAllMessages();
+                    }
+                    this.lastMessageCount = res.data;
+                })
                 .catch(error => console.log(error));
         },
         sendOldMesssagesCount() {
@@ -116,9 +116,9 @@ const app = Vue.createApp({
                         } else {
                             var dateTime = resDateTime.substring(0, 9);
                         }
-                        return { ...msg, dateTime: dateTime };
+                        return { ...msg, dateTime: dateTime, isHover: false };
                     });
-                    let messageLength = this.messageList.length
+                    let messageLength = this.messageList.length;
                     if (this.messageListLength < messageLength) {
                         if (this.messageList.at(-1).messageUser.id !== this.userId && !this.isMute && !this.isFirstTime) {
                             this.playNoti();
@@ -133,7 +133,13 @@ const app = Vue.createApp({
                     this.messageListLength = messageLength;
                 })
                 .catch(error => console.log(error));
-        }
+        },
+        deleteMessage(messageId) {
+            axios.
+                get(`http://localhost:8080/api/message/deleteMessageById/${messageId}`)
+                .then(() => console.log("deleted message"))
+                .catch(error => console.log(error));
+        },
     },
     mounted() {
         window.that = this;
@@ -143,7 +149,7 @@ const app = Vue.createApp({
         this.getAllMessages();
         setInterval(() => {
             this.getUserList();
-            this.getLastInsertedId();
+            this.getLastMessageCount();
         }, 100);
         setInterval(() => {
             this.getMessagesCount();

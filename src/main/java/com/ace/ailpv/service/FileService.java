@@ -1,5 +1,4 @@
 package com.ace.ailpv.service;
-
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +9,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +34,24 @@ public class FileService {
         if (!resourceFolder.exists()) {
             resourceFolder.mkdirs();
         }
+        
     }
+
+    //added by me
+    public void createFolderForAssignment(String assignmentName){
+        File assignmentFolder = new File(courseFilePath + assignmentName + "\\assignment");
+        if (!assignmentFolder.exists()) {
+            assignmentFolder.mkdirs();
+        }
+    }
+
+    public void createFolderForAssignmentAnswer(String questionFileName) {
+        File assignmentFolder = new File(courseFilePath + questionFileName + "\\assignment"+ "\\answer");
+        if (!assignmentFolder.exists()) {
+            assignmentFolder.mkdirs();
+        }
+    }
+    //end
 
     public void createFile(MultipartFile file, String folderName) throws IllegalStateException, IOException {
         fileUploadUtilService.saveFile(courseFilePath + folderName + "\\", file.getOriginalFilename(), file);
@@ -69,4 +84,3 @@ public class FileService {
     }
 
 }
-

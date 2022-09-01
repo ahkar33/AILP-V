@@ -1,6 +1,8 @@
 const app = Vue.createApp({
     data() {
         return {
+            isCommentEmpty: true,
+            isReplyEmtpy: true,
             isClickInput: false,
             userId: '',
             videoId: '',
@@ -8,13 +10,14 @@ const app = Vue.createApp({
             commentText: '',
             commentList: [],
             replyText: '',
+            userName: ''
         }
     },
     methods: {
         convertDateTime(timeMiliSecond) {
-            if (timeMiliSecond <= 60000) {
+            if (timeMiliSecond <= 120000) {
                 return commentedTime = 'JUST NOW';
-            } else if (timeMiliSecond > 60000 && timeMiliSecond < 3600000) {
+            } else if (timeMiliSecond > 120000 && timeMiliSecond < 3600000) {
                 let minute = Math.round((timeMiliSecond / 1000) / 60);
                 return commentedTime = minute + ' minutes ago';
             } else if (timeMiliSecond > 3600000 && timeMiliSecond < 86400000) {
@@ -33,49 +36,62 @@ const app = Vue.createApp({
         },
         clickInput() {
             this.isClickInput = true;
-            let strDate = new Date().toLocaleString();
-            let date = new Date(strDate);
-            console.log(date);
         },
         handleCancelInput() {
             this.isClickInput = false;
         },
         sendComment() {
-            let data = {
-                userId: this.userId,
-                videoId: this.videoId,
-                batchId: this.batchId,
-                commentText: this.commentText,
-                dateTime: new Date().toLocaleString()
+            this.isCommentEmpty = this.commentText.replace(/\s/g, "").length <= 0 && true;
+            if (!this.isCommentEmpty) {
+                let data = {
+                    userId: this.userId,
+                    videoId: this.videoId,
+                    batchId: this.batchId,
+                    commentText: this.commentText,
+                    dateTime: new Date().toLocaleString()
+                }
+                axios.post(`http://localhost:8080/api/comment/sendComment`, data)
+                    .then(() => {
+                        console.log('success')
+                        this.getMessageList();
+                    })
+                    .catch(error => console.log(error));
+                this.commentText = '';
             }
-            axios.post(`http://localhost:8080/api/comment/sendComment`, data)
-                .then(() => {
-                    console.log('success')
-                    this.getMessageList();
-                })
-                .catch(error => console.log(error));
-            this.commentText = '';
         },
         sendReply(commentId, index) {
-            let data = {
-                replyText: this.commentList[index].replyText,
-                replyUserId: this.userId,
-                replyCommentId: commentId,
-                dateTime: new Date().toLocaleString()
+            this.isReplyEmtpy = this.commentList[index].replyText.replace(/\s/g, "").length <= 0 && true;
+            if (!this.isReplyEmtpy) {
+                let data = {
+                    replyText: this.commentList[index].replyText,
+                    replyUserId: this.userId,
+                    replyCommentId: commentId,
+                    dateTime: new Date().toLocaleString()
+                }
+                axios.post(`http://localhost:8080/api/comment/sendReply`, data)
+                    .then(() => {
+                        this.getMessageList(index);
+                        console.log('success')
+                    })
+                    .catch(error => console.log(error));
+                this.commentList[index].replyText = '';
             }
-            axios.post(`http://localhost:8080/api/comment/sendReply`, data)
-                .then(() => {
-                    this.getMessageList(index);
-                    console.log('success')
-                })
-                .catch(error => console.log(error));
-            this.commentList[index].replyText = '';
         },
         toggleShowReply(index) {
             this.commentList[index].isReplyShow = !this.commentList[index].isReplyShow;
         },
         handleCancel(index) {
             this.commentList[index].isReplyShow = false;
+        },
+        deleteComment(commentId) {
+            axios.get(`http://localhost:8080/api/comment/deleteCommentById/${commentId}`)
+                .then(() => this.getMessageList())
+                .catch(error => console.log(error));
+        },
+        deleteReply(replyId, index){
+            axios.get(`http://localhost:8080/api/comment/deleteReplyById/${replyId}`)
+                .then(() => this.getMessageList(index))
+                .catch(error => console.log(error));
         },
         getMessageList(index) {
             axios.get(`http://localhost:8080/api/comment/getCommentListByBatchIdAndVideoId/${this.batchId}/${this.videoId}`)
@@ -90,32 +106,34 @@ const app = Vue.createApp({
                             let date = new Date(reply.dateTime);
                             let timeMiliSecond = currentTime - date;
                             let commentedTime = this.convertDateTime(timeMiliSecond);
-                            return { ...reply, dateTime: commentedTime };
+                            return { ...reply, dateTime: commentedTime, isHover: false };
                         });
                         let currentTime = new Date();
                         let date = new Date(cmt.dateTime);
                         let timeMiliSecond = currentTime - date;
                         let commentedTime = this.convertDateTime(timeMiliSecond);
-                        return { ...cmt, dateTime: commentedTime };
+                        return { ...cmt, dateTime: commentedTime, isHover: false };
                     });
                     if (index >= 0) {
                         this.commentList[index].isReplyShow = true;
                     }
                 })
                 .catch(error => console.log(error));
-        }
-    },
-    watch: {
+        },
+        handleChange(newVal) {
+            // Handle changes here!
+            console.log(newVal);
+        },
     },
     mounted() {
         this.userId = document.getElementById('userId').value;
         this.videoId = document.getElementById('videoId').value;
         this.batchId = document.getElementById('batchId').value;
+        this.userName = document.getElementById('userName').value;
 
         if (this.videoId && this.batchId) {
             this.getMessageList();
         }
-
     }
 })
 app.mount('#app');
