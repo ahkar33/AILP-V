@@ -47,5 +47,9 @@ public class AssignmentAnswerService {
 
     public void addTeacherResponse(AssignmentAnswer asgmAnswer) {
         assignmentAnswerRepository.save(asgmAnswer);
+    }
+
+    public List<AssignmentAnswer> getAssignmentAnswerByStudentName(String studentName) {
+        return assignmentAnswerRepository.getAnswerByStudentName(studentName);
     }   
 }

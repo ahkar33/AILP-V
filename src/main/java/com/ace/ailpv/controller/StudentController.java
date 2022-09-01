@@ -3,6 +3,7 @@ package com.ace.ailpv.controller;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -139,13 +140,24 @@ public class StudentController {
         answer.setQuestionFileId(fileId);
         answer.setStudentName(studentName);
         answer.setAssignment(resAssignment);
-        LocalDateTime now = LocalDateTime.now();
-        answer.setSubmitTime(now);
-
+        answer.setSubmitTime(LocalDateTime.now());
         if(isValidFile){
             assignmentAnswerService.addStudentAnswer(answer, multipartFileName);
         } 
         return "redirect:/student/studentAssignment";
+    }
+
+    @GetMapping("/studentGradeBook")
+    public String getStudentGradeBook(HttpSession session, ModelMap model){
+        String studentId =  (String) session.getAttribute("uid");
+        User student = usersService.getUserById(studentId);
+        String studentName = student.getName();
+        List<AssignmentAnswer> unfilteredanswerScore = assignmentAnswerService.getAssignmentAnswerByStudentName(studentName);
+        List<AssignmentAnswer> answerScore = unfilteredanswerScore.stream()
+                                            .filter(answer -> answer.getTeacherId() != null)
+                                            .collect(Collectors.toList());
+        model.addAttribute("answerScore", answerScore);
+        return "/student/STU-GRB-00.html";
     }
 
     @GetMapping("/getVideos/{batchId}")
