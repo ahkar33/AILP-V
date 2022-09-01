@@ -23,7 +23,8 @@
             [[${courseName}]]
         </h1>
         <i class="fa-chalkboard-teacher fas " style="margin-right: 10px;"></i>
-        <span th:each="teacher, loop : ${teacherList}" class="text-primary fs-6 fw-bold mb-2" style="font-family: Arimo, sans-serif;margin-right: 8px;">
+        <span th:each="teacher, loop : ${teacherList}" class="text-primary fs-6 fw-bold mb-2"
+            style="font-family: Arimo, sans-serif;margin-right: 8px;">
             [[${teacher?.name}]] <span th:if="${loop.index != loop.size-1}">,</span>
         </span>
 
