@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasResource;
 import com.ace.ailpv.entity.BatchHasVideo;
 import com.ace.ailpv.entity.User;
+
 import com.ace.ailpv.entity.Video;
+
 import com.ace.ailpv.service.BatchHasResourceService;
 import com.ace.ailpv.service.BatchHasVideoService;
 import com.ace.ailpv.service.BatchService;
@@ -74,6 +77,7 @@ public class StudentController {
         model.addAttribute("batchHasResourceList", batchHasResourceList);
         return "/student/STU-REC-09";
     }
+
 
     @GetMapping("/getVideos/{batchId}")
     public String getVideos(ModelMap model, HttpSession session, @PathVariable("batchId") String batchId) {
@@ -142,6 +146,7 @@ public class StudentController {
         model.addAttribute("batchId", userBatchId);
         model.addAttribute("username", userInfo.getName());
         return "/student/STU-VID-06";
+
     }
 
 }

@@ -62,6 +62,7 @@ public class UserController extends Thread {
         String uid = (String) request.getSession(false).getAttribute("uid");
         User user = userService.getUserById(uid);
 
+
         if (user.getRole().equals("ROLE_TEACHER")) {
             if (passwordEncoder.matches(secretConfigProperties.getDefaultTchPassword(), user.getPassword()))
                 model.addAttribute("dpwarn", "Default password must be changed for security reason!");

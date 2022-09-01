@@ -55,6 +55,7 @@ public class Batch {
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "batch")
     @JsonIgnore
     private List<BatchHasResource> batchHasResourceList = new ArrayList<>();
+       
 
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "bhvBatch")
     @JsonIgnore
