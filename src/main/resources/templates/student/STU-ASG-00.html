@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+    <head th:insert="/student/student-fragments :: student_head">
+        <title>Student Home</title>
+    </head>
+
+<body id="page-top" style="background: rgb(255,255,255);">
+    <div th:insert="/student/student-fragments :: pc-navbar" />
+    <div th:insert="/student/student-fragments :: mobile-navbar" />
+    
+
+    <div class="container" style="margin-top: 22px;padding-right: 10px;padding-left: 10px;">
+
+        <h2 class="m-3">Assignemnts</h2>
+        <div class="card shadow" style="margin-bottom: 85px;">
+            <div class="card-body" style="padding: 10px;">
+                <table id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Assignment Name</th>
+                            <th>Resources</th>
+                            <th>Due Date</th>
+                            <th>To Upload</th>
+                            <th>Action</th>
+                        </tr>
+                    <tbody>
+                        
+                            <tr th:each="assignment:${assignmentList}">
+                                <form th:action="@{/student/submitAssignment}" method="post" enctype="multipart/form-data">
+                                    
+                                    <td>[[${assignment.name}]]</td>
+                                    <td >
+                                        <a th:href="@{ ${'/courses/' + assignment?.name + '/assignment/' + file?.name} }"
+                                            target="_blank"
+                                            class="btn btn-info" 
+                                            th:each="file:${assignment.assignmentFileList}">
+                                            <input type="hidden" th:name="questionFileId" th:value="${file.id}">
+                                            [[${file.name}]]       
+                                        </a>
+                                    </td>
+                                    <td>[[${assignment.endTime}]]</td>
+                                    
+                                        <input type="hidden" th:name="assignmentId" th:value="${assignment.id}">
+                                        
+                                        <td>
+                                            <input type="file" name="answerFile" accept=".zip"/>
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </td>
+                                </form>
+                            </tr>
+                          
+                    </tbody>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="hide-on-desktop">
+        <a class="border rounded d-inline scroll-to-top" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    </div>
+
+    
+
+
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/js/bs-init.js"></script>
+    <script src="../assets/js/theme.js"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <!-- datatable-js -->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+</body>
+
+</html>

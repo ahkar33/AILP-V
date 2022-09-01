@@ -34,7 +34,24 @@ public class FileService {
         if (!resourceFolder.exists()) {
             resourceFolder.mkdirs();
         }
+        
     }
+
+    //added by me
+    public void createFolderForAssignment(String assignmentName){
+        File assignmentFolder = new File(courseFilePath + assignmentName + "\\assignment");
+        if (!assignmentFolder.exists()) {
+            assignmentFolder.mkdirs();
+        }
+    }
+
+    public void createFolderForAssignmentAnswer(String questionFileName) {
+        File assignmentFolder = new File(courseFilePath + questionFileName + "\\assignment"+ "\\answer");
+        if (!assignmentFolder.exists()) {
+            assignmentFolder.mkdirs();
+        }
+    }
+    //end
 
     public void createFile(MultipartFile file, String folderName) throws IllegalStateException, IOException {
         fileUploadUtilService.saveFile(courseFilePath + folderName + "\\", file.getOriginalFilename(), file);
@@ -67,4 +84,3 @@ public class FileService {
     }
 
 }
-

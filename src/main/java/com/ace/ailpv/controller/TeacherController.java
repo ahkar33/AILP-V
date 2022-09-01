@@ -1,9 +1,15 @@
 package com.ace.ailpv.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +20,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ace.ailpv.entity.Assignment;
+import com.ace.ailpv.entity.AssignmentAnswer;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Schedule;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
+import com.ace.ailpv.service.AssignmentAnswerService;
+import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.ScheduleService;
 import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
@@ -35,6 +47,13 @@ public class TeacherController {
 
     @Autowired
     private ScheduleService scheduleService;
+
+    //added by me
+    @Autowired
+    private AssignmentService assignmentService;
+
+    @Autowired
+    private AssignmentAnswerService assignmentAnswerService;
 
     @GetMapping("/dashboard")
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
@@ -148,6 +167,78 @@ public class TeacherController {
         model.addAttribute("batchList", batchList);
         return "/teacher/TCH-UPR-02";
     }
+
+    //added by me
+    @GetMapping("/assignment-table")
+    public String setupAssignmentTable(HttpSession session, ModelMap model) {
+        String teacherId = (String) session.getAttribute("uid");
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+        model.addAttribute("assignment", new Assignment());
+        model.addAttribute("batchList", batchList);
+        model.addAttribute("assignmentList", assignmentService.getAllAssignment());
+        return "/teacher/TCH-ASG-00";
+    }
+
+    @PostMapping("/createAssignment")
+    public String createAssignment(@ModelAttribute("assignment") Assignment assignment, RedirectAttributes redirectAttrs)
+            throws IllegalStateException, IOException {
+        assignmentService.addAssignment(assignment);
+        return "redirect:/teacher/assignment-table";
+    }
+
+    @GetMapping("/checkAssignment/{assignmentId}")
+    public String checkAssignment(@PathVariable("assignmentId")Long assignmentId, ModelMap model){
+        List<AssignmentAnswer> answerList = assignmentAnswerService.getAssignmentAnswerByAssignmentId(assignmentId);
+        Assignment assignment = assignmentService.getAssignmentById(assignmentId);
+        String assignmentName = assignment.getName();
+        model.addAttribute("answerList", answerList);
+        model.addAttribute("assignmentName", assignmentName);
+        return "/teacher/TCH-ASD-00";
+    }
+
+    @PostMapping("/assignmentFeedBack/{asgmAnswerId}")
+    public String assignmentFeedBack(@PathVariable("asgmAnswerId") Long asgmAnswerId
+    , HttpSession session
+    , @RequestParam("comment")String comment
+    , @RequestParam("mark")String score){
+
+        String teacherId = (String) session.getAttribute("uid");
+        AssignmentAnswer asgmAnswer = assignmentAnswerService.getAssignmentAnswerById(asgmAnswerId);
+        String assignmentId = String.valueOf(asgmAnswer.getAssignment().getId());
+        asgmAnswer.setComment(comment);
+        asgmAnswer.setScore(score);
+        asgmAnswer.setTeacherId(teacherId);
+        assignmentAnswerService.addTeacherResponse(asgmAnswer);
+        return "redirect:/teacher/checkAssignment/"+assignmentId;
+    }
+
+    @GetMapping("/downloadAnswer/{asgmAnswerId}")
+    public String downloadAnswer(@PathVariable("asgmAnswerId") Long asgmAnswerId
+    , HttpServletResponse response) throws IOException{
+        AssignmentAnswer asgmAnswer = assignmentAnswerService.getAssignmentAnswerById(asgmAnswerId);
+        String asgmName = asgmAnswer.getAssignment().getName();
+        String fileName = asgmAnswer.getAnswerFile();
+        String filePath = "C:\\AILP-V\\src\\main\\resources\\static\\courses\\"+asgmName+ "\\assignment"+ "\\answer\\"+fileName;
+        File file = new File(filePath);
+        response.setContentType("application/octet-stream");
+        String headerKey = "Content Disposition";
+        String headerValue = "Attachment File Name "+file.getName();
+        response.setHeader(headerKey, headerValue);
+        ServletOutputStream outputStream = response.getOutputStream();
+        BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+
+        byte[] buffer = new byte[8192];//8KB BUFFER
+        int byteRead = -1;
+        while((byteRead = inputStream.read(buffer)) != -1){
+            outputStream.write(buffer,0,byteRead);
+        }
+        inputStream.close();
+        outputStream.close();
+
+        return "redirect:/teacher/assignmentFeedBack/"+asgmAnswerId;
+    }
+
+    //end
 
     @GetMapping("/postVideo")
     public String setupPostVideo(HttpSession session, ModelMap model) {
