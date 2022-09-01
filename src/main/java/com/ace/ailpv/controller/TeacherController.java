@@ -36,6 +36,7 @@ public class TeacherController {
     @Autowired
     private ScheduleService scheduleService;
 
+
     @GetMapping("/dashboard")
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
