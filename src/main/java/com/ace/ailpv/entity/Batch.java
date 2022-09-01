@@ -55,6 +55,7 @@ public class Batch {
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "batch")
     @JsonIgnore
     private List<BatchHasResource> batchHasResourceList = new ArrayList<>();
+       
 
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "bhvBatch")
     @JsonIgnore
@@ -62,5 +63,10 @@ public class Batch {
 
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean isActive;
+
+    //added by me
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "batch")
+    @JsonIgnore
+    private List<Assignment> assignment = new ArrayList<>();
 
 }
