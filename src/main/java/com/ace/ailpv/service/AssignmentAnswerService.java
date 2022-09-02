@@ -1,6 +1,7 @@
 package com.ace.ailpv.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,24 +36,31 @@ public class AssignmentAnswerService {
             AssignmentAnswer resAnswer = assignmentAnswerRepository.findByAnswerStudent_IdAndAssignment_Id(studentId,
                     assignmentId);
             fileService.deleteFile(path + courseName + "\\" + Long.toString(batchId)
-                            + "\\AssignmentAnswer\\" + resAnswer.getAnswerFileName());
+                    + "\\AssignmentAnswer\\" + resAnswer.getAnswerFileName());
             fileUploadUtilService.saveFile(
                     path + courseName + "\\" + Long.toString(batchId)
                             + "\\AssignmentAnswer\\",
-                    assignmentAnswer.getAnswerFile().getOriginalFilename(), assignmentAnswer.getAnswerFile());
-            resAnswer.setAnswerFileName(assignmentAnswer.getAnswerFileName());
+                    studentId + assignmentAnswer.getAnswerFile().getOriginalFilename(),
+                    assignmentAnswer.getAnswerFile());
+            resAnswer.setAnswerFileName(studentId + assignmentAnswer.getAnswerFileName());
             assignmentAnswerRepository.save(resAnswer);
         } else {
             fileUploadUtilService.saveFile(
                     path + courseName + "\\" + Long.toString(batchId)
                             + "\\AssignmentAnswer\\",
-                    assignmentAnswer.getAnswerFile().getOriginalFilename(), assignmentAnswer.getAnswerFile());
+                    studentId + assignmentAnswer.getAnswerFile().getOriginalFilename(),
+                    assignmentAnswer.getAnswerFile());
+            assignmentAnswer.setAnswerFileName(studentId + assignmentAnswer.getAnswerFile().getOriginalFilename());
             assignmentAnswerRepository.save(assignmentAnswer);
         }
     }
 
     public void deleteAssignmentAnswerById(Long id) {
         assignmentAnswerRepository.deleteById(id);
+    }
+
+    public List<AssignmentAnswer> getAssignmentAnswerListByAssignmentId(Long id) {
+        return assignmentAnswerRepository.findByAssignment_Id(id);
     }
 
 }
