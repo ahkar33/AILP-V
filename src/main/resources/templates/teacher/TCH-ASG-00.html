@@ -108,7 +108,7 @@
                                     <tr th:each="assignment:${assignmentList}">
                                         <td>[[${assignment?.id}]]</td>
                                         <td>[[${assignment?.name}]]</td>
-                                        <td>[[${assignment?.batch.name}]]</td>
+                                        <td>[[${assignment?.assignmentBatch.name}]]</td>
                                         <td>
                                             <a th:href="@{/teacher/checkAssignment/} + ${assignment?.id}"
                                                 class="text-decoration-none">

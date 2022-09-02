@@ -15,7 +15,7 @@ public class AssignmentService {
     @Autowired
     private AssignmentRepository assignmentRepository;
 
-    @Autowired 
+    @Autowired
     private FileUploadUtilService fileUploadUtilService;
 
     String path = "src\\main\\resources\\static\\courses\\";
@@ -25,17 +25,21 @@ public class AssignmentService {
     }
 
     public void addAssignment(Assignment assignment) throws IllegalStateException, IOException {
-
         String courseName = assignment.getAssignmentBatch().getBatchCourse().getName().trim();
-        // fileService.createFolderForAssignment(courseName);
-        // fileUploadUtilService.saveFile(path + courseName + "\\" + "assignmentQuestion\\", assignment.getQuestionFileName() , assignment.getQuestionFile());
-        System.out.println(assignment.getQuestionFile().getOriginalFilename());
-        fileUploadUtilService.saveFile(path + courseName + "\\" + "AssignmentQuestion\\", assignment.getQuestionFile().getOriginalFilename(), assignment.getQuestionFile());
-
+        fileUploadUtilService.saveFile(
+                path + courseName + "\\" + Long.toString(assignment.getAssignmentBatch().getId())
+                        + "\\AssignmentQuestion\\",
+                assignment.getQuestionFile().getOriginalFilename(), assignment.getQuestionFile());
+        assignment.setQuestionFileName(assignment.getQuestionFile().getOriginalFilename());
+        assignmentRepository.save(assignment);
     }
 
-    public Assignment getAssignmentById(Long id){
+    public Assignment getAssignmentById(Long id) {
         return assignmentRepository.findById(id).get();
+    }
+
+    public List<Assignment> getAllAssignmentByBatchId(Long batchId) {
+        return assignmentRepository.findByAssignmentBatch_Id(batchId);
     }
 
 }

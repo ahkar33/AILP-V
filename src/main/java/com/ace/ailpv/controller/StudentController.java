@@ -1,5 +1,8 @@
 package com.ace.ailpv.controller;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,17 +11,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+import com.ace.ailpv.entity.Assignment;
+import com.ace.ailpv.entity.AssignmentAnswer;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasResource;
 import com.ace.ailpv.entity.BatchHasVideo;
 import com.ace.ailpv.entity.User;
 
 import com.ace.ailpv.entity.Video;
-
+import com.ace.ailpv.service.AssignmentAnswerService;
+import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.BatchHasResourceService;
 import com.ace.ailpv.service.BatchHasVideoService;
 import com.ace.ailpv.service.BatchService;
@@ -43,6 +50,12 @@ public class StudentController {
 
     @Autowired
     private VideoService videoService;
+
+    @Autowired
+    private AssignmentService assignmentService;
+
+    @Autowired
+    private AssignmentAnswerService assignmentAnswerService;
 
     @GetMapping("/student-home")
     public String showStudentHomePage(HttpSession session, ModelMap model) {
@@ -77,7 +90,6 @@ public class StudentController {
         model.addAttribute("batchHasResourceList", batchHasResourceList);
         return "/student/STU-REC-09";
     }
-
 
     @GetMapping("/getVideos/{batchId}")
     public String getVideos(ModelMap model, HttpSession session, @PathVariable("batchId") String batchId) {
@@ -147,6 +159,30 @@ public class StudentController {
         model.addAttribute("username", userInfo.getName());
         return "/student/STU-VID-06";
 
+    }
+
+    @GetMapping("/studentAssignment")
+    public String studentAssignment(ModelMap model, HttpSession session) {
+        String studentId = (String) session.getAttribute("uid");
+        User studentInfo = usersService.getUserById(studentId);
+        Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
+        List<Assignment> assignmentList = assignmentService.getAllAssignmentByBatchId(studentBatchId);
+        model.addAttribute("assignmentList", assignmentList);
+        model.addAttribute("answer", new AssignmentAnswer());
+        return "/student/STU-ASG-00";
+    }
+
+    @PostMapping("/submitAssignment")
+    public String submitAssignment(@ModelAttribute("answer") AssignmentAnswer answer) throws IOException {
+        Long currentTime = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
+        Assignment assignment = assignmentService.getAssignmentById(answer.getAssignment().getId());
+        Long startTime = assignment.getEndTime().toEpochSecond(ZoneOffset.UTC);
+        if(currentTime > startTime) {
+            answer.setIsLate(true);
+        }
+        answer.setAnswerFileName(answer.getAnswerFile().getOriginalFilename());
+        assignmentAnswerService.addAssignmentAnswer(answer);
+        return "redirect:/student/studentAssignment";
     }
 
 }
