@@ -1,271 +1,196 @@
 <!DOCTYPE html>
 <html>
-    <head th:insert="/student/student-fragments :: student_head">
-        <title>Student Grade</title>
-    </head>
+
+<head th:insert="/student/student-fragments :: student_head">
+  <title>Student Grade</title>
+</head>
 
 <body id="page-top" style="background: rgb(255,255,255);">
-    <div th:insert="/student/student-fragments :: pc-navbar" />
-    <div th:insert="/student/student-fragments :: mobile-navbar" />
+  <div th:insert="/student/student-fragments :: pc-navbar" />
+  <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-    <div class="container" style="margin-bottom: 90px; max-width: 50rem">
-      <!-- this is assignment container -->
-      <div class="container mb-5">
-        <h2>Assignment</h2>
-        <!-- assignment card start -->
-        <div style="margin-top: 22px" th:each="answer:${answerScore}">
-          <p
+  <div class="container" style="margin-bottom: 90px; max-width: 50rem">
+    <!-- this is assignment container -->
+    <div class="container mb-5">
+      <h2>Assignment</h2>
+      <!-- assignment card start -->
+      <div style="margin-top: 22px" th:each="result : ${resultList}">
+        <!-- <p
             style="margin-top: 0px; font-family: 'IBM Plex Sans KR', sans-serif"
           >
             [[${answer?.submitTime}]]
-          </p>
-          <div class="card" style="margin-top: -8px">
-            <div
-              class="card-body text-dark shadow-sm"
-              style="
+          </p> -->
+        <div class="card" style="margin-top: -8px">
+          <div class="card-body text-dark shadow-sm" style="
                 padding-top: 10px;
                 padding-right: 15px;
                 padding-bottom: 10px;
-              "
-            >
-              <div class="row">
-                <!-- this div and <i> tag is assignment icon -->
-                <div class="col-1 text-center mb-2">
-                  <i class="fa fa-paste text-success" style="font-size: 29px">
-                  </i>
-                </div>
-                <div class="col-sm-10 col-md-9 col-lg-9 col-xl-10">
-                  <h4>[[${answer?.assignment?.name}]]&nbsp;</h4>
-                  <h6 class="text-muted mb-2">[[${answer?.teacherId}]]</h6>
-                  <a
-                    class="btn btn-dark btn-sm"
-                    role="button"
-                    style="
+              ">
+            <div class="row">
+              <!-- this div and <i> tag is assignment icon -->
+              <div class="col-1 text-center mb-2">
+                <i class="fa fa-paste text-success" style="font-size: 29px">
+                </i>
+              </div>
+              <div class="col-sm-10 col-md-9 col-lg-9 col-xl-10">
+                <h4>[[${result?.assignmentResultAnswer?.assignment?.name}]]&nbsp;</h4>
+                <h6 class="text-muted mb-2">[[${result?.assignmentResultTeacher?.name}]]</h6>
+                <a class="btn btn-dark btn-sm" role="button" style="
                       margin-left: 0px;
                       margin-right: 0px;
                       margin-bottom: 0px;
                       margin-top: -5px;
-                    "
-                    href="#grade-comment-button"
-                    data-bs-target="#grade-comment-button"
-                    data-bs-toggle="modal"
-                  >
-                    comment
-                  </a>
-                  <div
-                    class="modal fade"
-                    role="dialog"
-                    tabindex="-1"
-                    id="grade-comment-button"
-                  >
-                    <div
-                      class="modal-dialog modal-dialog-centered"
-                      role="document"
-                    >
-                      <div class="modal-content">
-                        <div class="modal-body">
-                            
-                          <div
-                            class="ps-3 pt-2 pb-1"
-                            style="background: #eeeeee; margin-bottom: 12px"
-                          >
-                            <h5 class="text-dark pt-2" style="font-size: 18px">
-                              <img
-                                class="border rounded-circle me-3"
-                                style="
+                    " href="#grade-comment-button" data-bs-target="#grade-comment-button" data-bs-toggle="modal">
+                  comment
+                </a>
+                <div class="modal fade" role="dialog" tabindex="-1" id="grade-comment-button">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body">
+
+                        <div class="ps-3 pt-2 pb-1" style="background: #eeeeee; margin-bottom: 12px">
+                          <h5 class="text-dark pt-2" style="font-size: 18px">
+                            <img class="border rounded-circle me-3" style="
                                   width: 30px;
                                   height: 30px;
                                   margin-top: -4px;
-                                "
-                                src="../assets/img/mock_profile.jpg"
-                              />
-                              [[${answer?.teacherId}]]
+                                " th:src="@{${'/profile_pics/' + result?.assignmentResultTeacher?.profile_pic} }" />
+                            [[${result?.assignmentResultTeacher?.name}]]
                             <p class="text-dark">
-                                [[${answer?.comment}]]
+                              [[${result?.comment}]]
                             </p>
-                            <p
+                            <!-- <p
                               class="text-secondary"
                               style="font-size: 13px; margin-top: -3px"
                             >
                             [[${answer?.submitTime}]]
-                            </p>
-                          </div>
+                            </p> -->
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="text-end">
-                  <p style="font-size: 14px">
-                    <b>[[${answer?.score}]]/100</b>
-                  </p>
-                </div>
+              </div>
+              <div class="text-end">
+                <p style="font-size: 14px">
+                  <b>[[${result?.mark}]]/100</b>
+                </p>
               </div>
             </div>
           </div>
         </div>
-        <!-- assignment card end -->
       </div>
+      <!-- assignment card end -->
+    </div>
 
-      <!-- this is exam container -->
-      <div class="container mb-5">
-        <h2>Exam</h2>
-        <!-- exam card start -->
-        <div style="margin-top: 22px">
-          <p
-            style="margin-top: 0px; font-family: 'IBM Plex Sans KR', sans-serif"
-          >
-            Monday, May 8 2022
-          </p>
-          <div class="card" style="margin-top: -8px">
-            <div
-              class="card-body text-dark shadow-sm"
-              style="
+    <!-- this is exam container -->
+    <div class="container mb-5">
+      <h2>Exam</h2>
+      <!-- exam card start -->
+      <div style="margin-top: 22px">
+        <p style="margin-top: 0px; font-family: 'IBM Plex Sans KR', sans-serif">
+          Monday, May 8 2022
+        </p>
+        <div class="card" style="margin-top: -8px">
+          <div class="card-body text-dark shadow-sm" style="
                 padding-top: 10px;
                 padding-right: 15px;
                 padding-bottom: 10px;
-              "
-            >
-              <div class="row">
-                <!-- this div and <i> tag is assignment icon -->
-                <div class="col-1 text-center mb-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                    class="bi bi-person-lines-fill text-primary"
-                    style="font-size: 29px"
-                  >
-                    <path
-                      d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="col-sm-10 col-md-9 col-lg-9 col-xl-10">
-                  <h4>Mid Term Exam&nbsp;</h4>
-                  <h6 class="text-muted mb-2">Teacher May Zwei</h6>
-                  <a
-                    class="btn btn-dark btn-sm"
-                    role="button"
-                    style="
+              ">
+            <div class="row">
+              <!-- this div and <i> tag is assignment icon -->
+              <div class="col-1 text-center mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"
+                  class="bi bi-person-lines-fill text-primary" style="font-size: 29px">
+                  <path
+                    d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z">
+                  </path>
+                </svg>
+              </div>
+              <div class="col-sm-10 col-md-9 col-lg-9 col-xl-10">
+                <h4>Mid Term Exam&nbsp;</h4>
+                <h6 class="text-muted mb-2">Teacher May Zwei</h6>
+                <a class="btn btn-dark btn-sm" role="button" style="
                       margin-left: 0px;
                       margin-right: 0px;
                       margin-bottom: 0px;
                       margin-top: -5px;
-                    "
-                    href="#grade-comment-button"
-                    data-bs-target="#grade-comment-button"
-                    data-bs-toggle="modal"
-                  >
-                    Comment
-                  </a>
-                  <div
-                    class="modal fade"
-                    role="dialog"
-                    tabindex="-1"
-                    id="grade-comment-button"
-                  >
-                    <div
-                      class="modal-dialog modal-dialog-centered"
-                      role="document"
-                    >
-                      <div class="modal-content">
-                        <div class="modal-body">
-                          <div
-                            class="ps-3 pt-2 pb-1"
-                            style="background: #eeeeee; margin-bottom: 12px"
-                          >
-                            <h5 class="text-dark pt-2" style="font-size: 18px">
-                              <img
-                                class="border rounded-circle me-3"
-                                style="
+                    " href="#grade-comment-button" data-bs-target="#grade-comment-button" data-bs-toggle="modal">
+                  Comment
+                </a>
+                <div class="modal fade" role="dialog" tabindex="-1" id="grade-comment-button">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <div class="ps-3 pt-2 pb-1" style="background: #eeeeee; margin-bottom: 12px">
+                          <h5 class="text-dark pt-2" style="font-size: 18px">
+                            <img class="border rounded-circle me-3" style="
                                   width: 30px;
                                   height: 30px;
                                   margin-top: -4px;
-                                "
-                                src="../assets/img/mock_profile.jpg"
-                              />
-                              Daw Moe Yee Rose
-                            </h5>
-                            <p class="text-dark">
-                              Eros hendrerit fames scelerisque ipsum, vestibulum
-                              est eget. Id molestie varius cras nam. Arcu
-                              potenti purus cras inceptos, lacus tincidunt.
-                            </p>
-                            <p
-                              class="text-secondary"
-                              style="font-size: 13px; margin-top: -3px"
-                            >
-                              Monday, May 8 2022
-                            </p>
-                          </div>
+                                " src="../assets/img/mock_profile.jpg" />
+                            Daw Moe Yee Rose
+                          </h5>
+                          <p class="text-dark">
+                            Eros hendrerit fames scelerisque ipsum, vestibulum
+                            est eget. Id molestie varius cras nam. Arcu
+                            potenti purus cras inceptos, lacus tincidunt.
+                          </p>
+                          <p class="text-secondary" style="font-size: 13px; margin-top: -3px">
+                            Monday, May 8 2022
+                          </p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="text-end">
-                  <p style="font-size: 14px">
-                    <b>100/100</b>
-                  </p>
-                </div>
+              </div>
+              <div class="text-end">
+                <p style="font-size: 14px">
+                  <b>100/100</b>
+                </p>
               </div>
             </div>
           </div>
         </div>
-        <!-- exam card end -->
       </div>
+      <!-- exam card end -->
+    </div>
 
-      <!-- logout  -->
-      <div
-        class="modal fade"
-        role="dialog"
-        tabindex="-1"
-        id="logout-modal-button-1"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-              <p
-                class="lead fw-bold text-center text-dark pt-4 pb-2"
-                style="
+    <!-- logout  -->
+    <div class="modal fade" role="dialog" tabindex="-1" id="logout-modal-button-1">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p class="lead fw-bold text-center text-dark pt-4 pb-2" style="
                   font-size: 20px;
                   font-family: 'IBM Plex Sans KR', sans-serif;
-                "
-              >
-                Are you sure you want to log out?
-              </p>
-            </div>
-            <div class="modal-footer" style="padding: 0px">
-              <button
-                class="btn btn-light border rounded-0 border-0"
-                type="button"
-                data-bs-dismiss="modal"
-                style="margin: 0px; width: 50%; height: 50px"
-              >
-                Cancel
-              </button>
-              <button
-                class="btn btn-danger border rounded-0 border-0"
-                type="submit"
-                style="margin: 0px; width: 50%; height: 50px"
-              >
-                Log Out
-              </button>
-            </div>
+                ">
+              Are you sure you want to log out?
+            </p>
+          </div>
+          <div class="modal-footer" style="padding: 0px">
+            <button class="btn btn-light border rounded-0 border-0" type="button" data-bs-dismiss="modal"
+              style="margin: 0px; width: 50%; height: 50px">
+              Cancel
+            </button>
+            <button class="btn btn-danger border rounded-0 border-0" type="submit"
+              style="margin: 0px; width: 50%; height: 50px">
+              Log Out
+            </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="hide-on-desktop">
-      <a class="border rounded d-inline scroll-to-top" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-      </a>
-    </div>
-    
-    <div th:insert="/student/student-fragments :: footer" />
-  </body>
+  <div class="hide-on-desktop">
+    <a class="border rounded d-inline scroll-to-top" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+  </div>
+
+  <div th:insert="/student/student-fragments :: footer" />
+</body>
+
 </html>

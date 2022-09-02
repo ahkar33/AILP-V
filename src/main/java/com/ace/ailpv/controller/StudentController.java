@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ace.ailpv.entity.Assignment;
 import com.ace.ailpv.entity.AssignmentAnswer;
+import com.ace.ailpv.entity.AssignmentResult;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasResource;
 import com.ace.ailpv.entity.BatchHasVideo;
@@ -25,6 +26,7 @@ import com.ace.ailpv.entity.User;
 
 import com.ace.ailpv.entity.Video;
 import com.ace.ailpv.service.AssignmentAnswerService;
+import com.ace.ailpv.service.AssignmentResultService;
 import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.BatchHasResourceService;
 import com.ace.ailpv.service.BatchHasVideoService;
@@ -56,6 +58,9 @@ public class StudentController {
 
     @Autowired
     private AssignmentAnswerService assignmentAnswerService;
+
+    @Autowired
+    private AssignmentResultService assignmentResultService;
 
     @GetMapping("/student-home")
     public String showStudentHomePage(HttpSession session, ModelMap model) {
@@ -183,6 +188,14 @@ public class StudentController {
         answer.setAnswerFileName(answer.getAnswerFile().getOriginalFilename());
         assignmentAnswerService.addAssignmentAnswer(answer);
         return "redirect:/student/studentAssignment";
+    }
+
+    @GetMapping("/studentGradeBook")
+    public String showGradeBook(ModelMap model, HttpSession session) {
+        String studentId = (String) session.getAttribute("uid");
+        List<AssignmentResult> resultList = assignmentResultService.getAssignmentResultListByStudentId(studentId);
+        model.addAttribute("resultList", resultList);
+        return "/student/STU-GRB-00";
     }
 
 }

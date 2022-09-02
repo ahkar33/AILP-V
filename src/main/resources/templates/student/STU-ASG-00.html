@@ -41,7 +41,7 @@
                                 <td>
                                     <input type="hidden" th:value="${session?.uid}" th:name="answerStudent" th:id="answerStudent">
                                     <input type="hidden" th:value="${assignment.id}" th:name="assignment" th:id="assignment">
-                                    <input type="file" th:field="*{answerFile}" accept=".zip" />
+                                    <input type="file" th:field="*{answerFile}" accept=".zip" required />
                                 </td>
                                 <td>
                                     <button type="submit" class="btn btn-primary">Submit</button>

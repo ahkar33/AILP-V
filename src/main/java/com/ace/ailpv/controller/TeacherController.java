@@ -17,10 +17,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ace.ailpv.entity.Assignment;
+import com.ace.ailpv.entity.AssignmentAnswer;
+import com.ace.ailpv.entity.AssignmentResult;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Schedule;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
+import com.ace.ailpv.service.AssignmentAnswerService;
+import com.ace.ailpv.service.AssignmentResultService;
 import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.ScheduleService;
 import com.ace.ailpv.service.UserScheduleService;
@@ -41,6 +45,12 @@ public class TeacherController {
 
     @Autowired
     private AssignmentService assignmentService;
+
+    @Autowired
+    private AssignmentAnswerService assignmentAnswerService;
+
+    @Autowired
+    private AssignmentResultService assignmentResultService;
 
     @GetMapping("/dashboard")
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
@@ -177,6 +187,20 @@ public class TeacherController {
     public String createAssignment(@ModelAttribute("assignment") Assignment assignment)
             throws IllegalStateException, IOException {
         assignmentService.addAssignment(assignment);
+        return "redirect:/teacher/assignment-table";
+    }
+
+    @GetMapping("/checkAssignment/{assignmentId}")
+    public String checkAssignment(@PathVariable("assignmentId") Long assignmentId, ModelMap model) {
+        List<AssignmentAnswer> answerList = assignmentAnswerService.getAssignmentAnswerListByAssignmentId(assignmentId);
+        model.addAttribute("answerList", answerList);
+        model.addAttribute("result", new AssignmentResult());
+        return "/teacher/TCH-ASD-00";
+    }
+
+    @PostMapping("/giveAssignmentResult")
+    public String giveAssignmentResult(@ModelAttribute("result") AssignmentResult result) {
+        assignmentResultService.addAssignmentResult(result);
         return "redirect:/teacher/assignment-table";
     }
 
