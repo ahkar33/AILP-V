@@ -1,5 +1,6 @@
 package com.ace.ailpv.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -20,8 +21,22 @@ public class BatchService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private FileService fileService;
 
-    public void addBatch(Batch batch) {
+    String path = "src\\main\\resources\\static\\courses\\";
+
+    public void addBatch(Batch batch, String courseName) {
+        try {
+            batchRepository.save(batch);
+            fileService.createFolderForBatch(path + courseName + "\\", batch.getId());
+            
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public void updateBatch(Batch batch) {
         try {
             batchRepository.save(batch);
             
@@ -30,7 +45,8 @@ public class BatchService {
         }
     }
 
-    public void deleteBatchById(Long id) {
+    public void deleteBatchById(Long id, String courseName) throws IOException {
+        fileService.deleteBatchFolder(path + courseName + "\\", Long.toString(id));
         List<User> userList = userService.findUserByBatchId(id);
         for(User user : userList) {
             Set<Batch> filteredBatchList = user.getBatchList().stream()

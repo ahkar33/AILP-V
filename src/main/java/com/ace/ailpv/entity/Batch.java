@@ -64,4 +64,8 @@ public class Batch {
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean isActive;
 
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "assignmentBatch")
+    @JsonIgnore
+    private List<Assignment> batchAssignmentList = new ArrayList<>();
+
 }

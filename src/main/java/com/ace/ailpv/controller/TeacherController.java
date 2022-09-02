@@ -1,6 +1,6 @@
 package com.ace.ailpv.controller;
 
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+import com.ace.ailpv.entity.Assignment;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Schedule;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
-
+import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.ScheduleService;
 import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
@@ -39,6 +39,8 @@ public class TeacherController {
     @Autowired
     private ScheduleService scheduleService;
 
+    @Autowired
+    private AssignmentService assignmentService;
 
     @GetMapping("/dashboard")
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
@@ -159,6 +161,23 @@ public class TeacherController {
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
         model.addAttribute("batchList", batchList);
         return "/teacher/TCH-UPV-03";
+    }
+
+    @GetMapping("/assignment-table")
+    public String setupAssignmentTable(HttpSession session, ModelMap model) {
+        String teacherId = (String) session.getAttribute("uid");
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+        model.addAttribute("assignment", new Assignment());
+        model.addAttribute("batchList", batchList);
+        model.addAttribute("assignmentList", assignmentService.getAllAssignments());
+        return "/teacher/TCH-ASG-00";
+    }
+
+    @PostMapping("/createAssignment")
+    public String createAssignment(@ModelAttribute("assignment") Assignment assignment)
+            throws IllegalStateException, IOException {
+        assignmentService.addAssignment(assignment);
+        return "redirect:/teacher/assignment-table";
     }
 
 }

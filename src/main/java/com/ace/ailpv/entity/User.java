@@ -74,4 +74,12 @@ public class User {
 
     private Long LastWatchVideoId;
 
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "answerStudent")
+    @JsonIgnore
+    private List<AssignmentAnswer> userAnswerList = new ArrayList<>();
+
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "assignmentResultTeacher")
+    @JsonIgnore
+    private List<AssignmentResult> teacherAssignmentResult = new ArrayList<>();
+
 }

@@ -80,7 +80,7 @@ public class CourseService {
         fileService.deleteFolder(courseName);
         List<Batch> batchList =  batchService.getBatchesByCourseId(courseId);
         for(Batch batch : batchList) {
-            batchService.deleteBatchById(batch.getId());
+            batchService.deleteBatchById(batch.getId(), courseName);
         }
         List<Exam> examList = examService.getExamListByBatchId(courseId);
         for(Exam exam: examList) {

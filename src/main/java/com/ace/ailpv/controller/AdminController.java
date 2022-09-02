@@ -164,7 +164,8 @@ public class AdminController {
 
     @PostMapping("/uploadCourseVideo")
     public String uploadCourseVideo(ModelMap modal, @RequestParam("file") MultipartFile[] files,
-            @RequestParam("courseId") String courseId) throws IllegalStateException, IOException, InputFormatException, EncoderException {
+            @RequestParam("courseId") String courseId)
+            throws IllegalStateException, IOException, InputFormatException, EncoderException {
         String courseName = courseService.getCourseById(Long.parseLong(courseId)).getName();
         Course course = courseService.getCourseById(Long.parseLong(courseId));
         for (MultipartFile file : files) {
@@ -173,7 +174,7 @@ public class AdminController {
                 Video newVideo = new Video();
                 newVideo.setName(file.getOriginalFilename());
                 newVideo.setVideoCourse(course);
-                 newVideo.setLength(videoService.getVideoLength(file));
+                newVideo.setLength(videoService.getVideoLength(file));
                 videoService.addVideo(newVideo);
             }
         }
@@ -229,13 +230,15 @@ public class AdminController {
     @PostMapping("/addBatch")
     public String addBatch(@ModelAttribute("batch") Batch batch) {
         batch.setIsActive(true);
-        batchService.addBatch(batch);
+        Course course = courseService.getCourseById(batch.getBatchCourse().getId());
+        batchService.addBatch(batch, course.getName());
         return "redirect:/admin/batch-table";
     }
 
     @GetMapping("/deleteBatch/{id}")
-    public String deleteBatch(@PathVariable("id") Long id) {
-        batchService.deleteBatchById(id);
+    public String deleteBatch(@PathVariable("id") Long id) throws IOException {
+        Batch batch = batchService.getBatchById(id);
+        batchService.deleteBatchById(id, batch.getBatchCourse().getName());
         return "redirect:/admin/batch-table";
     }
 
@@ -277,7 +280,7 @@ public class AdminController {
                     userService.doToggleAccountStatus(true, user.getId());
             }
         }
-        batchService.addBatch(batch);
+        batchService.updateBatch(batch);
         return "redirect:/admin/batch-table";
     }
 
@@ -291,16 +294,17 @@ public class AdminController {
     }
 
     @PostMapping("/editBatch")
-    public String editBatch(@ModelAttribute("batch") Batch batch,ModelMap model) {
+    public String editBatch(@ModelAttribute("batch") Batch batch, ModelMap model) {
         Batch resBatch = batchService.getBatchById(batch.getId());
         if (resBatch.getIsActive()) {
             batch.setIsActive(true);
         } else {
             batch.setIsActive(false);
         }
-        batchService.addBatch(batch);
-        model.addAttribute("successMsg",true);
-        return "/admin/ADM-EDB-11";
+        batchService.updateBatch(batch);
+        // model.addAttribute("successMsg", true);
+        // return "/admin/ADM-EDB-11";
+        return "redirect:/admin/batch-table";
     }
 
     @GetMapping("/student-table")
@@ -387,19 +391,19 @@ public class AdminController {
     }
 
     @GetMapping("/changePassword/{userId}")
-    public String changePassword(@PathVariable("userId")String userId){
-       
-       User user=userService.getUserById(userId);
-       if(user.getRole().equals("ROLE_STUDENT")){
-        user.setPassword(secretConfigProperties.getDefaultStdPassword());
-        userService.updatePasswordByUserId(passwordEncoder.encode(user.getPassword()), userId);
-        return "redirect:/admin/student-table";
-       }else if(user.getRole().equals("ROLE_TEACHER")){
-        user.setPassword(secretConfigProperties.getDefaultTchPassword());
-        userService.updatePasswordByUserId(passwordEncoder.encode(user.getPassword()) , userId);
-        return "redirect:/admin/teacher-table";
-       }
-       return "redirect:/admin/dashboard";
+    public String changePassword(@PathVariable("userId") String userId) {
+
+        User user = userService.getUserById(userId);
+        if (user.getRole().equals("ROLE_STUDENT")) {
+            user.setPassword(secretConfigProperties.getDefaultStdPassword());
+            userService.updatePasswordByUserId(passwordEncoder.encode(user.getPassword()), userId);
+            return "redirect:/admin/student-table";
+        } else if (user.getRole().equals("ROLE_TEACHER")) {
+            user.setPassword(secretConfigProperties.getDefaultTchPassword());
+            userService.updatePasswordByUserId(passwordEncoder.encode(user.getPassword()), userId);
+            return "redirect:/admin/teacher-table";
+        }
+        return "redirect:/admin/dashboard";
     }
 
     // to delete after admin account created
