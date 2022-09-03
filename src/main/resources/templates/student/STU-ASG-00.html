@@ -27,20 +27,21 @@
                     <tbody>
 
                         <tr th:each="assignment : ${assignmentList}">
-                            <form th:action="@{/student/submitAssignment}"
-                            th:object="${answer}"
-                             method="post" enctype="multipart/form-data">
-                                <td>[[${assignment.name}]]</td>
+                            <form th:action="@{/student/submitAssignment}" th:object="${answer}" method="post"
+                                enctype="multipart/form-data">
+                                <td>[[${assignment?.name}]]</td>
                                 <td>
                                     <a th:href="@{ ${'/courses/' + assignment?.assignmentBatch?.batchCourse?.name + '/' + assignment?.assignmentBatch?.id + '/'  +  'AssignmentQuestion' + '/' + assignment?.questionFileName} }"
                                         target="_blank" class="btn btn-info">
-                                        [[${assignment.questionFileName}]]
+                                        [[${assignment?.questionFileName}]]
                                     </a>
                                 </td>
-                                <td>[[${assignment.endTime}]]</td>
+                                <td>[[${assignment?.dueDate}]]</td>
                                 <td>
-                                    <input type="hidden" th:value="${session?.uid}" th:name="answerStudent" th:id="answerStudent">
-                                    <input type="hidden" th:value="${assignment.id}" th:name="assignment" th:id="assignment">
+                                    <input type="hidden" th:value="${session?.uid}" th:name="answerStudent"
+                                        th:id="answerStudent">
+                                    <input type="hidden" th:value="${assignment.id}" th:name="assignment"
+                                        th:id="assignment">
                                     <input type="file" th:field="*{answerFile}" accept=".zip" required />
                                 </td>
                                 <td>
@@ -63,14 +64,7 @@
     </div>
 
 
-
-
-    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../assets/js/bs-init.js"></script>
-    <script src="../assets/js/theme.js"></script>
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <div th:insert="/student/student-fragments :: footer" />
     <!-- datatable-js -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
     <script>

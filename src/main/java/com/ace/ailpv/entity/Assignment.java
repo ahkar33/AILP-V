@@ -43,6 +43,9 @@ public class Assignment {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime endTime;
 
+    @Transient
+    private String dueDate;
+
     private String questionFileName;
 
     @Transient

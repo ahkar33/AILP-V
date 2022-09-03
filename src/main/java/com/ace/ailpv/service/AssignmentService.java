@@ -1,6 +1,8 @@
 package com.ace.ailpv.service;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,14 @@ public class AssignmentService {
     }
 
     public List<Assignment> getAllAssignmentByBatchId(Long batchId) {
-        return assignmentRepository.findByAssignmentBatch_Id(batchId);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy hh:mm a");
+        List<Assignment> unformattedList = assignmentRepository.findByAssignmentBatch_Id(batchId);
+        List<Assignment> formattedList = new ArrayList<>();
+        for (Assignment a : unformattedList) {
+            String dateTimeString = a.getEndTime().format(dateTimeFormatter);
+            a.setDueDate(dateTimeString);
+            formattedList.add(a);
+        }
+        return formattedList;
     }
-
 }
