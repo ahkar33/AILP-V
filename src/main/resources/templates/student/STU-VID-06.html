@@ -24,7 +24,8 @@
         </h1>
         <div class="mb-1">
             <i class="fa-chalkboard-teacher fas mb-2 mt-2" style="margin-right: 7px; font-size: 19px;"></i>
-            <span th:each="teacher, loop : ${teacherList}" class="fw-bold h6 text-primary" style="font-family: 'Roboto', sans-serif; margin-right: 5px; position: relative; top: -3px;">
+            <span th:each="teacher, loop : ${teacherList}" class="fw-bold h6 text-primary"
+                style="font-family: 'Roboto', sans-serif; margin-right: 5px; position: relative; top: -3px;">
                 [[${teacher?.name}]] <span th:if="${loop.index != loop.size-1}">,</span>
             </span>
         </div>
@@ -213,9 +214,9 @@
                                                     @mouseleave="comment.isHover = false"
                                                     @mouseover="comment.isHover = true">
                                                     {{ comment.commentText }}
-                                                    <span v-if="userName == comment.commentUser.name">
-                                                        <a href="" class="fw-bold text-danger text-decoration-none ms-2"
-                                                            style="font-size: 1px;" v-show="comment.isHover"
+                                                    <span v-if="userId == comment.commentUser.id">
+                                                        <a class="fw-bold text-danger text-decoration-none ms-2"
+                                                            style="font-size: 15px;" v-show="comment.isHover"
                                                             @click="deleteComment(comment.id)">
                                                             Delete
                                                         </a>
@@ -288,9 +289,8 @@
                                                                         @mouseover="reply.isHover = true"
                                                                         style="font-family: 'Roboto', sans-serif; cursor: pointer;">
                                                                         {{ reply.replyText }}
-                                                                        <span v-if="userName == reply.replyUser.name">
-                                                                            <a href=""
-                                                                                class="fw-bold text-danger text-decoration-none ms-2"
+                                                                        <span v-if="userId == reply.replyUser.id">
+                                                                            <a class="fw-bold text-danger text-decoration-none ms-2"
                                                                                 style="font-size: 15px;"
                                                                                 v-show="reply.isHover"
                                                                                 @click="deleteReply(reply.id, index)">
