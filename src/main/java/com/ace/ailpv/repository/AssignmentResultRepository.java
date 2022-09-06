@@ -10,4 +10,6 @@ public interface AssignmentResultRepository extends JpaRepository<AssignmentResu
    
     List<AssignmentResult> findByAssignmentResultAnswer_AnswerStudent_Id(String id);
 
+    AssignmentResult findByAssignmentResultAnswer_Id(Long id);
+
 }

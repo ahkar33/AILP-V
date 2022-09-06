@@ -5,6 +5,7 @@
   <title>Assignment Details</title>
 </head>
 
+
 <body id="page-top">
   <div id="wrapper">
     <!-- this is where side bar is -->
@@ -17,56 +18,105 @@
         <input type="hidden" th:value="${session?.uid}" id="teacherId" />
 
         <div class="container-fluid">
-          <div class="row" style="margin-top: 31px">
-            <div class="d-flex justify-content-center">
-              <div class="bg-white border container justify-content-center p-3 rounded shadow text-center text-dark">
-                <h3 style="font-family: 'Roboto', sans-serif" class="fs-2 fw-bold text-dark">
-                  [[${assignmentName}]]
-                </h3>
-                <div class="row">
-                  <div class="col-12 mt-4">
-                    <div class="row">
-                      <!-- assigment div start -->
-                      <div class="col-lg-4 col-md-6 col-sm-12 col-xl-3 mb-4" th:each="answer : ${answerList}">
-                        <!-- card start -->
-                        <div class="border border-secondary card p-3 shadow-sm">
-                          <div class="card-body">
-                            <p class="card-text fs-4 text-center">[[${answer?.answerStudent?.name}]]</p>
-                            <div class="d-flex justify-content-center">
-                              <p th:if="${answer?.isLate}" class="text-danger fw-bold" >
-                                Turn In Late
-                              </p>
-                              <a th:href="@{ ${'/courses/' + answer?.assignment?.assignmentBatch?.batchCourse?.name + '/' + answer?.assignment?.assignmentBatch?.id + '/' + 'AssignmentAnswer' + '/' + answer?.answerFileName } }"
-                                target="_blank" class="btn btn-warning m-1">
-                                Download
-                              </a>
-                            </div>
-                          </div>
-                          <form th:action="@{/teacher/giveAssignmentResult}" method="post" th:object="${result}">
-                            <input type="hidden" th:value="${answer?.id}" id="assignmentResultAnswer" name="assignmentResultAnswer" >
-                            <input type="hidden" th:value="${session?.uid}" id="assignmentResultTeacher" name="assignmentResultTeacher" >
-                            <input class="border border-secondary form-control mb-2" type="text" th:field="*{comment}"
-                              placeholder="comment" />
-                            <input class="border border-secondary form-control mb-2" type="text" th:field="*{mark}"
-                             placeholder="mark" />
-                            <div class="d-flex justify-content-center m-1">
-                              <button type="submit" class="btn btn-primary">
-                                <i class="fa-paper-plane fas"></i>
-                                Send
-                              </button>
-                            </div>
-                          </form>
-                        </div>
-                        <!-- card end -->
-                      </div>
-                      <!-- assigment div end -->
+          <h1 class="fs-3 mb-3 text-secondary"
+            style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+            [[${assignmentName}]]
+          </h1>
+          <div class="gx-3 row">
+
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xl-3" th:each="answer : ${answerList}">
+              <div class="card">
+                <div class="card-body">
+                  <div class="align-items-center d-flex flex-column">
+                    <div class="mb-2">
+                      <img th:src="@{${'/profile_pics/' + answer?.answerStudent?.profile_pic } }" alt="" class="avatar-md img-thumbnail rounded-circle"
+                        style="width: 50px; height: 50px;" />
+                    </div>
+                    <div class="align-items-center d-flex flex-column justify-content-center text-center">
+                      <h5 class="font-size-16 mb-1">
+                        <p class=" text-dark" style="font-family: 'Roboto', sans-serif;">
+                          [[${answer?.answerStudent?.name}]]
+                        </p>
+                      </h5>
+                      <span 
+                        th:if="${answer?.isLate == null}"
+                        class="badge rounded-pill bg-success fw-bold justify-content-between mb-0 mt-1">
+                        Done
+                      </span>
+                      <span 
+                        th:if="${answer?.isLate}"
+                        class="badge rounded-pill bg-danger fw-bold justify-content-between mb-0 mt-1">
+                        Turned in late
+                      </span>
                     </div>
                   </div>
+                  <form th:action="@{/teacher/giveAssignmentResult}" method="post" th:object="${result}">
+                    <div class="mt-2 pt-1">
+                      <input type="hidden" th:value="${answer?.id}" id="assignmentResultAnswer"
+                        name="assignmentResultAnswer">
+                      <input type="hidden" th:value="${session?.uid}" id="assignmentResultTeacher"
+                        name="assignmentResultTeacher">
+                      <textarea class="form-control mb-2" rows="2" placeholder="Comment"
+                        th:field="*{comment}"></textarea>
+                      <input type="number" class="form-control mb-2" placeholder="Mark" th:field="*{mark}" />
+                    </div>
+                    <div class="d-flex gap-1 pt-2">
+                      <a th:href="@{ ${'/courses/' + answer?.assignment?.assignmentBatch?.batchCourse?.name + '/' + answer?.assignment?.assignmentBatch?.id + '/' + 'AssignmentAnswer' + '/' + answer?.answerFileName } }"
+                        class="btn btn-sm btn-soft-primary btn-success pe-0 ps-0 w-50" data-bs-toggle="tooltip"
+                        data-bs-trigger="hover" data-bs-placement="top"
+                        title="Download the student's uploaded assignment files">
+                        <i class="bx bx-user fa fa-download me-1"></i>
+                        Download
+                      </a>
+                      <button type="submit" class="btn btn-primary btn-sm pe-0 ps-0 w-50">
+                        <i class="bx bx-user fa fa-location-arrow me-1"></i>
+                        Send
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
+
+            <!-- <div class="col-lg-4 col-md-6 col-sm-12 col-xl-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="align-items-center d-flex flex-column">
+                    <div class="mb-2">
+                      <img src="../assets/img/zzs_profile.jpg" alt="" class="avatar-md img-thumbnail rounded-circle"
+                        style="width: 50px; height: 50px;" />
+                    </div>
+                    <div class="align-items-center d-flex flex-column justify-content-center">
+                      <h5 class="font-size-16 mb-1"><a href="#" class=" text-dark"
+                          style="font-family: 'Roboto', sans-serif;">Sitt Thiha Naing</a></h5> <span
+                        class="badge badge-soft-danger fw-bold justify-content-between mb-0">Turned In Late</span>
+                    </div>
+                  </div>
+                  <form>
+                    <div class="mt-2 pt-1">
+                      <textarea class="form-control mb-2" id="formInput6" rows="2" placeholder="Comment"></textarea>
+                      <input type="number" class="form-control mb-2" placeholder="Mark" aria-label="Username"
+                        aria-describedby="basic-addon1" />
+                    </div>
+                    <div class="d-flex gap-1 pt-2">
+                      <button type="button" class="btn btn-sm btn-soft-primary btn-success pe-0 ps-0 w-50"
+                        data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top"
+                        title="Download the student's uploaded assignment files"><i
+                          class="bx bx-user fa fa-download me-1"></i> Download
+                      </button>
+                      <button type="button" class="btn btn-primary btn-sm pe-0 ps-0 w-50">
+                        <i class="bx bx-user fa fa-location-arrow me-1"></i> Send
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div> -->
+
           </div>
         </div>
+
+
       </div>
       <footer class="bg-white sticky-footer">
         <div class="container my-auto">
