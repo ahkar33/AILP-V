@@ -204,4 +204,18 @@ public class TeacherController {
         return "redirect:/teacher/assignment-table";
     }
 
+        @GetMapping("/studentTable")
+    public String showStudentTable(ModelMap model, HttpSession session) {
+        String teacherId = (String) session.getAttribute("uid");
+        User teacherInfo = userService.getUserById(teacherId);
+        Long batchId = teacherInfo.getBatchList().get(0).getId();
+        List<Assignment> assignmentList = assignmentService.getAllAssignmentByBatchId(batchId);
+
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+
+        model.addAttribute("assignmentList", assignmentList);
+        model.addAttribute("studentList", studentList);
+        return "/teacher/TCH-STB-00";
+    }
+
 }

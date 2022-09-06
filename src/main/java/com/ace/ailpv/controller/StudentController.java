@@ -116,13 +116,17 @@ public class StudentController {
             Video video = videoService.getVideoById(userInfo.getLastWatchVideoId());
             if (video != null) {
                 model.addAttribute("video", video);
-            } else {
-                Video firstVieo = videoService.getFirstVideo();
-                model.addAttribute("video", firstVieo);
-            }
+            } 
         } else {
-            BatchHasVideo batchHasVideo = batchHasVideoService.getAllBatchHasVideoByBatchId(userBatchId).get(0);
-            model.addAttribute("video", batchHasVideo.getVideo());
+            List<BatchHasVideo> batchVideoList =  batchHasVideoService.getAllBatchHasVideoByBatchId(userBatchId);
+            BatchHasVideo batchHasVideo = new BatchHasVideo();
+            if(batchVideoList.size() > 0 ) {
+                batchHasVideo = batchHasVideoService.getAllBatchHasVideoByBatchId(userBatchId).get(0);
+                model.addAttribute("video", batchHasVideo.getVideo());
+            } else {
+                batchHasVideo.setVideo(null);
+                model.addAttribute("video", batchHasVideo.getVideo());
+            }
         }
         model.addAttribute("teacherList", teacherList);
         model.addAttribute("courseName", studentBatch.getBatchCourse().getName());
