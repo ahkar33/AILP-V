@@ -31,13 +31,13 @@ const app = Vue.createApp({
         },
         isToday(date) {
             let today = new Date();
-            return today.toLocaleDateString() == date.substring(0, 9) ? true : false;
+            return today.toLocaleString().split(',')[0] == date.split(',')[0] ? true : false;
         },
         isYesterday(date) {
             let today = new Date();
             let yesterday = new Date();
             yesterday.setDate(today.getDate() - 1);
-            return yesterday.toLocaleDateString() == date.substring(0, 9) ? true : false;
+            return yesterday.toLocaleString().split(',')[0] == date.split(',')[0] ? true : false;
         },
         handleSend() {
             this.message = document.getElementById('inputMessage').value;
@@ -107,16 +107,26 @@ const app = Vue.createApp({
                     this.messageList = [...res.data];
                     this.messageList = this.messageList.map(msg => {
                         let resDateTime = msg.dateTime;
-                        let shortTime = resDateTime.substring(11, 15) + " " + resDateTime.slice(-2);
-                        let longTime = resDateTime.substring(11, 16) + " " + resDateTime.slice(-2);
+                        var shortTime = '';
+                        var longTime = '';
+                        // if(resDateTime.split(',')[0].length == 8) {
+                        //     shortTime = resDateTime.split(',')[1];
+                        //     // longTime = resDateTime.split(',')[1];
+                        // } else if (resDateTime.split(',')[0].length == 9) {
+                        //     shortTime = resDateTime.split(',')[1];
+                        //     // longTime = resDateTime.split(',')[1];
+                        // }
+                        time = resDateTime.split(',')[1];
                         if (this.isToday(resDateTime)) {
-                            var dateTime = (resDateTime.length == 21) ? "Today at " + shortTime : "Today at " + longTime;
+                            // var dateTime = (resDateTime.length == 21) ? "Today at " + time : "Today at " + shortTime;
+                            var dateTime = "Today at" + time.substring(0, time.length - 6) + time.slice(-2);
                         } else if (this.isYesterday(resDateTime)) {
-                            var dateTime = (resDateTime.length == 21) ? "Yesterday at " + shortTime : "Yesterday at " + longTime;
+                            // var dateTime = (resDateTime.length == 21) ? "Yesterday at " + shortTime : "Yesterday at " + shortTime;
+                            var dateTime = "Yesterday at" + time;
                         } else {
-                            var dateTime = resDateTime.substring(0, 9);
+                            var dateTime = resDateTime.split(',')[0];
                         }
-                        return { ...msg, dateTime: dateTime, isHover: false };
+                        return { ...msg, dateTime: dateTime ,isHover: false };
                     });
                     let messageLength = this.messageList.length;
                     if (this.messageListLength < messageLength) {
