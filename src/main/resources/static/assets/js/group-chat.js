@@ -55,11 +55,12 @@ const app = Vue.createApp({
 
                 $("#inputMessage").data("emojioneArea").setText('');
 
-                axios
+                const res = axios
                     .post('http://localhost:8080/api/message/addMessage/', data)
                     .then(() => {
                         console.log("success");
-                        this.getAllMessages();
+                        // this.getAllMessages();
+                        this.messageList = [...this.messageList, ...res];
                     })
                     .catch(error => console.log(error));
             }
@@ -107,21 +108,10 @@ const app = Vue.createApp({
                     this.messageList = [...res.data];
                     this.messageList = this.messageList.map(msg => {
                         let resDateTime = msg.dateTime;
-                        var shortTime = '';
-                        var longTime = '';
-                        // if(resDateTime.split(',')[0].length == 8) {
-                        //     shortTime = resDateTime.split(',')[1];
-                        //     // longTime = resDateTime.split(',')[1];
-                        // } else if (resDateTime.split(',')[0].length == 9) {
-                        //     shortTime = resDateTime.split(',')[1];
-                        //     // longTime = resDateTime.split(',')[1];
-                        // }
                         time = resDateTime.split(',')[1];
                         if (this.isToday(resDateTime)) {
-                            // var dateTime = (resDateTime.length == 21) ? "Today at " + time : "Today at " + shortTime;
-                            var dateTime = "Today at" + time.substring(0, time.length - 6) + time.slice(-2);
+                            var dateTime = "Today at" + time.substring(0, time.length - 6) + " " + time.slice(-2);
                         } else if (this.isYesterday(resDateTime)) {
-                            // var dateTime = (resDateTime.length == 21) ? "Yesterday at " + shortTime : "Yesterday at " + shortTime;
                             var dateTime = "Yesterday at" + time;
                         } else {
                             var dateTime = resDateTime.split(',')[0];
