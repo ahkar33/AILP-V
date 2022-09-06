@@ -33,9 +33,9 @@
                           <div class="card-body">
                             <p class="card-text fs-4 text-center">[[${answer?.answerStudent?.name}]]</p>
                             <div class="d-flex justify-content-center">
-                              <!-- <p th:if="${answer?.isLate}" class="text-danger fw-bold" >
+                              <p th:if="${answer?.isLate}" class="text-danger fw-bold" >
                                 Turn In Late
-                              </p> -->
+                              </p>
                               <a th:href="@{ ${'/courses/' + answer?.assignment?.assignmentBatch?.batchCourse?.name + '/' + answer?.assignment?.assignmentBatch?.id + '/' + 'AssignmentAnswer' + '/' + answer?.answerFileName } }"
                                 target="_blank" class="btn btn-warning m-1">
                                 Download

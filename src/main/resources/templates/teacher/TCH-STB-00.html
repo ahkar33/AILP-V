@@ -6,7 +6,10 @@
 </head>
 
 <style>
-    table td:empty::before {content: "Missing"; color:red}
+    table td:empty::before {
+        content: "Missing";
+        color: red
+    }
 </style>
 
 <body id="page-top">
@@ -25,6 +28,30 @@
                         Student Table
                     </h1>
                     <div class="card shadow">
+
+                        <div class="card-header py-3">
+                            <form th:object="${data}" th:action="@{/teacher/searchStudentsByBatch}" method="post"
+                                class="d-flex d-lg-flex flex-lg-wrap flex-wrap">
+                                <div class="me-3">
+                                    <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                            <label class="form-label">Batch</label>
+                                            <select th:field="*{id}" class="form-select" aria-label="Default select example">
+                                                <option th:each="batch : ${batchList}" th:value="${batch?.id}">
+                                                    [[${batch?.name}]]
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 2.3rem;">
+                                    <button type="submit" class="btn btn-primary">
+                                        Search
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
                         <div class="card-body text-dark">
                             <!-- where I have to write table -->
                             <table id="dataTable">
