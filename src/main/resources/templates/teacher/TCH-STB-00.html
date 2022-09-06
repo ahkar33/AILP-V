@@ -70,10 +70,12 @@
                                         <span th:if="${assignmentList.size == student.userAnswerList.size}">
                                             <span th:each="answer : ${student.userAnswerList}">
                                                 <td>
-                                                    <span class="text-success" th:if="${answer?.assignemntAnswerResult != null}">
+                                                    <span class="text-success"
+                                                        th:if="${answer?.assignemntAnswerResult != null}">
                                                         [[${answer?.assignemntAnswerResult?.mark}]] Marks
                                                     </span>
-                                                    <span class="text-warning" th:if="${answer?.assignemntAnswerResult == null}">
+                                                    <span class="text-warning"
+                                                        th:if="${answer?.assignemntAnswerResult == null}">
                                                         Not yet graded
                                                     </span>
                                                     <span th:if="${answer?.isLate == true}">
@@ -82,35 +84,38 @@
                                                 </td>
                                             </span>
                                         </span>
+
+                                        <span th:each="aId : ${student.answerAssignmentIdList}">
+                                            [[${aId}]]
+                                        </span>
+
                                         <span th:if="${assignmentList.size != student.userAnswerList.size}">
-                                            <span th:each="answer : ${student.userAnswerList}">
-                                                <span th:each="a : ${assignmentList}">
-                                                    <span th:if="${a.id == answer?.assignment?.id}">
-                                                        <td>
-                                                            <span class="text-success" th:if="${answer?.assignemntAnswerResult != null}">
+                                            <span th:each="a : ${assignmentList}">
+                                                <td>
+                                                    <span th:each="answer : ${student.userAnswerList}">
+                                                        <span th:if="${a.id == answer?.assignment?.id}">
+                                                            <span class="text-success"
+                                                                th:if="${answer?.assignemntAnswerResult != null}">
                                                                 [[${answer?.assignemntAnswerResult?.mark}]] Marks
                                                             </span>
                                                             <span class="text-warning"
                                                                 th:if="${answer?.assignemntAnswerResult == null}">
-                                                                Not yet graded 
+                                                                Not yet graded
                                                             </span>
-
                                                             <span th:if="${answer?.isLate == true}">
                                                                 (Turned in late)
                                                             </span>
-                                                        </td>
+                                                        </span>
+                                                        <span th:if="${a.id != answer?.assignment?.id}">
+                                                            
+                                                        </span>
                                                     </span>
-                                                    <span th:if="${a.id != answer?.assignment?.id}">
-                                                        <td></td>
-                                                    </span>
-                                                </span>
+                                                </td>
                                             </span>
                                         </span>
                                         <span th:if="${student.userAnswerList.size == 0}">
                                             <span th:each="a : ${assignmentList}">
-                                                <span th:if="${a.id != answer?.assignment?.id}">
-                                                    <td></td>
-                                                </span>
+                                                <td></td>
                                             </span>
                                         </span>
                                     </tr>
@@ -129,6 +134,13 @@
     </div>
     <div th:insert="/teacher/teacher-fragments :: footer" />
     <script>
+        const elements = document.getElementsByTagName('td');
+        Array.from(elements).forEach((element, index) => {
+            if (element.innerText == '') {
+                element.innerHTML = '<b>Missing</b>'
+                element.classList.add('text-danger');
+            }
+        });
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });

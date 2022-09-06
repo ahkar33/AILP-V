@@ -82,4 +82,7 @@ public class User {
     @JsonIgnore
     private List<AssignmentResult> teacherAssignmentResult = new ArrayList<>();
 
+    @Transient
+    private List<Long> answerAssignmentIdList = new ArrayList<>();
+
 }
