@@ -112,11 +112,11 @@ const app = Vue.createApp({
                         if (this.isToday(resDateTime)) {
                             var dateTime = "Today at" + time.substring(0, time.length - 6) + " " + time.slice(-2);
                         } else if (this.isYesterday(resDateTime)) {
-                            var dateTime = "Yesterday at" + time;
+                            var dateTime = "Yesterday at" + time.substring(0, time.length - 6) + " " + time.slice(-2);
                         } else {
                             var dateTime = resDateTime.split(',')[0];
                         }
-                        return { ...msg, dateTime: dateTime ,isHover: false };
+                        return { ...msg, dateTime: dateTime, isHover: false };
                     });
                     let messageLength = this.messageList.length;
                     if (this.messageListLength < messageLength) {
