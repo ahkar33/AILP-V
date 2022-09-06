@@ -200,7 +200,15 @@ public class TeacherController {
 
     @PostMapping("/giveAssignmentResult")
     public String giveAssignmentResult(@ModelAttribute("result") AssignmentResult result) {
-        assignmentResultService.addAssignmentResult(result);
+        AssignmentResult resResult = assignmentResultService
+                .getAssignmentResultByAnswerId(result.getAssignmentResultAnswer().getId());
+        if (resResult != null) {
+            resResult.setComment(result.getComment());
+            resResult.setMark(result.getMark());
+            assignmentResultService.addAssignmentResult(resResult);
+        } else {
+            assignmentResultService.addAssignmentResult(result);
+        }
         return "redirect:/teacher/assignment-table";
     }
 

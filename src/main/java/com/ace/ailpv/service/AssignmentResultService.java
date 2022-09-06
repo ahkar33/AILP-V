@@ -21,5 +21,9 @@ public class AssignmentResultService {
     public List<AssignmentResult> getAssignmentResultListByStudentId(String id) {
         return assignmentResultRepository.findByAssignmentResultAnswer_AnswerStudent_Id(id);
     }
+    
+    public AssignmentResult getAssignmentResultByAnswerId(Long id) {
+        return assignmentResultRepository.findByAssignmentResultAnswer_Id(id);
+    }
 
 }

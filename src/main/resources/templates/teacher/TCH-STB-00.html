@@ -36,7 +36,8 @@
                                     <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                         <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
                                             <label class="form-label">Batch</label>
-                                            <select th:field="*{id}" class="form-select" aria-label="Default select example">
+                                            <select th:field="*{id}" class="form-select"
+                                                aria-label="Default select example">
                                                 <option th:each="batch : ${batchList}" th:value="${batch?.id}">
                                                     [[${batch?.name}]]
                                                 </option>
@@ -69,8 +70,15 @@
                                         <span th:if="${assignmentList.size == student.userAnswerList.size}">
                                             <span th:each="answer : ${student.userAnswerList}">
                                                 <td>
-                                                    [[${answer?.assignemntAnswerResult?.mark}]] Marks
-                                                    <!-- <span th:if="${answer?.isLate == true}">Turned in late</span> -->
+                                                    <span class="text-success" th:if="${answer?.assignemntAnswerResult != null}">
+                                                        [[${answer?.assignemntAnswerResult?.mark}]] Marks
+                                                    </span>
+                                                    <span class="text-warning" th:if="${answer?.assignemntAnswerResult == null}">
+                                                        Not yet graded
+                                                    </span>
+                                                    <span th:if="${answer?.isLate == true}">
+                                                        (Turned in late)
+                                                    </span>
                                                 </td>
                                             </span>
                                         </span>
@@ -79,15 +87,29 @@
                                                 <span th:each="a : ${assignmentList}">
                                                     <span th:if="${a.id == answer?.assignment?.id}">
                                                         <td>
-                                                            [[${answer?.assignemntAnswerResult?.mark}]] Marks
-                                                            <!-- <span th:if="${answer?.isLate == true}">
-                                                                Turned in late
-                                                            </span> -->
+                                                            <span class="text-success" th:if="${answer?.assignemntAnswerResult != null}">
+                                                                [[${answer?.assignemntAnswerResult?.mark}]] Marks
+                                                            </span>
+                                                            <span class="text-warning"
+                                                                th:if="${answer?.assignemntAnswerResult == null}">
+                                                                Not yet graded 
+                                                            </span>
+
+                                                            <span th:if="${answer?.isLate == true}">
+                                                                (Turned in late)
+                                                            </span>
                                                         </td>
                                                     </span>
                                                     <span th:if="${a.id != answer?.assignment?.id}">
                                                         <td></td>
                                                     </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                        <span th:if="${student.userAnswerList.size == 0}">
+                                            <span th:each="a : ${assignmentList}">
+                                                <span th:if="${a.id != answer?.assignment?.id}">
+                                                    <td></td>
                                                 </span>
                                             </span>
                                         </span>
