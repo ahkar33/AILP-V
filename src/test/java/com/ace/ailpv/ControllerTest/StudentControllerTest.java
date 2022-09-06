@@ -7,65 +7,22 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-
-import com.ace.ailpv.repository.BatchHasResourceRepository;
-import com.ace.ailpv.repository.BatchHasVideoRepository;
-import com.ace.ailpv.repository.BatchRepository;
-import com.ace.ailpv.repository.UserRepository;
-import com.ace.ailpv.service.BatchHasResourceService;
-import com.ace.ailpv.service.BatchHasVideoService;
-import com.ace.ailpv.service.BatchService;
-import com.ace.ailpv.service.UserService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 public class StudentControllerTest {
+
     @Autowired
-	private MockMvc mockMvc;
-
-    @MockBean
-    BatchHasResourceService batchHasResourceService;
-
-    @MockBean 
-    BatchHasResourceRepository batchHasResourceRepository;
-
-    @MockBean 
-    BatchHasVideoService batchHasVideoService;
-
-    @MockBean
-    BatchHasVideoRepository batchHasVideoRepository;
-
-    @MockBean
-    UserService userService;
-
-    @MockBean
-    UserRepository userRepository;
-
-    @MockBean
-    BatchService batchService;
-
-    @MockBean
-    BatchRepository batchRepository;
+    private MockMvc mockMvc;
 
     String apiPath = "/student";
 
-    //Testing student home page
     @Test
-    public void showStudentHomePageTest(){
-           
-                 
-    }
-
-    @Test
-    public void getResourcesTest() throws Exception{
-        this.mockMvc.perform(get(apiPath + "/getResources"))
+    public void showStudentHomePageTest() throws Exception{
+        this.mockMvc.perform(get(apiPath + "/student-home"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/student/STU-REC-09"));
+                .andExpect(view().name("/student/STU-HOM-01"));
     }
     
-    
-
-
 }
