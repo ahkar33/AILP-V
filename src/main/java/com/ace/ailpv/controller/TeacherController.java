@@ -204,7 +204,7 @@ public class TeacherController {
         return "redirect:/teacher/assignment-table";
     }
 
-        @GetMapping("/studentTable")
+    @GetMapping("/studentTable")
     public String showStudentTable(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
         User teacherInfo = userService.getUserById(teacherId);
@@ -213,8 +213,29 @@ public class TeacherController {
 
         List<User> studentList = userService.getStudentListByBatchId(batchId);
 
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+
+        model.addAttribute("data", new Batch());
         model.addAttribute("assignmentList", assignmentList);
         model.addAttribute("studentList", studentList);
+        model.addAttribute("batchList", batchList);
+        return "/teacher/TCH-STB-00";
+    }
+
+    @PostMapping("/searchStudentsByBatch")
+    public String searchStudentsByBatch(@ModelAttribute("data") Batch batch, ModelMap model, HttpSession session) {
+        String teacherId = (String) session.getAttribute("uid");
+        Long batchId = batch.getId();
+        List<Assignment> assignmentList = assignmentService.getAllAssignmentByBatchId(batchId);
+
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+
+        model.addAttribute("data", batch);
+        model.addAttribute("assignmentList", assignmentList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("batchList", batchList);
         return "/teacher/TCH-STB-00";
     }
 
