@@ -45,6 +45,9 @@ public class AssignmentAnswer {
     @Column(columnDefinition = "TINYINT(0)")
     private Boolean isLate;
 
+    @Column(columnDefinition = "TINYINT(0)")
+    private Boolean isGraded;
+
     @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "assignmentResultAnswer")
     private AssignmentResult assignemntAnswerResult;
 

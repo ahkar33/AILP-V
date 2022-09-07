@@ -5,6 +5,12 @@
     <title>Student Table</title>
 </head>
 
+<style>
+    .badge-soft-danger {
+        color: #cf1919 !important;
+        background-color: rgba(245, 110, 110, 0.226);
+    }
+</style>
 
 <body id="page-top">
     <div id="wrapper">
@@ -19,78 +25,104 @@
                 <div class="container-fluid">
                     <h1 class="fs-3 mb-4 text-start"
                         style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
-                        Student Table</h1>
+                        Student Table
+                    </h1>
                     <div class="card shadow">
 
-                        <!-- <div class="card-header py-3">
-                            <form>
-                                <div class="row">
+                        <div class="card-header py-3">
+                            <form th:object="${data}" th:action="@{/teacher/searchStudentsByBatch}" method="post"
+                                class="d-flex d-lg-flex flex-lg-wrap flex-wrap">
+                                <div class="me-3">
                                     <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                         <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                            <label class="form-label" style="color: rgb(77,77,77);"
-                                                for="cours-name">Course<select
-                                                    class="form-select d-inline-block form-select form-select-sm"
-                                                    style="margin-left: 10px;width: 146.062px;" name="cours-name">
-                                                    <option value="JAVA">JAVA</option>
-                                                    <option value="PHP">PHP</option>
-                                                    <option value="Programming Fundamental">Programming Fundamental
-                                                    </option>
-                                                    <option value="Andriod">Andriod</option>
-                                                </select>&nbsp;</label>
+                                            <label class="form-label">Batch</label>
+                                            <select th:field="*{id}" class="form-select"
+                                                aria-label="Default select example">
+                                                <option th:each="batch : ${batchList}" th:value="${batch?.id}">
+                                                    [[${batch?.name}]]
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="col-auto col-sm-auto col-md-auto col-lg-auto col-xl-auto col-xxl-auto text-nowrap"
-                                        style="margin-top: 4px;">
-                                        <div id="dataTable_length-2" class="dataTables_length"
-                                            aria-controls="dataTable"><label class="form-label"
-                                                style="color: rgb(77,77,77);" for="batch-name">Batch<select
-                                                    class="form-select d-inline-block form-select form-select-sm"
-                                                    style="margin-left: 10px;width: 127.453px;" name="batch-name">
-                                                    <option selected disabled>Choose One Batch</option>
-                                                    <option value="1">Java Web Batch 01</option>
-                                                    <option value="2">OJT Batch 01</option>
-                                                    <option value="3">PHP Batch 01</option>
-                                                </select>&nbsp;</label></div>
-                                    </div>
-                                    <div class="col-sm-5 col-lg-3"><button class="btn btn-dark border rounded shadow-sm"
-                                            type="submit">Search</button>
-                                    </div>
+                                </div>
+                                <div style="margin-top: 2.3rem;">
+                                    <button type="submit" class="btn btn-primary">
+                                        Search
+                                    </button>
                                 </div>
                             </form>
-                        </div> -->
+                        </div>
 
                         <div class="card-body text-dark">
-
                             <!-- where I have to write table -->
-
                             <table id="dataTable">
                                 <thead class="table">
-                                    <tr>
-                                        <th>Student Id</th>
+                                    <tr class="text-dark">
                                         <th>Student Name</th>
-                                        <th>Batch</th>
-                                        <th>Info</th>
+                                        <th th:each="assignment : ${assignmentList}">
+                                            [[${assignment?.name}]]
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="student : ${studentList}">
-                                        <td>[[${student?.id}]]</td>
+                                    <tr th:each="student, iter : ${studentList}">
                                         <td>[[${student?.name}]]</td>
-                                        <td th:each="batch : ${student.batchList}">
-                                            [[${batch.name}]]
-                                        </td>
-                                        <td class="flex-lg-nowrap flex-nowrap">
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop2">
-                                                Detail
-                                            </button>
+                                        <span th:if="${assignmentList.size == student.userAnswerList.size}">
+                                            <span th:each="answer : ${student.userAnswerList}">
+                                                <td>
+                                                    <span
+                                                        style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;"
+                                                        th:if="${answer?.assignemntAnswerResult != null}">
+                                                        [[${answer?.assignemntAnswerResult?.mark}]] Marks
+                                                    </span>
+                                                    <span
+                                                        style="color: #df6a00; font-family: 'Roboto', sans-serif; font-weight: 700;"
+                                                        th:if="${answer?.assignemntAnswerResult == null}">
+                                                        Not yet graded
+                                                    </span>
+                                                    <span th:if="${answer?.isLate == true}"
+                                                        class="badge badge-soft-danger fw-bold justify-content-between ms-1">
+                                                        Turned in late
+                                                    </span>
+                                                </td>
+                                            </span>
+                                        </span>
 
-                                        </td>
+                                        <span th:if="${assignmentList.size != student.userAnswerList.size and student.userAnswerList.size > 0}">
+                                            <span th:each="a : ${assignmentList}">
+                                                <td>
+                                                    <span th:each="answer : ${student.userAnswerList}">
+                                                        <span th:if="${a.id == answer?.assignment?.id}">
+                                                            <span
+                                                                style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;"
+                                                                th:if="${answer?.assignemntAnswerResult != null}">
+                                                                [[${answer?.assignemntAnswerResult?.mark}]] Marks
+                                                            </span>
+                                                            <span
+                                                                style="color: #df6a00; font-family: 'Roboto', sans-serif; font-weight: 700;"
+                                                                th:if="${answer?.assignemntAnswerResult == null}">
+                                                                Not yet graded
+                                                            </span>
+                                                            <span th:if="${answer?.isLate == true}"
+                                                                class="badge badge-soft-danger fw-bold justify-content-between ms-1">
+                                                                Turned in late
+                                                            </span>
+                                                        </span>
+                                                        <span th:if="${a.id != answer?.assignment?.id}">
+
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                            </span>
+                                        </span>
+                                        <span th:if="${student.userAnswerList.size == 0}">
+                                            <span th:each="a : ${assignmentList}">
+                                                <td></td>
+                                            </span>
+                                        </span>
                                     </tr>
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>
@@ -100,15 +132,22 @@
                     <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
                 </div>
             </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
     </div>
     <div th:insert="/teacher/teacher-fragments :: footer" />
     <script>
+        const elements = document.getElementsByTagName('td');
+        Array.from(elements).forEach((element, index) => {
+            if (element.innerText == '') {
+                element.innerHTML = 'Missing'
+                element.style.color =  '#cf0000';
+                element.style.fontWeight = 800;
+                element.style.fontFamily = 'Roboto';
+            }
+        });
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });
-
-        
     </script>
 </body>
 
