@@ -67,7 +67,7 @@ public class AdminControllerTest {
     public void deleteCourseTest() throws Exception {
         this.mockMvc.perform(get(apiPath + "/deleteCourse")
                 .param("id", "1")
-                .param("courseName", "java"))
+                .param("courseName", "java"));
             
     }
 

@@ -37,30 +37,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        EncodeDecodeUrl edUrl = new EncodeDecodeUrl();
         http
                 .csrf().disable()
 
                 .authorizeRequests()
-                //.antMatchers("/assets/**", "/auth/**", "/login", "/logout", "/admin/register", "/api/**","/user/**").permitAll()
-                //.antMatchers("/admin/**").hasRole("ADMIN")
-                //.antMatchers("/teacher/**").hasRole("TEACHER")
-                //.antMatchers("/student/**").hasAnyRole("TEACHER", "STUDENT")
-                .antMatchers("/admin/**").permitAll()
+                .antMatchers("/assets/**", "/auth/**", "/login", "/logout", "/admin/register", "/api/**","/user/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers(edUrl.encodeUrl("/teacher/**")).hasRole("TEACHER")
+                .antMatchers(edUrl.encodeUrl("/student/**")).hasAnyRole("TEACHER", "STUDENT")
+                //.antMatchers("/admin/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 
-                // .and()
-                // .formLogin()
-                // .loginPage("/auth/login")
-                // .loginProcessingUrl("/login")
-                // .successHandler(loginSuccessHandler)
-                // .failureHandler(customAuthenticationFailureHandler)
-                // .and()
-                // .rememberMe()
-                // .authenticationSuccessHandler(remembermeSuccessHandler)
-                // .tokenValiditySeconds(2592000)
-                // .and()
-                // .exceptionHandling().accessDeniedPage("/user/403")
+                .and()
+                .formLogin()
+                .loginPage("/auth/login")
+                .loginProcessingUrl("/login")
+                .successHandler(loginSuccessHandler)
+                .failureHandler(customAuthenticationFailureHandler)
+                .and()
+                .rememberMe()
+                .authenticationSuccessHandler(remembermeSuccessHandler)
+                .tokenValiditySeconds(2592000)
+                .and()
+                .exceptionHandling().accessDeniedPage("/user/403")
                 ;
     }
 
