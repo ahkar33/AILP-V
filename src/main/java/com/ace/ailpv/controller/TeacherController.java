@@ -202,6 +202,9 @@ public class TeacherController {
     public String giveAssignmentResult(@ModelAttribute("result") AssignmentResult result) {
         AssignmentResult resResult = assignmentResultService
                 .getAssignmentResultByAnswerId(result.getAssignmentResultAnswer().getId());
+        AssignmentAnswer answer = assignmentAnswerService.getAssignmentAnswerById(result.getAssignmentResultAnswer().getId());
+        answer.setIsGraded(true);
+        assignmentAnswerService.saveAssignmentAnswer(answer);
         if (resResult != null) {
             resResult.setComment(result.getComment());
             resResult.setMark(result.getMark());
