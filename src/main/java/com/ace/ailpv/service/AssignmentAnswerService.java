@@ -63,4 +63,8 @@ public class AssignmentAnswerService {
         return assignmentAnswerRepository.findByAssignment_Id(id);
     }
 
+    public List<AssignmentAnswer> getAssignmentAnswerListByStudentId(String id) {
+        return assignmentAnswerRepository.findByAnswerStudent_IdOrderByAssignment_Id(id);
+    }
+
 }
