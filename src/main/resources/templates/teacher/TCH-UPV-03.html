@@ -78,13 +78,13 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="staticBackdropLabel">
-                                                                Video
+                                                                {{video.name.substring(0, video.name.length - 4)}}
                                                             </h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            <video width="320" height="240" controls
+                                                        <div class="modal-body d-flex justify-content-center">
+                                                            <video width="400" height="350" controls
                                                                 controlsList="nodownload">
                                                                 <source
                                                                     :src=`/courses/${video.videoCourse.name}/video/${video.name}`
