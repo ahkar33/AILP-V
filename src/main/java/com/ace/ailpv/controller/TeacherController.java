@@ -63,13 +63,13 @@ public class TeacherController {
         return "/teacher/TCH-DSB-01";
     }
 
-    @GetMapping("/student-table")
-    public String setupStudentTable(ModelMap model, HttpSession session) {
-        String teacherId = (String) session.getAttribute("uid");
-        User teacherInfo = userService.getUserById(teacherId);
-        model.addAttribute("studentList", userService.getStudentListByTeacherId(teacherInfo.getId()));
-        return "/teacher/TCH-STB-11";
-    }
+    // @GetMapping("/student-table")
+    // public String setupStudentTable(ModelMap model, HttpSession session) {
+    //     String teacherId = (String) session.getAttribute("uid");
+    //     User teacherInfo = userService.getUserById(teacherId);
+    //     model.addAttribute("studentList", userService.getStudentListByTeacherId(teacherInfo.getId()));
+    //     return "/teacher/TCH-STB-11";
+    // }
 
     @GetMapping("/teacher-public-chat")
     public String setupTeacherPublicChat(HttpSession session, ModelMap model) {
@@ -215,7 +215,7 @@ public class TeacherController {
         return "redirect:/teacher/assignment-table";
     }
 
-    @GetMapping("/studentTable")
+    @GetMapping("/student-table")
     public String showStudentTable(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
         User teacherInfo = userService.getUserById(teacherId);
@@ -230,7 +230,7 @@ public class TeacherController {
         model.addAttribute("assignmentList", assignmentList);
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
-        return "/teacher/TCH-STB-00";
+        return "/teacher/TCH-STB-11";
     }
 
     @PostMapping("/searchStudentsByBatch")
