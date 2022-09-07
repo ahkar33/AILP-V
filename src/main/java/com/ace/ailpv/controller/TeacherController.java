@@ -200,8 +200,51 @@ public class TeacherController {
 
     @PostMapping("/giveAssignmentResult")
     public String giveAssignmentResult(@ModelAttribute("result") AssignmentResult result) {
-        assignmentResultService.addAssignmentResult(result);
+        AssignmentResult resResult = assignmentResultService
+                .getAssignmentResultByAnswerId(result.getAssignmentResultAnswer().getId());
+        if (resResult != null) {
+            resResult.setComment(result.getComment());
+            resResult.setMark(result.getMark());
+            assignmentResultService.addAssignmentResult(resResult);
+        } else {
+            assignmentResultService.addAssignmentResult(result);
+        }
         return "redirect:/teacher/assignment-table";
+    }
+
+    @GetMapping("/studentTable")
+    public String showStudentTable(ModelMap model, HttpSession session) {
+        String teacherId = (String) session.getAttribute("uid");
+        User teacherInfo = userService.getUserById(teacherId);
+        Long batchId = teacherInfo.getBatchList().get(0).getId();
+        List<Assignment> assignmentList = assignmentService.getAllAssignmentByBatchId(batchId);
+
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+
+        model.addAttribute("data", new Batch());
+        model.addAttribute("assignmentList", assignmentList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("batchList", batchList);
+        return "/teacher/TCH-STB-00";
+    }
+
+    @PostMapping("/searchStudentsByBatch")
+    public String searchStudentsByBatch(@ModelAttribute("data") Batch batch, ModelMap model, HttpSession session) {
+        String teacherId = (String) session.getAttribute("uid");
+        Long batchId = batch.getId();
+        List<Assignment> assignmentList = assignmentService.getAllAssignmentByBatchId(batchId);
+
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+
+        model.addAttribute("data", batch);
+        model.addAttribute("assignmentList", assignmentList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("batchList", batchList);
+        return "/teacher/TCH-STB-00";
     }
 
 }

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/teacher/teacher-fragments :: teacher_head">
+    <title>Student Table</title>
+</head>
+
+<style>
+    table td:empty::before {
+        content: "Missing";
+        color: red
+    }
+</style>
+
+<body id="page-top">
+    <div id="wrapper">
+        <!-- this is where side bar is -->
+        <div th:insert="/teacher/teacher-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <!-- this is where nav bar is -->
+                <div th:insert="/teacher/teacher-fragments :: navbar" />
+
+                <div class="container-fluid">
+                    <h1 class="fs-3 mb-4 text-start"
+                        style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
+                        Student Table
+                    </h1>
+                    <div class="card shadow">
+
+                        <div class="card-header py-3">
+                            <form th:object="${data}" th:action="@{/teacher/searchStudentsByBatch}" method="post"
+                                class="d-flex d-lg-flex flex-lg-wrap flex-wrap">
+                                <div class="me-3">
+                                    <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                            <label class="form-label">Batch</label>
+                                            <select th:field="*{id}" class="form-select"
+                                                aria-label="Default select example">
+                                                <option th:each="batch : ${batchList}" th:value="${batch?.id}">
+                                                    [[${batch?.name}]]
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 2.3rem;">
+                                    <button type="submit" class="btn btn-primary">
+                                        Search
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="card-body text-dark">
+                            <!-- where I have to write table -->
+                            <table id="dataTable">
+                                <thead class="table">
+                                    <tr class="text-dark">
+                                        <th>Student Name</th>
+                                        <th th:each="assignment : ${assignmentList}">
+                                            [[${assignment?.name}]]
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="student, iter : ${studentList}">
+                                        <td>[[${student?.name}]]</td>
+                                        <span th:if="${assignmentList.size == student.userAnswerList.size}">
+                                            <span th:each="answer : ${student.userAnswerList}">
+                                                <td>
+                                                    <span class="text-success"
+                                                        th:if="${answer?.assignemntAnswerResult != null}">
+                                                        [[${answer?.assignemntAnswerResult?.mark}]] Marks
+                                                    </span>
+                                                    <span class="text-warning"
+                                                        th:if="${answer?.assignemntAnswerResult == null}">
+                                                        Not yet graded
+                                                    </span>
+                                                    <span th:if="${answer?.isLate == true}">
+                                                        (Turned in late)
+                                                    </span>
+                                                </td>
+                                            </span>
+                                        </span>
+
+                                        <span th:each="aId : ${student.answerAssignmentIdList}">
+                                            [[${aId}]]
+                                        </span>
+
+                                        <span th:if="${assignmentList.size != student.userAnswerList.size}">
+                                            <span th:each="a : ${assignmentList}">
+                                                <td>
+                                                    <span th:each="answer : ${student.userAnswerList}">
+                                                        <span th:if="${a.id == answer?.assignment?.id}">
+                                                            <span class="text-success"
+                                                                th:if="${answer?.assignemntAnswerResult != null}">
+                                                                [[${answer?.assignemntAnswerResult?.mark}]] Marks
+                                                            </span>
+                                                            <span class="text-warning"
+                                                                th:if="${answer?.assignemntAnswerResult == null}">
+                                                                Not yet graded
+                                                            </span>
+                                                            <span th:if="${answer?.isLate == true}">
+                                                                (Turned in late)
+                                                            </span>
+                                                        </span>
+                                                        <span th:if="${a.id != answer?.assignment?.id}">
+                                                            
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                            </span>
+                                        </span>
+                                        <span th:if="${student.userAnswerList.size == 0}">
+                                            <span th:each="a : ${assignmentList}">
+                                                <td></td>
+                                            </span>
+                                        </span>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <div th:insert="/teacher/teacher-fragments :: footer" />
+    <script>
+        const elements = document.getElementsByTagName('td');
+        Array.from(elements).forEach((element, index) => {
+            if (element.innerText == '') {
+                element.innerHTML = '<b>Missing</b>'
+                element.classList.add('text-danger');
+            }
+        });
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+</body>
+
+</html>

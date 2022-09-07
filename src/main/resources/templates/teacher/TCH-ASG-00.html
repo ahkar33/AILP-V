@@ -54,7 +54,7 @@
                                             <div class="modal-body text-dark">
                                                 <label for="" class="mb-auto">Assignment Name</label>
                                                 <input type="text" th:field="*{name}"
-                                                    class="border border-secondary form-control mb-3" />
+                                                    class="border border-secondary form-control mb-3" required />
 
                                                 <label for="" class="mb-auto">Batch</label>
                                                 <select th:field="*{assignmentBatch}" class="form-select mb-3"
@@ -68,15 +68,15 @@
 
                                                 <label class="form-label mb-auto">Start Time</label>
                                                 <input type="datetime-local" th:field="*{startTime}"
-                                                    class="border border-secondary form-control mb-3" />
+                                                    class="border border-secondary form-control mb-3" required/>
 
                                                 <label class="form-label mb-auto">End Time</label>
                                                 <input type="datetime-local" th:field="*{endTime}"
-                                                    class="border border-secondary form-control mb-3" />
+                                                    class="border border-secondary form-control mb-3" required />
 
                                                 <label for="" class="mb-auto">File</label>
                                                 <input type="file" class="border border-secondary form-control mb-3"
-                                                    th:field="*{questionFile}" accept=".zip" />
+                                                    th:field="*{questionFile}" accept=".zip" required />
                                             </div>
                                             <div class="modal-footer" style="background: #f8f9fc">
                                                 <button class="btn btn-light" data-bs-dismiss="modal"
