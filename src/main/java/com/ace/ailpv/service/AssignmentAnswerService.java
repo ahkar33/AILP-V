@@ -27,6 +27,10 @@ public class AssignmentAnswerService {
         return assignmentAnswerRepository.findById(id).orElse(null);
     }
 
+    public void saveAssignmentAnswer(AssignmentAnswer answer) {
+        assignmentAnswerRepository.save(answer);
+    }
+
     public void addAssignmentAnswer(AssignmentAnswer assignmentAnswer) throws IOException {
         String studentId = assignmentAnswer.getAnswerStudent().getId();
         Long assignmentId = assignmentAnswer.getAssignment().getId();
@@ -62,6 +66,7 @@ public class AssignmentAnswerService {
     public List<AssignmentAnswer> getAssignmentAnswerListByAssignmentId(Long id) {
         return assignmentAnswerRepository.findByAssignment_Id(id);
     }
+
 
     public List<AssignmentAnswer> getAssignmentAnswerListByStudentId(String id) {
         return assignmentAnswerRepository.findByAnswerStudent_IdOrderByAssignment_Id(id);
