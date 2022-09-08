@@ -21,7 +21,7 @@ public class UserControllerTest {
     @Test
     public void getProfileTest() throws Exception{
         this.mockMvc.perform(get(apiPath+"/profile"))
-                .andExpect(status().isOk());
+                .andExpect(model().attributeExists("batchName"));
 
 
     }
