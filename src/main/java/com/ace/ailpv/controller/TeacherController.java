@@ -180,7 +180,7 @@ public class TeacherController {
         model.addAttribute("assignment", new Assignment());
         model.addAttribute("batchList", batchList);
         model.addAttribute("assignmentList", assignmentService.getAllAssignments());
-        return "/teacher/TCH-ASG-00";
+        return "/teacher/TCH-AST-00";
     }
 
     @PostMapping("/createAssignment")
@@ -215,7 +215,7 @@ public class TeacherController {
         return "redirect:/teacher/assignment-table";
     }
 
-    @GetMapping("/student-table")
+    @GetMapping("/assignment-grade")
     public String showStudentTable(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
         User teacherInfo = userService.getUserById(teacherId);
@@ -230,7 +230,7 @@ public class TeacherController {
         model.addAttribute("assignmentList", assignmentList);
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
-        return "/teacher/TCH-STB-11";
+        return "/teacher/TCH-ASG-00";
     }
 
     @PostMapping("/searchStudentsByBatch")
@@ -247,7 +247,7 @@ public class TeacherController {
         model.addAttribute("assignmentList", assignmentList);
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
-        return "/teacher/TCH-STB-00";
+        return "/teacher/TCH-ASG-00";
     }
 
 }
