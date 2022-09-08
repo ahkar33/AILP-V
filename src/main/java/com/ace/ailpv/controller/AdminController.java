@@ -27,6 +27,7 @@ import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
 import com.ace.ailpv.service.FileService;
 import com.ace.ailpv.service.ResourceService;
+import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
 import com.ace.ailpv.service.VideoService;
 
@@ -63,6 +64,9 @@ public class AdminController {
 
     @Autowired
     private ResourceService resourceService;
+
+    @Autowired
+    private UserScheduleService userScheduleService;
 
     String path = "src\\main\\resources\\static\\courses\\";
 
@@ -309,7 +313,12 @@ public class AdminController {
 
     @GetMapping("/student-table")
     public String setupStudentTable(ModelMap model) {
-        model.addAttribute("studentList", userService.getAllStudents());
+        List<User> studentList = userService.getAllStudents();
+        for (User student : studentList) {
+            Float attendancePercentage = userScheduleService.avgAttendaceOfStudent(student.getId()).floatValue();
+            student.setAttendancePercentage(Math.round(attendancePercentage));
+        }
+        model.addAttribute("studentList", studentList);
         return "/admin/ADM-STB-08";
     }
 

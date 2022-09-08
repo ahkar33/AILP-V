@@ -45,7 +45,6 @@ public class AdminApi {
     public Map<String, Float> getStudentAttendance() {
         Map<String, Float> data = new LinkedHashMap<>();
         for (User user : userService.getAllStudents()) {         
-            
             data.put(user.getName(), userScheduleService.avgAttendaceOfStudent(user.getId()).floatValue());
         }
         return data;
@@ -55,7 +54,6 @@ public class AdminApi {
     public Map<String, Float> getStudentAttendanceByBatch(@PathVariable("batchId") String batchId) {
         Map<String, Float> data = new LinkedHashMap<>();
         for (User user : userService.getStudentListByBatchId(Long.parseLong(batchId))) {         
-            
             data.put(user.getName(), userScheduleService.avgAttendaceOfStudent(user.getId()).floatValue());
         }
         return data;
