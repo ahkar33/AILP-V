@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/teacher/teacher-fragments :: teacher_head">
+    <title> Upload Exam </title>
+</head>
+
+
+<body>
+    <div id="wrapper">
+        <!-- this is where side bar is -->
+        <div th:insert="/teacher/teacher-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="app">
+                <!-- this is where nav bar is -->
+                <div th:insert="/teacher/teacher-fragments :: navbar" />
+                <input type="hidden" th:value="${session?.uid}" id="teacherId">
+                <div class="container-fluid">
+                    <h1 class="fs-3 mb-4 text-start"
+                        style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
+                        Exam
+                    </h1>
+                    <div class="card shadow text-dark">
+                        <!-- <div class="card-header d-flex d-lg-flex flex-lg-wrap flex-wrap py-3">
+                            <form>
+                                <div class="me-3">
+                                    <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                            <label for="exampleInputEmail1" class="form-label">Date</label>
+                                            <input type="date" class="form-control" v-model="date" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <form>
+                                <div class="">
+                                    <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                            <label class="form-label">Batch</label>
+                                            <select v-model="batchId" class="form-select"
+                                                aria-label="Default select example">
+                                                <option disabled>Choose One Batch</option>
+                                                <span th:each="batch : ${batchList}">
+                                                    <option th:value="${batch?.id}">[[${batch?.name}]]</option>
+                                                </span>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> -->
+
+                        <div class="card-body text-dark">
+
+                            <!-- where I have to write table -->
+                            <table id="dataTable" class="display p-2">
+                                <thead class="table">
+                                    <tr>
+                                        <th>Exam Name</th>
+                                        <th>Course Name</th>
+                                        <th>Full Mark</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="exam : ${examList}">
+                                        <td>[[${exam?.name}]]</td>
+                                        <td>[[${exam?.examCourse.name}]]</td>
+                                        <td>[[${exam?.fullMark}]]</td>
+                                        <td>
+                                            <a th:href="@{/teacher/uploadExam/} + ${exam.id}" class="btn btn-primary">
+                                                Upload
+                                            </a>
+                                            <!-- <a class="btn btn-danger btn bg-gradient" title="Remove"
+                                                data-bs-placement="top" data-bs-toggle="tooltip"
+                                                th:attr="onclick=|handleDelete('${exam.id}')|">
+                                                <i class="fa-trash-alt fas"></i>
+                                            </a> -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <div th:insert="/teacher/teacher-fragments :: footer" />
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+
+</body>
+
+</html>
