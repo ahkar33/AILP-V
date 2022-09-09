@@ -66,7 +66,7 @@ public class ExamServiceTest {
     public void getExamListByBatchIdTest(){
         List<Exam>examList=getExamList();
         when(examRepository.findByExamCourse_Id(1L)).thenReturn(examList);
-        List<Exam>list=examService.getExamListByBatchId(1L);
+        List<Exam>list=examService.getExamListByCourseId(1L);
         assertEquals(examList.size(), list.size());
         verify(examRepository,times(1)).findByExamCourse_Id(1L);
     }
