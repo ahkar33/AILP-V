@@ -26,18 +26,18 @@
                 <div id="content" style="margin-top: -19px;background: #ffffff;margin-bottom: 80px;">
                     <div class="row d-flex flex-wrap" style="padding-right: 10px;padding-left: 10px;margin-top: 38px;">
 
-                        <!-- <span v-for="question in questionList">
-                            <h3>{{ question.examQuestion }}</h3>
+                        <span v-for="(question, index) in exam.questionList">
+                            <h4>{{ question.examQuestion }}</h4>
                             <span v-for="radio in question.radioList">
-                                <p>{{ radio.radioValue  }}</p>
+                                <input class="ms-2" type="radio" v-model="studentAnswerList[index]"
+                                    :value="radio.radioValue">{{ radio.radioValue }}
                             </span>
-                        </span> -->
-
-                        <!-- <input type="radio" id="one" value="One" v-model="picked" />
-                        <label for="one">One</label>
-
-                        <input type="radio" id="two" value="Two" v-model="picked" />
-                        <label for="two">Two</label> -->
+                        </span>
+                        <span class="mt-2">
+                            <button @click="handleSubmit()" class="btn btn-primary">
+                                Submit
+                            </button>
+                        </span>
 
                     </div>
                 </div>
