@@ -44,7 +44,7 @@ let studentCourse = new Chart(chartOne, {
 let totalMember = new Chart(chartTwo, {
     type: 'doughnut', // bar, horizontalBar, pie ...
     data: {
-        labels: ["Student", "Teacher", "Other Employee"],
+        labels: ["Java Batch 01", "Java Batch 02", " Java Batch 03"],
         datasets: [{
             // label: 'Number of News',
             data: [100, 10, 5], // number of news per reporter
