@@ -20,6 +20,7 @@ import com.ace.ailpv.entity.Assignment;
 import com.ace.ailpv.entity.AssignmentAnswer;
 import com.ace.ailpv.entity.AssignmentResult;
 import com.ace.ailpv.entity.Batch;
+import com.ace.ailpv.entity.BatchHasExam;
 import com.ace.ailpv.entity.BatchHasResource;
 import com.ace.ailpv.entity.BatchHasVideo;
 import com.ace.ailpv.entity.User;
@@ -28,6 +29,7 @@ import com.ace.ailpv.entity.Video;
 import com.ace.ailpv.service.AssignmentAnswerService;
 import com.ace.ailpv.service.AssignmentResultService;
 import com.ace.ailpv.service.AssignmentService;
+import com.ace.ailpv.service.BatchHasExamService;
 import com.ace.ailpv.service.BatchHasResourceService;
 import com.ace.ailpv.service.BatchHasVideoService;
 import com.ace.ailpv.service.BatchService;
@@ -61,6 +63,9 @@ public class StudentController {
 
     @Autowired
     private AssignmentResultService assignmentResultService;
+
+    @Autowired
+    private BatchHasExamService batchHasExamService;
 
     @GetMapping("/student-home")
     public String showStudentHomePage(HttpSession session, ModelMap model) {
@@ -116,11 +121,11 @@ public class StudentController {
             Video video = videoService.getVideoById(userInfo.getLastWatchVideoId());
             if (video != null) {
                 model.addAttribute("video", video);
-            } 
+            }
         } else {
-            List<BatchHasVideo> batchVideoList =  batchHasVideoService.getAllBatchHasVideoByBatchId(userBatchId);
+            List<BatchHasVideo> batchVideoList = batchHasVideoService.getAllBatchHasVideoByBatchId(userBatchId);
             BatchHasVideo batchHasVideo = new BatchHasVideo();
-            if(batchVideoList.size() > 0 ) {
+            if (batchVideoList.size() > 0) {
                 batchHasVideo = batchHasVideoService.getAllBatchHasVideoByBatchId(userBatchId).get(0);
                 model.addAttribute("video", batchHasVideo.getVideo());
             } else {
@@ -186,7 +191,7 @@ public class StudentController {
         Long currentTime = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         Assignment assignment = assignmentService.getAssignmentById(answer.getAssignment().getId());
         Long startTime = assignment.getEndTime().toEpochSecond(ZoneOffset.UTC);
-        if(currentTime > startTime) {
+        if (currentTime > startTime) {
             answer.setIsLate(true);
         }
         answer.setAnswerFileName(answer.getAnswerFile().getOriginalFilename());
@@ -200,6 +205,25 @@ public class StudentController {
         List<AssignmentResult> resultList = assignmentResultService.getAssignmentResultListByStudentId(studentId);
         model.addAttribute("resultList", resultList);
         return "/student/STU-GRB-00";
+    }
+
+    @GetMapping("/getExamList")
+    public String getBheListByBatchId(HttpSession session, ModelMap model) {
+        String studentId = (String) session.getAttribute("uid");
+        User studentInfo = usersService.getUserById(studentId);
+        Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
+        List<BatchHasExam> bheList = batchHasExamService.getBatchHasExamListByBatchId(studentBatchId);
+        model.addAttribute("bheList", bheList);
+        return "/student/STU-EXL-00";
+    }
+
+    @GetMapping("/getExam/{bheId}")
+    public String getExam(@PathVariable("bheId") Long bheId, ModelMap model, HttpSession session) {
+        String studentId = (String) session.getAttribute("uid");
+        // User studentInfo = usersService.getUserById(studentId);
+        model.addAttribute("bheId", bheId);
+        model.addAttribute("studentId", studentId);
+        return "/student/STU-EXM-00";
     }
 
 }
