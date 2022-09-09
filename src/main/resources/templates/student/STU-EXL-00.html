@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/student/student-fragments :: student_head">
+    <title>Exam</title>
+</head>
+
+<body id="page-top">
+
+    <div th:insert="/student/student-fragments :: pc-navbar" />
+
+    <div th:insert="/student/student-fragments :: mobile-navbar" />
+
+    <div class="container mt-5">
+
+        <h1 class="h2">Exams</h1>
+        <div id="wrapper">
+            <div class="flex-column" id="content-wrapper" style="background: rgb(255,255,255);">
+                <div id="content" style="margin-top: -19px;background: #ffffff;margin-bottom: 80px;">
+                    <div class="row d-flex flex-wrap" style="padding-right: 10px;padding-left: 10px;margin-top: 38px;">
+
+                        <span th:each="bhe : ${bheList}">
+                            <a th:href="@{/student/getExam/} + ${bhe.id}">
+                                [[${bhe.bheExam.name}]]
+                            </a>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hide-on-desktop">
+        <a class="border rounded d-inline scroll-to-top" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    </div>
+
+
+    <div th:insert="/student/student-fragments :: footer" />
+
+</body>
+
+</html>

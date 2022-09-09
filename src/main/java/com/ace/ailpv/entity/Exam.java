@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,5 +47,9 @@ public class Exam {
 
     @Transient
     private String courseId;
+
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "bheExam")
+    @JsonIgnore
+    private List<BatchHasExam> batchHasExamList = new ArrayList<>();
 
 }

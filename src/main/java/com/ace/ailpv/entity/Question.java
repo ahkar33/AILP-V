@@ -36,4 +36,6 @@ public class Question {
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     private List<Radio> radioList = new ArrayList<>();
 
+    private Double mark;
+
 }

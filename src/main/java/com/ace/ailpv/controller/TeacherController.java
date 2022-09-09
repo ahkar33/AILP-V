@@ -15,17 +15,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ace.ailpv.entity.Assignment;
 import com.ace.ailpv.entity.AssignmentAnswer;
 import com.ace.ailpv.entity.AssignmentResult;
 import com.ace.ailpv.entity.Batch;
+import com.ace.ailpv.entity.BatchHasExam;
+import com.ace.ailpv.entity.Exam;
 import com.ace.ailpv.entity.Schedule;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
 import com.ace.ailpv.service.AssignmentAnswerService;
 import com.ace.ailpv.service.AssignmentResultService;
 import com.ace.ailpv.service.AssignmentService;
+import com.ace.ailpv.service.BatchHasExamService;
+import com.ace.ailpv.service.ExamService;
 import com.ace.ailpv.service.ScheduleService;
 import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
@@ -52,6 +57,12 @@ public class TeacherController {
     @Autowired
     private AssignmentResultService assignmentResultService;
 
+    @Autowired
+    private ExamService examService;
+
+    @Autowired
+    private BatchHasExamService batchHasExamService;
+
     @GetMapping("/dashboard")
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
@@ -65,10 +76,11 @@ public class TeacherController {
 
     // @GetMapping("/student-table")
     // public String setupStudentTable(ModelMap model, HttpSession session) {
-    //     String teacherId = (String) session.getAttribute("uid");
-    //     User teacherInfo = userService.getUserById(teacherId);
-    //     model.addAttribute("studentList", userService.getStudentListByTeacherId(teacherInfo.getId()));
-    //     return "/teacher/TCH-STB-11";
+    // String teacherId = (String) session.getAttribute("uid");
+    // User teacherInfo = userService.getUserById(teacherId);
+    // model.addAttribute("studentList",
+    // userService.getStudentListByTeacherId(teacherInfo.getId()));
+    // return "/teacher/TCH-STB-11";
     // }
 
     @GetMapping("/teacher-public-chat")
@@ -202,7 +214,8 @@ public class TeacherController {
     public String giveAssignmentResult(@ModelAttribute("result") AssignmentResult result) {
         AssignmentResult resResult = assignmentResultService
                 .getAssignmentResultByAnswerId(result.getAssignmentResultAnswer().getId());
-        AssignmentAnswer answer = assignmentAnswerService.getAssignmentAnswerById(result.getAssignmentResultAnswer().getId());
+        AssignmentAnswer answer = assignmentAnswerService
+                .getAssignmentAnswerById(result.getAssignmentResultAnswer().getId());
         answer.setIsGraded(true);
         assignmentAnswerService.saveAssignmentAnswer(answer);
         if (resResult != null) {
@@ -248,6 +261,42 @@ public class TeacherController {
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
         return "/teacher/TCH-ASG-00";
+    }
+
+    @GetMapping("/exam-table")
+    public String setupUploadExam(ModelMap model, HttpSession session) {
+        String teacherId = (String) session.getAttribute("uid");
+        List<Exam> examList = examService.getExamListByTeacherId(teacherId);
+        model.addAttribute("examList", examList);
+        return "/teacher/exam-table";
+    }
+
+    @GetMapping("/uploadExam/{examId}")
+    public String setupUploadExam(@PathVariable("examId") Long examId, HttpSession session, ModelMap model) {
+        String teacherId = (String) session.getAttribute("uid");
+        Exam exam = examService.getExamById(examId);
+        Long courseId = exam.getExamCourse().getId();
+        List<Batch> batchList = userService.getTeacherBatchListByTeacherIdAndCourseId(teacherId, courseId);
+        model.addAttribute("exam", exam);
+        model.addAttribute("batchList", batchList);
+        model.addAttribute("data", new BatchHasExam());
+        return "/teacher/upload-exam";
+    }
+
+    @PostMapping("/uploadExam")
+    public String uploadExam(@ModelAttribute("data") BatchHasExam batchHasExam, RedirectAttributes redirectAttrs) {
+        Long examId = batchHasExam.getBheExam().getId();
+        Long batchId = batchHasExam.getBheBatch().getId();
+        BatchHasExam bhe = batchHasExamService.getBatchHasExamByExamIdAndBatchId(examId, batchId);
+        if (bhe != null) {
+            bhe.setStartDateTime(batchHasExam.getStartDateTime());
+            bhe.setEndDateTime(batchHasExam.getEndDateTime());
+            batchHasExamService.addBatchHasExam(bhe);
+        } else {
+            batchHasExamService.addBatchHasExam(batchHasExam);
+        }
+        redirectAttrs.addFlashAttribute("isSuccess", true);
+        return "redirect:/teacher/uploadExam/" + batchHasExam.getBheExam().getId();
     }
 
 }

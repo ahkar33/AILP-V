@@ -82,7 +82,7 @@ public class CourseService {
         for(Batch batch : batchList) {
             batchService.deleteBatchById(batch.getId(), courseName);
         }
-        List<Exam> examList = examService.getExamListByBatchId(courseId);
+        List<Exam> examList = examService.getExamListByCourseId(courseId);
         for(Exam exam: examList) {
             examService.deleteExamById(exam.getId());
         }

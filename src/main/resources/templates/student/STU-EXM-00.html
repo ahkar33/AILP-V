@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/student/student-fragments :: student_head">
+    <title>Exam</title>
+</head>
+
+<style>
+    [v-cloak] {
+        display: none
+    }
+</style>
+
+<body id="page-top">
+
+    <div th:insert="/student/student-fragments :: pc-navbar" />
+
+    <div th:insert="/student/student-fragments :: mobile-navbar" />
+
+    <div v-cloak class="container mt-5" id="app">
+        <input id="studentId" type="hidden" th:value="${studentId}">
+        <input id="bheId" type="hidden" th:value="${bheId}">
+
+        <div id="wrapper">
+            <div class="flex-column" id="content-wrapper" style="background: rgb(255,255,255);">
+                <div id="content" style="margin-top: -19px;background: #ffffff;margin-bottom: 80px;">
+                    <div class="row d-flex flex-wrap" style="padding-right: 10px;padding-left: 10px;margin-top: 38px;">
+
+                        <span v-for="(question, index) in exam.questionList">
+                            <h4>{{ question.examQuestion }}</h4>
+                            <span v-for="radio in question.radioList">
+                                <input class="ms-2" type="radio" v-model="studentAnswerList[index]"
+                                    :value="radio.radioValue">{{ radio.radioValue }}
+                            </span>
+                        </span>
+                        <span class="mt-2">
+                            <button @click="handleSubmit()" class="btn btn-primary">
+                                Submit
+                            </button>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hide-on-desktop">
+        <a class="border rounded d-inline scroll-to-top" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    </div>
+
+
+    <div th:insert="/student/student-fragments :: footer" />
+    <script src="/assets/js/exam.js"></script>
+</body>
+
+</html>
