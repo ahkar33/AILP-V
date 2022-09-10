@@ -20,37 +20,68 @@
     <div v-cloak class="container mt-5" id="app">
         <input id="studentId" type="hidden" th:value="${studentId}">
         <input id="bheId" type="hidden" th:value="${bheId}">
+        <input id="examId" type="hidden" th:value="${examId}">
 
-        <div id="wrapper">
-            <div class="flex-column" id="content-wrapper" style="background: rgb(255,255,255);">
-                <div id="content" style="margin-top: -19px;background: #ffffff;margin-bottom: 80px;">
-                    <div class="row d-flex flex-wrap" style="padding-right: 10px;padding-left: 10px;margin-top: 38px;">
-
-                        <span v-for="(question, index) in exam.questionList">
-                            <h4>{{ question.examQuestion }}</h4>
-                            <span v-for="radio in question.radioList">
-                                <input class="ms-2" type="radio" v-model="studentAnswerList[index]"
-                                    :value="radio.radioValue">{{ radio.radioValue }}
-                            </span>
+        <span v-if="isLoaded">
+            <span v-if="!isStarted">
+                Exam will start at {{ startDateTime }}
+            </span>
+            <span v-else>
+                <span v-if="isSubmitted">
+                    <h2>You already submitted</h2>
+                    <h3>{{ studentScore }}/{{ exam.fullMark }} Marks</h3>
+                </span>
+                <span v-else-if="!isExamEnd">
+                    <div class="d-flex justify-content-evenly">
+                        <span d-flex flex-column>
+                            <h2>{{ displayDays }}</h2>
+                            <p>days</p>
                         </span>
-                        <span class="mt-2">
-                            <button @click="handleSubmit()" class="btn btn-primary">
-                                Submit
-                            </button>
+                        <h2>:</h2>
+                        <span d-flex flex-column>
+                            <h2>{{ displayHours }}</h2>
+                            <p>hours</p>
                         </span>
-
+                        <h2>:</h2>
+                        <span d-flex flex-column>
+                            <h2>{{ displayMinutes }}</h2>
+                            <p>minutes</p>
+                        </span>
+                        <h2>:</h2>
+                        <span d-flex flex-column>
+                            <h2>{{ displaySeconds }}</h2>
+                            <p>seconds</p>
+                        </span>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <div id="wrapper">
+                        <div class="flex-column" id="content-wrapper" style="background: rgb(255,255,255);">
+                            <div id="content" style="margin-top: -19px;background: #ffffff;margin-bottom: 80px;">
+                                <div class="row d-flex flex-wrap"
+                                    style="padding-right: 10px;padding-left: 10px;margin-top: 38px;">
+                                    <span v-for="(question, index) in exam.questionList">
+                                        <h4>{{ question.examQuestion }}</h4>
+                                        <span v-for="radio in question.radioList">
+                                            <input class="ms-2" type="radio" v-model="studentAnswerList[index]"
+                                                :value="radio.radioValue">{{ radio.radioValue }}
+                                        </span>
+                                    </span>
+                                    <span class="mt-2">
+                                        <button @click="handleSubmit()" class="btn btn-primary">
+                                            Submit
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+                <span v-else>
+                    <h2>Exam has ended</h2>
+                </span>
+            </span>
+        </span>
+        
     </div>
-
-    <div class="hide-on-desktop">
-        <a class="border rounded d-inline scroll-to-top" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-    </div>
-
 
     <div th:insert="/student/student-fragments :: footer" />
     <script src="/assets/js/exam.js"></script>

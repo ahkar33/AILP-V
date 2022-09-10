@@ -82,6 +82,10 @@ public class User {
     @JsonIgnore
     private List<AssignmentResult> teacherAssignmentResult = new ArrayList<>();
 
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "sheStudent")
+    @JsonIgnore
+    private List<StudentHasExam> studentHasExamList = new ArrayList<>();
+
     @Transient
     private List<Long> answerAssignmentIdList = new ArrayList<>();
 
