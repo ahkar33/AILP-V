@@ -21,7 +21,12 @@ const app = Vue.createApp({
             this.audio.play();
         },
         toggleMute() {
-            let data = { id: this.userId, isMute: !this.isMute };
+            this.isMute = !this.isMute;
+            let data = {
+                userId: this.userId,
+                batchId: this.batchId,
+                isMute: this.isMute
+            };
             axios
                 .post('http://localhost:8080/api/user/toggleMute/', data)
                 .then(() => {
@@ -55,26 +60,36 @@ const app = Vue.createApp({
 
                 $("#inputMessage").data("emojioneArea").setText('');
 
-                const res = axios
+                axios
                     .post('http://localhost:8080/api/message/addMessage/', data)
                     .then(() => {
                         console.log("success");
-                        // this.getAllMessages();
-                        this.messageList = [...this.messageList, ...res];
+                        this.getAllMessages();
                     })
                     .catch(error => console.log(error));
             }
+        },
+        getUserMute() {
+            axios
+                .get(`http://localhost:8080/api/user/getMuteByBatchIdandUserId/${this.batchId}/${this.userId}`)
+                .then(res => {
+                    if (res.data == '' || res.data.isMute == false) {
+                        this.isMute = false;
+                    } else {
+                        this.isMute = true;
+                    }
+                })
         },
         getUserList() {
             axios
                 .get('http://localhost:8080/api/user/getUserList')
                 .then(res => {
                     this.userList = [...res.data];
-                    this.userList.forEach(user => {
-                        if (user.id == this.userId) {
-                            this.isMute = user.isMute;
-                        }
-                    });
+                    // this.userList.forEach(user => {
+                    //     if (user.id == this.userId) {
+                    //         this.isMute = user.isMute;
+                    //     }
+                    // });
                 })
                 .catch(error => console.log(error));
         },
@@ -147,6 +162,7 @@ const app = Vue.createApp({
         this.userId = document.getElementById('userId').value;
         this.userName = document.getElementById('userName').value;
         this.getAllMessages();
+        this.getUserMute();
         setInterval(() => {
             this.getUserList();
             this.getLastMessageCount();

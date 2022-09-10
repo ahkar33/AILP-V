@@ -38,9 +38,6 @@ public class User {
     private String role;
     private String profile_pic;
 
-    @Column(nullable = false, columnDefinition = "TINYINT(0)")
-    private Boolean isMute;
-
     @ManyToMany
     // @JsonIgnore
     @JoinTable(name = "batch_has_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "batch_id"))
@@ -91,5 +88,9 @@ public class User {
 
     @Transient
     private Integer attendancePercentage;
+
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "muteUser")
+    @JsonIgnore
+    private List<Mute> muteList = new ArrayList<>();
 
 }
