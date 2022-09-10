@@ -221,8 +221,10 @@ public class StudentController {
     public String getExam(@PathVariable("bheId") Long bheId, ModelMap model, HttpSession session) {
         String studentId = (String) session.getAttribute("uid");
         // User studentInfo = usersService.getUserById(studentId);
+        BatchHasExam batchHasExam = batchHasExamService.getBatchHasExamById(bheId);
         model.addAttribute("bheId", bheId);
         model.addAttribute("studentId", studentId);
+        model.addAttribute("examId", batchHasExam.getBheExam().getId());
         return "/student/STU-EXM-00";
     }
 
