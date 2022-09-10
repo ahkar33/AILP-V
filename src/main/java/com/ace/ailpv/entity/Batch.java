@@ -71,4 +71,8 @@ public class Batch {
     @JsonIgnore
     private List<BatchHasExam> batchHasExamList = new ArrayList<>();
 
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "muteBatch")
+    @JsonIgnore
+    private List<Mute> muteList = new ArrayList<>();
+
 }

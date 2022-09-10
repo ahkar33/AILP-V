@@ -113,7 +113,7 @@ public class TeacherController {
         List<Batch> batchList = userService.getTeacherBatchListById(teacherInfo.getId());
         batchList = batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
         model.addAttribute("batchList", batchList);
-        return "/teacher/TCH-CWB-06";
+        return "/teacher/TCH-PBC-05";
     }
 
     @GetMapping("/modifyAttendance")

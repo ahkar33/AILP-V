@@ -84,7 +84,7 @@
                                                         <h6 class="fs-5 fw-normal m-b-0 mb-0 text-light"
                                                             style="font-family: 'Roboto', sans-serif;">
                                                             [[${batchName}]]
-                                                            <span @click="toggleMute()" class="ms-1">
+                                                            <span v-cloak @click="toggleMute()" class="ms-1">
                                                                 <span v-if="isMute">
                                                                     <i class="fa-solid fa-bell-slash"></i>
                                                                 </span>
@@ -103,7 +103,7 @@
                                         <!-- <p class="mb-4 mt-4 text-center" style="font-size: 13px;">Today 10:45AM</p> -->
                                         <ul class="m-b-0">
                                             <span v-for="(message, index) in messageList" :key="index">
-                                                <span v-cloak v-if="userName == message.messageUser.name">
+                                                <span v-cloak v-if="userId == message.messageUser.id">
                                                     <li
                                                         class="align-items-start clearfix d-flex flex-column flex-nowrap g-0 mb-3 text-start">
                                                         <div class="d-flex justify-content-end mw-100 row w-100"
