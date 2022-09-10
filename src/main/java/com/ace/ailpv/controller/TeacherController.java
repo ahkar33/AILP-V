@@ -191,7 +191,11 @@ public class TeacherController {
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
         model.addAttribute("assignment", new Assignment());
         model.addAttribute("batchList", batchList);
-        model.addAttribute("assignmentList", assignmentService.getAllAssignments());
+        List<Assignment> assignmentList = new ArrayList<>();
+        for(Batch batch : batchList) {
+            assignmentList.addAll(assignmentService.getAllAssignmentByBatchId(batch.getId()));
+        }
+        model.addAttribute("assignmentList", assignmentList);
         return "/teacher/TCH-AST-00";
     }
 
