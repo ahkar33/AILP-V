@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/teacher/teacher-fragments :: teacher_head">
-    <title>Modify Attendance</title>
+    <title> Upload Exam </title>
 </head>
 
 
@@ -19,9 +19,10 @@
                 <div class="container-fluid">
                     <h1 class="fs-3 mb-4 text-start"
                         style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
-                        Modify Attendance</h1>
+                        Exam
+                    </h1>
                     <div class="card shadow text-dark">
-                        <div class="card-header d-flex d-lg-flex flex-lg-wrap flex-wrap py-3">
+                        <!-- <div class="card-header d-flex d-lg-flex flex-lg-wrap flex-wrap py-3">
                             <form>
                                 <div class="me-3">
                                     <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
@@ -48,64 +49,38 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
 
                         <div class="card-body text-dark">
 
                             <!-- where I have to write table -->
-                            <table id="dataTable"  class="display p-2">
+                            <table id="dataTable" class="display p-2">
                                 <thead class="table">
                                     <tr>
-                                        <th>Student Id</th>
-                                        <th>Student Name</th>
-                                        <th>Batch</th>
-                                        <th>Attendance Status</th>
+                                        <th>Exam Name</th>
+                                        <th>Course Name</th>
+                                        <th>Full Mark</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(student, index) in studentList" :key="student.id">
+                                    <tr th:each="exam : ${examList}">
+                                        <td>[[${exam?.name}]]</td>
+                                        <td>[[${exam?.examCourse.name}]]</td>
+                                        <td>[[${exam?.fullMark}]]</td>
                                         <td>
-                                            {{ student.id }}
-                                            <input v-model="student.id" readonly type="hidden" style="border: 0">
-                                        </td>
-                                        <td>
-                                            {{student.name}}
-                                            <input v-model="student.name" readonly type="hidden" style="border: 0">
-                                        </td>
-                                        </td>
-                                        <td v-for="(batch, index) in student.batchList" :key="batch.id">
-                                            {{batch.name}}
-                                            <input v-model="batch.name" readonly type="hidden" style="border: 0">
-                                        </td>
-                                        <td class="d-flex justify-content-start">
-                                            <div class="form-check me-2">
-                                                <input class="form-check-input" type="radio" :name="student.id"
-                                                   v-model="student.status" value="Present" checked />
-                                                <label class="form-check-label" :for="student.id">
-                                                    Present
-                                                </label>
-                                            </div>
-                                            <div class="form-check me-2">
-                                                <input class="form-check-input" type="radio" :name="student.id"
-                                                v-model="student.status" value="Absent"
-                                                 />
-                                                <label class="form-check-label" :for="student.id">
-                                                    Absent
-                                                </label>
-                                            </div>
-                                            <div class="form-check me-2">
-                                                <input class="form-check-input" type="radio" :name="student.id"
-                                                    v-model="student.status" value="Leave" 
-                                                />
-                                                <label class="form-check-label" :for="student.id">
-                                                    Leave
-                                                </label>
-                                            </div>
+                                            <a th:href="@{/teacher/uploadExam/} + ${exam.id}" class="btn btn-primary">
+                                                Upload
+                                            </a>
+                                            <!-- <a class="btn btn-danger btn bg-gradient" title="Remove"
+                                                data-bs-placement="top" data-bs-toggle="tooltip"
+                                                th:attr="onclick=|handleDelete('${exam.id}')|">
+                                                <i class="fa-trash-alt fas"></i>
+                                            </a> -->
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <button @click.prevent="handleSubmit()" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -116,7 +91,12 @@
     </div>
     <div th:insert="/teacher/teacher-fragments :: footer" />
 
-    <script src="/assets/js/modifyAttendance.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+
 </body>
 
 </html>

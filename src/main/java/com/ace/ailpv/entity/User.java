@@ -85,4 +85,7 @@ public class User {
     @Transient
     private List<Long> answerAssignmentIdList = new ArrayList<>();
 
+    @Transient
+    private Integer attendancePercentage;
+
 }

@@ -150,4 +150,8 @@ public class UserService {
         return userRepository.userCountByUserRole(userRole);
     }
 
+    public int getUserCountByCourseIdAndRole(Long courseId, String role) {
+        return userRepository.countByBatchList_batchCourse_IdAndRole(courseId, role);
+    }
+
 }

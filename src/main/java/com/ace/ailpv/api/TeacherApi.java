@@ -62,6 +62,9 @@ public class TeacherApi {
     @Autowired
     private BatchHasResourceService batchHasResourceService;
 
+    // @Autowired
+    // private ExamService examService;
+
     @PostMapping("/addTeachers")
     public void addTeachers(@RequestBody User[] teacherList) {
         Long batchId = Long.parseLong(teacherList[0].getBatchId());
@@ -173,5 +176,17 @@ public class TeacherApi {
             batchHasVideoService.addBatchHasVideo(batchHasVideo);
         }
     }
+
+    // @GetMapping("/getExamListByTeacherId")
+    // public List<Exam> getExamListByTeacherId() {
+    //     List<Exam> examList = examService.getExamListByTeacherId("tch001");
+    //     return examList;
+    // }
+
+    // @GetMapping("/getTeacherBatchListByTeacherIdAndCourseId/{teacherId}/{courseId}")
+    // public List<Batch> getTeacherBatchListByTeacherIdAndCourseId(@PathVariable("teacherId") String teacherId, @PathVariable("courseId") Long courseId) {
+    //     List<Batch> batchList = userService.getTeacherBatchListByTeacherIdAndCourseId(teacherId, courseId);
+    //     return batchList;
+    // }
 
 }

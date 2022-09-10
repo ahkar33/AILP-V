@@ -70,6 +70,8 @@
                                         </div>
                                         <input v-model="question.rightAnswer" class="form-control" required
                                             placeholder="Enter the right answer" />
+                                        <input v-model="question.mark" type="number" class="form-control mt-4 mb-4"
+                                            id="inputEmail4" required style="width: 100%;" placeholder="Enter Mark" />
                                         <div class="text-end mt-3">
                                             <button @click.prevent="removeQuestion(index)" type="button"
                                                 class="btn btn-danger fw-bold me-3" style="width: 40px;">-</button>
@@ -82,23 +84,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-4 shadow-sm">
-                            <div class="card-body p-4 fw-bold text-dark">
-                                <label for="inputEmail4" class="form-label fs-4 fw-bold">Full Mark</label>
+                        <!-- <div class="card mb-4 shadow-sm">
+                            <div class="card-body p-4 fw-bold text-dark"> -->
+                        <!-- <label for="inputEmail4" class="form-label fs-4 fw-bold">Full Mark</label>
                                 <div class=" d-flex flex-row-reverse input-group mb-3">
                                     <input v-model="fullMark" type="number" class="form-control mb-4" id="inputEmail4"
-                                        required style="width: 100%;" placeholder="Enter Full Mark" />
-                                    <button @click="createExam()" type="submit"
-                                        class="btn btn-primary rounded">Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                                        required style="width: 100%;" placeholder="Enter Full Mark" /> -->
+                        <button @click="createExam()" type="submit" class="btn btn-primary rounded">Submit</button>
+                        <!-- </div>
+                            </div> -->
                 </div>
-
+                </form>
             </div>
+
         </div>
-        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
 
     <div th:insert="/admin/admin-fragments :: footer" />
@@ -110,11 +111,11 @@
                     courseList: [],
                     course: '',
                     name: '',
-                    fullMark: '',
                     questionList: [
                         {
                             examQuestion: '',
                             rightAnswer: '',
+                            mark: '',
                             radioList: [
                                 {
                                     radioValue: ''
@@ -130,6 +131,7 @@
                     {
                         examQuestion: '',
                         rightAnswer: '',
+                        mark: '',
                         radioList: [
                             {
                                 radioValue: ''
@@ -176,7 +178,9 @@
 
                         if (
                             question.examQuestion.replace(/\s/g, "").length == 0 ||
-                            question.rightAnswer.replace(/\s/g, "").length == 0
+                            question.rightAnswer.replace(/\s/g, "").length == 0 ||
+                            question.mark.length == 0 
+
                         ) {
                             this.isEmpty = true;
                             Swal.fire(
@@ -187,8 +191,7 @@
                         }
                         else if (
                             this.course.replace(/\s/g, "").length == 0 ||
-                            this.name.replace(/\s/g, "").length == 0 ||
-                            this.fullMark.length == 0
+                            this.name.replace(/\s/g, "").length == 0
                         ) {
                             this.isEmpty = true;
                             Swal.fire(
@@ -200,10 +203,14 @@
                     })
 
                     if (!this.isEmpty) {
+                        let fullMark = 0;
+                        this.questionList.forEach(question => {
+                            fullMark = fullMark + question.mark; 
+                        });
                         let data = {
                             courseId: this.course,
                             name: this.name,
-                            fullMark: this.fullMark,
+                            fullMark: fullMark,
                             questionList: this.questionList
                         }
                         console.log(data);
