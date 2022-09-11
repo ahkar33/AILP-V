@@ -64,17 +64,22 @@ public class AdminApi {
         return data;
     }
 
-    // @GetMapping("/countUserByCourseIdAndRole/{courseId}/{role}")
-    // public int countUserByCourseId(@PathVariable("courseId") Long courseId, @PathVariable("role") String role) {
-    //     return userRepository.countByBatchList_batchCourse_IdAndRole(courseId, role);
-    // }
-
     @GetMapping("/getStudentCountByCourse")
     public Map<String, Integer> getStudentCountByCourse() {
         List<Course> courseList = courseService.getAllCourses();
         Map<String, Integer> data = new LinkedHashMap<>();
-        for(Course course : courseList) {
+        for (Course course : courseList) {
             data.put(course.getName(), userService.getUserCountByCourseIdAndRole(course.getId(), "ROLE_STUDENT"));
+        }
+        return data;
+    }
+
+    @GetMapping("/getStudentCountByBatch")
+    public Map<String, Integer> getStudentCountByBatch() {
+        List<Batch> batchList = batchService.getAllBatches();
+        Map<String, Integer> data = new LinkedHashMap<>();
+        for (Batch batch : batchList) {
+            data.put(batch.getName(), userService.getUserCountByBatchIdAndRole(batch.getId(), "ROLE_STUDENT"));
         }
         return data;
     }
