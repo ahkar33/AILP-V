@@ -1,10 +1,14 @@
 package com.ace.ailpv.ControllerTest;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -88,9 +92,8 @@ public class AdminControllerTest {
 
     @Test
     public void addCourseTestFail() throws Exception {
-        ResultActions rs = this.mockMvc.perform(post(apiPath + "/addCourse").flashAttr("course", new Course()));
+        ResultActions rs = this.mockMvc.perform(post(apiPath + "/addCourse"));
         rs.andExpect(status().is(302))
-          //      .andExpect(flash().attribute("msg", "course name already exists"))
                 .andExpect(redirectedUrl("/admin/course-table"));
     }
 
@@ -98,23 +101,23 @@ public class AdminControllerTest {
     @Test
     public void editCourseTest() throws Exception{
 
-        // long id = 1L;
+        long id = 1L;
 
-        // Course oldCourse = getCourse();
-        // Course editCourse = new Course();
-        // editCourse.setId(id);
-        // editCourse.setName("name");
-        // editCourse.setFee(2000.0);
-        // editCourse.setDescription("description");
-        // when(courseRepository.findById(id)).thenReturn(Optional.of(oldCourse));
-        // when(courseRepository.save(any(Course.class))).thenReturn(editCourse);
-        // this.mockMvc.perform(post(apiPath+"/editCourse")
-        // .contentType(MediaType.APPLICATION_JSON)
-        // .content(mapper.writeValueAsString(editCourse)))
-        // .andExpect(status().isOk())
-        // .andExpect(jsonPath("$.id").value(editCourse.getId()))
-        // .andExpect(jsonPath("$.name").value(editCourse.getName()))
-        // .andExpect(jsonPath("$.fee").value(editCourse.getFee()));
+        Course oldCourse = getCourse();
+        Course editCourse = new Course();
+        editCourse.setId(id);
+        editCourse.setName("name");
+        editCourse.setFee(2000.0);
+        editCourse.setDescription("description");
+        when(courseRepository.findById(id)).thenReturn(Optional.of(oldCourse));
+        when(courseRepository.save(any(Course.class))).thenReturn(editCourse);
+        // this.mockMvc.perform(post(apiPath+"/editCourse?multipart/form-data")
+        //         .param("id", "1L")
+        //         .param("name", "name")
+        //         .param("fee", "2000.0")
+        //         .param("desc", "description"))
+        //     .andExpect(status().is(302))
+        //     .andExpect(redirectedUrl("/admin/course-table"));
                 
     }
 
@@ -128,7 +131,7 @@ public class AdminControllerTest {
 
         this.mockMvc.perform(get(apiPath+"/editVideo/{id}", id))
                 .andExpect(status().isOk())
-                // .andExpect(model().attributeExists("videoList"))
+                .andExpect(model().attributeExists("videoList"))
                 .andExpect(model().attributeExists("course"))
                 .andExpect(view().name("/admin/ADM-VTB-14"));
     }
@@ -143,7 +146,7 @@ public class AdminControllerTest {
 
         this.mockMvc.perform(get(apiPath+"/editResource/{id}", id))
                 .andExpect(status().isOk())
-                //.andExpect(model().attributeExists("resourceList"))
+                .andExpect(model().attributeExists("resourceList"))
                 .andExpect(model().attributeExists("course"))
                 .andExpect(view().name("/admin/ADM-RTB-15"));
     }
@@ -161,9 +164,6 @@ public class AdminControllerTest {
 
         this.mockMvc.perform(get(apiPath+"/deleteVideo/{vidId}/{courseName}", 1L, "java"))
                 .andExpect(status().is(302))
-                //.andExpect(model().attributeExists("videoList"))
-                //.andExpect(model().attributeExists("course"))
-                //.andExpect(model().attributeExists("msg"))
                 .andExpect(redirectedUrl("/admin/editVideo/"+course.getId()));
     }
 
@@ -180,29 +180,37 @@ public class AdminControllerTest {
 
         this.mockMvc.perform(get(apiPath+"/deleteResource/{resourceId}/{courseName}", resourceId, courseName))
                 .andExpect(status().is(302))
-                //.andExpect(model().attributeExists("videoList"))
-                //.andExpect(model().attributeExists("course"))
-                //.andExpect(model().attributeExists("msg"))
                 .andExpect(redirectedUrl("/admin/editResource/"+course.getId()));
     }
 
     @Test
     public void uploadCourseVideoTest() throws Exception{
-
-        //String courseId = "1L";
         Long cid = 1L;
         Course course = getCourse();
         when(courseService.getCourseById(cid)).thenReturn(course);
         
-        //MockMultipartFile File = new MockMultipartFile("filename", "filename.mp4", "video/mp4", "some data as file text".getBytes());
-        // this.mockMvc.perform(post(apiPath+"/uploadCourseVideo"))
+        // final InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("file");
+        // final MockMultipartFile video = new MockMultipartFile("file", "filename.mp4", "video/mp4", inputStream);
+        // this.mockMvc.perform(multipart(apiPath+"/uploadCourseVideo?multipart/form-data")
+        //         .file(video)
+        //         .param("courseId", "1L"))
         //         .andExpect(status().is(302))
-        //         .andExpect(redirectedUrl("/admin/editVideo/"+courseId));
+        //         .andExpect(redirectedUrl("/admin/editVideo/"+course.getId()));
     }
 
     @Test
-    public void uploadCourseResourceTest(){
-
+    public void uploadCourseResourceTest() throws Exception{
+        Long cid = 1L;
+        Course course = getCourse();
+        when(courseService.getCourseById(cid)).thenReturn(course);
+        
+        // final InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("file");
+        // MockMultipartFile pdf = new MockMultipartFile("file", "filename.pdf", "application/pdf", inputStream);
+        // this.mockMvc.perform(multipart(apiPath+"/uploadCourseResource?multipart/form-data")
+        //         .file(pdf)
+        //         .param("courseId", "cid"))
+        //         .andExpect(status().is(302))
+        //         .andExpect(redirectedUrl("/admin/editResource/"+course.getId()));
     }
 
     @Test
@@ -250,7 +258,11 @@ public class AdminControllerTest {
         when(courseService.getCourseById(batch.getBatchCourse().getId())).thenReturn(course);
         batchService.addBatch(batch, course.getName());
 
-        // this.mockMvc.perform(post(apiPath+"/addBatch"))
+        // this.mockMvc.perform(post(apiPath+"/addBatch")
+        //         .param("name",batch.getName())
+        //         .param("start date", batch.getStartDate().toString())
+        //         .param("end date", batch.getEndDate().toString())
+        //         .flashAttr("batch", new Batch()))
         //         .andExpect(status().is(302))
         //         .andExpect(redirectedUrl("/admin/batch-table"));
     }
@@ -293,7 +305,11 @@ public class AdminControllerTest {
         when(batchService.getBatchById(id)).thenReturn(batch);
         batch.setIsActive(true);
         batchService.updateBatch(batch);
-        // this.mockMvc.perform(post(apiPath+"/editBatch"))
+        // this.mockMvc.perform(post(apiPath+"/editBatch")
+        //         .param("name", batch.getName())
+        //         .param("start date", batch.getStartDate().toString())
+        //         .param("end date", batch.getEndDate().toString())
+        //         .flashAttr("batch", new Batch()))
         //         .andExpect(status().is(302))
         //         .andExpect(redirectedUrl("/admin/batch-table"));
     }
@@ -410,15 +426,41 @@ public class AdminControllerTest {
 
     @Test
     public void changePasswordTest() throws Exception{
+        String uid = "adm001";
+        User user = getAdmin();
+        String pwd = "updatedPassword";
+        when(userService.getUserById(uid)).thenReturn(user);
+        userService.updatePasswordByUserId(pwd, uid);
+
+        this.mockMvc.perform(get(apiPath+"/changePassword/{userId}", uid))
+                .andExpect(status().is(302))
+                .andExpect(redirectedUrl("/admin/dashboard"));
+    }
+
+    @Test
+    public void changePasswordStudentTest() throws Exception{
         String uid = "stu001";
         User user = getUser();
         String pwd = "updatedPassword";
         when(userService.getUserById(uid)).thenReturn(user);
         userService.updatePasswordByUserId(pwd, uid);
 
-        // this.mockMvc.perform(get(apiPath+"/changePassword/{userId}", uid))
-        //         .andExpect(status().is(302))
-        //         .andExpect(redirectedUrl("/admin/dashboard"));
+        this.mockMvc.perform(get(apiPath+"/changePassword/{userId}", uid))
+                .andExpect(status().is(302))
+                .andExpect(redirectedUrl("/admin/student-table"));
+    }
+
+    @Test
+    public void changePasswordTeacherTest() throws Exception{
+        String uid = "tch001";
+        User user = getTeacher();
+        String pwd = "updatedPassword";
+        when(userService.getUserById(uid)).thenReturn(user);
+        userService.updatePasswordByUserId(pwd, uid);
+
+        this.mockMvc.perform(get(apiPath+"/changePassword/{userId}", uid))
+                .andExpect(status().is(302))
+                .andExpect(redirectedUrl("/admin/teacher-table"));
     }
 
     @Test
@@ -429,8 +471,42 @@ public class AdminControllerTest {
     }
 
     @Test
-    public void setupRegisterTest(){
+    public void setupRegisterTestOk() throws Exception{
+        this.mockMvc.perform(post(apiPath+"/register?multipart/form-data")
+                .param("id", "adm001")
+                .param("name", "admin")
+                .param("password", "admin")
+                .param("confirmPassword", "admin")
+                .param("pin", "1337"))
+                .andExpect(status().is(302))
+                .andExpect(redirectedUrl("/auth/login"));
         
+    }
+
+    @Test
+    public void setupRegisterTestFail() throws Exception {
+        ResultActions rs = this.mockMvc.perform(post(apiPath+"/register?multipart/form-data")
+                                    .param("id", "adm001")
+                                    .param("name", "admin")
+                                    .param("password", "admin")
+                                    .param("confirmPassword", "admin")
+                                    .param("pin", "9999"));
+        rs.andExpect(status().is(302))
+            .andExpect(flash().attribute("errorMsg", "Invalid Pin!"))
+            .andExpect(redirectedUrl("/admin/register"));
+    }
+
+    @Test
+    public void setupRegisterUnmatchPwdTest() throws Exception {
+        ResultActions rs = this.mockMvc.perform(post(apiPath+"/register?multipart/form-data")
+                                    .param("id", "adm001")
+                                    .param("name", "admin")
+                                    .param("password", "admin")
+                                    .param("confirmPassword", "ailpitb")
+                                    .param("pin", "1337"));
+        rs.andExpect(status().is(302))
+            .andExpect(flash().attribute("errorMsg", "Unmatch Password!"))
+            .andExpect(redirectedUrl("/admin/register"));
     }
 
 
@@ -496,6 +572,8 @@ public class AdminControllerTest {
         batch.setName("java batch 01");
         batch.setBatchCourse(getCourse());
         batch.setIsActive(false);
+        batch.setStartDate(LocalDate.of(2022, 9, 06));
+        batch.setEndDate(LocalDate.of(2022, 9, 22));
 
         return batch;
     }
@@ -509,10 +587,33 @@ public class AdminControllerTest {
         return batchList;
     }
 
+    private User getAdmin(){
+        User user = new User();
+        user.setId("adm001");
+        user.setName("student");
+        user.setPassword("password");
+        user.setRole("ROLE_ADMIN");
+        user.setProfile_pic("profile.png");
+        return user;
+    }
+
     private User getUser(){
         User user = new User();
         user.setId("sut001");
         user.setName("student");
+        user.setPassword("password");
+        user.setRole("ROLE_STUDENT");
+        user.setProfile_pic("profile.png");
+        return user;
+    }
+
+    private User getTeacher(){
+        User user = new User();
+        user.setId("tch001");
+        user.setName("teacher");
+        user.setPassword("password");
+        user.setRole("ROLE_TEACHER");
+        user.setProfile_pic("profile.png");
         return user;
     }
 
