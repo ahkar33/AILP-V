@@ -58,7 +58,7 @@
                             <div id="content" style="margin-top: -19px;background: #ffffff;margin-bottom: 80px;">
                                 <div class="row d-flex flex-wrap"
                                     style="padding-right: 10px;padding-left: 10px;margin-top: 38px;">
-                                    <span v-for="(question, index) in exam.questionList">
+                                    <span v-for="(question, index) in exam.questionList" :key="question.id">
                                         <h4>{{ question.examQuestion }}</h4>
                                         <span v-for="radio in question.radioList">
                                             <input class="ms-2" type="radio" v-model="studentAnswerList[index]"
