@@ -78,7 +78,6 @@ public class TeacherApi {
                 teacher.getBatchList().addAll(teacherBatchList);
                 teacher.setPassword(passwordEncoder.encode(secretConfigProperties.getDefaultTchPassword()));
                 teacher.setRole("ROLE_TEACHER");
-                teacher.setIsMute(false);
                 teacher.setEnabled(true);
                 teacher.setProfile_pic("profile.png");
                 userService.addUser(teacher);
@@ -86,7 +85,6 @@ public class TeacherApi {
                 teacher.getBatchList().add(batch);
                 teacher.setPassword(passwordEncoder.encode(secretConfigProperties.getDefaultTchPassword()));
                 teacher.setRole("ROLE_TEACHER");
-                teacher.setIsMute(false);
                 teacher.setEnabled(true);
                 teacher.setProfile_pic("profile.png");
                 userService.addUser(teacher);

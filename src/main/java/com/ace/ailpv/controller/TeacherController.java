@@ -113,7 +113,7 @@ public class TeacherController {
         List<Batch> batchList = userService.getTeacherBatchListById(teacherInfo.getId());
         batchList = batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
         model.addAttribute("batchList", batchList);
-        return "/teacher/TCH-CWB-06";
+        return "/teacher/TCH-PBC-05";
     }
 
     @GetMapping("/modifyAttendance")
@@ -191,7 +191,11 @@ public class TeacherController {
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
         model.addAttribute("assignment", new Assignment());
         model.addAttribute("batchList", batchList);
-        model.addAttribute("assignmentList", assignmentService.getAllAssignments());
+        List<Assignment> assignmentList = new ArrayList<>();
+        for(Batch batch : batchList) {
+            assignmentList.addAll(assignmentService.getAllAssignmentByBatchId(batch.getId()));
+        }
+        model.addAttribute("assignmentList", assignmentList);
         return "/teacher/TCH-AST-00";
     }
 

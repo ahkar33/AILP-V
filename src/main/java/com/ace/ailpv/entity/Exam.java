@@ -52,4 +52,8 @@ public class Exam {
     @JsonIgnore
     private List<BatchHasExam> batchHasExamList = new ArrayList<>();
 
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "sheExam")
+    @JsonIgnore
+    private List<StudentHasExam> studentHasExamList = new ArrayList<>();
+
 }

@@ -346,7 +346,6 @@ public class AdminController {
     @PostMapping("/editStudent")
     public String editStudent(@ModelAttribute("student") User student) {
         User resStudent = userService.getUserById(student.getId());
-        student.setIsMute(resStudent.getIsMute());
         student.setEnabled(resStudent.getEnabled());
         student.setPassword(resStudent.getPassword());
         student.setProfile_pic(resStudent.getProfile_pic());
@@ -391,7 +390,6 @@ public class AdminController {
     @PostMapping("/editTeacher")
     public String editTeacher(@ModelAttribute("teacher") User teacher) {
         User resTeacher = userService.getUserById(teacher.getId());
-        teacher.setIsMute(resTeacher.getIsMute());
         teacher.setEnabled(resTeacher.getEnabled());
         teacher.setPassword(resTeacher.getPassword());
         teacher.setProfile_pic(resTeacher.getProfile_pic());
@@ -433,7 +431,6 @@ public class AdminController {
                 user.setId(id);
                 user.setName(name);
                 user.setPassword(passwordEncoder.encode(password));
-                user.setIsMute(false);
                 user.setEnabled(true);
                 user.setRole("ROLE_ADMIN");
                 user.setProfile_pic("profile.png");

@@ -56,10 +56,10 @@ public class StudentApi {
             student.setPassword(passwordEncoder.encode(secretConfigProperties.getDefaultStdPassword()));
             student.setRole("ROLE_STUDENT");
             student.setEnabled(true);
-            student.setIsMute(false);
             student.setProfile_pic("profile.png");
             userService.addUser(student);
         }
+
     }
 
     @GetMapping("/getStudentListByBatchId/{batchId}")
