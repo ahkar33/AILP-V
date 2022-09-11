@@ -31,6 +31,6 @@ public class StudentHasExam {
 	@JoinColumn(name = "exam_id", referencedColumnName = "id")
     private Exam sheExam;
 
-    private Double score;
+    private Long score;
 
 }

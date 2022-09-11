@@ -56,7 +56,7 @@ public class ExamApi {
 
     @PostMapping("/addStudentHasExam")
     public void addStudentHasExam(@Param("studentId") String studentId, @Param("examId") Long examId,
-            @Param("score") Double score) {
+            @Param("score") Long score) {
         User student = userService.getUserById(studentId);
         Exam exam = examService.getExamById(examId);
         StudentHasExam studentHasExam = new StudentHasExam();
