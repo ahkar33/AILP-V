@@ -76,7 +76,7 @@ public class ExamServiceTest {
         Exam exam=new Exam();
         exam.setId(1L);
         exam.setName("first term");
-        exam.setFullMark(100.00);
+        exam.setFullMark(100L);
         exam.setQuestionList(new ArrayList<>());
         exam.setExamCourse(new Course());
         return exam;
@@ -87,13 +87,13 @@ public class ExamServiceTest {
         Exam exam=new Exam();
         exam.setId(1L);
         exam.setName("first term");
-        exam.setFullMark(100.00);
+        exam.setFullMark(100L);
         exam.setQuestionList(new ArrayList<>());
         exam.setExamCourse(new Course());
         Exam exam1=new Exam();
         exam1.setId(1L);
         exam1.setName("first term");
-        exam1.setFullMark(100.00);
+        exam1.setFullMark(100L);
         exam1.setQuestionList(new ArrayList<>());
         exam1.setExamCourse(new Course());
         examList.add(exam);

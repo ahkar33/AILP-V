@@ -35,7 +35,7 @@ public class Exam {
     private Long id;
 
     private String name;
-    private Double fullMark;
+    private Long fullMark;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "exam_id", referencedColumnName = "id")

@@ -46,4 +46,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     int countByBatchList_batchCourse_IdAndRole(Long id, String role);
 
+    int countByBatchList_IdAndRole(Long id, String role);
+
 }

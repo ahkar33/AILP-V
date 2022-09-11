@@ -143,7 +143,7 @@ public class CourseServiceTest {
         exam.setId(1L);
         exam.setName("mid term");
         exam.setQuestionList(new ArrayList<>());
-        exam.setFullMark(100.00);
+        exam.setFullMark(100L);
         exam.setExamCourse(new Course());
         examList.add(exam);
         return examList;
