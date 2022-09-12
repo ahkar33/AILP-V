@@ -11,164 +11,158 @@
     }
 </style>
 
-<body id="page-top" style="background: rgb(255,255,255);">
+<body id="page-top" style="background-color: #E4E6E9 ">
 
     <div th:insert="/student/student-fragments :: pc-navbar" />
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
     <div class="container" style="margin-bottom: 77px;">
 
-        <div id="wrapper">
-            <div class="flex-column" id="content-wrapper" style="background: rgb(255,255,255);">
-                <div id="content" style="margin-top: -19px;background: #ffffff;">
-                    <div class="row gx-1 d-flex flex-wrap" style="margin-top: 38px;">
+        <div class="row gx-1 d-flex flex-wrap" style="margin-top: 20px;">
 
-                        <!-- card start -->
-                        <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4"
-                            style="padding-left: 5px;padding-right: 5px;">
-                            <a class="text-decoration-none text-dark" th:href="@{/student/getVideos/AILP}">
-                                <div class="card shadow-sm">
-                                    <div class="card-body">
-                                        <div class="row mb-1">
-                                            <div
-                                                class="col text-truncate d-flex d-lg-flex flex-column justify-content-lg-start align-items-lg-start">
-                                                <h4 class="fw-bold"
-                                                    style="font-family: Arimo, sans-serif;font-size: 23.6px;color: #0027b3;">
-                                                    Course Videos
-                                                </h4>
-                                            </div>
-                                            <div
-                                                class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                                                    width="1em" height="1em" fill="currentColor"
-                                                    class="d-flex d-md-flex justify-content-md-center align-items-md-center"
-                                                    style="font-size: 22px;color: #0027b3;">
-                                                    <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
-                                                    <path
-                                                        d="M512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM176 168V344C176 352.7 180.7 360.7 188.3 364.9C195.8 369.2 205.1 369 212.5 364.5L356.5 276.5C363.6 272.1 368 264.4 368 256C368 247.6 363.6 239.9 356.5 235.5L212.5 147.5C205.1 142.1 195.8 142.8 188.3 147.1C180.7 151.3 176 159.3 176 168V168z">
-                                                    </path>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <p class="text-secondary card-text">
-                                            Learn new things by watching video lectures
-                                            and doing homework.
-                                        </p>
-                                    </div>
+            <!-- card start -->
+            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" style="padding-left: 5px;padding-right: 5px;">
+                <a class="text-decoration-none text-dark" th:href="@{/student/getVideos/AILP}">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="row mb-1">
+                                <div
+                                    class="col text-truncate d-flex d-lg-flex flex-column justify-content-lg-start align-items-lg-start">
+                                    <h4 class="fw-bold"
+                                        style="font-family: Arimo, sans-serif;font-size: 23.6px;color: #0027b3;">
+                                        Course Videos
+                                    </h4>
                                 </div>
-                            </a>
-                        </div>
-                        <!-- card end -->
-
-                        <!-- card start -->
-                        <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" id="resource"
-                            style="padding-left: 5px;padding-right: 5px;">
-                            <a class="text-decoration-none text-dark" th:href="@{/student/getResources}">
-                                <div class="card shadow-sm">
-                                    <div class="card-body">
-                                        <div class="row mb-1">
-                                            <div
-                                                class="col d-flex d-lg-flex flex-column justify-content-lg-start align-items-lg-start">
-                                                <h4 class="fw-bold"
-                                                    style="font-family: Arimo, sans-serif;font-size: 23.6px;color: #b50000;">
-                                                    Resources
-                                                </h4>
-                                            </div>
-                                            <div
-                                                class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512"
-                                                    width="1em" height="1em" fill="currentColor"
-                                                    class="d-flex d-md-flex justify-content-md-center align-items-md-center"
-                                                    style="font-size: 22px;color: #b50000;">
-                                                    <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
-                                                    <path
-                                                        d="M256 0v128h128L256 0zM224 128L224 0H48C21.49 0 0 21.49 0 48v416C0 490.5 21.49 512 48 512h288c26.51 0 48-21.49 48-48V160h-127.1C238.3 160 224 145.7 224 128zM96 32h64v32H96V32zM96 96h64v32H96V96zM96 160h64v32H96V160zM128.3 415.1c-40.56 0-70.76-36.45-62.83-75.45L96 224h64l30.94 116.9C198.7 379.7 168.5 415.1 128.3 415.1zM144 336h-32C103.2 336 96 343.2 96 352s7.164 16 16 16h32C152.8 368 160 360.8 160 352S152.8 336 144 336z">
-                                                    </path>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <p class="text-secondary card-text">
-                                            Get the files from the online video lessons
-                                            and do the exercises.
-                                        </p>
-                                    </div>
+                                <div
+                                    class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em"
+                                        height="1em" fill="currentColor"
+                                        class="d-flex d-md-flex justify-content-md-center align-items-md-center"
+                                        style="font-size: 22px;color: #0027b3;">
+                                        <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                                        <path
+                                            d="M512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM176 168V344C176 352.7 180.7 360.7 188.3 364.9C195.8 369.2 205.1 369 212.5 364.5L356.5 276.5C363.6 272.1 368 264.4 368 256C368 247.6 363.6 239.9 356.5 235.5L212.5 147.5C205.1 142.1 195.8 142.8 188.3 147.1C180.7 151.3 176 159.3 176 168V168z">
+                                        </path>
+                                    </svg>
                                 </div>
-                            </a>
+                            </div>
+                            <p class="text-secondary card-text">
+                                Learn new things by watching video lectures
+                                and doing homework.
+                            </p>
                         </div>
-                        <!-- card end -->
+                    </div>
+                </a>
+            </div>
+            <!-- card end -->
 
-                        <!-- card start -->
-                        <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4"
-                            style="padding-left: 5px;padding-right: 5px;">
-                            <a class="text-decoration-none text-dark" th:href="@{/student/studentAssignment}">
-                                <div class="card shadow-sm">
-                                    <div class="card-body">
-                                        <div class="row mb-1">
-                                            <div
-                                                class="col d-flex d-lg-flex flex-column justify-content-lg-start align-items-lg-start">
-                                                <h4 class="fw-bold"
-                                                    style="font-family: Arimo, sans-serif;font-size: 23.6px;color: #00842d;">
-                                                    Assignment
-                                                </h4>
-                                            </div>
-                                            <div
-                                                class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
-                                                <i class="material-icons d-flex d-md-flex justify-content-md-center align-items-md-center"
-                                                    style="font-size: 25px;color: #00842d;">assignment</i>
-                                            </div>
-                                        </div>
-                                        <p class="text-secondary card-text">
-                                            Doing assignment on a regular basis will
-                                            help you improve your skills.
-                                        </p>
-                                    </div>
+            <!-- card start -->
+            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" id="resource"
+                style="padding-left: 5px;padding-right: 5px;">
+                <a class="text-decoration-none text-dark" th:href="@{/student/getResources}">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="row mb-1">
+                                <div
+                                    class="col d-flex d-lg-flex flex-column justify-content-lg-start align-items-lg-start">
+                                    <h4 class="fw-bold"
+                                        style="font-family: Arimo, sans-serif;font-size: 23.6px;color: #b50000;">
+                                        Resources
+                                    </h4>
                                 </div>
-                            </a>
-                        </div>
-                        <!-- card end -->
-
-                        <!-- card start -->
-                        <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" id="chat"
-                            style="padding-left: 5px;padding-right: 5px;">
-                            <input id="batchId" type="hidden" th:value="${batchId}">
-                            <input id="userId" type="hidden" th:value="${userId}">
-                            <a class="text-decoration-none text-dark" th:href="@{/student/student-public-chat}">
-                                <div class="card shadow-sm">
-                                    <div class="card-body">
-                                        <div class="row mb-1">
-                                            <div
-                                                class="col d-flex d-lg-flex flex-column justify-content-lg-start align-items-lg-start">
-                                                <h4 class="fw-bold"
-                                                    style="font-family: Arimo, sans-serif;font-size: 23.6px;color: #00518c;">
-                                                    Group Chat
-                                                </h4>
-                                            </div>
-                                            <div
-                                                class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
-                                                <i class="icon ion-chatboxes d-flex d-md-flex justify-content-md-center align-items-md-center"
-                                                    style="font-size: 26px;color: #00518c;"></i>
-                                                <span v-cloak v-if="unreadMessagesCount != 0"
-                                                    class="badge bg-danger rounded-pill"
-                                                    style="top: 11px; position: absolute; right: 11px; font-size: 10px;">
-                                                    <span v-if="unreadMessagesCount <= 99">
-                                                        {{ unreadMessagesCount }}
-                                                    </span>
-                                                    <span v-else> 99+ </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <p class="text-secondary card-text">
-                                            Talk to your classmates about the concepts
-                                            you don't understand.
-                                        </p>
-                                    </div>
+                                <div
+                                    class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em"
+                                        height="1em" fill="currentColor"
+                                        class="d-flex d-md-flex justify-content-md-center align-items-md-center"
+                                        style="font-size: 22px;color: #b50000;">
+                                        <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                                        <path
+                                            d="M256 0v128h128L256 0zM224 128L224 0H48C21.49 0 0 21.49 0 48v416C0 490.5 21.49 512 48 512h288c26.51 0 48-21.49 48-48V160h-127.1C238.3 160 224 145.7 224 128zM96 32h64v32H96V32zM96 96h64v32H96V96zM96 160h64v32H96V160zM128.3 415.1c-40.56 0-70.76-36.45-62.83-75.45L96 224h64l30.94 116.9C198.7 379.7 168.5 415.1 128.3 415.1zM144 336h-32C103.2 336 96 343.2 96 352s7.164 16 16 16h32C152.8 368 160 360.8 160 352S152.8 336 144 336z">
+                                        </path>
+                                    </svg>
                                 </div>
-                            </a>
+                            </div>
+                            <p class="text-secondary card-text">
+                                Get the files from the online video lessons
+                                and do the exercises.
+                            </p>
                         </div>
-                        <!-- card end -->
+                    </div>
+                </a>
+            </div>
+            <!-- card end -->
 
-                        <!-- card start -->
-                        <!-- <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4"
+            <!-- card start -->
+            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" style="padding-left: 5px;padding-right: 5px;">
+                <a class="text-decoration-none text-dark" th:href="@{/student/studentAssignment}">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="row mb-1">
+                                <div
+                                    class="col d-flex d-lg-flex flex-column justify-content-lg-start align-items-lg-start">
+                                    <h4 class="fw-bold"
+                                        style="font-family: Arimo, sans-serif;font-size: 23.6px;color: #00842d;">
+                                        Assignment
+                                    </h4>
+                                </div>
+                                <div
+                                    class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
+                                    <i class="material-icons d-flex d-md-flex justify-content-md-center align-items-md-center"
+                                        style="font-size: 25px;color: #00842d;">assignment</i>
+                                </div>
+                            </div>
+                            <p class="text-secondary card-text">
+                                Doing assignment on a regular basis will
+                                help you improve your skills.
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- card end -->
+
+            <!-- card start -->
+            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" id="chat"
+                style="padding-left: 5px;padding-right: 5px;">
+                <input id="batchId" type="hidden" th:value="${batchId}">
+                <input id="userId" type="hidden" th:value="${userId}">
+                <a class="text-decoration-none text-dark" th:href="@{/student/student-public-chat}">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="row mb-1">
+                                <div
+                                    class="col d-flex d-lg-flex flex-column justify-content-lg-start align-items-lg-start">
+                                    <h4 class="fw-bold"
+                                        style="font-family: Arimo, sans-serif;font-size: 23.6px;color: #00518c;">
+                                        Group Chat
+                                    </h4>
+                                </div>
+                                <div
+                                    class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
+                                    <i class="icon ion-chatboxes d-flex d-md-flex justify-content-md-center align-items-md-center"
+                                        style="font-size: 26px;color: #00518c;"></i>
+                                    <span v-cloak v-if="unreadMessagesCount != 0" class="badge bg-danger rounded-pill"
+                                        style="top: 11px; position: absolute; right: 11px; font-size: 10px;">
+                                        <span v-if="unreadMessagesCount <= 99">
+                                            {{ unreadMessagesCount }}
+                                        </span>
+                                        <span v-else> 99+ </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="text-secondary card-text">
+                                Talk to your classmates about the concepts
+                                you don't understand.
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- card end -->
+
+            <!-- card start -->
+            <!-- <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4"
                             style="padding-left: 5px;padding-right: 5px;">
                             <a class="text-decoration-none text-dark" href="student-private-chat.html">
                                 <div class="card shadow-sm">
@@ -194,72 +188,70 @@
                                 </div>
                             </a>
                         </div> -->
-                        <!-- card end -->
+            <!-- card end -->
 
-                        <!-- card start -->
-                        <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4"
-                            style="padding-left: 5px;padding-right: 5px;">
-                            <a class="text-decoration-none text-dark" th:href="@{/student/getExamList}">
-                                <div class="card shadow-sm">
-                                    <div class="card-body">
-                                        <div class="row mb-1">
-                                            <div
-                                                class="col d-flex d-lg-flex flex-column justify-content-lg-start align-items-lg-start">
-                                                <h4 class="fw-bold"
-                                                    style="font-family: Arimo, sans-serif;font-size: 23.6px;color: #7400ab;">
-                                                    Exam
-                                                </h4>
-                                            </div>
-                                            <div
-                                                class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
-                                                <i class="material-icons d-flex d-md-flex justify-content-md-center align-items-md-center"
-                                                    style="font-size: 25px;color: #7400ab;">
-                                                    library_books
-                                                </i>
-                                            </div>
-                                        </div>
-                                        <p class="text-secondary card-text">
-                                            Take the test to see how good you are and
-                                            how much you know.
-                                        </p>
-                                    </div>
+            <!-- card start -->
+            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" style="padding-left: 5px;padding-right: 5px;">
+                <a class="text-decoration-none text-dark" th:href="@{/student/getExamList}">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="row mb-1">
+                                <div
+                                    class="col d-flex d-lg-flex flex-column justify-content-lg-start align-items-lg-start">
+                                    <h4 class="fw-bold"
+                                        style="font-family: Arimo, sans-serif;font-size: 23.6px;color: #7400ab;">
+                                        Exam
+                                    </h4>
                                 </div>
-                            </a>
-                        </div>
-                        <!-- card end -->
-
-                        <!-- card start -->
-                        <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4"
-                            style="padding-left: 5px;padding-right: 5px;">
-                            <a class="text-decoration-none text-dark" th:href="@{/student/studentGradeBook}">
-                                <div class="card shadow-sm">
-                                    <div class="card-body">
-                                        <div class="row mb-1">
-                                            <div
-                                                class="col d-flex d-lg-flex flex-column justify-content-lg-start align-items-lg-start">
-                                                <h4 class="fw-bold"
-                                                    style="font-family: Arimo, sans-serif;font-size: 23.6px;color: #762727;">
-                                                    Score
-                                                </h4>
-                                            </div>
-                                            <div
-                                                class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
-                                                <i class="icon ion-clipboard d-flex d-md-flex justify-content-md-center align-items-md-center"
-                                                    style="font-size: 25px;color: #762727;"></i>
-                                            </div>
-                                        </div>
-                                        <p class="text-secondary card-text">
-                                            Examine the outcome of the finished
-                                            assignments and exams.
-                                        </p>
-                                    </div>
+                                <div
+                                    class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
+                                    <i class="material-icons d-flex d-md-flex justify-content-md-center align-items-md-center"
+                                        style="font-size: 25px;color: #7400ab;">
+                                        library_books
+                                    </i>
                                 </div>
-                            </a>
+                            </div>
+                            <p class="text-secondary card-text">
+                                Take the test to see how good you are and
+                                how much you know.
+                            </p>
                         </div>
-                        <!-- card end -->
+                    </div>
+                </a>
+            </div>
+            <!-- card end -->
 
-                        <!-- card start -->
-                        <!-- <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4"
+            <!-- card start -->
+            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" style="padding-left: 5px;padding-right: 5px;">
+                <a class="text-decoration-none text-dark" th:href="@{/student/studentGradeBook}">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="row mb-1">
+                                <div
+                                    class="col d-flex d-lg-flex flex-column justify-content-lg-start align-items-lg-start">
+                                    <h4 class="fw-bold"
+                                        style="font-family: Arimo, sans-serif;font-size: 23.6px;color: #762727;">
+                                        Score
+                                    </h4>
+                                </div>
+                                <div
+                                    class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
+                                    <i class="icon ion-clipboard d-flex d-md-flex justify-content-md-center align-items-md-center"
+                                        style="font-size: 25px;color: #762727;"></i>
+                                </div>
+                            </div>
+                            <p class="text-secondary card-text">
+                                Examine the outcome of the finished
+                                assignments and exams.
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- card end -->
+
+            <!-- card start -->
+            <!-- <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4"
                             style="padding-left: 5px;padding-right: 5px;">
                             <a class="text-decoration-none text-dark" href="classmate.html">
                                 <div class="card shadow-sm">
@@ -286,11 +278,8 @@
                                 </div>
                             </a>
                         </div> -->
-                        <!-- card end -->
+            <!-- card end -->
 
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 

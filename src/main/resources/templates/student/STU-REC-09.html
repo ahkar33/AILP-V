@@ -5,105 +5,63 @@
     <title>Resource</title>
 </head>
 
-<body id="page-top">
+<body id="page-top" style="background-color: #E4E6E9 ">
 
     <div th:insert="/student/student-fragments :: pc-navbar" />
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-    <div class="container mt-5">
-
-        <h1 class="h2">Resources</h1>
-        <div id="wrapper">
-            <div class="flex-column" id="content-wrapper" style="background: rgb(255,255,255);">
-                <div id="content" style="margin-top: -19px;background: #ffffff;margin-bottom: 80px;">
-                    <div class="row d-flex flex-wrap" style="padding-right: 10px;padding-left: 10px;margin-top: 38px;">
-
-                        <a th:href="@{ ${'/courses/' + batchResource?.resource?.resourceCourse?.name + '/resource/' + batchResource?.resource?.name} }"
-                            target="_blank"
-                            th:each="batchResource : ${batchHasResourceList}" class="col-sm-6 col-md-6 col-lg-4 mb-5 text-decoration-none">
-                            <p class="mb-1">[[${batchResource?.schedule.toString.substring(0, 10)}]]</p>
-                            <!-- [[${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 )}]] -->
-                            <div class="card shadow-sm border-start-primary py-2"
-                                style="height: 60px;padding-left: 0px;padding-right: 0px;margin-bottom: -14px;">
-                                <div class="card-body d-flex justify-content-center"
-                                    style="padding-bottom: 0px;padding-top: 0px;">
-                                    <div class="row d-flex flex-row-reverse align-items-center no-gutters">
-
-                                        <div th:if="${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 ) == 'zip'}"
-                                            class="col-auto">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                                                fill="currentColor" viewBox="0 0 16 16"
-                                                class="bi bi-file-zip-fill fa-2x"
-                                                style="color: #c8730f;font-size: 30px;margin-top: 4px;">
-                                                <path
-                                                    d="M8.5 9.438V8.5h-1v.938a1 1 0 0 1-.03.243l-.4 1.598.93.62.93-.62-.4-1.598a1 1 0 0 1-.03-.243z">
-                                                </path>
-                                                <path
-                                                    d="M4 0h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm2.5 8.5v.938l-.4 1.599a1 1 0 0 0 .416 1.074l.93.62a1 1 0 0 0 1.109 0l.93-.62a1 1 0 0 0 .415-1.074l-.4-1.599V8.5a1 1 0 0 0-1-1h-1a1 1 0 0 0-1 1zm1-5.5h-1v1h1v1h-1v1h1v1H9V6H8V5h1V4H8V3h1V2H8V1H6.5v1h1v1z">
-                                                </path>
-                                            </svg>
-                                        </div>
-
-                                        <div th:if="${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 ) == 'lsx'}"
-                                            class="col-auto">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                                                fill="currentColor" viewBox="0 0 16 16"
-                                                class="bi bi-file-earmark-excel-fill fa-2x"
-                                                style="color: #038153;font-size: 30px;margin-top: 4px;">
-                                                <path
-                                                    d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM5.884 6.68 8 9.219l2.116-2.54a.5.5 0 1 1 .768.641L8.651 10l2.233 2.68a.5.5 0 0 1-.768.64L8 10.781l-2.116 2.54a.5.5 0 0 1-.768-.641L7.349 10 5.116 7.32a.5.5 0 1 1 .768-.64z">
-                                                </path>
-                                            </svg>
-                                        </div>
-
-                                        <div th:if="${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 ) == 'rar'}"
-                                            class="col-auto">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em"
-                                                height="1em" fill="currentColor" class="fa-2x"
-                                                style="color: var(--bs-orange);font-size: 30px;margin-top: 4px;">
-                                                <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
-                                                <path
-                                                    d="M256 0v128h128L256 0zM224 128L224 0H48C21.49 0 0 21.49 0 48v416C0 490.5 21.49 512 48 512h288c26.51 0 48-21.49 48-48V160h-127.1C238.3 160 224 145.7 224 128zM279.6 308.1C284.2 353.5 248.5 392 204 392H160v40C160 440.8 152.8 448 144 448H128c-8.836 0-16-7.164-16-16V256c0-8.836 7.164-16 16-16h71.51C239.3 240 275.6 268.5 279.6 308.1zM160 344h44c15.44 0 28-12.56 28-28S219.4 288 204 288H160V344z">
-                                                </path>
-                                            </svg>
-                                        </div>
-
-                                        <div th:if="${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 ) == 'pdf'}"
-                                            class="col-auto">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                                                fill="currentColor" viewBox="0 0 16 16"
-                                                class="bi bi-file-pdf-fill fa-2x"
-                                                style="color: #d30000;font-size: 30px;margin-top: 4px;">
-                                                <path
-                                                    d="M5.523 10.424c.14-.082.293-.162.459-.238a7.878 7.878 0 0 1-.45.606c-.28.337-.498.516-.635.572a.266.266 0 0 1-.035.012.282.282 0 0 1-.026-.044c-.056-.11-.054-.216.04-.36.106-.165.319-.354.647-.548zm2.455-1.647c-.119.025-.237.05-.356.078a21.035 21.035 0 0 0 .5-1.05 11.96 11.96 0 0 0 .51.858c-.217.032-.436.07-.654.114zm2.525.939a3.888 3.888 0 0 1-.435-.41c.228.005.434.022.612.054.317.057.466.147.518.209a.095.095 0 0 1 .026.064.436.436 0 0 1-.06.2.307.307 0 0 1-.094.124.107.107 0 0 1-.069.015c-.09-.003-.258-.066-.498-.256zM8.278 4.97c-.04.244-.108.524-.2.829a4.86 4.86 0 0 1-.089-.346c-.076-.353-.087-.63-.046-.822.038-.177.11-.248.196-.283a.517.517 0 0 1 .145-.04c.013.03.028.092.032.198.005.122-.007.277-.038.465z">
-                                                </path>
-                                                <path fill-rule="evenodd"
-                                                    d="M4 0h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm.165 11.668c.09.18.23.343.438.419.207.075.412.04.58-.03.318-.13.635-.436.926-.786.333-.401.683-.927 1.021-1.51a11.64 11.64 0 0 1 1.997-.406c.3.383.61.713.91.95.28.22.603.403.934.417a.856.856 0 0 0 .51-.138c.155-.101.27-.247.354-.416.09-.181.145-.37.138-.563a.844.844 0 0 0-.2-.518c-.226-.27-.596-.4-.96-.465a5.76 5.76 0 0 0-1.335-.05 10.954 10.954 0 0 1-.98-1.686c.25-.66.437-1.284.52-1.794.036-.218.055-.426.048-.614a1.238 1.238 0 0 0-.127-.538.7.7 0 0 0-.477-.365c-.202-.043-.41 0-.601.077-.377.15-.576.47-.651.823-.073.34-.04.736.046 1.136.088.406.238.848.43 1.295a19.707 19.707 0 0 1-1.062 2.227 7.662 7.662 0 0 0-1.482.645c-.37.22-.699.48-.897.787-.21.326-.275.714-.08 1.103z">
-                                                </path>
-                                            </svg>
-                                        </div>
-
-                                        <div class="col text-nowrap text-truncate me-2">
-                                            <div
-                                                class="text-truncate text-uppercase text-primary d-flex d-lg-flex justify-content-lg-center align-items-lg-center fw-bold text-xs mb-1">
-                                                <p class="text-nowrap text-truncate"
-                                                    style="font-size: 13.2px;width: 178.5px;margin-bottom: 0px;min-width: 223.469px;">
-                                                    [[${batchResource?.resource?.name}]]
-                                                </p>
-                                            </div>
-                                            <div class="text-dark fw-bold h5 mb-0" style="margin-top: -6px;">
-                                                <span style="font-size: 14px;"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+    <div class="container mt-4" style="margin-bottom: 77px;">
+        <h1 class="fs-2 mb-3"
+                        style=" color: rgb(78, 78, 78); font-family: 'Roboto', sans-serif;">
+                        Resources</h1>
+        <div class="row">
+                <a th:href="@{ ${'/courses/' + batchResource?.resource?.resourceCourse?.name + '/resource/' + batchResource?.resource?.name} }" class=" col-6 col-lg-3 col-md-6 col-xl-2 text-decoration-none"
+                    target="_blank" th:each="batchResource : ${batchHasResourceList}">
+                    <div class="bg-light file-man-box pb-0 pe-0 ps-0 pt-3">
+                        <!-- Resource icons start-->
+                        <div class="file-img-box">
+                            <div
+                                th:if="${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 ) == 'zip'}">
+                                <img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/zip.svg" alt="icon"/>
                             </div>
-                        </a>
 
+                             <div
+                                th:if="${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 ) == 'lsx'}">
+                                <img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/xls.svg" alt="icon"/>
+                            </div>
+
+                            <div
+                                th:if="${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 ) == 'rar'}">
+                                <img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/zip.svg" alt="icon"/>
+                            </div>
+
+                            <div
+                                th:if="${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 ) == 'sql'}">
+                                <img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/sql.svg" alt="icon"/>
+                            </div>
+
+                            <div
+                                th:if="${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 ) == 'pdf'}">
+                                <img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/pdf.svg" alt="icon"/>
+                            </div>
+                        </div>
+
+                        <!-- Resource icons end-->
+                        
+                        <div class="file-man-title me-3 ms-3 text-secondary">
+                            <h5 class="mb-0 text-overflow">[[${batchResource?.resource?.name}]]</h5>
+                            <p class="mb-0"><small>568.8 kb</small></p>
+                        </div>
+
+                        <!-- [[${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 )}]] -->
+                        <p class="bg-opacity-50 bg-primary border-primary mb-0 me-n1 mt-1 pb-1 pt-1 rounded-bottom text-center"
+                            style="font-family: 'Arimo', sans-serif; color: #0012a6;">
+                            [[${batchResource?.schedule.toString.substring(0, 10)}]]</p>
                     </div>
-                </div>
-            </div>
+
+                </a>
+
         </div>
     </div>
 
@@ -113,8 +71,76 @@
         </a>
     </div>
 
+    <style>
+        .card-box {
+            padding: 20px;
+            border-radius: 3px;
+            margin-bottom: 30px;
+            background-color: #fff;
+        }
 
+        .file-man-box {
+            padding: 20px;
+            border: 1px solid #e3eaef;
+            border-radius: 5px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .file-man-box .file-close {
+            color: #f1556c;
+            position: absolute;
+            line-height: 24px;
+            font-size: 24px;
+            right: 10px;
+            top: 10px;
+            visibility: hidden;
+        }
+
+        .file-man-box .file-img-box {
+            line-height: 100px;
+            text-align: center;
+            padding-bottom: 8px;
+        }
+
+        .file-man-box .file-img-box img {
+            height: 64px;
+        }
+
+        .file-man-box .file-download {
+            font-size: 32px;
+            color: #98a6ad;
+            position: absolute;
+            right: 10px;
+        }
+
+        .file-man-box .file-download:hover {
+            color: #313a46;
+        }
+
+        .file-man-box:hover {
+            -webkit-box-shadow: 0 0 24px 0 rgba(0, 0, 0, .06), 0 1px 0 0 rgba(0, 0, 0, .02);
+            box-shadow: 0 0 24px 0 rgba(0, 0, 0, .06), 0 1px 0 0 rgba(0, 0, 0, .02);
+        }
+
+        .file-man-box:hover .file-close {
+            visibility: visible;
+        }
+
+        .text-overflow {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: block;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        h5 {
+            font-size: 15px;
+        }
+    </style>
     <div th:insert="/student/student-fragments :: footer" />
+
 
 </body>
 
