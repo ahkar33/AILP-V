@@ -128,7 +128,10 @@ public class TeacherController {
     public String setupAttendanceTable(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
-        List<UserSchedule> userScheduleList = userScheduleService.getAllUserSchedules();
+        List<UserSchedule> userScheduleList = new ArrayList<>();
+        for (Batch batch : batchList) {
+            userScheduleList.addAll(userScheduleService.getUserScheduleListByBatchIdOrScheduleId(batch.getId()));
+        }
         model.addAttribute("userScheduleList", userScheduleList);
         model.addAttribute("batchList", batchList);
         model.addAttribute("data", new UserSchedule());
