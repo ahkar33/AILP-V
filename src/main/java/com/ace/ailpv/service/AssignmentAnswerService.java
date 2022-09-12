@@ -1,4 +1,4 @@
-package com.ace.ailpv.service;
+  package com.ace.ailpv.service;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,6 +25,10 @@ public class AssignmentAnswerService {
 
     public AssignmentAnswer getAssignmentAnswerById(Long id) {
         return assignmentAnswerRepository.findById(id).orElse(null);
+    }
+
+    public void saveAssignmentAnswer(AssignmentAnswer answer) {
+        assignmentAnswerRepository.save(answer);
     }
 
     public void addAssignmentAnswer(AssignmentAnswer assignmentAnswer) throws IOException {
@@ -62,6 +66,7 @@ public class AssignmentAnswerService {
     public List<AssignmentAnswer> getAssignmentAnswerListByAssignmentId(Long id) {
         return assignmentAnswerRepository.findByAssignment_Id(id);
     }
+
 
     public List<AssignmentAnswer> getAssignmentAnswerListByStudentId(String id) {
         return assignmentAnswerRepository.findByAnswerStudent_IdOrderByAssignment_Id(id);

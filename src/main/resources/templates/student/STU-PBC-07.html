@@ -66,7 +66,7 @@
                             <!-- <p class="mb-4 mt-4 text-center" style="font-size: 13px;">Today 10:45AM</p> -->
                             <ul class="m-b-0">
                                 <span v-cloak v-for="(message, index) in messageList" :key="index">
-                                    <span v-if="userName == message.messageUser.name">
+                                    <span v-if="userId == message.messageUser.id">
                                         <li
                                             class="align-items-start clearfix d-flex flex-column flex-nowrap g-0 mb-3 text-start">
                                             <div class="d-flex justify-content-end mw-100 row w-100"

@@ -55,7 +55,6 @@ public class Batch {
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "batch")
     @JsonIgnore
     private List<BatchHasResource> batchHasResourceList = new ArrayList<>();
-       
 
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "bhvBatch")
     @JsonIgnore
@@ -67,5 +66,13 @@ public class Batch {
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "assignmentBatch")
     @JsonIgnore
     private List<Assignment> batchAssignmentList = new ArrayList<>();
+
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "bheBatch")
+    @JsonIgnore
+    private List<BatchHasExam> batchHasExamList = new ArrayList<>();
+
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "muteBatch")
+    @JsonIgnore
+    private List<Mute> muteList = new ArrayList<>();
 
 }

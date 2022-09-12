@@ -18,7 +18,7 @@
                 <div class="container-fluid" id="app">
                     <h1 class="fs-3 mb-4 text-start"
                         style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
-                        Upload Video 
+                        Upload Video
                     </h1>
                     <div class="card-header d-flex d-lg-flex flex-lg-wrap flex-wrap py-3">
                         <form>
@@ -55,16 +55,54 @@
                                 <thead>
                                     <th>Course</th>
                                     <th>Resource</th>
+                                    <th>Video</th>
                                     <th>Action</th>
                                 </thead>
                                 <tbody>
                                     <tr v-for="(video, index) in videoList" :key="index">
                                         <td>{{ video.videoCourse.name}} </td>
                                         <td>{{ video.name }}</td>
+                                        <td>
+
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                :data-bs-target=`#staticBackdrop${video.id}`>
+                                                Preview
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" :id=`staticBackdrop${video.id}` data-bs-backdrop="static"
+                                                data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">
+                                                                {{video.name.substring(0, video.name.length - 4)}}
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body d-flex justify-content-center">
+                                                            <video width="400" height="350" controls
+                                                                controlsList="nodownload">
+                                                                <source
+                                                                    :src=`/courses/${video.videoCourse.name}/video/${video.name}`
+                                                                    type="video/mp4" />
+                                                            </video>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
                                         <td class="form-check">
-                                            <input type="checkbox" :value="video.id" 
-                                            v-model="videoId"
-                                            class="form-check-input border-dark" >
+                                            <input type="checkbox" :value="video.id" v-model="videoId"
+                                                class="form-check-input border-dark">
                                         </td>
                                     </tr>
                                 </tbody>

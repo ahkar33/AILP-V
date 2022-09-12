@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/teacher/teacher-fragments :: teacher_head">
+    <title>Upload Video</title>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <!-- this is where side bar is -->
+        <div th:insert="/teacher/teacher-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="app">
+                <!-- this is where nav bar is -->
+                <div th:insert="/teacher/teacher-fragments :: navbar" />
+
+                <!-- <input id="teacherId" type="hidden" th:value="${teacherId}">
+                <input id="examId" type="hidden" th:value="${examId}">
+                <input id="courseId" type="hidden" th:value="${courseId}"> -->
+
+                <div class="container-fluid pb-5 pe-5 ps-5 pt-2" style="max-width: 45rem;" id="app">
+                    <h1 class="fs-3 mb-4 text-start"
+                        style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
+                        Upload Exam
+                    </h1>
+
+                    <div class="card mb-4 shadow-sm">
+                        <form th:action="@{/teacher/uploadExam}" th:object="${data}" method="post">
+                            <div class="card-body p-4 text-dark" style="font-family: 'Roboto', sans-serif;">
+
+                                <label class="fs-6">Exam</label>
+                                <div class="input-group mb-3">
+                                    <input class="form-control mb-2" th:value="${exam?.name}" readonly />
+                                    <input type="hidden" th:value="${exam?.id}" id="bheExam" name="bheExam">
+                                    <input id="isSuccess" type="hidden" th:value="${isSuccess}">
+                                </div>
+                                <label class="fs-6">Batch</label>
+                                <div class="input-group mb-3">
+                                    <select th:field="*{bheBatch}" class="form-select mb-3"
+                                        aria-label="Default select example" required>
+                                        <span th:each="batch : ${batchList}">
+                                            <option th:value="${batch.id}">[[${batch.name}]]</option>
+                                        </span>
+                                    </select>
+                                </div>
+
+                                <label class="fs-6">Start DateTime</label>
+                                <div class="input-group mb-3">
+                                    <input type="datetime-local" class="form-control mb-2"
+                                        placeholder="Exam Start DateTime" th:field="*{startDateTime}" required="true" />
+                                </div>
+                                <label class="fs-6">End DateTime</label>
+                                <div class="input-group mb-3">
+                                    <input type="datetime-local" class="form-control mb-2"
+                                        placeholder="Exam End DateTime" th:field="*{endDateTime}" required="true" />
+                                </div>
+
+                                <div class="d-flex flex-wrap justify-content-between">
+                                    <button type="submit"
+                                        class="bg-gradient btn btn-primary float-end shadow-sm text-nowrap"
+                                        style="width: 120px; height: 37px;">
+                                        Upload
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <div th:insert="/teacher/teacher-fragments :: footer" />
+    <script>
+        let isSuccess = document.getElementById("isSuccess").value;
+        if (isSuccess) {
+            Swal.fire(
+                'Successfully Uploaded!',
+                '',
+                'success'
+            )
+        }
+    </script>
+</body>
+
+</html>

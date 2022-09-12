@@ -44,4 +44,8 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query(value = "select count(id) from user where role=?1",nativeQuery = true)
     int userCountByUserRole(String userRole);
 
+    int countByBatchList_batchCourse_IdAndRole(Long id, String role);
+
+    int countByBatchList_IdAndRole(Long id, String role);
+
 }

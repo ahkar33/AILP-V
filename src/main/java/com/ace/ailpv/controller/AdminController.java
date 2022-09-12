@@ -27,6 +27,7 @@ import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
 import com.ace.ailpv.service.FileService;
 import com.ace.ailpv.service.ResourceService;
+import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
 import com.ace.ailpv.service.VideoService;
 
@@ -63,6 +64,9 @@ public class AdminController {
 
     @Autowired
     private ResourceService resourceService;
+
+    @Autowired
+    private UserScheduleService userScheduleService;
 
     String path = "src\\main\\resources\\static\\courses\\";
 
@@ -309,7 +313,12 @@ public class AdminController {
 
     @GetMapping("/student-table")
     public String setupStudentTable(ModelMap model) {
-        model.addAttribute("studentList", userService.getAllStudents());
+        List<User> studentList = userService.getAllStudents();
+        for (User student : studentList) {
+            Float attendancePercentage = userScheduleService.avgAttendaceOfStudent(student.getId()).floatValue();
+            student.setAttendancePercentage(Math.round(attendancePercentage));
+        }
+        model.addAttribute("studentList", studentList);
         return "/admin/ADM-STB-08";
     }
 
@@ -337,7 +346,6 @@ public class AdminController {
     @PostMapping("/editStudent")
     public String editStudent(@ModelAttribute("student") User student) {
         User resStudent = userService.getUserById(student.getId());
-        student.setIsMute(resStudent.getIsMute());
         student.setEnabled(resStudent.getEnabled());
         student.setPassword(resStudent.getPassword());
         student.setProfile_pic(resStudent.getProfile_pic());
@@ -382,7 +390,6 @@ public class AdminController {
     @PostMapping("/editTeacher")
     public String editTeacher(@ModelAttribute("teacher") User teacher) {
         User resTeacher = userService.getUserById(teacher.getId());
-        teacher.setIsMute(resTeacher.getIsMute());
         teacher.setEnabled(resTeacher.getEnabled());
         teacher.setPassword(resTeacher.getPassword());
         teacher.setProfile_pic(resTeacher.getProfile_pic());
@@ -424,7 +431,6 @@ public class AdminController {
                 user.setId(id);
                 user.setName(name);
                 user.setPassword(passwordEncoder.encode(password));
-                user.setIsMute(false);
                 user.setEnabled(true);
                 user.setRole("ROLE_ADMIN");
                 user.setProfile_pic("profile.png");

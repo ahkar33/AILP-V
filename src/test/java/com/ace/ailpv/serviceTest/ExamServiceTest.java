@@ -66,7 +66,7 @@ public class ExamServiceTest {
     public void getExamListByBatchIdTest(){
         List<Exam>examList=getExamList();
         when(examRepository.findByExamCourse_Id(1L)).thenReturn(examList);
-        List<Exam>list=examService.getExamListByBatchId(1L);
+        List<Exam>list=examService.getExamListByCourseId(1L);
         assertEquals(examList.size(), list.size());
         verify(examRepository,times(1)).findByExamCourse_Id(1L);
     }
@@ -76,7 +76,7 @@ public class ExamServiceTest {
         Exam exam=new Exam();
         exam.setId(1L);
         exam.setName("first term");
-        exam.setFullMark(100.00);
+        exam.setFullMark(100L);
         exam.setQuestionList(new ArrayList<>());
         exam.setExamCourse(new Course());
         return exam;
@@ -87,13 +87,13 @@ public class ExamServiceTest {
         Exam exam=new Exam();
         exam.setId(1L);
         exam.setName("first term");
-        exam.setFullMark(100.00);
+        exam.setFullMark(100L);
         exam.setQuestionList(new ArrayList<>());
         exam.setExamCourse(new Course());
         Exam exam1=new Exam();
         exam1.setId(1L);
         exam1.setName("first term");
-        exam1.setFullMark(100.00);
+        exam1.setFullMark(100L);
         exam1.setQuestionList(new ArrayList<>());
         exam1.setExamCourse(new Course());
         examList.add(exam);

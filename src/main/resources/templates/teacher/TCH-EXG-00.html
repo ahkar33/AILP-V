@@ -2,13 +2,13 @@
 <html>
 
 <head th:insert="/teacher/teacher-fragments :: teacher_head">
-    <title>Student Table</title>
+    <title>Exam Grade</title>
 </head>
 
 <style>
-    table td:empty::before {
-        content: "Missing";
-        color: red
+    .badge-soft-danger {
+        color: #cf1919 !important;
+        background-color: rgba(245, 110, 110, 0.226);
     }
 </style>
 
@@ -25,12 +25,12 @@
                 <div class="container-fluid">
                     <h1 class="fs-3 mb-4 text-start"
                         style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
-                        Student Table
+                        Exam Grade
                     </h1>
                     <div class="card shadow">
 
                         <div class="card-header py-3">
-                            <form th:object="${data}" th:action="@{/teacher/searchStudentsByBatch}" method="post"
+                            <form th:object="${data}" th:action="@{/teacher/searchStudentExamsByBatch}" method="post"
                                 class="d-flex d-lg-flex flex-lg-wrap flex-wrap">
                                 <div class="me-3">
                                     <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
@@ -54,67 +54,73 @@
                         </div>
 
                         <div class="card-body text-dark">
+
                             <!-- where I have to write table -->
-                            <table id="dataTable">
+                            <table id="dataTable" class="display p-2">
                                 <thead class="table">
                                     <tr class="text-dark">
                                         <th>Student Name</th>
-                                        <th th:each="assignment : ${assignmentList}">
-                                            [[${assignment?.name}]]
+                                        <th th:each="bhe : ${bheList}">
+                                            [[${bhe?.bheExam?.name}]]
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr th:each="student, iter : ${studentList}">
                                         <td>[[${student?.name}]]</td>
-                                        <span th:if="${assignmentList.size == student.userAnswerList.size}">
-                                            <span th:each="answer : ${student.userAnswerList}">
+                                        <span th:if="${bheList.size == student?.studentHasExamList.size}">
+                                            <span th:each="answer, iter : ${student.studentHasExamList}">
                                                 <td>
-                                                    <span class="text-success"
-                                                        th:if="${answer?.assignemntAnswerResult != null}">
-                                                        [[${answer?.assignemntAnswerResult?.mark}]] Marks
+                                                    <span th:if="${answer?.score == bheList[iter.index]?.bheExam?.fullMark}"
+                                                        style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;">
+                                                        [[${answer?.score}]] /
+                                                        [[${bheList[iter.index].bheExam?.fullMark}]] Marks
                                                     </span>
-                                                    <span class="text-warning"
-                                                        th:if="${answer?.assignemntAnswerResult == null}">
-                                                        Not yet graded
+                                                    <span th:if="${answer?.score != bheList[iter.index]?.bheExam?.fullMark and answer?.score > 0}"
+                                                        style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;">
+                                                        [[${answer?.score}]] /
+                                                        [[${bheList[iter.index].bheExam?.fullMark}]] Marks
                                                     </span>
-                                                    <span th:if="${answer?.isLate == true}">
-                                                        (Turned in late)
+                                                    <span th:if="${answer?.score == 0}"
+                                                        style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;">
+                                                        [[${answer?.score}]] /
+                                                        [[${bheList[iter.index].bheExam?.fullMark}]] Marks
                                                     </span>
                                                 </td>
                                             </span>
                                         </span>
-
-                                        <span th:each="aId : ${student.answerAssignmentIdList}">
-                                            [[${aId}]]
-                                        </span>
-
-                                        <span th:if="${assignmentList.size != student.userAnswerList.size}">
-                                            <span th:each="a : ${assignmentList}">
+                                        <span
+                                            th:if="${bheList.size != student.studentHasExamList.size and student.studentHasExamList.size > 0}">
+                                            <span th:each="bhe : ${bheList}">
                                                 <td>
-                                                    <span th:each="answer : ${student.userAnswerList}">
-                                                        <span th:if="${a.id == answer?.assignment?.id}">
-                                                            <span class="text-success"
-                                                                th:if="${answer?.assignemntAnswerResult != null}">
-                                                                [[${answer?.assignemntAnswerResult?.mark}]] Marks
+                                                    <span th:each="answer : ${student.studentHasExamList}">
+                                                        <span th:if="${bhe.bheExam.id == answer?.sheExam?.id}">
+                                                            <span th:if="${answer?.score == bhe.bheExam.fullMark}"
+                                                                style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;">
+                                                                [[${answer?.score}]] / [[${bhe?.bheExam?.fullMark}]]
+                                                                Marks
                                                             </span>
-                                                            <span class="text-warning"
-                                                                th:if="${answer?.assignemntAnswerResult == null}">
-                                                                Not yet graded
+                                                            <span
+                                                                th:if="${answer?.score != bhe.bheExam.fullMark and answer?.score > 0}"
+                                                                style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;">
+                                                                [[${answer?.score}]] / [[${bhe?.bheExam?.fullMark}]]
+                                                                Marks
                                                             </span>
-                                                            <span th:if="${answer?.isLate == true}">
-                                                                (Turned in late)
+                                                            <span th:if="${answer?.score == 0}"
+                                                                style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;">
+                                                                [[${answer?.score}]] / [[${bhe?.bheExam?.fullMark}]]
+                                                                Marks
                                                             </span>
                                                         </span>
-                                                        <span th:if="${a.id != answer?.assignment?.id}">
-                                                            
+                                                        <span th:if="${bhe.bheExam.id != answer?.sheExam?.id}">
+
                                                         </span>
                                                     </span>
                                                 </td>
                                             </span>
                                         </span>
-                                        <span th:if="${student.userAnswerList.size == 0}">
-                                            <span th:each="a : ${assignmentList}">
+                                        <span th:if="${student.studentHasExamList.size == 0}">
+                                            <span th:each="bhe : ${bheList}">
                                                 <td></td>
                                             </span>
                                         </span>
@@ -137,8 +143,10 @@
         const elements = document.getElementsByTagName('td');
         Array.from(elements).forEach((element, index) => {
             if (element.innerText == '') {
-                element.innerHTML = '<b>Missing</b>'
-                element.classList.add('text-danger');
+                element.innerHTML = 'Missing'
+                element.style.color = '#cf0000';
+                element.style.fontWeight = 800;
+                element.style.fontFamily = 'Roboto';
             }
         });
         $(document).ready(function () {

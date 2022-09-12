@@ -72,14 +72,14 @@
                         <div class="card-body text-dark pt-4">
 
                             <!-- where I have to write table -->
-                            <table id="dataTable">
+                            <table id="dataTable" class="display p-2">
                                 <thead class="table">
                                     <tr>
                                         <th>Student Id</th>
                                         <th>Student Name</th>
                                         <th>Batch</th>
+                                        <th>Attendance</th>
                                         <th>Action</th>
-                                        <th>Info</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -89,7 +89,14 @@
                                         <td th:each="batch : ${student.batchList}">
                                             [[${batch.name}]]
                                         </td>
-
+                                        <td>
+                                            <span th:if="${student?.attendancePercentage >= 75}" class="text-success fw-bold">
+                                                [[${student?.attendancePercentage}]] %
+                                            </span>
+                                            <span th:if="${student?.attendancePercentage < 75}" class="text-danger fw-bold">
+                                                [[${student?.attendancePercentage}]] %
+                                            </span>
+                                        </td>
                                         <td>
                                             <a th:href="@{/admin/editStudent/} + ${student?.id}"
                                                 class="btn btn-primary me-1 bg-gradient">
@@ -100,14 +107,6 @@
                                                 th:attr="onclick=|handleDelete('${student.id}')|">
                                                 <i class="fa-trash-alt fas"></i>
                                             </a>
-                                        </td>
-                                        <td class="flex-lg-nowrap flex-nowrap">
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-warning bg-gradient"
-                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-                                                Detail
-                                            </button>
-
                                         </td>
                                     </tr>
 

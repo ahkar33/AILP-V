@@ -109,7 +109,7 @@ public class CourseServiceTest {
         List<Batch>batchList=getBatchList();
         List<Exam>examList=getExamList();
         when(batchService.getBatchesByCourseId(1L)).thenReturn(batchList);
-        when(examService.getExamListByBatchId(1L)).thenReturn(examList);
+        when(examService.getExamListByCourseId(1L)).thenReturn(examList);
         courseService.deleteCourseById(1L, "java");
         verify(courseRepository,times(1)).deleteById(1L);
     }
@@ -143,7 +143,7 @@ public class CourseServiceTest {
         exam.setId(1L);
         exam.setName("mid term");
         exam.setQuestionList(new ArrayList<>());
-        exam.setFullMark(100.00);
+        exam.setFullMark(100L);
         exam.setExamCourse(new Course());
         examList.add(exam);
         return examList;
