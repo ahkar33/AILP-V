@@ -96,23 +96,25 @@ const app = Vue.createApp({
                 .catch(error => console.log(error));
         },
         handleSubmit() {
-            let rightAnswerList = [];
-            this.exam.questionList.forEach(question => {
-                rightAnswerList = [...rightAnswerList, [question.rightAnswer, question.mark]];
-            });
-            for (let i = 0; i < rightAnswerList.length; i++) {
-                if (rightAnswerList[i][0] == this.studentAnswerList[i]) {
-                    this.studentScore = this.studentScore + rightAnswerList[i][1];
+            if (this.studentAnswerList.length > 0) {
+                let rightAnswerList = [];
+                this.exam.questionList.forEach(question => {
+                    rightAnswerList = [...rightAnswerList, [question.rightAnswer, question.mark]];
+                });
+                for (let i = 0; i < rightAnswerList.length; i++) {
+                    if (rightAnswerList[i][0] == this.studentAnswerList[i]) {
+                        this.studentScore = this.studentScore + rightAnswerList[i][1];
+                    }
                 }
+                axios.post(`http://localhost:8080/api/exam/addStudentHasExam`, null, {
+                    params: {
+                        studentId: this.studentId,
+                        examId: this.examId,
+                        score: this.studentScore
+                    }
+                });
+                this.isSubmitted = true;
             }
-            axios.post(`http://localhost:8080/api/exam/addStudentHasExam`, null, {
-                params: {
-                    studentId: this.studentId,
-                    examId: this.examId,
-                    score: this.studentScore
-                }
-            });
-            this.isSubmitted = true;
         },
         getStudentHasExam() {
             axios
