@@ -279,8 +279,14 @@ public class AdminControllerTest {
     }
 
     @Test
-    public void disableBatchTest(){
+    public void disableBatchTest() throws Exception{
+        Long id = 1L;
+        Batch batch = getBatch();
+        when(batchService.getBatchById(id)).thenReturn(batch);
 
+        this.mockMvc.perform(get(apiPath+"/toggleDisableBatch/{id}", 1L))
+                .andExpect(status().is(302))
+                .andExpect(redirectedUrl("/admin/batch-table"));
     }
 
     @Test
