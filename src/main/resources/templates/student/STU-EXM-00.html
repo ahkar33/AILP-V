@@ -66,7 +66,12 @@
                                         </span>
                                     </span>
                                     <span class="mt-2">
-                                        <button @click="handleSubmit()" class="btn btn-primary">
+                                        <button v-if="studentAnswerList.length > 0" @click="handleSubmit()"
+                                            class="btn btn-primary">
+                                            Submit
+                                        </button>
+                                        <button v-if="studentAnswerList.length == 0" @click="handleSubmit()"
+                                            class="btn btn-primary disabled">
                                             Submit
                                         </button>
                                     </span>
@@ -80,7 +85,7 @@
                 </span>
             </span>
         </span>
-        
+
     </div>
 
     <div th:insert="/student/student-fragments :: footer" />

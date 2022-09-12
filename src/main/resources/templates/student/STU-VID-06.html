@@ -178,7 +178,10 @@
                             <div v-if="isClickInput" class="text-end mb-0">
                                 <button @click.prevent="handleCancelInput()" type="button"
                                     class="btn btn-light mb-0">Cancel</button>
-                                <button @click.prevent="sendComment()" type="submit" class="btn btn-primary mb-0">
+                                <button v-if="commentText.trim().length <= 0" @click.prevent="sendComment()" type="submit" class="btn btn-primary mb-0 disabled">
+                                    Comment
+                                </button>
+                                <button v-else type="submit" class="btn btn-primary mb-0">
                                     Comment
                                 </button>
                             </div>
@@ -258,7 +261,11 @@
                                                     <div class="mb-0 text-end">
                                                         <button type="button" @click.prevent="handleCancel(index)"
                                                             class="btn btn-light btn-sm mb-0">Cancel</button>
-                                                        <button @click.prevent="sendReply(comment.id, index)"
+                                                        <button v-if="comment.replyText.trim().length <= 0" @click.prevent="sendReply(comment.id, index)"
+                                                            type="submit" class="btn btn-primary btn-sm mb-0 disabled">
+                                                            Reply
+                                                        </button>
+                                                        <button v-else @click.prevent="sendReply(comment.id, index)"
                                                             type="submit" class="btn btn-primary btn-sm mb-0">
                                                             Reply
                                                         </button>
