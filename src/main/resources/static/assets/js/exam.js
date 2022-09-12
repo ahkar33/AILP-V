@@ -129,6 +129,17 @@ const app = Vue.createApp({
                 .catch(error => console.log(error));
         }
     },
+    // watch: {
+    //     studentAnswerList: {
+    //         handler: function (newList, oldList) {
+    //             console.log("hi");
+    //             if(newList.length == 0) {
+    //                 console.log("zero");
+    //             }
+    //         },
+    //         deep: true,
+    //     }
+    // },
     mounted() {
         this.studentId = document.getElementById('studentId').value;
         this.bheId = document.getElementById('bheId').value;
