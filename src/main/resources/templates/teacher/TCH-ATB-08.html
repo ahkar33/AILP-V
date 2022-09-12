@@ -22,34 +22,45 @@
                         style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
                         Attendance Table</h1>
                     <div class="card shadow text-dark">
-                        <div class="card-header py-3">
-                            <form th:action="@{/teacher/searchUserScheduleList}" th:object="${data}" method="post" 
-                            class="d-flex d-lg-flex flex-lg-wrap flex-wrap">
-                                <div class="me-3">
-                                    <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
-                                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                            <label for="exampleInputEmail1" class="form-label">Date</label>
-                                            <input th:field="*{date}" type="date" class="form-control" />
+                        <div class="card-header py-3 d-flex justify-content-between">
+                            <span>
+                                <form th:action="@{/teacher/searchUserScheduleList}" th:object="${data}" method="post"
+                                    class="d-flex d-lg-flex flex-lg-wrap flex-wrap">
+                                    <div class="me-3">
+                                        <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                            <div id="dataTable_length" class="dataTables_length"
+                                                aria-controls="dataTable">
+                                                <label for="exampleInputEmail1" class="form-label">Date</label>
+                                                <input th:field="*{date}" type="date" class="form-control" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="me-3">
-                                    <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
-                                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                            <label class="form-label">Batch</label>
-                                            <select th:field="*{user.batchList}" class="form-select" aria-label="Default select example">
-                                                <option th:each="batch : ${batchList}" th:value="${batch?.id}">
-                                                    [[${batch?.name}]]
-                                                </option>
-                                            </select>
+                                    <div class="me-3">
+                                        <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                            <div id="dataTable_length" class="dataTables_length"
+                                                aria-controls="dataTable">
+                                                <label class="form-label">Batch</label>
+                                                <select th:field="*{user.batchList}" class="form-select"
+                                                    aria-label="Default select example">
+                                                    <option th:each="batch : ${batchList}" th:value="${batch?.id}">
+                                                        [[${batch?.name}]]
+                                                    </option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div style="margin-top: 2.2rem;">
-                                    <button class="btn btn-primary">Search</button>
-                                </div>
-                            </form>
+                                    <div style="margin-top: 2.2rem;">
+                                        <button class="btn btn-primary">Search</button>
+                                    </div>
+                                </form>
+                            </span>
+                            <span style="margin-top: 2.3rem">
+                                <a th:href="@{/teacher/modifyAttendance}" class="btn btn-primary">
+                                    Create
+                                </a>
+                            </span>
                         </div>
+
 
                         <div class="card-body">
 
@@ -99,24 +110,6 @@
     <div th:insert="/teacher/teacher-fragments :: footer" />
 
     <script>
-
-
-        const app = Vue.createApp({
-            data() {
-                return {
-                }
-            },
-            methods: {
-            },
-            watch: {
-            },
-            mounted() {
-
-            }
-        })
-        app.mount('#app');
-
-
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });

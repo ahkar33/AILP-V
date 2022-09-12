@@ -1,6 +1,7 @@
 package com.ace.ailpv.controller;
 
 import java.io.IOException;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -128,7 +129,10 @@ public class TeacherController {
     public String setupAttendanceTable(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
-        List<UserSchedule> userScheduleList = userScheduleService.getAllUserSchedules();
+        List<UserSchedule> userScheduleList = new ArrayList<>();
+        for (Batch batch : batchList) {
+            userScheduleList.addAll(userScheduleService.getUserScheduleListByBatchIdOrScheduleId(batch.getId()));
+        }
         model.addAttribute("userScheduleList", userScheduleList);
         model.addAttribute("batchList", batchList);
         model.addAttribute("data", new UserSchedule());
@@ -289,11 +293,25 @@ public class TeacherController {
         Long examId = batchHasExam.getBheExam().getId();
         Long batchId = batchHasExam.getBheBatch().getId();
         BatchHasExam bhe = batchHasExamService.getBatchHasExamByExamIdAndBatchId(examId, batchId);
+        Long startTime = batchHasExam.getStartDateTime().toEpochSecond(ZoneOffset.UTC);
+        Long endTime = batchHasExam.getEndDateTime().toEpochSecond(ZoneOffset.UTC);
+        Long totalTime = endTime - startTime;
+        Long hour = totalTime / 3600;
+        Long hourMin = (totalTime % 3600) / 60;
+        Long min = totalTime / 60;
+        String totalTimeStr = "";
+        if (hour == 0) {
+            totalTimeStr = min + "min";
+        } else {
+            totalTimeStr = hour + "hr " + hourMin + "min";
+        }
         if (bhe != null) {
             bhe.setStartDateTime(batchHasExam.getStartDateTime());
             bhe.setEndDateTime(batchHasExam.getEndDateTime());
+            bhe.setTotalTime(totalTimeStr);
             batchHasExamService.addBatchHasExam(bhe);
         } else {
+            batchHasExam.setTotalTime(totalTimeStr);
             batchHasExamService.addBatchHasExam(batchHasExam);
         }
         redirectAttrs.addFlashAttribute("isSuccess", true);
