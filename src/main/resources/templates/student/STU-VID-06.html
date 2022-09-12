@@ -181,7 +181,7 @@
                                 <button v-if="commentText.trim().length <= 0" @click.prevent="sendComment()" type="submit" class="btn btn-primary mb-0 disabled">
                                     Comment
                                 </button>
-                                <button v-else type="submit" class="btn btn-primary mb-0">
+                                <button v-else @click.prevent="sendComment()" type="submit" class="btn btn-primary mb-0">
                                     Comment
                                 </button>
                             </div>
