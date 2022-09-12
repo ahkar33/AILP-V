@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ace.ailpv.entity.UserSchedule;
-import com.ace.ailpv.repository.ScheduleRepository;
 import com.ace.ailpv.repository.UserScheduleRepository;
 
 @Service
@@ -17,10 +16,6 @@ public class UserScheduleService {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private ScheduleRepository scheduleRepository;
-
 
     public void addUserSchedule(UserSchedule userSchedule) {
         userScheduleRepository.save(userSchedule);
@@ -56,19 +51,14 @@ public class UserScheduleService {
 
     public Float avgAttendaceOfBatch(Long batchId) {
         Float totalPresentOfBatch = getPresentByBatchId(batchId).floatValue();
-        int  totalStudent = userService.getUserCountByUserRole("ROLE_STUDENT");
-        Long totalDate = scheduleRepository.countDate();
-
-        return (totalPresentOfBatch / (totalDate * totalStudent)) * 100;
+        int totalStudent = userService.getUserCountByBatchIdAndRole(batchId, "ROLE_STUDENT");
+        return (totalPresentOfBatch / totalStudent) * 100;
     }
 
     public Float avgAttendaceOfStudent(String studentId) {
         float totalPresentOfStudent = getPresentByStudentId(studentId).floatValue();
-        
-        Long totalDate = scheduleRepository.countDate();
-        
-
-        return (totalPresentOfStudent / totalDate)  * 100;
+        Long totalDate = userScheduleRepository.countTotalDateStudentId(studentId);
+        return (totalPresentOfStudent / totalDate) * 100;
     }
 
 }

@@ -39,50 +39,65 @@ const colorListTwo = [
     'rgba(116,52,17,0.4)'
 ];
 
-let studentCourse = new Chart(chartOne, {
-    type: 'bar', // bar, horizontalBar, pie ...
-    data: {
-        labels: ["Basic Java", "Web Java", "React", "OJT", "Angular"],
-        datasets: [{
-            label: 'Attendance',
-            data: [20, 23, 32, 15, 20], // number of news per reporter
-            backgroundColor: [...colorListTwo],
-            // backgroundColor: 'lightblue',
-            borderWidth: 1, // boder thickness of the bar
-            borderColor: '#777',
-            hoverBorderWidth: 2,
-            hoverBorderColor: 'black'
-        }],
-    },
-    options: {
-        plugins: {
-            title: {
-                display: true,
-                text: '',
-                font: {
-                    size: 25
-                }
-            },
-            legend: {
-                // display: false, // hide label
-                position: 'right', // move label to right side of chart
-            },
-            tooltips: {
-                enabled: false
-            }
-        },
-        layout: {
-            padding: {
-                left: 50,
-                right: 0,
-                bottom: 0,
-                top: 0
-            }
-        },
-    }
-});
+// -----------------------------------------------------------------------------------------------------------------
 
-let totalMember = new Chart(chartTwo, {
+let attendanceBatchList = [];
+let attendancePercentList = [];
+
+axios.get('http://localhost:8080/api/admin/getBatchAttendance')
+    .then(res => {
+        attendanceBatchList = Object.keys(res.data);
+        attendancePercentList = Object.values(res.data);
+    })
+    .then(() => {
+        let batchAttendance = new Chart(chartOne, {
+            type: 'bar', // bar, horizontalBar, pie ...
+            data: {
+                labels: attendanceBatchList,
+                datasets: [{
+                    label: 'Attendance Percentage',
+                    data: attendancePercentList, 
+                    backgroundColor: [...colorListTwo],
+                    // backgroundColor: 'lightblue',
+                    borderWidth: 1, // boder thickness of the bar
+                    borderColor: '#777',
+                    hoverBorderWidth: 2,
+                    hoverBorderColor: 'black'
+                }],
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '',
+                        font: {
+                            size: 25
+                        }
+                    },
+                    legend: {
+                        // display: false, // hide label
+                        position: 'right', // move label to right side of chart
+                    },
+                    tooltips: {
+                        enabled: false
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
+            }
+        });
+    })
+    .catch(error => console.log(error.message));
+
+// -----------------------------------------------------------------------------------------------------------------
+
+let totalStudents = new Chart(chartTwo, {
     type: 'doughnut', // bar, horizontalBar, pie ...
     data: {
         labels: ["Java Batch 01", "Java Batch 02", " Java Batch 03"],
