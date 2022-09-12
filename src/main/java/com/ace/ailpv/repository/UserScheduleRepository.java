@@ -41,5 +41,18 @@ public interface UserScheduleRepository extends JpaRepository<UserSchedule, Long
     )
     Long countPresentByStudentId(String studentId);
 
+    @Query
+    (
+        value = "select count(schedule_id) from user_schedule where user_schedule_batch_id=?1",
+        nativeQuery = true
+    )
+    Long countTotalDate(Long batchId);
+
+    @Query
+    (
+        value = "select count(schedule_id) from user_schedule where user_id=?1",
+        nativeQuery = true
+    )
+    Long countTotalDateStudentId(String studentId);
 
 }
