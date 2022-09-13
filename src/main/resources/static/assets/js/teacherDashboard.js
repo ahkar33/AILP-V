@@ -19,100 +19,109 @@ const colorListTwo = [
     'rgba(190,164,19,0.4)', 'rgba(12,89,34,0.4)',
     'rgba(116,52,17,0.4)'
 ];
+let teacherId = document.getElementById('teacherId').value;
+let attendanceBatchList = [];
+let attendancePercentList = [];
+axios.get(`http://localhost:8080/api/teacher/getBatchAttendanceByTeacherId/${teacherId}`)
+    .then(res => {
+        attendanceBatchList = Object.keys(res.data);
+        attendancePercentList = Object.values(res.data);
+    })
+    .then(() => {
+        let studentCourse = new Chart(chartOne, {
+            type: 'bar', // bar, horizontalBar, pie ...
+            data: {
+                labels: attendanceBatchList,
+                datasets: [{
+                    label: 'Attendance',
+                    data: attendancePercentList,
+                    backgroundColor: colorListTwo,
+                    borderWidth: 1, // border thickness of the bar
+                    borderColor: '#777',
+                    hoverBorderWidth: 2,
+                    hoverBorderColor: 'black'
+                }],
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '',
+                        font: {
+                            size: 25
+                        }
+                    },
+                    legend: {
+                        // display: false, // hide label
+                        position: 'right', // move label to right side of chart
+                    },
+                    tooltips: {
+                        enabled: false
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
+            }
+        });
 
-let studentCourse = new Chart(chartOne, {
-    type: 'bar', // bar, horizontalBar, pie ...
-    data: {
-        labels: ["Basic Java", "Web Java", "React", "OJT", "Angular"],
-        datasets: [{
-            label: 'Attendance',
-            data: [20, 23, 32, 15, 20], // number of news per reporter
-            // backgroundColor: [...color],
-            backgroundColor: colorListTwo,
-            borderWidth: 1, // boder thickness of the bar
-            borderColor: '#777',
-            hoverBorderWidth: 2,
-            hoverBorderColor: 'black'
-        }],
-    },
-    options: {
-        plugins: {
-            title: {
-                display: true,
-                text: '',
-                font: {
-                    size: 25
-                }
-            },
-            legend: {
-                // display: false, // hide label
-                position: 'right', // move label to right side of chart
-            },
-            tooltips: {
-                enabled: false
-            }
-        },
-        layout: {
-            padding: {
-                left: 50,
-                right: 0,
-                bottom: 0,
-                top: 0
-            }
-        },
-    }
-});
+    })
 
 let countBatchList = [];
 let countStudentList = [];
-axios.get('http://localhost:8080/api/teacher/getStudentCountByBatch')
+axios.get(`http://localhost:8080/api/teacher/getStudentCountByBatchTeacherId/${teacherId}`)
     .then((res) => {
-        // countBatchList = Object.keys(res.data);
-        // countStudentList = Object.values(res.data);
+        countBatchList = Object.keys(res.data);
+        countStudentList = Object.values(res.data);
         console.log(res.data);
 
     })
-    // .then(() => {
+    .then(() => {
 
-    //     let totalMember = new Chart(chartTwo, {
-    //         type: 'doughnut', // bar, horizontalBar, pie ...
-    //         data: {
-    //             labels: countBatchList,
-    //             datasets: [{
-    //                 label: 'Total Students',
-    //                 data: countStudentList, // number of news per reporter
-    //                 backgroundColor: colorListOne,
-    //                 borderWidth: 1, // boder thickness of the bar
-    //                 borderColor: '#777',
-    //                 hoverBorderWidth: 2,
-    //                 hoverBorderColor: 'black'
-    //             }],
-    //         },
-    //         options: {
-    //             plugins: {
-    //                 title: {
-    //                     display: true,
-    //                     text: '',
-    //                     font: {
-    //                         size: 25
-    //                     }
-    //                 },
-    //                 legend: {
-    //                     // display: false, // hide label
-    //                     position: 'right', // move label to right side of chart
-    //                 },
-    //                 tooltips: {
-    //                     enabled: false
-    //                 }
-    //             },
-    //             layout: {
-    //                 padding: {
-    //                     left: 50,
-    //                     right: 0,
-    //                     bottom: 0,
-    //                     top: 0
-    //                 }
-    //             },
-    //         }
-    //     });
-    // }) 
+        let totalMember = new Chart(chartTwo, {
+            type: 'doughnut', // bar, horizontalBar, pie ...
+            data: {
+                labels: countBatchList,
+                datasets: [{
+                    label: 'Total Students',
+                    data: countStudentList, // number of news per reporter
+                    backgroundColor: colorListOne,
+                    borderWidth: 1, // boder thickness of the bar
+                    borderColor: '#777',
+                    hoverBorderWidth: 2,
+                    hoverBorderColor: 'black'
+                }],
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '',
+                        font: {
+                            size: 25
+                        }
+                    },
+                    legend: {
+                        // display: false, // hide label
+                        position: 'right', // move label to right side of chart
+                    },
+                    tooltips: {
+                        enabled: false
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
+            }
+        });
+    }) 
