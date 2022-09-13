@@ -31,6 +31,7 @@ import com.ace.ailpv.service.BatchHasResourceService;
 import com.ace.ailpv.service.BatchHasVideoService;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.ResourceService;
+import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
 import com.ace.ailpv.service.VideoService;
 
@@ -63,6 +64,9 @@ public class TeacherApi {
 
     @Autowired
     private BatchHasResourceService batchHasResourceService;
+
+    @Autowired
+    private UserScheduleService userScheduleService;
 
     // @Autowired
     // private ExamService examService;
@@ -177,9 +181,9 @@ public class TeacherApi {
         }
     }
 
-    @GetMapping("/getStudentCountByBatch")
-    public Map<String, Integer> getStudentCountByBatch() {
-        List<Batch> batchList = batchService.getAllBatches();
+    @GetMapping("/getStudentCountByBatchTeacherId/{teacherId}")
+    public Map<String, Integer> getStudentCountByBatch(@PathVariable("teacherId") String teacherId) {
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
         Map<String, Integer> data = new LinkedHashMap<>();
         for (Batch batch : batchList) {
             data.put(batch.getName(), userService.getUserCountByBatchIdAndRole(batch.getId(), "ROLE_STUDENT"));
@@ -187,18 +191,29 @@ public class TeacherApi {
         return data;
     }
 
+    @GetMapping("/getStudentAttendanceByTeacherId/{teacherId}")
+    public Map<String, Float> getStudentAttendance(@PathVariable("teacherId") String teacherId) {
+        List<User> studentList = userService.getStudentListByTeacherId(teacherId);
+        Map<String, Float> data = new LinkedHashMap<>();
+        for (User user : studentList) {
+            data.put(user.getName(), userScheduleService.avgAttendaceOfStudent(user.getId()).floatValue());
+        }
+        return data;
+    }
+
     // @GetMapping("/getExamListByTeacherId")
     // public List<Exam> getExamListByTeacherId() {
-    //     List<Exam> examList = examService.getExamListByTeacherId("tch001");
-    //     return examList;
+    // List<Exam> examList = examService.getExamListByTeacherId("tch001");
+    // return examList;
     // }
 
     // @GetMapping("/getTeacherBatchListByTeacherIdAndCourseId/{teacherId}/{courseId}")
-    // public List<Batch> getTeacherBatchListByTeacherIdAndCourseId(@PathVariable("teacherId") String teacherId, @PathVariable("courseId") Long courseId) {
-    //     List<Batch> batchList = userService.getTeacherBatchListByTeacherIdAndCourseId(teacherId, courseId);
-    //     return batchList;
+    // public List<Batch>
+    // getTeacherBatchListByTeacherIdAndCourseId(@PathVariable("teacherId") String
+    // teacherId, @PathVariable("courseId") Long courseId) {
+    // List<Batch> batchList =
+    // userService.getTeacherBatchListByTeacherIdAndCourseId(teacherId, courseId);
+    // return batchList;
     // }
-
-
 
 }
