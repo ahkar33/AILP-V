@@ -60,12 +60,13 @@ public class VideoService{
         MultimediaInfo result=instance.getInfo(); 
         hour = (result.getDuration()/1000)/3600;
         min=(result.getDuration()/1000)/60;
+        Long hourMin = ((result.getDuration()/1000) % 3600) / 60;
         
         // ses=(result.getDuration()/1000)%60;      
         file.delete();
         if(hour == 0) {
             return min + "min";
         }
-        return hour + "hr " + min + "min";
+        return hour + "hr " + hourMin + "min";
     }
 }

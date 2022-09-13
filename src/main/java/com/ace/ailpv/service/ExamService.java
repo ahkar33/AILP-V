@@ -1,7 +1,9 @@
 package com.ace.ailpv.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,11 +42,15 @@ public class ExamService {
         return examRepository.findByExamCourse_Id(id);
     }
 
-    public List<Exam> getExamListByTeacherId(String teacherId){
+    public List<Exam> getExamListByTeacherId(String teacherId) {
         User teacherInfo = userService.getUserById(teacherId);
         List<Exam> examList = new ArrayList<>();
-        for(Batch batch : teacherInfo.getBatchList()) {
-            examList.addAll(getExamListByCourseId(batch.getBatchCourse().getId()));
+        Set<Long> courseIdList = new HashSet<>();
+        for (Batch batch : teacherInfo.getBatchList()) {
+            courseIdList.add(batch.getBatchCourse().getId());
+        }
+        for(Long courseId : courseIdList) {
+            examList.addAll(getExamListByCourseId(courseId));
         }
         return examList;
     }

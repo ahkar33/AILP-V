@@ -5,30 +5,48 @@
     <title>Exam</title>
 </head>
 
-<body id="page-top">
+<body id="page-top" style="background-color: #E4E6E9 ">
 
     <div th:insert="/student/student-fragments :: pc-navbar" />
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-    <div class="container mt-5">
+    <div class="container mt-4" style="margin-bottom: 86px;">
 
-        <h1 class="h2">Exams</h1>
-        <div id="wrapper">
-            <div class="flex-column" id="content-wrapper" style="background: rgb(255,255,255);">
-                <div id="content" style="margin-top: -19px;background: #ffffff;margin-bottom: 80px;">
-                    <div class="row d-flex flex-wrap" style="padding-right: 10px;padding-left: 10px;margin-top: 38px;">
+        <h1 class="fs-2 mb-2"
+                        style=" color: rgb(78, 78, 78); font-family: 'Roboto', sans-serif;">
+                        Exams</h1>
 
-                        <span th:each="bhe : ${bheList}">
-                            <a th:href="@{/student/getExam/} + ${bhe.id}">
-                                [[${bhe.bheExam.name}]]
-                            </a>
-                        </span>
-
+            <!-- Exam Card/ Button Start -->
+            <span th:each="bhe : ${bheList}">
+                <div class="btn btn-light ms-0 me-0 my-2 py-3 shadow-sm w-100">
+                    <div class="row align-items-center">
+                        <div class="align-items-md-start col-12 col-lg-5 col-md-4 col-xl-5 d-flex d-md-flex flex-column justify-content-center justify-content-md-start ps-0 ps-md-4">
+                            <h4 class="pt-2"
+                                style="font-family: 'Arimo', sans-serif; font-weight: 700; color: #3f3f3f;">
+                                    [[${bhe?.bheExam?.name}]]</h4>
+                        </div>
+                        <ul class="align-items-lg-start col-12 col-lg-3 col-md-4 col-xl-3 d-flex d-lg-flex flex-column flex-lg-column gap-2 justify-content-lg-start justify-content-start list-unstyled mb-0 mt-2 my-4 my-md-0 text-90 text-dark-l1 text-left"
+                            style="font-family: 'Arimo', sans-serif; font-size: 17px; color: #636363;">
+                            <li> <i class="fa fa-file-text-o mr-2 mt-1 text-110 text-success-m2"
+                                    style="margin-right: 8px;"></i> <span> <span class="text-110">[[${bhe?.bheExam?.questionList.size}]] Questions</span>
+                                </span>
+                            </li>
+                            <li class="mt-25"> <i class="fa fa-clock-o mr-2 mt-1 text-110 text-success-m2"
+                                    style="margin-right: 8px;"></i> <span class="text-110">Total [[${bhe?.totalTime}]]</span>
+                            </li>
+                            <li class="mt-25"> <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"
+                                    style="margin-right: 8px;"></i> <span class="text-110">[[${bhe?.bheExam?.fullMark}]] Marks</span>
+                            </li>
+                        </ul>
+                        <div class="col-12 col-md-4 text-center"> <a href="#"
+                                class="btn btn-raised f-n-hover fw-bold mb-md-0 mt-3 mt-md-0 pe-md-4 ps-md-4 px-4 py-25 shadow-sm text-600 text-light w-75"
+                                style="background-color: #2d4177;" th:href="@{/student/getExam/} + ${bhe.id}">Get Started</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </span>
+    </div>
     </div>
 
     <div class="hide-on-desktop">

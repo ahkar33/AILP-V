@@ -11,13 +11,13 @@
     }
 </style>
 
-<body id="page-top">
+<body id="page-top" style="background-color: #E4E6E9 ">
 
     <div th:insert="/student/student-fragments :: pc-navbar" />
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-    <div v-cloak class="container mt-5" id="app">
+    <div v-cloak class="container mt-5" style="margin-bottom: 86px;" id="app">
         <input id="studentId" type="hidden" th:value="${studentId}">
         <input id="bheId" type="hidden" th:value="${bheId}">
         <input id="examId" type="hidden" th:value="${examId}">
@@ -32,53 +32,81 @@
                     <h3>{{ studentScore }}/{{ exam.fullMark }} Marks</h3>
                 </span>
                 <span v-else-if="!isExamEnd">
-                    <div class="d-flex justify-content-evenly">
-                        <span d-flex flex-column>
-                            <h2>{{ displayDays }}</h2>
-                            <p>days</p>
-                        </span>
-                        <h2>:</h2>
-                        <span d-flex flex-column>
-                            <h2>{{ displayHours }}</h2>
-                            <p>hours</p>
-                        </span>
-                        <h2>:</h2>
-                        <span d-flex flex-column>
-                            <h2>{{ displayMinutes }}</h2>
-                            <p>minutes</p>
-                        </span>
-                        <h2>:</h2>
-                        <span d-flex flex-column>
-                            <h2>{{ displaySeconds }}</h2>
-                            <p>seconds</p>
-                        </span>
-                    </div>
-                    <div id="wrapper">
-                        <div class="flex-column" id="content-wrapper" style="background: rgb(255,255,255);">
-                            <div id="content" style="margin-top: -19px;background: #ffffff;margin-bottom: 80px;">
-                                <div class="row d-flex flex-wrap"
-                                    style="padding-right: 10px;padding-left: 10px;margin-top: 38px;">
-                                    <span v-for="(question, index) in exam.questionList" :key="question.id">
-                                        <h4>{{ question.examQuestion }}</h4>
-                                        <span v-for="radio in question.radioList">
-                                            <input class="ms-2" type="radio" v-model="studentAnswerList[index]"
-                                                :value="radio.radioValue">{{ radio.radioValue }}
-                                        </span>
-                                    </span>
-                                    <span class="mt-2">
-                                        <button v-if="studentAnswerList.length > 0" @click="handleSubmit()"
-                                            class="btn btn-primary">
-                                            Submit
-                                        </button>
-                                        <button v-if="studentAnswerList.length == 0" @click="handleSubmit()"
-                                            class="btn btn-primary disabled">
-                                            Submit
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
+                    <div class="card-body shadow-sm text-light mb-4 mt"
+                        style="background-image: linear-gradient(180deg, rgb(50, 75, 160) 1%, rgb(40, 57, 119) 99%); border-radius: 25px; padding: 15px 30px 3px; margin-top: -25px;">
+                        <div class="d-flex justify-content-evenly">
+                            <span d-flex flex-column>
+                                <h2 style="text-align: center; font-size: 27px;">{{ displayDays }}</h2>
+                                <p style="font-size: 13px;">DAYS</p>
+                            </span>
+
+                            <h2 style="font-size: 37px; font-weight: 200; line-height: 64px;">:</h2>
+
+                            <span d-flex flex-column>
+                                <h2 style="text-align: center; font-size: 27px;">{{ displayHours }}</h2>
+                                <p style="font-size: 13px;">HOURS</p>
+                            </span>
+
+                            <h2 style="font-size: 37px; font-weight: 200; line-height: 64px;">:</h2>
+
+                            <span d-flex flex-column>
+                                <h2 style="text-align: center; font-size: 27px;">{{ displayMinutes }}</h2>
+                                <p style="font-size: 13px;">MINUTES</p>
+                            </span>
+
+                            <h2 style="font-size: 37px; font-weight: 200; line-height: 64px;">:</h2>
+
+                            <span d-flex flex-column>
+                                <h2 style="text-align: center; font-size: 27px;">{{ displaySeconds }}</h2>
+                                <p style="font-size: 13px;">SECONDS</p>
+                            </span>
                         </div>
                     </div>
+
+                    <div class="accordion" id="accordionQuestion">
+                        <!-- Each accordion starts from this -->
+                        <div class="accordion-item border-secondary">
+                            <span v-for="(question, index) in exam.questionList" :key="question.id">
+                                <!-- Question Header/ Question -->
+                                <h2 class="accordion-header align-items-baseline d-flex flex-row h5 px-4 py-3"
+                                    id="panelsStayOpen-headingOne">
+                                    <div class="collapsed w-100" data-bs-toggle="collapse" aria-expandes="true"
+                                        data-bs-target="#panelsStayOpen-collapseOne"
+                                        aria-controls="panelsStayOpen-collapseOne">
+                                        <h4 style="font-family: 'Roboto', sans-serif; font-size: 1em; color: #535353;"
+                                            class="mb-0">{{ question.examQuestion }}</h4>
+                                    </div> <span>
+                                        <p class="mb-0"
+                                            style="font-size: 15px; font-weight: bold; color: #03205f; font-family: 'Roboto', sans-serif;">
+                                            10Marks</p>
+                                    </span>
+                                </h2>
+                                <!-- Question's Radio Buttons -->
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                                    aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body pt-1"
+                                        style="font-family: 'Roboto', sans-serif; color: #5e5e5e;">
+                                        <div class="d-flex flex-column gap-3">
+                                            <span v-for="radio in question.radioList">
+                                                <input class="ms-2 me-2" type="radio" v-model="studentAnswerList[index]"
+                                                    :value="radio.radioValue">{{ radio.radioValue }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+
+                    <span>
+                        <button v-if="studentAnswerList.length > 0" @click="handleSubmit()" class="btn btn-lg btn-primary mt-3 w-100" style="margin: 0px;"> 
+                            Submit
+                        </button>
+                        <button v-if="studentAnswerList.length == 0" @click="handleSubmit()" class="btn btn-lg btn-primary mt-3 w-100 disabled" style="margin: 0px;"> 
+                            Submit
+                        </button>
+                    </span>
+
                 </span>
                 <span v-else>
                     <h2>Exam has ended</h2>
