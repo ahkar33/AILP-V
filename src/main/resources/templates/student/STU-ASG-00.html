@@ -29,6 +29,7 @@
                         <tr th:each="assignment : ${assignmentList}">
                             <form th:action="@{/student/submitAssignment}" th:object="${answer}" method="post"
                                 enctype="multipart/form-data">
+                                <input type="hidden" th:value="${successMsg}" id="successMsg">
                                 <td>[[${assignment?.name}]]</td>
                                 <td>
                                     <a th:href="@{ ${'/courses/' + assignment?.assignmentBatch?.batchCourse?.name + '/' + assignment?.assignmentBatch?.id + '/'  +  'AssignmentQuestion' + '/' + assignment?.questionFileName} }"
@@ -47,6 +48,7 @@
                                 <td>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </td>
+                          
                             </form>
                         </tr>
 
@@ -72,6 +74,7 @@
             $('#dataTable').DataTable();
         });
     </script>
+    <script src="/assets/js/alert.js"></script>
 </body>
 
 </html>

@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +38,11 @@ public class BatchServiceTest {
     }
 
     // @Test
-    // public void deleteBatchByIdTest(){
+    // public void deleteBatchByIdTest() throws IOException{
     //     Batch batch=getOneBatch();
     //     List<User>userList=getUserList();
     //     when(userService.findUserByBatchId(batch.getId())).thenReturn(userList);
-    //     batchService.deleteBatchById(batch.getId());
+    //     batchService.deleteBatchById(batch.getId(),"courseName");
     //     verify(batchRepository, times(1)).deleteById(batch.getId());
     // }
 

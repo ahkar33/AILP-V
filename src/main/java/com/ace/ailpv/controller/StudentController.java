@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ace.ailpv.entity.Assignment;
 import com.ace.ailpv.entity.AssignmentAnswer;
@@ -187,7 +188,7 @@ public class StudentController {
     }
 
     @PostMapping("/submitAssignment")
-    public String submitAssignment(@ModelAttribute("answer") AssignmentAnswer answer) throws IOException {
+    public String submitAssignment(@ModelAttribute("answer") AssignmentAnswer answer,RedirectAttributes redirectAttr) throws IOException {
         Long currentTime = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         Assignment assignment = assignmentService.getAssignmentById(answer.getAssignment().getId());
         Long startTime = assignment.getEndTime().toEpochSecond(ZoneOffset.UTC);
@@ -196,6 +197,8 @@ public class StudentController {
         }
         answer.setAnswerFileName(answer.getAnswerFile().getOriginalFilename());
         assignmentAnswerService.addAssignmentAnswer(answer);
+        redirectAttr.addFlashAttribute("successMsg", true);
+        // return "/student/STU-ASG-00";
         return "redirect:/student/studentAssignment";
     }
 
