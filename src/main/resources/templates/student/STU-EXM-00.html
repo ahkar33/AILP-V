@@ -62,28 +62,23 @@
                             </span>
                         </div>
                     </div>
-
-                    <div class="accordion" id="accordionQuestion">
-                        <!-- Each accordion starts from this -->
-                        <div class="accordion-item border-secondary">
+                    <div class="border border-bottom-0 border-secondary card shadow-sm">
+                        <div class="card-body p-0">
                             <span v-for="(question, index) in exam.questionList" :key="question.id">
-                                <!-- Question Header/ Question -->
-                                <h2 class="accordion-header align-items-baseline d-flex flex-row h5 px-4 py-3"
-                                    id="panelsStayOpen-headingOne">
-                                    <div class="collapsed w-100" data-bs-toggle="collapse" aria-expandes="true"
-                                        data-bs-target="#panelsStayOpen-collapseOne"
-                                        aria-controls="panelsStayOpen-collapseOne">
-                                        <h4 style="font-family: 'Roboto', sans-serif; font-size: 1em; color: #535353;"
+                                <div class="border-bottom border-secondary">
+                                    <!-- Question Header/ Question -->
+                                    <h2 class="accordion-header align-items-baseline d-flex flex-row h5 px-4 py-3"
+                                    >
+                                    <div class="w-100">
+                                        <h4 style="font-family: 'Roboto', sans-serif; font-size: 18px; color: #535353;"
                                             class="mb-0">{{ question.examQuestion }}</h4>
                                     </div> <span>
                                         <p class="mb-0"
-                                            style="font-size: 15px; font-weight: bold; color: #03205f; font-family: 'Roboto', sans-serif;">
+                                            style="font-size: 14px; font-weight: bold; color: #03205f; font-family: 'Roboto', sans-serif;">
                                             10Marks</p>
                                     </span>
                                 </h2>
                                 <!-- Question's Radio Buttons -->
-                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-                                    aria-labelledby="panelsStayOpen-headingOne">
                                     <div class="accordion-body pt-1"
                                         style="font-family: 'Roboto', sans-serif; color: #5e5e5e;">
                                         <div class="d-flex flex-column gap-3">
@@ -94,15 +89,20 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+
+                                
                             </span>
                         </div>
                     </div>
+                        <!-- Each accordion starts from this -->
+                        
 
                     <span>
-                        <button v-if="studentAnswerList.length > 0" @click="handleSubmit()" class="btn btn-lg btn-primary mt-3 w-100" style="margin: 0px;"> 
+                        <button v-if="studentAnswerList.length > 0" @click="handleSubmit()" class="btn btn-lg btn-primary mt-3 w-100 shadow-sm bg-gradient" style="margin: 0px;"> 
                             Submit
                         </button>
-                        <button v-if="studentAnswerList.length == 0" @click="handleSubmit()" class="btn btn-lg btn-primary mt-3 w-100 disabled" style="margin: 0px;"> 
+                        <button v-if="studentAnswerList.length == 0" @click="handleSubmit()" class="btn btn-lg btn-primary mt-3 w-100 disabled shadow-sm bg-gradient" style="margin: 0px;"> 
                             Submit
                         </button>
                     </span>
