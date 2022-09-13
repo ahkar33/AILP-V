@@ -50,6 +50,7 @@
                         </div>
 
                         <div class="mb-5 me-0 pe-0 row">
+                            <input type="hidden" th:value="${teacherId}" id="teacherId">
                             <div class="col-lg-6 col-md-12 col-xl- col-xxl-3 mb-3 me-0" th:each="batch: ${batchList}">
                                 <a class="text-decoration-none" th:href="@{'/student/getVideos/' + ${batch.id} }">
                                     <div class="border-start-primary card pb-1 pt-1 py-2 shadow-sm"
@@ -82,18 +83,15 @@
                             </div>
                         </div>
 
-                        <!-- <div class="col-lg-12 col-xl-12 mb-5 text-center">
-                            <h1 class="fw-bold h4 text-dark" style="font-family: 'Roboto', sans-serif;">Batch vs.
-                                Attendance
-                            </h1>
-                            <canvas id="chartOne"></canvas>
-                        </div>
-                        <div class="col-lg-5 col-xl-4 text-center">
-                            <h1 class="fw-bold h4 text-dark" style="font-family: 'Roboto', sans-serif;">Batch vs.
-                                Attendance
-                            </h1>
-                            <canvas id="chartTwo"></canvas>
-                        </div> -->
+             
+                            <div class="col-lg-6 col-xl-8 mb-5 text-center">
+                                <canvas id="chartOne"></canvas>
+                            </div>
+                            <div class="col-lg-6 col-xl-4 text-center">
+                                <canvas id="chartTwo"></canvas>
+                            </div>
+                 
+
 
                     </div>
                 </div>
@@ -103,10 +101,10 @@
 
     <!-- chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
-    <!-- <script src="/assets/js/teacherDashboard.js"></script> -->
+
 
     <div th:insert="/teacher/teacher-fragments :: footer" />
-
+    <script src="/assets/js/teacherDashboard.js"></script>
 
 </body>
 
