@@ -104,8 +104,7 @@ axios.get('http://localhost:8080/api/admin/getStudentCountByCourse')
     .then((res) => {
         countCourseList = Object.keys(res.data);
         countStudentList = Object.values(res.data);
-    }).then(() => {
-        
+    }).then(() => {     
         let totalStudents = new Chart(chartTwo, {
             type: 'doughnut', // bar, horizontalBar, pie ...
             data: {

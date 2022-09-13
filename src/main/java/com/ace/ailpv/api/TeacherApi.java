@@ -2,7 +2,9 @@ package com.ace.ailpv.api;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -175,6 +177,16 @@ public class TeacherApi {
         }
     }
 
+    @GetMapping("/getStudentCountByBatch")
+    public Map<String, Integer> getStudentCountByBatch() {
+        List<Batch> batchList = batchService.getAllBatches();
+        Map<String, Integer> data = new LinkedHashMap<>();
+        for (Batch batch : batchList) {
+            data.put(batch.getName(), userService.getUserCountByBatchIdAndRole(batch.getId(), "ROLE_STUDENT"));
+        }
+        return data;
+    }
+
     // @GetMapping("/getExamListByTeacherId")
     // public List<Exam> getExamListByTeacherId() {
     //     List<Exam> examList = examService.getExamListByTeacherId("tch001");
@@ -186,5 +198,7 @@ public class TeacherApi {
     //     List<Batch> batchList = userService.getTeacherBatchListByTeacherIdAndCourseId(teacherId, courseId);
     //     return batchList;
     // }
+
+
 
 }
