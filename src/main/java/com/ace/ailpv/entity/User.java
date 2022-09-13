@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -38,7 +39,7 @@ public class User {
     private String role;
     private String profile_pic;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     // @JsonIgnore
     @JoinTable(name = "batch_has_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "batch_id"))
     List<Batch> batchList = new ArrayList<>();

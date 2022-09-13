@@ -71,33 +71,30 @@ public class StudentController {
     @GetMapping("/student-home")
     public String showStudentHomePage(HttpSession session, ModelMap model) {
         String studentId = (String) session.getAttribute("uid");
-        User userInfo = usersService.getUserById(studentId);
-        userInfo.setBatchId(userInfo.getBatchList().iterator().next().getId().toString());
-        model.addAttribute("userId", userInfo.getId());
-        model.addAttribute("batchId", userInfo.getBatchId());
+        String batchId = (String) session.getAttribute("batchId");
+        model.addAttribute("userId", studentId);
+        model.addAttribute("batchId", batchId);
         return "/student/STU-HOM-01";
     }
 
     @GetMapping("/student-public-chat")
     public String setupStudentPublicChat(HttpSession session, ModelMap model) {
         String studentId = (String) session.getAttribute("uid");
-        User userInfo = usersService.getUserById(studentId);
-        userInfo.setBatchId(userInfo.getBatchList().iterator().next().getId().toString());
-        userInfo.setBatchName(userInfo.getBatchList().iterator().next().getName());
-        model.addAttribute("userId", userInfo.getId());
-        model.addAttribute("username", userInfo.getName());
-        model.addAttribute("batchId", userInfo.getBatchId());
-        model.addAttribute("batchName", userInfo.getBatchName());
+        String batchId = (String) session.getAttribute("batchId");
+        String username = usersService.getUserById(studentId).getName();
+        String batchName = batchService.getBatchById(Long.parseLong(batchId)).getName();
+        model.addAttribute("userId", studentId);
+        model.addAttribute("username", username);
+        model.addAttribute("batchId", batchId);
+        model.addAttribute("batchName", batchName);
         return "/student/STU-PBC-07";
     }
 
     @GetMapping("/getResources")
     public String getResources(ModelMap model, HttpSession session) {
-        String studentId = (String) session.getAttribute("uid");
-        User studentInfo = usersService.getUserById(studentId);
-        Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
+        String studentBatchId = (String) session.getAttribute("batchId");
         List<BatchHasResource> batchHasResourceList = batchHasResourceService
-                .getAllBatchHasResourcesByBatchId(studentBatchId);
+                .getAllBatchHasResourcesByBatchId(Long.parseLong(studentBatchId));
         model.addAttribute("batchHasResourceList", batchHasResourceList);
         return "/student/STU-REC-09";
     }
@@ -178,10 +175,8 @@ public class StudentController {
 
     @GetMapping("/studentAssignment")
     public String studentAssignment(ModelMap model, HttpSession session) {
-        String studentId = (String) session.getAttribute("uid");
-        User studentInfo = usersService.getUserById(studentId);
-        Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
-        List<Assignment> assignmentList = assignmentService.getAllAssignmentByBatchId(studentBatchId);
+        String studentBatchId = (String) session.getAttribute("batchId");
+        List<Assignment> assignmentList = assignmentService.getAllAssignmentByBatchId(Long.parseLong(studentBatchId));
         model.addAttribute("assignmentList", assignmentList);
         model.addAttribute("answer", new AssignmentAnswer());
         return "/student/STU-ASG-00";
@@ -212,10 +207,8 @@ public class StudentController {
 
     @GetMapping("/getExamList")
     public String getBheListByBatchId(HttpSession session, ModelMap model) {
-        String studentId = (String) session.getAttribute("uid");
-        User studentInfo = usersService.getUserById(studentId);
-        Long studentBatchId = studentInfo.getBatchList().iterator().next().getId();
-        List<BatchHasExam> bheList = batchHasExamService.getBatchHasExamListByBatchId(studentBatchId);
+        String studentBatchId = (String) session.getAttribute("batchId");
+        List<BatchHasExam> bheList = batchHasExamService.getBatchHasExamListByBatchId(Long.parseLong(studentBatchId));
         model.addAttribute("bheList", bheList);
         return "/student/STU-EXL-00";
     }
