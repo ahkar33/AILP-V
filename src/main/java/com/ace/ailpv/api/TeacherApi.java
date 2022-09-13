@@ -201,6 +201,17 @@ public class TeacherApi {
         return data;
     }
 
+    @GetMapping("/getBatchAttendanceByTeacherId/{teacherId}")
+    public Map<String, Float> getBatchAttendanceByTeacherId(@PathVariable("teacherId") String teacherId) {
+        Map<String, Float> data = new LinkedHashMap<>();
+        User teacher = userService.getUserById(teacherId);
+        List<Batch> batchList = teacher.getBatchList();
+        for (Batch batch : batchList) {
+            data.put(batch.getName(), userScheduleService.avgAttendaceOfBatch(batch.getId()).floatValue());
+        }
+        return data;
+    }
+
     // @GetMapping("/getExamListByTeacherId")
     // public List<Exam> getExamListByTeacherId() {
     // List<Exam> examList = examService.getExamListByTeacherId("tch001");

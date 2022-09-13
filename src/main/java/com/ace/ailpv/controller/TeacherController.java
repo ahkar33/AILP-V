@@ -72,6 +72,7 @@ public class TeacherController {
                 .filter(batch -> batch.getIsActive())
                 .collect(Collectors.toList());
         model.addAttribute("batchList", batchList);
+        model.addAttribute("teacherId", teacherId);
         return "/teacher/TCH-DSB-01";
     }
 

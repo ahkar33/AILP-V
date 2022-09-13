@@ -50,6 +50,7 @@
                         </div>
 
                         <div class="mb-5 me-0 pe-0 row">
+                            <input type="hidden" th:value="${teacherId}" id="teacherId">
                             <div class="col-lg-6 col-md-12 col-xl- col-xxl-3 mb-3 me-0" th:each="batch: ${batchList}">
                                 <a class="text-decoration-none" th:href="@{'/student/getVideos/' + ${batch.id} }">
                                     <div class="border-start-primary card pb-1 pt-1 py-2 shadow-sm"
