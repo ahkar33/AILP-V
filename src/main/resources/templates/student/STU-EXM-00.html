@@ -17,7 +17,7 @@
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-    <div v-cloak class="container mt-3" style="margin-bottom: 86px;" id="app">
+    <div v-cloak class="container mt-5" style="margin-bottom: 86px;" id="app">
         <input id="studentId" type="hidden" th:value="${studentId}">
         <input id="bheId" type="hidden" th:value="${bheId}">
         <input id="examId" type="hidden" th:value="${examId}">
@@ -33,22 +33,22 @@
                                 <p class="fw-bold h2 mb-4 text-dark"
                                     style="font-family: 'IBM Plex Sans KR', sans-serif;">Exam will start at</p>
                                 <div class="d-flex justify-content-evenly mb-3 pb-2"><span d-flex="" flex-column="">
-                                        <h2 style="text-align: center; font-size: 27px;">01</h2>
+                                        <h2 style="text-align: center; font-size: 27px;">{{ startDays }}</h2>
                                         <p style="font-size: 13px;">DAYS</p>
                                     </span>
                                     <h2 style="font-size: 37px; font-weight: 200; line-height: 64px;">:</h2><span
                                         d-flex="" flex-column="">
-                                        <h2 style="text-align: center; font-size: 27px;">23</h2>
+                                        <h2 style="text-align: center; font-size: 27px;">{{ startHours }}</h2>
                                         <p style="font-size: 13px;">HOURS</p>
                                     </span>
                                     <h2 style="font-size: 37px; font-weight: 200; line-height: 64px;">:</h2><span
                                         d-flex="" flex-column="">
-                                        <h2 style="text-align: center; font-size: 27px;">56</h2>
+                                        <h2 style="text-align: center; font-size: 27px;">{{ startMinutes }}</h2>
                                         <p style="font-size: 13px;">MINUTES</p>
                                     </span>
                                     <h2 style="font-size: 37px; font-weight: 200; line-height: 64px;">:</h2><span
                                         d-flex="" flex-column="">
-                                        <h2 style="text-align: center; font-size: 27px;">27</h2>
+                                        <h2 style="text-align: center; font-size: 27px;">{{ startSeconds }}</h2>
                                         <p style="font-size: 13px;">SECONDS</p>
                                     </span>
                                 </div>
@@ -59,7 +59,6 @@
                         </div>
                     </div>
                 </section>
-                <!-- Exam will start at {{ startDateTime }} -->
             </span>
             <span v-else>
                 <span v-if="isSubmitted">
@@ -67,8 +66,8 @@
                     <h3>{{ studentScore }}/{{ exam.fullMark }} Marks</h3>
                 </span>
                 <span v-else-if="!isExamEnd">
-                    <div class="card-body shadow-sm text-light mb-4 mt-4"
-                        style="background-image: linear-gradient(180deg, rgb(50, 75, 160) 1%, rgb(40, 57, 119) 99%); border-radius: 25px; padding: 15px 30px 3px;">
+                    <div class="card-body shadow-sm mb-4 mt" :class="[ isNearEnd ? 'text-danger' : 'text-light' ]"
+                        style="background-image: linear-gradient(180deg, rgb(50, 75, 160) 1%, rgb(40, 57, 119) 99%); border-radius: 25px; padding: 15px 30px 3px; margin-top: -25px;">
                         <div class="d-flex justify-content-evenly">
                             <span d-flex flex-column>
                                 <h2 style="text-align: center; font-size: 27px;">{{ displayDays }}</h2>
@@ -102,17 +101,18 @@
                             <span v-for="(question, index) in exam.questionList" :key="question.id">
                                 <div class="border-bottom border-secondary">
                                     <!-- Question Header/ Question -->
-                                    <h2 class="accordion-header align-items-baseline d-flex flex-row h5 px-4 py-3">
-                                        <div class="w-100">
-                                            <h4 style="font-family: 'Roboto', sans-serif; font-size: 18px; color: #535353;"
-                                                class="mb-0">{{ question.examQuestion }}</h4>
-                                        </div> <span>
-                                            <p class="mb-0"
-                                                style="font-size: 14px; font-weight: bold; color: #03205f; font-family: 'Roboto', sans-serif;">
-                                                10Marks</p>
-                                        </span>
-                                    </h2>
-                                    <!-- Question's Radio Buttons -->
+                                    <h2 class="accordion-header align-items-baseline d-flex flex-row h5 px-4 py-3"
+                                    >
+                                    <div class="w-100">
+                                        <h4 style="font-family: 'Roboto', sans-serif; font-size: 18px; color: #535353;"
+                                            class="mb-0">{{ question.examQuestion }}</h4>
+                                    </div> <span>
+                                        <p class="mb-0"
+                                            style="font-size: 14px; font-weight: bold; color: #03205f; font-family: 'Roboto', sans-serif;">
+                                            10Marks</p>
+                                    </span>
+                                </h2>
+                                <!-- Question's Radio Buttons -->
                                     <div class="accordion-body pt-1"
                                         style="font-family: 'Roboto', sans-serif; color: #5e5e5e;">
                                         <div class="d-flex flex-column gap-3">
@@ -123,23 +123,20 @@
                                         </div>
                                     </div>
                                 </div>
+                                
 
-
-
+                                
                             </span>
                         </div>
                     </div>
-                    <!-- Each accordion starts from this -->
-
+                        <!-- Each accordion starts from this -->
+                        
 
                     <span>
-                        <button v-if="studentAnswerList.length > 0" @click="handleSubmit()"
-                            class="btn btn-lg btn-primary mt-3 w-100 shadow-sm bg-gradient" style="margin: 0px;">
+                        <button v-if="studentAnswerList.length > 0" @click="handleSubmit()" class="btn btn-lg btn-primary mt-3 w-100 shadow-sm bg-gradient" style="margin: 0px;"> 
                             Submit
                         </button>
-                        <button v-if="studentAnswerList.length == 0" @click="handleSubmit()"
-                            class="btn btn-lg btn-primary mt-3 w-100 disabled shadow-sm bg-gradient"
-                            style="margin: 0px;">
+                        <button v-if="studentAnswerList.length == 0" @click="handleSubmit()" class="btn btn-lg btn-primary mt-3 w-100 disabled shadow-sm bg-gradient" style="margin: 0px;"> 
                             Submit
                         </button>
                     </span>
