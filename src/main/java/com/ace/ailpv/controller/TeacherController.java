@@ -240,8 +240,10 @@ public class TeacherController {
     @GetMapping("/assignment-grade")
     public String showStudentTable(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
-        User teacherInfo = userService.getUserById(teacherId);
-        Long batchId = teacherInfo.getBatchList().get(0).getId();
+        // User teacherInfo = userService.getUserById(teacherId);
+        // Long batchId = teacherInfo.getBatchList().get(0).getId();
+        String resBatchId = (String) session.getAttribute("batchId");
+        Long batchId = Long.parseLong(resBatchId);
         List<Assignment> assignmentList = assignmentService.getAllAssignmentByBatchId(batchId);
 
         List<User> studentList = userService.getStudentListByBatchId(batchId);
@@ -322,8 +324,10 @@ public class TeacherController {
     @GetMapping("/exam-grade")
     public String setupExamGrade(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
-        User teacherInfo = userService.getUserById(teacherId);
-        Long batchId = teacherInfo.getBatchList().get(0).getId();
+        // User teacherInfo = userService.getUserById(teacherId);
+        // Long batchId = teacherInfo.getBatchList().get(0).getId();
+        String resBatchId = (String) session.getAttribute("batchId");
+        Long batchId = Long.parseLong(resBatchId);
         List<BatchHasExam> bheList = batchHasExamService.getBatchHasExamListByBatchId(batchId);
         List<User> studentList = userService.getStudentListByBatchId(batchId);
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);

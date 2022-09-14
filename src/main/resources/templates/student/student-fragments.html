@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap" />
@@ -29,7 +30,7 @@
     <link rel="stylesheet" href="/assets/css/custom.css" />
     <link rel="stylesheet" href="/assets/css/textarea.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gelasio&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gelasio&display=swap" />
     <!-- datatable-css -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
 </head>
@@ -137,13 +138,13 @@
                                 th:src="@{${'/profile_pics/' + session?.profile_pic} }"
                                 style="width: 35px; height: 35px;" />
                         </a>
-                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                            <a class="dropdown-item fs-6 mb-1" th:href="@{/user/profile}">
+                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in pb-0 pt-0">
+                            <a class="dropdown-item fs-6 pb-2 pt-2" th:href="@{/user/profile}">
                                 <i class="fa-fw fa-sm fa-user fas me-2 text-dark"></i>
                                 &nbsp;Profile
                             </a>
-                            <button class="dropdown-item fs-6 mb-1" onclick="handleLogout()">
-                                <i class="fa-fw fa-sign-out-alt fa-sm fas me-2 text-dark"></i>
+                            <button class="bg-danger text-light dropdown-item fs-6 rounded-bottom pb-2 pt-2" onclick="handleLogout()">
+                                <i class="fa-fw fa-sign-out-alt fa-sm fas me-2"></i>
                                 &nbsp;Logout
                             </button>
                         </div>
@@ -201,6 +202,9 @@
 
 
     <div th:fragment="footer">
+
+        <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/assets/js/bs-init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
