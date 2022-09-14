@@ -3,37 +3,31 @@ package com.ace.ailpv.ControllerTest;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.mockito.Mockito.when;
+
+import com.ace.ailpv.entity.*;
+import com.ace.ailpv.service.*;
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockMultipartFile;
 
-import com.ace.ailpv.entity.Assignment;
-import com.ace.ailpv.entity.AssignmentResult;
-import com.ace.ailpv.entity.Batch;
-import com.ace.ailpv.entity.BatchHasExam;
-import com.ace.ailpv.entity.BatchHasResource;
-import com.ace.ailpv.entity.Exam;
-import com.ace.ailpv.entity.Resource;
-import com.ace.ailpv.entity.User;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ace.ailpv.repository.BatchHasResourceRepository;
 import com.ace.ailpv.repository.BatchHasVideoRepository;
 import com.ace.ailpv.repository.BatchRepository;
 import com.ace.ailpv.repository.UserRepository;
 import com.ace.ailpv.security.CustomUserDetailsService;
-import com.ace.ailpv.service.AssignmentResultService;
-import com.ace.ailpv.service.AssignmentService;
-import com.ace.ailpv.service.BatchHasExamService;
-import com.ace.ailpv.service.BatchHasResourceService;
-import com.ace.ailpv.service.BatchHasVideoService;
-import com.ace.ailpv.service.BatchService;
-import com.ace.ailpv.service.UserService;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 
 // import static org.mockito.BDDMockito.*;
@@ -80,6 +74,9 @@ public class StudentControllerTest {
 
     @MockBean
     BatchService batchService;
+
+    @MockBean
+    VideoService videoService;
 
     @MockBean
     BatchRepository batchRepository;
@@ -208,6 +205,287 @@ public class StudentControllerTest {
                 .andExpect(model().attributeExists("studentId"))
                 .andExpect(model().attributeExists("examId"))
                 .andExpect(view().name("/student/STU-EXM-00"));
+    }
+
+    @Test
+    public void submitAssignmentTest() throws Exception {
+
+        User student = new User();
+        student.setId("stu001");
+
+        Course course = new Course();
+        course.setId(1L);
+        course.setName("java");
+
+        Batch batch = new Batch();
+        batch.setId(1L);
+        batch.setBatchCourse(course);
+
+        Assignment assignment = new Assignment();
+        assignment.setAssignmentBatch(batch);
+        assignment.setId(1L);
+        assignment.setEndTime(LocalDateTime.of(2015,
+                Month.JULY, 29, 19, 30, 40));
+
+        File file = new File("src\\test\\resources\\input.txt");
+        FileInputStream input = new FileInputStream(file);
+        MultipartFile multipartFile = new MockMultipartFile("file",
+                file.getName(), "text/plain", IOUtils.toByteArray(input));
+
+        AssignmentAnswer answer = new AssignmentAnswer();
+        answer.setAnswerStudent(student);
+        answer.setAssignment(assignment);
+        answer.setAnswerFile(multipartFile);
+
+        when(assignmentService.getAssignmentById(1L)).thenReturn(assignment);
+        this.mockMvc.perform(post("/student/submitAssignment")
+                .flashAttr("answer", answer))
+                .andExpect(status().is(302))
+                .andExpect(flash().attributeExists("successMsg"))
+                .andExpect(redirectedUrl("/student/studentAssignment"));
+    }
+
+    @Test
+    public void getVideosTestIfBatchIdExists() throws Exception {
+        HashMap<String, Object> sessionattr = new HashMap<String, Object>();
+        sessionattr.put("uid", "stu001");
+        sessionattr.put("batchId", "1");
+
+        User user = new User();
+        user.setId("stu001");
+        user.setName("Joey");
+        user.setLastWatchVideoId(1L);
+
+        List<User> teacherList = new ArrayList<>();
+        teacherList.add(user);
+
+        Course course = new Course();
+        course.setId(1L);
+        course.setName("Java");
+
+        Batch batch = new Batch();
+        batch.setId(1L);
+        batch.setName("java");
+        batch.setBatchCourse(course);
+
+        Video video = new Video();
+        video.setId(1L);
+        video.setName("hello");
+
+        BatchHasVideo bhv = new BatchHasVideo();
+        bhv.setId(1L);
+        bhv.setVideo(video);
+
+        List<BatchHasVideo> bhvList = new ArrayList<>();
+        bhvList.add(bhv);
+
+        when(userService.getUserById("stu001")).thenReturn(user);
+        when(batchHasVideoService.getAllBatchHasVideoByBatchId(1L)).thenReturn(bhvList);
+        when(batchService.getBatchById(1L)).thenReturn(batch);
+        when(userService.getTeacherListByBatchId(1L)).thenReturn(teacherList);
+        when(videoService.getVideoById(1L)).thenReturn(video);
+        this.mockMvc.perform(get("/student/getVideos/{batchId}", "1").sessionAttrs(sessionattr))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("video"))
+                .andExpect(model().attributeExists("teacherList"))
+                .andExpect(model().attributeExists("courseName"))
+                .andExpect(model().attributeExists("batchHasVideoList"))
+                .andExpect(model().attributeExists("batchId"))
+                .andExpect(model().attributeExists("username"))
+                .andExpect(view().name("/student/STU-VID-06"));
+    }
+
+    @Test
+    public void getVideosTestIfBatchIdIfAILP() throws Exception {
+        HashMap<String, Object> sessionattr = new HashMap<String, Object>();
+        sessionattr.put("uid", "stu001");
+        sessionattr.put("batchId", "1");
+
+        User user = new User();
+        user.setId("stu001");
+        user.setName("Joey");
+        user.setLastWatchVideoId(null);
+
+        List<User> teacherList = new ArrayList<>();
+        teacherList.add(user);
+
+        Course course = new Course();
+        course.setId(1L);
+        course.setName("Java");
+
+        Batch batch = new Batch();
+        batch.setId(1L);
+        batch.setName("java");
+        batch.setBatchCourse(course);
+
+        Video video = new Video();
+        video.setId(1L);
+        video.setName("hello");
+
+        BatchHasVideo bhv = new BatchHasVideo();
+        bhv.setId(1L);
+        bhv.setVideo(video);
+
+        List<BatchHasVideo> bhvList = new ArrayList<>();
+        bhvList.add(bhv);
+
+        when(userService.getUserById("stu001")).thenReturn(user);
+        when(batchHasVideoService.getAllBatchHasVideoByBatchId(1L)).thenReturn(bhvList);
+        when(batchService.getBatchById(1L)).thenReturn(batch);
+        when(userService.getTeacherListByBatchId(1L)).thenReturn(teacherList);
+        when(videoService.getVideoById(1L)).thenReturn(video);
+        this.mockMvc.perform(get("/student/getVideos/{batchId}", "AILP").sessionAttrs(sessionattr))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("video"))
+                .andExpect(model().attributeExists("teacherList"))
+                .andExpect(model().attributeExists("courseName"))
+                .andExpect(model().attributeExists("batchHasVideoList"))
+                .andExpect(model().attributeExists("batchId"))
+                .andExpect(model().attributeExists("username"))
+                .andExpect(view().name("/student/STU-VID-06"));
+    }
+
+    @Test
+    public void getVideosTestIfBatchIdIfVideoListSizeIsZero() throws Exception {
+        HashMap<String, Object> sessionattr = new HashMap<String, Object>();
+        sessionattr.put("uid", "stu001");
+        sessionattr.put("batchId", "1");
+
+        User user = new User();
+        user.setId("stu001");
+        user.setName("Joey");
+        user.setLastWatchVideoId(null);
+
+        List<User> teacherList = new ArrayList<>();
+        teacherList.add(user);
+
+        Course course = new Course();
+        course.setId(1L);
+        course.setName("Java");
+
+        Batch batch = new Batch();
+        batch.setId(1L);
+        batch.setName("java");
+        batch.setBatchCourse(course);
+
+        BatchHasVideo bhv = new BatchHasVideo();
+        bhv.setId(1L);
+
+        List<BatchHasVideo> bhvList = new ArrayList<>();
+
+        when(userService.getUserById("stu001")).thenReturn(user);
+        when(batchHasVideoService.getAllBatchHasVideoByBatchId(1L)).thenReturn(bhvList);
+        when(batchService.getBatchById(1L)).thenReturn(batch);
+        when(userService.getTeacherListByBatchId(1L)).thenReturn(teacherList);
+        this.mockMvc.perform(get("/student/getVideos/{batchId}", "AILP").sessionAttrs(sessionattr))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("video"))
+                .andExpect(model().attributeExists("teacherList"))
+                .andExpect(model().attributeExists("courseName"))
+                .andExpect(model().attributeExists("batchHasVideoList"))
+                .andExpect(model().attributeExists("batchId"))
+                .andExpect(model().attributeExists("username"))
+                .andExpect(view().name("/student/STU-VID-06"));
+    }
+
+    @Test
+    public void showClickedVideoIfRoleIsTeacherTest() throws Exception {
+        HashMap<String, Object> sessionattr = new HashMap<String, Object>();
+        sessionattr.put("uid", "stu001");
+        sessionattr.put("batchId", "1");
+
+        User user = new User();
+        user.setId("stu001");
+        user.setName("Joey");
+        user.setRole("ROLE_TEACHER");
+
+        List<User> teacherList = new ArrayList<>();
+        teacherList.add(user);
+
+        Course course = new Course();
+        course.setId(1L);
+        course.setName("Java");
+
+        Batch batch = new Batch();
+        batch.setId(1L);
+        batch.setName("java");
+        batch.setBatchCourse(course);
+
+        Video video = new Video();
+        video.setId(1L);
+        video.setName("hello");
+
+        BatchHasVideo bhv = new BatchHasVideo();
+        bhv.setId(1L);
+        bhv.setVideo(video);
+
+        List<BatchHasVideo> bhvList = new ArrayList<>();
+        bhvList.add(bhv);
+
+        when(userService.getUserById("stu001")).thenReturn(user);
+        when(batchHasVideoService.getAllBatchHasVideoByBatchId(1L)).thenReturn(bhvList);
+        when(batchService.getBatchById(1L)).thenReturn(batch);
+        when(userService.getTeacherListByBatchId(1L)).thenReturn(teacherList);
+        when(videoService.getVideoById(1L)).thenReturn(video);
+        this.mockMvc.perform(get("/student/showClickedVideo/{courseName}/{videoId}/{batchId}", "Java", "1", "1").sessionAttrs(sessionattr))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("teacherList"))
+                .andExpect(model().attributeExists("video"))
+                .andExpect(model().attributeExists("courseName"))
+                .andExpect(model().attributeExists("batchHasVideoList"))
+                .andExpect(model().attributeExists("batchId"))
+                .andExpect(model().attributeExists("username"))
+                .andExpect(view().name("/student/STU-VID-06"));
+    }
+
+    @Test
+    public void showClickedVideoIfRoleIsStudentTest() throws Exception {
+        HashMap<String, Object> sessionattr = new HashMap<String, Object>();
+        sessionattr.put("uid", "stu001");
+        sessionattr.put("batchId", "1");
+
+        User user = new User();
+        user.setId("stu001");
+        user.setName("Joey");
+        user.setRole("ROLE_STUDENT");
+
+        List<User> teacherList = new ArrayList<>();
+        teacherList.add(user);
+
+        Course course = new Course();
+        course.setId(1L);
+        course.setName("Java");
+
+        Batch batch = new Batch();
+        batch.setId(1L);
+        batch.setName("java");
+        batch.setBatchCourse(course);
+
+        Video video = new Video();
+        video.setId(1L);
+        video.setName("hello");
+
+        BatchHasVideo bhv = new BatchHasVideo();
+        bhv.setId(1L);
+        bhv.setVideo(video);
+
+        List<BatchHasVideo> bhvList = new ArrayList<>();
+        bhvList.add(bhv);
+
+        when(userService.getUserById("stu001")).thenReturn(user);
+        when(batchHasVideoService.getAllBatchHasVideoByBatchId(1L)).thenReturn(bhvList);
+        when(batchService.getBatchById(1L)).thenReturn(batch);
+        when(userService.getTeacherListByBatchId(1L)).thenReturn(teacherList);
+        when(videoService.getVideoById(1L)).thenReturn(video);
+        this.mockMvc.perform(get("/student/showClickedVideo/{courseName}/{videoId}/{batchId}", "Java", "1", "1").sessionAttrs(sessionattr))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("teacherList"))
+                .andExpect(model().attributeExists("video"))
+                .andExpect(model().attributeExists("courseName"))
+                .andExpect(model().attributeExists("batchHasVideoList"))
+                .andExpect(model().attributeExists("batchId"))
+                .andExpect(model().attributeExists("username"))
+                .andExpect(view().name("/student/STU-VID-06"));
     }
 
 }
