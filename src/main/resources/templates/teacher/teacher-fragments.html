@@ -50,16 +50,15 @@
                                 th:src="@{${'/profile_pics/' + session?.profile_pic} }"
                                 style="width: 35px; height: 35px;" />
                         </a>
-                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                            <a class="dropdown-item fs-6 text-dark" th:href="@{/user/profile}">
+                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in pb-0 pt-0">
+                            <a class="dropdown-item fs-6 text-dark rounded-top pt-2 pb-2" th:href="@{/user/profile}">
                                 <i class="fa-fw fa-sm fa-user fas me-2 text-dark"></i>
                                 &nbsp;Profile
                             </a>
-                            <div class="dropdown-divider"></div>
                             <form id="logout" th:action="@{/logout}" method="post">
                             </form>
-                            <button class="dropdown-item fs-6 text-dark" onclick="handleLogout()">
-                                <i class="fa-fw fa-sign-out-alt fa-sm fas me-2 text-dark"></i>
+                            <button class="bg-danger text-light dropdown-item fs-6 rounded-bottom pb-2 pt-2" onclick="handleLogout()">
+                                <i class="fa-fw fa-sign-out-alt fa-sm fas me-2"></i>
                                 &nbsp;Logout
                             </button>
                         </div>
