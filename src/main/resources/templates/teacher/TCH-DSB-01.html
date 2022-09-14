@@ -16,83 +16,78 @@
 
 
                 <div class="container-fluid">
-                    <div class="mb-5 mt-4 row">
-                        <div class="col-12 col-lg-8 col-md-12 col-sm-12 col-xl-8">
-
-                            <div class="align-items-center d-inline-flex flex-row"> <i
-                                    class="d-inline-flex fa-2x fa-chart-bar fas fs-3 mb-2 me-2 text-primary"></i>
-                                <h3 class="d-inline-flex fs-3 mb-2 text-dark"
-                                    style="font-weight: bold;font-family: 'Roboto', sans-serif;font-size: 30px;">
-                                    &nbsp;Teacher Dashboard</h3>
-                            </div>
-                        </div>
-                        <div class="col-md-4 text-lg-end text-start text-xl-end">
-
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-outline-primary dropdown-toggle fs-6"
-                                    data-bs-toggle="dropdown" aria-expanded="false">Generate Report</button>
-                                <ul class="dropdown-menu" style="margin: 0px;">
-                                    <li><a class="dropdown-item fs-6" href="#">.pdf file</a>
-                                    </li>
-                                    <li><a class="dropdown-item fs-6" href="#">.xlsx file</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="align-items-center d-inline-flex flex-row mb-3 mt-2"> <i
+                            class="d-inline-flex fa-2x fa-chart-bar fas fs-4 mb-2 me-2 text-primary"></i>
+                        <h3 class="d-inline-flex fs-4 mb-2 text-dark"
+                            style="font-weight: bold; font-family: Roboto, sans-serif;">
+                            &nbsp;Teacher Dashboard</h3>
                     </div>
 
 
-                    <div class="pe-0 ps-0 row">
-                        <div class="mb-2">
-                            <h1 style="font-family: 'Roboto', sans-serif;" class="fs-4">
-                                Classes you are currently teaching
-                            </h1>
-                        </div>
+                    <h1 style="font-family: &#39;Roboto&#39;, sans-serif;" class="fs-5">
+                        Classes you are currently teaching </h1>
 
-                        <div class="mb-5 me-0 pe-0 row">
-                            <input type="hidden" th:value="${teacherId}" id="teacherId">
-                            <div class="col-lg-6 col-md-12 col-xl- col-xxl-3 mb-3 me-0" th:each="batch: ${batchList}">
-                                <a class="text-decoration-none" th:href="@{'/student/getVideos/' + ${batch.id} }">
-                                    <div class="border-start-primary card pb-1 pt-1 py-2 shadow-sm"
-                                        data-bss-hover-animate="pulse">
-                                        <div class="card-body">
-                                            <div class="row align-items-center no-gutters">
-                                                <div class="col col-9 me-2">
-                                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                                        <p style="font-size: 18.2px;font-weight: bold;font-family: 'Roboto', sans-serif;color: #edba39;"
-                                                            class="fs-5 text-capitalize text-dark">
-                                                            [[${batch.getBatchCourse().getName()}]]</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-auto pe-0 ps-0">
-                                                    <i class="fa fa-2x fa-photo-video fa-users fas text-primary"></i>
+                    <div class="mb-4 me-0 pe-0 row">
+                        <input type="hidden" th:value="${teacherId}" id="teacherId">
+                        <div class="col-lg-6 col-md-12 col-xl- col-xxl-3 mb-3 me-0" th:each="batch: ${batchList}">
+                            <a class="text-decoration-none" th:href="@{'/student/getVideos/' + ${batch.id} }">
+                                <div class="border-start-primary card pb-1 pt-1 py-2 shadow-sm"
+                                    data-bss-hover-animate="pulse">
+                                    <div class="card-body">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col col-9 me-2">
+                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                                    <p style="font-size: 18.2px;font-weight: bold;font-family: 'Roboto', sans-serif;color: #edba39;"
+                                                        class="fs-5 text-capitalize text-dark">
+                                                        [[${batch.getBatchCourse().getName()}]]</p>
                                                 </div>
                                             </div>
-                                            <div class="row align-items-center no-gutters">
-                                                <div class="col col-9 me-2">
-                                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                                        <p style="font-size: 18.2px;font-weight: bold;font-family: 'Roboto', sans-serif;color: #edba39;"
-                                                            class="fs-6 mb-0 text-capitalize text-danger">
-                                                            [[${batch.getName()}]]</p>
-                                                    </div>
+                                            <div class="col-auto pe-0 ps-0">
+                                                <i class="fa fa-2x fa-photo-video fa-users fas text-primary"></i>
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col col-9 me-2">
+                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                                    <p style="font-size: 18.2px;font-weight: bold;font-family: 'Roboto', sans-serif;color: #edba39;"
+                                                        class="fs-6 mb-0 text-capitalize text-danger">
+                                                        [[${batch.getName()}]]</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class=" row">
+                        <div class="col-lg-6 col-md-12 ">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <div class="d-md-flex no-block align-items-center">
+                                        <div>
+                                            <h5 class="card-title" style="font-family: Roboto, sans-serif;">Batch VS. Attendance Chart</h5>
+                                            <h6 class="card-subtitle">you can check the count</h6>
+                                        </div>
+                                    </div>
+                                    <canvas id="chartOne"></canvas>
+                                </div>
                             </div>
                         </div>
-
-             
-                            <div class="col-lg-6 col-xl-8 mb-5 text-center">
-                                <canvas id="chartOne"></canvas>
+                        <div class="col-lg-6 col-md-12 ">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <div class="d-md-flex no-block align-items-center">
+                                        <div>
+                                            <h5 class="card-title" style="font-family: Roboto, sans-serif;">Batch VS. Attendance Chart</h5>
+                                            <h6 class="card-subtitle">you can check the count</h6>
+                                        </div>
+                                    </div>
+                                    <canvas id="chartTwo"></canvas>
+                                </div>
                             </div>
-                            <div class="col-lg-6 col-xl-4 text-center">
-                                <canvas id="chartTwo"></canvas>
-                            </div>
-                 
-
-
+                        </div>
                     </div>
                 </div>
             </div>
