@@ -78,14 +78,14 @@
             style="background: rgb(50,77,160);">
             <div class="container d-flex flex-column p-0">
                 <hr class="sidebar-divider my-0" />
-                <ul class="mt-4 navbar-nav text-light" id="accordionSidebar">
+                <ul class="mt-2 navbar-nav text-light" id="accordionSidebar">
                     <!-- side bar link start -->
                     <li class="nav-item">
                         <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
                             th:href="@{/teacher/dashboard}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-chart-bar fas fs-4"></i>
+                                <i class="fa-chart-bar fas" style="font-size: 19px;"></i>
                                 <div>
                                     <p style="margin-top: 1px;margin-bottom: -4px;">Dashboard</p>
                                 </div>
@@ -97,26 +97,27 @@
                     <!-- side bar link start -->
                     <li class="nav-item">
                         <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
+                            th:href="@{/teacher/postVideo}" style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa-photo-video fas" style="font-size: 16px;"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Upload Video</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
                             th:href="@{/teacher/postResource}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-photo-video fas fs-4"></i>
+                                <i class="fa-folder-open fas" style="font-size: 17px;"></i>
                                 <div>
                                     <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Upload Resource</p>
                                 </div>
                             </div>
                         </a>
 
-                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
-                            th:href="@{/teacher/postVideo}" style="font-size: 15.6px;">
-                            <div
-                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-photo-video fas fs-4"></i>
-                                <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Upload Video</p>
-                                </div>
-                            </div>
-                        </a>
 
                         <!-- <a class="d-flex d-md-flex nav-link" data-bss-hover-animate="pulse"
                             th:href="@{/teacher/student-table}" style="font-size: 15.6px;">
@@ -135,9 +136,9 @@
                             th:href="@{/teacher/teacher-public-chat}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-comments fas fs-4"></i>
+                                <i class="fa-comments fas" style="font-size: 18px;"></i>
                                 <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">&nbsp;
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">
                                         Group Chat
                                     </p>
                                 </div>
@@ -148,7 +149,7 @@
                             th:href="@{/teacher/attendance-table}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-user-check fas fs-4"></i>
+                                <i class="fa-user-check fas" style="font-size: 16px;"></i>
                                 <div>
                                     <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Attendance Table
                                     </p>
@@ -175,7 +176,8 @@
                             th:href="@{/teacher/assignment-table}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-clipboard-list fas fs-4"></i>
+                                <i class="fa-clipboard-list fas"
+                                    style="font-size: 17px; margin-left: 1px; margin-right: 10px;"></i>
                                 <div>
                                     <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Assignment Table
                                     </p>
@@ -184,11 +186,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" th:href="@{/teacher/assignment-grade}"
-                            style="font-size: 15.6px;">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
+                            th:href="@{/teacher/assignment-grade}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-file-signature fas fs-4"></i>
+                                <i class="fa-file-signature fas" style="font-size: 17px; margin-left: 1px; margin-right: 4px;"></i>
                                 <div>
                                     <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Assignment Grade
                                     </p>
@@ -200,11 +202,11 @@
 
                     <!-- side bar link start -->
                     <li class="nav-item">
-                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" th:href="@{/teacher/exam-table}"
-                            style="font-size: 15.6px;">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
+                            th:href="@{/teacher/exam-table}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa fa-file-signature fa-file-text fas fs-4"></i>
+                                <i class="fa fa-file-signature fa-file-text fas" style="font-size: 17px; margin-left: 1px; margin-right: 7px;"></i>
                                 <div>
                                     <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Exam Table</p>
                                 </div>
@@ -214,11 +216,11 @@
 
                     <!-- side bar link start -->
                     <li class="nav-item">
-                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse" th:href="@{/teacher/exam-grade}" 
-                            style="font-size: 15.6px;">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
+                            th:href="@{/teacher/exam-grade}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-poll-h fas fs-4"></i>
+                                <i class="fa-poll-h fas" style="font-size: 17px; margin-left: 1px; margin-right: 7px;"></i>
                                 <div>
                                     <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Exam Grade</p>
                                 </div>
