@@ -17,7 +17,7 @@
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-    <div v-cloak class="container mt-5" style="margin-bottom: 86px;" id="app">
+    <div v-cloak class="container mt-3" style="margin-bottom: 86px;" id="app">
         <input id="studentId" type="hidden" th:value="${studentId}">
         <input id="bheId" type="hidden" th:value="${bheId}">
         <input id="examId" type="hidden" th:value="${examId}">
@@ -32,7 +32,7 @@
                                 <img src="/assets/img/ExamWillStartAt-Photo.png" style="width: 80%;" class="mb-3" />
                                 <p class="fw-bold h2 mb-4 text-dark"
                                     style="font-family: 'IBM Plex Sans KR', sans-serif;">Exam will start at</p>
-                                <div class="d-flex justify-content-evenly mb-3 pb-2"><span d-flex="" flex-column="">
+                                <div class="d-flex justify-content-evenly fw-bolder mb-3 pb-2"><span d-flex="" flex-column="">
                                         <h2 style="text-align: center; font-size: 27px;">{{ startDays }}</h2>
                                         <p style="font-size: 13px;">DAYS</p>
                                     </span>
@@ -53,7 +53,7 @@
                                     </span>
                                 </div>
                                 <span th:if="${session?.role == 'ROLE_STUDENT'}">
-                                    <a th:href="@{/student/student-home}" class="btn btn-lg btn-primary rounded-pill">Go Home</a>
+                                    <a th:href="@{/student/student-home}" class="btn btn-lg pe-5 ps-5 btn-primary rounded-pill">Go Home</a>
                                 </span>
                             </div>
                         </div>
@@ -62,12 +62,32 @@
             </span>
             <span v-else>
                 <span v-if="isSubmitted">
-                    <h2>submitted</h2>
-                    <h3>{{ studentScore }}/{{ exam.fullMark }} Marks</h3>
+                    <section class="text-center">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 me-auto ms-auto">
+                                    <h3 class="fw-semibold h2 mb-4" style="font-family: Roboto, sans-serif;"></h3>
+                                    <p class="fw-semibold h2 mb-3 text-dark" style="font-family: IBM Plex Sans KR, sans-serif;">Your exam form was turned in.</p>
+                                    <h1 style="text-align: center; font-size: 25px; font-family: 'ABeeZee', sans-serif; font-weight: 700; background-color: rgba(0, 185, 43, 0.164); color: #00661e;" class="bg-opacity-50 border mb-3 me-4 ms-4 pb-3 pt-3 rounded"><span class="fw-normal">RESULT:  </span>{{ studentScore }}/{{ exam.fullMark }}<span style="font-size: 21px; font-weight: normal;">&nbsp;Marks</span></h1>
+
+                                    <!-- If exam mark was between 0 to 30 -->
+                                    <!-- <h1 style="text-align: center; font-size: 25px; font-family: 'ABeeZee', sans-serif; font-weight: 700; background-color: rgba(185, 0, 0, 0.15); color: #660000;" class="bg-opacity-50 border mb-3 me-4 ms-4 pb-3 pt-3 rounded"><span class="fw-normal">RESULT:  </span>{{ studentScore }}/{{ exam.fullMark }}<span style="font-size: 21px; font-weight: normal;">&nbsp;Marks</span></h1> -->
+
+                                    <!-- If exam mark was between 31 to 70 -->
+                                    <!-- <h1 style="text-align: center; font-size: 25px; font-family: 'ABeeZee', sans-serif; font-weight: 700; background-color: rgba(185, 94, 0, 0.15); color: #843c00;" class="bg-opacity-50 border mb-3 me-4 ms-4 pb-3 pt-3 rounded"><span class="fw-normal">RESULT:  </span>{{ studentScore }}/{{ exam.fullMark }}<span style="font-size: 21px; font-weight: normal;">&nbsp;Marks</span></h1> -->
+
+                                    <img src="/assets/img/Student1stMark-Photo.png" class="mb-3" style="width: 70%;"/>
+                                    <span><a href="http://localhost:8080/student/student-home" class="btn btn-lg pe-5 ps-5 btn-primary rounded-pill">Go Home</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </span>
+
+
                 <span v-else-if="!isExamEnd">
-                    <div class="card-body shadow-sm mb-4 mt" :class="[ isNearEnd ? 'text-danger' : 'text-light' ]"
-                        style="background-image: linear-gradient(180deg, rgb(50, 75, 160) 1%, rgb(40, 57, 119) 99%); border-radius: 25px; padding: 15px 30px 3px; margin-top: -25px;">
+                    <div class="card-body shadow-sm mb-4 mt-4" :class="[ isNearEnd ? 'text-danger' : 'text-light' ]"
+                        style="background-image: linear-gradient(181deg, rgb(68, 94, 180) 1%, rgb(49, 72, 152) 99%); border-radius: 25px; padding: 15px 30px 3px; margin-top: -25px;">
                         <div class="d-flex justify-content-evenly">
                             <span d-flex flex-column>
                                 <h2 style="text-align: center; font-size: 27px;">{{ displayDays }}</h2>
