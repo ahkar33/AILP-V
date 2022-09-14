@@ -2,6 +2,7 @@
 const app = Vue.createApp({
     data() {
         return {
+            isNearEnd: false,
             isStarted: false,
             startDateTime: '',
             studentId: '',
@@ -20,6 +21,10 @@ const app = Vue.createApp({
             isExamEnd: false,
             isLoaded: false,
             isSubmitted: false,
+            startDays: 0,
+            startHours: 0,
+            startMinutes: 0,
+            startSeconds: 0
         }
     },
     computed: {
@@ -41,6 +46,9 @@ const app = Vue.createApp({
                 const now = new Date();
                 const end = new Date(this.bhe.endDateTime);
                 const distance = end.getTime() - now.getTime();
+                if(distance < 11000) {
+                    this.isNearEnd = true;
+                }
                 if (distance <= 0) {
                     clearInterval(timer);
                     if (this.studentAnswerList.length > 0) {
@@ -61,6 +69,27 @@ const app = Vue.createApp({
                 this.isLoaded = true;
             }, 1000)
         },
+        showWhenWillExamStart(){
+            const timer = setInterval(() => {
+                const now = new Date();
+                const start = new Date(this.bhe.startDateTime);
+                const distance = start.getTime() - now.getTime();
+                if (distance <= 0) {
+                    this.isStarted = true;
+                    clearInterval(timer);
+                    return;
+                }
+                const days = Math.floor((distance / this._days));
+                const hours = Math.floor((distance % this._days) / this._hours);
+                const minutes = Math.floor((distance % this._hours) / this._minutes);
+                const seconds = Math.floor((distance % this._minutes) / this._seconds);
+                this.startMinutes = this.formatNum(minutes);
+                this.startSeconds= this.formatNum(seconds);
+                this.startHours = this.formatNum(hours);
+                this.startDays = this.formatNum(days);
+                this.isLoaded = true;
+            }, 1000)
+        },
         formatDateTime(date) {
             var hours = date.getHours();
             var minutes = date.getMinutes();
@@ -78,14 +107,14 @@ const app = Vue.createApp({
                     this.bhe = { ...res.data };
                     this.exam = { ...this.bhe.bheExam };
 
-                    this.startDateTime = this.formatDateTime(new Date(this.bhe.startDateTime));
-                    const startDate = setInterval(() => {
-                        let remainingTimeToStart = new Date(this.bhe.startDateTime).getTime() - new Date().getTime();
-                        if (remainingTimeToStart <= 0) {
-                            this.isStarted = true;
-                            clearInterval(startDate);
-                        }
-                    }, 1000);
+                    // this.startDateTime = this.formatDateTime(new Date(this.bhe.startDateTime));
+                    // const startDate = setInterval(() => {
+                    //     let remainingTimeToStart = new Date(this.bhe.startDateTime).getTime() - new Date().getTime();
+                    //     if (remainingTimeToStart <= 0) {
+                    //         this.isStarted = true;
+                    //         clearInterval(startDate);
+                    //     }
+                    // }, 1000);
 
                     let remainingTime = new Date(this.bhe.endDateTime).getTime() - new Date().getTime();
                     if (remainingTime <= 0) {
@@ -135,6 +164,7 @@ const app = Vue.createApp({
         this.examId = document.getElementById('examId').value;
         this.getStudentHasExam();
         this.getBheData();
+        this.showWhenWillExamStart();
         this.showExamStartTime();
     }
 })
