@@ -24,7 +24,41 @@
 
         <span v-if="isLoaded">
             <span v-if="!isStarted">
-                Exam will start at {{ startDateTime }}
+                <section class="text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 ms-auto me-auto">
+                                <h3 class="fw-semibold h2 mb-4" style="font-family: 'Roboto', sans-serif;"></h3>
+                                <img src="/assets/img/ExamWillStartAt-Photo.png" style="width: 80%;" class="mb-3" />
+                                <p class="fw-bold h2 mb-4 text-dark"
+                                    style="font-family: 'IBM Plex Sans KR', sans-serif;">Exam will start at</p>
+                                <div class="d-flex justify-content-evenly mb-3 pb-2"><span d-flex="" flex-column="">
+                                        <h2 style="text-align: center; font-size: 27px;">01</h2>
+                                        <p style="font-size: 13px;">DAYS</p>
+                                    </span>
+                                    <h2 style="font-size: 37px; font-weight: 200; line-height: 64px;">:</h2><span
+                                        d-flex="" flex-column="">
+                                        <h2 style="text-align: center; font-size: 27px;">23</h2>
+                                        <p style="font-size: 13px;">HOURS</p>
+                                    </span>
+                                    <h2 style="font-size: 37px; font-weight: 200; line-height: 64px;">:</h2><span
+                                        d-flex="" flex-column="">
+                                        <h2 style="text-align: center; font-size: 27px;">56</h2>
+                                        <p style="font-size: 13px;">MINUTES</p>
+                                    </span>
+                                    <h2 style="font-size: 37px; font-weight: 200; line-height: 64px;">:</h2><span
+                                        d-flex="" flex-column="">
+                                        <h2 style="text-align: center; font-size: 27px;">27</h2>
+                                        <p style="font-size: 13px;">SECONDS</p>
+                                    </span>
+                                </div>
+                                <span th:if="${session?.role == 'ROLE_STUDENT'}">
+                                    <a th:href="@{/student/student-home}" class="btn btn-lg btn-primary rounded-pill">Go Home</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </span>
             <span v-else>
                 <span v-if="isSubmitted">
