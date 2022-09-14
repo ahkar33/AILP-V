@@ -72,6 +72,7 @@ public class TeacherController {
                 .filter(batch -> batch.getIsActive())
                 .collect(Collectors.toList());
         model.addAttribute("batchList", batchList);
+        model.addAttribute("teacherId", teacherId);
         return "/teacher/TCH-DSB-01";
     }
 
@@ -301,9 +302,9 @@ public class TeacherController {
         Long min = totalTime / 60;
         String totalTimeStr = "";
         if (hour == 0) {
-            totalTimeStr = min + "min";
+            totalTimeStr = min + " min";
         } else {
-            totalTimeStr = hour + "hr " + hourMin + "min";
+            totalTimeStr = hour + " hr " + hourMin + "min";
         }
         if (bhe != null) {
             bhe.setStartDateTime(batchHasExam.getStartDateTime());

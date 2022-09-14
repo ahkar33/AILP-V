@@ -138,9 +138,6 @@
 
                                             <span th:if="${batch.isActive == true}">
                                                 <a th:href="@{/admin/toggleDisableBatch/} + ${batch?.id}"
-                                                    data-bs-toggle="popover" title="Disable Button"
-                                                    data-bs-content="Hello There" data-bs-trigger="hover"
-                                                    data-bs-placement="top" data-bs-delay="700" data-bs-html="false"
                                                     class="btn btn-danger bg-gradient">
                                                     Disable
                                                 </a>
@@ -148,9 +145,6 @@
 
                                             <span th:if="${batch.isActive == false}">
                                                 <a th:href="@{/admin/toggleDisableBatch/} + ${batch?.id}"
-                                                    data-bs-toggle="popover" title="Enable Button"
-                                                    data-bs-content="Hello There" data-bs-trigger="hover"
-                                                    data-bs-placement="top" data-bs-delay="700" data-bs-html="false"
                                                     class="btn btn-success bg-gradient">
                                                     Enable
                                                 </a>

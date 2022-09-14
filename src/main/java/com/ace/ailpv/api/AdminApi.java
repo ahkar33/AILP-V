@@ -74,14 +74,5 @@ public class AdminApi {
         return data;
     }
 
-    @GetMapping("/getStudentCountByBatch")
-    public Map<String, Integer> getStudentCountByBatch() {
-        List<Batch> batchList = batchService.getAllBatches();
-        Map<String, Integer> data = new LinkedHashMap<>();
-        for (Batch batch : batchList) {
-            data.put(batch.getName(), userService.getUserCountByBatchIdAndRole(batch.getId(), "ROLE_STUDENT"));
-        }
-        return data;
-    }
 
 }
