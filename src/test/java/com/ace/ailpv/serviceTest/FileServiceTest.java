@@ -25,7 +25,7 @@ public class FileServiceTest {
     @TempDir
     Path resourceDir;
 
-    String courseFilePath = "D:\\OJT BATCH 4\\final project\\AILP-V\\src\\main\\resources\\static\\courses\\";
+    String courseFilePath = "src\\main\\resources\\static\\courses\\";
 
     @Test
     public void createFolderForCourseTest() {

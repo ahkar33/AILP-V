@@ -41,4 +41,6 @@ public class BatchHasExam {
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime endDateTime;
 
+	private String totalTime;
+
 }

@@ -41,14 +41,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
 
                 .authorizeRequests()
-                .antMatchers("/assets/**", "/auth/**", "/login", "/logout", "/admin/register", "/api/**","/user/**").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/teacher/**").hasRole("TEACHER")
-                .antMatchers("/student/**").hasAnyRole("TEACHER", "STUDENT","ADMIN")
-                .antMatchers("/admin/**").permitAll()
-                .anyRequest()
-                .authenticated()
-                
+                // .antMatchers("/assets/**", "/auth/**", "/login", "/logout",
+                // "/admin/register", "/api/**","/user/**").permitAll()
+                // .antMatchers("/admin/**").hasRole("ADMIN")
+                // .antMatchers("/teacher/**").hasRole("TEACHER")
+                // .antMatchers("/student/**").hasAnyRole("TEACHER", "STUDENT","ADMIN")
+                // .antMatchers("/admin/**").permitAll()
+                // .anyRequest()
+                // .authenticated()
+                .antMatchers("/**").permitAll()
+
                 .and()
                 .formLogin()
                 .loginPage("/auth/login")
@@ -60,8 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationSuccessHandler(remembermeSuccessHandler)
                 .tokenValiditySeconds(2592000)
                 .and()
-                .exceptionHandling().accessDeniedPage("/user/403")
-                ;
+                .exceptionHandling().accessDeniedPage("/user/403");
     }
 
     @Bean

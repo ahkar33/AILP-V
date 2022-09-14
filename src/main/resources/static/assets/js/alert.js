@@ -1,11 +1,9 @@
 const alertSuccess = () => {
     Swal.fire(
-        'Successfully Edited!', 
+        'Successfully Submitted!', 
         ' ',
         'success'
-    ).then(() => {
-            window.location = `http://localhost:8080/admin/batch-table`;    
-    });
+    )
 }
 
 const handleReset = (userId) => {
@@ -24,12 +22,12 @@ const handleReset = (userId) => {
     })
 }
 
-// $(document).ready(function(){
-//     let successMsg = document.getElementById("successMsg").value;
-//     if(successMsg){
-//         alertSuccess();
-//     }
-// });
+$(document).ready(function(){
+    let successMsg = document.getElementById("successMsg").value;
+    if(successMsg){
+        alertSuccess();
+    }
+});
 
 
 

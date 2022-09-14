@@ -56,7 +56,7 @@ axios.get('http://localhost:8080/api/admin/getBatchAttendance')
                 labels: attendanceBatchList,
                 datasets: [{
                     label: 'Attendance Percentage',
-                    data: attendancePercentList, 
+                    data: attendancePercentList,
                     backgroundColor: [...colorListTwo],
                     // backgroundColor: 'lightblue',
                     borderWidth: 1, // boder thickness of the bar
@@ -96,45 +96,54 @@ axios.get('http://localhost:8080/api/admin/getBatchAttendance')
     .catch(error => console.log(error.message));
 
 // -----------------------------------------------------------------------------------------------------------------
+let countCourseList = [];
+let countStudentList = [];
 
-let totalStudents = new Chart(chartTwo, {
-    type: 'doughnut', // bar, horizontalBar, pie ...
-    data: {
-        labels: ["Java Batch 01", "Java Batch 02", " Java Batch 03"],
-        datasets: [{
-            // label: 'Total Students',
-            data: [100, 10, 5], // number of news per reporter
-            backgroundColor: [...colorListOne],
-            borderWidth: 1, // boder thickness of the bar
-            borderColor: '#777',
-            hoverBorderWidth: 2,
-            hoverBorderColor: 'black'
-        }],
-    },
-    options: {
-        plugins: {
-            title: {
-                display: true,
-                text: '',
-                font: {
-                    size: 25
-                }
+
+axios.get('http://localhost:8080/api/admin/getStudentCountByCourse')
+    .then((res) => {
+        countCourseList = Object.keys(res.data);
+        countStudentList = Object.values(res.data);
+    }).then(() => {     
+        let totalStudents = new Chart(chartTwo, {
+            type: 'doughnut', // bar, horizontalBar, pie ...
+            data: {
+                labels: countCourseList,
+                datasets: [{
+                    label: 'Total Students',
+                    data: countStudentList, // number of news per reporter
+                    backgroundColor: [...colorListOne],
+                    borderWidth: 1, // boder thickness of the bar
+                    borderColor: '#777',
+                    hoverBorderWidth: 2,
+                    hoverBorderColor: 'black'
+                }],
             },
-            legend: {
-                // display: false, // hide label
-                position: 'right', // move label to right side of chart
-            },
-            tooltips: {
-                enabled: false
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '',
+                        font: {
+                            size: 25
+                        }
+                    },
+                    legend: {
+                        // display: false, // hide label
+                        position: 'right', // move label to right side of chart
+                    },
+                    tooltips: {
+                        enabled: false
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
             }
-        },
-        layout: {
-            padding: {
-                left: 50,
-                right: 0,
-                bottom: 0,
-                top: 0
-            }
-        },
-    }
-});
+    });
+    }) 
