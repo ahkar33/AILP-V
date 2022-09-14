@@ -43,7 +43,6 @@ build/
 *.rar
 
 ### ignore images
-*.png
 *.jpeg
 *.jpg
 *.jfif
