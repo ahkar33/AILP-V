@@ -105,7 +105,8 @@ public class StudentController {
         User userInfo = usersService.getUserById(userId);
         Long userBatchId;
         if (batchId.equals("AILP")) {
-            userBatchId = userInfo.getBatchList().iterator().next().getId();
+            String resBatchId = (String) session.getAttribute("batchId");
+            userBatchId = Long.parseLong(resBatchId);
         } else {
             userBatchId = Long.parseLong(batchId);
         }
@@ -126,8 +127,11 @@ public class StudentController {
             if (batchVideoList.size() > 0) {
                 batchHasVideo = batchHasVideoService.getAllBatchHasVideoByBatchId(userBatchId).get(0);
                 model.addAttribute("video", batchHasVideo.getVideo());
-            } else {
-                batchHasVideo.setVideo(null);
+            }
+            else {
+                Video video = new Video();
+                video.setId(null);
+                batchHasVideo.setVideo(video);
                 model.addAttribute("video", batchHasVideo.getVideo());
             }
         }
@@ -145,9 +149,10 @@ public class StudentController {
         String userId = (String) session.getAttribute("uid");
         User userInfo = usersService.getUserById(userId);
 
-        Long userBatchId;
+        long userBatchId;
         if (batchId.equals("AILP")) {
-            userBatchId = userInfo.getBatchList().iterator().next().getId();
+            String resBatchId = (String) session.getAttribute("batchId");
+            userBatchId = Long.parseLong(resBatchId);
         } else {
             userBatchId = Long.parseLong(batchId);
         }
@@ -192,7 +197,7 @@ public class StudentController {
         }
         answer.setAnswerFileName(answer.getAnswerFile().getOriginalFilename());
         assignmentAnswerService.addAssignmentAnswer(answer);
-        redirectAttr.addFlashAttribute("successMsg", true);
+         redirectAttr.addFlashAttribute("successMsg", true);
         // return "/student/STU-ASG-00";
         return "redirect:/student/studentAssignment";
     }
