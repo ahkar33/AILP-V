@@ -31,6 +31,7 @@ public class User {
     @Id
     private String id;
 
+    @Column(length = 1000)
     private String name;
 
     @JsonIgnore

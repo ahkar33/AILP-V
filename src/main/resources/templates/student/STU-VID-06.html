@@ -170,7 +170,7 @@
                                 <img class="img-profile me-3 rounded-circle"
                                     th:src="@{'/profile_pics/' + ${session?.profile_pic} }"
                                     style="width: 40px; height: 40px;" />
-                                <textarea @keyup.enter="sendComment()" v-model="commentText"
+                                <textarea @keyup.enter="sendComment()" v-model="commentText" maxlength="900"
                                     @click.prevent="clickInput()"
                                     class="bg-transparent border-0 border-2 border-bottom border-secondary form-control fs-6"
                                     id="formInput4" rows="2" placeholder="Add a comment..."></textarea>
@@ -252,7 +252,7 @@
                                                         <img class="img-profile me-2 rounded-circle"
                                                             th:src="@{'/profile_pics/' + ${session?.profile_pic} }"
                                                             style="width: 30px; height: 30px;" />
-                                                        <textarea v-model="comment.replyText"
+                                                        <textarea v-model="comment.replyText" maxlength="900"
                                                             @keyup.enter="sendReply(comment.id, index)"
                                                             class="bg-transparent border-0 border-2 border-bottom border-secondary form-control fs-6"
                                                             id="formInput4" rows="1" cols="58"

@@ -139,8 +139,8 @@
                                                                 <input type="hidden" name="id" th:value="${course?.id}">
                                                                 <label for="">Course Name</label>
                                                                 <input type="text" name="name" class="form-control"
-                                                                    style="margin-bottom: 12px;" required
-                                                                    maxlength="100" minlength="1"
+                                                                    style="margin-bottom: 12px;" required 
+                                                                    maxlength="900"
                                                                     th:value="${course?.name}">
 
                                                                 <label for="">Fee</label>
@@ -151,7 +151,7 @@
                                                                 <label for="">Description</label>
                                                                 <textarea type="text" name="desc" class="form-control"
                                                                     style="margin-bottom: 12px;"
-                                                                    th:text="${course?.description}" required
+                                                                    th:text="${course?.description}" required 
                                                                     maxlength="1000"> </textarea>
 
                                                             </div>
