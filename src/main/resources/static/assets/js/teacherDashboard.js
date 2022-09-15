@@ -43,6 +43,7 @@ axios.get(`http://localhost:8080/api/teacher/getBatchAttendanceByTeacherId/${tea
                 }],
             },
             options: {
+                responsive: true,
                 plugins: {
                     title: {
                         display: true,
@@ -53,7 +54,7 @@ axios.get(`http://localhost:8080/api/teacher/getBatchAttendanceByTeacherId/${tea
                     },
                     legend: {
                         // display: false, // hide label
-                        position: 'right', // move label to right side of chart
+                        position: 'top', // move label to right side of chart
                     },
                     tooltips: {
                         enabled: false
@@ -61,12 +62,12 @@ axios.get(`http://localhost:8080/api/teacher/getBatchAttendanceByTeacherId/${tea
                 },
                 layout: {
                     padding: {
-                        left: 50,
+                        left: 0,
                         right: 0,
                         bottom: 0,
-                        top: 0
+                        top: -20
                     }
-                },
+                }
             }
         });
 
@@ -98,6 +99,7 @@ axios.get(`http://localhost:8080/api/teacher/getStudentCountByBatchTeacherId/${t
                 }],
             },
             options: {
+                responsive: true,
                 plugins: {
                     title: {
                         display: true,
@@ -108,7 +110,7 @@ axios.get(`http://localhost:8080/api/teacher/getStudentCountByBatchTeacherId/${t
                     },
                     legend: {
                         // display: false, // hide label
-                        position: 'right', // move label to right side of chart
+                        position: 'top', // move label to right side of chart
                     },
                     tooltips: {
                         enabled: false
@@ -116,10 +118,10 @@ axios.get(`http://localhost:8080/api/teacher/getStudentCountByBatchTeacherId/${t
                 },
                 layout: {
                     padding: {
-                        left: 50,
+                        left: 0,
                         right: 0,
                         bottom: 0,
-                        top: 0
+                        top: -30
                     }
                 },
             }
