@@ -17,8 +17,8 @@
                 <div th:insert="/teacher/teacher-fragments :: navbar" />
                 <input type="hidden" th:value="${session?.uid}" id="teacherId">
                 <div class="container-fluid">
-                    <h1 class="fs-3 mb-4 text-start"
-                        style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
+                    <h1 class="fs-3 mb-3 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
                         Modify Attendance</h1>
                     <div class="card shadow text-dark">
                         <div class="card-header d-flex d-lg-flex flex-lg-wrap flex-wrap py-3">
@@ -53,7 +53,7 @@
                         <div class="card-body text-dark">
 
                             <!-- where I have to write table -->
-                            <table id="dataTable"  class="display p-2">
+                            <table id="dataTable" class="display p-2">
                                 <thead class="table">
                                     <tr>
                                         <th>Student Id</th>
@@ -80,23 +80,21 @@
                                         <td class="d-flex justify-content-start">
                                             <div class="form-check me-2">
                                                 <input class="form-check-input" type="radio" :name="student.id"
-                                                   v-model="student.status" value="Present" checked />
+                                                    v-model="student.status" value="Present" checked />
                                                 <label class="form-check-label" :for="student.id">
                                                     Present
                                                 </label>
                                             </div>
                                             <div class="form-check me-2">
                                                 <input class="form-check-input" type="radio" :name="student.id"
-                                                v-model="student.status" value="Absent"
-                                                 />
+                                                    v-model="student.status" value="Absent" />
                                                 <label class="form-check-label" :for="student.id">
                                                     Absent
                                                 </label>
                                             </div>
                                             <div class="form-check me-2">
                                                 <input class="form-check-input" type="radio" :name="student.id"
-                                                    v-model="student.status" value="Leave" 
-                                                />
+                                                    v-model="student.status" value="Leave" />
                                                 <label class="form-check-label" :for="student.id">
                                                     Leave
                                                 </label>
@@ -109,10 +107,15 @@
                         </div>
                     </div>
                 </div>
-
+                <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
+                    <div class="container pb-2 pt-2">
+                        <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights Reserved - Ace Inspiration</p>
+                    </div>
+                </footer>
             </div>
         </div>
-        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <div th:insert="/teacher/teacher-fragments :: footer" />
 

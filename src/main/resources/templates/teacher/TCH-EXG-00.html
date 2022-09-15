@@ -23,11 +23,10 @@
                 <div th:insert="/teacher/teacher-fragments :: navbar" />
 
                 <div class="container-fluid">
-                    <h1 class="fs-3 mb-4 text-start"
-                        style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
-                        Exam Grade
-                    </h1>
-                    <div class="card shadow">
+                    <h1 class="fs-3 mb-3 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        Exam Grade</h1>
+                    <div class="card shadow-sm">
 
                         <div class="card-header py-3">
                             <form th:object="${data}" th:action="@{/teacher/searchStudentExamsByBatch}" method="post"

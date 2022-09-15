@@ -26,15 +26,14 @@
                     </div>
                     <div class="d-sm-flex justify-content-between align-items-center mb-2 mt-2"
                         style="margin-top: 35px;">
-                        <h3 class="mb-0"
-                            style="font-weight: bold;font-family: 'Anek Kannada', sans-serif;font-size: 30px;color: rgb(103,103,103);">
-                            Profile
-                        </h3>
+                        <h1 class="fs-3 mb-1 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        Profile</h1>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-4">
                             <div class="card mb-3">
-                                <div class="card-body text-center shadow">
+                                <div class="card-body text-center shadow-sm">
                                     <img class="rounded-circle mb-3 mt-4"
                                         th:src="@{${'/profile_pics/' + session?.profile_pic} }" width="160"
                                         height="160" />
@@ -116,7 +115,7 @@
                         <div class="col-lg-8">
                             <div class="row">
                                 <div class="col">
-                                    <div class="card shadow mb-3">
+                                    <div class="card shadow-sm mb-3">
                                         <div class="card-header py-3">
                                             <p class="text-primary m-0 fw-bold"
                                                 style="font-family: 'IBM Plex Sans KR', sans-serif;">
@@ -192,6 +191,11 @@
 
 
             </div>
+            <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
+                <div class="container pb-2 pt-2">
+                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights Reserved - Ace Inspiration</p>
+                </div>
+            </footer>
         </div>
     </div>
 

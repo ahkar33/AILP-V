@@ -15,45 +15,36 @@
                 <div th:insert="/teacher/teacher-fragments :: navbar" />
 
 
-                <div class="container-fluid">
+                <div class="container-fluid mb-5">
                     <div class="align-items-center d-inline-flex flex-row mb-3 mt-2"> <i
                             class="d-inline-flex fa-2x fa-chart-bar fas fs-4 mb-2 me-2 text-primary"></i>
-                        <h3 class="d-inline-flex fs-4 mb-2 text-dark"
-                            style="font-weight: bold; font-family: Roboto, sans-serif;">
-                            &nbsp;Teacher Dashboard</h3>
+                            <h1 class="fs-4  mb-2 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        &nbsp;Teacher Dashboard</h1>
                     </div>
 
 
                     <h1 style="font-family:Roboto, sans-serif;" class="fs-5">
                         Classes you are currently teaching </h1>
 
-                    <div class="mb-4 me-0 pe-0 row">
+                    <div class="g-3 mb-4 row">
                         <input type="hidden" th:value="${teacherId}" id="teacherId">
-                        <div class="col-lg-6 col-md-12 col-xl- col-xxl-3 mb-3 me-0" th:each="batch: ${batchList}">
+                        <div class="col-lg-4 col-md-6 col-xl- col-xl-4 col-xxl-3 " th:each="batch: ${batchList}">
                             <a class="text-decoration-none" th:href="@{'/student/getVideos/' + ${batch.id} }">
                                 <div class="border-start-primary card pb-1 pt-1 py-2 shadow-sm"
                                     data-bss-hover-animate="pulse">
                                     <div class="card-body">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col col-9 me-2">
-                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                                    <p style="font-size: 18.2px;font-weight: bold;font-family: 'Roboto', sans-serif;color: #edba39;"
-                                                        class="fs-5 text-capitalize text-dark">
-                                                        [[${batch.getBatchCourse().getName()}]]</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-auto pe-0 ps-0">
-                                                <i class="fa fa-2x fa-photo-video fa-users fas text-primary"></i>
-                                            </div>
+                                        <div class="d-flex justify-content-between">
+                                            <p style="font-size: 18.2px; font-family: 'Roboto', sans-serif;"
+                                                class="fs-5 text-uppercase fw-normal text-dark">
+                                                [[${batch.getBatchCourse().getName()}]]</p>
+                                            <i class="fa fa-photo-video fa-users fas ms-2 text-primary"
+                                                style="font-size: 28px;"></i>
                                         </div>
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col col-9 me-2">
-                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                                    <p style="font-size: 18.2px;font-weight: bold;font-family: 'Roboto', sans-serif;color: #edba39;"
-                                                        class="fs-6 mb-0 text-capitalize text-danger">
-                                                        [[${batch.getName()}]]</p>
-                                                </div>
-                                            </div>
+                                        <div class="text-uppercase text-primary text-xs mb-1">
+                                            <p style="font-size: 18.2px; font-family: 'Roboto', sans-serif;"
+                                                class="fs-6 mb-0 text-capitalize text-danger">
+                                                [[${batch.getName()}]]</p>
                                         </div>
                                     </div>
                                 </div>
@@ -62,12 +53,13 @@
                     </div>
 
                     <div class=" row">
-                        <div class="col-lg-7 col-md-12 ">
+                        <div class="col-lg-8 col-xl-8 col-md-12 ">
                             <div class="card shadow-sm">
                                 <div class="card-body">
                                     <div class="d-md-flex no-block align-items-center">
                                         <div>
-                                            <h5 class="card-title" style="font-family: Roboto, sans-serif;">Batch VS. Attendance Chart</h5>
+                                            <h5 class="card-title" style="font-family: Roboto, sans-serif;">Batch VS.
+                                                Attendance Chart</h5>
                                             <h6 class="card-subtitle">you can check the count</h6>
                                         </div>
                                     </div>
@@ -75,12 +67,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-12 ">
+                        <div class="col-lg-4 col-xl-4 col-md-12 ">
                             <div class="card shadow-sm">
                                 <div class="card-body">
                                     <div class="d-md-flex no-block align-items-center">
                                         <div>
-                                            <h5 class="card-title" style="font-family: Roboto, sans-serif;">Batch VS. Attendance Chart</h5>
+                                            <h5 class="card-title" style="font-family: Roboto, sans-serif;">Batch VS.
+                                                Attendance Chart</h5>
                                             <h6 class="card-subtitle">you can check the count</h6>
                                         </div>
                                     </div>
@@ -91,6 +84,11 @@
                     </div>
                 </div>
             </div>
+            <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
+                <div class="container pb-2 pt-2">
+                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights Reserved - Ace Inspiration</p>
+                </div>
+            </footer>
         </div>
     </div>
 
