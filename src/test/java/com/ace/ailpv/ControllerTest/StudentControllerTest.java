@@ -42,6 +42,7 @@ import java.util.List;
 @ContextConfiguration
 // @WithUserDetails("stu001")
 public class StudentControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
 
