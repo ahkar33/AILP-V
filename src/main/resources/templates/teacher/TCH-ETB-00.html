@@ -12,16 +12,15 @@
         <div th:insert="/teacher/teacher-fragments :: sidebar" />
 
         <div class="d-flex flex-column" id="content-wrapper">
-            <div id="app">
+            <div id="content">
                 <!-- this is where nav bar is -->
                 <div th:insert="/teacher/teacher-fragments :: navbar" />
                 <input type="hidden" th:value="${session?.uid}" id="teacherId">
                 <div class="container-fluid">
-                    <h1 class="fs-3 mb-4 text-start"
-                        style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
-                        Exam
-                    </h1>
-                    <div class="card shadow text-dark">
+                    <h1 class="fs-3 mb-3 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        Exam Table</h1>
+                    <div class="card shadow-sm text-dark">
                         <!-- <div class="card-header d-flex d-lg-flex flex-lg-wrap flex-wrap py-3">
                             <form>
                                 <div class="me-3">
@@ -84,7 +83,11 @@
                         </div>
                     </div>
                 </div>
-
+                <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
+                    <div class="container pb-2 pt-2">
+                        <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights Reserved - Ace Inspiration</p>
+                    </div>
+                </footer>
             </div>
         </div>
         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
