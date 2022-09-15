@@ -17,11 +17,13 @@
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
     <div class="container" style="margin-bottom: 77px;">
-        <h2 class="mt-4 fw-bold" style="font-family: 'Gelasio', serif; color: rgb(61, 61, 61);" >Let's Start Learning, [[${session.name}]]</h2>
+        <h2 class="mt-4 fw-bold" style="font-family: 'Gelasio', serif; color: rgb(61, 61, 61);">Let's Start Learning,
+            [[${session.name}]]</h2>
         <div class="row gx-1 d-flex flex-wrap" style="margin-top: 20px;">
 
             <!-- card start -->
-            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" style="padding-left: 5px;padding-right: 5px;" data-bss-hover-animate="pulse">
+            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" style="padding-left: 5px;padding-right: 5px;"
+                data-bss-hover-animate="pulse">
                 <a class="text-decoration-none text-dark" th:href="@{/student/getVideos/AILP}">
                     <div class="card shadow-sm">
                         <div class="card-body">
@@ -94,7 +96,8 @@
             <!-- card end -->
 
             <!-- card start -->
-            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" style="padding-left: 5px;padding-right: 5px;" data-bss-hover-animate="pulse">
+            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" style="padding-left: 5px;padding-right: 5px;"
+                data-bss-hover-animate="pulse">
                 <a class="text-decoration-none text-dark" th:href="@{/student/studentAssignment}">
                     <div class="card shadow-sm">
                         <div class="card-body">
@@ -109,7 +112,7 @@
                                 <div
                                     class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
                                     <i class="material-icons d-flex d-md-flex justify-content-md-center align-items-md-center"
-                                        style="font-size: 25px;color: #00842d;">assignment</i>
+                                        style="font-size: 25px;color: #00842d;"></i>
                                 </div>
                             </div>
                             <p class="text-secondary card-text">
@@ -191,7 +194,8 @@
             <!-- card end -->
 
             <!-- card start -->
-            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" style="padding-left: 5px;padding-right: 5px;" data-bss-hover-animate="pulse">
+            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" style="padding-left: 5px;padding-right: 5px;"
+                data-bss-hover-animate="pulse">
                 <a class="text-decoration-none text-dark" th:href="@{/student/getExamList}">
                     <div class="card shadow-sm">
                         <div class="card-body">
@@ -207,7 +211,6 @@
                                     class="col-2 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2 text-nowrap text-end d-flex justify-content-center align-items-center">
                                     <i class="material-icons d-flex d-md-flex justify-content-md-center align-items-md-center"
                                         style="font-size: 25px;color: #7400ab;">
-                                        library_books
                                     </i>
                                 </div>
                             </div>
@@ -222,7 +225,8 @@
             <!-- card end -->
 
             <!-- card start -->
-            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" style="padding-left: 5px;padding-right: 5px;" data-bss-hover-animate="pulse">
+            <div class="col-sm-6 col-md-6 col-lg-4 mt-sm-auto mb-4" style="padding-left: 5px;padding-right: 5px;"
+                data-bss-hover-animate="pulse">
                 <a class="text-decoration-none text-dark" th:href="@{/student/studentGradeBook}">
                     <div class="card shadow-sm">
                         <div class="card-body">
@@ -324,8 +328,6 @@
         app.mount('#chat');
 
     </script>
-    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/assets/js/bs-init.js"></script>
 
 </body>
 

@@ -5,15 +5,15 @@
     <title>Student Home</title>
 </head>
 
-<body id="page-top" style="background: rgb(255,255,255);">
+<body id="page-top" style="background-color: #E4E6E9 ">
     <div th:insert="/student/student-fragments :: pc-navbar" />
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
 
     <div class="container" style="margin-top: 22px;padding-right: 10px;padding-left: 10px;">
 
-        <h2 class="m-3">Assignemnts</h2>
-        <div class="card shadow" style="margin-bottom: 85px;">
+        <h2 class="mb-3 me-3 mt-3 text-black-50" style="font-family: 'Roboto', sans-serif;">Assignments</h2>
+        <div class="card shadow-sm" style="margin-bottom: 85px; font-family: 'Roboto', sans-serif;">
             <div class="card-body" style="padding: 10px;">
                 <table id="dataTable">
                     <thead>
@@ -30,23 +30,23 @@
                             <form th:action="@{/student/submitAssignment}" th:object="${answer}" method="post"
                                 enctype="multipart/form-data">
                                 <input type="hidden" th:value="${successMsg}" id="successMsg">
-                                <td>[[${assignment?.name}]]</td>
-                                <td>
+                                <td class="pt-2 text-dark">[[${assignment?.name}]]</td>
+                                <td class="pb-0 pt-2">
                                     <a th:href="@{ ${'/courses/' + assignment?.assignmentBatch?.batchCourse?.name + '/' + assignment?.assignmentBatch?.id + '/'  +  'AssignmentQuestion' + '/' + assignment?.questionFileName} }"
-                                        target="_blank" class="btn btn-info">
+                                        target="_blank" class="btn  btn-sm btn-success mb-2 ms-0 text-break text-overflow text-truncate w-75"><i class="fa fa-download me-1 pt-1"></i>
                                         [[${assignment?.questionFileName}]]
                                     </a>
                                 </td>
                                 <td>[[${assignment?.dueDate}]]</td>
-                                <td>
+                                <td class="pt-1 ">
                                     <input type="hidden" th:value="${session?.uid}" th:name="answerStudent"
                                         th:id="answerStudent">
                                     <input type="hidden" th:value="${assignment.id}" th:name="assignment"
                                         th:id="assignment">
-                                    <input type="file" th:field="*{answerFile}" accept=".zip" required />
+                                    <input class="form-control w-75" type="file" th:field="*{answerFile}" accept=".zip" required />
                                 </td>
-                                <td>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                <td class="pb-0 pt-1">
+                                    <button type="submit" class=" btn btn-primary mb-2 ms-0">Submit</button>
                                 </td>
                           
                             </form>

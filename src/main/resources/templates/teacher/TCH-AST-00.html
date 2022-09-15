@@ -17,15 +17,9 @@
                 <input type="hidden" th:value="${session?.uid}" id="teacherId" />
 
                 <div class="container-fluid">
-                    <h1 class="fs-3 mb-4 text-start" style="
-                margin-bottom: 42px;
-                font-size: 33px;
-                color: rgb(72, 72, 72);
-                font-weight: bold;
-                font-family: 'Roboto', sans-serif;
-              ">
-                        Assignment Table
-                    </h1>
+                    <h1 class="fs-3 mb-3 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        Assignment Table</h1>
                     <div
                         class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
                         <div>
@@ -53,7 +47,7 @@
                                             </div>
                                             <div class="modal-body text-dark">
                                                 <label for="" class="mb-auto">Assignment Name</label>
-                                                <input type="text" th:field="*{name}"
+                                                <input type="text" th:field="*{name}" maxlength="900"
                                                     class="border border-secondary form-control mb-3" required />
 
                                                 <label for="" class="mb-auto">Batch</label>
@@ -91,7 +85,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card shadow">
+                    <div class="card shadow-sm">
 
                         <div class="card-body text-dark">
                             <table id="dataTable">
@@ -121,9 +115,9 @@
                     </div>
                 </div>
             </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
+            <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
+                <div class="container pb-2 pt-2">
+                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights Reserved - Ace Inspiration</p>
                 </div>
             </footer>
         </div>
