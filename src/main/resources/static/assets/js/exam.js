@@ -51,7 +51,7 @@ const app = Vue.createApp({
                 }
                 if (distance <= 0) {
                     clearInterval(timer);
-                    if (this.studentAnswerList.length > 0) {
+                    if (this.studentAnswerList.length > 0 && !this.isSubmitted) {
                         this.handleSubmit();
                     }
                     this.isExamEnd = true;

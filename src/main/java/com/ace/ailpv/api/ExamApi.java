@@ -57,17 +57,24 @@ public class ExamApi {
     @PostMapping("/addStudentHasExam")
     public void addStudentHasExam(@Param("studentId") String studentId, @Param("examId") Long examId,
             @Param("score") Long score) {
-        User student = userService.getUserById(studentId);
-        Exam exam = examService.getExamById(examId);
-        StudentHasExam studentHasExam = new StudentHasExam();
-        studentHasExam.setSheExam(exam);
-        studentHasExam.setSheStudent(student);
-        studentHasExam.setScore(score);
-        studentHasExamService.addStudentHasExam(studentHasExam);
+
+        StudentHasExam studentHasExamRes = studentHasExamService.getStudentHasExamByStudentIdAndExamId(studentId,
+                examId);
+        if (studentHasExamRes == null) {
+            User student = userService.getUserById(studentId);
+            Exam exam = examService.getExamById(examId);
+            StudentHasExam studentHasExam = new StudentHasExam();
+            studentHasExam.setSheExam(exam);
+            studentHasExam.setSheStudent(student);
+            studentHasExam.setScore(score);
+            studentHasExamService.addStudentHasExam(studentHasExam);
+        }
+
     }
 
     @GetMapping("/getStudentHasExam/{studentId}/{examId}")
-    public StudentHasExam getStudentHasExam(@PathVariable("studentId") String studentId, @PathVariable("examId") Long examId) {
+    public StudentHasExam getStudentHasExam(@PathVariable("studentId") String studentId,
+            @PathVariable("examId") Long examId) {
         return studentHasExamService.getStudentHasExamByStudentIdAndExamId(studentId, examId);
     }
 
