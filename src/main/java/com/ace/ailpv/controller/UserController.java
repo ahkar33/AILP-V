@@ -90,7 +90,7 @@ public class UserController extends Thread {
         } else if (user.getRole().equals("ROLE_TEACHER")) {
             return "/teacher/TCH-PRF-08";
         } else {
-            return "/student/STU-PRF-08";
+            return "/student/STU-PRF-09";
         }
     }
 
