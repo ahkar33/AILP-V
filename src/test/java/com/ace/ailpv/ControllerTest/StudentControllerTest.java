@@ -119,7 +119,7 @@ public class StudentControllerTest {
                 .andExpect(model().attributeExists("username"))
                 .andExpect(model().attributeExists("batchId"))
                 .andExpect(model().attributeExists("batchName"))
-                .andExpect(view().name("/student/STU-PBC-07"));
+                .andExpect(view().name("/student/STU-PBC-05"));
     }
 
     @Test
@@ -138,7 +138,7 @@ public class StudentControllerTest {
         this.mockMvc.perform(get("/student/getResources").sessionAttrs(sessionattr))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("batchHasResourceList"))
-                .andExpect(view().name("/student/STU-REC-09"));
+                .andExpect(view().name("/student/STU-REC-03"));
     }
 
     @Test
@@ -157,7 +157,7 @@ public class StudentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("assignmentList"))
                 .andExpect(model().attributeExists("answer"))
-                .andExpect(view().name("/student/STU-ASG-00"));
+                .andExpect(view().name("/student/STU-ASG-04"));
     }
 
     @Test
@@ -171,7 +171,7 @@ public class StudentControllerTest {
         this.mockMvc.perform(get("/student/studentGradeBook").sessionAttrs(sessionattr))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("resultList"))
-                .andExpect(view().name("/student/STU-GRB-00"));
+                .andExpect(view().name("/student/STU-GRB-08"));
     }
 
     @Test
@@ -188,7 +188,7 @@ public class StudentControllerTest {
         this.mockMvc.perform(get("/student/getExamList").sessionAttrs(sessionattr))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("bheList"))
-                .andExpect(view().name("/student/STU-EXL-00"));
+                .andExpect(view().name("/student/STU-EXL-06"));
     }
 
     @Test
@@ -205,7 +205,7 @@ public class StudentControllerTest {
                 .andExpect(model().attributeExists("bheId"))
                 .andExpect(model().attributeExists("studentId"))
                 .andExpect(model().attributeExists("examId"))
-                .andExpect(view().name("/student/STU-EXM-00"));
+                .andExpect(view().name("/student/STU-EXM-07"));
     }
 
     @Test
@@ -293,7 +293,7 @@ public class StudentControllerTest {
                 .andExpect(model().attributeExists("batchHasVideoList"))
                 .andExpect(model().attributeExists("batchId"))
                 .andExpect(model().attributeExists("username"))
-                .andExpect(view().name("/student/STU-VID-06"));
+                .andExpect(view().name("/student/STU-VID-02"));
     }
 
     @Test
@@ -343,7 +343,7 @@ public class StudentControllerTest {
                 .andExpect(model().attributeExists("batchHasVideoList"))
                 .andExpect(model().attributeExists("batchId"))
                 .andExpect(model().attributeExists("username"))
-                .andExpect(view().name("/student/STU-VID-06"));
+                .andExpect(view().name("/student/STU-VID-02"));
     }
 
     @Test
@@ -386,7 +386,7 @@ public class StudentControllerTest {
                 .andExpect(model().attributeExists("batchHasVideoList"))
                 .andExpect(model().attributeExists("batchId"))
                 .andExpect(model().attributeExists("username"))
-                .andExpect(view().name("/student/STU-VID-06"));
+                .andExpect(view().name("/student/STU-VID-02"));
     }
 
     @Test
@@ -436,7 +436,7 @@ public class StudentControllerTest {
                 .andExpect(model().attributeExists("batchHasVideoList"))
                 .andExpect(model().attributeExists("batchId"))
                 .andExpect(model().attributeExists("username"))
-                .andExpect(view().name("/student/STU-VID-06"));
+                .andExpect(view().name("/student/STU-VID-02"));
     }
 
     @Test
@@ -486,7 +486,7 @@ public class StudentControllerTest {
                 .andExpect(model().attributeExists("batchHasVideoList"))
                 .andExpect(model().attributeExists("batchId"))
                 .andExpect(model().attributeExists("username"))
-                .andExpect(view().name("/student/STU-VID-06"));
+                .andExpect(view().name("/student/STU-VID-02"));
     }
 
 }
