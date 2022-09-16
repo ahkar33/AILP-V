@@ -87,7 +87,7 @@ public class StudentController {
         model.addAttribute("username", username);
         model.addAttribute("batchId", batchId);
         model.addAttribute("batchName", batchName);
-        return "/student/STU-PBC-07";
+        return "/student/STU-PBC-05";
     }
 
     @GetMapping("/getResources")
@@ -96,7 +96,7 @@ public class StudentController {
         List<BatchHasResource> batchHasResourceList = batchHasResourceService
                 .getAllBatchHasResourcesByBatchId(Long.parseLong(studentBatchId));
         model.addAttribute("batchHasResourceList", batchHasResourceList);
-        return "/student/STU-REC-09";
+        return "/student/STU-REC-03";
     }
 
     @GetMapping("/getVideos/{batchId}")
@@ -140,7 +140,7 @@ public class StudentController {
         model.addAttribute("batchHasVideoList", batchHasVideoList);
         model.addAttribute("batchId", userBatchId);
         model.addAttribute("username", userInfo.getName());
-        return "/student/STU-VID-06";
+        return "/student/STU-VID-02";
     }
 
     @GetMapping("/showClickedVideo/{courseName}/{videoId}/{batchId}")
@@ -174,7 +174,7 @@ public class StudentController {
         model.addAttribute("batchHasVideoList", batchHasVideoList);
         model.addAttribute("batchId", userBatchId);
         model.addAttribute("username", userInfo.getName());
-        return "/student/STU-VID-06";
+        return "/student/STU-VID-02";
 
     }
 
@@ -184,7 +184,7 @@ public class StudentController {
         List<Assignment> assignmentList = assignmentService.getAllAssignmentByBatchId(Long.parseLong(studentBatchId));
         model.addAttribute("assignmentList", assignmentList);
         model.addAttribute("answer", new AssignmentAnswer());
-        return "/student/STU-ASG-00";
+        return "/student/STU-ASG-04";
     }
 
     @PostMapping("/submitAssignment")
@@ -198,7 +198,6 @@ public class StudentController {
         answer.setAnswerFileName(answer.getAnswerFile().getOriginalFilename());
         assignmentAnswerService.addAssignmentAnswer(answer);
          redirectAttr.addFlashAttribute("successMsg", true);
-        // return "/student/STU-ASG-00";
         return "redirect:/student/studentAssignment";
     }
 
@@ -207,7 +206,7 @@ public class StudentController {
         String studentId = (String) session.getAttribute("uid");
         List<AssignmentResult> resultList = assignmentResultService.getAssignmentResultListByStudentId(studentId);
         model.addAttribute("resultList", resultList);
-        return "/student/STU-GRB-00";
+        return "/student/STU-GRB-08";
     }
 
     @GetMapping("/getExamList")
@@ -215,7 +214,7 @@ public class StudentController {
         String studentBatchId = (String) session.getAttribute("batchId");
         List<BatchHasExam> bheList = batchHasExamService.getBatchHasExamListByBatchId(Long.parseLong(studentBatchId));
         model.addAttribute("bheList", bheList);
-        return "/student/STU-EXL-00";
+        return "/student/STU-EXL-06";
     }
 
     @GetMapping("/getExam/{bheId}")
@@ -226,7 +225,7 @@ public class StudentController {
         model.addAttribute("bheId", bheId);
         model.addAttribute("studentId", studentId);
         model.addAttribute("examId", batchHasExam.getBheExam().getId());
-        return "/student/STU-EXM-00";
+        return "/student/STU-EXM-07";
     }
 
 }
