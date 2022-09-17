@@ -77,7 +77,7 @@ public class AdminControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("courseList"))
                 .andExpect(model().attributeExists("course"))
-                .andExpect(view().name("/admin/ADM-CTB-04"));
+                .andExpect(view().name("/admin/ADM-CTB-02"));
     }
 
     @Test
@@ -133,7 +133,7 @@ public class AdminControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("videoList"))
                 .andExpect(model().attributeExists("course"))
-                .andExpect(view().name("/admin/ADM-VTB-14"));
+                .andExpect(view().name("/admin/ADM-VTB-03"));
     }
 
     @Test
@@ -148,7 +148,7 @@ public class AdminControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("resourceList"))
                 .andExpect(model().attributeExists("course"))
-                .andExpect(view().name("/admin/ADM-RTB-15"));
+                .andExpect(view().name("/admin/ADM-RTB-04"));
     }
 
     @Test
@@ -227,7 +227,7 @@ public class AdminControllerTest {
     public void setupExamTableTest() throws Exception {
         this.mockMvc.perform(get(apiPath + "/exam-table"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/admin/ADM-ETB-05"));
+                .andExpect(view().name("/admin/ADM-ETB-13"));
     }
 
     @Test
@@ -237,7 +237,7 @@ public class AdminControllerTest {
          this.mockMvc.perform(get(apiPath+"/create-exam"))
                 .andExpect(model().attributeExists("courseList"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/admin/ADM-CRE-06"));
+                .andExpect(view().name("/admin/ADM-CRE-14"));
     }
 
     @Test
@@ -247,7 +247,7 @@ public class AdminControllerTest {
                 .andExpect(model().attributeExists("batch"))
                 .andExpect(model().attributeExists("editBatch"))
                 .andExpect(model().attributeExists("batchList"))
-                .andExpect(view().name("/admin/ADM-BTB-03"));
+                .andExpect(view().name("/admin/ADM-BTB-05"));
     }
 
     @Test
@@ -301,7 +301,7 @@ public class AdminControllerTest {
                 .andExpect(model().attributeExists("courseList"))
                 .andExpect(model().attributeExists("batch"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/admin/ADM-EDB-11"));
+                .andExpect(view().name("/admin/ADM-EDB-06"));
     }
 
     @Test
@@ -327,7 +327,7 @@ public class AdminControllerTest {
         this.mockMvc.perform(get(apiPath+"/student-table"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("studentList"))
-                .andExpect(view().name("/admin/ADM-STB-08"));
+                .andExpect(view().name("/admin/ADM-STB-07"));
     }
 
     @Test
@@ -336,7 +336,7 @@ public class AdminControllerTest {
         when(batchService.getAllBatches()).thenReturn(batchList);
         this.mockMvc.perform(get(apiPath+"/studentRegister"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/admin/ADM-STG-07"));
+                .andExpect(view().name("/admin/ADM-STG-08"));
     }
 
     @Test
@@ -358,7 +358,7 @@ public class AdminControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("student"))
                 .andExpect(model().attributeExists("batchList"))
-                .andExpect(view().name("/admin/ADM-EDS-12"));
+                .andExpect(view().name("/admin/ADM-EDS-09"));
     }
 
     @Test
@@ -397,7 +397,7 @@ public class AdminControllerTest {
         
         this.mockMvc.perform(get(apiPath+"/teacherRegister"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/admin/ADM-TTG-09"));
+                .andExpect(view().name("/admin/ADM-TTG-11"));
     }
 
     @Test
@@ -420,7 +420,7 @@ public class AdminControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("batchList"))
                 .andExpect(model().attributeExists("teacher"))
-                .andExpect(view().name("/admin/ADM-EDT-13.html"));
+                .andExpect(view().name("/admin/ADM-EDT-12.html"));
     }
 
     @Test
@@ -473,7 +473,7 @@ public class AdminControllerTest {
     public void registerTest() throws Exception{
         this.mockMvc.perform(get(apiPath+"/register"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/admin/ADM-REG-17"));
+                .andExpect(view().name("/admin/ADM-REG-16"));
     }
 
     @Test

@@ -83,7 +83,7 @@ public class AdminController {
     public String setupCourseTable(ModelMap model) {
         model.addAttribute("courseList", courseService.getAllCourses());
         model.addAttribute("course", new Course());
-        return "/admin/ADM-CTB-04";
+        return "/admin/ADM-CTB-02";
     }
 
     @PostMapping("/addCourse")
@@ -122,7 +122,7 @@ public class AdminController {
         List<Video> videoList = videoService.getVideoByCourseId(id);
         model.addAttribute("videoList", videoList);
         model.addAttribute("course", course);
-        return "/admin/ADM-VTB-14";
+        return "/admin/ADM-VTB-03";
 
     }
 
@@ -132,7 +132,7 @@ public class AdminController {
         List<Resource> resourceList = resourceService.getResourceByCourseId(id);
         model.addAttribute("resourceList", resourceList);
         model.addAttribute("course", course);
-        return "/admin/ADM-RTB-15";
+        return "/admin/ADM-RTB-04";
     }
 
     @GetMapping("/deleteVideo/{vidId}/{courseName}")
@@ -210,25 +210,13 @@ public class AdminController {
         return "redirect:/admin/course-table";
     }
 
-    @GetMapping("/exam-table")
-    public String setupExamTable(ModelMap model) {
-        model.addAttribute("examList", examService.getAllExams());
-        return "/admin/ADM-ETB-05";
-    }
-
-    @GetMapping("/create-exam")
-    public String setupCreateExam(ModelMap model) {
-        model.addAttribute("courseList", courseService.getAllCourses());
-        return "/admin/ADM-CRE-06";
-    }
-
     @GetMapping("/batch-table")
     public String setupBatchTable(ModelMap model) {
         model.addAttribute("courseList", courseService.getAllCourses());
         model.addAttribute("batch", new Batch());
         model.addAttribute("editBatch", new Batch());
         model.addAttribute("batchList", batchService.getAllBatches());
-        return "/admin/ADM-BTB-03";
+        return "/admin/ADM-BTB-05";
     }
 
     @PostMapping("/addBatch")
@@ -294,7 +282,7 @@ public class AdminController {
         List<Course> courseList = courseService.getAllCourses();
         model.addAttribute("courseList", courseList);
         model.addAttribute("batch", batch);
-        return "/admin/ADM-EDB-11";
+        return "/admin/ADM-EDB-06";
     }
 
     @PostMapping("/editBatch")
@@ -319,13 +307,13 @@ public class AdminController {
             student.setAttendancePercentage(Math.round(attendancePercentage));
         }
         model.addAttribute("studentList", studentList);
-        return "/admin/ADM-STB-08";
+        return "/admin/ADM-STB-07";
     }
 
     @GetMapping("/studentRegister")
     public String setupStudentRegister(ModelMap model) {
         model.addAttribute("batchList", batchService.getAllBatches());
-        return "/admin/ADM-STG-07";
+        return "/admin/ADM-STG-08";
     }
 
     @GetMapping("/deleteStudent/{id}")
@@ -340,7 +328,7 @@ public class AdminController {
         User student = userService.getUserById(id);
         model.addAttribute("batchList", batchService.getAllBatches());
         model.addAttribute("student", student);
-        return "/admin/ADM-EDS-12";
+        return "/admin/ADM-EDS-09";
     }
 
     @PostMapping("/editStudent")
@@ -370,7 +358,7 @@ public class AdminController {
     @GetMapping("/teacherRegister")
     public String setupTeacherRegister(ModelMap model) {
         model.addAttribute("batchList", batchService.getAllBatches());
-        return "/admin/ADM-TTG-09";
+        return "/admin/ADM-TTG-11";
     }
 
     @GetMapping("/deleteTeacher/{id}")
@@ -384,7 +372,7 @@ public class AdminController {
         User teacher = userService.getUserById(id);
         model.addAttribute("batchList", batchService.getAllBatches());
         model.addAttribute("teacher", teacher);
-        return "/admin/ADM-EDT-13.html";
+        return "/admin/ADM-EDT-12.html";
     }
 
     @PostMapping("/editTeacher")
@@ -395,6 +383,18 @@ public class AdminController {
         teacher.setProfile_pic(resTeacher.getProfile_pic());
         userService.addUser(teacher);
         return "redirect:/admin/teacher-table";
+    }
+
+    @GetMapping("/exam-table")
+    public String setupExamTable(ModelMap model) {
+        model.addAttribute("examList", examService.getAllExams());
+        return "/admin/ADM-ETB-13";
+    }
+
+    @GetMapping("/create-exam")
+    public String setupCreateExam(ModelMap model) {
+        model.addAttribute("courseList", courseService.getAllCourses());
+        return "/admin/ADM-CRE-14";
     }
 
     @GetMapping("/changePassword/{userId}")
@@ -416,7 +416,7 @@ public class AdminController {
     // to delete after admin account created
     @GetMapping("/register")
     public String setupRegister() {
-        return "/admin/ADM-REG-17";
+        return "/admin/ADM-REG-16";
     }
 
     @PostMapping("/register")
