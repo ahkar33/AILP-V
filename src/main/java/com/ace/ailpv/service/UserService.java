@@ -102,9 +102,16 @@ public class UserService {
         return userIdList;
     }
 
+    // public List<Batch> getTeacherBatchListById(String id) {
+    // User teacher = userRepository.findById(id).orElse(null);
+    // return teacher.getBatchList();
+    // }
+
     public List<Batch> getTeacherBatchListById(String id) {
         User teacher = userRepository.findById(id).orElse(null);
-        return teacher.getBatchList();
+        List<Batch> batchList = teacher.getBatchList();
+        batchList = batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
+        return batchList;
     }
 
     public List<Course> getTeacherCourseListById(String id) {
@@ -156,6 +163,6 @@ public class UserService {
 
     public int getUserCountByBatchIdAndRole(Long batchId, String role) {
         return userRepository.countByBatchList_IdAndRole(batchId, role);
-    } 
+    }
 
 }
