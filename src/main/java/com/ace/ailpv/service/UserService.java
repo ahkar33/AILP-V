@@ -36,7 +36,7 @@ public class UserService {
 
     public List<User> getAllStudents() {
         List<User> studentList = getAllUsers().stream()
-                .filter(user -> user.getRole().equals("ROLE_STUDENT")).collect(Collectors.toList());
+                .filter(user -> user.getRole().equals("ROLE_STUDENT") && user.getEnabled()).collect(Collectors.toList());
         return studentList;
     }
 
