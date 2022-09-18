@@ -115,7 +115,6 @@
         const app = Vue.createApp({
             data() {
                 return {
-                    isContains: false,
                     isEmpty: null,
                     courseList: [],
                     course: '',
@@ -173,7 +172,6 @@
                 createExam() {
                     this.isEmpty = false;
                     this.questionList.forEach((question, index) => {
-
                         question.radioList.forEach(radio => {
                             if (radio.radioValue.replace(/\s/g, "").length == 0) {
                                 this.isEmpty = true;
@@ -184,9 +182,6 @@
                                 )
                             }
                         });
-
-
-
                         if (
                             question.examQuestion.replace(/\s/g, "").length == 0 ||
                             question.rightAnswer.replace(/\s/g, "").length == 0 ||
@@ -211,10 +206,14 @@
                                 'info'
                             )
                         } else {
-                            if (!question.radioList.includes(question.rightAnswer)) {
+                            let radioValues = [];
+                            question.radioList.forEach(radio => {
+                               radioValues.push(radio.radioValue);
+                            });
+                            if (!radioValues.includes(question.rightAnswer)) {
                                 this.isEmpty = true;
                                 Swal.fire(
-                                    `\"Question ${index + 1}\" right answer and radio aint same dawg`,
+                                    `\"Question ${index + 1}\" right answer and one of the option values do not match`,
                                     '',
                                     'info'
                                 )
@@ -222,7 +221,7 @@
                         }
                     })
 
-                    if (!this.isEmpty && this.isContains) {
+                    if (!this.isEmpty) {
                         let fullMark = 0;
                         this.questionList.forEach(question => {
                             fullMark = fullMark + question.mark;

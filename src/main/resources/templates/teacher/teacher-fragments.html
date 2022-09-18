@@ -57,7 +57,8 @@
                             </a>
                             <form id="logout" th:action="@{/logout}" method="post">
                             </form>
-                            <button class="bg-danger text-light dropdown-item fs-6 rounded-bottom pb-2 pt-2" onclick="handleLogout()">
+                            <button class="bg-danger text-light dropdown-item fs-6 rounded-bottom pb-2 pt-2"
+                                onclick="handleLogout()">
                                 <i class="fa-fw fa-sign-out-alt fa-sm fas me-2"></i>
                                 &nbsp;Logout
                             </button>
@@ -78,7 +79,6 @@
             <div class="container d-flex flex-column p-0">
                 <hr class="sidebar-divider my-0" />
                 <ul class="mt-2 navbar-nav text-light" id="accordionSidebar">
-                    <!-- side bar link start -->
                     <li class="nav-item">
                         <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
                             th:href="@{/teacher/dashboard}" style="font-size: 16px;">
@@ -91,9 +91,18 @@
                             </div>
                         </a>
                     </li>
-                    <!-- side bar link end -->
-
-                    <!-- side bar link start -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
+                            th:href="@{/teacher/postResource}" style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa-folder-open fas" style="font-size: 17px;"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Upload Resource</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
                             th:href="@{/teacher/postVideo}" style="font-size: 16px;">
@@ -105,32 +114,8 @@
                                 </div>
                             </div>
                         </a>
-
-                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
-                            th:href="@{/teacher/postResource}" style="font-size: 15.6px;">
-                            <div
-                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-folder-open fas" style="font-size: 17px;"></i>
-                                <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Upload Resource</p>
-                                </div>
-                            </div>
-                        </a>
-
-
-                        <!-- <a class="d-flex d-md-flex nav-link" data-bss-hover-animate="pulse"
-                            th:href="@{/teacher/student-table}" style="font-size: 15.6px;">
-                            <div
-                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-users fas fs-4"></i>
-                                <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">&nbsp;
-                                        Student Table
-                                    </p>
-                                </div>
-                            </div>
-                        </a> -->
-
+                    </li>
+                    <li class="nav-item">
                         <a class="d-flex d-md-flex nav-link" data-bss-hover-animate="pulse"
                             th:href="@{/teacher/teacher-public-chat}" style="font-size: 15.6px;">
                             <div
@@ -143,33 +128,7 @@
                                 </div>
                             </div>
                         </a>
-
-                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
-                            th:href="@{/teacher/attendance-table}" style="font-size: 15.6px;">
-                            <div
-                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-user-check fas" style="font-size: 16px;"></i>
-                                <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Attendance Table
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                        <!-- <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
-                            th:href="@{/teacher/modifyAttendance}" style="font-size: 15.6px;">
-                            <div
-                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-users-cog fas fs-4"></i>
-                                <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Modify Attendance
-                                    </p>
-                                </div>
-                            </div>
-                        </a> -->
                     </li>
-                    <!-- side bar link end -->
-
-                    <!-- side bar link start -->
                     <li class="nav-item">
                         <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
                             th:href="@{/teacher/assignment-table}" style="font-size: 15.6px;">
@@ -189,7 +148,8 @@
                             th:href="@{/teacher/assignment-grade}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-file-signature fas" style="font-size: 17px; margin-left: 1px; margin-right: 4px;"></i>
+                                <i class="fa-file-signature fas"
+                                    style="font-size: 17px; margin-left: 1px; margin-right: 4px;"></i>
                                 <div>
                                     <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Assignment Grade
                                     </p>
@@ -197,36 +157,45 @@
                             </div>
                         </a>
                     </li>
-                    <!-- side bar link end -->
-
-                    <!-- side bar link start -->
                     <li class="nav-item">
                         <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
                             th:href="@{/teacher/exam-table}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa fa-file-signature fa-file-text fas" style="font-size: 17px; margin-left: 1px; margin-right: 7px;"></i>
+                                <i class="fa fa-file-signature fa-file-text fas"
+                                    style="font-size: 17px; margin-left: 1px; margin-right: 7px;"></i>
                                 <div>
                                     <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Exam Table</p>
                                 </div>
                             </div>
                         </a>
                     </li>
-
-                    <!-- side bar link start -->
                     <li class="nav-item">
                         <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
                             th:href="@{/teacher/exam-grade}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-poll-h fas" style="font-size: 17px; margin-left: 1px; margin-right: 7px;"></i>
+                                <i class="fa-poll-h fas"
+                                    style="font-size: 17px; margin-left: 1px; margin-right: 7px;"></i>
                                 <div>
                                     <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Exam Grade</p>
                                 </div>
                             </div>
                         </a>
                     </li>
-                    <!-- side bar link end -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
+                            th:href="@{/teacher/attendance-table}" style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa-user-check fas" style="font-size: 16px;"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Attendance Table
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
                 <div class="text-center d-none d-md-inline">
                     <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>

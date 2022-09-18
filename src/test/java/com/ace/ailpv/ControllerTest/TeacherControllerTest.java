@@ -137,7 +137,7 @@ public class TeacherControllerTest {
         this.mockMvc.perform(get("/teacher/modifyAttendance").sessionAttrs(sessionattr))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("batchList"))
-                .andExpect(view().name("/teacher/TCH-MDA-07"));
+                .andExpect(view().name("/teacher/TCH-MDA-12"));
     }
 
     @Test
@@ -152,7 +152,7 @@ public class TeacherControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("batchList"))
                 .andExpect(model().attributeExists("data"))
-                .andExpect(view().name("/teacher/TCH-ATB-08"));
+                .andExpect(view().name("/teacher/TCH-ATB-11"));
     }
 
     // @Test
@@ -221,7 +221,7 @@ public class TeacherControllerTest {
         this.mockMvc.perform(get("/teacher/assignment-table").sessionAttrs(sessionattr))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("batchList"))
-                .andExpect(view().name("/teacher/TCH-AST-00"));
+                .andExpect(view().name("/teacher/TCH-AST-05"));
 
     }
 
@@ -242,7 +242,7 @@ public class TeacherControllerTest {
         this.mockMvc.perform(get("/teacher/checkAssignment/{assignmentId}", assignmentId))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("answerList", answerList))
-                .andExpect(view().name("/teacher/TCH-ASD-00"));
+                .andExpect(view().name("/teacher/TCH-ASD-06"));
     }
 
     // @Test
@@ -313,7 +313,7 @@ public class TeacherControllerTest {
                 .andExpect(model().attributeExists("assignmentList"))
                 .andExpect(model().attributeExists("studentList"))
                 .andExpect(model().attributeExists("batchList"))
-                .andExpect(view().name("/teacher/TCH-ASG-00"));
+                .andExpect(view().name("/teacher/TCH-ASG-07"));
 
     }
 
@@ -332,7 +332,7 @@ public class TeacherControllerTest {
         this.mockMvc.perform(get("/teacher/exam-table").sessionAttrs(sessionattr))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("examList"))
-                .andExpect(view().name("/teacher/TCH-ETB-00"));
+                .andExpect(view().name("/teacher/TCH-ETB-08"));
     }
 
     @Test
@@ -352,7 +352,7 @@ public class TeacherControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("exam"))
                 .andExpect(model().attributeExists("batchList"))
-                .andExpect(view().name("/teacher/TCH-UPE-00"));
+                .andExpect(view().name("/teacher/TCH-UPE-09"));
     }
 
     // @Test
@@ -398,7 +398,7 @@ public class TeacherControllerTest {
                 .andExpect(model().attributeExists("bheList"))
                 .andExpect(model().attributeExists("studentList"))
                 .andExpect(model().attributeExists("batchList"))
-                .andExpect(view().name("/teacher/TCH-EXG-00"));
+                .andExpect(view().name("/teacher/TCH-EXG-10"));
     }
 
     @Test
@@ -419,7 +419,7 @@ public class TeacherControllerTest {
                 .andExpect(model().attributeExists("bheList"))
                 .andExpect(model().attributeExists("studentList"))
                 .andExpect(model().attributeExists("batchList"))
-                .andExpect(view().name("/teacher/TCH-EXG-00"));
+                .andExpect(view().name("/teacher/TCH-EXG-10"));
     }
     
 

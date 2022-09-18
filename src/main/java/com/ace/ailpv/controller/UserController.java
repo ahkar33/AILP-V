@@ -91,7 +91,7 @@ public class UserController extends Thread {
         if (user.getRole().equals("ROLE_ADMIN")) {
             return "/admin/ADM-PRF-15";
         } else if (user.getRole().equals("ROLE_TEACHER")) {
-            return "/teacher/TCH-PRF-08";
+            return "/teacher/TCH-PRF-13";
         } else {
             return "/student/STU-PRF-09";
         }
