@@ -5,6 +5,7 @@ import com.ace.ailpv.entity.User;
 import com.ace.ailpv.service.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,6 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 public class TeacherControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -47,7 +49,6 @@ public class TeacherControllerTest {
         this.mockMvc.perform(get(apiPath+"/dashboard").sessionAttrs(sessionAttr))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("batchList"))
-                .andExpect(model().attributeExists("teacherId"))
                 .andExpect(view().name("/teacher/TCH-DSB-01"));
     }
 
@@ -71,6 +72,7 @@ public class TeacherControllerTest {
     @Test
     public void setupChatWithBatchTest()throws Exception{
         HashMap<String,Object>sessionAttr = getSessionAttr();
+
         User user = getUser();
         List<Batch>batchList = getBatchList();
         when(userService.getUserById(user.getId())).thenReturn(user);
@@ -104,8 +106,8 @@ public class TeacherControllerTest {
 
        private HashMap<String,Object> getSessionAttr(){
         HashMap<String,Object>sessionAttr = new HashMap<>();
-        sessionAttr.put("uid", "stu001");
-        sessionAttr.put("batchId", "1");
+        sessionAttr.put("uid", "tcr01");
+
         return sessionAttr;
     }
 

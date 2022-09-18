@@ -1,10 +1,9 @@
 package com.ace.ailpv.controller;
-import java.io.File;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -24,10 +23,10 @@ import com.ace.ailpv.service.FileUploadUtilService;
 import com.ace.ailpv.service.FileValidationService;
 import com.ace.ailpv.service.UserService;
 
-import ws.schild.jave.EncoderException;
-import ws.schild.jave.InputFormatException;
-import ws.schild.jave.MultimediaInfo;
-import ws.schild.jave.MultimediaObject;
+//import ws.schild.jave.EncoderException;
+//import ws.schild.jave.InputFormatException;
+//import ws.schild.jave.MultimediaInfo;
+//import ws.schild.jave.MultimediaObject;
 
 
 @Controller
@@ -54,6 +53,10 @@ public class UserController extends Thread {
     @Autowired
     BatchService batchService;
 
+     String teacherRole = "ROLE_TEACHER";
+     String studentRole = "ROLE_STUDENT";
+     String adminRole = "ROLE_ADMIN";
+
     @GetMapping("/profile")
     public String getProfile(HttpServletRequest request, ModelMap model) {
 
@@ -62,16 +65,16 @@ public class UserController extends Thread {
         String uid = (String) request.getSession(false).getAttribute("uid");
         User user = userService.getUserById(uid);
 
-        if (user.getRole().equals("ROLE_TEACHER")) {
+        if (user.getRole().equals(teacherRole)) {
             if (passwordEncoder.matches(secretConfigProperties.getDefaultTchPassword(), user.getPassword()))
                 model.addAttribute("dpwarn", "Default password must be changed for security reason!");
         }
 
-        else if (user.getRole().equals("ROLE_STUDENT")) {
+        else if (user.getRole().equals(studentRole)) {
             if (passwordEncoder.matches(secretConfigProperties.getDefaultStdPassword(), user.getPassword()))
                 model.addAttribute("dpwarn", "Default password must be changed for security reason!");
-
         }
+      
 
         if (user.getBatchList().size() > 0) {
             if (user.getBatchList().size() > 1) {
@@ -85,9 +88,9 @@ public class UserController extends Thread {
             model.addAttribute("batchName", batches);
         }
 
-        if (user.getRole().equals("ROLE_ADMIN")) {
+        if (user.getRole().equals(adminRole)) {
             return "/admin/ADM-PRF-16";
-        } else if (user.getRole().equals("ROLE_TEACHER")) {
+        } else if (user.getRole().equals(teacherRole)) {
             return "/teacher/TCH-PRF-08";
         } else {
             return "/student/STU-PRF-08";
@@ -122,14 +125,14 @@ public class UserController extends Thread {
     }
 
     @PostMapping("/upload")
-    public String uploadProfilePic(@RequestParam("profile_pic") MultipartFile profile_pic, HttpServletRequest request)
+    public String uploadProfilePic(@RequestParam("profile_pic") MultipartFile profile_pic, HttpServletRequest request,RedirectAttributes redirectAttrs)
             throws IOException, InterruptedException {
 
         String profilePath = "src\\main\\resources\\static\\profile_pics\\";
 
         boolean isValidFile = false;
         String randomName = fileService
-                .generateFileName(fileValidationService.getExtension(profile_pic.getOriginalFilename()));
+                            .generateFileName(fileValidationService.getExtension(profile_pic.getOriginalFilename()));
 
         if (!fileValidationService.isLimitExceed(profile_pic.getSize())) {
 
@@ -162,6 +165,8 @@ public class UserController extends Thread {
 
         } else {
             System.out.println("Invalid file!");
+            redirectAttrs.addFlashAttribute("msg", "Invalid file!");
+
         }
         Thread.sleep(1500);
         return "redirect:/user/profile";
@@ -172,27 +177,27 @@ public class UserController extends Thread {
         return "/error/403";
     }
 
-    @GetMapping("/test")
-    public String  test() {
-        return "upload.html";
-    }
-
-    @PostMapping(value="/test")
-    public String test1(@RequestParam("myFile") MultipartFile myFile) throws IOException, InputFormatException, EncoderException {
-        Long min=0L;
-        Long ses=0L;
-        File file=new File(myFile.getOriginalFilename());
-        FileUtils.copyInputStreamToFile(myFile.getInputStream(),file);
-        MultimediaObject instance =new MultimediaObject(file);
-        MultimediaInfo result=instance.getInfo();
-        
-        min=(result.getDuration()/1000)/60;
-        ses=(result.getDuration()/1000)%60;
-        System.out.println(min + ":"+ ses);
-        file.delete();
-        return "upload.html";
-    }
-    
+//    @GetMapping("/test")
+//    public String  test() {
+//        return "upload.html";
+//    }
+//
+//    @PostMapping(value="/test")
+//    public String test1(@RequestParam("myFile") MultipartFile myFile) throws IOException, InputFormatException, EncoderException {
+//        Long min=0L;
+//        Long ses=0L;
+//        File file=new File(myFile.getOriginalFilename());
+//        FileUtils.copyInputStreamToFile(myFile.getInputStream(),file);
+//        MultimediaObject instance =new MultimediaObject(file);
+//        MultimediaInfo result=instance.getInfo();
+//
+//        min=(result.getDuration()/1000)/60;
+//        ses=(result.getDuration()/1000)%60;
+//        System.out.println(min + ":"+ ses);
+//        file.delete();
+//        return "upload.html";
+//    }
+//
     
 
 }
