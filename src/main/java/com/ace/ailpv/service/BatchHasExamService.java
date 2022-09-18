@@ -1,5 +1,7 @@
 package com.ace.ailpv.service;
 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,15 @@ public class BatchHasExamService {
     }
 
     public List<BatchHasExam> getBatchHasExamListByBatchId(Long batchId) {
-        return batchHasExamRepository.findByBheBatch_Id(batchId);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy hh:mm a");
+        List<BatchHasExam> unformattedBheList = batchHasExamRepository.findByBheBatch_Id(batchId);
+        List<BatchHasExam> formattedBheList = new ArrayList<>();
+        for (BatchHasExam bhe : unformattedBheList) {
+            String dateTimeString = bhe.getStartDateTime().format(dateTimeFormatter);
+            bhe.setStartTime(dateTimeString);
+            formattedBheList.add(bhe);
+        }
+        return formattedBheList;
     }
 
 }

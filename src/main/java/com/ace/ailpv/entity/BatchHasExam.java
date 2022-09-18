@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -42,5 +43,8 @@ public class BatchHasExam {
 	private LocalDateTime endDateTime;
 
 	private String totalTime;
+
+	@Transient
+	private String startTime;
 
 }
