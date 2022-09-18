@@ -68,8 +68,8 @@ public class TeacherController {
         String teacherId = (String) session.getAttribute("uid");
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
         // batchList = batchList.stream()
-        //         .filter(batch -> batch.getIsActive())
-        //         .collect(Collectors.toList());
+        // .filter(batch -> batch.getIsActive())
+        // .collect(Collectors.toList());
         model.addAttribute("batchList", batchList);
         model.addAttribute("teacherId", teacherId);
         return "/teacher/TCH-DSB-01";
@@ -89,14 +89,15 @@ public class TeacherController {
         String teacherId = (String) session.getAttribute("uid");
         User teacherInfo = userService.getUserById(teacherId);
         List<Batch> batchList = userService.getTeacherBatchListById(teacherInfo.getId());
-        // batchList = batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
+        // batchList = batchList.stream().filter(batch ->
+        // batch.getIsActive()).collect(Collectors.toList());
         Batch firstBatch = batchList.get(0);
         model.addAttribute("userId", teacherInfo.getId());
         model.addAttribute("username", teacherInfo.getName());
         model.addAttribute("batchId", firstBatch.getId());
         model.addAttribute("batchName", firstBatch.getName());
         model.addAttribute("batchList", batchList);
-        return "/teacher/TCH-PBC-05";
+        return "/teacher/TCH-PBC-04";
     }
 
     @GetMapping("/chatWithBatch/{batchId}/{batchName}")
@@ -112,9 +113,10 @@ public class TeacherController {
         model.addAttribute("batchId", batchId);
         model.addAttribute("batchName", batchName);
         List<Batch> batchList = userService.getTeacherBatchListById(teacherInfo.getId());
-        // batchList = batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
+        // batchList = batchList.stream().filter(batch ->
+        // batch.getIsActive()).collect(Collectors.toList());
         model.addAttribute("batchList", batchList);
-        return "/teacher/TCH-PBC-05";
+        return "/teacher/TCH-PBC-04";
     }
 
     @GetMapping("/modifyAttendance")
@@ -122,7 +124,7 @@ public class TeacherController {
         String teacherId = (String) session.getAttribute("uid");
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
         model.addAttribute("batchList", batchList);
-        return "/teacher/TCH-MDA-07";
+        return "/teacher/TCH-MDA-12";
     }
 
     @GetMapping("/attendance-table")
@@ -136,7 +138,7 @@ public class TeacherController {
         model.addAttribute("userScheduleList", userScheduleList);
         model.addAttribute("batchList", batchList);
         model.addAttribute("data", new UserSchedule());
-        return "/teacher/TCH-ATB-08";
+        return "/teacher/TCH-ATB-11";
     }
 
     @PostMapping("/searchUserScheduleList")
@@ -151,8 +153,7 @@ public class TeacherController {
                 model.addAttribute("userScheduleList", new ArrayList<>());
                 model.addAttribute("batchList", batchList);
                 model.addAttribute("data", new UserSchedule());
-                return "/teacher/TCH-ATB-08";
-
+                return "/teacher/TCH-ATB-11";
             }
             List<UserSchedule> list = userScheduleService.getUserScheduleListByBatchIdAndScheduleId(batchId,
                     resSchedule.getId());
@@ -161,7 +162,7 @@ public class TeacherController {
             model.addAttribute("userScheduleList", list);
             model.addAttribute("batchList", batchList);
             model.addAttribute("data", new UserSchedule());
-            return "/teacher/TCH-ATB-08";
+            return "/teacher/TCH-ATB-11";
         } else {
             List<UserSchedule> list = userScheduleService.getUserScheduleListByBatchIdOrScheduleId(batchId);
             String teacherId = (String) session.getAttribute("uid");
@@ -169,7 +170,7 @@ public class TeacherController {
             model.addAttribute("userScheduleList", list);
             model.addAttribute("batchList", batchList);
             model.addAttribute("data", userSchedule);
-            return "/teacher/TCH-ATB-08";
+            return "/teacher/TCH-ATB-11";
         }
     }
 
@@ -200,7 +201,7 @@ public class TeacherController {
             assignmentList.addAll(assignmentService.getAllAssignmentByBatchId(batch.getId()));
         }
         model.addAttribute("assignmentList", assignmentList);
-        return "/teacher/TCH-AST-00";
+        return "/teacher/TCH-AST-05";
     }
 
     @PostMapping("/createAssignment")
@@ -215,7 +216,7 @@ public class TeacherController {
         List<AssignmentAnswer> answerList = assignmentAnswerService.getAssignmentAnswerListByAssignmentId(assignmentId);
         model.addAttribute("answerList", answerList);
         model.addAttribute("result", new AssignmentResult());
-        return "/teacher/TCH-ASD-00";
+        return "/teacher/TCH-ASD-06";
     }
 
     @PostMapping("/giveAssignmentResult")
@@ -253,7 +254,7 @@ public class TeacherController {
         model.addAttribute("assignmentList", assignmentList);
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
-        return "/teacher/TCH-ASG-00";
+        return "/teacher/TCH-ASG-07";
     }
 
     @PostMapping("/searchStudentsByBatch")
@@ -267,7 +268,7 @@ public class TeacherController {
         model.addAttribute("assignmentList", assignmentList);
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
-        return "/teacher/TCH-ASG-00";
+        return "/teacher/TCH-ASG-07";
     }
 
     @GetMapping("/exam-table")
@@ -275,7 +276,7 @@ public class TeacherController {
         String teacherId = (String) session.getAttribute("uid");
         List<Exam> examList = examService.getExamListByTeacherId(teacherId);
         model.addAttribute("examList", examList);
-        return "/teacher/TCH-ETB-00";
+        return "/teacher/TCH-ETB-08";
     }
 
     @GetMapping("/uploadExam/{examId}")
@@ -287,7 +288,7 @@ public class TeacherController {
         model.addAttribute("exam", exam);
         model.addAttribute("batchList", batchList);
         model.addAttribute("data", new BatchHasExam());
-        return "/teacher/TCH-UPE-00";
+        return "/teacher/TCH-UPE-09";
     }
 
     @PostMapping("/uploadExam")
@@ -334,7 +335,7 @@ public class TeacherController {
         model.addAttribute("bheList", bheList);
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
-        return "/teacher/TCH-EXG-00";
+        return "/teacher/TCH-EXG-10";
     }
 
     @PostMapping("/searchStudentExamsByBatch")
@@ -348,7 +349,7 @@ public class TeacherController {
         model.addAttribute("bheList", bheList);
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
-        return "/teacher/TCH-EXG-00";
+        return "/teacher/TCH-EXG-10";
     }
 
 }
