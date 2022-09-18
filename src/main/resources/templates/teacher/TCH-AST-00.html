@@ -60,13 +60,21 @@
                                                     </span>
                                                 </select>
 
-                                                <label class="form-label mb-auto">Start Time</label>
-                                                <input type="datetime-local" th:field="*{startTime}"
-                                                    class="border border-secondary form-control mb-3" required/>
+                                                <span id="calendar">
+                                                    <label class="form-label mb-auto">Start Time</label>
+                                                    <input type="datetime-local" th:field="*{startTime}"
+                                                        id="startDate"
+                                                        :value="startDate"
+                                                        @input="event => startDate = event.target.value"
+                                                        class="border border-secondary form-control mb-3" required />
 
-                                                <label class="form-label mb-auto">End Time</label>
-                                                <input type="datetime-local" th:field="*{endTime}"
-                                                    class="border border-secondary form-control mb-3" required />
+                                                    <label class="form-label mb-auto">End Time</label>
+                                                    <input type="datetime-local" th:field="*{endTime}" :value="endDate"
+                                                        id="endDate"
+                                                        @input="event => endDate = event.target.value"
+                                                        :disabled="!isStartDateFilled"
+                                                        class="border border-secondary form-control mb-3" required />
+                                                </span>
 
                                                 <label for="" class="mb-auto">File</label>
                                                 <input type="file" class="border border-secondary form-control mb-3"
@@ -117,7 +125,8 @@
             </div>
             <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">
-                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights Reserved - Ace Inspiration</p>
+                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                        Reserved - Ace Inspiration</p>
                 </div>
             </footer>
         </div>
@@ -131,6 +140,47 @@
         $(document).ready(function () {
             $("#dataTable").DataTable();
         });
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    startDate: '',
+                    endDate: '',
+                    isStartDateFilled: false
+                }
+            },
+            methods: {
+                getDate(date) {
+                    let dd = String(date.getDate()).padStart(2, '0');
+                    let mm = String(date.getMonth() + 1).padStart(2, '0');
+                    let yyyy = date.getFullYear();
+                    let [time] = date.toTimeString().split(' ');
+                    value = yyyy + '-' + mm + '-' + dd + 'T' + time.substring(0, 5);
+                    return value;
+                }
+            },
+            watch: {
+                startDate: function (newStartDate, oldStartDate) {
+                    let dayAfterStartDate = new Date(newStartDate);
+                    dayAfterStartDate.setDate(dayAfterStartDate.getDate() + 1);
+                    let endDate = document.getElementById('endDate');
+                    endDate.setAttribute("min", this.getDate(dayAfterStartDate));
+                    this.isStartDateFilled = true;
+                },
+                endDate: function (newEndDate, oldEndDate) {
+                    let maxDate = new Date(newEndDate);
+                    maxDate.setDate(maxDate.getDate() - 1);
+                    startDate.setAttribute("max", this.getDate(maxDate));
+                }
+            },
+            mounted() {
+                let today = new Date();
+                let startDate = document.getElementById('startDate');
+                startDate.setAttribute("min", this.getDate(today));
+            }
+        })
+        app.mount('#calendar');
+
     </script>
 </body>
 
