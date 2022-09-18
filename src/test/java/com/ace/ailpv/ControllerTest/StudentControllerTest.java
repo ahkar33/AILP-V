@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mock.web.MockMultipartFile;
 
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +22,17 @@ import com.ace.ailpv.repository.BatchHasResourceRepository;
 import com.ace.ailpv.repository.BatchHasVideoRepository;
 import com.ace.ailpv.repository.BatchRepository;
 import com.ace.ailpv.repository.UserRepository;
+
+import com.ace.ailpv.service.BatchHasResourceService;
+import com.ace.ailpv.service.BatchHasVideoService;
+import com.ace.ailpv.service.BatchService;
+import com.ace.ailpv.service.UserService;
+// import org.springframework.security.test.context.support.WithUserDetails;
+
+// @SpringBootTest(
+//     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+// )
+
 import com.ace.ailpv.security.CustomUserDetailsService;
 
 import java.io.File;
@@ -38,8 +49,10 @@ import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
+
 @AutoConfigureMockMvc
 @ContextConfiguration
+
 // @WithUserDetails("stu001")
 public class StudentControllerTest {
 
@@ -87,7 +100,8 @@ public class StudentControllerTest {
 
     String apiPath = "/student";
 
-    // Testing student home page
+
+
     @Test
     public void showStudentHomePageTest() throws Exception {
         HashMap<String, Object> sessionattr = new HashMap<String, Object>();
