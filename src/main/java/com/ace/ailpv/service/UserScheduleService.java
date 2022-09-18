@@ -52,7 +52,8 @@ public class UserScheduleService {
     public Float avgAttendaceOfBatch(Long batchId) {
         Float totalPresentOfBatch = getPresentByBatchId(batchId).floatValue();
         int totalStudent = userService.getUserCountByBatchIdAndRole(batchId, "ROLE_STUDENT");
-        return (totalPresentOfBatch / totalStudent) * 100;
+        Long totalDate = userScheduleRepository.countTotalDate(batchId);
+        return (totalPresentOfBatch / (totalStudent * totalDate)) * 100;
     }
 
     public Float avgAttendaceOfStudent(String studentId) {

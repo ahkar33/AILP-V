@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -68,9 +67,9 @@ public class TeacherController {
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
-        batchList = batchList.stream()
-                .filter(batch -> batch.getIsActive())
-                .collect(Collectors.toList());
+        // batchList = batchList.stream()
+        //         .filter(batch -> batch.getIsActive())
+        //         .collect(Collectors.toList());
         model.addAttribute("batchList", batchList);
         model.addAttribute("teacherId", teacherId);
         return "/teacher/TCH-DSB-01";
@@ -90,7 +89,7 @@ public class TeacherController {
         String teacherId = (String) session.getAttribute("uid");
         User teacherInfo = userService.getUserById(teacherId);
         List<Batch> batchList = userService.getTeacherBatchListById(teacherInfo.getId());
-        batchList = batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
+        // batchList = batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
         Batch firstBatch = batchList.get(0);
         model.addAttribute("userId", teacherInfo.getId());
         model.addAttribute("username", teacherInfo.getName());
@@ -113,7 +112,7 @@ public class TeacherController {
         model.addAttribute("batchId", batchId);
         model.addAttribute("batchName", batchName);
         List<Batch> batchList = userService.getTeacherBatchListById(teacherInfo.getId());
-        batchList = batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
+        // batchList = batchList.stream().filter(batch -> batch.getIsActive()).collect(Collectors.toList());
         model.addAttribute("batchList", batchList);
         return "/teacher/TCH-PBC-05";
     }

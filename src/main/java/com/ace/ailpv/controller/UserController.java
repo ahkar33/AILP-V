@@ -88,12 +88,18 @@ public class UserController extends Thread {
             model.addAttribute("batchName", batches);
         }
 
+<<<<<<< HEAD
         if (user.getRole().equals(adminRole)) {
             return "/admin/ADM-PRF-16";
         } else if (user.getRole().equals(teacherRole)) {
+=======
+        if (user.getRole().equals("ROLE_ADMIN")) {
+            return "/admin/ADM-PRF-15";
+        } else if (user.getRole().equals("ROLE_TEACHER")) {
+>>>>>>> 074b019af40840a203f8b6cb365716768d6a3195
             return "/teacher/TCH-PRF-08";
         } else {
-            return "/student/STU-PRF-08";
+            return "/student/STU-PRF-09";
         }
     }
 

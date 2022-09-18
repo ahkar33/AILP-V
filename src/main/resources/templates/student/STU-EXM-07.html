@@ -6,13 +6,16 @@
 </head>
 
 <style>
+    .nearEnd {
+        color: #ffe200;
+    }
+
     [v-cloak] {
         display: none
     }
 </style>
 
 <body id="page-top" style="background-color: #E4E6E9 ">
-
     <div th:insert="/student/student-fragments :: pc-navbar" />
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
@@ -86,7 +89,7 @@
 
 
                 <span v-else-if="!isExamEnd">
-                    <div class="card-body shadow-sm mb-4 mt-4" :class="[ isNearEnd ? 'text-danger' : 'text-light' ]"
+                    <div class="card-body shadow-sm mb-4 mt-4" :class="[ isNearEnd ? 'nearEnd' : 'text-light' ]"
                         style="background-image: linear-gradient(181deg, rgb(68, 94, 180) 1%, rgb(49, 72, 152) 99%); border-radius: 25px; padding: 15px 30px 3px; margin-top: -25px;">
                         <div class="d-flex justify-content-evenly">
                             <span d-flex flex-column>
@@ -143,9 +146,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-
-                                
                             </span>
                         </div>
                     </div>

@@ -28,11 +28,13 @@ public class Reply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 1000)
     private String replyText;
 
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "comment_id", referencedColumnName = "id")
+
     private Comment replyComment;
 
     @ManyToOne

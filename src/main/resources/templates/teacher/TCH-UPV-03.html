@@ -15,41 +15,41 @@
                 <!-- this is where nav bar is -->
                 <div th:insert="/teacher/teacher-fragments :: navbar" />
 
-                <div class="container-fluid" id="app">
-                    <h1 class="fs-3 mb-4 text-start"
-                        style="margin-bottom: 42px;font-size: 33px;color: rgb(72,72,72);font-weight: bold;font-family: 'Roboto', sans-serif;">
-                        Upload Video
-                    </h1>
-                    <div class="card-header d-flex d-lg-flex flex-lg-wrap flex-wrap py-3">
-                        <form>
-                            <div class="me-3">
-                                <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
-                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                        <label for="exampleInputEmail1" class="form-label">Date</label>
-                                        <input type="datetime-local" class="form-control" v-model="date" required />
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <form>
-                            <div class="">
-                                <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
-                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                        <label class="form-label">Batch</label>
-                                        <select v-model="batchId" class="form-select" required
-                                            aria-label="Default select example">
-                                            <option disabled>Choose One Batch</option>
-                                            <span th:each="batch : ${batchList}">
-                                                <option th:value="${batch?.id}">[[${batch?.name}]]</option>
-                                            </span>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                <div class="container-fluid mb-4" id="app">
+                    <h1 class="fs-3 mb-3 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        Upload Video</h1>
+                   
 
-                    <div class="card shadow">
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex flex-wrap py-3">
+                            <form>
+                                <div class="me-3">
+                                    <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                            <label for="exampleInputEmail1" class="form-label">Date</label>
+                                            <input type="datetime-local" class="form-control" v-model="date" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <form>
+                                <div class="">
+                                    <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                            <label class="form-label">Batch</label>
+                                            <select v-model="batchId" class="form-select" required
+                                                aria-label="Default select example">
+                                                <option disabled>Choose One Batch</option>
+                                                <span th:each="batch : ${batchList}">
+                                                    <option th:value="${batch?.id}">[[${batch?.name}]]</option>
+                                                </span>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <div class="card-body text-dark">
                             <table id="dataTable" class="display p-2">
                                 <thead>
@@ -113,9 +113,9 @@
                 </div>
 
             </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
+            <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
+                <div class="container pb-2 pt-2">
+                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights Reserved - Ace Inspiration</p>
                 </div>
             </footer>
         </div>

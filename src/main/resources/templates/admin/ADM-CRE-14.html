@@ -35,7 +35,7 @@
                                 </select>
 
                                 <div class="input-group mb-3">
-                                    <input v-model="name" type="text" class="form-control mb-2" placeholder="Exam Name"
+                                    <input v-model="name" type="text" class="form-control mb-2" placeholder="Exam Name" maxlength="900"
                                         required />
                                 </div>
                             </div>
@@ -47,14 +47,14 @@
                                     <form>
                                         <label class="form-label fs-4 fw-bold">Question</label>
                                         <div class="input-group mb-3">
-                                            <input v-model="question.examQuestion" type="text" class="form-control mb-2"
+                                            <input v-model="question.examQuestion" type="text" class="form-control mb-2" maxlength="900"
                                                 required style="width: 100%;" placeholder="Untitiled Question" />
                                         </div>
                                         <div class="mb-4">
                                             <div class="form-check">
                                                 <div v-for="(radio, indes) in question.radioList" :key="indes"
                                                     class="input-group mb-3">
-                                                    <input v-model="radio.radioValue" type="text" required
+                                                    <input v-model="radio.radioValue" type="text" required maxlength="900"
                                                         class="form-control" :placeholder="'Option ' + (++indes)" />
                                                     <button @click.prevent="removeRadio(index, --indes)" type="button"
                                                         class="btn btn-danger fw-bold rounded ms-2">
@@ -69,7 +69,7 @@
 
                                         </div>
                                         <input v-model="question.rightAnswer" class="form-control" required
-                                            placeholder="Enter the right answer" />
+                                            placeholder="Enter the right answer" maxlength="900" />
                                         <input v-model="question.mark" type="number" class="form-control mt-4 mb-4"
                                             id="inputEmail4" required style="width: 100%;" placeholder="Enter Mark" />
                                         <div class="text-end mt-3">

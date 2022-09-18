@@ -191,26 +191,39 @@ public class TeacherApi {
         return data;
     }
 
-    @GetMapping("/getStudentAttendanceByTeacherId/{teacherId}")
-    public Map<String, Float> getStudentAttendance(@PathVariable("teacherId") String teacherId) {
-        List<User> studentList = userService.getStudentListByTeacherId(teacherId);
-        Map<String, Float> data = new LinkedHashMap<>();
-        for (User user : studentList) {
-            data.put(user.getName(), userScheduleService.avgAttendaceOfStudent(user.getId()).floatValue());
-        }
-        return data;
-    }
+    // @GetMapping("/getStudentAttendanceByTeacherId/{teacherId}")
+    // public Map<String, Float> getStudentAttendance(@PathVariable("teacherId") String teacherId) {
+    //     List<User> studentList = userService.getStudentListByTeacherId(teacherId);
+    //     Map<String, Float> data = new LinkedHashMap<>();
+    //     for (User user : studentList) {
+    //         data.put(user.getName(), userScheduleService.avgAttendaceOfStudent(user.getId()).floatValue());
+    //     }
+    //     return data;
+    // }
 
-    @GetMapping("/getBatchAttendanceByTeacherId/{teacherId}")
-    public Map<String, Float> getBatchAttendanceByTeacherId(@PathVariable("teacherId") String teacherId) {
+    @GetMapping(value = "/getBatchAttendanceByTeacherId/{teacherId}")
+    public Map<String, Float> getBatchAttendance(@PathVariable("teacherId") String teacherId) {
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
         Map<String, Float> data = new LinkedHashMap<>();
-        User teacher = userService.getUserById(teacherId);
-        List<Batch> batchList = teacher.getBatchList();
         for (Batch batch : batchList) {
             data.put(batch.getName(), userScheduleService.avgAttendaceOfBatch(batch.getId()).floatValue());
         }
         return data;
     }
+
+    // @GetMapping("/getBatchAttendanceByTeacherId/{teacherId}")
+    // public Map<String, Float> getBatchAttendanceByTeacherId(@PathVariable("teacherId") String teacherId) {
+    //     Map<String, Float> data = new LinkedHashMap<>();
+    //     User teacher = userService.getUserById(teacherId);
+    //     List<Batch> batchList = teacher.getBatchList();
+    //     batchList = batchList.stream()
+    //             .filter(batch -> batch.getIsActive())
+    //             .collect(Collectors.toList());
+    //     for (Batch batch : batchList) {
+    //         data.put(batch.getName(), userScheduleService.avgAttendaceOfBatch(batch.getId()).floatValue());
+    //     }
+    //     return data;
+    // }
 
     // @GetMapping("/getExamListByTeacherId")
     // public List<Exam> getExamListByTeacherId() {

@@ -43,7 +43,7 @@ public interface UserScheduleRepository extends JpaRepository<UserSchedule, Long
 
     @Query
     (
-        value = "select count(schedule_id) from user_schedule where user_schedule_batch_id=?1",
+        value = "select count(DISTINCT schedule_id) from user_schedule where user_schedule_batch_id=?1",
         nativeQuery = true
     )
     Long countTotalDate(Long batchId);
