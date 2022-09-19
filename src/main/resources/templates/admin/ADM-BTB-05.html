@@ -133,27 +133,29 @@
                                         <td>[[${batch?.startDate}]]</td>
                                         <td>[[${batch?.endDate}]]</td>
                                         <td>
-                                            <a th:href="@{/admin/editBatch/} + ${batch?.id}"
-                                                class="btn btn-primary bg-gradient">
-                                                Edit
-                                            </a>
+                                            
 
                                             <span th:if="${batch.isActive == true}">
                                                 <a th:href="@{/admin/toggleDisableBatch/} + ${batch?.id}"
-                                                    class="btn btn-danger bg-gradient">
+                                                    class="bg-gradient btn btn-outline-danger me-2" style="width: 110px;"><i class="fa fa-info-circle"></i>
                                                     Disable
                                                 </a>
                                             </span>
 
                                             <span th:if="${batch.isActive == false}">
                                                 <a th:href="@{/admin/toggleDisableBatch/} + ${batch?.id}"
-                                                    class="btn btn-success bg-gradient">
+                                                    class="bg-gradient btn btn-outline-success me-2" style="width: 110px;"><i class="fa fa-info-circle"></i>
                                                     Enable
                                                 </a>
 
                                             </span>
 
-                                            <a class="btn btn-outline-danger btn" title="Remove" data-bs-placement="top"
+                                            <a th:href="@{/admin/editBatch/} + ${batch?.id}"
+                                                class="btn btn-primary bg-gradient me-1">
+                                                Edit
+                                            </a>
+
+                                            <a class="btn-danger bg-gradient btn" title="Remove" data-bs-placement="top"
                                                 data-bs-toggle="tooltip"
                                                 th:attr="onclick=|handleDelete('${batch.id}')|">
                                                 <i class="fa-trash-alt fas"></i>
@@ -167,9 +169,10 @@
                     </div>
                 </div>
             </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2022</span></div>
+            <footer class="pb-2 pt-2 small text-dark mt-5" data-pg-collapsed style="background-color: #dfdfdf;">
+                <div class="container pb-2 pt-2">
+                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                        Reserved - Ace Inspiration</p>
                 </div>
             </footer>
         </div>

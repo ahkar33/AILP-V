@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Login - Brand</title>
+    <title>Login</title>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -37,7 +37,7 @@
                                 <div class="p-5" style="margin-top: -25px;margin-bottom: -17px;">
                                     <div class="text-center">
                                         <img src="/assets/img/logo_blue.png"
-                                            style="width: 229px;margin-bottom: 50px;margin-top: 12px;">
+                                            style="width: 229px;margin-bottom: 40px;margin-top: 12px;">
                                     </div>
                                     <span th:if="${param.error}">
                                         <span th:if="${param.error[0] == 'error'}">
@@ -65,20 +65,20 @@
                                         <div class="mb-3">
                                             <input
                                                 class="border rounded border-1 border-secondary shadow-sm form-control form-control-user"
-                                                type="text" name="username" placeholder="Enter Username or ID" required>
+                                                type="text" name="username" placeholder="Enter Username or ID" style="font-size: 14px;" required>
                                         </div>
                                         <div class="mb-3">
                                             <input name="password"
                                                 class="border rounded border-1 border-secondary shadow-sm form-control form-control-user"
-                                                type="password" placeholder="Enter Password" required>
+                                                type="password" placeholder="Enter Password" style="font-size: 14px;" required>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-2">
                                             <div class="custom-control custom-checkbox small">
                                                 <div class="form-check"><input
                                                         class="form-check-input custom-control-input" type="checkbox"
                                                         id="formCheck-1" name="remember-me" style="font-size: 15px;">
                                                     <label class="form-check-label custom-control-label"
-                                                        for="formCheck-1" style="color: rgb(82,82,82);font-size: 15px;">
+                                                        for="formCheck-1" style="font-family: Roboto, sans-serif; color: rgb(82,82,82);font-size: 16px;">
                                                         Remember Me
                                                     </label>
                                                 </div>
@@ -86,7 +86,7 @@
                                         </div>
                                         <button class="btn btn-primary border rounded shadow-sm d-block btn-user w-100"
                                             role="button" data-bss-hover-animate="pulse"
-                                            style="background: rgb(55,81,162);border-radius: 9px;margin-bottom: 18px;margin-left: 0px;"
+                                            style="background: rgb(55,81,162);border-radius: 9px;font-size: 15px;margin-bottom: 18px;margin-left: 0px;"
                                             type="submit">
                                             Login
                                         </button>
@@ -95,25 +95,25 @@
                                     <!-- form end -->
                                     <div>
                                         <p
-                                            style="font-family: 'Average Sans', sans-serif;font-size: 18px;color: rgb(21,21,21);margin-bottom: 20px;">
+                                            style="font-family: Roboto, sans-serif;font-size: 17px;color: rgb(101,99,99);margin-bottom: 14px;">
                                             To request an account, please contact us.
                                         </p>
                                         <div class="row d-flex">
                                             <div class="col-xl-6 col-xxl-5 d-flex"><a class="text-decoration-none"
                                                     href="tel: +959253257742">
                                                     <p class="text-decoration-none"
-                                                        style="font-family: 'Average Sans', sans-serif;font-size: 17px;">
+                                                        style="font-family: 'Average Sans', sans-serif;font-size: 15px;">
                                                         <img src="/assets/img/login_call_logo.png"
-                                                            style="width: 24px;filter: contrast(94%) hue-rotate(281deg) saturate(93%);">&nbsp;
+                                                            style="width: 20px;">&nbsp;
                                                         +959253257742
                                                     </p>
                                                 </a></div>
                                             <div class="col-xl-6 col-xxl-5 d-flex"><a class="text-decoration-none"
                                                     href="tel: +959795519692">
                                                     <p class="text-decoration-none"
-                                                        style="font-family: 'Average Sans', sans-serif;font-size: 17px;">
+                                                        style="font-family: 'Average Sans', sans-serif;font-size: 15px;">
                                                         <img src="/assets/img/login_call_logo.png"
-                                                            style="width: 24px;filter: contrast(94%) hue-rotate(281deg) saturate(93%);">&nbsp;
+                                                            style="width: 20px;">&nbsp;
                                                         +959795519692
                                                     </p>
                                                 </a></div>
@@ -122,9 +122,9 @@
                                             <div class="col text-nowrap"><a class="text-decoration-none"
                                                     href="https://www.facebook.com/aceinspiration">
                                                     <p class="text-truncate text-decoration-none"
-                                                        style="font-family: 'Average Sans', sans-serif;font-size: 18px;">
+                                                        style="font-family: 'Average Sans', sans-serif;font-size: 17px;">
                                                         <img src="/assets/img/loginin_facebook_logo.png"
-                                                            style="width: 24px;">&nbsp; www.facebook.com/aceinspiration
+                                                            style="width: 20px;">&nbsp; www.facebook.com/aceinspiration
                                                     </p>
                                                 </a>
                                             </div>

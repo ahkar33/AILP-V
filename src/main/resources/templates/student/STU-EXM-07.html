@@ -56,7 +56,7 @@
                                     </span>
                                 </div>
                                 <span th:if="${session?.role == 'ROLE_STUDENT'}">
-                                    <a th:href="@{/student/student-home}" class="btn btn-lg pe-5 ps-5 btn-primary rounded-pill">Go Home</a>
+                                    <a th:href="@{/student/student-home}" class="btn btn-lg bg-gradient shadow-sm pe-5 ps-5 btn-primary rounded-pill">Go Home</a>
                                 </span>
                             </div>
                         </div>
@@ -153,17 +153,27 @@
                         
 
                     <span>
-                        <button v-if="studentAnswerList.length > 0" @click="handleSubmit()" class="btn btn-lg btn-primary mt-3 w-100 shadow-sm bg-gradient" style="margin: 0px;"> 
+                        <button v-if="studentAnswerList.length > 0" @click="handleSubmit()" class="bg-gradient btn btn-lg mt-3 shadow-sm text-light w-25" style="margin: 0px; background-color: #32499a;"> <i class="fa fa-check pe-1"></i>
                             Submit
                         </button>
-                        <button v-if="studentAnswerList.length == 0" @click="handleSubmit()" class="btn btn-lg btn-primary mt-3 w-100 disabled shadow-sm bg-gradient" style="margin: 0px;"> 
+                        <button v-if="studentAnswerList.length == 0" @click="handleSubmit()" class="bg-gradient btn btn-lg mt-3 shadow-sm text-light w-25" style="margin: 0px; background-color: #32499a;"> <i class="fa fa-check pe-1"></i>
                             Submit
                         </button>
                     </span>
 
                 </span>
                 <span v-else>
-                    <h2>Exam has ended</h2>
+                    <section class="text-center mt-5">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 ms-auto me-auto">
+                                    <img src="/assets/img/exam-ended.png" class="mb-3" style="width: 85%;"/>
+                                    <p class="fw-normal h2 mb-4 text-dark" style="font-family: 'Roboto', sans-serif;">Sorry, the exam has already ended.</p>
+                                    <span><a th:href="@{/student/student-home}" class="btn btn-lg bg-gradient shadow-sm pe-5 ps-5 btn-primary rounded-pill">Go Home</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </span>
             </span>
         </span>
