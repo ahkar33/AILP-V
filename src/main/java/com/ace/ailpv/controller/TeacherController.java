@@ -234,7 +234,7 @@ public class TeacherController {
         } else {
             assignmentResultService.addAssignmentResult(result);
         }
-        return "redirect:/teacher/assignment-table";
+        return "redirect:/teacher/checkAssignment/" + result.getAssignmentResultAnswer().getAssignment().getId();
     }
 
     @GetMapping("/assignment-grade")
