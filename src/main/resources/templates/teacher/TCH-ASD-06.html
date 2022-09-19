@@ -57,9 +57,9 @@
                         name="assignmentResultAnswer">
                       <input type="hidden" th:value="${session?.uid}" id="assignmentResultTeacher"
                         name="assignmentResultTeacher">
-                      <textarea class="form-control mb-2" rows="2" placeholder="Comment" maxlength="900"
+                      <textarea class="form-control mb-2" rows="2" placeholder="Comment" maxlength="900" required
                         th:field="*{comment}"></textarea>
-                      <input type="number" class="form-control mb-2" placeholder="Mark" th:field="*{mark}" />
+                      <input type="number" class="form-control mb-2" placeholder="Mark" th:field="*{mark}" required />
                     </div>
                     <div class="d-flex gap-1 pt-2">
                       <a th:href="@{ ${'/courses/' + answer?.assignment?.assignmentBatch?.batchCourse?.name + '/' + answer?.assignment?.assignmentBatch?.id + '/' + 'AssignmentAnswer' + '/' + answer?.answerFileName } }"
