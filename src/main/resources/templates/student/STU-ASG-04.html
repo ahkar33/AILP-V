@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/student/student-fragments :: student_head">
-    <title>Student Home</title>
+    <title>Assignment</title>
 </head>
 
 <body id="page-top" style="background-color: #E4E6E9 ">
@@ -33,7 +33,7 @@
                                 <td class="pt-2 text-dark">[[${assignment?.name}]]</td>
                                 <td class="pb-0 pt-2">
                                     <a th:href="@{ ${'/courses/' + assignment?.assignmentBatch?.batchCourse?.name + '/' + assignment?.assignmentBatch?.id + '/'  +  'AssignmentQuestion' + '/' + assignment?.questionFileName} }"
-                                        target="_blank" class="btn  btn-sm btn-success mb-2 ms-0 text-break text-overflow text-truncate w-75"><i class="fa fa-download me-1 pt-1"></i>
+                                        target="_blank" class="btn shadow bg-gradient btn-sm btn-success mb-2 ms-0 text-break text-overflow text-truncate w-75"><i class="fa fa-download me-1 pt-1"></i>
                                         [[${assignment?.questionFileName}]]
                                     </a>
                                 </td>
@@ -46,7 +46,7 @@
                                     <input class="form-control w-75" type="file" th:field="*{answerFile}" accept=".zip" required />
                                 </td>
                                 <td class="pb-0 pt-1">
-                                    <button type="submit" class=" btn btn-primary mb-2 ms-0">Submit</button>
+                                    <button type="submit" class=" btn btn-primary shadow-sm bg-gradient mb-2 ms-0">Submit</button>
                                 </td>
                           
                             </form>

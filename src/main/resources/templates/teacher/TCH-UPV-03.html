@@ -65,7 +65,7 @@
                                         <td>
 
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn-primary bg-gradient shadow-sm" data-bs-toggle="modal"
                                                 :data-bs-target=`#staticBackdrop${video.id}`>
                                                 Preview
                                             </button>
@@ -74,26 +74,24 @@
                                             <div class="modal fade" :id=`staticBackdrop${video.id}` data-bs-backdrop="static"
                                                 data-bs-keyboard="false" tabindex="-1"
                                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
+                                                <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticBackdropLabel">
+                                                        <div class="border border-0 modal-header rounded rounded-0"
+                                                        style="background: #f8f9fc; background-color: #324da0; padding-top: 14px; padding-bottom: 14px;">
+                                                            <h5 style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif; margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
+                                                            class="text-light" id="staticBackdropLabel">
                                                                 {{video.name.substring(0, video.name.length - 4)}}
                                                             </h5>
-                                                            <button type="button" class="btn-close"
+                                                            <button type="button" class="btn-close btn-close-white"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body d-flex justify-content-center">
+                                                        <div class="modal-body d-flex justify-content-center p-0 pb-5">
                                                             <video width="400" height="350" controls
                                                                 controlsList="nodownload">
                                                                 <source
                                                                     :src=`/courses/${video.videoCourse.name}/video/${video.name}`
                                                                     type="video/mp4" />
                                                             </video>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -107,7 +105,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <button @click.prevent="handleSubmit()" class="btn btn-primary">Submit</button>
+                            <button @click.prevent="handleSubmit()" class="btn btn-primary  bg-gradient shadow-sm">Submit</button>
                         </div>
                     </div>
                 </div>
