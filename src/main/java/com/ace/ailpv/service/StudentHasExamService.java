@@ -1,5 +1,7 @@
 package com.ace.ailpv.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +22,7 @@ public class StudentHasExamService {
         return studentHasExamRepository.findBySheStudent_IdAndSheExam_Id(studentId, examId);
     }
 
+    public List<StudentHasExam> getStudentHasExamListByStudentId(String studentId) {
+        return studentHasExamRepository.findBySheStudent_Id(studentId);
+    }
 }
