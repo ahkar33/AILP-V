@@ -127,8 +127,7 @@ public class StudentController {
             if (batchVideoList.size() > 0) {
                 batchHasVideo = batchHasVideoService.getAllBatchHasVideoByBatchId(userBatchId).get(0);
                 model.addAttribute("video", batchHasVideo.getVideo());
-            }
-            else {
+            } else {
                 Video video = new Video();
                 video.setId(null);
                 batchHasVideo.setVideo(video);
@@ -188,7 +187,8 @@ public class StudentController {
     }
 
     @PostMapping("/submitAssignment")
-    public String submitAssignment(@ModelAttribute("answer") AssignmentAnswer answer,RedirectAttributes redirectAttr) throws IOException {
+    public String submitAssignment(@ModelAttribute("answer") AssignmentAnswer answer, RedirectAttributes redirectAttr)
+            throws IOException {
         Long currentTime = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         Assignment assignment = assignmentService.getAssignmentById(answer.getAssignment().getId());
         Long startTime = assignment.getEndTime().toEpochSecond(ZoneOffset.UTC);
@@ -197,7 +197,7 @@ public class StudentController {
         }
         answer.setAnswerFileName(answer.getAnswerFile().getOriginalFilename());
         assignmentAnswerService.addAssignmentAnswer(answer);
-         redirectAttr.addFlashAttribute("successMsg", true);
+        redirectAttr.addFlashAttribute("successMsg", true);
         return "redirect:/student/studentAssignment";
     }
 
@@ -226,6 +226,11 @@ public class StudentController {
         model.addAttribute("studentId", studentId);
         model.addAttribute("examId", batchHasExam.getBheExam().getId());
         return "/student/STU-EXM-07";
+    }
+
+    @GetMapping("/contactUs")
+    public String getContactUs() {
+        return "/student/STU-CTC-10";
     }
 
 }
