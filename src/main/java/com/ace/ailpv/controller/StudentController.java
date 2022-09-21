@@ -24,6 +24,7 @@ import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasExam;
 import com.ace.ailpv.entity.BatchHasResource;
 import com.ace.ailpv.entity.BatchHasVideo;
+import com.ace.ailpv.entity.StudentHasExam;
 import com.ace.ailpv.entity.User;
 
 import com.ace.ailpv.entity.Video;
@@ -34,6 +35,7 @@ import com.ace.ailpv.service.BatchHasExamService;
 import com.ace.ailpv.service.BatchHasResourceService;
 import com.ace.ailpv.service.BatchHasVideoService;
 import com.ace.ailpv.service.BatchService;
+import com.ace.ailpv.service.StudentHasExamService;
 import com.ace.ailpv.service.UserService;
 import com.ace.ailpv.service.VideoService;
 
@@ -67,6 +69,9 @@ public class StudentController {
 
     @Autowired
     private BatchHasExamService batchHasExamService;
+
+    @Autowired
+    private StudentHasExamService studentHasExamService;
 
     @GetMapping("/student-home")
     public String showStudentHomePage(HttpSession session, ModelMap model) {
@@ -206,6 +211,9 @@ public class StudentController {
         String studentId = (String) session.getAttribute("uid");
         List<AssignmentResult> resultList = assignmentResultService.getAssignmentResultListByStudentId(studentId);
         model.addAttribute("resultList", resultList);
+        List<StudentHasExam> sheList = studentHasExamService.getStudentHasExamListByStudentId(studentId);
+        model.addAttribute("sheList", sheList);
+
         return "/student/STU-GRB-08";
     }
 

@@ -73,99 +73,69 @@
 
     </div>
 
-
     <!-- this is exam container -->
     <div class="border-secondary pt-3">
       <h2 style="font-family: 'Roboto', sans-serif;">Exam</h2>
       <!-- exam card start -->
       <div class="g-2 row">
-        <div class="col-lg-6 col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body pb-2 pt-3 shadow-sm text-dark" style="
+        <span th:each=" studentHasExam : ${sheList}">
+          <div class="col-lg-6 col-md-6 col-xl-4">
+
+            <div class="card">
+              <div class="card-body pb-2 pt-3 shadow-sm text-dark" style="
             padding-top: 10px;
             padding-right: 15px;
             padding-bottom: 10px;
           ">
-              <div class="border-bottom d-flex justify-content-between">
-                <h5 style="font-family: 'Roboto', sans-serif;" class="mb-3">Mid Term Exam</h5>
-                <p style="font-family: 'Roboto', sans-serif; font-size: 14px; color: #008a14;"
-                  class="fw-bold mb-0 ps-3 pt-1">100/100</p>
-              </div>
-              <div class="align-items-center d-flex mt-3 pb-1">
-                <img class="img-profile me-2 rounded-circle"
-                  th:src="@{${'/profile_pics/' + result?.assignmentResultTeacher?.profile_pic} }"
-                  style="width: 23px; height: 23px;" />
-                <h6 class="mb-0  text-muted" style="font-family: 'Roboto', sans-serif;">Teacher 01</h6>
-              </div>
-              <a class="btn btn-dark btn-sm mb-2 ms-0 mt-2" role="button" href="#grade-comment-button"
-                data-bs-target="#grade-comment-button" data-bs-toggle="modal">Teacher&apos;s Comment</a>
-              <p class="mb-0 text-end" style="font-family: 'Roboto', sans-serif; font-size: 15px;">Monday, May 8 2022
-              </p>
-
-              <!-- Modal Box -->
-              <div class="modal fade" role="dialog" tabindex="-1" id="grade-comment-button">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header pb-2 pt-0 text-dark" style="background-color: #f7f3f3;">
-                      <div class="align-items-center d-flex mt-3 pb-1" data-pg-collapsed>
-                        <img class="img-profile me-2 rounded-circle"
-                          th:src="@{${'/profile_pics/' + result?.assignmentResultTeacher?.profile_pic} }"
-                          style="width: 30px; height: 30px;" />
-                        <h5 class="mb-0" style="font-family: 'Roboto', sans-serif;">
-                          [[${result?.assignmentResultTeacher?.name}]]</h5>
-                      </div>
-
-                      <button type="button" class="btn-close mt-1" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <p style="font-family: 'Roboto', sans-serif;" class="mb-0">[[${result?.comment}]]</p>
-                    </div>
-
-                  </div>
+                <div class="border-bottom d-flex justify-content-between">
+                  <h5 style="font-family: 'Roboto', sans-serif;" class="mb-3">[[${studentHasExam?.sheExam?.name}]]</h5>
+                  <p style="font-family: 'Roboto', sans-serif; font-size: 14px; color: #008a14;"
+                    class="fw-bold mb-0 ps-3 pt-1">[[${studentHasExam?.score}]]/[[${studentHasExam?.sheExam?.fullMark}]]
+                  </p>
                 </div>
+
               </div>
             </div>
           </div>
-        </div>
-
+        </span>
       </div>
       <!-- exam card end -->
-    </div>
 
-    <!-- logout  -->
-    <div class="modal fade" role="dialog" tabindex="-1" id="logout-modal-button-1">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <p class="lead fw-bold text-center text-dark pt-4 pb-2" style="
+
+      <!-- logout  -->
+      <div class="modal fade" role="dialog" tabindex="-1" id="logout-modal-button-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <p class="lead fw-bold text-center text-dark pt-4 pb-2" style="
                   font-size: 20px;
                   font-family: 'IBM Plex Sans KR', sans-serif;
                 ">
-              Are you sure you want to log out?
-            </p>
-          </div>
-          <div class="modal-footer" style="padding: 0px">
-            <button class="btn btn-light border rounded-0 border-0" type="button" data-bs-dismiss="modal"
-              style="margin: 0px; width: 50%; height: 50px">
-              Cancel
-            </button>
-            <button class="btn btn-danger border rounded-0 border-0" type="submit"
-              style="margin: 0px; width: 50%; height: 50px">
-              Log Out
-            </button>
+                Are you sure you want to log out?
+              </p>
+            </div>
+            <div class="modal-footer" style="padding: 0px">
+              <button class="btn btn-light border rounded-0 border-0" type="button" data-bs-dismiss="modal"
+                style="margin: 0px; width: 50%; height: 50px">
+                Cancel
+              </button>
+              <button class="btn btn-danger border rounded-0 border-0" type="submit"
+                style="margin: 0px; width: 50%; height: 50px">
+                Log Out
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="hide-on-desktop">
-    <a class="border rounded d-inline scroll-to-top" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
-  </div>
+    <div class="hide-on-desktop">
+      <a class="border rounded d-inline scroll-to-top" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+      </a>
+    </div>
 
-  <div th:insert="/student/student-fragments :: footer" />
+    <div th:insert="/student/student-fragments :: footer" />
 </body>
 
 </html>
