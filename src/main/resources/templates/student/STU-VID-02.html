@@ -9,6 +9,10 @@
     [v-cloak] {
         display: none
     }
+
+    .allButFooter {
+    min-height: calc(80vh - 90px);
+    }
 </style>
 
 <body id="page-top" class="bg-opacity-25" style="background-color: #f4f4f4;">
@@ -17,7 +21,7 @@
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-    <div class="container mb-3">
+    <div class="container allButFooter mb-3">
         <h1 class="h2 mb-2 mt-4 text-dark"
             style="font-weight: bold;font-family: 'Roboto', sans-serif;margin-bottom: 3px;">
             [[${courseName}]]
@@ -327,6 +331,44 @@
 
         </div>
     </div>
+
+    <footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed
+        style="background-color: #1a2033; font-family: 'Roboto', sans-serif;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
+                    <p class="h6 mb-2" style="font-family: 'Roboto', sans-serif; font-weight: 700;">How To Find Us</p>
+                    <div class="mb-1">
+                        <p class="mb-2 text-white" style="font-size: 14px; font-weight: 200;"><i
+                                class="fa-solid fa-location-dot ps-1 pe-3"></i> No. 169, 9th Floor, MTP Condo, Insein
+                            Road, Than Lan Bus Stop, Hlaing Township, Yangon, Myanmar.</p>
+                        <p class="mb-2 mt-0 text-white" style="font-size: 14px;"><i
+                                class="fa-solid fa-phone pe-3 ps-1 "></i>+959253257742</p> <a href="#"
+                            class="pb-0 pt-0 text-decoration-none text-white" style="font-size: 14px;"><i
+                                class="fa-solid fa-envelope pe-3 ps-1 "></i>info@aceinspiration.com</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xl-3 pb-0 pt-3 py-3">
+                    <p class="h6 mb-1" style="font-family: 'Roboto', sans-serif; font-weight: 700;">Get In Touch</p>
+                    <div class="d-inline-flex flex-wrap ">
+                        <a href="https://www.facebook.com/aceinspiration/" class="text-decoration-none text-white"><i
+                                class="fa-brands fa-square-facebook p-1" style="font-size: 25px;"></i></a>
+                        <a href="https://mm.linkedin.com/school/ace-inspiration/"
+                            class="text-decoration-none text-white"><i class="fa-brands fa-linkedin p-1"
+                                style="font-size: 25px;"></i></a>
+                    </div>
+                    <div class="mt-2">
+                        <button type="button" class="btn btn-outline-light mb-1 ms-0"><i
+                                class="fa-solid fa-headset me-2"></i>Contact Us</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary mt-1 mb-1" />
+            <div class="align-items-center d-flex justify-content-center pb-5 pb-md-2 pt-2 pt-md-2 text-center">
+                <p class="mb-0" style="font-size: 14px;">2022. All Rights Reserved - Ace Inspiration</p>
+            </div>
+        </div>
+    </footer>
 
     <div class="hide-on-desktop">
         <a class="border rounded d-inline scroll-to-top" href="#page-top">
