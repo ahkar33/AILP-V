@@ -184,11 +184,11 @@
                                     class="btn btn-light mb-0">Cancel</button>
                                 <button v-if="commentText.trim().length <= 0" @click.prevent="sendComment()"
                                     type="submit" class="btn btn-primary mb-0 disabled">
-                                    Comment
+                                    <i class="fa-solid fa-comment-dots me-2"></i>Comment
                                 </button>
                                 <button v-else @click.prevent="sendComment()" type="submit"
                                     class="btn btn-primary mb-0">
-                                    Comment
+                                    <i class="fa-solid fa-comment-dots me-2"></i>Comment
                                 </button>
                             </div>
                         </form>
@@ -221,15 +221,7 @@
                                                 <p class="mb-2 text-break"
                                                     style="font-family: 'Roboto', sans-serif; cursor: pointer;">
                                                     {{ comment.commentText }}
-                                                    <span v-if="userId == comment.commentUser.id">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            @click="deleteComment(comment.id)" width="16" height="16"
-                                                            fill="currentColor" class="bi bi-trash-fill text-danger"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                                        </svg>
-                                                    </span>
+                                                    <i v-if="userId == comment.commentUser.id" @click="deleteComment(comment.id)" class="fa-solid fa-trash ms-2 text-danger text-opacity-75" style="font-size: 14px;"></i>
                                                 </p>
 
                                                 <i @click.prevent="toggleShowReply(index)"
@@ -270,11 +262,11 @@
                                                         <button v-if="comment.replyText.trim().length <= 0"
                                                             @click.prevent="sendReply(comment.id, index)" type="submit"
                                                             class="btn btn-primary btn-sm mb-0 disabled">
-                                                            Reply
+                                                            <i class="fa-solid fa-paper-plane me-2"></i>Reply
                                                         </button>
                                                         <button v-else @click.prevent="sendReply(comment.id, index)"
                                                             type="submit" class="btn btn-primary btn-sm mb-0">
-                                                            Reply
+                                                            <i class="fa-solid fa-paper-plane me-2"></i>Reply
                                                         </button>
 
                                                     </div>
@@ -301,17 +293,7 @@
                                                                     <p class="mb-2 text-break"
                                                                         style="font-family: 'Roboto', sans-serif; cursor: pointer;">
                                                                         {{ reply.replyText }}
-                                                                        <span v-if="userId == reply.replyUser.id">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                @click="deleteReply(reply.id, index)"
-                                                                                width="16" height="16"
-                                                                                fill="currentColor"
-                                                                                class="bi bi-trash-fill text-danger"
-                                                                                viewBox="0 0 16 16">
-                                                                                <path
-                                                                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                                                            </svg>
-                                                                        </span>
+                                                                        <i v-if="userId == reply.replyUser.id" @click="deleteReply(reply.id, index)" class="fa-solid fa-trash ms-2 text-danger text-opacity-75" style="font-size: 14px;"></i>
                                                                     </p>
                                                                 </div>
                                                             </div>
