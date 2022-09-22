@@ -77,7 +77,7 @@
 
                                         </div>
                                         <input v-model="question.rightAnswer" class="form-control" required
-                                            placeholder="Enter the right answer" maxlength="900" />
+                                            placeholder="Enter the correct answer" maxlength="900" />
                                         <input v-model="question.mark" type="number" class="form-control mt-4 mb-4"
                                             id="inputEmail4" required style="width: 100%;" placeholder="Enter Mark" />
                                         <div class="text-end mt-3">
@@ -218,7 +218,7 @@
                             if (!radioValues.includes(question.rightAnswer)) {
                                 this.isEmpty = true;
                                 Swal.fire(
-                                    `\"Question ${index + 1}\" right answer and one of the option values do not match`,
+                                    `\"Question ${index + 1}\" correct answer and one of the option value do not match`,
                                     '',
                                     'info'
                                 )
