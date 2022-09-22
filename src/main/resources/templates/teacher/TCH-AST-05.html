@@ -141,45 +141,45 @@
             $("#dataTable").DataTable();
         });
 
-        const app = Vue.createApp({
-            data() {
-                return {
-                    startDate: '',
-                    endDate: '',
-                    isStartDateFilled: false
-                }
-            },
-            methods: {
-                getDate(date) {
-                    let dd = String(date.getDate()).padStart(2, '0');
-                    let mm = String(date.getMonth() + 1).padStart(2, '0');
-                    let yyyy = date.getFullYear();
-                    let [time] = date.toTimeString().split(' ');
-                    value = yyyy + '-' + mm + '-' + dd + 'T' + time.substring(0, 5);
-                    return value;
-                }
-            },
-            watch: {
-                startDate: function (newStartDate, oldStartDate) {
-                    let dayAfterStartDate = new Date(newStartDate);
-                    dayAfterStartDate.setDate(dayAfterStartDate.getDate() + 1);
-                    let endDate = document.getElementById('endDate');
-                    endDate.setAttribute("min", this.getDate(dayAfterStartDate));
-                    this.isStartDateFilled = true;
-                },
-                endDate: function (newEndDate, oldEndDate) {
-                    let maxDate = new Date(newEndDate);
-                    maxDate.setDate(maxDate.getDate() - 1);
-                    startDate.setAttribute("max", this.getDate(maxDate));
-                }
-            },
-            mounted() {
-                let today = new Date();
-                let startDate = document.getElementById('startDate');
-                startDate.setAttribute("min", this.getDate(today));
-            }
-        })
-        app.mount('#calendar');
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             startDate: '',
+        //             endDate: '',
+        //             isStartDateFilled: false
+        //         }
+        //     },
+        //     methods: {
+        //         getDate(date) {
+        //             let dd = String(date.getDate()).padStart(2, '0');
+        //             let mm = String(date.getMonth() + 1).padStart(2, '0');
+        //             let yyyy = date.getFullYear();
+        //             let [time] = date.toTimeString().split(' ');
+        //             value = yyyy + '-' + mm + '-' + dd + 'T' + time.substring(0, 5);
+        //             return value;
+        //         }
+        //     },
+        //     watch: {
+        //         startDate: function (newStartDate, oldStartDate) {
+        //             let dayAfterStartDate = new Date(newStartDate);
+        //             dayAfterStartDate.setDate(dayAfterStartDate.getDate() + 1);
+        //             let endDate = document.getElementById('endDate');
+        //             endDate.setAttribute("min", this.getDate(dayAfterStartDate));
+        //             this.isStartDateFilled = true;
+        //         },
+        //         endDate: function (newEndDate, oldEndDate) {
+        //             let maxDate = new Date(newEndDate);
+        //             maxDate.setDate(maxDate.getDate() - 1);
+        //             startDate.setAttribute("max", this.getDate(maxDate));
+        //         }
+        //     },
+        //     mounted() {
+        //         let today = new Date();
+        //         let startDate = document.getElementById('startDate');
+        //         startDate.setAttribute("min", this.getDate(today));
+        //     }
+        // })
+        // app.mount('#calendar');
 
     </script>
 </body>
