@@ -5,130 +5,183 @@
   <title>Grade</title>
 </head>
 
+<style>
+  .allButFooter {
+  min-height: calc(80vh - 90px);
+}
+</style>
+
 <body id="page-top" style="background-color: #E4E6E9 ">
   <div th:insert="/student/student-fragments :: pc-navbar" />
   <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-  <div class="container mb-5 mt-4 pb-5">
-    <div class="border-1 border-bottom border-secondary pb-4">
-      <h2 style="font-family: 'Roboto', sans-serif;" class="mb-2">Assignment</h2>
-      <div class="g-2 row">
-        <div class="col-lg-6 col-md-6 col-xl-4" th:each="result : ${resultList}">
-          <!-- <p
-              style="margin-top: 0px; font-family: 'IBM Plex Sans KR', sans-serif"
-            >
-              [[${answer?.submitTime}]]
-            </p> -->
-          <div class="card">
-            <div class="card-body pb-2 pt-3 shadow-sm text-dark">
+  <div class="container allButFooter mb-5 mt-4 pb-5">
+    <nav>
+      <div class="nav nav-fill nav-tabs w-50" id="nav-tab" role="tablist">
+        <button class="nav-link active bg-primary text-light" id="nav-assignment-tab" data-bs-toggle="tab"
+          data-bs-target="#nav-assignment" type="button" role="tab" aria-controls="nav-assignment"
+          aria-selected="true">Assignment</button>
+        <button class="nav-link bg-light text-primary" id="nav-exam-tab" data-bs-toggle="tab" data-bs-target="#nav-exam"
+          type="button" role="tab" aria-controls="nav-exam" aria-selected="false">Exam</button>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-assignment" role="tabpanel" aria-labelledby="nav-assignment-tab"
+        tabindex="0">
+        <div class="mt-4 pb-4">
+          <div class="g-2 row">
+            <div class="col-lg-6 col-md-6 col-xl-4" th:each="result : ${resultList}">
+              <!-- <p
+                style="margin-top: 0px; font-family: 'IBM Plex Sans KR', sans-serif"
+              >
+                [[${answer?.submitTime}]]
+              </p> -->
+              <div class="card">
+                <div class="card-body pb-2 pt-3 shadow-sm text-dark">
 
-              <div class="border-bottom d-flex justify-content-between">
-                <h5 style="font-family: 'Roboto', sans-serif;" class="mb-3">
-                  [[${result?.assignmentResultAnswer?.assignment?.name}]]
-                </h5>
-                <p style="font-family: 'Roboto', sans-serif; font-size: 14px; color: #008a14;"
-                  class="fw-bold mb-0 ps-3 pt-1">[[${result?.mark}]]/100</p>
-              </div>
+                  <div class="border-bottom d-flex justify-content-between">
+                    <h5 style="font-family: 'Roboto', sans-serif;" class="mb-3">
+                      [[${result?.assignmentResultAnswer?.assignment?.name}]]
+                    </h5>
+                    <p style="font-family: 'Roboto', sans-serif; font-size: 14px; color: #008a14;"
+                      class="fw-bold mb-0 ps-3 pt-1">[[${result?.mark}]]/100</p>
+                  </div>
 
-              <div class="align-items-center d-flex mt-3 pb-1">
-                <img class="img-profile me-2 rounded-circle"
-                  th:src="@{${'/profile_pics/' + result?.assignmentResultTeacher?.profile_pic} }"
-                  style="width: 23px; height: 23px;" />
-                <h6 class="mb-0  text-muted" style="font-family: 'Roboto', sans-serif;">
-                  [[${result?.assignmentResultTeacher?.name}]]</h6>
-              </div>
+                  <div class="align-items-center d-flex mt-3 pb-1">
+                    <img class="img-profile me-2 rounded-circle"
+                      th:src="@{${'/profile_pics/' + result?.assignmentResultTeacher?.profile_pic} }"
+                      style="width: 23px; height: 23px;" />
+                    <h6 class="mb-0  text-muted" style="font-family: 'Roboto', sans-serif;">
+                      [[${result?.assignmentResultTeacher?.name}]]</h6>
+                  </div>
 
-              <a class="btn btn-dark btn-sm mb-2 ms-0 mt-2" role="button" href="#grade-comment-button"
-                data-bs-target="#grade-comment-button" data-bs-toggle="modal">Teacher&apos;s Comment</a>
+                  <a class="btn btn-dark btn-sm mb-2 ms-0 mt-2" role="button" href="#grade-comment-button"
+                    data-bs-target="#grade-comment-button" data-bs-toggle="modal">Teacher&apos;s Comment</a>
 
-              <p class="mb-0 text-end" style="font-family: 'Roboto', sans-serif; font-size: 15px;">Monday, May 8 2022
-              </p>
+                  <!-- <p class="mb-0 text-end" style="font-family: 'Roboto', sans-serif; font-size: 15px;">Monday, May 8
+                    2022
+                  </p> -->
 
-              <!-- Modal Box -->
-              <div class="modal fade" role="dialog" tabindex="-1" id="grade-comment-button">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header pb-2 pt-0 text-dark" style="background-color: #f7f3f3;">
-                      <div class="align-items-center d-flex mt-3 pb-1" data-pg-collapsed>
-                        <img class="img-profile me-2 rounded-circle"
-                          th:src="@{${'/profile_pics/' + result?.assignmentResultTeacher?.profile_pic} }"
-                          style="width: 30px; height: 30px;" />
-                        <h5 class="mb-0" style="font-family: 'Roboto', sans-serif;">
-                          [[${result?.assignmentResultTeacher?.name}]]</h5>
+                  <!-- Modal Box -->
+                  <div class="modal fade" role="dialog" tabindex="-1" id="grade-comment-button">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header pb-2 pt-0 text-dark" style="background-color: #f7f3f3;">
+                          <div class="align-items-center d-flex mt-3 pb-1" data-pg-collapsed>
+                            <img class="img-profile me-2 rounded-circle"
+                              th:src="@{${'/profile_pics/' + result?.assignmentResultTeacher?.profile_pic} }"
+                              style="width: 30px; height: 30px;" />
+                            <h5 class="mb-0" style="font-family: 'Roboto', sans-serif;">
+                              [[${result?.assignmentResultTeacher?.name}]]</h5>
+                          </div>
+
+                          <button type="button" class="btn-close mt-1" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p style="font-family: 'Roboto', sans-serif;" class="mb-0">[[${result?.comment}]]</p>
+                        </div>
+
                       </div>
-
-                      <button type="button" class="btn-close mt-1" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                      <p style="font-family: 'Roboto', sans-serif;" class="mb-0">[[${result?.comment}]]</p>
-                    </div>
-
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
+      <div class="tab-pane fade" id="nav-exam" role="tabpanel" aria-labelledby="nav-exam-tab" tabindex="0">
+        <!-- this is exam container -->
+        <div class="border-secondary mt-4">
+          <!-- exam card start -->
+          <div class="gx-3 gy-2 row">
+            <span th:each=" studentHasExam : ${sheList}">
+              <div class="col-md-4">
+                <div class="card mb-3">
+                  <div class="card-body" style="font-family: 'Roboto', sans-serif;">
+                    <div class="d-flex flex-column flex-lg-row"> <i class="fa-solid fa-square-poll-horizontal me-3 mb-2" style="font-size: 25px;"></i>
+                      <div class="row flex-fill">
+                        <div class="col-sm-12">
+                          <h5 class="h5 text-dark">[[${studentHasExam?.sheExam?.name}]]</h5> <span class="badge bg-success">[[${studentHasExam?.score}]]/[[${studentHasExam?.sheExam?.fullMark}]]</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </div>
+          <!-- exam card end -->
 
-    </div>
 
-    <!-- this is exam container -->
-    <div class="border-secondary pt-3">
-      <h2 style="font-family: 'Roboto', sans-serif;">Exam</h2>
-      <!-- exam card start -->
-      <div class="g-2 row">
-        <span th:each=" studentHasExam : ${sheList}">
-          <div class="col-lg-6 col-md-6 col-xl-4">
-
-            <div class="card">
-              <div class="card-body pb-2 pt-3 shadow-sm text-dark" style="
-            padding-top: 10px;
-            padding-right: 15px;
-            padding-bottom: 10px;
-          ">
-                <div class="border-bottom d-flex justify-content-between">
-                  <h5 style="font-family: 'Roboto', sans-serif;" class="mb-3">[[${studentHasExam?.sheExam?.name}]]</h5>
-                  <p style="font-family: 'Roboto', sans-serif; font-size: 14px; color: #008a14;"
-                    class="fw-bold mb-0 ps-3 pt-1">[[${studentHasExam?.score}]]/[[${studentHasExam?.sheExam?.fullMark}]]
+          <!-- logout  -->
+          <div class="modal fade" role="dialog" tabindex="-1" id="logout-modal-button-1">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <p class="lead fw-bold text-center text-dark pt-4 pb-2" style="
+                      font-size: 20px;
+                      font-family: 'IBM Plex Sans KR', sans-serif;
+                    ">
+                    Are you sure you want to log out?
                   </p>
                 </div>
-
+                <div class="modal-footer" style="padding: 0px">
+                  <button class="btn btn-light border rounded-0 border-0" type="button" data-bs-dismiss="modal"
+                    style="margin: 0px; width: 50%; height: 50px">
+                    Cancel
+                  </button>
+                  <button class="btn btn-danger border rounded-0 border-0" type="submit"
+                    style="margin: 0px; width: 50%; height: 50px">
+                    Log Out
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </span>
-      </div>
-      <!-- exam card end -->
-
-
-      <!-- logout  -->
-      <div class="modal fade" role="dialog" tabindex="-1" id="logout-modal-button-1">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-              <p class="lead fw-bold text-center text-dark pt-4 pb-2" style="
-                  font-size: 20px;
-                  font-family: 'IBM Plex Sans KR', sans-serif;
-                ">
-                Are you sure you want to log out?
-              </p>
-            </div>
-            <div class="modal-footer" style="padding: 0px">
-              <button class="btn btn-light border rounded-0 border-0" type="button" data-bs-dismiss="modal"
-                style="margin: 0px; width: 50%; height: 50px">
-                Cancel
-              </button>
-              <button class="btn btn-danger border rounded-0 border-0" type="submit"
-                style="margin: 0px; width: 50%; height: 50px">
-                Log Out
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </div>
-
+  </div>
+  <footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed
+        style="background-color: #1a2033; font-family: 'Roboto', sans-serif;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
+                    <p class="h6 mb-2" style="font-family: 'Roboto', sans-serif; font-weight: 700;">How To Find Us</p>
+                    <div class="mb-1">
+                        <p class="mb-2 text-white" style="font-size: 14px; font-weight: 200;"><i
+                                class="fa-solid fa-location-dot ps-1 pe-3"></i> No. 169, 9th Floor, MTP Condo, Insein
+                            Road, Than Lan Bus Stop, Hlaing Township, Yangon, Myanmar.</p>
+                        <p class="mb-2 mt-0 text-white" style="font-size: 14px;"><i
+                                class="fa-solid fa-phone pe-3 ps-1 "></i>+959253257742</p> <a href="#"
+                            class="pb-0 pt-0 text-decoration-none text-white" style="font-size: 14px;"><i
+                                class="fa-solid fa-envelope pe-3 ps-1 "></i>info@aceinspiration.com</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xl-3 pb-0 pt-3 py-3">
+                    <p class="h6 mb-1" style="font-family: 'Roboto', sans-serif; font-weight: 700;">Get In Touch</p>
+                    <div class="d-inline-flex flex-wrap ">
+                        <a href="https://www.facebook.com/aceinspiration/" class="text-decoration-none text-white"><i
+                                class="fa-brands fa-square-facebook p-1" style="font-size: 25px;"></i></a>
+                        <a href="https://mm.linkedin.com/school/ace-inspiration/"
+                            class="text-decoration-none text-white"><i class="fa-brands fa-linkedin p-1"
+                                style="font-size: 25px;"></i></a>
+                    </div>
+                    <div class="mt-2">
+                        <button type="button" class="btn btn-outline-light mb-1 ms-0"><i
+                                class="fa-solid fa-headset me-2"></i>Contact Us</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary mt-1 mb-1" />
+            <div class="align-items-center d-flex justify-content-center pb-5 pb-md-2 pt-2 pt-md-2 text-center">
+                <p class="mb-0" style="font-size: 14px;">2022. All Rights Reserved - Ace Inspiration</p>
+            </div>
+        </div>
+    </footer>
     <div class="hide-on-desktop">
       <a class="border rounded d-inline scroll-to-top" href="#page-top">
         <i class="fas fa-angle-up"></i>
