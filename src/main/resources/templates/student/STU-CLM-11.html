@@ -8,6 +8,61 @@
     .allButFooter {
         min-height: calc(80vh - 90px);
     }
+
+    .articles a {
+        text-decoration: none !important;
+        display: block;
+        margin-bottom: 0;
+        color: #555;
+    }
+
+    .articles .badge {
+        font-size: 0.7em;
+        padding: 5px 10px;
+        line-height: 1;
+        margin-left: 10px;
+    }
+
+    .articles .item {
+        padding: 20px;
+    }
+
+    .articles .item:nth-of-type(even) {
+        background: #fafafa;
+    }
+
+    .articles .item .image {
+        min-width: 50px;
+        max-width: 50px;
+        height: 50px;
+        margin-right: 15px;
+    }
+
+    .articles .item img {
+        padding: 3px;
+        border: 1px solid #8d8d8d;
+    }
+
+    .articles .item h3 {
+        color: #555;
+        font-weight: 400;
+        margin-bottom: 0;
+    }
+
+    .articles .item small {
+        color: #aaa;
+        font-size: 0.75em;
+    }
+
+    .card-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    [v-cloak] {
+        display: none
+    }
 </style>
 
 <body id="page-top" style="background-color: #E4E6E9 ">
@@ -15,32 +70,34 @@
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
 
-    <div class="container allButFooter"
+    <div id="app" class="container allButFooter" v-cloak
         style="margin-top: 22px;padding-right: 10px;padding-left: 10px; margin-bottom: 77px;">
+        <input type="hidden" th:value="${session.batchId}" id="batchId">
         <div class="articles card" style="font-family: 'Roboto', sans-serif;">
             <div class="align-items-center card-header d-flex justify-content-between pb-3 pt-3"
                 style="background-color: #32499a; color: #ffffff;">
                 <div class="row w-100">
-                    <div class="align-items-center col-6 col-lg-8 col-xl-9 d-flex"><i class="fa-solid fa-users-line pe-2" style="font-size: 20px;"></i>
+                    <div class="align-items-center col-6 col-lg-8 col-xl-9 d-flex"><i
+                            class="fa-solid fa-users-line pe-2" style="font-size: 20px;"></i>
                         <h2 class="h3 mb-1 mt-1">Classmates</h2>
                     </div>
                     <div class="col-6 col-lg-4 col-xl-3 d-flex justify-content-end pe-0">
 
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="search"
                             placeholder="Search..." />
                     </div>
                 </div>
             </div>
             <div class="card-body no-padding p-0">
-                <div class="align-items-center d-flex item pb-3 pt-3"
+                <div v-for="student in filterList" class="align-items-center d-flex item pb-3 pt-3"
                     style="border-top-style: none; border-bottom: 1px solid #cdcdcd;">
                     <div class="image">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="..."
+                        <img :src=`/profile_pics/${student.profile_pic}` 
                             class="img-fluid rounded-circle" />
                     </div>
                     <div class="text"><a href="#">
-                            <h3 class="h5">Student 01</h3>
-                        </a><small class="fs-6">stu001</small>
+                            <h3 class="h5">{{ student.id }}</h3>
+                        </a><small class="fs-6"> {{ student.name }} </small>
                     </div>
                 </div>
             </div>
@@ -98,60 +155,39 @@
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    search: '',
+                    studentList: [],
+                }
+            },
+            methods: {
+                getStudentList(batchId) {
+                    axios.get(`http://localhost:8080/api/student/getStudentListByBatchId/${batchId}`)
+                        .then(res => this.studentList = [...res.data])
+                        .catch(error => console.log(error.message));
+                }
+            },
+            computed: {
+                filterList() {
+                    return this.studentList.filter(student => {
+                        return (student.name.toLowerCase().includes(this.search.toLowerCase())
+                            || student.id.toLowerCase().includes(this.search.toLowerCase())
+                        )
+                    })
+                }
+            },
+            mounted() {
+                let batchId = document.getElementById("batchId").value;
+                this.getStudentList(batchId);
+            },
+        });
+
+        app.mount('#app');
+
     </script>
-    <script src="/assets/js/alert.js"></script>
-    <style type="text/css">
-        .articles a {
-            text-decoration: none !important;
-            display: block;
-            margin-bottom: 0;
-            color: #555;
-        }
-
-        .articles .badge {
-            font-size: 0.7em;
-            padding: 5px 10px;
-            line-height: 1;
-            margin-left: 10px;
-        }
-
-        .articles .item {
-            padding: 20px;
-        }
-
-        .articles .item:nth-of-type(even) {
-            background: #fafafa;
-        }
-
-        .articles .item .image {
-            min-width: 50px;
-            max-width: 50px;
-            height: 50px;
-            margin-right: 15px;
-        }
-
-        .articles .item img {
-            padding: 3px;
-            border: 1px solid #8d8d8d;
-        }
-
-        .articles .item h3 {
-            color: #555;
-            font-weight: 400;
-            margin-bottom: 0;
-        }
-
-        .articles .item small {
-            color: #aaa;
-            font-size: 0.75em;
-        }
-
-        .card-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-        }
-    </style>
 </body>
 
 </html>

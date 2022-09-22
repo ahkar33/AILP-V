@@ -11,7 +11,7 @@
     }
 
     .allButFooter {
-    min-height: calc(80vh - 90px);
+        min-height: calc(80vh - 90px);
     }
 </style>
 
@@ -182,10 +182,12 @@
                             <div v-if="isClickInput" class="text-end mb-0">
                                 <button @click.prevent="handleCancelInput()" type="button"
                                     class="btn btn-light mb-0">Cancel</button>
-                                <button v-if="commentText.trim().length <= 0" @click.prevent="sendComment()" type="submit" class="btn btn-primary mb-0 disabled">
+                                <button v-if="commentText.trim().length <= 0" @click.prevent="sendComment()"
+                                    type="submit" class="btn btn-primary mb-0 disabled">
                                     Comment
                                 </button>
-                                <button v-else @click.prevent="sendComment()" type="submit" class="btn btn-primary mb-0">
+                                <button v-else @click.prevent="sendComment()" type="submit"
+                                    class="btn btn-primary mb-0">
                                     Comment
                                 </button>
                             </div>
@@ -217,16 +219,16 @@
                                                 </small>
 
                                                 <p class="mb-2 text-break"
-                                                    style="font-family: 'Roboto', sans-serif; cursor: pointer;"
-                                                    @mouseleave="comment.isHover = false"
-                                                    @mouseover="comment.isHover = true">
+                                                    style="font-family: 'Roboto', sans-serif; cursor: pointer;">
                                                     {{ comment.commentText }}
                                                     <span v-if="userId == comment.commentUser.id">
-                                                        <a class="fw-bold text-danger text-decoration-none ms-2"
-                                                            style="font-size: 15px;" v-show="comment.isHover"
-                                                            @click="deleteComment(comment.id)">
-                                                            Delete
-                                                        </a>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            @click="deleteComment(comment.id)" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-trash-fill text-danger"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                                        </svg>
                                                     </span>
                                                 </p>
 
@@ -265,8 +267,9 @@
                                                     <div class="mb-0 text-end">
                                                         <button type="button" @click.prevent="handleCancel(index)"
                                                             class="btn btn-light btn-sm mb-0">Cancel</button>
-                                                        <button v-if="comment.replyText.trim().length <= 0" @click.prevent="sendReply(comment.id, index)"
-                                                            type="submit" class="btn btn-primary btn-sm mb-0 disabled">
+                                                        <button v-if="comment.replyText.trim().length <= 0"
+                                                            @click.prevent="sendReply(comment.id, index)" type="submit"
+                                                            class="btn btn-primary btn-sm mb-0 disabled">
                                                             Reply
                                                         </button>
                                                         <button v-else @click.prevent="sendReply(comment.id, index)"
@@ -296,17 +299,18 @@
                                                                         {{ reply.dateTime }}
                                                                     </small>
                                                                     <p class="mb-2 text-break"
-                                                                        @mouseleave="reply.isHover = false"
-                                                                        @mouseover="reply.isHover = true"
                                                                         style="font-family: 'Roboto', sans-serif; cursor: pointer;">
                                                                         {{ reply.replyText }}
                                                                         <span v-if="userId == reply.replyUser.id">
-                                                                            <a class="fw-bold text-danger text-decoration-none ms-2"
-                                                                                style="font-size: 15px;"
-                                                                                v-show="reply.isHover"
-                                                                                @click="deleteReply(reply.id, index)">
-                                                                                Delete
-                                                                            </a>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                @click="deleteReply(reply.id, index)"
+                                                                                width="16" height="16"
+                                                                                fill="currentColor"
+                                                                                class="bi bi-trash-fill text-danger"
+                                                                                viewBox="0 0 16 16">
+                                                                                <path
+                                                                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                                                            </svg>
                                                                         </span>
                                                                     </p>
                                                                 </div>

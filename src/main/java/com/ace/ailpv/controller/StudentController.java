@@ -241,4 +241,9 @@ public class StudentController {
         return "/student/STU-CTC-10";
     }
 
+    @GetMapping("/classmates")
+    public String getClassmates() {
+        return "/student/STU-CLM-11";
+    }
+
 }
