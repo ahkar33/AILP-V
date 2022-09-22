@@ -6,7 +6,7 @@
 </head>
 <style>
     .allButFooter {
-    min-height: calc(80vh - 90px);
+        min-height: calc(80vh - 90px);
     }
 </style>
 
@@ -15,51 +15,34 @@
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
 
-    <div class="container allButFooter" style="margin-top: 22px;padding-right: 10px;padding-left: 10px;">
+    <div class="container allButFooter"
+        style="margin-top: 22px;padding-right: 10px;padding-left: 10px; margin-bottom: 77px;">
+        <div class="articles card" style="font-family: 'Roboto', sans-serif;">
+            <div class="align-items-center card-header d-flex justify-content-between pb-3 pt-3"
+                style="background-color: #32499a; color: #ffffff;">
+                <div class="row w-100">
+                    <div class="align-items-center col-6 col-lg-8 col-xl-9 d-flex"><i class="fa-solid fa-users-line pe-2" style="font-size: 20px;"></i>
+                        <h2 class="h3 mb-1 mt-1">Classmates</h2>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3 d-flex justify-content-end pe-0">
 
-        <h2 class="mb-3 me-3 mt-3 text-black-50" style="font-family: 'Roboto', sans-serif;">Assignments</h2>
-        <div class="card shadow-sm" style="margin-bottom: 85px; font-family: 'Roboto', sans-serif;">
-            <div class="card-body" style="padding: 10px;">
-                <table id="dataTable">
-                    <thead>
-                        <tr>
-                            <th>Assignment Name</th>
-                            <th>Resources</th>
-                            <th>Due Date</th>
-                            <th>To Upload</th>
-                            <th>Action</th>
-                        </tr>
-                    <tbody>
-
-                        <tr th:each="assignment : ${assignmentList}">
-                            <form th:action="@{/student/submitAssignment}" th:object="${answer}" method="post"
-                                enctype="multipart/form-data">
-                                <input type="hidden" th:value="${successMsg}" id="successMsg">
-                                <td class="pt-2 text-dark">[[${assignment?.name}]]</td>
-                                <td class="pb-0 pt-2">
-                                    <a th:href="@{ ${'/courses/' + assignment?.assignmentBatch?.batchCourse?.name + '/' + assignment?.assignmentBatch?.id + '/'  +  'AssignmentQuestion' + '/' + assignment?.questionFileName} }"
-                                        target="_blank" class="btn shadow bg-gradient btn-sm btn-success mb-2 ms-0 text-break text-overflow text-truncate w-75"><i class="fa fa-download me-1 pt-1"></i>
-                                        [[${assignment?.questionFileName}]]
-                                    </a>
-                                </td>
-                                <td>[[${assignment?.dueDate}]]</td>
-                                <td class="pt-1 ">
-                                    <input type="hidden" th:value="${session?.uid}" th:name="answerStudent"
-                                        th:id="answerStudent">
-                                    <input type="hidden" th:value="${assignment.id}" th:name="assignment"
-                                        th:id="assignment">
-                                    <input class="form-control w-75" type="file" th:field="*{answerFile}" accept=".zip" required />
-                                </td>
-                                <td class="pb-0 pt-1">
-                                    <button type="submit" class=" btn btn-primary shadow-sm bg-gradient mb-2 ms-0">Submit</button>
-                                </td>
-                          
-                            </form>
-                        </tr>
-
-                    </tbody>
-                    </thead>
-                </table>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Search..." />
+                    </div>
+                </div>
+            </div>
+            <div class="card-body no-padding p-0">
+                <div class="align-items-center d-flex item pb-3 pt-3"
+                    style="border-top-style: none; border-bottom: 1px solid #cdcdcd;">
+                    <div class="image">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="..."
+                            class="img-fluid rounded-circle" />
+                    </div>
+                    <div class="text"><a href="#">
+                            <h3 class="h5">Student 01</h3>
+                        </a><small class="fs-6">stu001</small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -117,6 +100,58 @@
         });
     </script>
     <script src="/assets/js/alert.js"></script>
+    <style type="text/css">
+        .articles a {
+            text-decoration: none !important;
+            display: block;
+            margin-bottom: 0;
+            color: #555;
+        }
+
+        .articles .badge {
+            font-size: 0.7em;
+            padding: 5px 10px;
+            line-height: 1;
+            margin-left: 10px;
+        }
+
+        .articles .item {
+            padding: 20px;
+        }
+
+        .articles .item:nth-of-type(even) {
+            background: #fafafa;
+        }
+
+        .articles .item .image {
+            min-width: 50px;
+            max-width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .articles .item img {
+            padding: 3px;
+            border: 1px solid #8d8d8d;
+        }
+
+        .articles .item h3 {
+            color: #555;
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+
+        .articles .item small {
+            color: #aaa;
+            font-size: 0.75em;
+        }
+
+        .card-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+    </style>
 </body>
 
 </html>

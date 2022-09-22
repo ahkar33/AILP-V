@@ -10,6 +10,10 @@
     [v-cloak] {
         display: none
     }
+
+    .allButFooter {
+    min-height: calc(80vh - 90px);
+}
 </style>
 
 <body id="page-top" style="background-color: #E4E6E9 ">
@@ -17,7 +21,7 @@
     <div th:insert="/student/student-fragments :: pc-navbar" />
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-    <div class="container" style="margin-bottom: 50px;">
+    <div class="container allButFooter" style="margin-bottom: 50px;">
         <h2 class="mt-4 fw-bold" style="font-family: 'Roboto'; color: rgb(61, 61, 61);">Let's Start Learning,
             [[${session.name}]]</h2>
         <div class="d-flex flex-wrap g-3 row justify-content-center mt-0" style="margin-top: 20px;">
@@ -260,31 +264,34 @@
         style="background-color: #1a2033; font-family: 'Roboto', sans-serif;">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-xl-6 me-auto pb-0 pt-3">
-                    <p class="h5 mb-2" style="font-family: 'Roboto', sans-serif; font-weight: 700;">How To Find Us</p>
+                <div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
+                    <p class="h6 mb-2" style="font-family: 'Roboto', sans-serif; font-weight: 700;">How To Find Us</p>
                     <div class="mb-1">
-                        <p class="mb-2 text-white" style="font-size: 15px; font-weight: 200;"><i
+                        <p class="mb-2 text-white" style="font-size: 14px; font-weight: 200;"><i
                                 class="fa-solid fa-location-dot ps-1 pe-3"></i> No. 169, 9th Floor, MTP Condo, Insein
                             Road, Than Lan Bus Stop, Hlaing Township, Yangon, Myanmar.</p>
-                        <p class="mb-2 mt-0 text-white" style="font-size: 15px;"><i
+                        <p class="mb-2 mt-0 text-white" style="font-size: 14px;"><i
                                 class="fa-solid fa-phone pe-3 ps-1 "></i>+959253257742</p> <a href="#"
-                            class="pb-0 pt-0 text-decoration-none text-white" style="font-size: 15px;"><i
+                            class="pb-0 pt-0 text-decoration-none text-white" style="font-size: 14px;"><i
                                 class="fa-solid fa-envelope pe-3 ps-1 "></i>info@aceinspiration.com</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xl-3 pb-0 pt-3 py-3">
-                    <p class="h5 mb-2" style="font-family: 'Roboto', sans-serif; font-weight: 700;">Get In Touch</p>
+                    <p class="h6 mb-1" style="font-family: 'Roboto', sans-serif; font-weight: 700;">Get In Touch</p>
                     <div class="d-inline-flex flex-wrap ">
-                        <a href="https://www.facebook.com/aceinspiration/"  class="text-decoration-none text-white"><i class="fa-brands fa-square-facebook p-1" style="font-size: 25px;"></i></a>
-                        <a href="https://mm.linkedin.com/school/ace-inspiration/" class="text-decoration-none text-white"><i class="fa-brands fa-linkedin p-1" style="font-size: 25px;"></i></a>
+                        <a href="https://www.facebook.com/aceinspiration/" class="text-decoration-none text-white"><i
+                                class="fa-brands fa-square-facebook p-1" style="font-size: 25px;"></i></a>
+                        <a href="https://mm.linkedin.com/school/ace-inspiration/"
+                            class="text-decoration-none text-white"><i class="fa-brands fa-linkedin p-1"
+                                style="font-size: 25px;"></i></a>
                     </div>
-                    <div class="mt-3">
-                        <button type="button" class="btn btn-outline-light mb-2 ms-0"><i
+                    <div class="mt-2">
+                        <button type="button" class="btn btn-outline-light mb-1 ms-0"><i
                                 class="fa-solid fa-headset me-2"></i>Contact Us</button>
                     </div>
                 </div>
             </div>
-            <hr class="border-secondary mb-0 mt-2" />
+            <hr class="border-secondary mt-1 mb-1" />
             <div class="align-items-center d-flex justify-content-center pb-5 pb-md-2 pt-2 pt-md-2 text-center">
                 <p class="mb-0" style="font-size: 14px;">2022. All Rights Reserved - Ace Inspiration</p>
             </div>
