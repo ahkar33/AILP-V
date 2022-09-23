@@ -35,6 +35,10 @@ public class FileService {
         if (!resourceFolder.exists()) {
             resourceFolder.mkdirs();
         }
+        File examFolder = new File(courseFilePath + courseName + "\\exam");
+        if (!examFolder.exists()) {
+            examFolder.mkdirs();
+        }
     }
 
     public void createFolderForBatch(String path, Long batchId) {
@@ -51,9 +55,16 @@ public class FileService {
         if (!assignmentAnswerFolder.exists()) {
             assignmentAnswerFolder.mkdirs();
         }
+        File examQuestionFolder = new File(path + strBatchId + "\\ExamQuestion");
+        if (!examQuestionFolder.exists()) {
+            examQuestionFolder.mkdirs();
+        }
+        File examAnswerFolder = new File(path + strBatchId + "\\ExamAnswer");
+        if (!examAnswerFolder.exists()) {
+            examAnswerFolder.mkdirs();
+        }
     }
 
-    // added by me
     public void createFolderForAssignment(String courseName) {
         File assignmentFolder = new File(courseFilePath + courseName + "\\" + "assignmentQuesitions\\");
         if (!assignmentFolder.exists()) {
@@ -67,7 +78,6 @@ public class FileService {
             assignmentFolder.mkdirs();
         }
     }
-    // end
 
     public void createFile(MultipartFile file, String folderName) throws IllegalStateException, IOException {
         fileUploadUtilService.saveFile(courseFilePath + folderName + "\\", file.getOriginalFilename(), file);
@@ -78,7 +88,7 @@ public class FileService {
         FileUtils.deleteDirectory(directory);
     }
 
-    public void deleteBatchFolder(String path,String folderName) throws IOException {
+    public void deleteBatchFolder(String path, String folderName) throws IOException {
         File directory = new File(path + folderName);
         FileUtils.deleteDirectory(directory);
     }
