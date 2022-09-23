@@ -159,7 +159,7 @@ public class TeacherController {
         model.addAttribute("batchList", batchList);
         model.addAttribute("dateList", dateList);
         model.addAttribute("studentList", studentList);
-        model.addAttribute("batch", new Batch());
+        model.addAttribute("batch", batch);
         return "/teacher/TCH-ATB-11";
     }
 
