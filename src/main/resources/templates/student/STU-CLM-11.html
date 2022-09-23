@@ -79,7 +79,7 @@
                 <div class="row w-100">
                     <div class="align-items-center col-6 col-lg-8 col-xl-9 d-flex"><i
                             class="fa-solid fa-users-line pe-2" style="font-size: 20px;"></i>
-                        <h2 class="h3 mb-1 mt-1">Classmates</h2>
+                        <h2 class="h4 mb-1 mt-1">Classmates</h2>
                     </div>
                     <div class="col-6 col-lg-4 col-xl-3 d-flex justify-content-end pe-0">
 
@@ -93,7 +93,9 @@
                     style="border-top-style: none; border-bottom: 1px solid #cdcdcd;">
                     <div class="image">
                         <img :src=`/profile_pics/${student.profile_pic}` 
-                            class="img-fluid rounded-circle" />
+                            style="  width: 50px;
+                            height: 50px;
+                            border-radius: 50%;" />
                     </div>
                     <div class="text"><a href="#">
                             <h3 class="h5">{{ student.id }}</h3>
