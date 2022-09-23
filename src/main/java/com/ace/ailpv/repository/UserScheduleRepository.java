@@ -55,4 +55,6 @@ public interface UserScheduleRepository extends JpaRepository<UserSchedule, Long
     )
     Long countTotalDateStudentId(String studentId);
 
+    List<UserSchedule> findByUserScheduleBatch_Id(Long batchId);
+
 }
