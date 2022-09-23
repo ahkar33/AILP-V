@@ -69,9 +69,9 @@ axios.get('http://localhost:8080/api/admin/getBatchAttendance')
                 plugins: {
                     title: {
                         display: true,
-                        text: '',
+                        text: 'Attendance Percentage Of Every Batch',
                         font: {
-                            size: 25
+                            size: 20
                         }
                     },
                     legend: {
@@ -123,9 +123,9 @@ axios.get('http://localhost:8080/api/admin/getStudentCountByCourse')
                 plugins: {
                     title: {
                         display: true,
-                        text: '',
+                        text: 'Total Students Of Every Course',
                         font: {
-                            size: 25
+                            size: 20
                         }
                     },
                     legend: {
