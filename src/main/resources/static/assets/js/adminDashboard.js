@@ -76,7 +76,7 @@ axios.get('http://localhost:8080/api/admin/getBatchAttendance')
                     },
                     legend: {
                         // display: false, // hide label
-                        position: 'right', // move label to right side of chart
+                        position: 'top', // move label to right side of chart
                     },
                     tooltips: {
                         enabled: false
@@ -130,7 +130,7 @@ axios.get('http://localhost:8080/api/admin/getStudentCountByCourse')
                     },
                     legend: {
                         // display: false, // hide label
-                        position: 'right', // move label to right side of chart
+                        position: 'top', // move label to right side of chart
                     },
                     tooltips: {
                         enabled: false
