@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/admin/admin-fragments :: admin_head">
+    <title>Attendance Table</title>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+
+        <!-- this is where side bar is -->
+        <div th:insert="/admin/admin-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <!-- this is where nav bar is -->
+                <div th:insert="/admin/admin-fragments :: navbar" />
+
+                <div class="container-fluid">
+                    <h1 class="fs-3 mb-3 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        Attendance Table</h1>
+                    <div class="card shadow-sm text-dark">
+                        <div class="card-header py-3 d-flex justify-content-between">
+                            <span>
+                                <form method="post" th:object="${batch}" th:action="@{/admin/searchScheduleForBatch}"
+                                    class="d-flex d-lg-flex flex-lg-wrap flex-wrap">
+                                    <div class="me-3">
+                                        <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                            <div id="dataTable_length" class="dataTables_length"
+                                                aria-controls="dataTable">
+                                                <label class="form-label">Batch</label>
+                                                <select th:field="*{id}" class="form-select"
+                                                    aria-label="Default select example">
+                                                    <option th:each="batch : ${batchList}" th:value="${batch?.id}">
+                                                        [[${batch?.name}]]
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 2.2rem;">
+                                        <button class="btn btn-primary  bg-gradient shadow-sm">Search</button>
+                                    </div>
+                                </form>
+                            </span>
+                            <span style="margin-top: 2.3rem">
+                                <a th:href="@{/teacher/modifyAttendance} "
+                                    class="btn btn-primary  bg-gradient shadow-sm">
+                                    Create
+                                </a>
+                            </span>
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <!-- where I have to write table -->
+                            <table id="dataTable" class="display p-2">
+                                <thead class="table">
+                                    <tr>
+                                        <th>Student Name</th>
+                                        <th th:each="date : ${dateList}">
+                                            [[${date}]]
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="student : ${studentList}">
+                                        <td>[[${student.name}]]</td>
+                                        <td th:each="studentSchedule : ${student.userScheduleList}">
+                                            <th:span th:switch="${studentSchedule.status}">
+                                                <span th:case="'Present'" class="text-success fw-bold">
+                                                    [[${studentSchedule.status}]]
+                                                </span>
+                                                <span th:case="'Absent'" class="text-danger fw-bold">
+                                                    [[${studentSchedule.status}]]
+                                                </span>
+                                                <span th:case="'Leave'" class="text-warning fw-bold">
+                                                    [[${studentSchedule.status}]]
+                                                </span>
+                                            </th:span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <footer class="pb-2 pt-2 small text-dark mt-5" data-pg-collapsed style="background-color: #dfdfdf;">
+                <div class="container pb-2 pt-2">
+                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                        Reserved - Ace Inspiration</p>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+    <div th:insert="/admin/admin-fragments :: footer" />
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+
+</body>
+
+</html>

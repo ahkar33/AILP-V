@@ -1,6 +1,7 @@
 package com.ace.ailpv.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.entity.Resource;
 import com.ace.ailpv.entity.User;
+import com.ace.ailpv.entity.UserSchedule;
 import com.ace.ailpv.entity.Video;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.CourseService;
@@ -444,6 +446,45 @@ public class AdminController {
         }
 
         return "redirect:/admin/register";
+    }
+
+    @GetMapping("/attendance-table")
+    public String getAttendanceTable(ModelMap model) {
+        List<Batch> batchList = batchService.getAllBatches(); 
+        Long batchId = batchList.get(0).getId();
+        List<UserSchedule> res = userScheduleService.getUserScheduleListByBatchId(batchId);
+        List<String> dateList = new ArrayList<>();
+        for (UserSchedule u : res) {
+            String date = u.getSchedule().getDate().toString();
+            if(!dateList.contains(date)) {
+                dateList.add(date);
+            }
+        }
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+        model.addAttribute("batchList", batchList);
+        model.addAttribute("dateList", dateList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("batch", new Batch());
+        return "/admin/ADM-ATB-17";
+    }
+
+    @PostMapping("/searchScheduleForBatch")
+    public String searchScheduleForBatch(@ModelAttribute("batch") Batch batch, ModelMap model) {
+        List<Batch> batchList = batchService.getAllBatches(); 
+        List<UserSchedule> res = userScheduleService.getUserScheduleListByBatchId(batch.getId());
+        List<String> dateList = new ArrayList<>();
+        for (UserSchedule u : res) {
+            String date = u.getSchedule().getDate().toString();
+            if(!dateList.contains(date)) {
+                dateList.add(date);
+            }
+        }
+        List<User> studentList = userService.getStudentListByBatchId(batch.getId());
+        model.addAttribute("batchList", batchList);
+        model.addAttribute("dateList", dateList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("batch", batch);
+        return "/admin/ADM-ATB-17";
     }
 
 }
