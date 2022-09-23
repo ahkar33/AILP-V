@@ -18,12 +18,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ace.ailpv.SecretConfigProperties;
+import com.ace.ailpv.entity.Assignment;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.entity.Resource;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
 import com.ace.ailpv.entity.Video;
+import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
@@ -69,6 +71,9 @@ public class AdminController {
 
     @Autowired
     private UserScheduleService userScheduleService;
+
+    @Autowired
+    private AssignmentService assignmentService;
 
     String path = "src\\main\\resources\\static\\courses\\";
 
@@ -486,5 +491,32 @@ public class AdminController {
         model.addAttribute("batch", batch);
         return "/admin/ADM-ATB-17";
     }
+
+    @GetMapping("/assignment-grade")
+    public String showStudentTable(ModelMap model) {
+        List<Batch> batchList = batchService.getAllBatches();
+        Long batchId = batchList.get(0).getId();
+        List<Assignment> assignmentList = assignmentService.getAllAssignmentByBatchId(batchId);
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+        model.addAttribute("data", new Batch());
+        model.addAttribute("assignmentList", assignmentList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("batchList", batchList);
+        return "/admin/ADM-ASG-18";
+    }
+
+    @PostMapping("/searchStudentsByBatch")
+    public String searchStudentsByBatch(@ModelAttribute("data") Batch batch, ModelMap model) {
+        Long batchId = batch.getId();
+        List<Assignment> assignmentList = assignmentService.getAllAssignmentByBatchId(batchId);
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+        List<Batch> batchList = batchService.getAllBatches();
+        model.addAttribute("data", batch);
+        model.addAttribute("assignmentList", assignmentList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("batchList", batchList);
+        return "/admin/ADM-ASG-18";
+    }
+
 
 }

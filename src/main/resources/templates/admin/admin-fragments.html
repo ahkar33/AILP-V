@@ -44,7 +44,8 @@
                             <form id="logout" th:action="@{/logout}" method="post">
 
                             </form>
-                            <button class="bg-danger text-light dropdown-item fs-6 rounded-bottom pb-2 pt-2" onclick="handleLogout()">
+                            <button class="bg-danger text-light dropdown-item fs-6 rounded-bottom pb-2 pt-2"
+                                onclick="handleLogout()">
                                 <i class="fa-fw fa-sign-out-alt fa-sm fas me-2"></i>
                                 &nbsp;Logout
                                 </butoon>
@@ -138,16 +139,27 @@
                     </a>
                 </li>
                 <li class="nav-item align-items-center"> <a class="nav-link d-flex d-md-flex align-items-md-center"
-                    data-bss-hover-animate="pulse" th:href="@{/admin/attendance-table}" style="font-size: 15.6px;">
-                    <div
-                        class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                        <i class="fa-file-alt fas fs-4"></i>
-                        <div>
-                            <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Attendance Table</p>
+                        data-bss-hover-animate="pulse" th:href="@{/admin/attendance-table}" style="font-size: 15.6px;">
+                        <div
+                            class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                            <i class="fa-file-alt fas fs-4"></i>
+                            <div>
+                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Attendance Table</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </li>
+                    </a>
+                </li>
+                <li class="nav-item align-items-center"> <a class="nav-link d-flex d-md-flex align-items-md-center"
+                        data-bss-hover-animate="pulse" th:href="@{/admin/assignment-grade}" style="font-size: 15.6px;">
+                        <div
+                            class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                            <i class="fa-file-alt fas fs-4"></i>
+                            <div>
+                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Assignment Table</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
             </ul>
             <div class="text-center d-none d-md-inline">
                 <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
