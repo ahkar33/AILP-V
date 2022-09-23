@@ -67,13 +67,6 @@ axios.get('http://localhost:8080/api/admin/getBatchAttendance')
             },
             options: {
                 plugins: {
-                    title: {
-                        display: true,
-                        text: 'Attendance Percentage Of Every Batch',
-                        font: {
-                            size: 20
-                        }
-                    },
                     legend: {
                         // display: false, // hide label
                         position: 'top', // move label to right side of chart
@@ -121,13 +114,6 @@ axios.get('http://localhost:8080/api/admin/getStudentCountByCourse')
             },
             options: {
                 plugins: {
-                    title: {
-                        display: true,
-                        text: 'Total Students Of Every Course',
-                        font: {
-                            size: 20
-                        }
-                    },
                     legend: {
                         // display: false, // hide label
                         position: 'top', // move label to right side of chart
