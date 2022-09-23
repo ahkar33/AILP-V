@@ -62,4 +62,8 @@ public class UserScheduleService {
         return (totalPresentOfStudent / totalDate) * 100;
     }
 
+    public List<UserSchedule> getUserScheduleListByBatchId(Long batchId) {
+        return userScheduleRepository.findByUserScheduleBatch_Id(batchId);
+    }
+
 }

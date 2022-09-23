@@ -24,23 +24,14 @@
                     <div class="card shadow-sm text-dark">
                         <div class="card-header py-3 d-flex justify-content-between">
                             <span>
-                                <form th:action="@{/teacher/searchUserScheduleList}" th:object="${data}" method="post"
+                                <form method="post" th:object="${batch}" th:action="@{/teacher/searchScheduleForBatch}"
                                     class="d-flex d-lg-flex flex-lg-wrap flex-wrap">
                                     <div class="me-3">
                                         <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                             <div id="dataTable_length" class="dataTables_length"
                                                 aria-controls="dataTable">
-                                                <label for="exampleInputEmail1" class="form-label">Date</label>
-                                                <input th:field="*{date}" type="date" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="me-3">
-                                        <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
-                                            <div id="dataTable_length" class="dataTables_length"
-                                                aria-controls="dataTable">
                                                 <label class="form-label">Batch</label>
-                                                <select th:field="*{user.batchList}" class="form-select"
+                                                <select th:field="*{id}" class="form-select"
                                                     aria-label="Default select example">
                                                     <option th:each="batch : ${batchList}" th:value="${batch?.id}">
                                                         [[${batch?.name}]]
@@ -55,7 +46,8 @@
                                 </form>
                             </span>
                             <span style="margin-top: 2.3rem">
-                                <a th:href="@{/teacher/modifyAttendance} " class="btn btn-primary  bg-gradient shadow-sm">
+                                <a th:href="@{/teacher/modifyAttendance} "
+                                    class="btn btn-primary  bg-gradient shadow-sm">
                                     Create
                                 </a>
                             </span>
@@ -68,31 +60,25 @@
                             <table id="dataTable" class="display p-2">
                                 <thead class="table">
                                     <tr>
-                                        <th>Student Id</th>
                                         <th>Student Name</th>
-                                        <th>Batch</th>
-                                        <th>Date</th>
-                                        <th>Attendance Status</th>
+                                        <th th:each="date : ${dateList}">
+                                            [[${date}]]
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="us : ${userScheduleList}">
-                                        <td>[[${us.user.id}]]</td>
-                                        <td>[[${us.user.name}]]</td>
-                                        <td th:each="batch : ${us.user.batchList}">
-                                            [[${batch.name}]]
-                                        </td>
-                                        <td>[[${us.schedule.date}]]</td>
-                                        <td>
-                                            <th:span th:switch="${us.status}">
+                                    <tr th:each="student : ${studentList}">
+                                        <td>[[${student.name}]]</td>
+                                        <td th:each="studentSchedule : ${student.userScheduleList}">
+                                            <th:span th:switch="${studentSchedule.status}">
                                                 <span th:case="'Present'" class="text-success fw-bold">
-                                                    [[${us.status}]]
+                                                    [[${studentSchedule.status}]]
                                                 </span>
                                                 <span th:case="'Absent'" class="text-danger fw-bold">
-                                                    [[${us.status}]]
+                                                    [[${studentSchedule.status}]]
                                                 </span>
                                                 <span th:case="'Leave'" class="text-warning fw-bold">
-                                                    [[${us.status}]]
+                                                    [[${studentSchedule.status}]]
                                                 </span>
                                             </th:span>
                                         </td>
@@ -105,7 +91,8 @@
             </div>
             <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">
-                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights Reserved - Ace Inspiration</p>
+                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                        Reserved - Ace Inspiration</p>
                 </div>
             </footer>
         </div>
