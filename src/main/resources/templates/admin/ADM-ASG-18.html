@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/admin/admin-fragments :: admin_head">
+    <title>Assignment Table</title>
+</head>
+
+<style>
+    .badge-soft-danger {
+        color: #cf1919 !important;
+        background-color: rgba(245, 110, 110, 0.226);
+    }
+</style>
+
+<body id="page-top">
+    <div id="wrapper">
+
+        <!-- this is where side bar is -->
+        <div th:insert="/admin/admin-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <!-- this is where nav bar is -->
+                <div th:insert="/admin/admin-fragments :: navbar" />
+
+                <div class="container-fluid">
+                    <h1 class="fs-3 mb-3 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        Student's Assignment Grade</h1>
+                    <div class="card shadow shadow-sm">
+
+                        <div class="card-header py-3">
+                            <form th:object="${data}" th:action="@{/admin/searchStudentsByBatch}" method="post"
+                                class="d-flex d-lg-flex flex-lg-wrap flex-wrap">
+                                <div class="me-3">
+                                    <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
+                                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                            <label class="form-label">Batch</label>
+                                            <select th:field="*{id}" class="form-select"
+                                                aria-label="Default select example">
+                                                <option th:each="batch : ${batchList}" th:value="${batch?.id}">
+                                                    [[${batch?.name}]]
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 2.3rem;">
+                                    <button type="submit" class="btn btn-primary bg-gradient shadow-sm">
+                                        Search
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="card-body text-dark">
+
+                            <!-- where I have to write table -->
+                            <table id="dataTable" class="display p-2">
+                                <thead class="table">
+                                    <tr class="text-dark">
+                                        <th>Student Name</th>
+                                        <th th:each="assignment : ${assignmentList}">
+                                            [[${assignment?.name}]]
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="student, iter : ${studentList}">
+                                        <td>[[${student?.name}]]</td>
+                                        <span th:if="${assignmentList.size == student.userAnswerList.size}">
+                                            <span th:each="answer : ${student.userAnswerList}">
+                                                <td>
+                                                    <span
+                                                        style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;"
+                                                        th:if="${answer?.assignemntAnswerResult != null}">
+                                                        [[${answer?.assignemntAnswerResult?.mark}]] Marks
+                                                    </span>
+                                                    <span
+                                                        style="color: #df6a00; font-family: 'Roboto', sans-serif; font-weight: 700;"
+                                                        th:if="${answer?.assignemntAnswerResult == null}">
+                                                        Not yet graded
+                                                    </span>
+                                                    <span th:if="${answer?.isLate == true}"
+                                                        class="badge badge-soft-danger fw-bold justify-content-between ms-1">
+                                                        Turned in late
+                                                    </span>
+                                                </td>
+                                            </span>
+                                        </span>
+
+                                        <span
+                                            th:if="${assignmentList.size != student.userAnswerList.size and student.userAnswerList.size > 0}">
+                                            <span th:each="a : ${assignmentList}">
+                                                <td>
+                                                    <span th:each="answer : ${student.userAnswerList}">
+                                                        <span th:if="${a.id == answer?.assignment?.id}">
+                                                            <span
+                                                                style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;"
+                                                                th:if="${answer?.assignemntAnswerResult != null}">
+                                                                [[${answer?.assignemntAnswerResult?.mark}]] Marks
+                                                            </span>
+                                                            <span
+                                                                style="color: #df6a00; font-family: 'Roboto', sans-serif; font-weight: 700;"
+                                                                th:if="${answer?.assignemntAnswerResult == null}">
+                                                                Not yet graded
+                                                            </span>
+                                                            <span th:if="${answer?.isLate == true}"
+                                                                class="badge badge-soft-danger fw-bold justify-content-between ms-1">
+                                                                Turned in late
+                                                            </span>
+                                                        </span>
+                                                        <span th:if="${a.id != answer?.assignment?.id}">
+
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                            </span>
+                                        </span>
+                                        <span th:if="${student.userAnswerList.size == 0}">
+                                            <span th:each="a : ${assignmentList}">
+                                                <td></td>
+                                            </span>
+                                        </span>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <footer class="pb-2 pt-2 small text-dark mt-5" data-pg-collapsed style="background-color: #dfdfdf;">
+                <div class="container pb-2 pt-2">
+                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                        Reserved - Ace Inspiration</p>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+    <div th:insert="/admin/admin-fragments :: footer" />
+
+    <script>
+        const elements = document.getElementsByTagName('td');
+        Array.from(elements).forEach((element, index) => {
+            if (element.innerText == '') {
+                element.innerHTML = 'Missing'
+                element.style.color = '#cf0000';
+                element.style.fontWeight = 800;
+                element.style.fontFamily = 'Roboto';
+            }
+        });
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+
+</body>
+
+</html>
