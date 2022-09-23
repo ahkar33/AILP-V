@@ -20,12 +20,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ace.ailpv.SecretConfigProperties;
 import com.ace.ailpv.entity.Assignment;
 import com.ace.ailpv.entity.Batch;
+import com.ace.ailpv.entity.BatchHasExam;
 import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.entity.Resource;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
 import com.ace.ailpv.entity.Video;
 import com.ace.ailpv.service.AssignmentService;
+import com.ace.ailpv.service.BatchHasExamService;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
@@ -74,6 +76,9 @@ public class AdminController {
 
     @Autowired
     private AssignmentService assignmentService;
+
+    @Autowired
+    private BatchHasExamService batchHasExamService;
 
     String path = "src\\main\\resources\\static\\courses\\";
 
@@ -518,5 +523,30 @@ public class AdminController {
         return "/admin/ADM-ASG-18";
     }
 
+    @GetMapping("/exam-grade")
+    public String setupExamGrade(ModelMap model) {
+        List<Batch> batchList = batchService.getAllBatches();
+        Long batchId = batchList.get(0).getId();
+        List<BatchHasExam> bheList = batchHasExamService.getBatchHasExamListByBatchId(batchId);
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+        model.addAttribute("data", new Batch());
+        model.addAttribute("bheList", bheList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("batchList", batchList);
+        return "/admin/ADM-EXG-19";
+    }
+
+    @PostMapping("/searchStudentExamsByBatch")
+    public String searchStudentExamsByBatch(@ModelAttribute("data") Batch batch, ModelMap model) {
+        Long batchId = batch.getId();
+        List<BatchHasExam> bheList = batchHasExamService.getBatchHasExamListByBatchId(batchId);
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+        List<Batch> batchList = batchService.getAllBatches();
+        model.addAttribute("data", batch);
+        model.addAttribute("bheList", bheList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("batchList", batchList);
+        return "/admin/ADM-EXG-19";
+    }
 
 }
