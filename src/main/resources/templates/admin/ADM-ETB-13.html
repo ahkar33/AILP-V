@@ -94,14 +94,14 @@
                                 </thead>
                                 <tbody>
 
-                                    <tr th:each="exam : ${examList}">
+                                    <tr th:each="exam : ${fileExamList}">
                                         <td>[[${exam?.name}]]</td>
-                                        <td>[[${exam?.examCourse.name}]]</td>
-                                        <td>[[${exam?.fullMark}]]</td>
+                                        <td>[[${exam?.fileExamCourse.name}]]</td>
+                                        <td>[[${exam?.totalMark}]]</td>
                                         <td>
                                             <a class="btn btn-danger btn bg-gradient" title="Remove"
                                                 data-bs-placement="top" data-bs-toggle="tooltip"
-                                                th:attr="onclick=|handleDelete('${exam.id}')|">
+                                                th:attr="onclick=|handleFileExamDelete('${exam.id}')|">
                                                 <i class="fa-trash-alt fas"></i>
                                             </a>
                                         </td>
@@ -139,21 +139,37 @@
         });
 
         const handleDelete = (examId) => {
-            console.log(examId);
-            Swal.fire({
-                title: 'Are you sure want to delete?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location = `http://localhost:8080/admin/deleteExam/${examId}`;
-                }
-            })
-        }
+                Swal.fire({
+                    title: 'Are you sure want to delete?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = `http://localhost:8080/admin/deleteExam/${examId}`;
+                    }
+                })
+            }
+
+            const handleFileExamDelete = (examId) => {
+                Swal.fire({
+                    title: 'Are you sure want to delete?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = `http://localhost:8080/admin/deleteFileExam/${examId}`;
+                    }
+                })
+            }
+
     </script>
 </body>
 

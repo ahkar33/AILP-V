@@ -22,6 +22,7 @@ import com.ace.ailpv.entity.Assignment;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasExam;
 import com.ace.ailpv.entity.Course;
+import com.ace.ailpv.entity.FileExam;
 import com.ace.ailpv.entity.Resource;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
@@ -31,6 +32,7 @@ import com.ace.ailpv.service.BatchHasExamService;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
+import com.ace.ailpv.service.FileExamService;
 import com.ace.ailpv.service.FileService;
 import com.ace.ailpv.service.ResourceService;
 import com.ace.ailpv.service.UserScheduleService;
@@ -79,6 +81,9 @@ public class AdminController {
 
     @Autowired
     private BatchHasExamService batchHasExamService;
+
+    @Autowired
+    private FileExamService fileExamService;
 
     String path = "src\\main\\resources\\static\\courses\\";
 
@@ -354,13 +359,6 @@ public class AdminController {
         return "redirect:/admin/student-table";
     }
 
-    @GetMapping("/deleteExam/{id}")
-    public String deleteExam(@PathVariable("id") Long id)
-            throws IOException {
-        examService.deleteExamById(id);
-        return "redirect:/admin/exam-table";
-    }
-
     @GetMapping("/teacher-table")
     public String setupTeacherTable(ModelMap model) {
         model.addAttribute("teacherList", userService.getAllTeachers());
@@ -400,6 +398,7 @@ public class AdminController {
     @GetMapping("/exam-table")
     public String setupExamTable(ModelMap model) {
         model.addAttribute("examList", examService.getAllExams());
+        model.addAttribute("fileExamList", fileExamService.getAllFileExams());
         return "/admin/ADM-ETB-13";
     }
 
@@ -407,6 +406,39 @@ public class AdminController {
     public String setupCreateExam(ModelMap model) {
         model.addAttribute("courseList", courseService.getAllCourses());
         return "/admin/ADM-CRE-14";
+    }
+
+    @GetMapping("/deleteExam/{id}")
+    public String deleteExam(@PathVariable("id") Long id)
+            throws IOException {
+        examService.deleteExamById(id);
+        return "redirect:/admin/exam-table";
+    }
+
+    @GetMapping("/create-file-exam")
+    public String setupCreateFileExam(ModelMap model) {
+        List<Course> courseList = courseService.getAllCourses();
+        model.addAttribute("courseList", courseList);
+        model.addAttribute("fileExam", new FileExam());
+        return "/admin/ADM-CFE-20";
+    }
+
+    @PostMapping("/create-file-exam")
+    public String createFileExam(@ModelAttribute("fileExam") FileExam fileExam, RedirectAttributes redirectAttrs)
+            throws IOException {
+        if (fileExamService.checkFileExamName(fileExam.getName(), fileExam.getFileExamCourse().getId())) {
+            redirectAttrs.addFlashAttribute("errorMsg", true);
+            return "redirect:/admin/create-file-exam";
+        }
+        fileExamService.addFileExam(fileExam);
+        return "/admin/ADM-CFE-20";
+    }
+
+    @GetMapping("/deleteFileExam/{id}")
+    public String deleteFileExam(@PathVariable("id") Long id)
+            throws IOException {
+        fileExamService.deleteFileExamById(id);
+        return "redirect:/admin/exam-table";
     }
 
     @GetMapping("/changePassword/{userId}")
@@ -460,13 +492,13 @@ public class AdminController {
 
     @GetMapping("/attendance-table")
     public String getAttendanceTable(ModelMap model) {
-        List<Batch> batchList = batchService.getAllBatches(); 
+        List<Batch> batchList = batchService.getAllBatches();
         Long batchId = batchList.get(0).getId();
         List<UserSchedule> res = userScheduleService.getUserScheduleListByBatchId(batchId);
         List<String> dateList = new ArrayList<>();
         for (UserSchedule u : res) {
             String date = u.getSchedule().getDate().toString();
-            if(!dateList.contains(date)) {
+            if (!dateList.contains(date)) {
                 dateList.add(date);
             }
         }
@@ -480,12 +512,12 @@ public class AdminController {
 
     @PostMapping("/searchScheduleForBatch")
     public String searchScheduleForBatch(@ModelAttribute("batch") Batch batch, ModelMap model) {
-        List<Batch> batchList = batchService.getAllBatches(); 
+        List<Batch> batchList = batchService.getAllBatches();
         List<UserSchedule> res = userScheduleService.getUserScheduleListByBatchId(batch.getId());
         List<String> dateList = new ArrayList<>();
         for (UserSchedule u : res) {
             String date = u.getSchedule().getDate().toString();
-            if(!dateList.contains(date)) {
+            if (!dateList.contains(date)) {
                 dateList.add(date);
             }
         }
