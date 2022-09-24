@@ -55,10 +55,6 @@ public class FileService {
         if (!assignmentAnswerFolder.exists()) {
             assignmentAnswerFolder.mkdirs();
         }
-        File examQuestionFolder = new File(path + strBatchId + "\\ExamQuestion");
-        if (!examQuestionFolder.exists()) {
-            examQuestionFolder.mkdirs();
-        }
         File examAnswerFolder = new File(path + strBatchId + "\\ExamAnswer");
         if (!examAnswerFolder.exists()) {
             examAnswerFolder.mkdirs();

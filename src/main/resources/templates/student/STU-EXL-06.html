@@ -23,8 +23,8 @@
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade mt-2 show active" id="nav-exam" role="tabpanel"
-                aria-labelledby="nav-exam-tab" tabindex="0">
+            <div class="tab-pane fade mt-2 show active" id="nav-exam" role="tabpanel" aria-labelledby="nav-exam-tab"
+                tabindex="0">
                 <!-- Exam Card/ Button Start -->
                 <span th:each="bhe : ${bheList}">
                     <div class="btn btn-light ms-0 me-0 my-2 py-3 shadow-sm w-100">
@@ -64,9 +64,63 @@
                     </div>
                 </span>
             </div>
-            <div class="tab-pane fade mt-2" id="nav-codetest" role="tabpanel" aria-labelledby="nav-codetest-tab" tabindex="0">
-                <h2 class="fs-2 mt-3" style=" color: rgb(78, 78, 78); font-family: 'Roboto', sans-serif;">
-                    Code Test</h2>
+            <div class="tab-pane fade mt-2" id="nav-codetest" role="tabpanel" aria-labelledby="nav-codetest-tab"
+                tabindex="0">
+
+                <div class="container allButFooter" style="margin-top: 22px;padding-right: 10px;padding-left: 10px;">
+                    <h2 class="mb-3 me-3 mt-3 text-black-50" style="font-family: 'Roboto', sans-serif;">File Exam</h2>
+                    <div class="card shadow-sm" style="margin-bottom: 85px; font-family: 'Roboto', sans-serif;">
+                        <div class="card-body" style="padding: 10px;">
+                            <table id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Exam Name</th>
+                                        <th>Exam Question</th>
+                                        <th>Exam File</th>
+                                        <th>Total Mark</th>
+                                        <th>Strat Time</th>
+                                        <th>End Time</th>
+                                        <th>To Upload</th>
+                                        <th>Action</th>
+                                    </tr>
+                                <tbody>
+
+                                    <tr th:each="bhfe : ${bhfeList}">
+                                        <form th:action="@{/student/submitFileExam}" th:object="${data}" method="post"
+                                            enctype="multipart/form-data">
+                                            <input type="hidden" th:value="${successMsg}" id="successMsg">
+                                            <td class="pt-2 text-dark">[[${bhfe?.bhfeExam?.name}]]</td>
+                                            <td class="pt-2 text-dark">[[${bhfe?.bhfeExam?.question}]]</td>
+                                            <td class="pt-2 text-dark">
+                                                <a
+                                                    th:href="@{ ${'/courses/' + bhfe?.bhfeExam?.fileExamCourse?.name + '/exam/' + bhfe?.bhfeExam?.questionFileName } }">
+                                                    [[${bhfe?.bhfeExam?.questionFileName}]]
+                                                </a>
+                                            </td>
+                                            <td class="pt-2 text-dark">[[${bhfe?.bhfeExam?.totalMark}]]</td>
+                                            <td class="pt-2 text-dark">[[${bhfe?.startDateTime}]]</td>
+                                            <td class="pt-2 text-dark">[[${bhfe?.endDateTime}]]</td>
+                                            <input type="hidden" th:value="${session?.uid}" th:name="examAnswerStudent"
+                                                th:id="examAnswerStudent">
+                                            <input type="hidden" th:value="${bhfe.id}" th:name="batchHasFileExam"
+                                                th:id="batchHasFileExam">
+                                            <td class="pt-1 ">
+                                                <input type="file"
+                                                    th:field="*{examAnswerFile}" accept=".zip" required />
+                                            </td>
+                                            <td class="text-dark">
+                                                <button class="btn btn-primary mt-3" type="submit">Upload</button>
+                                            </td>
+                                        </form>
+                                    </tr>
+
+                                </tbody>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -80,7 +134,11 @@
 
 
     <div th:insert="/student/student-fragments :: footer" />
-
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
 </body>
 
 </html>
