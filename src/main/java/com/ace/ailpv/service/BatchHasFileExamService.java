@@ -1,8 +1,11 @@
-package com.ace.ailpv.security;
+package com.ace.ailpv.service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +15,9 @@ import com.ace.ailpv.repository.BatchHasFileExamRepository;
 
 @Service
 public class BatchHasFileExamService {
-  
+
     @Autowired
-    private BatchHasFileExamRepository batchHasFileExamRepository;    
+    private BatchHasFileExamRepository batchHasFileExamRepository;
 
     public void addBatchHasFileExam(BatchHasFileExam batchHasFileExam) {
         batchHasFileExamRepository.save(batchHasFileExam);
@@ -38,6 +41,17 @@ public class BatchHasFileExamService {
             formattedBhfeList.add(bhfe);
         }
         return formattedBhfeList;
+    }
+
+    public List<BatchHasFileExam> getBatchHasFileExamListByBatchIdForStudents(Long batchId) {
+        Long currentTime = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
+        List<BatchHasFileExam> unfilteredList = getBatchHasFileExamListByBatchId(batchId);
+        List<BatchHasFileExam> filteredList = unfilteredList.stream()
+                .filter(batchHasFileExam -> currentTime > batchHasFileExam.getStartDateTime()
+                        .toEpochSecond(ZoneOffset.UTC)
+                        && currentTime < batchHasFileExam.getEndDateTime().toEpochSecond(ZoneOffset.UTC))
+                .collect(Collectors.toList());
+        return filteredList;
     }
 
 }
