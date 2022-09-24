@@ -373,7 +373,8 @@ public class TeacherController {
     }
 
     @PostMapping("/uploadFileExam")
-    public String uploadFileExam(@ModelAttribute("data") BatchHasFileExam batchHasFileExam, RedirectAttributes redirectAttrs) {
+    public String uploadFileExam(@ModelAttribute("data") BatchHasFileExam batchHasFileExam,
+            RedirectAttributes redirectAttrs) {
         Long examId = batchHasFileExam.getBhfeExam().getId();
         Long batchId = batchHasFileExam.getBhfeBatch().getId();
         BatchHasFileExam bhfe = batchHasFileExamService.getBatchHasFileExamByFileExamIdAndBatchId(examId, batchId);
@@ -400,6 +401,18 @@ public class TeacherController {
         }
         redirectAttrs.addFlashAttribute("isSuccess", true);
         return "redirect:/teacher/uploadFileExam/" + batchHasFileExam.getBhfeExam().getId();
+    }
+
+    @GetMapping("/uploaded-file-exams")
+    public String setUpUploadedFileExam(HttpSession session, ModelMap model) {
+        String teacherId = (String) session.getAttribute("uid");
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+        List<BatchHasFileExam> bhfeList = new ArrayList<>();
+        for (Batch batch : batchList) {
+            bhfeList.addAll(batchHasFileExamService.getBatchHasFileExamListByBatchId(batch.getId()));
+        }
+        model.addAttribute("bhfeList", bhfeList);
+        return "/teacher/TCH-FET-15";
     }
 
     @GetMapping("/exam-grade")

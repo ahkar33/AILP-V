@@ -33,8 +33,8 @@ public class BatchHasFileExam {
 	private Batch bhfeBatch;
 
 	@ManyToOne
-	@JoinColumn(name = "exam_id", referencedColumnName = "id")
-	private Exam bhfeExam;
+	@JoinColumn(name = "file_exam_id", referencedColumnName = "id")
+	private FileExam bhfeExam;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime startDateTime;
