@@ -58,4 +58,8 @@ public class Course {
     @JsonIgnore
     List<Resource> resourceList = new ArrayList<>();
 
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "fileExamCourse")
+    @JsonIgnore
+    private List<FileExam> fileExamList = new ArrayList<>();
+
 }
