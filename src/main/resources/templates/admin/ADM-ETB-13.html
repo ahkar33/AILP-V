@@ -14,105 +14,126 @@
                 <!-- this is wherer nav bar is -->
                 <div th:insert="/admin/admin-fragments :: navbar" />
                 <div class="container-fluid">
-                    <h1 class="fs-3 mb-2 text-secondary"
-                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
-                        Exam Table
-                    </h1>
-                    <div
-                        class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
-                        <div>
-                            <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
-                                style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
-                                role="button" th:href="@{/admin/create-exam}">
-                                <i class="fa fa-file-alt fas fa-lg"
-                                    style="padding-bottom: 7px; padding-top: 9px; font-size:18px"></i>
-                                &nbsp;Create Exam
-                            </a>
+                    <nav>
+                        <div class="nav nav-fill nav-pills w-50 mb-4" id="nav-tab" role="tablist">
+                            <button class="nav-link active fw-bold" id="nav-examOne-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-examOne" type="button" role="tab" aria-controls="nav-examOne"
+                                aria-selected="true">Exam</button>
+                            <button class="nav-link fw-bold" id="nav-examTwo-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-examTwo" type="button" role="tab" aria-controls="nav-examTwo"
+                                aria-selected="false">Exam</button>
                         </div>
-                    </div>
-                    <div class="card shadow-sm">
-                        <div class="card-body text-dark pt-4">
-                            <!-- this is where to write datatable -->
-                            <table id="dataTable" class="display p-2">
-                                <thead>
-                                    <tr>
-                                        <th>Exam Name</th>
-                                        <th>Course Name</th>
-                                        <th>Full Mark</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <!-- Tab 1 Start Here -->
+                        <div class="tab-pane fade show active" id="nav-examOne" role="tabpanel"
+                            aria-labelledby="nav-examOne-tab" tabindex="0">
+                            <h1 class="fs-3 mb-2 text-secondary"
+                                style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                                Exam Table
+                            </h1>
+                            <div
+                                class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
+                                <div>
+                                    <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
+                                        style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
+                                        role="button" th:href="@{/admin/create-exam}">
+                                        <i class="fa fa-file-alt fas fa-lg"
+                                            style="padding-bottom: 7px; padding-top: 9px; font-size:18px"></i>
+                                        &nbsp;Create Exam
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card shadow-sm">
+                                <div class="card-body text-dark pt-4">
+                                    <!-- this is where to write datatable -->
+                                    <table id="dataTable" class="display p-2">
+                                        <thead>
+                                            <tr>
+                                                <th>Exam Name</th>
+                                                <th>Course Name</th>
+                                                <th>Full Mark</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                    <tr th:each="exam : ${examList}">
-                                        <td>[[${exam?.name}]]</td>
-                                        <td>[[${exam?.examCourse.name}]]</td>
-                                        <td>[[${exam?.fullMark}]]</td>
-                                        <td>
-                                            <a class="btn btn-danger btn bg-gradient" title="Remove"
-                                                data-bs-placement="top" data-bs-toggle="tooltip"
-                                                th:attr="onclick=|handleDelete('${exam.id}')|">
-                                                <i class="fa-trash-alt fas"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                            <tr th:each="exam : ${examList}">
+                                                <td>[[${exam?.name}]]</td>
+                                                <td>[[${exam?.examCourse.name}]]</td>
+                                                <td>[[${exam?.fullMark}]]</td>
+                                                <td>
+                                                    <a class="btn btn-danger btn bg-gradient" title="Remove"
+                                                        data-bs-placement="top" data-bs-toggle="tooltip"
+                                                        th:attr="onclick=|handleDelete('${exam.id}')|">
+                                                        <i class="fa-trash-alt fas"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
 
-                                </tbody>
-                            </table>
-                            </form>
+                                        </tbody>
+                                    </table>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <br><br>
-                    <!-- ------------------------------------------------------------------------------------------------------------------------------>
-                    <h1 class="fs-3 mb-2 text-secondary"
-                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
-                        Exam Table
-                    </h1>
-                    <div
-                        class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
-                        <div>
-                            <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
-                                style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
-                                role="button" th:href="@{/admin/create-exam}">
-                                <i class="fa fa-file-alt fas fa-lg"
-                                    style="padding-bottom: 7px; padding-top: 9px; font-size:18px"></i>
-                                &nbsp;Create Exam
-                            </a>
+                        <!-- Tab 1 End here -->
+
+
+                        <!-- Tab 2 Start Here -->
+                        <div class="tab-pane fade" id="nav-examTwo" role="tabpanel" aria-labelledby="nav-examTwo-tab"
+                            tabindex="0">
+                            <h1 class="fs-3 mb-2 text-secondary"
+                                style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                                Exam Table
+                            </h1>
+                            <div
+                                class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
+                                <div>
+                                    <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
+                                        style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
+                                        role="button" th:href="@{/admin/create-exam}">
+                                        <i class="fa fa-file-alt fas fa-lg"
+                                            style="padding-bottom: 7px; padding-top: 9px; font-size:18px"></i>
+                                        &nbsp;Create Exam
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card shadow-sm">
+                                <div class="card-body text-dark pt-4">
+                                    <!-- this is where to write datatable -->
+                                    <table id="dataTable2" class="display p-2">
+                                        <thead>
+                                            <tr>
+                                                <th>Exam Name</th>
+                                                <th>Course Name</th>
+                                                <th>Full Mark</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr th:each="exam : ${fileExamList}">
+                                                <td>[[${exam?.name}]]</td>
+                                                <td>[[${exam?.fileExamCourse.name}]]</td>
+                                                <td>[[${exam?.totalMark}]]</td>
+                                                <td>
+                                                    <a class="btn btn-danger btn bg-gradient" title="Remove"
+                                                        data-bs-placement="top" data-bs-toggle="tooltip"
+                                                        th:attr="onclick=|handleFileExamDelete('${exam.id}')|">
+                                                        <i class="fa-trash-alt fas"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
+                        <!-- Tab 2 End Here -->
                     </div>
-                    <div class="card shadow-sm">
-                        <div class="card-body text-dark pt-4">
-                            <!-- this is where to write datatable -->
-                            <table id="dataTable2" class="display p-2">
-                                <thead>
-                                    <tr>
-                                        <th>Exam Name</th>
-                                        <th>Course Name</th>
-                                        <th>Full Mark</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr th:each="exam : ${fileExamList}">
-                                        <td>[[${exam?.name}]]</td>
-                                        <td>[[${exam?.fileExamCourse.name}]]</td>
-                                        <td>[[${exam?.totalMark}]]</td>
-                                        <td>
-                                            <a class="btn btn-danger btn bg-gradient" title="Remove"
-                                                data-bs-placement="top" data-bs-toggle="tooltip"
-                                                th:attr="onclick=|handleFileExamDelete('${exam.id}')|">
-                                                <i class="fa-trash-alt fas"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                            </form>
-                        </div>
-                    </div>
-
                 </div>
             </div>
             <footer class="pb-2 pt-2 small text-dark mt-5" data-pg-collapsed style="background-color: #dfdfdf;">
@@ -139,36 +160,36 @@
         });
 
         const handleDelete = (examId) => {
-                Swal.fire({
-                    title: 'Are you sure want to delete?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location = `http://localhost:8080/admin/deleteExam/${examId}`;
-                    }
-                })
-            }
+            Swal.fire({
+                title: 'Are you sure want to delete?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = `http://localhost:8080/admin/deleteExam/${examId}`;
+                }
+            })
+        }
 
-            const handleFileExamDelete = (examId) => {
-                Swal.fire({
-                    title: 'Are you sure want to delete?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location = `http://localhost:8080/admin/deleteFileExam/${examId}`;
-                    }
-                })
-            }
+        const handleFileExamDelete = (examId) => {
+            Swal.fire({
+                title: 'Are you sure want to delete?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = `http://localhost:8080/admin/deleteFileExam/${examId}`;
+                }
+            })
+        }
 
     </script>
 </body>

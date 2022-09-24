@@ -17,76 +17,95 @@
                 <div th:insert="/teacher/teacher-fragments :: navbar" />
                 <input type="hidden" th:value="${session?.uid}" id="teacherId">
                 <div class="container-fluid">
-                    <h1 class="fs-3 mb-3 text-secondary"
-                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
-                        Exam Table
-                    </h1>
-                    <div class="card shadow-sm text-dark">
-                        <div class="card-body text-dark">
-
-                            <!-- where I have to write table -->
-                            <table id="dataTable" class="display p-2">
-                                <thead class="table">
-                                    <tr>
-                                        <th>Exam Name</th>
-                                        <th>Course Name</th>
-                                        <th>Full Mark</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="exam : ${examList}">
-                                        <td>[[${exam?.name}]]</td>
-                                        <td>[[${exam?.examCourse.name}]]</td>
-                                        <td>[[${exam?.fullMark}]]</td>
-                                        <td>
-                                            <a th:href="@{/teacher/uploadExam/} + ${exam.id}"
-                                                class="btn btn-primary bg-gradient shadow-sm">
-                                                Upload
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <nav>
+                        <div class="nav nav-fill nav-pills w-50 mb-4" id="nav-tab" role="tablist">
+                            <button class="nav-link active fw-bold" id="nav-examOne-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-examOne" type="button" role="tab" aria-controls="nav-examOne"
+                                aria-selected="true">Exam</button>
+                            <button class="nav-link fw-bold" id="nav-examTwo-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-examTwo" type="button" role="tab" aria-controls="nav-examTwo"
+                                aria-selected="false">Exam</button>
                         </div>
-                    </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <!-- Tab 1 Start Here -->
+                        <div class="tab-pane fade show active" id="nav-examOne" role="tabpanel"
+                            aria-labelledby="nav-examOne-tab" tabindex="0">
+                            <h1 class="fs-3 mb-3 text-secondary"
+                                style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                                Exam Table
+                            </h1>
+                            <div class="card shadow-sm text-dark">
+                                <div class="card-body text-dark">
 
-                    <!-- --------------------------------------------------------------------------------------------------------- -->
-
-                    <h1 class="fs-3 mb-3 text-secondary"
-                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
-                        Exam Table
-                    </h1>
-                    <div class="card shadow-sm text-dark">
-                        <div class="card-body text-dark">
-
-                            <!-- where I have to write table -->
-                            <table id="dataTable2" class="display p-2">
-                                <thead class="table">
-                                    <tr>
-                                        <th>Exam Name</th>
-                                        <th>Course Name</th>
-                                        <th>Full Mark</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="exam : ${fileExamList}">
-                                        <td>[[${exam?.name}]]</td>
-                                        <td>[[${exam?.fileExamCourse.name}]]</td>
-                                        <td>[[${exam?.totalMark}]]</td>
-                                        <td>
-                                            <a th:href="@{/teacher/uploadFileExam/} + ${exam.id}"
-                                                class="btn btn-primary bg-gradient shadow-sm">
-                                                Upload
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                    <!-- where I have to write table -->
+                                    <table id="dataTable" class="display p-2">
+                                        <thead class="table">
+                                            <tr>
+                                                <th>Exam Name</th>
+                                                <th>Course Name</th>
+                                                <th>Full Mark</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="exam : ${examList}">
+                                                <td>[[${exam?.name}]]</td>
+                                                <td>[[${exam?.examCourse.name}]]</td>
+                                                <td>[[${exam?.fullMark}]]</td>
+                                                <td>
+                                                    <a th:href="@{/teacher/uploadExam/} + ${exam.id}"
+                                                        class="btn btn-primary bg-gradient shadow-sm">
+                                                        Upload
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <!-- Tab 1 End Here -->
 
+                        <!-- Tab 2 Start Here -->
+                        <div class="tab-pane fade" id="nav-examTwo" role="tabpanel" aria-labelledby="nav-examTwo-tab"
+                            tabindex="0">
+                            <h1 class="fs-3 mb-3 text-secondary"
+                                style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                                Exam Table
+                            </h1>
+                            <div class="card shadow-sm text-dark">
+                                <div class="card-body text-dark">
+
+                                    <!-- where I have to write table -->
+                                    <table id="dataTable2" class="display p-2">
+                                        <thead class="table">
+                                            <tr>
+                                                <th>Exam Name</th>
+                                                <th>Course Name</th>
+                                                <th>Full Mark</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="exam : ${fileExamList}">
+                                                <td>[[${exam?.name}]]</td>
+                                                <td>[[${exam?.fileExamCourse.name}]]</td>
+                                                <td>[[${exam?.totalMark}]]</td>
+                                                <td>
+                                                    <a th:href="@{/teacher/uploadFileExam/} + ${exam.id}"
+                                                        class="btn btn-primary bg-gradient shadow-sm">
+                                                        Upload
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tab 2 Start Here -->
+                    </div>
                 </div>
             </div>
             <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
