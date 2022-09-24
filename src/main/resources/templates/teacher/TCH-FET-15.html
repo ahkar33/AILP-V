@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="/teacher/teacher-fragments :: teacher_head">
+    <title>Assignment Table</title>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <!-- this is where side bar is -->
+        <div th:insert="/teacher/teacher-fragments :: sidebar" />
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <!-- this is where nav bar is -->
+                <div th:insert="/teacher/teacher-fragments :: navbar" />
+                <input type="hidden" th:value="${session?.uid}" id="teacherId" />
+
+                <div class="container-fluid">
+                    <h1 class="fs-3 mb-3 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        Exam Table
+                    </h1>
+                    <div class="card shadow-sm">
+
+                        <div class="card-body text-dark">
+                            <table id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Exam Name</th>
+                                        <th>Batch</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="bhfe :${bhfeList}">
+                                        <td>[[${bhfe?.bhfeExam?.name}]]</td>
+                                        <td>[[${bhfe?.bhfeBatch?.name}]]</td>
+                                        <td>
+                                            <a th:href="@{/teacher/checkAssignment/} + ${assignment?.id}"
+                                                class="text-decoration-none">
+                                                <button class="btn btn-primary bg-gradient shadow-sm">Check</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
+                <div class="container pb-2 pt-2">
+                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                        Reserved - Ace Inspiration</p>
+                </div>
+            </footer>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <div th:insert="/teacher/teacher-fragments :: footer" />
+
+    <!-- datatable-js -->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#dataTable").DataTable();
+        });
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             startDate: '',
+        //             endDate: '',
+        //             isStartDateFilled: false
+        //         }
+        //     },
+        //     methods: {
+        //         getDate(date) {
+        //             let dd = String(date.getDate()).padStart(2, '0');
+        //             let mm = String(date.getMonth() + 1).padStart(2, '0');
+        //             let yyyy = date.getFullYear();
+        //             let [time] = date.toTimeString().split(' ');
+        //             value = yyyy + '-' + mm + '-' + dd + 'T' + time.substring(0, 5);
+        //             return value;
+        //         }
+        //     },
+        //     watch: {
+        //         startDate: function (newStartDate, oldStartDate) {
+        //             let dayAfterStartDate = new Date(newStartDate);
+        //             dayAfterStartDate.setDate(dayAfterStartDate.getDate() + 1);
+        //             let endDate = document.getElementById('endDate');
+        //             endDate.setAttribute("min", this.getDate(dayAfterStartDate));
+        //             this.isStartDateFilled = true;
+        //         },
+        //         endDate: function (newEndDate, oldEndDate) {
+        //             let maxDate = new Date(newEndDate);
+        //             maxDate.setDate(maxDate.getDate() - 1);
+        //             startDate.setAttribute("max", this.getDate(maxDate));
+        //         }
+        //     },
+        //     mounted() {
+        //         let today = new Date();
+        //         let startDate = document.getElementById('startDate');
+        //         startDate.setAttribute("min", this.getDate(today));
+        //     }
+        // })
+        // app.mount('#calendar');
+
+    </script>
+</body>
+
+</html>
