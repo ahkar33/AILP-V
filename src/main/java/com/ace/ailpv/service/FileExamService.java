@@ -1,12 +1,17 @@
 package com.ace.ailpv.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.FileExam;
+import com.ace.ailpv.entity.User;
 import com.ace.ailpv.repository.FileExamRepository;
 
 @Service
@@ -17,6 +22,9 @@ public class FileExamService {
 
     @Autowired
     private FileUploadUtilService fileUploadUtilService;
+
+    @Autowired
+    private UserService userService;
 
     String path = "src\\main\\resources\\static\\courses\\";
 
@@ -38,6 +46,23 @@ public class FileExamService {
 
     public void deleteFileExamById(Long id) {
         examFileRepository.deleteById(id);
+    }
+
+    public List<FileExam> getFileExamListByCourseId(Long courseId) {
+        return examFileRepository.findByFileExamCourse_Id(courseId);
+    }
+
+    public List<FileExam> getFileExamListByTeacherId(String teacherId) {
+        User teacherInfo = userService.getUserById(teacherId);
+        List<FileExam> fileExamList = new ArrayList<>();
+        Set<Long> courseIdList = new HashSet<>();
+        for (Batch batch : teacherInfo.getBatchList()) {
+            courseIdList.add(batch.getBatchCourse().getId());
+        }
+        for(Long courseId : courseIdList) {
+            fileExamList.addAll(getFileExamListByCourseId(courseId));
+        }
+        return fileExamList;
     }
 
 }

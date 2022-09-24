@@ -23,6 +23,7 @@ import com.ace.ailpv.entity.AssignmentResult;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasExam;
 import com.ace.ailpv.entity.Exam;
+import com.ace.ailpv.entity.FileExam;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
 import com.ace.ailpv.service.AssignmentAnswerService;
@@ -30,6 +31,7 @@ import com.ace.ailpv.service.AssignmentResultService;
 import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.BatchHasExamService;
 import com.ace.ailpv.service.ExamService;
+import com.ace.ailpv.service.FileExamService;
 import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
 
@@ -54,6 +56,9 @@ public class TeacherController {
 
     @Autowired
     private ExamService examService;
+
+    @Autowired
+    private FileExamService fileExamService;
 
     @Autowired
     private BatchHasExamService batchHasExamService;
@@ -297,7 +302,9 @@ public class TeacherController {
     public String setupUploadExam(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
         List<Exam> examList = examService.getExamListByTeacherId(teacherId);
+        List<FileExam> fileExamList = fileExamService.getFileExamListByTeacherId(teacherId);
         model.addAttribute("examList", examList);
+        model.addAttribute("fileExamList", fileExamList);
         return "/teacher/TCH-ETB-08";
     }
 
