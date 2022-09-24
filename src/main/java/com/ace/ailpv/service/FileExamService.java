@@ -48,6 +48,10 @@ public class FileExamService {
         examFileRepository.deleteById(id);
     }
 
+    public FileExam getFileExamById(Long id) {
+        return examFileRepository.findById(id).orElse(null);
+    }
+
     public List<FileExam> getFileExamListByCourseId(Long courseId) {
         return examFileRepository.findByFileExamCourse_Id(courseId);
     }
