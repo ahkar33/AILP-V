@@ -22,10 +22,12 @@ import com.ace.ailpv.entity.AssignmentAnswer;
 import com.ace.ailpv.entity.AssignmentResult;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasExam;
+import com.ace.ailpv.entity.BatchHasFileExam;
 import com.ace.ailpv.entity.Exam;
 import com.ace.ailpv.entity.FileExam;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
+import com.ace.ailpv.security.BatchHasFileExamService;
 import com.ace.ailpv.service.AssignmentAnswerService;
 import com.ace.ailpv.service.AssignmentResultService;
 import com.ace.ailpv.service.AssignmentService;
@@ -62,6 +64,9 @@ public class TeacherController {
 
     @Autowired
     private BatchHasExamService batchHasExamService;
+
+    @Autowired
+    private BatchHasFileExamService batchHasFileExamService;
 
     @GetMapping("/dashboard")
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
@@ -136,7 +141,7 @@ public class TeacherController {
         List<String> dateList = new ArrayList<>();
         for (UserSchedule u : res) {
             String date = u.getSchedule().getDate().toString();
-            if(!dateList.contains(date)) {
+            if (!dateList.contains(date)) {
                 dateList.add(date);
             }
         }
@@ -156,7 +161,7 @@ public class TeacherController {
         List<String> dateList = new ArrayList<>();
         for (UserSchedule u : res) {
             String date = u.getSchedule().getDate().toString();
-            if(!dateList.contains(date)) {
+            if (!dateList.contains(date)) {
                 dateList.add(date);
             }
         }
@@ -169,36 +174,40 @@ public class TeacherController {
     }
 
     // @PostMapping("/searchUserScheduleList")
-    // public String searchUserScheduleList(@ModelAttribute("data") UserSchedule userSchedule, ModelMap model,
-    //         HttpSession session) {
-    //     Long batchId = userSchedule.getUser().getBatchList().get(0).getId();
-    //     if (userSchedule.getDate() != null) {
-    //         Schedule resSchedule = scheduleService.getScheduleByDate(userSchedule.getDate());
-    //         if (resSchedule == null) {
-    //             String teacherId = (String) session.getAttribute("uid");
-    //             List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
-    //             model.addAttribute("userScheduleList", new ArrayList<>());
-    //             model.addAttribute("batchList", batchList);
-    //             model.addAttribute("data", new UserSchedule());
-    //             return "/teacher/TCH-ATB-11";
-    //         }
-    //         List<UserSchedule> list = userScheduleService.getUserScheduleListByBatchIdAndScheduleId(batchId,
-    //                 resSchedule.getId());
-    //         String teacherId = (String) session.getAttribute("uid");
-    //         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
-    //         model.addAttribute("userScheduleList", list);
-    //         model.addAttribute("batchList", batchList);
-    //         model.addAttribute("data", new UserSchedule());
-    //         return "/teacher/TCH-ATB-11";
-    //     } else {
-    //         List<UserSchedule> list = userScheduleService.getUserScheduleListByBatchIdOrScheduleId(batchId);
-    //         String teacherId = (String) session.getAttribute("uid");
-    //         List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
-    //         model.addAttribute("userScheduleList", list);
-    //         model.addAttribute("batchList", batchList);
-    //         model.addAttribute("data", userSchedule);
-    //         return "/teacher/TCH-ATB-11";
-    //     }
+    // public String searchUserScheduleList(@ModelAttribute("data") UserSchedule
+    // userSchedule, ModelMap model,
+    // HttpSession session) {
+    // Long batchId = userSchedule.getUser().getBatchList().get(0).getId();
+    // if (userSchedule.getDate() != null) {
+    // Schedule resSchedule =
+    // scheduleService.getScheduleByDate(userSchedule.getDate());
+    // if (resSchedule == null) {
+    // String teacherId = (String) session.getAttribute("uid");
+    // List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+    // model.addAttribute("userScheduleList", new ArrayList<>());
+    // model.addAttribute("batchList", batchList);
+    // model.addAttribute("data", new UserSchedule());
+    // return "/teacher/TCH-ATB-11";
+    // }
+    // List<UserSchedule> list =
+    // userScheduleService.getUserScheduleListByBatchIdAndScheduleId(batchId,
+    // resSchedule.getId());
+    // String teacherId = (String) session.getAttribute("uid");
+    // List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+    // model.addAttribute("userScheduleList", list);
+    // model.addAttribute("batchList", batchList);
+    // model.addAttribute("data", new UserSchedule());
+    // return "/teacher/TCH-ATB-11";
+    // } else {
+    // List<UserSchedule> list =
+    // userScheduleService.getUserScheduleListByBatchIdOrScheduleId(batchId);
+    // String teacherId = (String) session.getAttribute("uid");
+    // List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+    // model.addAttribute("userScheduleList", list);
+    // model.addAttribute("batchList", batchList);
+    // model.addAttribute("data", userSchedule);
+    // return "/teacher/TCH-ATB-11";
+    // }
     // }
 
     @GetMapping("/postResource")
@@ -320,6 +329,19 @@ public class TeacherController {
         return "/teacher/TCH-UPE-09";
     }
 
+    @GetMapping("/uploadFileExam/{fileExamId}")
+    public String setupFileUploadExam(@PathVariable("fileExamId") Long fileExamId, HttpSession session,
+            ModelMap model) {
+        String teacherId = (String) session.getAttribute("uid");
+        FileExam fileExam = fileExamService.getFileExamById(fileExamId);
+        Long courseId = fileExam.getFileExamCourse().getId();
+        List<Batch> batchList = userService.getTeacherBatchListByTeacherIdAndCourseId(teacherId, courseId);
+        model.addAttribute("exam", fileExam);
+        model.addAttribute("batchList", batchList);
+        model.addAttribute("data", new BatchHasFileExam());
+        return "/teacher/TCH-UFE-14";
+    }
+
     @PostMapping("/uploadExam")
     public String uploadExam(@ModelAttribute("data") BatchHasExam batchHasExam, RedirectAttributes redirectAttrs) {
         Long examId = batchHasExam.getBheExam().getId();
@@ -348,6 +370,36 @@ public class TeacherController {
         }
         redirectAttrs.addFlashAttribute("isSuccess", true);
         return "redirect:/teacher/uploadExam/" + batchHasExam.getBheExam().getId();
+    }
+
+    @PostMapping("/uploadFileExam")
+    public String uploadFileExam(@ModelAttribute("data") BatchHasFileExam batchHasFileExam, RedirectAttributes redirectAttrs) {
+        Long examId = batchHasFileExam.getBhfeExam().getId();
+        Long batchId = batchHasFileExam.getBhfeBatch().getId();
+        BatchHasFileExam bhfe = batchHasFileExamService.getBatchHasFileExamByFileExamIdAndBatchId(examId, batchId);
+        Long startTime = batchHasFileExam.getStartDateTime().toEpochSecond(ZoneOffset.UTC);
+        Long endTime = batchHasFileExam.getEndDateTime().toEpochSecond(ZoneOffset.UTC);
+        Long totalTime = endTime - startTime;
+        Long hour = totalTime / 3600;
+        Long hourMin = (totalTime % 3600) / 60;
+        Long min = totalTime / 60;
+        String totalTimeStr = "";
+        if (hour == 0) {
+            totalTimeStr = min + " min";
+        } else {
+            totalTimeStr = hour + " hr " + hourMin + "min";
+        }
+        if (bhfe != null) {
+            bhfe.setStartDateTime(batchHasFileExam.getStartDateTime());
+            bhfe.setEndDateTime(batchHasFileExam.getEndDateTime());
+            bhfe.setTotalTime(totalTimeStr);
+            batchHasFileExamService.addBatchHasFileExam(bhfe);
+        } else {
+            batchHasFileExam.setTotalTime(totalTimeStr);
+            batchHasFileExamService.addBatchHasFileExam(batchHasFileExam);
+        }
+        redirectAttrs.addFlashAttribute("isSuccess", true);
+        return "redirect:/teacher/uploadFileExam/" + batchHasFileExam.getBhfeExam().getId();
     }
 
     @GetMapping("/exam-grade")
