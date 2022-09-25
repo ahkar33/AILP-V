@@ -11,7 +11,7 @@
     }
 </style>
 
-<body id="page-top">
+<body id="page-top" style="font-family: 'Roboto', sans-serif;">
     <div id="wrapper">
 
         <!-- this is where side nav is -->
@@ -25,13 +25,13 @@
 
                 <div v-cloak class="container-fluid pb-5 pe-5 ps-5 pt-2" id="app" style="max-width: 45rem;">
                     <h1 class="fs-3 mb-2 text-secondary"
-                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        style="font-size: 33px; color: rgb(72,72,72);  font-family: 'Roboto', sans-serif;">
                         Create Exam</h1>
                     <form action="">
-                        <div class="card mb-4 shadow-sm">
+                        <div class="card shadow-sm" style="margin-bottom: 13px;">
                             <div class="card-body p-4 fw-bold text-dark">
-                                <select v-model="course" class="form-select mb-4" aria-label="Default select example"
-                                    required style="width: 10rem;">
+                                <select v-model="course" class="form-select w-50" aria-label="Default select example"
+                                    required style="width: 10rem; margin-bottom: 13px;">
                                     <option value="" disabled>Choose Course</option>
                                     <span th:each="course : ${courseList}">
                                         <option th:value="${course.id}">
@@ -40,52 +40,53 @@
                                     </span>
                                 </select>
 
-                                <div class="input-group mb-3">
-                                    <input v-model="name" type="text" class="form-control mb-2" placeholder="Exam Name"
+                                <div class="input-group">
+                                    <input v-model="name" type="text" class="form-control" placeholder="Exam Name"
                                         maxlength="900" required />
                                 </div>
                             </div>
                         </div>
 
                         <div v-for="(question, index) in questionList" :key="index">
-                            <div class="card mb-4 shadow-sm">
-                                <div class="card-body p-4 text-dark fw-bold">
+                            <div class="card shadow-sm" style="margin-bottom: 13px;">
+                                <div class="card-body p-3 text-dark fw-bold">
                                     <form>
-                                        <label class="form-label fs-4 fw-bold">Question {{ index + 1 }}</label>
-                                        <div class="input-group mb-3">
-                                            <input v-model="question.examQuestion" type="text" class="form-control mb-2"
-                                                maxlength="900" required style="width: 100%;"
+                                        <label class="form-label fs-4 text-primary">Question {{ index + 1 }}</label>
+                                        <div class="input-group">
+                                            <input v-model="question.examQuestion" type="text" class="form-control"
+                                                maxlength="900" required style="width: 100%; margin-bottom: 13px;"
                                                 placeholder="Untitiled Question" />
                                         </div>
-                                        <div class="mb-4">
-                                            <div class="form-check">
-                                                <div v-for="(radio, indes) in question.radioList" :key="indes"
-                                                    class="input-group mb-3">
-                                                    <input v-model="radio.radioValue" type="text" required
-                                                        maxlength="900" class="form-control"
-                                                        :placeholder="'Option ' + (++indes)" />
-                                                    <button @click.prevent="removeRadio(index, --indes)" type="button"
-                                                        class="btn btn-danger fw-bold rounded ms-2">
-                                                        -
-                                                    </button>
-                                                    <button @click.prevent="addRadio(index)" type="button"
-                                                        class="btn btn-primary fw-bold rounded ms-2">
-                                                        +
-                                                    </button>
-                                                </div>
+                                        <div class="form-check">
+                                            <div v-for="(radio, indes) in question.radioList" :key="indes"
+                                                class="input-group" style="margin-bottom: 13px;">
+                                                <input v-model="radio.radioValue" type="text" required maxlength="900"
+                                                    class="form-control" :placeholder="'Option ' + (++indes)" />
+                                                <button @click.prevent="removeRadio(index, --indes)" type="button"
+                                                class="btn btn-outline-danger fw-bolder shadow-sm ms-1 me-1"
+                                                style="width: 38px;">
+                                                    -
+                                                </button>
+                                                <button @click.prevent="addRadio(index)" type="button"
+                                                class="btn btn-outline-primary fw-bolder shadow-sm"
+                                                style="width: 38px;">
+                                                    +
+                                                </button>
                                             </div>
-
                                         </div>
                                         <input v-model="question.rightAnswer" class="form-control" required
-                                            placeholder="Enter the correct answer" maxlength="900" />
-                                        <input v-model="question.mark" type="number" class="form-control mt-4 mb-4"
-                                            id="inputEmail4" required style="width: 100%;" placeholder="Enter Mark" />
-                                        <div class="text-end mt-3">
+                                            placeholder="Enter the correct answer" maxlength="900"  style="margin-bottom: 13px;"/>
+                                        <input v-model="question.mark" type="number" class="form-control"
+                                            id="inputEmail4" required style="width: 100%; margin-bottom: 13px;" placeholder="Enter Mark" />
+                                        <div class="text-end">
                                             <button @click.prevent="removeQuestion(index)" type="button"
-                                                class="btn btn-danger fw-bold me-3" style="width: 40px;">-</button>
+                                            class="btn bg-gradient btn-danger fw-bolder shadow-sm ms-1 me-1"
+                                            style="width: 38px;">-</button>
                                             <button @click.prevent="addQuestion()" type="button"
-                                                class="btn btn-primary fw-bold" style="width: 40px;">+</button>
+                                            class="btn bg-gradient btn-primary fw-bolder shadow-sm"
+                                            style="width: 38px;">+</button>
                                         </div>
+                                        
 
                                     </form>
 
@@ -98,7 +99,7 @@
                                 <div class=" d-flex flex-row-reverse input-group mb-3">
                                     <input v-model="fullMark" type="number" class="form-control mb-4" id="inputEmail4"
                                         required style="width: 100%;" placeholder="Enter Full Mark" /> -->
-                        <button @click="createExam()" type="submit" class="btn btn-primary rounded">Submit</button>
+                        <button @click="createExam()" type="submit" class="btn bg-gradient shadow-sm btn-primary rounded">Submit<i class="ms-2 fa-solid fa-check"></i></button>
                         <!-- </div>
                             </div> -->
                 </div>
@@ -213,7 +214,7 @@
                         } else {
                             let radioValues = [];
                             question.radioList.forEach(radio => {
-                               radioValues.push(radio.radioValue);
+                                radioValues.push(radio.radioValue);
                             });
                             if (!radioValues.includes(question.rightAnswer)) {
                                 this.isEmpty = true;
