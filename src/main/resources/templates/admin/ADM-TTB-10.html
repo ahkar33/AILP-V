@@ -5,7 +5,7 @@
     <title>Teacher Table</title>
 </head>
 
-<body id="page-top">
+<body id="page-top" style="font-family: 'Roboto', sans-serif;">
     <div id="wrapper">
         <!-- this is where side bar is -->
         <div th:insert="/admin/admin-fragments :: sidebar" />
@@ -21,14 +21,11 @@
                         Teacher Table</h1>
                     <div
                         class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
-                        <div><a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
-                                style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
-                                role="button" th:href="@{/admin/teacherRegister}">
-                                <i class="fa fa-user-plus fas fa-lg"
-                                    style="padding-bottom: 7px; padding-top: 9px; font-size:18px"></i>&nbsp;
-                                Add Teacher
-                            </a>
-                        </div>
+                        <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
+                            style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
+                            role="button" th:href="@{/admin/teacherRegister}">
+                            <i class="fa-solid fa-user-plus me-2" style="padding-top: 9px;"></i>Add Teacher
+                        </a>
                     </div>
                     <div class="card shadow-sm">
                         <!-- <div class="card-header py-3">
@@ -70,7 +67,7 @@
                         <div class="card-body text-dark pt-4">
                             <table id="dataTable" class="display p-2">
                                 <thead>
-                                    <tr> 
+                                    <tr>
                                         <th>Teacher Id</th>
                                         <th>Teacher Name</th>
                                         <th>Batch</th>
@@ -81,20 +78,21 @@
                                     <tr th:each="teacher : ${teacherList}">
                                         <td>[[${teacher?.id}]]</td>
                                         <td>[[${teacher?.name}]]</td>
-                                        <td>
-                                            <span th:each="batch, loop : ${teacher.batchList}">
+                                        <td class="text-overflow" style="max-width: 350px;">
+                                            <span th:each="batch, loop : ${teacher.batchList}" th:title="${teacher.batchList}">
                                                 [[${batch.name}]]<span th:if="${loop.index != loop.size-1}">,</span>
                                             </span>
                                         </td>
                                         <td class="d-flex d-lg-flex">
-                                            <a th:href="@{'/admin/editTeacher/' + ${teacher.id} }"
-                                                class="btn btn-primary me-2 bg-gradient">
-                                                Edit
+                                            <a title="Edit" data-bs-placement="top" data-bs-toggle="tooltip"
+                                                th:href="@{'/admin/editTeacher/' + ${teacher.id} }"
+                                                class="btn btn-outline-primary me-2 bg-gradient">
+                                                <i class="fa-solid fa-pen-to-square "></i>
                                             </a>
-                                            <a class="btn btn-danger btn bg-gradient" title="Remove"
+                                            <a class="btn btn-outline-danger btn bg-gradient" title="Remove"
                                                 data-bs-placement="top" data-bs-toggle="tooltip"
                                                 th:attr="onclick=|handleDelete('${teacher.id}')|">
-                                                <i class="fa-trash-alt fas"></i>
+                                                <i class="fa-solid fa-trash"></i>
                                             </a>
                                         </td>
                                     </tr>

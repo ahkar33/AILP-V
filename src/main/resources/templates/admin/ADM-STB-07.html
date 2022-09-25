@@ -5,7 +5,7 @@
     <title>Student Table</title>
 </head>
 
-<body id="page-top">
+<body id="page-top" style="font-family: 'Roboto', sans-serif;">
     <div id="wrapper">
 
         <!-- this is where side bar is -->
@@ -22,15 +22,13 @@
                         Student Table</h1>
                     <div
                         class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
-                        <div>
                             <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
                                 style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
                                 role="button" th:href="@{/admin/studentRegister}">
-                                <i class="fa fa-user-plus fas fa-lg"
-                                    style="padding-bottom: 7px; padding-top: 9px; font-size:18px"></i>&nbsp;
+                                <i class="fa-solid fa-user-plus me-1"
+                                    style="padding-top: 7px; font-size:15px"></i>
                                 Add Student
                             </a>
-                        </div>
                     </div>
                     <div class="card shadow-sm">
                         <!-- <div class="card-header py-3">
@@ -98,14 +96,15 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <a th:href="@{/admin/editStudent/} + ${student?.id}"
-                                                class="btn btn-primary me-1 bg-gradient">
-                                                Edit
+                                            <a title="Edit" data-bs-placement="top"
+                                            data-bs-toggle="tooltip" th:href="@{/admin/editStudent/} + ${student?.id}"
+                                                class="btn btn-outline-primary me-1">
+                                                <i class="fa-solid fa-pen-to-square "></i>
                                             </a>
                                             <a class="btn btn-outline-danger btn bg-gradient" title="Remove"
                                                 data-bs-placement="top" data-bs-toggle="tooltip"
                                                 th:attr="onclick=|handleDelete('${student.id}')|">
-                                                <i class="fa-trash-alt fas"></i>
+                                                <i class="fa-solid fa-trash"></i>
                                             </a>
                                         </td>
                                     </tr>
