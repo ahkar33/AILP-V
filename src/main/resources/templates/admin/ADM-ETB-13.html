@@ -16,73 +16,19 @@
                 <div class="container-fluid">
                     <nav>
                         <div class="nav nav-fill nav-pills w-50 mb-4" id="nav-tab" role="tablist">
-                            <button class="nav-link active fw-bold" id="nav-examOne-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-examOne" type="button" role="tab" aria-controls="nav-examOne"
-                                aria-selected="true">Multiple Choice Exam</button>
-                            <button class="nav-link fw-bold" id="nav-examTwo-tab" data-bs-toggle="tab"
+                            <button class="nav-link active fw-bold" id="nav-examTwo-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-examTwo" type="button" role="tab" aria-controls="nav-examTwo"
-                                aria-selected="false">File Upload Exam</button>
+                                aria-selected="true">File Upload Exam</button>
+                            <button class="nav-link fw-bold" id="nav-examOne-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-examOne" type="button" role="tab" aria-controls="nav-examOne"
+                                aria-selected="false">Multiple Choice Exam</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
+
                         <!-- Tab 1 Start Here -->
-                        <div class="tab-pane fade show active" id="nav-examOne" role="tabpanel"
-                            aria-labelledby="nav-examOne-tab" tabindex="0">
-                            <h1 class="fs-3 mb-2 text-secondary"
-                                style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
-                                Exam Table
-                            </h1>
-                            <div
-                                class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
-                                <div>
-                                    <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
-                                        style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
-                                        role="button" th:href="@{/admin/create-exam}">
-                                        <i class="fa fa-file-alt fas fa-lg"
-                                            style="padding-bottom: 7px; padding-top: 9px; font-size:18px"></i>
-                                        &nbsp;Create Exam
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card shadow-sm">
-                                <div class="card-body text-dark pt-4">
-                                    <!-- this is where to write datatable -->
-                                    <table id="dataTable" class="display p-2">
-                                        <thead>
-                                            <tr>
-                                                <th>Exam Name</th>
-                                                <th>Course Name</th>
-                                                <th>Full Mark</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr th:each="exam : ${examList}">
-                                                <td>[[${exam?.name}]]</td>
-                                                <td>[[${exam?.examCourse.name}]]</td>
-                                                <td>[[${exam?.fullMark}]]</td>
-                                                <td>
-                                                    <a class="btn btn-danger btn bg-gradient" title="Remove"
-                                                        data-bs-placement="top" data-bs-toggle="tooltip"
-                                                        th:attr="onclick=|handleDelete('${exam.id}')|">
-                                                        <i class="fa-trash-alt fas"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Tab 1 End here -->
-
-
-                        <!-- Tab 2 Start Here -->
-                        <div class="tab-pane fade" id="nav-examTwo" role="tabpanel" aria-labelledby="nav-examTwo-tab"
-                            tabindex="0">
+                        <div class="tab-pane fade show active" id="nav-examTwo" role="tabpanel"
+                            aria-labelledby="nav-examTwo-tab" tabindex="0">
                             <h1 class="fs-3 mb-2 text-secondary"
                                 style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
                                 Exam Table
@@ -93,9 +39,8 @@
                                     <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
                                         style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
                                         role="button" th:href="@{/admin/create-file-exam}">
-                                        <i class="fa fa-file-alt fas fa-lg"
-                                            style="padding-bottom: 7px; padding-top: 9px; font-size:18px"></i>
-                                        &nbsp;Create Exam
+                                        <i class="fa-solid fa-list-check me-2"
+                                            style="padding-top: 8px; font-size:15px"></i>Create Exam
                                     </a>
                                 </div>
                             </div>
@@ -121,7 +66,7 @@
                                                     <a class="btn btn-danger btn bg-gradient" title="Remove"
                                                         data-bs-placement="top" data-bs-toggle="tooltip"
                                                         th:attr="onclick=|handleFileExamDelete('${exam.id}')|">
-                                                        <i class="fa-trash-alt fas"></i>
+                                                        <i class="fa-solid fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -132,7 +77,60 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Tab 2 End Here -->
+                        <!-- Tab 1 End Here -->
+
+                        <!-- Tab 2 Start Here -->
+                        <div class="tab-pane fade" id="nav-examOne" role="tabpanel" aria-labelledby="nav-examOne-tab"
+                            tabindex="0">
+                            <h1 class="fs-3 mb-2 text-secondary"
+                                style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                                Exam Table
+                            </h1>
+                            <div
+                                class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
+                                <div>
+                                    <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
+                                        style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
+                                        role="button" th:href="@{/admin/create-exam}">
+                                        <i class="fa-solid fa-list-check me-2"
+                                            style="padding-top: 8px; font-size:15px"></i>Create Exam
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card shadow-sm">
+                                <div class="card-body text-dark pt-4">
+                                    <!-- this is where to write datatable -->
+                                    <table id="dataTable" class="display p-2">
+                                        <thead>
+                                            <tr>
+                                                <th>Exam Name</th>
+                                                <th>Course Name</th>
+                                                <th>Full Mark</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr th:each="exam : ${examList}">
+                                                <td>[[${exam?.name}]]</td>
+                                                <td>[[${exam?.examCourse.name}]]</td>
+                                                <td>[[${exam?.fullMark}]]</td>
+                                                <td>
+                                                    <a class="btn btn-danger btn bg-gradient" title="Remove"
+                                                        data-bs-placement="top" data-bs-toggle="tooltip"
+                                                        th:attr="onclick=|handleDelete('${exam.id}')|">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tab 2 End here -->
                     </div>
                 </div>
             </div>
