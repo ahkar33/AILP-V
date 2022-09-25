@@ -14,77 +14,16 @@
     <div class="container mt-4" style="margin-bottom: 50px;">
         <nav>
             <div class="nav nav-fill nav-pills w-50" id="nav-tab" role="tablist">
-                <button class="nav-link fw-bold active" id="nav-codetest-tab" data-bs-toggle="tab"
-                    data-bs-target="#nav-codetest" type="button" role="tab" aria-controls="nav-codetest"
-                    aria-selected="true">Code Test</button>
-                <button class="nav-link fw-bold" id="nav-exam-tab" data-bs-toggle="tab"
+                <button class="nav-link active fw-bold" id="nav-exam-tab" data-bs-toggle="tab"
                     data-bs-target="#nav-exam" type="button" role="tab" aria-controls="nav-exam"
-                    aria-selected="false">Exams</button>
+                    aria-selected="true">Exams</button>
+                <button class="nav-link fw-bold" id="nav-codetest-tab" data-bs-toggle="tab"
+                    data-bs-target="#nav-codetest" type="button" role="tab" aria-controls="nav-codetest"
+                    aria-selected="false">Code Test</button>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-
-            <!-- 1st tab start -->
-            <div class="tab-pane fade mt-2 show active" id="nav-codetest" role="tabpanel" aria-labelledby="nav-codetest-tab"
-                tabindex="0">
-                <div class="container allButFooter" style="margin-top: 22px;padding-right: 10px;padding-left: 10px;">
-                    <h2 class="mb-3 me-3 mt-3 text-black-50" style="font-family: 'Roboto', sans-serif;">File Exam</h2>
-                    <div class="card shadow-sm" style="margin-bottom: 85px; font-family: 'Roboto', sans-serif;">
-                        <div class="card-body" style="padding: 10px;">
-                            <table id="dataTable">
-                                <thead>
-                                    <tr>
-                                        <th>Exam Name</th>
-                                        <th>Exam Question</th>
-                                        <th>Exam File</th>
-                                        <th>Total Mark</th>
-                                        <th>Strat Time</th>
-                                        <th>End Time</th>
-                                        <th>To Upload</th>
-                                        <th>Action</th>
-                                    </tr>
-                                <tbody>
-
-                                    <tr th:each="bhfe : ${bhfeList}">
-                                        <form th:action="@{/student/submitFileExam}" th:object="${data}" method="post"
-                                            enctype="multipart/form-data">
-                                            <input type="hidden" th:value="${successMsg}" id="successMsg">
-                                            <td class="pt-2 text-dark">[[${bhfe?.bhfeExam?.name}]]</td>
-                                            <td class="pt-2 text-dark">[[${bhfe?.bhfeExam?.question}]]</td>
-                                            <td class="pt-2 text-dark">
-                                                <a
-                                                    th:href="@{ ${'/courses/' + bhfe?.bhfeExam?.fileExamCourse?.name + '/exam/' + bhfe?.bhfeExam?.questionFileName } }">
-                                                    [[${bhfe?.bhfeExam?.questionFileName}]]
-                                                </a>
-                                            </td>
-                                            <td class="pt-2 text-dark">[[${bhfe?.bhfeExam?.totalMark}]]</td>
-                                            <td class="pt-2 text-dark">[[${bhfe?.startDateTime}]]</td>
-                                            <td class="pt-2 text-dark">[[${bhfe?.endDateTime}]]</td>
-                                            <input type="hidden" th:value="${session?.uid}" th:name="examAnswerStudent"
-                                                th:id="examAnswerStudent">
-                                            <input type="hidden" th:value="${bhfe.id}" th:name="batchHasFileExam"
-                                                th:id="batchHasFileExam">
-                                            <td class="pt-1 ">
-                                                <input type="file" th:field="*{examAnswerFile}" accept=".zip"
-                                                    required />
-                                            </td>
-                                            <td class="text-dark">
-                                                <button class="btn btn-primary mt-3" type="submit">Upload</button>
-                                            </td>
-                                        </form>
-                                    </tr>
-
-                                </tbody>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 1st tab end -->
-
-            <!-- 1st tab start -->
-            <div class="tab-pane fade mt-2" id="nav-exam" role="tabpanel" aria-labelledby="nav-exam-tab"
+            <div class="tab-pane fade mt-2 show active" id="nav-exam" role="tabpanel" aria-labelledby="nav-exam-tab"
                 tabindex="0">
                 <!-- Exam Card/ Button Start -->
                 <span th:each="bhe : ${bheList}">
@@ -125,9 +64,65 @@
                     </div>
                 </span>
             </div>
-            <!-- 2nd tab end -->
+            <div class="tab-pane fade mt-2" id="nav-codetest" role="tabpanel" aria-labelledby="nav-codetest-tab"
+                tabindex="0">
+
+                <div class="container allButFooter" style="margin-top: 22px;padding-right: 10px;padding-left: 10px;">
+                    <h2 class="mb-3 me-3 mt-3 text-black-50" style="font-family: 'Roboto', sans-serif;">File Exam</h2>
+                    <div class="card shadow-sm" style="margin-bottom: 85px; font-family: 'Roboto', sans-serif;">
+                        <div class="card-body" style="padding: 10px;">
+                            <table id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Exam Name</th>
+                                        <th>Exam Question</th>
+                                        <th>Exam File</th>
+                                        <th>Total Mark</th>
+                                        <th>Strat Time</th>
+                                        <th>End Time</th>
+                                        <th>To Upload</th>
+                                        <th>Action</th>
+                                    </tr>
+                                <tbody>
+
+                                    <tr th:each="bhfe : ${bhfeList}">
+                                        <form th:action="@{/student/submitFileExam}" th:object="${data}" method="post"
+                                            enctype="multipart/form-data">
+                                            <input type="hidden" th:value="${successMsg}" id="successMsg">
+                                            <td class="pt-2 text-dark">[[${bhfe?.bhfeExam?.name}]]</td>
+                                            <td class="pt-2 text-dark">[[${bhfe?.bhfeExam?.question}]]</td>
+                                            <td class="pt-2 text-dark">
+                                                <a
+                                                    th:href="@{ ${'/courses/' + bhfe?.bhfeExam?.fileExamCourse?.name + '/exam/' + bhfe?.bhfeExam?.questionFileName } }">
+                                                    [[${bhfe?.bhfeExam?.questionFileName}]]
+                                                </a>
+                                            </td>
+                                            <td class="pt-2 text-dark">[[${bhfe?.bhfeExam?.totalMark}]]</td>
+                                            <td class="pt-2 text-dark">[[${bhfe?.startTime}]]</td>
+                                            <td class="pt-2 text-dark">[[${bhfe?.endTime}]]</td>
+                                            <input type="hidden" th:value="${session?.uid}" th:name="examAnswerStudent"
+                                                th:id="examAnswerStudent">
+                                            <input type="hidden" th:value="${bhfe.id}" th:name="batchHasFileExam"
+                                                th:id="batchHasFileExam">
+                                            <td class="pt-1 ">
+                                                <input type="file" th:field="*{examAnswerFile}" accept=".zip"
+                                                    required />
+                                            </td>
+                                            <td class="text-dark">
+                                                <button class="btn btn-primary mt-3" type="submit">Upload</button>
+                                            </td>
+                                        </form>
+                                    </tr>
+
+                                </tbody>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
     </div>
 
     <div class="hide-on-desktop">

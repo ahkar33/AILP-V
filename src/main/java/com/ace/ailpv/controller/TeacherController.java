@@ -36,6 +36,7 @@ import com.ace.ailpv.service.BatchHasExamService;
 import com.ace.ailpv.service.BatchHasFileExamService;
 import com.ace.ailpv.service.ExamService;
 import com.ace.ailpv.service.FileExamAnswerService;
+import com.ace.ailpv.service.FileExamResultService;
 import com.ace.ailpv.service.FileExamService;
 import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
@@ -73,6 +74,9 @@ public class TeacherController {
 
     @Autowired
     private FileExamAnswerService fileExamAnswerService;
+
+    @Autowired
+    private FileExamResultService fileExamResultService;
 
     @GetMapping("/dashboard")
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
@@ -429,11 +433,18 @@ public class TeacherController {
         return "/teacher/TCH-FED-16";
     }
 
+    @PostMapping("/giveFileExamResult")
+    public String giveFileExamResult(@ModelAttribute("result") FileExamResult result) {
+        FileExamAnswer answer = fileExamAnswerService.getFilExamAnswerById(result.getExamResultAnswer().getId());
+        answer.setIsGraded(true);
+        fileExamAnswerService.saveFileExamAnswer(answer);
+        fileExamResultService.addFileExamResult(result);
+        return "redirect:/teacher/checkFileExamAnswer/" + result.getExamResultAnswer().getBatchHasFileExam().getId();
+    }
+
     @GetMapping("/exam-grade")
     public String setupExamGrade(ModelMap model, HttpSession session) {
         String teacherId = (String) session.getAttribute("uid");
-        // User teacherInfo = userService.getUserById(teacherId);
-        // Long batchId = teacherInfo.getBatchList().get(0).getId();
         String resBatchId = (String) session.getAttribute("batchId");
         Long batchId = Long.parseLong(resBatchId);
         List<BatchHasExam> bheList = batchHasExamService.getBatchHasExamListByBatchId(batchId);
@@ -444,6 +455,22 @@ public class TeacherController {
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
         return "/teacher/TCH-EXG-10";
+    }
+
+
+    @GetMapping("/file-exam-grade")
+    public String setupFileExamGrade(ModelMap model, HttpSession session) {
+        String teacherId = (String) session.getAttribute("uid");
+        String resBatchId = (String) session.getAttribute("batchId");
+        Long batchId = Long.parseLong(resBatchId);
+        List<BatchHasFileExam> bhfeList = batchHasFileExamService.getBatchHasFileExamListByBatchId(batchId);
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+        model.addAttribute("batch", new Batch());
+        model.addAttribute("bhfeList", bhfeList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("batchList", batchList);
+        return "/teacher/TCH-FEG-17";
     }
 
     @PostMapping("/searchStudentExamsByBatch")
@@ -458,6 +485,21 @@ public class TeacherController {
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
         return "/teacher/TCH-EXG-10";
+    }
+
+
+    @PostMapping("/searchStudentFileExamsByBatch")
+    public String searchStudentFileExamsByBatch(@ModelAttribute("batch") Batch batch, ModelMap model, HttpSession session) {
+        String teacherId = (String) session.getAttribute("uid");
+        Long batchId = batch.getId();
+        List<BatchHasFileExam> bhfeList = batchHasFileExamService.getBatchHasFileExamListByBatchId(batchId);
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+        List<Batch> batchList = userService.getTeacherBatchListById(teacherId);
+        model.addAttribute("batch", batch);
+        model.addAttribute("bhfeList", bhfeList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("batchList", batchList);
+        return "/teacher/TCH-FEG-17";
     }
 
 }

@@ -53,6 +53,9 @@ public class BatchHasFileExam {
 	@Transient
 	private String startTime;
 
+	@Transient
+	private String endTime;
+
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "batchHasFileExam")
     @JsonIgnore
     private List<FileExamAnswer> FileExamAnswerList = new ArrayList<>();
