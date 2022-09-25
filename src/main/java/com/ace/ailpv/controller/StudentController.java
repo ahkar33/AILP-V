@@ -26,6 +26,7 @@ import com.ace.ailpv.entity.BatchHasFileExam;
 import com.ace.ailpv.entity.BatchHasResource;
 import com.ace.ailpv.entity.BatchHasVideo;
 import com.ace.ailpv.entity.FileExamAnswer;
+import com.ace.ailpv.entity.FileExamResult;
 import com.ace.ailpv.entity.StudentHasExam;
 import com.ace.ailpv.entity.User;
 
@@ -39,6 +40,7 @@ import com.ace.ailpv.service.BatchHasResourceService;
 import com.ace.ailpv.service.BatchHasVideoService;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.FileExamAnswerService;
+import com.ace.ailpv.service.FileExamResultService;
 import com.ace.ailpv.service.StudentHasExamService;
 import com.ace.ailpv.service.UserService;
 import com.ace.ailpv.service.VideoService;
@@ -82,6 +84,9 @@ public class StudentController {
 
     @Autowired
     private FileExamAnswerService fileExamAnswerService;
+
+    @Autowired
+    private FileExamResultService fileExamResultService;
 
     @GetMapping("/student-home")
     public String showStudentHomePage(HttpSession session, ModelMap model) {
@@ -220,10 +225,11 @@ public class StudentController {
     public String showGradeBook(ModelMap model, HttpSession session) {
         String studentId = (String) session.getAttribute("uid");
         List<AssignmentResult> resultList = assignmentResultService.getAssignmentResultListByStudentId(studentId);
-        model.addAttribute("resultList", resultList);
         List<StudentHasExam> sheList = studentHasExamService.getStudentHasExamListByStudentId(studentId);
+        List<FileExamResult> fileExamResultList = fileExamResultService.getFileExamResultListByStudentId(studentId);
+        model.addAttribute("resultList", resultList);
         model.addAttribute("sheList", sheList);
-
+        model.addAttribute("fileExamResultList", fileExamResultList);
         return "/student/STU-GRB-08";
     }
 
@@ -231,7 +237,8 @@ public class StudentController {
     public String getBheListByBatchId(HttpSession session, ModelMap model) {
         String studentBatchId = (String) session.getAttribute("batchId");
         List<BatchHasExam> bheList = batchHasExamService.getBatchHasExamListByBatchId(Long.parseLong(studentBatchId));
-        List<BatchHasFileExam> bhfeList = batchHasFileExamService.getBatchHasFileExamListByBatchIdForStudents(Long.parseLong(studentBatchId));
+        List<BatchHasFileExam> bhfeList = batchHasFileExamService
+                .getBatchHasFileExamListByBatchIdForStudents(Long.parseLong(studentBatchId));
         model.addAttribute("bheList", bheList);
         model.addAttribute("bhfeList", bhfeList);
         model.addAttribute("data", new FileExamAnswer());
@@ -239,10 +246,11 @@ public class StudentController {
     }
 
     @PostMapping("/submitFileExam")
-    public String submitFileExam(@ModelAttribute("data") FileExamAnswer fileExamAnswer, HttpSession session) throws NumberFormatException, IOException {
+    public String submitFileExam(@ModelAttribute("data") FileExamAnswer fileExamAnswer, HttpSession session)
+            throws NumberFormatException, IOException {
         LocalDateTime currentTime = LocalDateTime.now();
         String batchId = (String) session.getAttribute("batchId");
-        if(currentTime.isAfter(fileExamAnswer.getBatchHasFileExam().getEndDateTime())) {
+        if (currentTime.isAfter(fileExamAnswer.getBatchHasFileExam().getEndDateTime())) {
             return "redirect:/student/getExamList";
         }
         fileExamAnswerService.addFileExamAnswer(fileExamAnswer, Long.parseLong(batchId));
