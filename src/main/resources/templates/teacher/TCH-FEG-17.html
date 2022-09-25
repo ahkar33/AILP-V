@@ -80,7 +80,7 @@
                                                     <span
                                                         style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;"
                                                         th:if="${answer?.fileExamAnswerResult != null}">
-                                                        [[${answer?.fileExamAnswerResult?.mark}]] Marks
+                                                        [[${answer?.fileExamAnswerResult?.mark}]] / [[${bhfeList[iter.index].bhfeExam.totalMark}]] Marks
                                                     </span>
                                                     <span
                                                         style="color: #df6a00; font-family: 'Roboto', sans-serif; font-weight: 700;"
@@ -95,13 +95,13 @@
                                             th:if="${bhfeList.size != student.examAnswerList.size and student.examAnswerList.size > 0}">
                                             <span th:each="a : ${bhfeList}">
                                                 <td>
-                                                    <span th:each="answer : ${student.examAnswerList}">
+                                                    <span th:each="answer, iter : ${student.examAnswerList}">
                                                         <span
-                                                            th:if="${a.bhfeExam.id == answer?.batchHasFileExam?.bhfeExam.id">
+                                                            th:if="${a.bhfeExam.id == answer?.batchHasFileExam?.bhfeExam.id}">
                                                             <span
                                                                 style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;"
                                                                 th:if="${answer?.fileExamAnswerResult != null}">
-                                                                [[${answer?.fileExamAnswerResult?.mark}]] Marks
+                                                                [[${answer?.fileExamAnswerResult?.mark}]] / [[${bhfeList[iter.index].bhfeExam.totalMark}]] Marks
                                                             </span>
                                                             <span
                                                                 style="color: #df6a00; font-family: 'Roboto', sans-serif; font-weight: 700;"

@@ -21,6 +21,7 @@ import com.ace.ailpv.SecretConfigProperties;
 import com.ace.ailpv.entity.Assignment;
 import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasExam;
+import com.ace.ailpv.entity.BatchHasFileExam;
 import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.entity.FileExam;
 import com.ace.ailpv.entity.Resource;
@@ -29,6 +30,7 @@ import com.ace.ailpv.entity.UserSchedule;
 import com.ace.ailpv.entity.Video;
 import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.BatchHasExamService;
+import com.ace.ailpv.service.BatchHasFileExamService;
 import com.ace.ailpv.service.BatchService;
 import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
@@ -84,6 +86,9 @@ public class AdminController {
 
     @Autowired
     private FileExamService fileExamService;
+
+    @Autowired
+    private BatchHasFileExamService batchHasFileExamService;
 
     String path = "src\\main\\resources\\static\\courses\\";
 
@@ -568,6 +573,19 @@ public class AdminController {
         return "/admin/ADM-EXG-19";
     }
 
+    @GetMapping("/file-exam-grade")
+    public String setupFileExamGrade(ModelMap model) {
+        List<Batch> batchList = batchService.getAllBatches();
+        Long batchId = batchList.get(0).getId();
+        List<BatchHasFileExam> bhfeList = batchHasFileExamService.getBatchHasFileExamListByBatchId(batchId);
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+        model.addAttribute("batch", new Batch());
+        model.addAttribute("bhfeList", bhfeList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("batchList", batchList);
+        return "/admin/ADM-FEG-21";
+    } 
+
     @PostMapping("/searchStudentExamsByBatch")
     public String searchStudentExamsByBatch(@ModelAttribute("data") Batch batch, ModelMap model) {
         Long batchId = batch.getId();
@@ -579,6 +597,19 @@ public class AdminController {
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
         return "/admin/ADM-EXG-19";
+    }
+
+    @PostMapping("/searchStudentFileExamsByBatch")
+    public String searchStudentFileExamsByBatch(@ModelAttribute("batch") Batch batch, ModelMap model) {
+        Long batchId = batch.getId();
+        List<BatchHasFileExam> bhfeList = batchHasFileExamService.getBatchHasFileExamListByBatchId(batchId);
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+        List<Batch> batchList = batchService.getAllBatches();
+        model.addAttribute("batch", batch);
+        model.addAttribute("bhfeList", bhfeList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("batchList", batchList);
+        return "/admin/ADM-FEG-21";
     }
 
 }
