@@ -2,123 +2,132 @@
 <html>
 
 <head th:insert="/teacher/teacher-fragments :: teacher_head">
-	<title>File Exam Details</title>
+    <title>File Exam Details</title>
 </head>
 
 
 <body id="page-top">
-	<div id="wrapper">
-		<!-- this is where side bar is -->
-		<div th:insert="/teacher/teacher-fragments :: sidebar" />
+    <div id="wrapper">
+        <!-- this is where side bar is -->
+        <div th:insert="/teacher/teacher-fragments :: sidebar" />
 
-		<div class="d-flex flex-column" id="content-wrapper">
-			<div id="content">
-				<!-- this is where nav bar is -->
-				<div th:insert="/teacher/teacher-fragments :: navbar" />
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <!-- this is where nav bar is -->
+                <div th:insert="/teacher/teacher-fragments :: navbar" />
 
-				<div class="container-fluid">
-					<h1 class="fs-3 mb-3 text-secondary"
-						style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
-					<div class="gx-3 row">
+                <div class="container-fluid">
+                    <h1 class="fs-3 mb-3 text-secondary"
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        <div class="gx-3 row">
 
-						<div class="col-lg-4 col-md-6 col-sm-12 col-xl-3" th:each="answer : ${answerList}">
-							<div class="card shadow-sm">
-								<div class="card-body">
-									<div th:if="${answer?.isGraded}" class="dropdown float-end">
-										<i class="fa fa-check-square-o" style="color: #02aa19; font-size: 17px;"
-											data-bs-toggle="tooltip" title="Graded" data-bs-placement="top"
-											data-bs-trigger="hover"></i>
-									</div>
-									<div class="align-items-center d-flex flex-column">
-										<div class="mb-2">
-											<img th:src="@{${'/profile_pics/' + answer?.examAnswerStudent?.profile_pic } }"
-												alt="" class=" rounded-circle" style="width: 45px; height: 45px;" />
-										</div>
-										<div
-											class="align-items-center d-flex flex-column justify-content-center text-center">
-											<h5 class="font-size-16 mb-0">
-												<p class=" text-dark mb-2" style="font-family: 'Roboto', sans-serif;">
-													[[${answer?.examAnswerStudent?.name}]]
-												</p>
-											</h5>
-										</div>
-									</div>
-									
-                                    <form th:action="@{/teacher/giveFileExamResult}" method="post"
-										th:object="${result}">
-										<div class="mt-2 pt-1">
-											<input type="hidden" th:value="${answer?.id}" id="examResultAnswer"
-												name="examResultAnswer">
-											<input type="number" class="form-control mb-2" placeholder="Mark"
-												th:field="*{mark}" required />
-										</div>
-										<div class="d-flex gap-1 pt-2">
-											<a th:href="@{ ${'/courses/' + answer?.batchHasFileExam?.bhfeExam?.fileExamCourse?.name + '/' + answer?.batchHasFileExam?.bhfeBatch?.id + '/' + 'ExamAnswer' + '/' + answer?.examAnswerFileName } }"
-												class="btn btn-sm pe-0 ps-0 w-50"
-												style="background-color: #198754; color: rgb(255, 255, 255);"
-												data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top"
-												title="Download the student's uploaded assignment files">
-												<i class="bx bx-user fa fa-download me-1"></i>
-												Download
-											</a>
-											<button type="submit" class="btn btn-primary btn-sm pe-0 ps-0 w-50">
-												<i class="bx bx-user fa fa-location-arrow me-1"></i>
-												Send
-											</button>
-										</div>
-									</form>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-xl-3" th:each="answer : ${answerList}">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <div th:if="${answer?.isGraded}" class="dropdown float-end">
+                                            <i class="fa fa-check-square-o" style="color: #02aa19; font-size: 17px;"
+                                                data-bs-toggle="tooltip" title="Graded" data-bs-placement="top"
+                                                data-bs-trigger="hover"></i>
+                                        </div>
+                                        <div class="align-items-center d-flex flex-column">
+                                            <div class="mb-2">
+                                                <img th:src="@{${'/profile_pics/' + answer?.examAnswerStudent?.profile_pic } }"
+                                                    alt="" class=" rounded-circle" style="width: 45px; height: 45px;" />
+                                            </div>
+                                            <div
+                                                class="align-items-center d-flex flex-column justify-content-center text-center">
+                                                <h5 class="font-size-16 mb-0">
+                                                    <p class=" text-dark mb-2"
+                                                        style="font-family: 'Roboto', sans-serif;">
+                                                        [[${answer?.examAnswerStudent?.name}]]
+                                                    </p>
+                                                </h5>
+                                            </div>
+                                        </div>
 
-								</div>
-							</div>
-						</div>
+                                        <form th:action="@{/teacher/giveFileExamResult}" method="post"
+                                            th:object="${result}">
+                                            <div class="mt-2 pt-1">
+                                                <input type="hidden" th:value="${answer?.id}" id="examResultAnswer"
+                                                    name="examResultAnswer">
+                                                <span th:if="${answer.isGraded == null}">
+                                                    <input type="number" class="form-control mb-2" placeholder="Mark"
+                                                        th:field="*{mark}" required />
+                                                </span>
+                                                <span th:if="${answer.isGraded != null}">
+                                                    <input type="number" class="form-control mb-2" placeholder="Mark" disabled
+                                                        th:field="*{mark}" required />
+                                                </span>
+                                            </div>
+                                            <div class="d-flex gap-1 pt-2">
+                                                <a th:href="@{ ${'/courses/' + answer?.batchHasFileExam?.bhfeExam?.fileExamCourse?.name + '/' + answer?.batchHasFileExam?.bhfeBatch?.id + '/' + 'ExamAnswer' + '/' + answer?.examAnswerFileName } }"
+                                                    class="btn btn-sm pe-0 ps-0 w-50"
+                                                    style="background-color: #198754; color: rgb(255, 255, 255);"
+                                                    data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                    data-bs-placement="top"
+                                                    title="Download the student's uploaded assignment files">
+                                                    <i class="bx bx-user fa fa-download me-1"></i>
+                                                    Download
+                                                </a>
+                                                <button type="submit" class="btn btn-primary btn-sm pe-0 ps-0 w-50"
+                                                    th:classappend="${answer?.isGraded == null} ? '' : 'disabled'">
+                                                    <i class="bx bx-user fa fa-location-arrow me-1"></i>
+                                                    Send
+                                                </button>
+                                            </div>
+                                        </form>
 
-					</div>
-				</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                </div>
 
 
-			</div>
-			<footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
-				<div class="container pb-2 pt-2">
-					<p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
-						Reserved - Ace Inspiration</p>
-				</div>
-			</footer>
-		</div>
-		<a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-	</div>
-	<div th:insert="/teacher/teacher-fragments :: footer" />
+            </div>
+            <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
+                <div class="container pb-2 pt-2">
+                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                        Reserved - Ace Inspiration</p>
+                </div>
+            </footer>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <div th:insert="/teacher/teacher-fragments :: footer" />
 
-	<style type="text/css">
-		.card {
-			position: relative;
-			display: flex;
-			flex-direction: column;
-			min-width: 0;
-			word-wrap: break-word;
-			background-color: #fff;
-			background-clip: border-box;
-			border: 1px solid #eff0f2;
-			border-radius: 1rem;
-		}
+    <style type="text/css">
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid #eff0f2;
+            border-radius: 1rem;
+        }
 
-		.badge-soft-danger {
-			color: #cf1919 !important;
-			background-color: rgba(245, 110, 110, 0.226);
-		}
+        .badge-soft-danger {
+            color: #cf1919 !important;
+            background-color: rgba(245, 110, 110, 0.226);
+        }
 
-		.badge-soft-success {
-			color: #17972d !important;
-			background-color: rgba(85, 185, 102, 0.253);
-		}
-	</style>
+        .badge-soft-success {
+            color: #17972d !important;
+            background-color: rgba(85, 185, 102, 0.253);
+        }
+    </style>
 
-	<!-- For Tooltip -->
-	<script>
-		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-			return new bootstrap.Tooltip(tooltipTriggerEl)
-		})
-	</script>
+    <!-- For Tooltip -->
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
 
 </body>
 

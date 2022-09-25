@@ -12,42 +12,54 @@ import com.ace.ailpv.repository.FileExamAnswerRepository;
 @Service
 public class FileExamAnswerService {
 
-    @Autowired
-    private FileExamAnswerRepository fileExamAnswerRepository;
+	@Autowired
+	private FileExamAnswerRepository fileExamAnswerRepository;
 
-    @Autowired
-    private FileUploadUtilService fileUploadUtilService;
+	@Autowired
+	private FileUploadUtilService fileUploadUtilService;
 
-    @Autowired
-    private FileService fileService;
+	@Autowired
+	private FileService fileService;
 
-    String path = "src\\main\\resources\\static\\courses\\";
+	String path = "src\\main\\resources\\static\\courses\\";
 
-    public void addFileExamAnswer(FileExamAnswer fileExamAnswer, Long batchId) throws IOException {
-        String answerFileName = fileExamAnswer.getExamAnswerFile().getOriginalFilename();
-        String studentId = fileExamAnswer.getExamAnswerStudent().getId();
-        String courseName = fileExamAnswer.getBatchHasFileExam().getBhfeExam().getFileExamCourse().getName();
-        Long bhfeId = fileExamAnswer.getBatchHasFileExam().getId();
-        if (!fileExamAnswerRepository.existsByExamAnswerStudent_IdAndBatchHasFileExam_Id(studentId,
-                bhfeId)) {
-            fileUploadUtilService.saveFile(path + courseName + "\\" + Long.toString(batchId) + "\\" + "ExamAnswer",
-                    studentId + answerFileName, fileExamAnswer.getExamAnswerFile());
-            fileExamAnswer.setExamAnswerFileName(studentId + answerFileName);
-            fileExamAnswerRepository.save(fileExamAnswer);
-        } else {
-            FileExamAnswer resAnswer = fileExamAnswerRepository.findByExamAnswerStudent_IdAndBatchHasFileExam_Id(studentId,
-                    bhfeId);
-            fileService.deleteFile(path + courseName + "\\" + Long.toString(batchId) + "\\" + "ExamAnswer" + "\\" +
-                    resAnswer.getExamAnswerFileName());
-            fileUploadUtilService.saveFile(path + courseName + "\\" + Long.toString(batchId) + "\\" + "ExamAnswer",
-                    studentId + answerFileName, fileExamAnswer.getExamAnswerFile());
-            resAnswer.setExamAnswerFileName(studentId + answerFileName);
-            fileExamAnswerRepository.save(resAnswer);
-        }
-    }
+	public void addFileExamAnswer(FileExamAnswer fileExamAnswer, Long batchId) throws IOException {
+		String answerFileName = fileExamAnswer.getExamAnswerFile().getOriginalFilename();
+		String studentId = fileExamAnswer.getExamAnswerStudent().getId();
+		String courseName = fileExamAnswer.getBatchHasFileExam().getBhfeExam().getFileExamCourse().getName();
+		Long bhfeId = fileExamAnswer.getBatchHasFileExam().getId();
+		if (!fileExamAnswerRepository.existsByExamAnswerStudent_IdAndBatchHasFileExam_Id(studentId,
+				bhfeId)) {
+			fileUploadUtilService.saveFile(
+					path + courseName + "\\" + Long.toString(batchId) + "\\" + "ExamAnswer",
+					studentId + answerFileName, fileExamAnswer.getExamAnswerFile());
+			fileExamAnswer.setExamAnswerFileName(studentId + answerFileName);
+			fileExamAnswerRepository.save(fileExamAnswer);
+		} else {
+			FileExamAnswer resAnswer = fileExamAnswerRepository
+					.findByExamAnswerStudent_IdAndBatchHasFileExam_Id(studentId,
+							bhfeId);
+			fileService.deleteFile(
+					path + courseName + "\\" + Long.toString(batchId) + "\\" + "ExamAnswer" + "\\" +
+							resAnswer.getExamAnswerFileName());
+			fileUploadUtilService.saveFile(
+					path + courseName + "\\" + Long.toString(batchId) + "\\" + "ExamAnswer",
+					studentId + answerFileName, fileExamAnswer.getExamAnswerFile());
+			resAnswer.setExamAnswerFileName(studentId + answerFileName);
+			fileExamAnswerRepository.save(resAnswer);
+		}
+	}
 
-    public List<FileExamAnswer> getFileExamAnswerListByBhfeId(Long id) {
-        return fileExamAnswerRepository.findByBatchHasFileExam_Id(id); 
-    }
+	public void saveFileExamAnswer(FileExamAnswer fileExamAnswer) {
+		fileExamAnswerRepository.save(fileExamAnswer);
+	}
+
+	public List<FileExamAnswer> getFileExamAnswerListByBhfeId(Long id) {
+		return fileExamAnswerRepository.findByBatchHasFileExam_Id(id);
+	}
+
+	public FileExamAnswer getFilExamAnswerById(Long id) {
+		return fileExamAnswerRepository.findById(id).orElse(null);
+	}
 
 }

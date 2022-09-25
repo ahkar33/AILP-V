@@ -36,8 +36,10 @@ public class BatchHasFileExamService {
         List<BatchHasFileExam> unformattedBhfeList = batchHasFileExamRepository.findByBhfeBatch_Id(batchId);
         List<BatchHasFileExam> formattedBhfeList = new ArrayList<>();
         for (BatchHasFileExam bhfe : unformattedBhfeList) {
-            String dateTimeString = bhfe.getStartDateTime().format(dateTimeFormatter);
-            bhfe.setStartTime(dateTimeString);
+            String startTimeString = bhfe.getStartDateTime().format(dateTimeFormatter);
+            String endTimeString = bhfe.getEndDateTime().format(dateTimeFormatter);
+            bhfe.setStartTime(startTimeString);
+            bhfe.setEndTime(endTimeString);
             formattedBhfeList.add(bhfe);
         }
         return formattedBhfeList;
