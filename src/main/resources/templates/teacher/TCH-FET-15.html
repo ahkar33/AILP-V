@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/teacher/teacher-fragments :: teacher_head">
-    <title>Assignment Table</title>
+    <title>File Exam Table</title>
 </head>
 
 <body id="page-top">
@@ -37,7 +37,7 @@
                                         <td>[[${bhfe?.bhfeExam?.name}]]</td>
                                         <td>[[${bhfe?.bhfeBatch?.name}]]</td>
                                         <td>
-                                            <a th:href="@{/teacher/checkAssignment/} + ${assignment?.id}"
+                                            <a th:href="@{/teacher/checkFileExamAnswer/} + ${bhfe?.id}"
                                                 class="text-decoration-none">
                                                 <button class="btn btn-primary bg-gradient shadow-sm">Check</button>
                                             </a>

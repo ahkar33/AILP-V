@@ -25,6 +25,8 @@ import com.ace.ailpv.entity.BatchHasExam;
 import com.ace.ailpv.entity.BatchHasFileExam;
 import com.ace.ailpv.entity.Exam;
 import com.ace.ailpv.entity.FileExam;
+import com.ace.ailpv.entity.FileExamAnswer;
+import com.ace.ailpv.entity.FileExamResult;
 import com.ace.ailpv.entity.User;
 import com.ace.ailpv.entity.UserSchedule;
 import com.ace.ailpv.service.AssignmentAnswerService;
@@ -33,6 +35,7 @@ import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.BatchHasExamService;
 import com.ace.ailpv.service.BatchHasFileExamService;
 import com.ace.ailpv.service.ExamService;
+import com.ace.ailpv.service.FileExamAnswerService;
 import com.ace.ailpv.service.FileExamService;
 import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
@@ -67,6 +70,9 @@ public class TeacherController {
 
     @Autowired
     private BatchHasFileExamService batchHasFileExamService;
+
+    @Autowired
+    private FileExamAnswerService fileExamAnswerService;
 
     @GetMapping("/dashboard")
     public String setupTeacherDashboard(ModelMap model, HttpSession session) {
@@ -413,6 +419,14 @@ public class TeacherController {
         }
         model.addAttribute("bhfeList", bhfeList);
         return "/teacher/TCH-FET-15";
+    }
+
+    @GetMapping("/checkFileExamAnswer/{bhfeId}")
+    public String checkFileExamAnswer(@PathVariable("bhfeId") Long bhfeId, ModelMap model) {
+        List<FileExamAnswer> answerList = fileExamAnswerService.getFileExamAnswerListByBhfeId(bhfeId);
+        model.addAttribute("answerList", answerList);
+        model.addAttribute("result", new FileExamResult());
+        return "/teacher/TCH-FED-16";
     }
 
     @GetMapping("/exam-grade")
