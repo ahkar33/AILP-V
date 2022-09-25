@@ -9,7 +9,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap" />
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
     <!-- datatable-css -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
@@ -59,7 +59,7 @@
     <!-- This is Sidebar -->
     <nav th:fragment="sidebar"
         class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
-        style="background: rgb(50,77,160); position: sticky; top:0; left: 0; bottom: 0;">
+        style="background: rgb(50,77,160); position: sticky; top:0; left: 0; bottom: 0; font-family: 'Roboto', sans-serif;">
         <div class="container d-flex flex-column p-0">
             <hr class="sidebar-divider my-0" />
             <ul class="navbar-nav text-light mt-4" id="accordionSidebar">
@@ -68,7 +68,7 @@
                         style="font-size: 15.6px;">
                         <div
                             class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                            <i class="fa-chart-bar fas fs-4"></i>
+                            <i class="fa-solid fa-chart-line" style="font-size: 16px;"></i>
                             <div>
                                 <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">&nbsp;Dashboard</p>
                             </div>
@@ -80,10 +80,9 @@
                         th:href="@{/admin/course-table}" style="font-size: 15.6px;">
                         <div
                             class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                            <i class="fa-photo-video fas fs-4"></i>
+                            <i class="fa-solid fa-photo-film" style="font-size: 15px;"></i>
                             <div>
-                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">&nbsp;
-                                    Course Table
+                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">&nbsp;Course Table
                                 </p>
                             </div>
                         </div>
@@ -94,10 +93,9 @@
                         th:href="@{/admin/batch-table}" style="font-size: 15.6px;">
                         <div
                             class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                            <i class="fa-paste fas fs-4"></i>
+                            <i class="fa-solid fa-users-gear" style="font-size: 15px;"></i>
                             <div>
-                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">&nbsp;
-                                    Batch Table
+                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">&nbsp;Batch Table
                                 </p>
                             </div>
                         </div>
@@ -108,7 +106,7 @@
                         th:href="@{/admin/student-table}" style="font-size: 15.6px;">
                         <div
                             class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                            <i class="fa-users fas fs-4"></i>
+                            <i class="fa-solid fa-user-graduate" style="font-size: 15px; margin-left: 3px;"></i>
                             <div style="font-size: 14px;">
                                 <p style="margin-top: 1px;margin-bottom: -4px;">&nbsp;Student Table</p>
                             </div>
@@ -120,9 +118,10 @@
                         th:href="@{/admin/teacher-table}" style="font-size: 15.6px;">
                         <div
                             class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                            <i class="fa-chalkboard-teacher fas fs-4"></i>
+                            <i class="fa-solid fa-chalkboard-user" style="font-size: 15px;"></i>
                             <div>
-                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Teacher Table</p>
+                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px; margin-left: 2px;">
+                                    Teacher Table</p>
                             </div>
                         </div>
                     </a>
@@ -131,31 +130,9 @@
                         data-bss-hover-animate="pulse" th:href="@{/admin/exam-table}" style="font-size: 15.6px;">
                         <div
                             class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                            <i class="fa-file-alt fas fs-4"></i>
+                            <i class="fa-solid fa-list-check" style="font-size: 15px;"></i>
                             <div>
-                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Exam Table</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item align-items-center"> <a class="nav-link d-flex d-md-flex align-items-md-center"
-                        data-bss-hover-animate="pulse" th:href="@{/admin/attendance-table}" style="font-size: 15.6px;">
-                        <div
-                            class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                            <i class="fa-file-alt fas fs-4"></i>
-                            <div>
-                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Attendance Table</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item align-items-center"> <a class="nav-link d-flex d-md-flex align-items-md-center"
-                        data-bss-hover-animate="pulse" th:href="@{/admin/assignment-grade}" style="font-size: 15.6px;">
-                        <div
-                            class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                            <i class="fa-file-alt fas fs-4"></i>
-                            <div>
-                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Assignment Grade</p>
+                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">&nbsp;Exam Table</p>
                             </div>
                         </div>
                     </a>
@@ -164,9 +141,34 @@
                         data-bss-hover-animate="pulse" th:href="@{/admin/exam-grade}" style="font-size: 15.6px;">
                         <div
                             class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                            <i class="fa-file-alt fas fs-4"></i>
+                            <i class="fa-solid fa-user-check" style="font-size: 15px;"></i>
                             <div>
-                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Exam Grade</p>
+                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px; margin-left: 2px;">
+                                    Students' Exam</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item align-items-center"> <a class="nav-link d-flex d-md-flex align-items-md-center"
+                        data-bss-hover-animate="pulse" th:href="@{/admin/assignment-grade}" style="font-size: 15.6px;">
+                        <div
+                            class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                            <i class="fa-solid fa-user-tag" style="font-size: 15px;"></i>
+                            <div>
+                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px; margin-left: 2px;">
+                                    Students' Assignment</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item align-items-center"> <a class="nav-link d-flex d-md-flex align-items-md-center"
+                        data-bss-hover-animate="pulse" th:href="@{/admin/attendance-table}" style="font-size: 15.6px;">
+                        <div
+                            class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                            <i class="fa-solid fa-user-clock" style="font-size: 15px;"></i>
+                            <div>
+                                <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px; margin-left: 3px; ">
+                                    Attendance Table</p>
                             </div>
                         </div>
                     </a>

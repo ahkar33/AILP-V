@@ -5,7 +5,7 @@
     <title>Course Table</title>
 </head>
 
-<body id="page-top">
+<body id="page-top" style="font-family: 'Roboto', sans-serif;">
     <div id="wrapper">
         <!-- this is where side bar is -->
         <div th:insert="/admin/admin-fragments :: sidebar" />
@@ -28,10 +28,8 @@
                         <div>
                             <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm" role="button"
                                 href="#add-course-button" data-bs-toggle="modal"
-                                style="width: 159.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;">
-                                <i class="fa-photo-video fas"
-                                    style="padding-bottom: 7px; padding-top: 6px; font-size: 17px;"></i><span
-                                    style="font-size: 20px;"><b>&nbsp;</b></span>
+                                style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px; font-family: 'Roboto', sans-serif;">
+                                <i class="fa-solid fa-photo-film me-1" style=" padding-top: 9px; font-size: 14px;"></i>
                                 Create Course
                             </a>
                             <div class="fw-bold modal fade" style="font-family: 'Roboto', sans-serif;" role="dialog"
@@ -109,7 +107,7 @@
                                         <td class="pb-1 pt-2">[[${course?.id}]]</td>
                                         <td class="pb-1 pt-2">[[${course?.name}]]</td>
                                         <td class="pb-1 pt-2">[[${course?.fee}]]</td>
-                                        <td class=" pb-1 pt-2 text-truncate" style="max-width: 193px;">
+                                        <td class=" pb-1 pt-2 text-truncate" style="max-width: 250px;">
                                             [[${course?.description}]]</td>
                                         <td
                                             class="d-inline-flex d-lg-flex flex-column flex-lg-nowrap flex-lg-row justify-content-lg-start pb-1 pt-2">
@@ -139,9 +137,8 @@
                                                                 <input type="hidden" name="id" th:value="${course?.id}">
                                                                 <label for="">Course Name</label>
                                                                 <input type="text" name="name" class="form-control"
-                                                                    style="margin-bottom: 12px;" required 
-                                                                    maxlength="900"
-                                                                    th:value="${course?.name}">
+                                                                    style="margin-bottom: 12px;" required
+                                                                    maxlength="900" th:value="${course?.name}">
 
                                                                 <label for="">Fee</label>
                                                                 <input type="number" name="fee" class="form-control"
@@ -151,7 +148,7 @@
                                                                 <label for="">Description</label>
                                                                 <textarea type="text" name="desc" class="form-control"
                                                                     style="margin-bottom: 12px;"
-                                                                    th:text="${course?.description}" required 
+                                                                    th:text="${course?.description}" required
                                                                     maxlength="1000"> </textarea>
 
                                                             </div>
@@ -175,31 +172,31 @@
                                                 </div>
                                             </div>
 
-                                            <a class="bg-gradient align-items-lg-center btn btn-sm btn-warning d-lg-inline-flex mb-1 me-xl-2  text-nowrap"
+                                            <a class="align-items-lg-center btn btn-sm btn-warning d-lg-inline-flex mb-1 me-xl-2  text-nowrap"
                                                 th:attr="href='#edit-course-button' + ${course.id}"
-                                                data-bs-toggle="modal"><i class="fa-edit fas"
-                                                    style="font-size: 12px;"></i>
-                                                &nbsp;Course
+                                                data-bs-toggle="modal">
+                                                <i class="fa-solid fa-marker me-1" style="font-size: 12px;"></i>
+                                                Course
                                             </a>
 
 
-                                            <a class="bg-gradient align-items-lg-center btn btn-sm btn-success d-lg-inline-flex mb-1 me-xl-2"
+                                            <a class="align-items-lg-center btn btn-sm btn-success d-lg-inline-flex mb-1 me-xl-2"
                                                 title="Edit Video" data-bs-placement="top" data-bs-toggle="tooltip"
-                                                th:href="@{'/admin/editVideo/' + ${course?.id} }"><i class="fa-edit fas"
-                                                    style="font-size: 12px;"></i>
-                                                &nbsp;Video
+                                                th:href="@{'/admin/editVideo/' + ${course?.id} }">
+                                                <i class="fa-solid fa-marker me-1" style="font-size: 12px;"></i>
+                                                Video
                                             </a>
-                                            <a class="bg-gradient align-items-center align-items-lg-center btn btn-dark btn-sm d-inline-flex d-lg-inline-flex mb-1 me-xl-2"
+                                            <a class="align-items-center align-items-lg-center btn btn-dark btn-sm d-inline-flex d-lg-inline-flex mb-1 me-xl-2"
                                                 title="Edit Resource" data-bs-placement="top" data-bs-toggle="tooltip"
-                                                th:href="@{'/admin/editResource/' + ${course?.id} }"><i
-                                                    class="fa-edit fas" style="font-size: 12px;"></i>
-                                                &nbsp;Resource
+                                                th:href="@{'/admin/editResource/' + ${course?.id} }">
+                                                <i class="fa-solid fa-marker me-1" style="font-size: 12px;"></i>
+                                                Resource
                                             </a>
 
                                             <a class="btn btn-danger btn-sm mb-1 bg-gradient" title="Remove"
                                                 data-bs-placement="top" data-bs-toggle="tooltip"
-                                                th:attr="onclick=|handleDelete('${course.id}' + '/' + '${course.name}')|"><i
-                                                    class="fa-trash-alt fas"></i>
+                                                th:attr="onclick=|handleDelete('${course.id}' + '/' + '${course.name}')|">
+                                                <i class="fa-solid fa-trash"></i>
                                             </a>
 
                                             <!-- <a class="btn btn-outline-danger"

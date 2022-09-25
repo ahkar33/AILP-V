@@ -11,7 +11,7 @@
     }
 </style>
 
-<body id="page-top">
+<body id="page-top" style="font-family: 'Roboto', sans-serif;">
     <div id="wrapper">
         <!-- this is where side bar is -->
         <div th:insert="/admin/admin-fragments :: sidebar" />
@@ -24,13 +24,14 @@
                 <div id="teacher-grid">
                     <div class="container-fluid">
                         <!-- this is where i write grid -->
-                        <select v-model="batch" class="form-select mb-4 mt-5 shadow-sm"
-                            aria-label="Default select example" style="width: 12rem;">
-                            <option selected disabled>Choose One Batch</option>
-                            <span th:each="batch : ${batchList}">
-                                <option th:value="${batch?.id}">[[${batch?.name}]]</option>
-                            </span>
-                        </select>
+                        <div class="select mb-3">
+                            <select v-model="batch" aria-label="Default select example">
+                                <option selected disabled>Choose One Batch</option>
+                                <span th:each="batch : ${batchList}">
+                                    <option th:value="${batch?.id}">[[${batch?.name}]]</option>
+                                </span>
+                            </select>
+                        </div>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -55,16 +56,18 @@
                                     </td>
                                     <td class="d-flex flex-lg-wrap">
                                         <button @click.prevent="handleRemoveField(index)"
-                                            class="btn btn-danger m-1">-</button>
-                                        <button @click.prevent="handleAddField()" class="btn btn-success m-1">+</button>
+                                        class="btn btn-danger fw-bolder m-1 bg-gradient shadow-sm"
+                                        style="width: 38px;">-</button>
+                                        <button @click.prevent="handleAddField()" class="btn btn-success fw-bolder m-1 bg-gradient shadow-sm"
+                                        style="width: 38px;">+</button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-start ms-2">
                             <button @click.prevent="handleSend()" class="btn btn-primary bg-gradient shadow-sm"
-                                style="width:130px;"><i class="fa fa-user-plus fas fa-lg"
-                                    style="padding-bottom: 7px; padding-top: 6px; font-size:17px"></i>&nbsp;&nbsp;Add</button>
+                            style="width:130px;"><i class="fa-solid fa-user-plus me-2"
+                                style="font-size:15px"></i>Add</button>
                         </div>
                     </div>
                 </div>
@@ -200,6 +203,61 @@
 
         app.mount('#teacher-grid');
     </script>
+    <style>
+        :root {
+            --background-gradient: linear-gradient(30deg, #f39c12 30%, #f1c40f);
+            --gray: #4961a8;
+            --darkgray: #4a6ac9;
+        }
+
+        select {
+            /* Reset Select */
+            appearance: none;
+            outline: 0;
+            border: 0;
+            box-shadow: none;
+            /* Personalize */
+            flex: 1;
+            padding: 0 1em;
+            color: #fff;
+            background-color: var(--darkgray);
+            background-image: none;
+            cursor: pointer;
+        }
+
+        /* Remove IE arrow */
+        select::-ms-expand {
+            display: none;
+        }
+
+        /* Custom Select wrapper */
+        .select {
+            position: relative;
+            display: flex;
+            width: 20em;
+            height: 3em;
+            border-radius: .25em;
+            overflow: hidden;
+            color: #e6e6e6;
+        }
+
+        /* Arrow */
+        .select::after {
+            content: '\25BC';
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 1em;
+            background-color: #5c78cc;
+            transition: .25s all ease;
+            pointer-events: none;
+        }
+
+        /* Transition */
+        .select:hover::after {
+            color: #ffffff;
+        }
+    </style>
 </body>
 
 </html>
