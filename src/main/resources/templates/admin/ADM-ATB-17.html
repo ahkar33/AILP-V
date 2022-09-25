@@ -5,7 +5,7 @@
     <title>Attendance Table</title>
 </head>
 
-<body id="page-top">
+<body id="page-top" style="font-family: 'Roboto', sans-serif;">
     <div id="wrapper">
 
         <!-- this is where side bar is -->
@@ -21,33 +21,33 @@
                         style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
                         Attendance Table</h1>
                     <div class="card shadow-sm text-dark">
-                        <div class="card-header py-3 d-flex justify-content-between">
+                        <div class="card-header d-flex flex-wrap justify-content-between py-3">
                             <span>
                                 <form method="post" th:object="${batch}" th:action="@{/admin/searchScheduleForBatch}"
-                                    class="d-flex d-lg-flex flex-lg-wrap flex-wrap">
-                                    <div class="me-3">
-                                        <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
-                                            <div id="dataTable_length" class="dataTables_length"
-                                                aria-controls="dataTable">
-                                                <label class="form-label">Batch</label>
-                                                <select th:field="*{id}" class="form-select"
-                                                    aria-label="Default select example">
-                                                    <option th:each="batch : ${batchList}" th:value="${batch?.id}">
-                                                        [[${batch?.name}]]
-                                                    </option>
-                                                </select>
-                                            </div>
+                                    class="d-flex d-lg-flex flex-lg-wrap-reverse flex-nowrap flex-row">
+                                    <div class="me-1">
+                                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                            <label class="form-label fw-bold mb-1 h6 text-secondary">Choose One
+                                                Batch</label>
+                                            <select th:field="*{id}" class="form-select" style="width: 230px;"
+                                                aria-label="Default select example">
+                                                <option th:each="batch : ${batchList}" th:value="${batch?.id}">
+                                                    [[${batch?.name}]]
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div style="margin-top: 2.2rem;">
-                                        <button class="btn btn-primary  bg-gradient shadow-sm">Search</button>
+                                    <div style="margin-top: 1.6rem;">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
                                     </div>
                                 </form>
                             </span>
                             <span style="margin-top: 2.3rem">
                                 <a th:href="@{/teacher/modifyAttendance} "
                                     class="btn btn-primary  bg-gradient shadow-sm">
-                                    Create
+                                    <i class="fa-solid fa-user-clock me-2"></i>Create Attendance
                                 </a>
                             </span>
                         </div>
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <footer class="pb-2 pt-2 small text-dark mt-5" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">

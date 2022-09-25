@@ -8,24 +8,16 @@
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Bangla&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Kannada&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Average+Sans&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inria+Sans&amp;display=swap" />
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css" />
-    <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <link rel="stylesheet" href="../assets/fonts/ionicons.min.css" />
     <link rel="stylesheet" href="../assets/fonts/material-icons.min.css" />
-    <link rel="stylesheet" href="../assets/fonts/fontawesome5-overrides.min.css" />
     <link rel="stylesheet" href="../assets/css/Dark-footer-with-social-media-icons.css" />
     <link rel="stylesheet" href="../assets/css/dh-header-cover-image-button.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
 </head>
 
-<body id="page-top">
+<body id="page-top" style="font-family: 'Roboto', sans-serif;">
     <div id="wrapper">
 
         <div th:insert="/admin/admin-fragments :: sidebar" />
@@ -34,115 +26,102 @@
             <div id="content">
                 <div th:insert="/admin/admin-fragments :: navbar" />
                 <div class="container-fluid text-primary">
-                    <div class="mb-3 mt-4 row">
-                        <div class="col-12 col-lg-8 col-md-12 col-sm-12 col-xl-8">
-                            <div class="align-items-center d-inline-flex flex-row"> <i
-                                    class="d-inline-flex fa-2x fa-chart-bar fas fs-3 mb-2 me-2 text-primary"></i>
-                                <h3 class="fs-3 text-secondary"
-                                style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
-                                    &nbsp;Admin Dashboard
-                                </h3>
-                            </div>
-                        </div>
+                    <div class="align-items-center d-inline-flex flex-row">
+                        <i class="fa-solid fa-chart-line text-primary"
+                            style="font-size: 23px; margin-bottom: 10px;"></i>
+                        <h3 class="text-secondary"
+                            style="font-size: 25px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                            &nbsp;Admin Dashboard
+                        </h3>
                     </div>
 
-                    <div class="row" style="margin-top: 31px;">
-                        <div class="col-md-6 col-xl-4 col-xxl-3 mb-4">
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-lg-4 col-md-6 col-xl-3 mb-4">
                             <a class="text-decoration-none" th:href="@{/admin/student-table}">
-                                <div class="card shadow-sm border-start-primary py-2" data-bss-hover-animate="pulse">
+                                <div class="card radius-10 border-start border-0 border-3 border-info"
+                                    data-bss-hover-animate="pulse">
                                     <div class="card-body">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col me-2">
-                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                                    <p style="font-size: 18.2px;font-weight: bold;font-family: 'Anek Bangla', sans-serif;border-color: #4e73df;"
-                                                        class="text-danger">
-                                                        Total Student
-                                                    </p>
-                                                </div>
-                                                <div class="text-dark fw-bold h5 mb-0">
-                                                    <span style="color: #3d3d3d;font-size: 22px;">
-                                                        [[${studentCount}]]
-                                                    </span>
-                                                </div>
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <p class="mb-0 h5 text-secondary">
+                                                    Total Student
+                                                </p>
+                                                <h4 class="my-1 text-info">
+                                                    [[${studentCount}]]
+                                                </h4>
                                             </div>
-                                            <div class="col-auto"><i class="fa-2x fa-users fas text-danger"></i></div>
+                                            <div
+                                                class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto">
+                                                <i class="fa-solid fa-user-graduate"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-md-6 col-xl-4 col-xxl-3 mb-4">
+                        <div class="col-lg-4 col-md-6 col-xl-3 mb-4">
                             <a class="text-decoration-none" th:href="@{/admin/teacher-table}">
-                                <div class="card shadow-sm border-start-primary py-2" data-bss-hover-animate="pulse">
+                                <div class="card radius-10 border-start border-0 border-3 border-danger"
+                                    data-bss-hover-animate="pulse">
                                     <div class="card-body">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col me-2">
-                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                                    <p style="font-size: 18.2px;font-weight: bold;font-family: 'Anek Bangla', sans-serif;border-color: #4e73df;"
-                                                        class="text-warning">
-                                                        Total Teacher
-                                                    </p>
-                                                </div>
-                                                <div class="text-dark fw-bold h5 mb-0">
-                                                    <span style="color: #3d3d3d;font-size: 22px;">
-                                                        [[${teacherCount}]]
-                                                    </span>
-                                                </div>
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <p class="mb-0 text-secondary h5">
+                                                    Total Teacher
+                                                </p>
+                                                <h4 class="my-1 text-danger">
+                                                    [[${teacherCount}]]
+                                                </h4>
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fa-2x fa-chalkboard-teacher fas text-warning"></i>
+                                            <div
+                                                class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto">
+                                                <i class="fa-solid fa-chalkboard-user"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-md-6 col-xl-4 col-xxl-3 mb-4">
+                        <div class="col-lg-4 col-md-6 col-xl-3 mb-4">
                             <a class="text-decoration-none" th:href="@{/admin/batch-table}">
-                                <div class="card shadow-sm border-start-primary py-2" data-bss-hover-animate="pulse">
+                                <div class="card radius-10 border-start border-0 border-3 border-success"
+                                    data-bss-hover-animate="pulse">
                                     <div class="card-body">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col me-2">
-                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                                    <p style="font-size: 18.2px;font-weight: bold;font-family: 'Anek Bangla', sans-serif;color: #edba39;"
-                                                        class="text-primary">
-                                                        Total Batch
-                                                    </p>
-                                                </div>
-                                                <div class="text-dark fw-bold h5 mb-0">
-                                                    <span style="color: #3d3d3d;font-size: 22px;">
-                                                        [[${batchCount}]]
-                                                    </span>
-                                                </div>
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <p class="mb-0 text-secondary h5">
+                                                    Total Batch
+                                                </p>
+                                                <h4 class="my-1 text-success">
+                                                    [[${batchCount}]]
+                                                </h4>
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fa fa-2x fa-paste fa-photo-video fas text-primary"></i>
+                                            <div
+                                                class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                                                <i class="fa-solid fa-users-gear"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-md-6 col-xl-4 col-xxl-3 mb-4">
+                        <div class="col-lg-4 col-md-6 col-xl-3 mb-4">
                             <a class="text-decoration-none" th:href="@{/admin/course-table}">
-                                <div class="card shadow-sm border-start-primary py-2" data-bss-hover-animate="pulse">
+                                <div class="card radius-10 border-start border-0 border-3 border-warning"
+                                    data-bss-hover-animate="pulse">
                                     <div class="card-body">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col me-2">
-                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                                    <p style="font-size: 18.2px;font-weight: bold;font-family: 'Anek Bangla', sans-serif;border-color: #4e73df;"
-                                                        class="text-info">
-                                                        Total Course
-                                                    </p>
-                                                </div>
-                                                <div class="text-dark fw-bold h5 mb-0">
-                                                    <span style="color: #3d3d3d;font-size: 22px;">
-                                                        [[${courseCount}]]
-                                                    </span>
-                                                </div>
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <p class="mb-0 text-secondary h5">
+                                                    Total Course
+                                                </p>
+                                                <h4 class="my-1 text-warning">
+                                                    [[${courseCount}]]
+                                                </h4>
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fa-2x fa-photo-video fas text-info"></i>
+                                            <div
+                                                class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto">
+                                                <i class="fa-solid fa-photo-film"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -150,13 +129,22 @@
                             </a>
                         </div>
                     </div>
-                    <div class="g-3 row">
-                        <div class="col-lg-8 col-xl-8 col-md-12 ">
-                            <div class="card shadow-sm">
+                    <div class="align-items-center d-inline-flex flex-row">
+                        <i class="fa-solid fa-chart-pie text-primary" style="font-size: 23px; margin-bottom: 8px;"></i>
+                        <h3 class="text-secondary"
+                            style="font-size: 25px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                            &nbsp;Charts
+                        </h3>
+                    </div>
+                    <div class="g-3 row" style="margin-top: 2px;">
+                        <div class="col-lg-8 col-xl-8 col-md-12">
+                            <div class="card" style="box-shadow: 1px 2px 7px 1px #c8c4c4;">
                                 <div class="card-body">
                                     <div class="d-md-flex no-block align-items-center mb-3">
                                         <div>
-                                            <h5 class="card-title text-secondary" style="font-family: Roboto, sans-serif;">Attendance Percentage Of Each Batch</h5>
+                                            <h5 class="card-title text-secondary"
+                                                style="font-family: Roboto, sans-serif;">Attendance Percentage Of Each
+                                                Batch</h5>
                                         </div>
                                     </div>
                                     <canvas id="chartOne"></canvas>
@@ -164,11 +152,13 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-xl-4 col-md-12">
-                            <div class="card shadow-sm">
+                            <div class="card" style="box-shadow: 1px 2px 7px 1px #c8c4c4;">
                                 <div class="card-body">
                                     <div class="d-md-flex no-block align-items-center mb-3">
                                         <div>
-                                            <h5 class="card-title text-secondary" style="font-family: Roboto, sans-serif;">Total Students Of Each Batch</h5>
+                                            <h5 class="card-title text-secondary"
+                                                style="font-family: Roboto, sans-serif;">Total Students Of Each Batch
+                                            </h5>
                                         </div>
                                     </div>
                                     <canvas id="chartTwo" class="mb-4"></canvas>
@@ -191,6 +181,88 @@
     <!-- chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
     <script src="/assets/js/adminDashboard.js"></script>
+    <style type="text/css">
+        .radius-10 {
+            border-radius: 10px !important;
+        }
+
+        .border-info {
+            border-left: 5px solid #0dcaf0 !important;
+        }
+
+        .border-danger {
+            border-left: 5px solid #fd3550 !important;
+        }
+
+        .border-success {
+            border-left: 5px solid #15ca20 !important;
+        }
+
+        .border-warning {
+            border-left: 5px solid #ffc107 !important;
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0px solid rgba(0, 0, 0, 0);
+            border-radius: .25rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+        }
+
+        .bg-gradient-scooter {
+            background: #17ead9;
+            background: -webkit-linear-gradient(45deg, #17ead9, #6078ea) !important;
+            background: linear-gradient(45deg, #17ead9, #6078ea) !important;
+        }
+
+        .widgets-icons-2 {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ededed;
+            font-size: 20px;
+            border-radius: 10px;
+        }
+
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+
+        .text-white {
+            color: #fff !important;
+        }
+
+        .ms-auto {
+            margin-left: auto !important;
+        }
+
+        .bg-gradient-bloody {
+            background: #f54ea2;
+            background: -webkit-linear-gradient(45deg, #f54ea2, #ff7676) !important;
+            background: linear-gradient(45deg, #f54ea2, #ff7676) !important;
+        }
+
+        .bg-gradient-ohhappiness {
+            background: #00b09b;
+            background: -webkit-linear-gradient(45deg, #00b09b, #96c93d) !important;
+            background: linear-gradient(45deg, #00b09b, #96c93d) !important;
+        }
+
+        .bg-gradient-blooker {
+            background: #ffdf40;
+            background: -webkit-linear-gradient(45deg, #ffdf40, #ff8359) !important;
+            background: linear-gradient(45deg, #ffdf40, #ff8359) !important;
+        }
+    </style>
 </body>
 
 </html>
