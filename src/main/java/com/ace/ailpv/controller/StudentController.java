@@ -246,13 +246,15 @@ public class StudentController {
     }
 
     @PostMapping("/submitFileExam")
-    public String submitFileExam(@ModelAttribute("data") FileExamAnswer fileExamAnswer, HttpSession session)
+    public String submitFileExam(@ModelAttribute("data") FileExamAnswer fileExamAnswer, HttpSession session,
+            RedirectAttributes redirectAttr)
             throws NumberFormatException, IOException {
         LocalDateTime currentTime = LocalDateTime.now();
         String batchId = (String) session.getAttribute("batchId");
         if (currentTime.isAfter(fileExamAnswer.getBatchHasFileExam().getEndDateTime())) {
             return "redirect:/student/getExamList";
         }
+        redirectAttr.addFlashAttribute("successMsg", true);
         fileExamAnswerService.addFileExamAnswer(fileExamAnswer, Long.parseLong(batchId));
         return "redirect:/student/getExamList";
     }

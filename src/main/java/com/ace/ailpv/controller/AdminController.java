@@ -436,7 +436,8 @@ public class AdminController {
             return "redirect:/admin/create-file-exam";
         }
         fileExamService.addFileExam(fileExam);
-        return "/admin/ADM-CFE-20";
+        redirectAttrs.addFlashAttribute("isSuccess", true);
+        return "redirect:/admin/create-file-exam";
     }
 
     @GetMapping("/deleteFileExam/{id}")

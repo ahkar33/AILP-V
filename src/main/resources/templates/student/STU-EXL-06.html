@@ -71,6 +71,7 @@
                     <h2 class="mb-3 me-3 mt-3 text-black-50" style="font-family: 'Roboto', sans-serif;">File Exam</h2>
                     <div class="card shadow-sm" style="margin-bottom: 85px; font-family: 'Roboto', sans-serif;">
                         <div class="card-body" style="padding: 10px;">
+                            <input type="hidden" th:value="${successMsg}" id="successMsg">
                             <table id="dataTable">
                                 <thead>
                                     <tr>
@@ -138,6 +139,7 @@
             $('#dataTable').DataTable();
         });
     </script>
+    <script src="/assets/js/alert.js"></script>
 </body>
 
 </html>
