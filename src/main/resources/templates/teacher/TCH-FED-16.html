@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/teacher/teacher-fragments :: teacher_head">
-	<title>Assignment Details</title>
+	<title>File Exam Details</title>
 </head>
 
 
@@ -15,12 +15,10 @@
 			<div id="content">
 				<!-- this is where nav bar is -->
 				<div th:insert="/teacher/teacher-fragments :: navbar" />
-				<input type="hidden" th:value="${session?.uid}" id="teacherId" />
 
 				<div class="container-fluid">
 					<h1 class="fs-3 mb-3 text-secondary"
 						style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
-						[[${assignmentName}]]</h1>
 					<div class="gx-3 row">
 
 						<div class="col-lg-4 col-md-6 col-sm-12 col-xl-3" th:each="answer : ${answerList}">
@@ -33,40 +31,29 @@
 									</div>
 									<div class="align-items-center d-flex flex-column">
 										<div class="mb-2">
-											<img th:src="@{${'/profile_pics/' + answer?.answerStudent?.profile_pic } }"
+											<img th:src="@{${'/profile_pics/' + answer?.examAnswerStudent?.profile_pic } }"
 												alt="" class=" rounded-circle" style="width: 45px; height: 45px;" />
 										</div>
 										<div
 											class="align-items-center d-flex flex-column justify-content-center text-center">
 											<h5 class="font-size-16 mb-0">
 												<p class=" text-dark mb-2" style="font-family: 'Roboto', sans-serif;">
-													[[${answer?.answerStudent?.name}]]
+													[[${answer?.examAnswerStudent?.name}]]
 												</p>
 											</h5>
-											<span th:if="${answer?.isLate == null}"
-												class="badge badge-soft-success fw-bold justify-content-between mb-0">
-												Done
-											</span>
-											<span th:if="${answer?.isLate}"
-												class="badge badge-soft-danger fw-bold justify-content-between mb-0">
-												Turned in late
-											</span>
 										</div>
 									</div>
-									<form th:action="@{/teacher/giveAssignmentResult}" method="post"
+									
+                                    <form th:action="@{/teacher/giveFileExamResult}" method="post"
 										th:object="${result}">
 										<div class="mt-2 pt-1">
-											<input type="hidden" th:value="${answer?.id}" id="assignmentResultAnswer"
-												name="assignmentResultAnswer">
-											<input type="hidden" th:value="${session?.uid}" id="assignmentResultTeacher"
-												name="assignmentResultTeacher">
-											<textarea class="form-control mb-2" rows="2" placeholder="Comment"
-												maxlength="900" required th:field="*{comment}"></textarea>
+											<input type="hidden" th:value="${answer?.id}" id="examResultAnswer"
+												name="examResultAnswer">
 											<input type="number" class="form-control mb-2" placeholder="Mark"
 												th:field="*{mark}" required />
 										</div>
 										<div class="d-flex gap-1 pt-2">
-											<a th:href="@{ ${'/courses/' + answer?.assignment?.assignmentBatch?.batchCourse?.name + '/' + answer?.assignment?.assignmentBatch?.id + '/' + 'AssignmentAnswer' + '/' + answer?.answerFileName } }"
+											<a th:href="@{ ${'/courses/' + answer?.batchHasFileExam?.bhfeExam?.fileExamCourse?.name + '/' + answer?.batchHasFileExam?.bhfeBatch?.id + '/' + 'ExamAnswer' + '/' + answer?.examAnswerFileName } }"
 												class="btn btn-sm pe-0 ps-0 w-50"
 												style="background-color: #198754; color: rgb(255, 255, 255);"
 												data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top"
@@ -80,6 +67,7 @@
 											</button>
 										</div>
 									</form>
+
 								</div>
 							</div>
 						</div>

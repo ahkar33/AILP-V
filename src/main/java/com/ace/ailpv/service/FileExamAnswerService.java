@@ -1,6 +1,7 @@
 package com.ace.ailpv.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,10 @@ public class FileExamAnswerService {
             resAnswer.setExamAnswerFileName(studentId + answerFileName);
             fileExamAnswerRepository.save(resAnswer);
         }
+    }
+
+    public List<FileExamAnswer> getFileExamAnswerListByBhfeId(Long id) {
+        return fileExamAnswerRepository.findByBatchHasFileExam_Id(id); 
     }
 
 }

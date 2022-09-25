@@ -5,7 +5,7 @@
     <title>Exam Table</title>
 </head>
 
-<body id="page-top" style="background-color: #b1b1b1; font-family: 'Roboto', sans-serif;">
+<body id="page-top" style="background-color: #b1b1b1;">
     <div id="wrapper">
         <!-- this is where side nav is -->
         <div th:insert="/admin/admin-fragments :: sidebar" />
@@ -18,10 +18,10 @@
                         <div class="nav nav-fill nav-pills w-50 mb-4" id="nav-tab" role="tablist">
                             <button class="nav-link active fw-bold" id="nav-examOne-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-examOne" type="button" role="tab" aria-controls="nav-examOne"
-                                aria-selected="true">Exam</button>
+                                aria-selected="true">Multiple Choice Exam</button>
                             <button class="nav-link fw-bold" id="nav-examTwo-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-examTwo" type="button" role="tab" aria-controls="nav-examTwo"
-                                aria-selected="false">Exam</button>
+                                aria-selected="false">File Upload Exam</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
@@ -38,9 +38,9 @@
                                     <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
                                         style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
                                         role="button" th:href="@{/admin/create-exam}">
-                                        <i class="fa-solid fa-list-check me-1"
-                                            style="padding-top: 8px; font-size:15px"></i>
-                                       Create Exam
+                                        <i class="fa fa-file-alt fas fa-lg"
+                                            style="padding-bottom: 7px; padding-top: 9px; font-size:18px"></i>
+                                        &nbsp;Create Exam
                                     </a>
                                 </div>
                             </div>
@@ -63,10 +63,10 @@
                                                 <td>[[${exam?.examCourse.name}]]</td>
                                                 <td>[[${exam?.fullMark}]]</td>
                                                 <td>
-                                                    <a class="btn btn-outline-danger btn bg-gradient" title="Remove"
+                                                    <a class="btn btn-danger btn bg-gradient" title="Remove"
                                                         data-bs-placement="top" data-bs-toggle="tooltip"
                                                         th:attr="onclick=|handleDelete('${exam.id}')|">
-                                                        <i class="fa-solid fa-trash"></i>
+                                                        <i class="fa-trash-alt fas"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -92,10 +92,10 @@
                                 <div>
                                     <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
                                         style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
-                                        role="button" th:href="@{/admin/create-exam}">
-                                        <i class="fa-solid fa-list-check me-1"
-                                        style="padding-top: 8px; font-size:15px"></i>
-                                        Create Exam
+                                        role="button" th:href="@{/admin/create-file-exam}">
+                                        <i class="fa fa-file-alt fas fa-lg"
+                                            style="padding-bottom: 7px; padding-top: 9px; font-size:18px"></i>
+                                        &nbsp;Create Exam
                                     </a>
                                 </div>
                             </div>
@@ -118,10 +118,10 @@
                                                 <td>[[${exam?.fileExamCourse.name}]]</td>
                                                 <td>[[${exam?.totalMark}]]</td>
                                                 <td>
-                                                    <a class="btn btn-outline-danger btn bg-gradient" title="Remove"
+                                                    <a class="btn btn-danger btn bg-gradient" title="Remove"
                                                         data-bs-placement="top" data-bs-toggle="tooltip"
                                                         th:attr="onclick=|handleFileExamDelete('${exam.id}')|">
-                                                        <i class="fa-solid fa-trash"></i>
+                                                        <i class="fa-trash-alt fas"></i>
                                                     </a>
                                                 </td>
                                             </tr>
