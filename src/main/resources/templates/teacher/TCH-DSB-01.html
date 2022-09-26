@@ -5,7 +5,7 @@
     <title>Student Table</title>
 </head>
 
-<body id="page-top">
+<body id="page-top" style="font-family: 'Roboto', sans-serif;">
     <div id="wrapper">
         <!-- this is where side bar is -->
         <div th:insert="/teacher/teacher-fragments :: sidebar" />
@@ -15,36 +15,38 @@
                 <div th:insert="/teacher/teacher-fragments :: navbar" />
 
 
-                <div class="container-fluid mb-5">
-                    <div class="align-items-center d-inline-flex flex-row mb-3 mt-2"> <i
-                            class="d-inline-flex fa-2x fa-chart-bar fas fs-4 mb-2 me-2 text-primary"></i>
-                            <h1 class="fs-4  mb-2 text-secondary"
-                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
-                        &nbsp;Teacher Dashboard</h1>
+                <div class="container-fluid mb-3">
+                    <div class="align-items-center d-inline-flex flex-row mb-3 mt-2">
+                        <i class="fa-solid fa-chart-line text-primary"
+                            style="font-size: 23px; margin-bottom: 10px;"></i>
+                        <h1 class="fs-4  mb-2 text-secondary"
+                            style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
+                            &nbsp;Teacher Dashboard</h1>
                     </div>
 
 
-                    <h1 style="font-family:Roboto, sans-serif;" class="fs-5">
+                    <h1 class="fs-5">
                         Classes you are currently teaching </h1>
 
-                    <div class="g-3 mb-4 row">
+                    <div class="mb-2 row">
                         <input type="hidden" th:value="${teacherId}" id="teacherId">
-                        <div class="col-lg-4 col-md-6 col-xl- col-xl-4 col-xxl-3 " th:each="batch: ${batchList}">
+                        <div class="col-lg-4 col-md-6 mb-4" th:each="batch: ${batchList}">
                             <a class="text-decoration-none" th:href="@{'/student/getVideos/' + ${batch.id} }">
-                                <div class="border-start-primary card pb-1 pt-1 py-2 shadow-sm"
+                                <div class="card radius-10 border-start border-0 border-3 border-info"
                                     data-bss-hover-animate="pulse">
                                     <div class="card-body">
-                                        <div class="d-flex justify-content-between">
-                                            <p style="font-size: 18.2px; font-family: 'Roboto', sans-serif;"
-                                                class="fs-5 text-uppercase fw-normal text-dark">
-                                                [[${batch.getBatchCourse().getName()}]]</p>
-                                            <i class="fa fa-photo-video fa-users fas ms-2 text-primary"
-                                                style="font-size: 28px;"></i>
-                                        </div>
-                                        <div class="text-uppercase text-primary text-xs mb-1">
-                                            <p style="font-size: 18.2px; font-family: 'Roboto', sans-serif;"
-                                                class="fs-6 mb-0 text-capitalize text-danger">
-                                                [[${batch.getName()}]]</p>
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <p class="mb-0 h5 text-dark">
+                                                    [[${batch.getBatchCourse().getName()}]]</p>
+
+                                                <p class="my-1" style="color:#1a74eb;">
+                                                    [[${batch.getName()}]]</p>
+                                            </div>
+                                            <div
+                                                class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto" style="min-width: 48px;">
+                                                <i class="fa-solid fa-users-gear"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -52,13 +54,21 @@
                         </div>
                     </div>
 
+                    <div class="align-items-center mb-2 d-inline-flex flex-row">
+                        <i class="fa-solid fa-chart-pie text-primary" style="font-size: 23px; margin-bottom: 8px;"></i>
+                        <h3 class="text-secondary"
+                            style="font-size: 25px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                            &nbsp;Charts
+                        </h3>
+                    </div>
                     <div class="g-3 row">
                         <div class="col-lg-8 col-xl-8 col-md-12 ">
-                            <div class="card shadow-sm">
+                            <div class="card" style="box-shadow: 1px 2px 7px 1px #c8c4c4;">
                                 <div class="card-body">
                                     <div class="d-md-flex no-block align-items-center">
                                         <div>
-                                            <h5 class="card-title" style="font-family: Roboto, sans-serif;">Attendance Percentage Of Every Batch You Are Currently Teaching</h5>
+                                            <h5 class="card-title" style="font-family: Roboto, sans-serif;">Attendance
+                                                Percentage Of Every Batch You Are Currently Teaching</h5>
                                         </div>
                                     </div>
                                     <canvas id="chartOne"></canvas>
@@ -66,11 +76,12 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-xl-4 col-md-12">
-                            <div class="card shadow-sm">
+                            <div class="card" style="box-shadow: 1px 2px 7px 1px #c8c4c4;">
                                 <div class="card-body">
                                     <div class="d-md-flex no-block align-items-center">
                                         <div>
-                                            <h5 class="card-title" style="font-family: Roboto, sans-serif;">Total Students Of Each Batch</h5>
+                                            <h5 class="card-title" style="font-family: Roboto, sans-serif;">Total
+                                                Students Of Each Batch</h5>
                                         </div>
                                     </div>
                                     <canvas id="chartTwo" class="mb-4"></canvas>
@@ -82,7 +93,8 @@
             </div>
             <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">
-                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights Reserved - Ace Inspiration</p>
+                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                        Reserved - Ace Inspiration</p>
                 </div>
             </footer>
         </div>
@@ -94,6 +106,77 @@
 
     <div th:insert="/teacher/teacher-fragments :: footer" />
     <script src="/assets/js/teacherDashboard.js"></script>
+
+    <style type="text/css">
+        .radius-10 {
+            border-radius: 10px !important;
+        }
+
+        .border-info {
+            border-left: 5px solid #1a74eb !important;
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0px solid rgba(0, 0, 0, 0);
+            border-radius: .25rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+        }
+
+        .bg-gradient-scooter {
+            background: #17ead9;
+            background: -webkit-linear-gradient(45deg, #1581fc, #3247b1) !important;
+            background: linear-gradient(45deg, #1581fc, #3247b1) !important;
+        }
+
+        .widgets-icons-2 {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ededed;
+            font-size: 20px;
+            border-radius: 10px;
+        }
+
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+
+        .text-white {
+            color: #fff !important;
+        }
+
+        .ms-auto {
+            margin-left: auto !important;
+        }
+
+        .bg-gradient-bloody {
+            background: #f54ea2;
+            background: -webkit-linear-gradient(45deg, #f54ea2, #ff7676) !important;
+            background: linear-gradient(45deg, #f54ea2, #ff7676) !important;
+        }
+
+        .bg-gradient-ohhappiness {
+            background: #00b09b;
+            background: -webkit-linear-gradient(45deg, #00b09b, #96c93d) !important;
+            background: linear-gradient(45deg, #00b09b, #96c93d) !important;
+        }
+
+        .bg-gradient-blooker {
+            background: #ffdf40;
+            background: -webkit-linear-gradient(45deg, #ffdf40, #ff8359) !important;
+            background: linear-gradient(45deg, #ffdf40, #ff8359) !important;
+        }
+    </style>
 
 </body>
 
