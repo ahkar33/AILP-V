@@ -7,7 +7,7 @@
 
 
 <body>
-    <div id="wrapper">
+    <div id="wrapper" style="font-family: 'Roboto', sans-serif;">
         <!-- this is where side bar is -->
         <div th:insert="/teacher/teacher-fragments :: sidebar" />
 
@@ -26,7 +26,7 @@
                                 <div class="me-3">
                                     <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                         <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                            <label for="exampleInputEmail1" class="form-label">Date</label>
+                                            <label class="form-label text-dark fw-bold mb-1 h6">Choose the Date<span class="text-danger ms-1">*</span></label>
                                             <input type="date" class="form-control" v-model="date" />
                                         </div>
                                     </div>
@@ -36,7 +36,7 @@
                                 <div class="">
                                     <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                         <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                            <label class="form-label">Batch</label>
+                                            <label class="form-label text-dark fw-bold mb-1 h6">Choose the Batch<span class="text-danger ms-1">*</span></label>
                                             <select v-model="batchId" class="form-select"
                                                 aria-label="Default select example">
                                                 <option disabled>Choose One Batch</option>
@@ -53,7 +53,7 @@
                         <div class="card-body text-dark">
 
                             <!-- where I have to write table -->
-                            <table id="dataTable" class="display p-2">
+                            <table id="dataTable" class="display" style="width:100%">
                                 <thead class="table">
                                     <tr>
                                         <th>Student Id</th>
@@ -78,24 +78,24 @@
                                             <input v-model="batch.name" readonly type="hidden" style="border: 0">
                                         </td>
                                         <td class="d-flex justify-content-start">
-                                            <div class="form-check me-2">
-                                                <input class="form-check-input" type="radio" :name="student.id"
+                                            <div class="form-check me-3">
+                                                <input class="form-check-input" type="radio" style="width: 20px; height: 20px;" :name="student.id"
                                                     v-model="student.status" value="Present" checked />
-                                                <label class="form-check-label" :for="student.id">
+                                                <label class="form-check-label" style="margin-top: 3px;" :for="student.id">
                                                     Present
                                                 </label>
                                             </div>
-                                            <div class="form-check me-2">
-                                                <input class="form-check-input" type="radio" :name="student.id"
+                                            <div class="form-check me-3">
+                                                <input class="form-check-input" type="radio" style="width: 20px; height: 20px;"  :name="student.id"
                                                     v-model="student.status" value="Absent" />
-                                                <label class="form-check-label" :for="student.id">
+                                                <label class="form-check-label" style="margin-top: 3px;" :for="student.id">
                                                     Absent
                                                 </label>
                                             </div>
-                                            <div class="form-check me-2">
-                                                <input class="form-check-input" type="radio" :name="student.id"
+                                            <div class="form-check me-3">
+                                                <input class="form-check-input" type="radio" style="width: 20px; height: 20px;"  :name="student.id"
                                                     v-model="student.status" value="Leave" />
-                                                <label class="form-check-label" :for="student.id">
+                                                <label class="form-check-label" style="margin-top: 3px;" :for="student.id">
                                                     Leave
                                                 </label>
                                             </div>

@@ -9,25 +9,16 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap" />
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Bangla&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Kannada&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arimo&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Average+Sans&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dangrek&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+KR&amp;display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inria+Sans&amp;display=swap" />
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css" />
-    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
 
     <!-- datatable-css -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
 </head>
 
 <body>
@@ -38,7 +29,7 @@
         <div class="container-fluid">
             <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button">
                 <i class="fas fa-bars"></i>
-            </button> <a href=""><img src="/assets/img/logo_blue.png" style="width: 150px;" /></a>
+            </button> <a th:href="@{/teacher/dashboard}"><img src="/assets/img/logo_blue.png" style="width: 150px;" /></a>
             <ul class="navbar-nav flex-nowrap ms-auto">
                 <li class="nav-item dropdown no-arrow">
                     <div class="nav-item dropdown no-arrow">
@@ -84,21 +75,9 @@
                             th:href="@{/teacher/dashboard}" style="font-size: 16px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-chart-bar fas" style="font-size: 19px;"></i>
+                                <i class="fa-solid fa-chart-line" style="font-size: 16px;"></i>
                                 <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px;">Dashboard</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
-                            th:href="@{/teacher/postResource}" style="font-size: 15.6px;">
-                            <div
-                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-folder-open fas" style="font-size: 17px;"></i>
-                                <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Upload Resource</p>
+                                    <p style="margin-top: 1px;margin-bottom:-4px; font-size: 14px; margin-left: 2px;">Dashboard</p>
                                 </div>
                             </div>
                         </a>
@@ -108,9 +87,21 @@
                             th:href="@{/teacher/postVideo}" style="font-size: 16px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-photo-video fas" style="font-size: 16px;"></i>
+                                <i class="fa-solid fa-photo-film" style="font-size: 15px;"></i>
                                 <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Upload Video</p>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px; margin-left: 1px;">Upload Video</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
+                            th:href="@{/teacher/postResource}" style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa-regular fa-folder-open" style="font-size: 16px;"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px;">Upload Resource</p>
                                 </div>
                             </div>
                         </a>
@@ -120,10 +111,22 @@
                             th:href="@{/teacher/teacher-public-chat}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-comments fas" style="font-size: 18px;"></i>
+                                <i class="fa-solid fa-message" style="font-size: 15px; margin-left: 2px;"></i>
                                 <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">
-                                        Group Chat
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px; margin-left: 3px;">Group Chat
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
+                            th:href="@{/teacher/attendance-table}" style="font-size: 15.6px;">
+                            <div
+                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
+                                <i class="fa-solid fa-user-clock" style="font-size: 15px;"></i>
+                                <div>
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px; margin-left: 1px;">Attendance Table
                                     </p>
                                 </div>
                             </div>
@@ -134,10 +137,10 @@
                             th:href="@{/teacher/assignment-table}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-clipboard-list fas"
-                                    style="font-size: 17px; margin-left: 1px; margin-right: 10px;"></i>
+                                <i class="fa-solid fa-file-code"
+                                    style="font-size: 18px; margin-left: 1px; margin-left: 2px;"></i>
                                 <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Assignment Table
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 14px; margin-left: 3px;">Assignment Table
                                     </p>
                                 </div>
                             </div>
@@ -148,10 +151,10 @@
                             th:href="@{/teacher/assignment-grade}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-file-signature fas"
-                                    style="font-size: 17px; margin-left: 1px; margin-right: 4px;"></i>
+                                <i class="fa-solid fa-file-circle-check"
+                                    style="font-size: 15px; margin-left: 1px;"></i>
                                 <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Assignment Grade
+                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px; margin-left: 1px;">Assignment Grade
                                     </p>
                                 </div>
                             </div>
@@ -162,10 +165,10 @@
                             th:href="@{/teacher/exam-table}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa fa-file-signature fa-file-text fas"
-                                    style="font-size: 17px; margin-left: 1px; margin-right: 7px;"></i>
+                                <i class="fa-solid fa-list-ul"
+                                    style="font-size: 15px; margin-left: 1px;"></i>
                                 <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Exam Table</p>
+                                    <p style="margin-bottom: -2px; font-size: 14px; margin-left: 2px;">Exam Table</p>
                                 </div>
                             </div>
                         </a>
@@ -175,23 +178,10 @@
                             th:href="@{/teacher/file-exam-grade}" style="font-size: 15.6px;">
                             <div
                                 class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-poll-h fas"
-                                    style="font-size: 17px; margin-left: 1px; margin-right: 7px;"></i>
+                                <i class="fa-solid fa-list-check"
+                                    style="font-size: 14px; margin-left: 1px;"></i>
                                 <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Exam Grade</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex d-md-flex" data-bss-hover-animate="pulse"
-                            th:href="@{/teacher/attendance-table}" style="font-size: 15.6px;">
-                            <div
-                                class="text-center d-flex justify-content-center align-items-center flex-wrap justify-content-lg-center align-items-lg-center">
-                                <i class="fa-user-check fas" style="font-size: 16px;"></i>
-                                <div>
-                                    <p style="margin-top: 1px;margin-bottom: -4px; font-size: 15px;">Attendance Table
-                                    </p>
+                                    <p style="margin-top: 1px;margin-bottom: -1px; font-size: 14px; margin-left: 2px; ">Exam Grade</p>
                                 </div>
                             </div>
                         </a>
@@ -219,6 +209,9 @@
         <script src="/assets/js/sweetAlert.js"></script>
         <!-- datatable-js -->
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
         <!-- axios -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <!-- vue3 -->

@@ -57,9 +57,7 @@ const app = Vue.createApp({
                 this.studentList = [...res.data];
                 setTimeout(() => {
                     $("#dataTable").DataTable({
-                        // "columnDefs": [
-                        //     { "searchable": false, "targets": 2 }
-                        // ]
+                        scrollX: true
                     });
                 });
             })
