@@ -68,7 +68,7 @@
                                         </td>
                                         <td>
                                             <!-- Code Here -->
-                                            <a>{{ resource.name }}</a>
+                                            <a :href="'/courses/'+resource?.resourceCourse?.name+'/resource/'+resource?.name" target="_blank" >{{ resource.name }}</a>
                                         </td>
                                         <td>{{ resource.resourceCourse.name}} </td>
                                     </tr>
