@@ -60,7 +60,8 @@
                                 <tbody>
                                     <tr v-for="(resource, index) in resourceList" :key="index">
                                         <td>{{ resource.resourceCourse.name}} </td>
-                                        <td>{{ resource.name }}</td>
+                                        <td><a :href="'/courses/'+resource?.resourceCourse?.name+'/resource/'+resource?.name" target="_blank" >{{ resource.name }}</a></td>
+                    >
                                         <td class="form-check">
                                             <input type="checkbox" :value="resource.id" 
                                             v-model="resourceId"
