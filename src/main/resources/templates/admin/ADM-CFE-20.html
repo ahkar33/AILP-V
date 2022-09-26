@@ -24,6 +24,7 @@
                     </div>
                     <div class="card mb-4 shadow-sm">
                         <input type="hidden" th:value="${errorMsg}" id="errorMsg">
+                        <input id="isSuccess" type="hidden" th:value="${isSuccess}">
                         <form th:action="@{/admin/create-file-exam}" th:object="${fileExam}" method="post"
                             enctype="multipart/form-data">
                             <div class="card-body p-4 text-dark">
@@ -90,6 +91,14 @@
                     title: 'Exam Name Already Exists For That Course!',
                     text: '',
                 })
+            }
+            let isSuccess = document.getElementById("isSuccess").value;
+            if (isSuccess) {
+                Swal.fire(
+                    'Successfully Created!',
+                    '',
+                    'success'
+                ).then(() => window.location = "http://localhost:8080/admin/exam-table");
             }
             let errorMsg = document.getElementById("errorMsg").value;
             if (errorMsg) {

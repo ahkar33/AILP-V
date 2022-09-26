@@ -27,8 +27,8 @@
 
                     <nav>
                         <div class="nav nav-fill nav-pills w-50 mb-4" id="nav-tab" role="tablist">
-                            <a th:href="@{/admin/file-exam-grade}" class="nav-link fw-bold">File Upload Exam</a>
-                            <a th:href="@{/admin/exam-grade}" class="nav-link active fw-bold" >Multiple Choice Exam</a>
+                            <a th:href="@{/admin/file-exam-grade}" class="nav-link active fw-bold">File Upload Exam</a>
+                            <a th:href="@{/admin/exam-grade}" class="nav-link fw-bold">Multiple Choice Exam</a>
                         </div>
                     </nav>
 
@@ -38,12 +38,12 @@
                     <div class="card shadow-sm">
 
                         <div class="card-header py-3">
-                            <form th:object="${data}" th:action="@{/admin/searchStudentExamsByBatch}" method="post"
+                            <form th:object="${batch}" th:action="@{/admin/searchStudentFileExamsByBatch}" method="post"
                                 class="d-flex d-lg-flex flex-lg-wrap flex-wrap">
-                                <div class="me-1">
-                                    <div class="col-auto text-nowrap" style="width: 237.078px;">
+                                <div class="me-3">
+                                    <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                         <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                            <label class="form-label fw-bold mb-1 h6">Choose One Batch</label>
+                                            <label class="form-label">Choose One Batch</label>
                                             <select th:field="*{id}" class="form-select"
                                                 aria-label="Default select example">
                                                 <option th:each="batch : ${batchList}" th:value="${batch?.id}">
@@ -53,7 +53,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="margin-top: 1.6rem;">
+                                <div style="margin-top: 2.3rem;">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
@@ -64,76 +64,67 @@
                         <div class="card-body text-dark">
 
                             <!-- where I have to write table -->
-                            <table id="dataTable" class="display p-2">
+                            <table id="dataTable2" class="display p-2">
                                 <thead class="table">
                                     <tr class="text-dark">
                                         <th>Student Name</th>
-                                        <th th:each="bhe : ${bheList}">
-                                            [[${bhe?.bheExam?.name}]]
+                                        <th th:each="bhfe : ${bhfeList}">
+                                            [[${bhfe?.bhfeExam?.name}]]
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr th:each="student, iter : ${studentList}">
                                         <td>[[${student?.name}]]</td>
-                                        <span th:if="${bheList.size == student?.studentHasExamList.size}">
-                                            <span th:each="answer, iter : ${student.studentHasExamList}">
+                                        <span th:if="${bhfeList.size == student?.examAnswerList.size}">
+                                            <span th:each="answer, iter : ${student.examAnswerList}">
                                                 <td>
                                                     <span
-                                                        th:if="${answer?.score == bheList[iter.index]?.bheExam?.fullMark}"
-                                                        style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;">
-                                                        [[${answer?.score}]] /
-                                                        [[${bheList[iter.index].bheExam?.fullMark}]] Marks
+                                                        style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;"
+                                                        th:if="${answer?.fileExamAnswerResult != null}">
+                                                        [[${answer?.fileExamAnswerResult?.mark}]] / [[${bhfeList[iter.index].bhfeExam.totalMark}]] Marks
                                                     </span>
                                                     <span
-                                                        th:if="${answer?.score != bheList[iter.index]?.bheExam?.fullMark and answer?.score > 0}"
-                                                        style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;">
-                                                        [[${answer?.score}]] /
-                                                        [[${bheList[iter.index].bheExam?.fullMark}]] Marks
-                                                    </span>
-                                                    <span th:if="${answer?.score == 0}"
-                                                        style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;">
-                                                        [[${answer?.score}]] /
-                                                        [[${bheList[iter.index].bheExam?.fullMark}]] Marks
+                                                        style="color: #df6a00; font-family: 'Roboto', sans-serif; font-weight: 700;"
+                                                        th:if="${answer?.fileExamAnswerResult == null}">
+                                                        Not yet graded
                                                     </span>
                                                 </td>
                                             </span>
                                         </span>
+
                                         <span
-                                            th:if="${bheList.size != student.studentHasExamList.size and student.studentHasExamList.size > 0}">
-                                            <span th:each="bhe : ${bheList}">
+                                            th:if="${bhfeList.size != student.examAnswerList.size and student.examAnswerList.size > 0}">
+                                            <span th:each="a : ${bhfeList}">
                                                 <td>
-                                                    <span th:each="answer : ${student.studentHasExamList}">
-                                                        <span th:if="${bhe.bheExam.id == answer?.sheExam?.id}">
-                                                            <span th:if="${answer?.score == bhe.bheExam.fullMark}"
-                                                                style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;">
-                                                                [[${answer?.score}]] / [[${bhe?.bheExam?.fullMark}]]
-                                                                Marks
+                                                    <span th:each="answer, iter : ${student.examAnswerList}">
+                                                        <span
+                                                            th:if="${a.bhfeExam.id == answer?.batchHasFileExam?.bhfeExam?.id}">
+                                                            <span
+                                                                style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;"
+                                                                th:if="${answer?.fileExamAnswerResult != null}">
+                                                                [[${answer?.fileExamAnswerResult?.mark}]] / [[${bhfeList[iter.index].bhfeExam.totalMark}]] Marks
                                                             </span>
                                                             <span
-                                                                th:if="${answer?.score != bhe.bheExam.fullMark and answer?.score > 0}"
-                                                                style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;">
-                                                                [[${answer?.score}]] / [[${bhe?.bheExam?.fullMark}]]
-                                                                Marks
-                                                            </span>
-                                                            <span th:if="${answer?.score == 0}"
-                                                                style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;">
-                                                                [[${answer?.score}]] / [[${bhe?.bheExam?.fullMark}]]
-                                                                Marks
+                                                                style="color: #df6a00; font-family: 'Roboto', sans-serif; font-weight: 700;"
+                                                                th:if="${answer?.fileExamAnswerResult == null}">
+                                                                Not yet graded
                                                             </span>
                                                         </span>
-                                                        <span th:if="${bhe.bheExam.id != answer?.sheExam?.id}">
-
+                                                        <span
+                                                            th:if="${a.bhfeExam.id != answer?.batchHasFileExam?.bhfeExam.id}">
                                                         </span>
                                                     </span>
                                                 </td>
                                             </span>
                                         </span>
-                                        <span th:if="${student.studentHasExamList.size == 0}">
-                                            <span th:each="bhe : ${bheList}">
+
+                                        <span th:if="${student.examAnswerList.size == 0}">
+                                            <span th:each="a : ${bhfeList}">
                                                 <td></td>
                                             </span>
                                         </span>
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -164,7 +155,7 @@
             }
         });
         $(document).ready(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable2').DataTable();
         });
     </script>
 

@@ -1,5 +1,7 @@
 package com.ace.ailpv.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class FileExamResultService {
 
     public void addFileExamResult(FileExamResult fileExamResult) {
         fileExamResultRepository.save(fileExamResult);
+    }
+
+    public List<FileExamResult> getFileExamResultListByStudentId(String id) {
+        return fileExamResultRepository.findByExamResultAnswer_ExamAnswerStudent_Id(id);
     }
 
 }
