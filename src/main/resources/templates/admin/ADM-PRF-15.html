@@ -25,7 +25,7 @@
                     <div class="row mb-3">
                         <div class="col-lg-4">
                             <div class="card mb-3">
-                                <div class="card-body text-center shadow-sm  pt-5 pb-5">
+                                <div class="card-body text-center shadow-sm pt-5 pb-5">
 
                                     <!-- Profile photo and change profile photo icon start here -->
                                     <div class="avatar-upload" style="margin-bottom: 33px;">
@@ -33,7 +33,7 @@
                                         <div class="avatar-edit">
                                             <a role="button" data-bs-target="#modal-2" data-bs-toggle="modal"
                                                 href="#modal-2">
-                                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                <input type='file' id="imageUpload"/>
                                                 <label for="imageUpload"></label>
                                             </a>
                                         </div>
@@ -82,7 +82,8 @@
                                     <!-- Profile name start here -->
                                     <a class="text-decoration-none text-dark" href="#profile-name-upload"
                                         data-bs-target="#profile-name-upload" data-bs-toggle="modal">
-                                            <h2 style="font-size: 30px; color: rgb(77, 76, 76);">
+                                            <h2 style="font-family: 'Noto Sans Display', sans-serif;
+                                            font-size: 30px;">
                                                 [[${session?.name}]]
                                                 <i class="fa-regular fa-pen-to-square ms-1" style="font-size: 17px; color: #7c7c7c;"></i>
                                             </h2>

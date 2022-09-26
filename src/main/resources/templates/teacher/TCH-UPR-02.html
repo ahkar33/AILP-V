@@ -5,7 +5,7 @@
     <title>Upload Resource</title>
 </head>
 
-<body id="page-top">
+<body id="page-top" style="font-family: 'Roboto', sans-serif;">
     <div id="wrapper">
         <!-- this is where side bar is -->
         <div th:insert="/teacher/teacher-fragments :: sidebar" />
@@ -19,7 +19,7 @@
                     <h1 class="fs-3 mb-3 text-secondary"
                         style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
                         Upload Resources</h1>
-                    
+
 
                     <div class="card shadow-sm ">
                         <div class="card-header d-flex flex-wrap py-3">
@@ -27,7 +27,8 @@
                                 <div class="me-3">
                                     <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                         <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                            <label for="exampleInputEmail1" class="form-label">Date</label>
+                                            <label class="form-label text-dark fw-bold mb-1 h6">Choose the Date<span
+                                                    class="text-danger ms-1">*</span></label>
                                             <input type="datetime-local" class="form-control" v-model="date" required />
                                         </div>
                                     </div>
@@ -37,7 +38,8 @@
                                 <div class="">
                                     <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                         <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                            <label class="form-label">Batch</label>
+                                            <label class="form-label text-dark fw-bold mb-1 h6">Choose the Batch<span
+                                                    class="text-danger ms-1">*</span></label>
                                             <select v-model="batchId" class="form-select" required
                                                 aria-label="Default select example">
                                                 <option disabled>Choose One Batch</option>
@@ -51,32 +53,37 @@
                             </form>
                         </div>
                         <div class="card-body text-dark">
-                            <table id="dataTable" class="display p-2">
+                            <table id="dataTable" class="display" style="width:100%">
                                 <thead>
-                                    <th>Course</th>
-                                    <th>Resource</th>
-                                    <th>Action</th>
+                                    <th>Select</th>
+                                    <th class="text-nowrap">Resource Name</th>
+                                    <th class="text-nowrap">Course Name</th>
                                 </thead>
                                 <tbody>
                                     <tr v-for="(resource, index) in resourceList" :key="index">
-                                        <td>{{ resource.resourceCourse.name}} </td>
-                                        <td>{{ resource.name }}</td>
-                                        <td class="form-check">
-                                            <input type="checkbox" :value="resource.id" 
-                                            v-model="resourceId"
-                                            class="form-check-input border-dark" >
+                                        <td>
+                                            <input type="checkbox" :value="resource.id" v-model="resourceId"
+                                                class="form-check-input border-dark ms-3"
+                                                style="width: 20px; height: 20px;">
                                         </td>
+                                        <td>
+                                            <!-- Code Here -->
+                                            <a :href="'/courses/'+resource?.resourceCourse?.name+'/resource/'+resource?.name" target="_blank" >{{ resource.name }}</a>
+                                        </td>
+                                        <td>{{ resource.resourceCourse.name}} </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <button @click.prevent="handleSubmit()" class="btn btn-primary  bg-gradient shadow-sm">Submit</button>
+                            <button @click.prevent="handleSubmit()" class="btn btn-primary  bg-gradient shadow-sm  mt-3"
+                                style="width: 170px;">Upload<i class="fa-solid fa-upload ms-2"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
             <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">
-                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights Reserved - Ace Inspiration</p>
+                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                        Reserved - Ace Inspiration</p>
                 </div>
             </footer>
         </div>

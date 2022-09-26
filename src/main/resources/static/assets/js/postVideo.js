@@ -79,7 +79,9 @@ const app = Vue.createApp({
             .then(res => {
                 this.videoList = [...res.data];
                 setTimeout(() => {
-                    $("#dataTable").DataTable({});
+                    $("#dataTable").DataTable({
+                        scrollX: true
+                    });
                 });
             })
             .catch(error => console.log(error));
