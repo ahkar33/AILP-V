@@ -19,15 +19,14 @@
                 <div class="container-fluid">
                     <h1 class="fs-3 mb-3 text-secondary"
                         style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
-                        Exam Table
+                        File Exam Table
                     </h1>
                     <div class="card shadow-sm">
-
                         <div class="card-body text-dark">
-                            <table id="dataTable">
+                            <table id="dataTable" class="display" style="width:100%">
                                 <thead>
-                                    <tr>
-                                        <th>Exam Name</th>
+                                    <tr class="text-dark">
+                                        <th class="text-nowrap">Exam Name</th>
                                         <th>Batch</th>
                                         <th>Action</th>
                                     </tr>
@@ -39,7 +38,7 @@
                                         <td>
                                             <a th:href="@{/teacher/checkFileExamAnswer/} + ${bhfe?.id}"
                                                 class="text-decoration-none">
-                                                <button class="btn btn-primary bg-gradient shadow-sm">Check</button>
+                                                <button class="text-nowrap btn btn-outline-primary bg-gradient shadow-sm"><i class="fa-solid fa-file-signature me-1"></i>Grade</button>
                                             </a>
                                         </td>
                                     </tr>
@@ -64,7 +63,9 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#dataTable").DataTable();
+            $("#dataTable").DataTable({
+                scrollX: true
+            });
         });
 
         // const app = Vue.createApp({
