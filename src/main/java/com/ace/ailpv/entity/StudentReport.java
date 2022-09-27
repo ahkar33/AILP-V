@@ -23,9 +23,9 @@ public class StudentReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    
   
-    private String studentId;
+    private String student_id;
     private String name;
     private String batch;
-    private String attendancePercentage;
+    private String attendance_percentage;
 
 }

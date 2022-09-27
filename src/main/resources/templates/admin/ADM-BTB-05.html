@@ -173,10 +173,10 @@
                                                     <i class="fa-solid fa-download me-2"></i>Report</button>
                                                 <ul class="dropdown-menu border-1 border-dark"
                                                     aria-labelledby="dropdownMenuButton">
-                                                    <li><a class="dropdown-item" th:href="@{/admin/report/} + ${batch?.id}"><i
+                                                    <li><a class="dropdown-item" th:href="@{/admin/reportPdf/} + ${batch?.id} + '/' + 'pdf'"><i
                                                                 class="fa-solid fa-file-pdf me-2"></i>Pdf</a>
                                                     </li>
-                                                    <li><a class="dropdown-item" th:href="@{/admin/report/} + ${batch?.id}"><i
+                                                    <li><a class="dropdown-item" th:href="@{/admin/reportExcel/} + ${batch?.id} + '/' + 'excel'"><i
                                                                 class="fa-solid fa-file-excel me-2"></i>Excel</a>
                                                     </li>
                                                 </ul>
