@@ -26,8 +26,7 @@
                     </div>
                     <div class="d-sm-flex justify-content-between align-items-center mb-2 mt-2"
                         style="margin-top: 35px;">
-                        <h1 class="mb-0 fw-bold"
-                        style="font-size: 30px;color: rgb(103,103,103);">
+                        <h1 class="mb-0 fw-bold" style="font-size: 30px;color: rgb(103,103,103);">
                             Profile</h1>
                     </div>
                     <div class="row mb-3">
@@ -39,11 +38,12 @@
                                     <div class="avatar-upload" style="margin-bottom: 33px;">
                                         <!-- Change profile photo icon -->
                                         <div class="avatar-edit">
-                                            <a role="button" data-bs-target="#modal-2" data-bs-toggle="modal"
-                                                href="#modal-2">
-                                                <input type='file' id="imageUpload" />
-                                                <label for="imageUpload"></label>
-                                            </a>
+                                            <form th:action="@{/user/upload}" method="post"
+                                                enctype="multipart/form-data">
+                                                    <input type='file' id="imageUpload" onchange='this.form.submit();'
+                                                        accept=".jpg,.png,.jpeg,.jfif" />
+                                                    <label for="imageUpload"></label>
+                                            </form>
                                         </div>
 
                                         <!-- Profile Photo -->
@@ -56,7 +56,7 @@
                                     </div>
 
                                     <!-- Modal box for profile photo -->
-                                    <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+                                    <!-- <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <form th:action="@{/user/upload}" method="post"
@@ -84,7 +84,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- Profile photo and change profile photo icon end here -->
 
                                     <!-- Profile name start here -->
@@ -94,7 +94,8 @@
                                             <h2 style="font-family: 'Noto Sans Display', sans-serif;
                                             font-size: 30px;">
                                                 [[${session?.name}]]
-                                                <i class="fa-regular fa-pen-to-square ms-1" style="font-size: 17px; color: #7c7c7c;"></i>
+                                                <i class="fa-regular fa-pen-to-square ms-1"
+                                                    style="font-size: 17px; color: #7c7c7c;"></i>
                                             </h2>
                                         </div>
                                     </a>
@@ -115,7 +116,8 @@
                                                     <div class="modal-body">
                                                         <div class="input-group">
                                                             <input class="form-control" type="text" name="name"
-                                                                style="height: 38px;" required="" placeholder="Enter Your Name..."/>
+                                                                style="height: 38px;" required=""
+                                                                placeholder="Enter Your Name..." />
                                                             <button class="btn btn-primary" type="submit">
                                                                 Change
                                                             </button>
@@ -193,7 +195,7 @@
                                                 <div class="mb-3 d-flex justify-content-end">
                                                     <button class="btn btn-primary" type="submit"
                                                         style="margin-left: 0px;margin-bottom: 0px;"><i
-                                                        class="fa-solid fa-gears me-2"></i>Change
+                                                            class="fa-solid fa-gears me-2"></i>Change
                                                         Password
                                                     </button>
                                                 </div>

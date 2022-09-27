@@ -92,7 +92,7 @@
                     <input type="hidden" th:value="${errorMsg}" id="errorMsg">
                     <div class="card shadow-sm text-dark">
                         <div class="card-body pt-4">
-                            <table id="dataTable" class="display p-2">
+                            <table id="dataTable" class="display" style="width:100%">
                                 <thead class="table">
                                     <tr>
                                         <th>Course ID</th>
@@ -230,7 +230,9 @@
         });
 
         $(document).ready(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+ 			            scrollX: true
+                    });
             let errorMsg = document.getElementById("errorMsg").value;
             if (errorMsg) {
                 alertError();
