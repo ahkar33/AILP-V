@@ -53,9 +53,9 @@
                                     <form>
                                         <label class="form-label fs-4 text-primary">Question {{ index + 1 }}</label>
                                         <div class="input-group">
-                                            <input v-model="question.examQuestion" type="text" class="form-control"
+                                            <textarea v-model="question.examQuestion" type="text" class="form-control"
                                                 maxlength="900" required style="width: 100%; margin-bottom: 13px;"
-                                                placeholder="Untitiled Question" />
+                                                placeholder="Untitiled Question" ></textarea>
                                         </div>
                                         <div class="form-check">
                                             <div v-for="(radio, indes) in question.radioList" :key="indes"
