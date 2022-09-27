@@ -15,7 +15,7 @@
     }
 </style>
 
-<body>
+<body style="font-family: 'Roboto', sans-serif;">
 
     <div th:insert="/student/student-fragments :: pc-navbar" />
 
@@ -27,7 +27,7 @@
         </div>
         <div class="d-sm-flex justify-content-between align-items-center mb-2 mt-2" style="margin-top: 35px;">
             <h3 class="mb-0"
-                style="font-weight: bold;font-family: 'Anek Kannada', sans-serif;font-size: 30px;color: rgb(103,103,103);">
+                style="font-weight: bold; font-size: 30px;color: rgb(103,103,103);">
                 Profile
             </h3>
         </div>
@@ -41,7 +41,7 @@
                             data-bs-target="#profile-name-upload" data-bs-toggle="modal">
                             <div class="pb-2">
                                 <h3 class="fw-bold"
-                                    style="font-size: 20.8px;font-family: 'IBM Plex Sans KR', sans-serif;">
+                                    style="font-size: 20.8px;">
                                     [[${session?.name}]] &nbsp;&nbsp;
                                     <i class="far fa-edit text-secondary" style="font-size: 15.8px;"></i>
                                 </h3>
@@ -110,39 +110,6 @@
 
                     </div>
                 </div>
-
-                <!-- <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="text-primary fw-bold m-0" style="font-family: 'IBM Plex Sans KR', sans-serif;">Grade
-                            Overview</h6>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="small fw-bold" style="font-family: Arimo, sans-serif;">Total Assignment Result<span
-                                class="float-end">20%</span></h4>
-                        <div class="progress progress-sm mb-3">
-                            <div class="progress-bar bg-success" aria-valuenow="80" aria-valuemin="0"
-                                aria-valuemax="100" style="width: 80%;"><span class="visually-hidden">80%</span></div>
-                        </div>
-                        <h4 class="small fw-bold" style="font-family: Arimo, sans-serif;">Total Exam Result<span
-                                class="float-end">40%</span></h4>
-                        <div class="progress progress-sm mb-3">
-                            <div class="progress-bar bg-warning" aria-valuenow="40" aria-valuemin="0"
-                                aria-valuemax="100" style="width: 40%;"><span class="visually-hidden">40%</span></div>
-                        </div>
-                        <h4 class="small fw-bold" style="font-family: Arimo, sans-serif;">Attendance<span
-                                class="float-end">60%</span></h4>
-                        <div class="progress progress-sm mb-3">
-                            <div class="progress-bar bg-primary" aria-valuenow="60" aria-valuemin="0"
-                                aria-valuemax="100" style="width: 60%;"><span class="visually-hidden">60%</span></div>
-                        </div>
-                        <h4 class="small fw-bold" style="font-family: Arimo, sans-serif;">Activity<span
-                                class="float-end">60%</span></h4>
-                        <div class="progress progress-sm mb-3">
-                            <div class="progress-bar bg-danger" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-                                style="width: 90%;"><span class="visually-hidden">90%</span></div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
 
             <!-- setting div start -->
@@ -151,8 +118,7 @@
                     <div class="col">
                         <div class="card shadow mb-3">
                             <div class="card-header py-3">
-                                <p class="text-primary m-0 fw-bold"
-                                    style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                <p class="text-primary m-0 fw-bold">
                                     Settings
                                 </p>
                             </div>
@@ -165,8 +131,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label class="form-label" for="course"
-                                                    style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                <label class="form-label" for="course">
                                                     <strong>Batch</strong>
                                                 </label>
                                                 <input class="form-control" type="text" id="username-1" name="course"
@@ -177,8 +142,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label class="form-label" for="old-password"
-                                                    style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                <label class="form-label" for="old-password">
                                                     <strong>Old Password</strong>
                                                 </label>
                                                 <input class="form-control" type="password" name="oldPassword"
@@ -187,8 +151,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label class="form-label" for="old-password"
-                                                    style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                <label class="form-label" for="old-password">
                                                     <strong>New Password</strong>
                                                 </label>
                                                 <input class="form-control" type="password" name="newPassword"
@@ -207,8 +170,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label class="form-label" for="old-password"
-                                                    style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                                                <label class="form-label" for="old-password">
                                                     <strong>Confirm Password</strong>
                                                 </label>
                                                 <input class="form-control" type="password" name="confirmPassword"
@@ -234,8 +196,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <p class="lead fw-bold text-center text-dark pt-2"
-                            style="font-size: 23px;font-family: 'IBM Plex Sans KR', sans-serif;">Are you sure you want
+                        <p class="lead fw-bold text-center text-dark pt-2">Are you sure you want
                             to log out?
                         </p>
                     </div>
@@ -254,11 +215,11 @@
         </div>
     </div>
     <footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed
-        style="background-color: #1a2033; font-family: 'Roboto', sans-serif;">
+        style="background-color: #1a2033;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
-                    <p class="h6 mb-2" style="font-family: 'Roboto', sans-serif; font-weight: 700;">How To Find Us</p>
+                    <p class="h6 mb-2" style="font-weight: 700;">How To Find Us</p>
                     <div class="mb-1">
                         <p class="mb-2 text-white" style="font-size: 14px; font-weight: 200;"><i
                                 class="fa-solid fa-location-dot ps-1 pe-3"></i> No. 169, 9th Floor, MTP Condo, Insein
@@ -270,7 +231,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-xl-3 pb-0 pt-3 py-3">
-                    <p class="h6 mb-1" style="font-family: 'Roboto', sans-serif; font-weight: 700;">Get In Touch</p>
+                    <p class="h6 mb-1" style="font-weight: 700;">Get In Touch</p>
                     <div class="d-inline-flex flex-wrap ">
                         <a href="https://www.facebook.com/aceinspiration/" class="text-decoration-none text-white"><i
                                 class="fa-brands fa-square-facebook p-1" style="font-size: 25px;"></i></a>
