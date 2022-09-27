@@ -80,14 +80,8 @@
   width: 40px;
 }
 
-.chat .chat-header .chat-about {
-  float: left;
-  padding-left: 10px;
-}
-
 .chat .chat-history {
   padding: 20px;
-  border-bottom: 2px solid #fff;
 }
 
 .chat .chat-history ul {
