@@ -73,4 +73,11 @@ public class MessageApi {
         messageService.deleteMessage(id);
     }
 
+    @GetMapping("/studentCountByBatchId/{batchId}")
+    public int getStudentCountByBatchId(@PathVariable("batchId") Long batchId) {
+        List<User> studentList = userService.getStudentListByBatchId(batchId);
+        return studentList.size();
+    }
+    
+
 }

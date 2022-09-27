@@ -13,7 +13,8 @@ const app = Vue.createApp({
             userName: '',
             message: '',
             messageList: [],
-            oldMessagesCount: 0
+            oldMessagesCount: 0,
+            totalStudent: 0,
         }
     },
     methods: {
@@ -79,6 +80,15 @@ const app = Vue.createApp({
                         this.isMute = true;
                     }
                 })
+        },
+        getTotalStudentsByBatchId(batchId) {
+            axios
+                .get(`http://localhost:8080/api/message/studentCountByBatchId/${batchId}`)
+                .then(res => {
+                    this.totalStudent = res.data;
+                })
+                .catch(error => console.log(error));
+
         },
         getUserList() {
             axios
@@ -163,6 +173,7 @@ const app = Vue.createApp({
         this.userName = document.getElementById('userName').value;
         this.getAllMessages();
         this.getUserMute();
+        this.getTotalStudentsByBatchId(this.batchId);
         setInterval(() => {
             this.getUserList();
             this.getLastMessageCount();
