@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -48,7 +49,7 @@ public class BatchHasResourceServiceTest {
         BatchHasResource bhs=getBatchHasResource();
         Batch batch=getOneBatch();
         Resource resource=getOneResource();
-        when(batchHasResourceRepository.findByBatchIdAndResourceId(batch.getId(), resource.getId()));
+        when(batchHasResourceRepository.findByBatchIdAndResourceId(batch.getId(), resource.getId())).thenReturn(bhs);
         BatchHasResource bhsActual =batchHasResourceService.getBatchHasResourceByBatchIdAndResourceId(batch.getId(), resource.getId());
         assertEquals(bhs.getResource(), bhsActual.getResource());
         assertEquals(bhs.getBatch(), bhsActual.getBatch());
@@ -58,27 +59,30 @@ public class BatchHasResourceServiceTest {
 
     @Test
     public void getAllBatchHasResourcesByBatchIdTest(){
-        List<BatchHasResource>bhsList=getBatchHasResourceList();
+        List<BatchHasResource> bhsList = getBatchHasResourceList();
+        batchHasResourceService.getAllBatchHasResourcesByBatchId(1L);
         when(batchHasResourceRepository.findByBatch_Id(1L)).thenReturn(bhsList);
-        verify(batchHasResourceRepository,times(1)).findByBatch_Id(1L);
+        verify(batchHasResourceRepository, times(1)).findByBatch_Id(1L);
 
     }
 
     private BatchHasResource getBatchHasResource(){
+        Batch batch = getOneBatch();
         BatchHasResource bhs=new BatchHasResource();
         bhs.setId(1L);
         bhs.setResource(new Resource());
-        bhs.setBatch(new Batch());
+        bhs.setBatch(batch);
         bhs.setSchedule(LocalDateTime.now());
         return bhs;
     }
     
-    private List<BatchHasResource>getBatchHasResourceList(){
-        List<BatchHasResource>bhsList=new ArrayList<>();
-        BatchHasResource bhs=new BatchHasResource();
+    private List<BatchHasResource> getBatchHasResourceList(){
+        List<BatchHasResource> bhsList = new ArrayList<>();
+        BatchHasResource bhs = new BatchHasResource();
         bhs.setId(1L);
         bhs.setResource(new Resource());
         bhs.setBatch(new Batch());
+        bhs.setBhrBatchId(1L);
         bhs.setSchedule(LocalDateTime.now());
         bhsList.add(bhs);
         return bhsList;

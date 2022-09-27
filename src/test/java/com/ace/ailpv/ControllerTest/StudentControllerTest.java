@@ -2,6 +2,7 @@ package com.ace.ailpv.ControllerTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import com.ace.ailpv.entity.*;
@@ -61,6 +62,9 @@ public class StudentControllerTest {
 
     @MockBean
     AssignmentService assignmentService;
+
+    @MockBean
+    AssignmentAnswerService assignmentAnswerService;
 
     @MockBean
     AssignmentResultService assignmentResultService;
@@ -240,7 +244,7 @@ public class StudentControllerTest {
         assignment.setAssignmentBatch(batch);
         assignment.setId(1L);
         assignment.setEndTime(LocalDateTime.of(2015,
-                Month.JULY, 29, 19, 30, 40));
+                Month.JULY, 29, 19, 30, 40));    
 
         File file = new File("src\\test\\resources\\input.txt");
         FileInputStream input = new FileInputStream(file);
@@ -251,7 +255,8 @@ public class StudentControllerTest {
         answer.setAnswerStudent(student);
         answer.setAssignment(assignment);
         answer.setAnswerFile(multipartFile);
-
+        answer.setIsLate(false); 
+        doNothing().when(assignmentAnswerService).addAssignmentAnswer(answer);
         when(assignmentService.getAssignmentById(1L)).thenReturn(assignment);
         this.mockMvc.perform(post("/student/submitAssignment")
                 .flashAttr("answer", answer))
