@@ -113,7 +113,7 @@
                                         <td>
                                             <a th:href="@{/teacher/checkAssignment/} + ${assignment?.id}"
                                                 class="text-decoration-none">
-                                                <button class="btn btn-primary bg-gradient shadow-sm">Check</button>
+                                                <button class="btn btn-outline-primary bg-gradient shadow-sm"><i class="fa-solid fa-file-signature me-1"></i>Grade</button>
                                             </a>
                                         </td>
                                     </tr>
@@ -142,7 +142,7 @@
                 scrollX: true
             });
         });
-
+        
         // const app = Vue.createApp({
         //     data() {
         //         return {

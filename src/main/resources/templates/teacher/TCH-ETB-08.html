@@ -2,65 +2,56 @@
 <html>
 
 <head th:insert="/teacher/teacher-fragments :: teacher_head">
-    <title>Exam Table</title>
+    <title>Upload Exam</title>
 </head>
 
 
-<body>
-    <div id="wrapper" style="font-family: 'Roboto', sans-serif;">
+<body style="font-family: 'Roboto', sans-serif;">
+    <div id="wrapper">
         <!-- this is where side bar is -->
         <div th:insert="/teacher/teacher-fragments :: sidebar" />
 
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-                
+
                 <!-- this is where nav bar is -->
                 <div th:insert="/teacher/teacher-fragments :: navbar" />
                 <input type="hidden" th:value="${session?.uid}" id="teacherId">
                 <div class="container-fluid">
                     <nav class="d-flex justify-content-center">
-                        <div  class="border-light mb-4 nav nav-fill nav-pills" style="width: 500px; box-shadow: 1px 2px 5px 4px #e6e6e6; border-radius: 74px; border: 7px solid #000000;" id="nav-tab" role="tablist">
-                            <button class="active fw-bold nav-link rounded-pill" id="nav-examTwo-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-examTwo" type="button" role="tab" aria-controls="nav-examTwo"
-                                aria-selected="true">File Exam</button>
+                        <div class="border-light mb-4 nav nav-fill nav-pills"
+                            style="width: 500px; box-shadow: 0px 1px 5px 3px #e6e6e6; border-radius: 74px; border: 7px solid #000000;"
+                            id="nav-tab" role="tablist">
+                            <button class="active fw-bold nav-link rounded-pill" id="nav-examTwo-tab"
+                                data-bs-toggle="tab" data-bs-target="#nav-examTwo" type="button" role="tab"
+                                aria-controls="nav-examTwo" aria-selected="true"><i class="fa-solid fa-cloud-arrow-up me-2"></i>File Exam</button>
                             <button class="nav-link rounded-pill fw-bold" id="nav-examOne-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-examOne" type="button" role="tab" aria-controls="nav-examOne"
-                                aria-selected="false">Multiple Choice Exam</button>
+                                aria-selected="false"><i class="fa-solid fa-cloud-arrow-up me-2"></i>MCQ Exam</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <!-- Tab 1 Start Here -->
-                        <div class="tab-pane fade" id="nav-examTwo" role="tabpanel" aria-labelledby="nav-examTwo-tab"
-                            tabindex="0">
-                            <h1 class="fs-3 mb-3 text-secondary"
-                                style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
-                                Exam Table
-                            </h1>
-
-                            <div
-                                class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
-                                <div>
-                                    <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
-                                        style="width: 190px; font-size: 15px; height: 40px; margin-bottom: 11px; padding-top: 2px;"
-                                        role="button" th:href="@{/teacher/uploaded-file-exams}"><i
-                                            class="fa-clipboard-list fas"
-                                            style="padding-bottom: 7px; padding-top: 6px; font-size: 18px;"></i>&nbsp;
-                                        Mark Exam 
-                                    </a>
-                                </div>
+                        <div class="tab-pane fade show active" id="nav-examTwo" role="tabpanel"
+                            aria-labelledby="nav-examTwo-tab" tabindex="0">
+                            <div class="d-flex mt-4 mb-3 justify-content-end">
+                                <a class="btn px-4 btn-primary bg-gradient shadow-sm"
+                                    role="button" th:href="@{/teacher/uploaded-file-exams}">
+                                    <i class="fa-solid fa-file-lines me-2"></i>File Exam Table
+                                </a>
                             </div>
 
                             <div class="card shadow-sm text-dark">
                                 <div class="card-body text-dark">
 
                                     <!-- where I have to write table -->
-                                    <table id="dataTable2" class="display p-2">
+                                    <table id="dataTable" class="display" style="width:100%">
                                         <thead class="table">
-                                            <tr>
-                                                <th>Exam Name</th>
-                                                <th>Course Name</th>
-                                                <th>Full Mark</th>
-                                                <th>Action</th>
+                                            <tr class="text-dark">
+                                                <th class="text-nowrap">Exam Name</th>
+                                                <th class="text-nowrap">Course Name</th>
+                                                <th class="text-nowrap">Full Mark</th>
+                                                <th class="text-nowrap">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -70,8 +61,8 @@
                                                 <td>[[${exam?.totalMark}]]</td>
                                                 <td>
                                                     <a th:href="@{/teacher/uploadFileExam/} + ${exam.id}"
-                                                        class="btn btn-primary bg-gradient shadow-sm">
-                                                        Upload
+                                                        class="btn btn-outline-primary bg-gradient shadow-sm" title="Upload Exam" data-bs-placement="right" data-bs-toggle="tooltip" data-bs-delay="500">
+                                                        <i class="fa-solid fa-upload"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -83,23 +74,19 @@
                         <!-- Tab 1 Start Here -->
 
                         <!-- Tab 2 Start Here -->
-                        <div class="tab-pane fade show active" id="nav-examOne" role="tabpanel"
-                            aria-labelledby="nav-examOne-tab" tabindex="0">
-                            <h1 class="fs-3 mb-3 text-secondary"
-                                style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
-                                Exam Table
-                            </h1>
-                            <div class="card shadow-sm text-dark">
+                        <div class="tab-pane fade" id="nav-examOne" role="tabpanel" aria-labelledby="nav-examOne-tab"
+                            tabindex="0">
+                            <div class="card mt-5 shadow-sm text-dark">
                                 <div class="card-body text-dark">
 
                                     <!-- where I have to write table -->
-                                    <table id="dataTable" class="display p-2">
+                                    <table id="dataTable2" class="display nowrap" style="width:100%">
                                         <thead class="table">
-                                            <tr>
-                                                <th>Exam Name</th>
-                                                <th>Course Name</th>
-                                                <th>Full Mark</th>
-                                                <th>Action</th>
+                                            <tr class="text-dark">
+                                                <th class="text-nowrap">Exam Name</th>
+                                                <th class="text-nowrap">Course Name</th>
+                                                <th class="text-nowrap">Full Mark</th>
+                                                <th class="text-nowrap">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -109,8 +96,8 @@
                                                 <td>[[${exam?.fullMark}]]</td>
                                                 <td>
                                                     <a th:href="@{/teacher/uploadExam/} + ${exam.id}"
-                                                        class="btn btn-primary bg-gradient shadow-sm">
-                                                        Upload
+                                                        class="btn btn-outline-primary bg-gradient shadow-sm" title="Upload Exam" data-bs-placement="right" data-bs-toggle="tooltip" data-bs-delay="500">
+                                                        <i class="fa-solid fa-upload"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -136,11 +123,20 @@
 
     <script>
         $(document).ready(function () {
-            $('#dataTable').DataTable();
-            $('#dataTable2').DataTable();
+            $('#dataTable').DataTable({
+                scrollX: true
+            });
+            $('#dataTable2').DataTable({
+                responsive: true
+            });
+        });
+
+        // For Tooltip
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
         });
     </script>
-
 </body>
 
 </html>
