@@ -18,19 +18,19 @@
                 <div th:insert="/teacher/teacher-fragments :: navbar" />
                 <input type="hidden" th:value="${session?.uid}" id="teacherId">
                 <div class="container-fluid">
-                    <nav>
-                        <div class="nav nav-fill nav-pills w-50 mb-4" id="nav-tab" role="tablist">
-                            <button class="nav-link fw-bold active" id="nav-examTwo-tab" data-bs-toggle="tab"
+                    <nav class="d-flex justify-content-center">
+                        <div  class="border-light mb-4 nav nav-fill nav-pills" style="width: 500px; box-shadow: 1px 2px 5px 4px #e6e6e6; border-radius: 74px; border: 7px solid #000000;" id="nav-tab" role="tablist">
+                            <button class="active fw-bold nav-link rounded-pill" id="nav-examTwo-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-examTwo" type="button" role="tab" aria-controls="nav-examTwo"
                                 aria-selected="true">File Exam</button>
-                            <button class="nav-link fw-bold" id="nav-examOne-tab" data-bs-toggle="tab"
+                            <button class="nav-link rounded-pill fw-bold" id="nav-examOne-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-examOne" type="button" role="tab" aria-controls="nav-examOne"
                                 aria-selected="false">Multiple Choice Exam</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <!-- Tab 1 Start Here -->
-                        <div class="tab-pane fade  show active" id="nav-examTwo" role="tabpanel" aria-labelledby="nav-examTwo-tab"
+                        <div class="tab-pane fade" id="nav-examTwo" role="tabpanel" aria-labelledby="nav-examTwo-tab"
                             tabindex="0">
                             <h1 class="fs-3 mb-3 text-secondary"
                                 style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
@@ -83,7 +83,7 @@
                         <!-- Tab 1 Start Here -->
 
                         <!-- Tab 2 Start Here -->
-                        <div class="tab-pane fade" id="nav-examOne" role="tabpanel"
+                        <div class="tab-pane fade show active" id="nav-examOne" role="tabpanel"
                             aria-labelledby="nav-examOne-tab" tabindex="0">
                             <h1 class="fs-3 mb-3 text-secondary"
                                 style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
