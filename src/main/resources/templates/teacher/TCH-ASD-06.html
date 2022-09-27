@@ -60,10 +60,18 @@
 												name="assignmentResultAnswer">
 											<input type="hidden" th:value="${session?.uid}" id="assignmentResultTeacher"
 												name="assignmentResultTeacher">
-											<textarea class="form-control mb-2" rows="2" placeholder="Comment"
-												maxlength="900" required th:field="*{comment}"></textarea>
-											<input type="number" class="form-control mb-2" placeholder="Mark"
-												th:field="*{mark}" required />
+											<span th:if="${answer.isGraded == null}">
+												<textarea class="form-control mb-2" rows="2" placeholder="Comment"
+													maxlength="900" required th:field="*{comment}"></textarea>
+												<input type="number" class="form-control mb-2" placeholder="Mark"
+													th:field="*{mark}" required />
+											</span>
+											<span th:if="${answer.isGraded != null}">
+												<textarea class="form-control mb-2" rows="2" placeholder="Comment"
+													maxlength="900" required th:field="*{comment}" disabled></textarea>
+												<input type="number" class="form-control mb-2" placeholder="Mark"
+													th:field="*{mark}" required disabled />
+											</span>
 										</div>
 										<div class="d-flex gap-1 pt-2">
 											<a th:href="@{ ${'/courses/' + answer?.assignment?.assignmentBatch?.batchCourse?.name + '/' + answer?.assignment?.assignmentBatch?.id + '/' + 'AssignmentAnswer' + '/' + answer?.answerFileName } }"
@@ -74,7 +82,8 @@
 												<i class="bx bx-user fa fa-download me-1"></i>
 												Download
 											</a>
-											<button type="submit" class="btn btn-primary btn-sm pe-0 ps-0 w-50">
+											<button type="submit" class="btn btn-primary btn-sm pe-0 ps-0 w-50"
+												th:classappend="${answer?.isGraded == null} ? '' : 'disabled'">
 												<i class="bx bx-user fa fa-location-arrow me-1"></i>
 												Send
 											</button>
