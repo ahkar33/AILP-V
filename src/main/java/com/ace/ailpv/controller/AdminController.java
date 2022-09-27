@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -36,11 +39,13 @@ import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
 import com.ace.ailpv.service.FileExamService;
 import com.ace.ailpv.service.FileService;
+import com.ace.ailpv.service.ReportService;
 import com.ace.ailpv.service.ResourceService;
 import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
 import com.ace.ailpv.service.VideoService;
 
+import net.sf.jasperreports.engine.JRException;
 import ws.schild.jave.EncoderException;
 import ws.schild.jave.InputFormatException;
 
@@ -89,6 +94,9 @@ public class AdminController {
 
     @Autowired
     private BatchHasFileExamService batchHasFileExamService;
+
+    @Autowired
+    private ReportService reportService;
 
     String path = "src\\main\\resources\\static\\courses\\";
 
@@ -585,7 +593,7 @@ public class AdminController {
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
         return "/admin/ADM-FEG-21";
-    } 
+    }
 
     @PostMapping("/searchStudentExamsByBatch")
     public String searchStudentExamsByBatch(@ModelAttribute("data") Batch batch, ModelMap model) {
@@ -612,5 +620,20 @@ public class AdminController {
         model.addAttribute("batchList", batchList);
         return "/admin/ADM-FEG-21";
     }
+
+    @GetMapping("/reportExcel/{batchId}/{format}")
+    public void reportExcel(@PathVariable("batchId") Long batchId, @PathVariable("format") String format,
+            HttpServletResponse response, RedirectAttributes redirectAttrs) throws JRException, IOException {
+        reportService.exportReport(format, response, batchId);
+        redirectAttrs.addFlashAttribute("msg", "Successfully Downloaded!");
+    }
+
+    @GetMapping("/reportPdf/{batchId}/{format}")
+    public String reportPdf(@PathVariable("batchId") Long batchId, @PathVariable("format") String format,
+            HttpServletResponse response) throws JRException, IOException {
+        reportService.exportReport(format, response, batchId);
+        return "redirect:/admin/batch-table";
+    }
+
 
 }
