@@ -5,7 +5,7 @@
     <title>Assignment Table</title>
 </head>
 
-<body id="page-top">
+<body id="page-top" style="font-family: 'Roboto', sans-serif;">
     <div id="wrapper">
         <!-- this is where side bar is -->
         <div th:insert="/teacher/teacher-fragments :: sidebar" />
@@ -18,23 +18,23 @@
 
                 <div class="container-fluid">
                     <h1 class="fs-3 mb-3 text-secondary"
-                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
                         Assignment Table</h1>
                     <div
                         class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
                         <div>
-                            <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm" style="width: 190px; font-size: 15px; height: 40px; margin-bottom: 11px; padding-top: 2px;" role="button" href="#create-assignment-button"
-                                data-bs-toggle="modal"><i class="fa-clipboard-list fas" style="padding-bottom: 7px; padding-top: 6px; font-size: 18px;"></i>&nbsp;
+                            <a class="btn btn-lg mb-3 btn-primary bg-gradient shadow-sm" style="font-size: 15px; height: 40px;" role="button" href="#create-assignment-button"
+                                data-bs-toggle="modal"><i class="fa-solid fa-file-code me-2" style="font-size: 18px;"></i>
                                 Create Assignment
                             </a>
                             <div class="modal fade" role="dialog" tabindex="-1" id="create-assignment-button">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content" style="font-family: 'Roboto', sans-serif;">
+                                    <div class="modal-content">
                                         <form th:action="@{/teacher/createAssignment}" th:object="${assignment}"
                                             method="post" enctype="multipart/form-data">
                                             <div class="border border-0 modal-header rounded rounded-0"
                                             style="background: #f8f9fc; background-color: #324da0; padding-top: 14px; padding-bottom: 14px;">
-                                                <h4 style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif; margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
+                                                <h4 style="color: rgb(75,75,75); margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
                                                 class="text-light">
                                                     Create Assignment
                                                 </h4>
@@ -96,11 +96,11 @@
                     <div class="card shadow-sm">
 
                         <div class="card-body text-dark">
-                            <table id="dataTable">
+                            <table id="dataTable" class="display" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Assignment Id</th>
-                                        <th>Assignment Name</th>
+                                        <th class="text-nowrap">Assignment Id</th>
+                                        <th class="text-nowrap">Assignment Name</th>
                                         <th>Batch</th>
                                         <th>Action</th>
                                     </tr>
@@ -113,7 +113,7 @@
                                         <td>
                                             <a th:href="@{/teacher/checkAssignment/} + ${assignment?.id}"
                                                 class="text-decoration-none">
-                                                <button class="btn btn-primary bg-gradient shadow-sm">Check</button>
+                                                <button class="btn btn-outline-primary bg-gradient shadow-sm"><i class="fa-solid fa-file-signature me-1"></i>Grade</button>
                                             </a>
                                         </td>
                                     </tr>
@@ -125,7 +125,7 @@
             </div>
             <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">
-                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                    <p class="mb-0 text-center">&copy; 2022. All Rights
                         Reserved - Ace Inspiration</p>
                 </div>
             </footer>
@@ -138,9 +138,11 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#dataTable").DataTable();
+            $("#dataTable").DataTable({
+                scrollX: true
+            });
         });
-
+        
         // const app = Vue.createApp({
         //     data() {
         //         return {

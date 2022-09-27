@@ -2,17 +2,17 @@
 <html>
 
 <head th:insert="/teacher/teacher-fragments :: teacher_head">
-    <title>Exam Grade</title>
+    <title>File Exam Grade Table</title>
 </head>
 
-<style>
+<style>kfq
     .badge-soft-danger {
         color: #cf1919 !important;
         background-color: rgba(245, 110, 110, 0.226);
     }
 </style>
 
-<body id="page-top">
+<body id="page-top" style="font-family: 'Roboto', sans-serif;">
     <div id="wrapper">
         <!-- this is where side bar is -->
         <div th:insert="/teacher/teacher-fragments :: sidebar" />
@@ -23,25 +23,23 @@
                 <div th:insert="/teacher/teacher-fragments :: navbar" />
 
                 <div class="container-fluid">
-                    <nav>
-                        <div class="nav nav-fill nav-pills w-50 mb-4" id="nav-tab" role="tablist">
-                            <a th:href="@{/teacher/file-exam-grade}" class="nav-link active fw-bold">File Upload Exam</a>
-                            <a th:href="@{/teacher/exam-grade}" class="nav-link fw-bold">Multiple Choice Exam</a>
+                    <nav class="d-flex justify-content-center">
+                        <div class="border-light mb-4 nav nav-fill nav-pills"
+                            style="width: 500px; box-shadow: 0px 1px 5px 3px #e6e6e6; border-radius: 74px; border: 7px solid #000000;"
+                            id="nav-tab" role="tablist">
+                            <a th:href="@{/teacher/file-exam-grade}" class="active fw-bold nav-link rounded-pill">File Exam</a>
+                            <a th:href="@{/teacher/exam-grade}" class="fw-bold nav-link rounded-pill">MCQ Exam</a>
                         </div>
                     </nav>
-                    <h1 class="fs-3 mb-3 text-secondary"
-                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
-                        File Exam Grade
-                    </h1>
-                    <div class="card shadow-sm">
-
+                    <div class="card shadow-sm mt-4">
                         <div class="card-header py-3">
                             <form th:object="${batch}" th:action="@{/teacher/searchStudentFileExamsByBatch}"
                                 method="post" class="d-flex d-lg-flex flex-lg-wrap flex-wrap">
-                                <div class="me-3">
+                                <div class="me-1">
                                     <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                         <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                            <label class="form-label">Batch</label>
+                                            <label class="form-label text-dark fw-bold mb-1 h6">Choose the
+                                                Batch<span class="text-danger ms-1">*</span></label>
                                             <select th:field="*{id}" class="form-select"
                                                 aria-label="Default select example">
                                                 <option th:each="batch : ${batchList}" th:value="${batch?.id}">
@@ -51,9 +49,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="margin-top: 2.3rem;">
-                                    <button type="submit" class="btn btn-primary bg-gradient shadow-sm">
-                                        Search
+                                <div style="margin-top: 1.8rem;">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
                                 </div>
                             </form>
@@ -78,12 +76,12 @@
                                             <span th:each="answer, iter : ${student.examAnswerList}">
                                                 <td>
                                                     <span
-                                                        style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;"
+                                                        style="color: #009520; font-weight: bold;"
                                                         th:if="${answer?.fileExamAnswerResult != null}">
                                                         [[${answer?.fileExamAnswerResult?.mark}]] / [[${bhfeList[iter.index].bhfeExam.totalMark}]] Marks
                                                     </span>
                                                     <span
-                                                        style="color: #df6a00; font-family: 'Roboto', sans-serif; font-weight: 700;"
+                                                        style="color: #df6a00; font-weight: 700;"
                                                         th:if="${answer?.fileExamAnswerResult == null}">
                                                         Not yet graded
                                                     </span>
@@ -99,12 +97,12 @@
                                                         <span
                                                             th:if="${a.bhfeExam.id == answer?.batchHasFileExam?.bhfeExam.id}">
                                                             <span
-                                                                style="color: #009520; font-weight: bold; font-family: 'Roboto', sans-serif;"
+                                                                style="color: #009520; font-weight: bold;"
                                                                 th:if="${answer?.fileExamAnswerResult != null}">
                                                                 [[${answer?.fileExamAnswerResult?.mark}]] / [[${bhfeList[iter.index].bhfeExam.totalMark}]] Marks
                                                             </span>
                                                             <span
-                                                                style="color: #df6a00; font-family: 'Roboto', sans-serif; font-weight: 700;"
+                                                                style="color: #df6a00; font-weight: 700;"
                                                                 th:if="${answer?.fileExamAnswerResult == null}">
                                                                 Not yet graded
                                                             </span>
@@ -134,7 +132,7 @@
             </div>
             <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">
-                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                    <p class="mb-0 text-center">&copy; 2022. All Rights
                         Reserved - Ace Inspiration</p>
                 </div>
             </footer>

@@ -5,7 +5,7 @@
     <title>Edit Batch</title>
 </head>
 
-<body id="page-top">
+<body id="page-top" style="font-family: 'Roboto', sans-serif;">
     <div id="wrapper">
         <!-- this is where side bar is -->
         <div th:insert="/admin/admin-fragments :: sidebar" />
@@ -18,7 +18,7 @@
                 <div class="container-fluid pb-5 pe-5 ps-5 pt-2" style="max-width: 45rem;">
                     <div>
                         <h1 class="fs-3 mb-2 text-secondary"
-                            style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                            style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
                             Create Exam
                         </h1>
                     </div>
@@ -30,8 +30,7 @@
                             <div class="card-body p-4 text-dark">
                                 <div class="dropdown">
                                     <div class="mb-3">
-                                        <label for="formInput6" class="fs-6"
-                                            style="font-family: 'Roboto';">Course</label>
+                                        <label for="formInput6" class="fs-6">Course</label>
                                         <select id="formInput6" class="form-select mb-4" th:field="*{fileExamCourse}"
                                             aria-label="Default select example">
                                             <span th:each="course : ${courseList}">
@@ -40,22 +39,22 @@
                                         </select>
                                     </div>
                                 </div>
-                                <label class="fs-6" style="font-family: 'Roboto';">Exam Name</label>
+                                <label class="fs-6">Exam Name</label>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control mb-2" placeholder="Enter Exam Name"
                                         th:field="*{name}" required="true" />
                                 </div>
-                                <label class="fs-6" style="font-family: 'Roboto';">Exam Question</label>
+                                <label class="fs-6">Exam Question</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control mb-2" placeholder="Enter Exam Question"
-                                        th:field="*{question}" required="true" />
+                                    <textarea type="text" class="form-control mb-2" placeholder="Enter Exam Question"
+                                        th:field="*{question}" required="true"></textarea>
                                 </div>
-                                <label class="fs-6" style="font-family: 'Roboto';">Total Mark</label>
+                                <label class="fs-6">Total Mark</label>
                                 <div class="input-group mb-3">
                                     <input type="number" class="form-control mb-2" placeholder="Enter Exam Question"
                                         th:field="*{totalMark}" required="true" />
                                 </div>
-                                <label class="text-dark" style="font-family: 'Roboto', sans-serif;">
+                                <label class="text-dark">
                                     Exam File
                                 </label>
                                 <div class="input-group mb-3">
@@ -74,7 +73,7 @@
             </div>
             <footer class="pb-2 pt-2 small text-dark mt-5" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">
-                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                    <p class="mb-0 text-center">&copy; 2022. All Rights
                         Reserved - Ace Inspiration</p>
                 </div>
             </footer>

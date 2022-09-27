@@ -19,7 +19,7 @@
 
                 <div class="container-fluid">
                     <h1 class="fs-3 mb-3 text-secondary"
-                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
                         Attendance Table</h1>
                     <div class="card shadow-sm text-dark">
                         <div class="card-header d-flex flex-wrap justify-content-between py-3">
@@ -30,7 +30,8 @@
                                         <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                             <div id="dataTable_length" class="dataTables_length"
                                                 aria-controls="dataTable">
-                                                <label class="form-label text-dark fw-bold mb-1 h6">Choose the Batch<span class="text-danger ms-1">*</span></label>
+                                                <label class="form-label text-dark fw-bold mb-1 h6">Choose the
+                                                    Batch<span class="text-danger ms-1">*</span></label>
                                                 <select th:field="*{id}" class="form-select"
                                                     aria-label="Default select example">
                                                     <option th:each="batch : ${batchList}" th:value="${batch?.id}">
@@ -57,10 +58,9 @@
 
 
                         <div class="card-body">
-
                             <!-- where I have to write table -->
                             <table id="dataTable" class="display" style="width:100%">
-                                <thead class="table">
+                                <thead>
                                     <tr>
                                         <th class="text-nowrap">Student Name</th>
                                         <th class="text-nowrap" th:each="date : ${dateList}">
@@ -73,7 +73,8 @@
                                         <td>[[${student.name}]]</td>
                                         <td th:each="studentSchedule : ${student.userScheduleList}">
                                             <th:span th:switch="${studentSchedule.status}">
-                                                <span th:case="'Present'" class="fw-bold" style="color: rgb(1, 100, 5);">
+                                                <span th:case="'Present'" class="fw-bold"
+                                                    style="color: rgb(1, 100, 5);">
                                                     [[${studentSchedule.status}]]
                                                 </span>
                                                 <span th:case="'Absent'" class="text-danger fw-bold">
@@ -93,7 +94,7 @@
             </div>
             <footer class="pb-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">
-                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                    <p class="mb-0 text-center">&copy; 2022. All Rights
                         Reserved - Ace Inspiration</p>
                 </div>
             </footer>
@@ -105,8 +106,8 @@
     <script>
         $(document).ready(function () {
             $('#dataTable').DataTable({
-                        scrollX: true 
-                    });
+                scrollX: true
+            });
         });
     </script>
 

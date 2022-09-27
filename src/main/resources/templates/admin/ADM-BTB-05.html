@@ -17,7 +17,7 @@
 
                 <div class="container-fluid">
                     <h1 class="fs-3 mb-4 text-secondary"
-                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
                         Batch Table</h1>
                     <div
                         class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
@@ -34,7 +34,7 @@
                                         <form th:action="@{/admin/addBatch}" th:object="${batch}" method="post">
                                             <div class="border border-0 modal-header rounded rounded-0"
                                                 style="background: #f8f9fc; background-color: #324da0; padding-top: 14px; padding-bottom: 14px;">
-                                                <h4 style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif; margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
+                                                <h4 style="color: rgb(75,75,75); margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
                                                     class="text-light">
                                                     Create Batch
                                                 </h4>
@@ -124,6 +124,7 @@
                                         <th>End Date</th>
                                         <th>Action</th>
                                         <th>Enable / Disable</th>
+                                        <th>Generate Report</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -134,14 +135,14 @@
                                         <td>[[${batch?.startDate}]]</td>
                                         <td>[[${batch?.endDate}]]</td>
                                         <td>
-                                            <a title="Edit" data-bs-placement="top"
-                                            data-bs-toggle="tooltip" th:href="@{/admin/editBatch/} + ${batch?.id}"
+                                            <a title="Edit" data-bs-placement="top" data-bs-toggle="tooltip"
+                                                th:href="@{/admin/editBatch/} + ${batch?.id}"
                                                 class="btn btn-outline-primary bg-gradient me-1">
                                                 <i class="fa-solid fa-pen-to-square "></i>
                                             </a>
 
-                                            <a class="btn-outline-danger bg-gradient btn" title="Remove" data-bs-placement="top"
-                                                data-bs-toggle="tooltip"
+                                            <a class="btn-outline-danger bg-gradient btn" title="Remove"
+                                                data-bs-placement="top" data-bs-toggle="tooltip"
                                                 th:attr="onclick=|handleDelete('${batch.id}')|">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
@@ -149,18 +150,37 @@
                                         <td>
                                             <span th:if="${batch.isActive == true}">
                                                 <a th:href="@{/admin/toggleDisableBatch/} + ${batch?.id}"
-                                                    class="bg-gradient btn btn-outline-danger me-2" style="width: 100px;"><i class="fa-regular fa-circle-xmark"></i>
+                                                    class="bg-gradient btn btn-outline-danger me-2"
+                                                    style="width: 100px;"><i class="fa-regular fa-circle-xmark"></i>
                                                     Disable
                                                 </a>
                                             </span>
 
                                             <span th:if="${batch.isActive == false}">
                                                 <a th:href="@{/admin/toggleDisableBatch/} + ${batch?.id}"
-                                                    class="bg-gradient btn btn-outline-success me-2" style="width: 100px;"><i class="fa-regular fa-circle-check"></i>
+                                                    class="bg-gradient btn btn-outline-success me-2"
+                                                    style="width: 100px;"><i class="fa-regular fa-circle-check"></i>
                                                     Enable
                                                 </a>
 
                                             </span>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown" data-pg-collapsed>
+                                                <button class="btn btn-outline-primary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    <i class="fa-solid fa-download me-2"></i>Report</button>
+                                                <ul class="dropdown-menu border-1 border-dark"
+                                                    aria-labelledby="dropdownMenuButton">
+                                                    <li><a class="dropdown-item" th:href="@{/admin/reportPdf/} + ${batch?.id} + '/' + 'pdf'"><i
+                                                                class="fa-solid fa-file-pdf me-2"></i>Pdf</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" th:href="@{/admin/reportExcel/} + ${batch?.id} + '/' + 'excel'"><i
+                                                                class="fa-solid fa-file-excel me-2"></i>Excel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -172,7 +192,7 @@
             </div>
             <footer class="pb-2 pt-2 small text-dark mt-5" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">
-                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                    <p class="mb-0 text-center">&copy; 2022. All Rights
                         Reserved - Ace Inspiration</p>
                 </div>
             </footer>

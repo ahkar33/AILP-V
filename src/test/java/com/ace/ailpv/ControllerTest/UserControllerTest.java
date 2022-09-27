@@ -58,7 +58,7 @@ public class UserControllerTest {
         this.mockMvc.perform(get(apiPath + "/profile").sessionAttrs(sessionAttr))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("dpwarn"))
-                .andExpect(view().name("/teacher/TCH-PRF-08"));
+                .andExpect(view().name("/teacher/TCH-PRF-13"));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class UserControllerTest {
         this.mockMvc.perform(get(apiPath + "/profile").sessionAttrs(sessionAttr))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("dpwarn"))
-                .andExpect(view().name("/student/STU-PRF-08"));
+                .andExpect(view().name("/student/STU-PRF-09"));
 
     }
 
@@ -87,7 +87,7 @@ public class UserControllerTest {
         when(userService.getUserById(uid)).thenReturn(user);
         this.mockMvc.perform(get(apiPath + "/profile").sessionAttrs(sessionAttr))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/admin/ADM-PRF-16"));
+                .andExpect(view().name("/admin/ADM-PRF-15"));
 
     }
 

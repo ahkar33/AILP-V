@@ -26,15 +26,15 @@
             <div id="content">
                 <div th:insert="/admin/admin-fragments :: navbar" />
                 <div class="container-fluid text-primary">
-                    <div class="align-items-center d-inline-flex flex-row">
-                        <i class="fa-solid fa-chart-line text-primary"
-                            style="font-size: 23px; margin-bottom: 10px;"></i>
-                        <h3 class="text-secondary"
-                            style="font-size: 25px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
-                            &nbsp;Admin Dashboard
-                        </h3>
-                    </div>
-
+                        <div class="align-items-center d-inline-flex flex-row">
+                            <i class="fa-solid fa-chart-line text-primary"
+                                style="font-size: 23px; margin-bottom: 10px;"></i>
+                            <h3 class="text-secondary"
+                                style="font-size: 25px; color: rgb(72,72,72); font-weight: bold;">
+                                &nbsp;Admin Dashboard
+                            </h3>
+                        </div>
+                        
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-lg-4 col-md-6 col-xl-3 mb-4">
                             <a class="text-decoration-none" th:href="@{/admin/student-table}">
@@ -132,7 +132,7 @@
                     <div class="align-items-center d-inline-flex flex-row">
                         <i class="fa-solid fa-chart-pie text-primary" style="font-size: 23px; margin-bottom: 8px;"></i>
                         <h3 class="text-secondary"
-                            style="font-size: 25px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                            style="font-size: 25px; color: rgb(72,72,72); font-weight: bold;">
                             &nbsp;Charts
                         </h3>
                     </div>
@@ -142,8 +142,7 @@
                                 <div class="card-body">
                                     <div class="d-md-flex no-block align-items-center mb-3">
                                         <div>
-                                            <h5 class="card-title text-secondary"
-                                                style="font-family: Roboto, sans-serif;">Attendance Percentage Of Each
+                                            <h5 class="card-title text-secondary">Attendance Percentage Of Each
                                                 Batch</h5>
                                         </div>
                                     </div>
@@ -156,8 +155,7 @@
                                 <div class="card-body">
                                     <div class="d-md-flex no-block align-items-center mb-3">
                                         <div>
-                                            <h5 class="card-title text-secondary"
-                                                style="font-family: Roboto, sans-serif;">Total Students Of Each Batch
+                                            <h5 class="card-title text-secondary">Total Students Of Each Batch
                                             </h5>
                                         </div>
                                     </div>
@@ -170,7 +168,7 @@
             </div>
             <footer class="pb-2 pt-2 small text-dark mt-5" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">
-                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                    <p class="mb-0 text-center">&copy; 2022. All Rights
                         Reserved - Ace Inspiration</p>
                 </div>
             </footer>

@@ -18,7 +18,7 @@
                 <input type="hidden" th:value="${session?.uid}" id="teacherId">
                 <div class="container-fluid">
                     <h1 class="fs-3 mb-3 text-secondary"
-                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;">
+                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
                         Modify Attendance</h1>
                     <div class="card shadow-sm text-dark">
                         <div class="card-header d-flex d-lg-flex flex-lg-wrap flex-wrap py-3">
@@ -26,7 +26,8 @@
                                 <div class="me-3">
                                     <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                         <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                            <label class="form-label text-dark fw-bold mb-1 h6">Choose the Date<span class="text-danger ms-1">*</span></label>
+                                            <label class="form-label text-dark fw-bold mb-1 h6">Choose the Date<span
+                                                    class="text-danger ms-1">*</span></label>
                                             <input type="date" class="form-control" v-model="date" />
                                         </div>
                                     </div>
@@ -36,7 +37,8 @@
                                 <div class="">
                                     <div class="col-auto text-nowrap" style="width: 237.078px;margin-top: 4px;">
                                         <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                            <label class="form-label text-dark fw-bold mb-1 h6">Choose the Batch<span class="text-danger ms-1">*</span></label>
+                                            <label class="form-label text-dark fw-bold mb-1 h6">Choose the Batch<span
+                                                    class="text-danger ms-1">*</span></label>
                                             <select v-model="batchId" class="form-select"
                                                 aria-label="Default select example">
                                                 <option disabled>Choose One Batch</option>
@@ -79,24 +81,30 @@
                                         </td>
                                         <td class="d-flex justify-content-start">
                                             <div class="form-check me-3">
-                                                <input class="form-check-input" type="radio" style="width: 20px; height: 20px;" :name="student.id"
-                                                    v-model="student.status" value="Present" checked />
-                                                <label class="form-check-label" style="margin-top: 3px;" :for="student.id">
-                                                    Present
+                                                <label>
+                                                    <input class="form-check-input" type="radio"
+                                                        style="width: 20px; height: 20px;" :name="student.id"
+                                                        v-model="student.status" value="Present" checked />
+                                                    <p class="form-check-label mb-0 pt-1" style="padding-top: 3px"
+                                                        :for="student.id">Present</p>
                                                 </label>
                                             </div>
                                             <div class="form-check me-3">
-                                                <input class="form-check-input" type="radio" style="width: 20px; height: 20px;"  :name="student.id"
-                                                    v-model="student.status" value="Absent" />
-                                                <label class="form-check-label" style="margin-top: 3px;" :for="student.id">
-                                                    Absent
+                                                <label>
+                                                    <input class="form-check-input" type="radio"
+                                                        style="width: 20px; height: 20px;" :name="student.id"
+                                                        v-model="student.status" value="Absent" />
+                                                    <p class="form-check-label mb-0 pt-1" style="padding-top: 3px"
+                                                        :for="student.id">Absent</p>
                                                 </label>
                                             </div>
                                             <div class="form-check me-3">
-                                                <input class="form-check-input" type="radio" style="width: 20px; height: 20px;"  :name="student.id"
-                                                    v-model="student.status" value="Leave" />
-                                                <label class="form-check-label" style="margin-top: 3px;" :for="student.id">
-                                                    Leave
+                                                <label>
+                                                    <input class="form-check-input" type="radio"
+                                                        style="width: 20px; height: 20px;" :name="student.id"
+                                                        v-model="student.status" value="Leave" />
+                                                    <p class="form-check-label mb-0" style="padding-top: 3px"
+                                                        :for="student.id">Leave</p>
                                                 </label>
                                             </div>
                                         </td>
@@ -111,7 +119,7 @@
             </div>
             <footer class="b-2 pt-2 small text-dark" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">
-                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                    <p class="mb-0 text-center">&copy; 2022. All Rights
                         Reserved - Ace Inspiration</p>
                 </div>
             </footer>

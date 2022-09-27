@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/student/student-fragments :: student_head">
-    <title>Assignment</title>
+    <title>Classmates</title>
 </head>
 <style>
     .allButFooter {
@@ -65,7 +65,7 @@
     }
 </style>
 
-<body id="page-top" style="background-color: #E4E6E9 ">
+<body id="page-top" style="background-color: #E4E6E9; font-family: 'Roboto', sans-serif;">
     <div th:insert="/student/student-fragments :: pc-navbar" />
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
@@ -73,7 +73,7 @@
     <div id="app" class="container allButFooter" v-cloak
         style="margin-top: 22px;padding-right: 10px;padding-left: 10px; margin-bottom: 77px;">
         <input type="hidden" th:value="${session.batchId}" id="batchId">
-        <div class="articles card" style="font-family: 'Roboto', sans-serif;">
+        <div class="articles card">
             <div class="align-items-center card-header d-flex justify-content-between pb-3 pt-3"
                 style="background-color: #32499a; color: #ffffff;">
                 <div class="row w-100">
@@ -107,11 +107,11 @@
     </div>
 
     <footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed
-        style="background-color: #1a2033; font-family: 'Roboto', sans-serif;">
+        style="background-color: #1a2033;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
-                    <p class="h6 mb-2" style="font-family: 'Roboto', sans-serif; font-weight: 700;">How To Find Us</p>
+                    <p class="h6 mb-2" style="font-weight: 700;">How To Find Us</p>
                     <div class="mb-1">
                         <p class="mb-2 text-white" style="font-size: 14px; font-weight: 200;"><i
                                 class="fa-solid fa-location-dot ps-1 pe-3"></i> No. 169, 9th Floor, MTP Condo, Insein
@@ -123,7 +123,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-xl-3 pb-0 pt-3 py-3">
-                    <p class="h6 mb-1" style="font-family: 'Roboto', sans-serif; font-weight: 700;">Get In Touch</p>
+                    <p class="h6 mb-1" style="font-weight: 700;">Get In Touch</p>
                     <div class="d-inline-flex flex-wrap ">
                         <a href="https://www.facebook.com/aceinspiration/" class="text-decoration-none text-white"><i
                                 class="fa-brands fa-square-facebook p-1" style="font-size: 25px;"></i></a>

@@ -17,7 +17,7 @@
 
                 <div class="container-fluid mb-4" id="app">
                     <div>
-                        <h5 style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;"
+                        <h5 style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;"
                             class="fs-3 mb-4 text-secondary">
                             Course Table
                         </h5>
@@ -28,11 +28,11 @@
                         <div>
                             <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm" role="button"
                                 href="#add-course-button" data-bs-toggle="modal"
-                                style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px; font-family: 'Roboto', sans-serif;">
+                                style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;">
                                 <i class="fa-solid fa-photo-film me-1" style=" padding-top: 9px; font-size: 14px;"></i>
                                 Create Course
                             </a>
-                            <div class="fw-bold modal fade" style="font-family: 'Roboto', sans-serif;" role="dialog"
+                            <div class="fw-bold modal fade" role="dialog"
                                 tabindex="-1" id="add-course-button">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content text-dark">
@@ -40,7 +40,7 @@
                                             enctype="multipart/form-data">
                                             <div class="border border-0 modal-header rounded rounded-0"
                                                 style="background: #f8f9fc; background-color: #324da0; padding-top: 14px; padding-bottom: 14px;">
-                                                <h4 style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif; margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
+                                                <h4 style="color: rgb(75,75,75); margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
                                                     class="text-light">
                                                     Create Course
                                                 </h4>
@@ -92,7 +92,7 @@
                     <input type="hidden" th:value="${errorMsg}" id="errorMsg">
                     <div class="card shadow-sm text-dark">
                         <div class="card-body pt-4">
-                            <table id="dataTable" class="display p-2">
+                            <table id="dataTable" class="display" style="width:100%">
                                 <thead class="table">
                                     <tr>
                                         <th>Course ID</th>
@@ -120,12 +120,11 @@
                                             <div class="modal fade" role="dialog" tabindex="-1"
                                                 th:attr="id='edit-course-button' + ${course.id}">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content"
-                                                        style="font-family: 'Roboto', sans-serif;">
+                                                    <div class="modal-content">
                                                         <form th:action="@{/admin/editCourse}" method="post">
                                                             <div class="border border-0 modal-header rounded rounded-0"
                                                                 style="background: #f8f9fc; background-color: #324da0; padding-top: 14px; padding-bottom: 14px;">
-                                                                <h4 style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif; margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
+                                                                <h4 style="color: rgb(75,75,75);margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
                                                                     class="text-light">
                                                                     Edit Course
                                                                 </h4>
@@ -213,7 +212,7 @@
             </div>
             <footer class="pb-2 pt-2 small text-dark mt-5" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">
-                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                    <p class="mb-0 text-center">&copy; 2022. All Rights
                         Reserved - Ace Inspiration</p>
                 </div>
             </footer>
@@ -230,7 +229,9 @@
         });
 
         $(document).ready(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+ 			            scrollX: true
+                    });
             let errorMsg = document.getElementById("errorMsg").value;
             if (errorMsg) {
                 alertError();
