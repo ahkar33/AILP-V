@@ -114,7 +114,7 @@
                         <div class="card-body text-dark pt-4">
 
                             <!-- data table -->
-                            <table id="dataTable" class="display p-2" >
+                            <table id="dataTable" class="display p-2">
                                 <thead class="table">
                                     <tr>
                                         <th>Batch ID</th>
@@ -124,6 +124,7 @@
                                         <th>End Date</th>
                                         <th>Action</th>
                                         <th>Enable / Disable</th>
+                                        <th>Generate Report</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -134,14 +135,14 @@
                                         <td>[[${batch?.startDate}]]</td>
                                         <td>[[${batch?.endDate}]]</td>
                                         <td>
-                                            <a title="Edit" data-bs-placement="top"
-                                            data-bs-toggle="tooltip" th:href="@{/admin/editBatch/} + ${batch?.id}"
+                                            <a title="Edit" data-bs-placement="top" data-bs-toggle="tooltip"
+                                                th:href="@{/admin/editBatch/} + ${batch?.id}"
                                                 class="btn btn-outline-primary bg-gradient me-1">
                                                 <i class="fa-solid fa-pen-to-square "></i>
                                             </a>
 
-                                            <a class="btn-outline-danger bg-gradient btn" title="Remove" data-bs-placement="top"
-                                                data-bs-toggle="tooltip"
+                                            <a class="btn-outline-danger bg-gradient btn" title="Remove"
+                                                data-bs-placement="top" data-bs-toggle="tooltip"
                                                 th:attr="onclick=|handleDelete('${batch.id}')|">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
@@ -149,18 +150,37 @@
                                         <td>
                                             <span th:if="${batch.isActive == true}">
                                                 <a th:href="@{/admin/toggleDisableBatch/} + ${batch?.id}"
-                                                    class="bg-gradient btn btn-outline-danger me-2" style="width: 100px;"><i class="fa-regular fa-circle-xmark"></i>
+                                                    class="bg-gradient btn btn-outline-danger me-2"
+                                                    style="width: 100px;"><i class="fa-regular fa-circle-xmark"></i>
                                                     Disable
                                                 </a>
                                             </span>
 
                                             <span th:if="${batch.isActive == false}">
                                                 <a th:href="@{/admin/toggleDisableBatch/} + ${batch?.id}"
-                                                    class="bg-gradient btn btn-outline-success me-2" style="width: 100px;"><i class="fa-regular fa-circle-check"></i>
+                                                    class="bg-gradient btn btn-outline-success me-2"
+                                                    style="width: 100px;"><i class="fa-regular fa-circle-check"></i>
                                                     Enable
                                                 </a>
 
                                             </span>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown" data-pg-collapsed>
+                                                <button class="btn btn-outline-primary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    <i class="fa-solid fa-download me-2"></i>Report</button>
+                                                <ul class="dropdown-menu border-1 border-dark"
+                                                    aria-labelledby="dropdownMenuButton">
+                                                    <li><a class="dropdown-item" th:href="@{/admin/report/} + ${batch?.id}"><i
+                                                                class="fa-solid fa-file-pdf me-2"></i>Pdf</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" th:href="@{/admin/report/} + ${batch?.id}"><i
+                                                                class="fa-solid fa-file-excel me-2"></i>Excel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
