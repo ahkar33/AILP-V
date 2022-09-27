@@ -18,7 +18,7 @@
                 <div class="container-fluid mb-4">
                     <div>
                         <h1 class="fs-3 mb-4 text-secondary"
-                            style="font-size: 33px; color: rgb(72,72,72); font-weight: bold; font-family: 'Roboto', sans-serif;"
+                            style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;"
                             th:text="${course?.name}">
 
                         </h1>
@@ -43,7 +43,7 @@
                                         enctype="multipart/form-data">
                                         <div class="border border-0 modal-header rounded rounded-0"
                                             style="background: #f8f9fc; background-color: #324da0; padding-top: 14px; padding-bottom: 14px;">
-                                            <h5 style="color: rgb(75,75,75); font-family: 'Roboto', sans-serif; margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
+                                            <h5 style="color: rgb(75,75,75); margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
                                                 class="text-light">Upload Video</h5>
                                             <input type="hidden" name="courseId" th:value="${course?.id}">
 
@@ -51,7 +51,7 @@
                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <label class="text-dark" style="font-family: 'Roboto', sans-serif;">Choose
+                                            <label class="text-dark">Choose
                                                 at least one video</label>
                                             <input class="form-control" type="file" name="file" multiple
                                                 accept="video/*" required>
@@ -114,7 +114,7 @@
             </div>
             <footer class="pb-2 pt-2 small text-dark mt-5" data-pg-collapsed style="background-color: #dfdfdf;">
                 <div class="container pb-2 pt-2">
-                    <p class="mb-0 text-center" style="font-family: 'Roboto', sans-serif;">&copy; 2022. All Rights
+                    <p class="mb-0 text-center">&copy; 2022. All Rights
                         Reserved - Ace Inspiration</p>
                 </div>
             </footer>

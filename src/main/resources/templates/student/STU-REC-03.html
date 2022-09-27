@@ -11,15 +11,14 @@
 }
 </style>
 
-<body id="page-top" style="background-color: #E4E6E9 ">
+<body id="page-top" style="background-color: #E4E6E9; font-family: 'Roboto', sans-serif;">
 
     <div th:insert="/student/student-fragments :: pc-navbar" />
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
     <div class="container mt-4 allButFooter" style="margin-bottom: 77px;">
-        <h1 class="fs-2 mb-3"
-                        style=" color: rgb(78, 78, 78); font-family: 'Roboto', sans-serif;">
+        <h1 class="fs-2 mb-3" style=" color: rgb(78, 78, 78);">
                         Resources</h1>
         <div class="row">
                 <a th:href="@{ ${'/courses/' + batchResource?.resource?.resourceCourse?.name + '/resource/' + batchResource?.resource?.name} }" class=" col-6 col-lg-3 col-md-6 col-xl-2 text-decoration-none"
@@ -61,7 +60,7 @@
 
                         <!-- [[${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 )}]] -->
                         <p class="bg-opacity-50 bg-primary border-primary mb-0 me-n1 mt-1 pb-1 pt-1 rounded-bottom text-center"
-                            style="font-family: 'Arimo', sans-serif; color: #0012a6;">
+                            style="color: #0012a6;">
                             [[${batchResource?.schedule.toString.substring(0, 10)}]]</p>
                     </div>
 
@@ -70,11 +69,11 @@
         </div>
     </div>
     <footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed
-        style="background-color: #1a2033; font-family: 'Roboto', sans-serif;">
+        style="background-color: #1a2033;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
-                    <p class="h6 mb-2" style="font-family: 'Roboto', sans-serif; font-weight: 700;">How To Find Us</p>
+                    <p class="h6 mb-2" style="font-weight: 700;">How To Find Us</p>
                     <div class="mb-1">
                         <p class="mb-2 text-white" style="font-size: 14px; font-weight: 200;"><i
                                 class="fa-solid fa-location-dot ps-1 pe-3"></i> No. 169, 9th Floor, MTP Condo, Insein
@@ -86,7 +85,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-xl-3 pb-0 pt-3 py-3">
-                    <p class="h6 mb-1" style="font-family: 'Roboto', sans-serif; font-weight: 700;">Get In Touch</p>
+                    <p class="h6 mb-1" style="font-weight: 700;">Get In Touch</p>
                     <div class="d-inline-flex flex-wrap ">
                         <a href="https://www.facebook.com/aceinspiration/" class="text-decoration-none text-white"><i
                                 class="fa-brands fa-square-facebook p-1" style="font-size: 25px;"></i></a>

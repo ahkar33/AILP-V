@@ -6,22 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Register</title>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Bangla&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Kannada&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arimo&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Average+Sans&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dangrek&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=EB+Garamond&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+KR&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inria+Sans&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
 </head>
 
-<body class="bg-gradient-primary d-xl-flex" style="background: rgb(55,81,162);">
+<body class="bg-gradient-primary d-xl-flex" style="background: rgb(55,81,162); font-family: 'Roboto', sans-serif;">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-10 col-md-9 col-xl-8">
@@ -36,7 +27,7 @@
                                             style="width: 247px; margin-bottom: 33px; margin-top: 12px;" />
                                     </div>
                                     <div class="text-start">
-                                        <p style="font-family: Roboto, sans-serif;font-size: 19px;color: rgb(101,99,99);margin-bottom: 10px;margin-top: -17px;">Create your account by filling the form below.<br />
+                                        <p style="font-size: 19px;color: rgb(101,99,99);margin-bottom: 10px;margin-top: -17px;">Create your account by filling the form below.<br />
                                         </p>
                                     </div>
                                     <div th:if="${errorMsg != null}" class="alert alert-danger">
@@ -83,7 +74,7 @@
                                             type="submit" role="button" data-bss-hover-animate="pulse"
                                             style="background: rgb(55,81,162); border-radius: 9px; margin-bottom: 18px; margin-left: 0px; font-size: 14px;">Register</button>
                                     </form>
-                                    <p class="text-center text-dark" style="font-family: Roboto, sans-serif;" >Have already an account? <a
+                                    <p class="text-center text-dark">Have already an account? <a
                                             href="/auth/login"><span><b>Login here</b></span></a></p>
                                 </div>
                             </div>
