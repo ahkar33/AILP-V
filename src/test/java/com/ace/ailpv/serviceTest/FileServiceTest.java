@@ -17,7 +17,7 @@ public class FileServiceTest {
 
     // file created in temdir will be deleted after test
     @TempDir
-    Path tempDir;
+    Path pathDir;
 
     @TempDir
     Path videoDir;
@@ -31,11 +31,9 @@ public class FileServiceTest {
     public void createFolderForCourseTest() {
 
         String courseName = "courseName";
-        File pathDir = new File(courseFilePath + courseName);
-        pathDir.delete();
-        assertFalse(pathDir.exists());
-        pathDir.mkdirs();
-        assertTrue(pathDir.exists());
+        File destroyDir = new File(courseFilePath + courseName);
+        destroyDir.mkdirs();
+        assertTrue(destroyDir.exists());
 
         File videoDir = new File(courseFilePath + courseName + "\\video");
         videoDir.delete();
@@ -53,7 +51,7 @@ public class FileServiceTest {
 
     @Test
     public void createFileTest() throws IOException {
-        Path filedir = tempDir.resolve("file.txt");
+        Path filedir = pathDir.resolve("file.txt");
         Files.writeString(filedir, "test file");
         assertTrue( Files.exists(filedir), "File should exist");
 
@@ -74,7 +72,7 @@ public class FileServiceTest {
 
     @Test
     public void deleteFileTest()throws IOException{
-        Path filedir = tempDir.resolve("file.txt");
+        Path filedir = pathDir.resolve("file.txt");
         Files.writeString(filedir, "test file");
         Files.delete(filedir);
         assertTrue(Files.notExists(filedir), "file should not exist");
