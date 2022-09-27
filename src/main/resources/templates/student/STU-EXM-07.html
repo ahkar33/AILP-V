@@ -15,7 +15,7 @@
     }
 </style>
 
-<body id="page-top" style="background-color: #E4E6E9 ">
+<body id="page-top" style="background-color: #E4E6E9;">
     <div th:insert="/student/student-fragments :: pc-navbar" />
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
@@ -31,10 +31,9 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-6 ms-auto me-auto">
-                                <h3 class="fw-semibold h2 mb-4" style="font-family: 'Roboto', sans-serif;"></h3>
+                                <h3 class="fw-semibold h2 mb-4"></h3>
                                 <img src="/assets/img/ExamWillStartAt-Photo.png" style="width: 80%;" class="mb-3" />
-                                <p class="fw-bold h2 mb-4 text-dark"
-                                    style="font-family: 'IBM Plex Sans KR', sans-serif;">Exam will start at</p>
+                                <p class="fw-bold h2 mb-4 text-dark">Exam will start at</p>
                                 <div class="d-flex justify-content-evenly fw-bolder mb-3 pb-2"><span d-flex="" flex-column="">
                                         <h2 style="text-align: center; font-size: 27px;">{{ startDays }}</h2>
                                         <p style="font-size: 13px;">DAYS</p>
@@ -69,9 +68,9 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-6 me-auto ms-auto">
-                                    <h3 class="fw-semibold h2 mb-4" style="font-family: Roboto, sans-serif;"></h3>
-                                    <p class="fw-semibold h2 mb-3 text-dark" style="font-family: IBM Plex Sans KR, sans-serif;">Your exam form was turned in.</p>
-                                    <h1 style="text-align: center; font-size: 25px; font-family: 'ABeeZee', sans-serif; font-weight: 700; background-color: rgba(0, 185, 43, 0.164); color: #00661e;" class="bg-opacity-50 border mb-3 me-4 ms-4 pb-3 pt-3 rounded"><span class="fw-normal">RESULT:  </span>{{ studentScore }}/{{ exam.fullMark }}<span style="font-size: 21px; font-weight: normal;">&nbsp;Marks</span></h1>
+                                    <h3 class="fw-semibold h2 mb-4"></h3>
+                                    <p class="fw-semibold h2 mb-3 text-dark"></p>Your exam form was turned in.</p>
+                                    <h1 style="text-align: center; font-size: 25px; font-weight: 700; background-color: rgba(0, 185, 43, 0.164); color: #00661e;" class="bg-opacity-50 border mb-3 me-4 ms-4 pb-3 pt-3 rounded"><span class="fw-normal">RESULT:  </span>{{ studentScore }}/{{ exam.fullMark }}<span style="font-size: 21px; font-weight: normal;">&nbsp;Marks</span></h1>
 
                                     <!-- If exam mark was between 0 to 30 -->
                                     <!-- <h1 style="text-align: center; font-size: 25px; font-family: 'ABeeZee', sans-serif; font-weight: 700; background-color: rgba(185, 0, 0, 0.15); color: #660000;" class="bg-opacity-50 border mb-3 me-4 ms-4 pb-3 pt-3 rounded"><span class="fw-normal">RESULT:  </span>{{ studentScore }}/{{ exam.fullMark }}<span style="font-size: 21px; font-weight: normal;">&nbsp;Marks</span></h1> -->
@@ -127,17 +126,17 @@
                                     <h2 class="accordion-header align-items-baseline d-flex flex-row h5 px-4 py-3"
                                     >
                                     <div class="w-100">
-                                        <h4 style="font-family: 'Roboto', sans-serif; font-size: 18px; color: #535353;"
+                                        <h4 style="font-size: 18px; color: #535353;"
                                             class="mb-0">{{ question.examQuestion }}</h4>
                                     </div> <span>
                                         <p class="mb-0"
-                                            style="font-size: 14px; font-weight: bold; color: #03205f; font-family: 'Roboto', sans-serif;">
+                                            style="font-size: 14px; font-weight: bold; color: #03205f;">
                                             10Marks</p>
                                     </span>
                                 </h2>
                                 <!-- Question's Radio Buttons -->
                                     <div class="accordion-body pt-1"
-                                        style="font-family: 'Roboto', sans-serif; color: #5e5e5e;">
+                                        style="color: #5e5e5e;">
                                         <div class="d-flex flex-column gap-3">
                                             <span v-for="radio in question.radioList">
                                                 <input class="ms-2 me-2" type="radio" v-model="studentAnswerList[index]"
@@ -168,7 +167,7 @@
                             <div class="row">
                                 <div class="col-lg-6 ms-auto me-auto">
                                     <img src="/assets/img/exam-ended.png" class="mb-3" style="width: 85%;"/>
-                                    <p class="fw-normal h2 mb-4 text-dark" style="font-family: 'Roboto', sans-serif;">Sorry, the exam has already ended.</p>
+                                    <p class="fw-normal h2 mb-4 text-dark">Sorry, the exam has already ended.</p>
                                     <span><a th:href="@{/student/student-home}" class="btn btn-lg bg-gradient shadow-sm pe-5 ps-5 btn-primary rounded-pill">Go Home</a>
                                 </div>
                             </div>

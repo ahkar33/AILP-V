@@ -11,7 +11,7 @@
 	}
 </style>
 
-<body id="page-top" style="background-color: #E4E6E9 ">
+<body id="page-top" style="background-color: #E4E6E9; font-family: 'Roboto', sans-serif;">
 	<div th:insert="/student/student-fragments :: pc-navbar" />
 	<div th:insert="/student/student-fragments :: mobile-navbar" />
 
@@ -31,19 +31,14 @@
 				<div class="mt-4 pb-4">
 					<div class="g-2 row">
 						<div class="col-lg-6 col-md-6 col-xl-4" th:each="result : ${resultList}">
-							<!-- <p
-                style="margin-top: 0px; font-family: 'IBM Plex Sans KR', sans-serif"
-              >
-                [[${answer?.submitTime}]]
-              </p> -->
 							<div class="card">
 								<div class="card-body pb-2 pt-3 shadow-sm text-dark">
 
 									<div class="border-bottom d-flex justify-content-between">
-										<h5 style="font-family: 'Roboto', sans-serif;" class="mb-3">
+										<h5 class="mb-3">
 											[[${result?.assignmentResultAnswer?.assignment?.name}]]
 										</h5>
-										<p style="font-family: 'Roboto', sans-serif; font-size: 14px; color: #008a14;"
+										<p style="font-size: 14px; color: #008a14;"
 											class="fw-bold mb-0 ps-3 pt-1">[[${result?.mark}]] Marks</p>
 									</div>
 
@@ -51,17 +46,13 @@
 										<img class="img-profile me-2 rounded-circle"
 											th:src="@{${'/profile_pics/' + result?.assignmentResultTeacher?.profile_pic} }"
 											style="width: 23px; height: 23px;" />
-										<h6 class="mb-0  text-muted" style="font-family: 'Roboto', sans-serif;">
+										<h6 class="mb-0  text-muted">
 											[[${result?.assignmentResultTeacher?.name}]]</h6>
 									</div>
 
 									<a class="btn btn-dark btn-sm mb-2 ms-0 mt-2" role="button"
 										href="#grade-comment-button" data-bs-target="#grade-comment-button"
 										data-bs-toggle="modal">Teacher&apos;s Comment</a>
-
-									<!-- <p class="mb-0 text-end" style="font-family: 'Roboto', sans-serif; font-size: 15px;">Monday, May 8
-                    2022
-                  </p> -->
 
 									<!-- Modal Box -->
 									<div class="modal fade" role="dialog" tabindex="-1" id="grade-comment-button">
@@ -73,7 +64,7 @@
 														<img class="img-profile me-2 rounded-circle"
 															th:src="@{${'/profile_pics/' + result?.assignmentResultTeacher?.profile_pic} }"
 															style="width: 30px; height: 30px;" />
-														<h5 class="mb-0" style="font-family: 'Roboto', sans-serif;">
+														<h5 class="mb-0">
 															[[${result?.assignmentResultTeacher?.name}]]</h5>
 													</div>
 
@@ -81,7 +72,7 @@
 														aria-label="Close"></button>
 												</div>
 												<div class="modal-body">
-													<p style="font-family: 'Roboto', sans-serif;" class="mb-0">
+													<p class="mb-0">
 														[[${result?.comment}]]</p>
 												</div>
 
@@ -103,7 +94,7 @@
 						<span th:each=" studentHasExam : ${sheList}">
 							<div class="col-md-4">
 								<div class="card mb-3">
-									<div class="card-body" style="font-family: 'Roboto', sans-serif;">
+									<div class="card-body">
 										<div class="d-flex flex-column flex-lg-row"> <i
 												class="fa-solid fa-square-poll-horizontal me-3 mb-2"
 												style="font-size: 25px;"></i>
@@ -127,7 +118,7 @@
 						<span th:each=" result : ${fileExamResultList}">
 							<div class="col-md-4">
 								<div class="card mb-3">
-									<div class="card-body" style="font-family: 'Roboto', sans-serif;">
+									<div class="card-body">
 										<div class="d-flex flex-column flex-lg-row"> <i
 												class="fa-solid fa-square-poll-horizontal me-3 mb-2"
 												style="font-size: 25px;"></i>
@@ -151,11 +142,11 @@
 		</div>
 	</div>
 	<footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed
-		style="background-color: #1a2033; font-family: 'Roboto', sans-serif;">
+		style="background-color: #1a2033;">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
-					<p class="h6 mb-2" style="font-family: 'Roboto', sans-serif; font-weight: 700;">How To Find Us</p>
+					<p class="h6 mb-2" style="font-weight: 700;">How To Find Us</p>
 					<div class="mb-1">
 						<p class="mb-2 text-white" style="font-size: 14px; font-weight: 200;"><i
 								class="fa-solid fa-location-dot ps-1 pe-3"></i> No. 169, 9th Floor, MTP Condo, Insein
@@ -167,7 +158,7 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-xl-3 pb-0 pt-3 py-3">
-					<p class="h6 mb-1" style="font-family: 'Roboto', sans-serif; font-weight: 700;">Get In Touch</p>
+					<p class="h6 mb-1" style="font-weight: 700;">Get In Touch</p>
 					<div class="d-inline-flex flex-wrap ">
 						<a href="https://www.facebook.com/aceinspiration/" class="text-decoration-none text-white"><i
 								class="fa-brands fa-square-facebook p-1" style="font-size: 25px;"></i></a>
