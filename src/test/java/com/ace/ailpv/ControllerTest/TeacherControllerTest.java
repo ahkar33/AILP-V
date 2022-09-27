@@ -27,12 +27,15 @@ import com.ace.ailpv.entity.Batch;
 import com.ace.ailpv.entity.BatchHasExam;
 import com.ace.ailpv.entity.Course;
 import com.ace.ailpv.entity.Exam;
+import com.ace.ailpv.entity.FileExam;
 import com.ace.ailpv.entity.User;
+import com.ace.ailpv.entity.UserSchedule;
 import com.ace.ailpv.service.AssignmentAnswerService;
 import com.ace.ailpv.service.AssignmentResultService;
 import com.ace.ailpv.service.AssignmentService;
 import com.ace.ailpv.service.BatchHasExamService;
 import com.ace.ailpv.service.ExamService;
+import com.ace.ailpv.service.FileExamService;
 import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
 
@@ -57,6 +60,9 @@ public class TeacherControllerTest {
 
     @MockBean
     ExamService examService;
+
+    @MockBean
+    FileExamService fileExamService;
 
     @MockBean
     BatchHasExamService batchHasExamService;
@@ -143,15 +149,21 @@ public class TeacherControllerTest {
     @Test
     public void setupAttendanceTableTest() throws Exception{
         String teacherId = "tch001";
+        String batchId = "1";
         HashMap<String, Object> sessionattr = new HashMap<String, Object>(); 
         sessionattr.put("teacherId", teacherId);
+        sessionattr.put("batchId", batchId);
         List<Batch> batchList = getBatchList();
+        List<UserSchedule> res = new ArrayList<>();
+        List<User> studentList = getUserList();
+        when(userScheduleService.getUserScheduleListByBatchId(Long.parseLong("1"))).thenReturn(res);
         when(userService.getTeacherBatchListById(teacherId)).thenReturn(batchList);
+        when(userService.getStudentListByBatchId(Long.parseLong("1"))).thenReturn(studentList);
 
         this.mockMvc.perform(get("/teacher/attendance-table").sessionAttrs(sessionattr))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("batchList"))
-                .andExpect(model().attributeExists("data"))
+                .andExpect(model().attributeExists("studentList"))
                 .andExpect(view().name("/teacher/TCH-ATB-11"));
     }
 
@@ -327,11 +339,14 @@ public class TeacherControllerTest {
         Exam exam1 = new Exam();
         examList.add(exam);
         examList.add(exam1);
+        List<FileExam> fileExamList = new ArrayList<>();
+        when(fileExamService.getFileExamListByTeacherId(teacherId)).thenReturn(fileExamList);
         when(examService.getExamListByTeacherId(teacherId)).thenReturn(examList);
 
         this.mockMvc.perform(get("/teacher/exam-table").sessionAttrs(sessionattr))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("examList"))
+                .andExpect(model().attributeExists("fileExamList"))
                 .andExpect(view().name("/teacher/TCH-ETB-08"));
     }
 
