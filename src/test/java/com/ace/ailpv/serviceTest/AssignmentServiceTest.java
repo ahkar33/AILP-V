@@ -60,9 +60,9 @@ public class AssignmentServiceTest {
 
     @Test
     public void getAllAssignmentByBatchIdTest(){
-        List<Assignment>assignmentList=getAssignmentList();
+        List<Assignment> assignmentList=getAssignmentList();
         when(assignmentRepository.findByAssignmentBatch_Id(1L)).thenReturn(assignmentList);
-        List<Assignment>assignmentactual=assignmentService.getAllAssignmentByBatchId(1L);
+        List<Assignment> assignmentactual = assignmentService.getAllAssignmentByBatchId(1L);
         assertEquals(assignmentList.size(), assignmentactual.size());
         verify(assignmentRepository,times(1)).findByAssignmentBatch_Id(1L);
 
@@ -81,12 +81,16 @@ public class AssignmentServiceTest {
 
     private List<Assignment>getAssignmentList(){
         List<Assignment>assignmentList=new ArrayList<>();
+        Batch batch = new Batch();
+        batch.setId(1L);
         Assignment assignment= new Assignment();
         assignment.setId(1L);
         assignment.setName("Test1");
         assignment.setStartTime(LocalDateTime.now());
         assignment.setQuestionFileName("Test 1 ");
-        assignment.setAssignmentBatch(new Batch());
+        assignment.setAssignmentBatch(batch);
+        assignment.setEndTime(LocalDateTime.now());
+        assignment.setDueDate("dueDate");
         assignmentList.add(assignment);
         return assignmentList;
     }
