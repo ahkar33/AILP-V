@@ -36,6 +36,7 @@ import com.ace.ailpv.service.CourseService;
 import com.ace.ailpv.service.ExamService;
 import com.ace.ailpv.service.FileExamService;
 import com.ace.ailpv.service.FileService;
+import com.ace.ailpv.service.ReportService;
 import com.ace.ailpv.service.ResourceService;
 import com.ace.ailpv.service.UserScheduleService;
 import com.ace.ailpv.service.UserService;
@@ -89,6 +90,9 @@ public class AdminController {
 
     @Autowired
     private BatchHasFileExamService batchHasFileExamService;
+
+    @Autowired
+    private ReportService reportService;
 
     String path = "src\\main\\resources\\static\\courses\\";
 
@@ -585,7 +589,7 @@ public class AdminController {
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
         return "/admin/ADM-FEG-21";
-    } 
+    }
 
     @PostMapping("/searchStudentExamsByBatch")
     public String searchStudentExamsByBatch(@ModelAttribute("data") Batch batch, ModelMap model) {
@@ -611,6 +615,12 @@ public class AdminController {
         model.addAttribute("studentList", studentList);
         model.addAttribute("batchList", batchList);
         return "/admin/ADM-FEG-21";
+    }
+
+    @GetMapping("/report")
+    public String report() {
+        reportService.exportReport();
+        return "redirect:/admin/dashboard";
     }
 
 }
