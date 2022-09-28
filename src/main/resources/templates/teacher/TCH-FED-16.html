@@ -24,8 +24,8 @@
                             <div class="col-lg-4 col-md-6 col-sm-12 col-xl-3" th:each="answer : ${answerList}">
                                 <div class="card shadow-sm">
                                     <div class="card-body">
-                                        <div th:if="${answer?.isGraded}" class="dropdown float-end">
-                                            <i class="fa fa-check-square-o" style="color: #02aa19; font-size: 17px;"
+                                        <div th:if="${answer?.isGraded}" class="d-flex dropdown float-end">
+                                            <i class="fa-regular fa-circle-check" style="color: #02aa19; font-size: 17px;"
                                                 data-bs-toggle="tooltip" title="Graded" data-bs-placement="top"
                                                 data-bs-trigger="hover"></i>
                                         </div>

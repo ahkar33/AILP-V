@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<link rel="stylesheet" href="/assets/css/profile-photo-icon.css" />
+<link href="https://fonts.googleapis.com/css2?family=Yantramanav:wght@500&display=swap" rel="stylesheet">
+
 <head th:insert="/student/student-fragments :: student_head">
     <title>Profile</title>
 </head>
@@ -11,7 +14,7 @@
     }
 
     .allButFooter {
-    min-height: calc(80vh - 90px);
+        min-height: calc(80vh - 90px);
     }
 </style>
 
@@ -26,43 +29,90 @@
             [[${dpwarn}]]
         </div>
         <div class="d-sm-flex justify-content-between align-items-center mb-2 mt-2" style="margin-top: 35px;">
-            <h3 class="mb-0"
-                style="font-weight: bold; font-size: 30px;color: rgb(103,103,103);">
+            <h3 class="mb-0" style="font-weight: bold; font-size: 30px;color: rgb(103,103,103);">
                 Profile
             </h3>
         </div>
         <div class="row mb-3">
             <div class="col-lg-4">
-                <div class="card mb-3">
-                    <div class="card-body text-center shadow">
-                        <img class="rounded-circle mb-3 mt-4" th:src="@{${'/profile_pics/' + session?.profile_pic} }"
-                            width="160" height="160" />
+                <div class="card mb-3" style="box-shadow: 1px 2px 7px 1px #c8c4c4;">
+                    <div class="card-body text-center pt-5 pb-5">
+
+                        <!-- Profile photo and change profile photo icon start here -->
+                        <div class="avatar-upload" style="margin-bottom: 33px;">
+                            <!-- Change profile photo icon -->
+                            <div class="avatar-edit">
+                                <a role="button" data-bs-target="#modal-2" data-bs-toggle="modal" href="#modal-2">
+                                    <input type='file' id="imageUpload" />
+                                    <label for="imageUpload"></label>
+                                </a>
+                            </div>
+
+                            <!-- Profile Photo -->
+                            <div class="avatar-preview">
+                                <img class="rounded-circle" alt="User profile picture"
+                                    style="box-shadow: 0px 0px 0px 4px #e6e6e6; border: 4px solid #ffffff;"
+                                    th:src="@{${'/profile_pics/' + session?.profile_pic} }" width="160px"
+                                    height="160px" />
+                            </div>
+                        </div>
+
+                        <!-- Modal box for profile photo -->
+                        <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <form th:action="@{/user/upload}" method="post" enctype="multipart/form-data">
+                                        <div class="border border-0 modal-header rounded rounded-0"
+                                            style="background: #f8f9fc; background-color: #324da0; padding-top: 14px; padding-bottom: 14px;">
+                                            <h5 style="color: rgb(75,75,75); margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
+                                                class="text-light">
+                                                Change Your Profile Photo
+                                            </h5>
+                                            <button type="button" class="btn-close btn-close-white"
+                                                data-bs-dismiss="modal" aria-label="Close">
+                                            </button>
+                                        </div>
+                                        <div class="modal-body pb-0">
+                                            <div class="input-group">
+                                                <input class="form-control" name="profile_pic" type="file"
+                                                    style="height: 38px;" required="" accept=".jpg,.png,.jpeg,.jfif" />
+                                                <button class="btn btn-primary" type="submit">
+                                                    Change
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                         <a class="text-decoration-none text-dark" href="#profile-name-upload" id="changeNameIcon"
                             data-bs-target="#profile-name-upload" data-bs-toggle="modal">
                             <div class="pb-2">
-                                <h3 class="fw-bold"
-                                    style="font-size: 20.8px;">
-                                    [[${session?.name}]] &nbsp;&nbsp;
-                                    <i class="far fa-edit text-secondary" style="font-size: 15.8px;"></i>
-                                </h3>
+                                <h2 style="font-size: 30px; font-family: 'Yantramanav', sans-serif;">
+                                    [[${session?.name}]]
+                                    <i class="fa-regular fa-pen-to-square ms-1"
+                                        style="font-size: 17px; color: #7c7c7c;"></i>
+                                    </h3>
                             </div>
                         </a>
 
-                        
-
+                        <!-- Modal box for profile name -->
                         <div class="modal fade" role="dialog" tabindex="-1" id="profile-name-upload">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <form method="post" th:action="@{/user/change-name}">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-dark">
+                                        <div class="border border-0 modal-header rounded rounded-0"
+                                            style="background: #f8f9fc; background-color: #324da0; padding-top: 14px; padding-bottom: 14px;">
+                                            <h5 style="color: rgb(75,75,75); margin-top: 5px; margin-bottom: 2px; font-size: 22px;"
+                                                class="text-light">
                                                 Change Your Profile Name
                                             </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close">
+                                            <button type="button" class="btn-close btn-close-white"
+                                                data-bs-dismiss="modal" aria-label="Close">
                                             </button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body pb-0">
                                             <div class="input-group">
                                                 <input class="form-control" type="text" name="name" id="changeNameInput"
                                                     style="height: 38px;" required="" />
@@ -75,39 +125,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="mb-3">
-                            <a class="btn btn-primary btn-sm" role="button" data-bs-target="#modal-2"
-                                data-bs-toggle="modal" href="#modal-2">
-                                Change Photo
-                            </a>
-                            <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <form th:action="@{/user/upload}" method="post" enctype="multipart/form-data">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title text-dark">
-                                                    Change Your Profile Photo
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close">
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="input-group">
-                                                    <input class="form-control" name="profile_pic" type="file"
-                                                        style="height: 38px;" required="" accept=".jpg,.png,.jpeg,.jfif"/>
-                                                    <button class="btn btn-primary" type="submit">
-                                                        Change
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -116,9 +133,9 @@
             <div class="col-lg-8">
                 <div class="row">
                     <div class="col">
-                        <div class="card shadow mb-3">
+                        <div class="card mb-3" style="box-shadow: 1px 2px 7px 1px #c8c4c4;">
                             <div class="card-header py-3">
-                                <p class="text-primary m-0 fw-bold">
+                                <p class="text-primary m-0 h5 fw-bold">
                                     Settings
                                 </p>
                             </div>
@@ -179,10 +196,10 @@
                                         </div>
 
                                     </div>
-                                    <div class="mb-3">
-                                        <button class="btn btn-primary btn-sm" type="submit"
+                                    <div class="mb-3 d-flex justify-content-end">
+                                        <button class="btn btn-primary" type="submit"
                                             style="margin-left: 0px;margin-bottom: 0px;">
-                                            Change Password
+                                            <i class="fa-solid fa-gears me-2"></i>Change Password
                                         </button>
                                     </div>
                                 </form>
@@ -214,8 +231,7 @@
             </div>
         </div>
     </div>
-    <footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed
-        style="background-color: #1a2033;">
+    <footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed style="background-color: #1a2033;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
