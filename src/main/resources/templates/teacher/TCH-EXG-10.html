@@ -60,7 +60,7 @@
                         <div class="card-body text-dark">
 
                             <!-- where I have to write table -->
-                            <table id="dataTable" class="display p-2">
+                            <table id="dataTable" class="display" style="width:100%">
                                 <thead class="table">
                                     <tr class="text-dark">
                                         <th>Student Name</th>
@@ -158,7 +158,9 @@
             }
         });
         $(document).ready(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+                scrollX: true
+            });
             $('#dataTable2').DataTable();
         });
     </script>

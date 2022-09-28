@@ -27,8 +27,8 @@
                                     class="d-flex d-lg-flex flex-lg-wrap-reverse flex-nowrap flex-row">
                                     <div class="me-1">
                                         <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                            <label class="form-label fw-bold mb-1 h6 text-secondary">Choose One
-                                                Batch</label>
+                                            <label class="form-label text-dark fw-bold mb-1 h6">Choose the
+                                                Batch<span class="text-danger ms-1">*</span></label>
                                             <select th:field="*{id}" class="form-select" style="width: 230px;"
                                                 aria-label="Default select example">
                                                 <option th:each="batch : ${batchList}" th:value="${batch?.id}">
@@ -44,20 +44,14 @@
                                     </div>
                                 </form>
                             </span>
-                            <span style="margin-top: 1.0rem">
-                                <a th:href="@{/teacher/modifyAttendance} "
-                                    class="btn btn-primary  bg-gradient shadow-sm">
-                                    <i class="fa-solid fa-user-clock me-2"></i>Create Attendance
-                                </a>
-                            </span>
                         </div>
 
 
                         <div class="card-body">
 
                             <!-- where I have to write table -->
-                            <table id="dataTable" class="display p-2">
-                                <thead class="table">
+                            <table id="dataTable" class="display" style="width:100%">
+                                <thead>
                                     <tr>
                                         <th>Student Name</th>
                                         <th th:each="date : ${dateList}">
@@ -70,13 +64,13 @@
                                         <td>[[${student.name}]]</td>
                                         <td th:each="studentSchedule : ${student.userScheduleList}">
                                             <th:span th:switch="${studentSchedule.status}">
-                                                <span th:case="'Present'" class="text-success fw-bold">
+                                                <span th:case="'Present'" class="fw-bold" style="color: rgb(1, 100, 5);">
                                                     [[${studentSchedule.status}]]
                                                 </span>
                                                 <span th:case="'Absent'" class="text-danger fw-bold">
                                                     [[${studentSchedule.status}]]
                                                 </span>
-                                                <span th:case="'Leave'" class="text-warning fw-bold">
+                                                <span th:case="'Leave'" class="fw-bold" style="color: #d3a200;">
                                                     [[${studentSchedule.status}]]
                                                 </span>
                                             </th:span>
@@ -102,7 +96,9 @@
 
     <script>
         $(document).ready(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+                scrollX: true
+            });
         });
     </script>
 

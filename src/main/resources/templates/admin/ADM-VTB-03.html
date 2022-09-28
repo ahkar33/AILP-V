@@ -77,9 +77,9 @@
                     <div class="card shadow-sm text-dark">
                         <h2 class="text-danger text-center">[[${msg}]]</h2>
                         <div class="card-body pt-4">
-                            <table id="dataTable">
-                                <thead class="table">
-                                    <tr>
+                            <table id="dataTable" class="display" style="width:100%">
+                                <thead>
+                                    <tr class="text-dark">
                                         <th>Name</th>
                                         <th>Action</th>
                                     </tr>
@@ -131,7 +131,9 @@
         });
 
         $(document).ready(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+                scrollX: true
+            });
         });
 
         const handleDelete = (vidId) => {
