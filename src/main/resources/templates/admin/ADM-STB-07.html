@@ -17,23 +17,19 @@
                 <div th:insert="/admin/admin-fragments :: navbar" />
 
                 <div class="container-fluid">
-                    <div class="d-flex justify-content-between mb-4">
-                        <h1 class="fs-3 mb-4 text-secondary"
+                    <h1 class="fs-3 mb-4 text-secondary"
                         style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
                         Student Table</h1>
+                    <div
+                        class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center bg-light">
+                        <a class="btn btn-primary pe-3 ps-3 mb-3 bg-gradient shadow-sm" role="button"
+                            th:href="@{/admin/studentRegister}">
+                            <i class="fa-solid fa-user-plus me-1"></i>
+                            Add Student
+                        </a>
                     </div>
-                    
                     <div class="card shadow-sm">
-                        <div
-                        class="d-flex card-header justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center pt-3 bg-light">
-                            <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
-                                style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
-                                role="button" th:href="@{/admin/studentRegister}">
-                                <i class="fa-solid fa-user-plus me-1"
-                                    style="padding-top: 7px; font-size:15px"></i>
-                                Add Student
-                            </a>
-                    </div>
+
                         <!-- <div class="card-header py-3">
                             <form>
                                 <div class="row">
@@ -73,11 +69,11 @@
                         <div class="card-body text-dark pt-4">
 
                             <!-- where I have to write table -->
-                            <table id="dataTable" class="display p-2">
-                                <thead class="table">
+                            <table id="dataTable" class="display" style="width:100%">
+                                <thead>
                                     <tr>
-                                        <th>Student Id</th>
-                                        <th>Student Name</th>
+                                        <th class="text-nowrap">Student Id</th>
+                                        <th class="text-nowrap">Student Name</th>
                                         <th>Batch</th>
                                         <th>Attendance</th>
                                         <th>Action</th>
@@ -91,16 +87,18 @@
                                             [[${batch.name}]]
                                         </td>
                                         <td>
-                                            <span th:if="${student?.attendancePercentage >= 75}" class="text-success fw-bold">
+                                            <span th:if="${student?.attendancePercentage >= 75}" class="fw-bold"
+                                                style="color: rgb(1, 100, 5);">
                                                 [[${student?.attendancePercentage}]] %
                                             </span>
-                                            <span th:if="${student?.attendancePercentage < 75}" class="text-danger fw-bold">
+                                            <span th:if="${student?.attendancePercentage < 75}"
+                                                class="text-danger fw-bold">
                                                 [[${student?.attendancePercentage}]] %
                                             </span>
                                         </td>
                                         <td>
-                                            <a title="Edit" data-bs-placement="top"
-                                            data-bs-toggle="tooltip" th:href="@{/admin/editStudent/} + ${student?.id}"
+                                            <a title="Edit" data-bs-placement="top" data-bs-toggle="tooltip"
+                                                th:href="@{/admin/editStudent/} + ${student?.id}"
                                                 class="btn btn-outline-primary me-1">
                                                 <i class="fa-solid fa-pen-to-square "></i>
                                             </a>
@@ -137,7 +135,9 @@
         });
 
         $(document).ready(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+                scrollX: true
+            });
         });
 
         const handleDelete = (studentId) => {

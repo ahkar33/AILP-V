@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/admin/admin-fragments :: admin_head">
-    <title>Attendance Table</title>
+    <title>MCQ Exam Grade</title>
 </head>
 
 <style>
@@ -23,27 +23,25 @@
                 <!-- this is where nav bar is -->
                 <div th:insert="/admin/admin-fragments :: navbar" />
 
-                <div class="container-fluid">
-
-                    <nav>
-                        <div class="nav nav-fill nav-pills w-50 mb-4" id="nav-tab" role="tablist">
-                            <a th:href="@{/admin/file-exam-grade}" class="nav-link fw-bold">File Upload Exam</a>
-                            <a th:href="@{/admin/exam-grade}" class="nav-link active fw-bold" >Multiple Choice Exam</a>
+                <div class="container-fluid"> 
+                    <nav class="d-flex justify-content-center mb-4">
+                        <div class="border-light mb-4 nav nav-fill nav-pills"
+                            style="width: 500px; box-shadow: 0px 1px 5px 3px #e6e6e6; border-radius: 74px; border: 7px solid #000000;"
+                            id="nav-tab" role="tablist">
+                            <a th:href="@{/admin/file-exam-grade}" class="fw-bold nav-link rounded-pill">File Exam</a>
+                            <a th:href="@{/admin/exam-grade}" class="active fw-bold nav-link rounded-pill">MCQ Exam</a>
                         </div>
                     </nav>
 
-                    <h1 class="fs-3 mb-3 text-secondary"
-                        style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
-                        Students' Exam Grade</h1>
                     <div class="card shadow-sm">
-
                         <div class="card-header py-3">
                             <form th:object="${data}" th:action="@{/admin/searchStudentExamsByBatch}" method="post"
                                 class="d-flex d-lg-flex flex-lg-wrap flex-wrap">
                                 <div class="me-1">
                                     <div class="col-auto text-nowrap" style="width: 237.078px;">
                                         <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                            <label class="form-label fw-bold mb-1 h6">Choose One Batch</label>
+                                            <label class="form-label text-dark fw-bold mb-1 h6">Choose the
+                                                Batch<span class="text-danger ms-1">*</span></label>
                                             <select th:field="*{id}" class="form-select"
                                                 aria-label="Default select example">
                                                 <option th:each="batch : ${batchList}" th:value="${batch?.id}">
@@ -53,7 +51,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="margin-top: 1.6rem;">
+                                <div style="margin-top: 1.5rem;">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
@@ -64,8 +62,8 @@
                         <div class="card-body text-dark">
 
                             <!-- where I have to write table -->
-                            <table id="dataTable" class="display p-2">
-                                <thead class="table">
+                            <table id="dataTable" class="display" style="width:100%">
+                                <thead>
                                     <tr class="text-dark">
                                         <th>Student Name</th>
                                         <th th:each="bhe : ${bheList}">
@@ -164,7 +162,9 @@
             }
         });
         $(document).ready(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+                scrollX: true
+            });
         });
     </script>
 
