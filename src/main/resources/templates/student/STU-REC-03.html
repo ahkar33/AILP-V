@@ -18,8 +18,8 @@
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
     <div class="container mt-4 allButFooter" style="margin-bottom: 77px;">
-        <h1 class="fs-2 mb-2" style=" color: rgb(78, 78, 78); font-family: 'Inter Tight', sans-serif;">
-                        Resources</h1>
+        <h3 class="mb-2" style=" font-family: 'Inter Tight', sans-serif;">
+                        Resources</h3>
         <div class="row">
                 <a th:href="@{ ${'/courses/' + batchResource?.resource?.resourceCourse?.name + '/resource/' + batchResource?.resource?.name} }" class=" col-6 col-lg-3 col-md-6 col-xl-2 text-decoration-none"
                     target="_blank" th:each="batchResource : ${batchHasResourceList}">
@@ -55,12 +55,12 @@
                         <!-- Resource icons end-->
                         
                         <div class="file-man-title me-3 ms-3 text-secondary">
-                            <h5 class="mb-2 text-overflow">[[${batchResource?.resource?.name}]]</h5>
+                            <h5 class="mb-2 text-overflow text-dark">[[${batchResource?.resource?.name}]]</h5>
                         </div>
 
                         <!-- [[${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 )}]] -->
                         <p class="bg-opacity-50 bg-primary border-primary mb-0 me-n1 mt-1 pb-1 pt-1 rounded-bottom text-center"
-                            style="color: #0012a6;">
+                            style="color: #0012a6; font-family: 'Inter Tight', sans-serif;">
                             [[${batchResource?.schedule.toString.substring(0, 10)}]]</p>
                     </div>
 
