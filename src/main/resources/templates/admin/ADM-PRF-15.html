@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 
+<link rel="stylesheet" href="/assets/css/profile-photo-icon.css" />
+<link href="https://fonts.googleapis.com/css2?family=Yantramanav:wght@500&display=swap" rel="stylesheet">
+
 <head th:insert="/admin/admin-fragments :: admin_head">
     <title>Profile</title>
 </head>
+
 <body id="page-top" style="font-family: 'Roboto', sans-serif;">
     <div id="wrapper">
         <!-- this is where side bar is -->
@@ -17,8 +21,7 @@
                 <div class="container" style="margin-bottom: 95px;">
                     <div class="d-sm-flex justify-content-between align-items-center mb-2 mt-2"
                         style="margin-top: 35px;">
-                        <h3 class="mb-0 fw-bold"
-                            style="font-size: 30px;color: rgb(103,103,103);">
+                        <h3 class="mb-0 fw-bold" style="font-size: 30px;color: rgb(103,103,103);">
                             Profile
                         </h3>
                     </div>
@@ -33,7 +36,7 @@
                                         <div class="avatar-edit">
                                             <a role="button" data-bs-target="#modal-2" data-bs-toggle="modal"
                                                 href="#modal-2">
-                                                <input type='file' id="imageUpload"/>
+                                                <input type='file' id="imageUpload" />
                                                 <label for="imageUpload"></label>
                                             </a>
                                         </div>
@@ -82,10 +85,11 @@
                                     <!-- Profile name start here -->
                                     <a class="text-decoration-none text-dark" href="#profile-name-upload"
                                         data-bs-target="#profile-name-upload" data-bs-toggle="modal">
-                                            <h2 style="font-size: 30px;">
-                                                [[${session?.name}]]
-                                                <i class="fa-regular fa-pen-to-square ms-1" style="font-size: 17px; color: #7c7c7c;"></i>
-                                            </h2>
+                                        <h2 style="font-size: 30px; font-family: 'Yantramanav', sans-serif;">
+                                            [[${session?.name}]]
+                                            <i class="fa-regular fa-pen-to-square ms-1"
+                                                style="font-size: 17px; color: #7c7c7c;"></i>
+                                        </h2>
                                     </a>
 
                                     <!-- Modal for profile name -->
@@ -210,55 +214,6 @@
         </div>
 
         <div th:insert="/admin/admin-fragments :: footer" />
-        <style>
-            .avatar-upload {
-                position: relative;
-                max-width: 205px;
-                margin: auto;
-                margin-bottom: 20px;
-            }
-        
-            .avatar-upload .avatar-edit {
-                position: absolute;
-                right: 40px;
-                z-index: 1;
-                top: 130px;
-            }
-        
-            .avatar-upload .avatar-edit input {
-                display: none;
-            }
-        
-            .avatar-upload .avatar-edit input+label {
-                display: inline-block;
-                width: 40px;
-                height: 40px;
-                margin-bottom: 0;
-                border-radius: 100%;
-                background: #1f43af;
-                border: 3px solid #ffffff;
-                cursor: pointer;
-                font-weight: normal;
-                transition: all 0.2s ease-in-out;
-            }
-        
-            .avatar-upload .avatar-edit input+label:hover {
-                background: #3f5baf;
-                border-color: #ffffff;
-            }
-        
-            .avatar-upload .avatar-edit input+label:after {
-                content: "\f030";
-                font-family: 'FontAwesome';
-                color: #ffffff;
-                position: absolute;
-                left: 0;
-                right: 0;
-                text-align: center;
-                line-height: 35px;
-                margin: auto;
-            }
-        </style>
         <script>
             const app = Vue.createApp({
                 data() {
@@ -306,9 +261,6 @@
                 )
             }
         </script>
-
-
-        
 
 </body>
 

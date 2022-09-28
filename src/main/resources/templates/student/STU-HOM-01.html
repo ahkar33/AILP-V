@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
-
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 <head th:insert="/student/student-fragments :: student_head">
-
     <title>Student Home</title>
 </head>
 
@@ -21,10 +20,10 @@
     <div th:insert="/student/student-fragments :: pc-navbar" />
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-    <div class="container allButFooter" style="margin-bottom: 50px;">
-        <h2 class="mt-3 fw-bold" style="color: rgb(61, 61, 61);">Let's Start Learning,
-            [[${session.name}]]</h2>
-        <div class="d-flex flex-wrap g-3 row justify-content-center mt-0" style="margin-top: 20px;">
+    <div class="container allButFooter">
+        <h3 class="mt-4 fw-bold" style="color: rgb(61, 61, 61); font-family: 'Ubuntu', sans-serif;">Let's Start Learning,
+            [[${session.name}]]</h3>
+        <div class="d-flex flex-wrap g-3 row justify-content-cente">
 
             <!-- card start -->
             <div class="col-lg-4 col-md-6 col-sm-6" data-bss-hover-animate="pulse">
