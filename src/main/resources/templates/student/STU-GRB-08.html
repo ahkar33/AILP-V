@@ -16,13 +16,16 @@
 	<div th:insert="/student/student-fragments :: mobile-navbar" />
 
 	<div class="container allButFooter mb-5 mt-4 pb-5">
-		<nav>
-			<div class="nav nav-fill nav-pills w-50" id="nav-tab" role="tablist">
-				<button class="nav-link active fw-bold" id="nav-assignment-tab" data-bs-toggle="tab"
+		<nav class="d-flex justify-content-center">
+			<div class="border-light mb-4 nav nav-fill nav-pills"
+				style="width: 500px; box-shadow: 2px 2px 5px 3px #d8d8d8; border-radius: 74px; border: 7px solid #ffffff; background-color: #ffffff;"
+				id="nav-tab" role="tablist">
+				<button class="active fw-bold nav-link rounded-pill" id="nav-assignment-tab" data-bs-toggle="tab"
 					data-bs-target="#nav-assignment" type="button" role="tab" aria-controls="nav-assignment"
 					aria-selected="true">Assignment</button>
-				<button class="nav-link fw-bold" id="nav-exam-tab" data-bs-toggle="tab" data-bs-target="#nav-exam"
-					type="button" role="tab" aria-controls="nav-exam" aria-selected="false">Exam</button>
+				<button class="nav-link rounded-pill fw-bold" id="nav-exam-tab" data-bs-toggle="tab"
+					data-bs-target="#nav-exam" type="button" role="tab" aria-controls="nav-exam"
+					aria-selected="false">Exam</button>
 			</div>
 		</nav>
 		<div class="tab-content" id="nav-tabContent">
@@ -38,21 +41,24 @@
 										<h5 class="mb-3">
 											[[${result?.assignmentResultAnswer?.assignment?.name}]]
 										</h5>
-										<p style="font-size: 14px; color: #008a14;"
-											class="fw-bold mb-0 ps-3 pt-1">[[${result?.mark}]] Marks</p>
+										<p style="font-size: 14px; color: #008a14;" class="fw-bold mb-0 ps-3 pt-1">
+											[[${result?.mark}]] Marks</p>
 									</div>
 
 									<div class="align-items-center d-flex mt-3 pb-1">
 										<img class="img-profile me-2 rounded-circle"
 											th:src="@{${'/profile_pics/' + result?.assignmentResultTeacher?.profile_pic} }"
 											style="width: 23px; height: 23px;" />
-										<h6 class="mb-0  text-muted">
+										<h6 class="mb-0  text-muted" style="font-family: 'Inter Tight', sans-serif;">
 											[[${result?.assignmentResultTeacher?.name}]]</h6>
 									</div>
 
-									<a class="btn btn-dark btn-sm mb-2 ms-0 mt-2" role="button"
-										href="#grade-comment-button" data-bs-target="#grade-comment-button"
-										data-bs-toggle="modal">Teacher&apos;s Comment</a>
+									<div class="text-end">
+										<a class="btn btn-dark btn-sm mb-2 ms-0 mt-2" role="button"
+											href="#grade-comment-button" data-bs-target="#grade-comment-button"
+											data-bs-toggle="modal">Teacher&apos;s Comment</a>
+									</div>
+
 
 									<!-- Modal Box -->
 									<div class="modal fade" role="dialog" tabindex="-1" id="grade-comment-button">
@@ -64,7 +70,7 @@
 														<img class="img-profile me-2 rounded-circle"
 															th:src="@{${'/profile_pics/' + result?.assignmentResultTeacher?.profile_pic} }"
 															style="width: 30px; height: 30px;" />
-														<h5 class="mb-0">
+														<h5 class="mb-0" style="font-family: 'Inter Tight', sans-serif; font-weight: 600;">
 															[[${result?.assignmentResultTeacher?.name}]]</h5>
 													</div>
 
@@ -89,21 +95,20 @@
 			<div class="tab-pane fade" id="nav-exam" role="tabpanel" aria-labelledby="nav-exam-tab" tabindex="0">
 				<!-- this is exam container -->
 				<div class="border-secondary mt-4">
-					<!-- exam card start -->
+					<!-- mcq exam card start -->
+					<h1 class="h4 text-dark" style="font-family: 'Inter Tight', sans-serif;">MCQ Exam</h1>
 					<div class="gx-3 gy-2 row">
-						<span th:each=" studentHasExam : ${sheList}">
-							<div class="col-md-4">
-								<div class="card mb-3">
-									<div class="card-body">
-										<div class="d-flex flex-column flex-lg-row"> <i
-												class="fa-solid fa-square-poll-horizontal me-3 mb-2"
-												style="font-size: 25px;"></i>
-											<div class="row flex-fill">
-												<div class="col-sm-12">
-													<h5 class="h5 text-dark">[[${studentHasExam?.sheExam?.name}]]</h5>
-													<span
-														class="badge bg-success">[[${studentHasExam?.score}]]/[[${studentHasExam?.sheExam?.fullMark}]]</span>
-												</div>
+						<span th:each=" studentHasExam : ${sheList}" class="col-md-4">
+							<div class="card mb-3" style="box-shadow: 1px 1px 4px 1px #d4d4d4;">
+								<div class="card-body">
+									<div class="d-flex flex-column flex-lg-row"> <i
+											class="fa-solid fa-file-circle-check me-3 mb-2"
+											style="font-size: 25px;"></i>
+										<div class="row flex-fill">
+											<div class="col-sm-12">
+												<h5 class="h5 text-dark">[[${studentHasExam?.sheExam?.name}]]</h5>
+												<span class="badge"
+													style="background-color: #07af0236; color: rgb(0, 82, 7); font-size: 13px;">[[${studentHasExam?.score}]]/[[${studentHasExam?.sheExam?.fullMark}]]</span>
 											</div>
 										</div>
 									</div>
@@ -111,23 +116,24 @@
 							</div>
 						</span>
 					</div>
-					<!-- exam card end -->
+					<!-- mcq exam card end -->
 
-					<!-- exam card start -->
+					<!-- file exam card start -->
+					<h1 class="h4 mt-4 text-dark" style="font-family: 'Inter Tight', sans-serif;">File Exam</h1>
 					<div class="gx-3 gy-2 row">
-						<span th:each=" result : ${fileExamResultList}">
-							<div class="col-md-4">
-								<div class="card mb-3">
-									<div class="card-body">
-										<div class="d-flex flex-column flex-lg-row"> <i
-												class="fa-solid fa-square-poll-horizontal me-3 mb-2"
-												style="font-size: 25px;"></i>
-											<div class="row flex-fill">
-												<div class="col-sm-12">
-													<h5 class="h5 text-dark">[[${result?.examResultAnswer?.batchHasFileExam?.bhfeExam?.name}]]</h5>
-													<span
-														class="badge bg-success">[[${result?.mark}]]/[[${result?.examResultAnswer?.batchHasFileExam?.bhfeExam?.totalMark}]]</span>
-												</div>
+						<span th:each=" result : ${fileExamResultList}" class="col-md-4">
+							<div class="card mb-3" style="box-shadow: 1px 1px 4px 1px #d4d4d4;">
+								<div class="card-body">
+									<div class="d-flex flex-column flex-lg-row"> <i
+											class="fa-solid fa-file-circle-check me-3 mb-2"
+											style="font-size: 25px;"></i>
+										<div class="row flex-fill">
+											<div class="col-sm-12">
+												<h5 class="h5 text-dark">
+													[[${result?.examResultAnswer?.batchHasFileExam?.bhfeExam?.name}]]
+												</h5>
+												<span class="badge"
+													style="background-color: #07af0236; color: rgb(0, 82, 7); font-size: 13px;">[[${result?.mark}]]/[[${result?.examResultAnswer?.batchHasFileExam?.bhfeExam?.totalMark}]]</span>
 											</div>
 										</div>
 									</div>
@@ -135,14 +141,13 @@
 							</div>
 						</span>
 					</div>
-					<!-- exam card end -->
+					<!-- file exam card end -->
 
 				</div>
 			</div>
 		</div>
 	</div>
-	<footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed
-		style="background-color: #1a2033;">
+	<footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed style="background-color: #1a2033;">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
