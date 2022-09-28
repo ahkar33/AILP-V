@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/admin/admin-fragments :: admin_head">
-    <title>Edit Batch</title>
+    <title>Create File Exam</title>
 </head>
 
 <body id="page-top" style="font-family: 'Roboto', sans-serif;">
@@ -19,7 +19,7 @@
                     <div>
                         <h1 class="fs-3 mb-2 text-secondary"
                             style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
-                            Create Exam
+                            Create File Exam
                         </h1>
                     </div>
                     <div class="card mb-4 shadow-sm">
@@ -29,9 +29,9 @@
                             enctype="multipart/form-data">
                             <div class="card-body p-4 text-dark">
                                 <div class="dropdown">
-                                    <div class="mb-3">
+                                    <div class="mb-2">
                                         <label for="formInput6" class="fs-6">Course</label>
-                                        <select id="formInput6" class="form-select mb-4" th:field="*{fileExamCourse}"
+                                        <select id="formInput6" class="form-select mb-3" th:field="*{fileExamCourse}"
                                             aria-label="Default select example">
                                             <span th:each="course : ${courseList}">
                                                 <option th:value="${course?.id}">[[${course?.name}]]</option>
@@ -40,30 +40,30 @@
                                     </div>
                                 </div>
                                 <label class="fs-6">Exam Name</label>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-2">
                                     <input type="text" class="form-control mb-2" placeholder="Enter Exam Name"
                                         th:field="*{name}" required="true" />
                                 </div>
                                 <label class="fs-6">Exam Question</label>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-2">
                                     <textarea type="text" class="form-control mb-2" placeholder="Enter Exam Question"
                                         th:field="*{question}" required="true"></textarea>
                                 </div>
                                 <label class="fs-6">Total Mark</label>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-2">
                                     <input type="number" class="form-control mb-2" placeholder="Enter Exam Question"
                                         th:field="*{totalMark}" required="true" />
                                 </div>
                                 <label class="text-dark">
                                     Exam File
                                 </label>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-2">
                                     <input class="form-control" type="file" th:field="*{questionFile}" accept=".zip"
                                         required />
                                 </div>
                                 <div class="text-end">
                                     <button type="submit" class="btn btn-primary bg-gradient shadow-sm w-25">
-                                        Create
+                                        <i class="fa-solid fa-file-circle-plus me-1"></i>Create
                                     </button>
                                 </div>
                             </div>

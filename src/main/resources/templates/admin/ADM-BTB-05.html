@@ -114,17 +114,17 @@
                         <div class="card-body text-dark pt-4">
 
                             <!-- data table -->
-                            <table id="dataTable" class="display p-2">
-                                <thead class="table">
+                            <table id="dataTable" class="display" style="width:100%">
+                                <thead>
                                     <tr>
-                                        <th>Batch ID</th>
-                                        <th>Batch Name</th>
+                                        <th class="text-nowrap">Batch ID</th>
+                                        <th class="text-nowrap">Batch Name</th>
                                         <th>Course</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
+                                        <th class="text-nowrap">Start Date</th>
+                                        <th class="text-nowrap">End Date</th>
                                         <th>Action</th>
-                                        <th>Enable / Disable</th>
-                                        <th>Generate Report</th>
+                                        <th class="text-nowrap">Enable / Disable</th>
+                                        <th class="text-nowrap">Generate Report</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -214,7 +214,9 @@
         })
 
         $(document).ready(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+                scrollX: true
+            });
         });
 
         const handleDelete = (batchId) => {

@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/admin/admin-fragments :: admin_head">
-    <title>Exam Table</title>
+    <title>Create Exam</title>
 </head>
 
 <body id="page-top" style="background-color: #b1b1b1; font-family: 'Roboto', sans-serif;">
@@ -14,45 +14,41 @@
                 <!-- this is wherer nav bar is -->
                 <div th:insert="/admin/admin-fragments :: navbar" />
                 <div class="container-fluid">
-                    <nav>
-                        <div class="nav nav-fill nav-pills w-50 mb-4" id="nav-tab" role="tablist">
-                            <button class="nav-link active fw-bold" id="nav-examTwo-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-examTwo" type="button" role="tab" aria-controls="nav-examTwo"
-                                aria-selected="true">File Upload Exam</button>
-                            <button class="nav-link fw-bold" id="nav-examOne-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-examOne" type="button" role="tab" aria-controls="nav-examOne"
-                                aria-selected="false">Multiple Choice Exam</button>
+                    <nav class="d-flex justify-content-center mb-2">
+                        <div class="border-light mb-4 nav nav-fill nav-pills"
+                            style="width: 500px; box-shadow: 0px 1px 5px 3px #e6e6e6; border-radius: 74px; border: 7px solid #000000;"
+                            id="nav-tab" role="tablist">
+                            <button class="active fw-bold nav-link rounded-pill" id="nav-fileExam-tab"
+                                data-bs-toggle="tab" data-bs-target="#nav-fileExam" type="button" role="tab"
+                                aria-controls="nav-fileExam" aria-selected="true">File Exam</button>
+                            <button class="nav-link rounded-pill fw-bold" id="nav-mcqExam-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-mcqExam" type="button" role="tab" aria-controls="nav-mcqExam"
+                                aria-selected="false">MCQ Exam</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
 
                         <!-- Tab 1 Start Here -->
-                        <div class="tab-pane fade show active" id="nav-examTwo" role="tabpanel"
-                            aria-labelledby="nav-examTwo-tab" tabindex="0">
-                            <h1 class="fs-3 mb-2 text-secondary"
-                                style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
-                                Exam Table
-                            </h1>
+                        <div class="tab-pane fade show active" id="nav-fileExam" role="tabpanel"
+                            aria-labelledby="nav-fileExam-tab" tabindex="0">
                             <div
                                 class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
                                 <div>
-                                    <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
-                                        style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
+                                    <a class="btn btn-primary bg-gradient shadow-sm mb-3 ps-4 pe-4"
                                         role="button" th:href="@{/admin/create-file-exam}">
-                                        <i class="fa-solid fa-list-check me-2"
-                                            style="padding-top: 8px; font-size:15px"></i>Create Exam
+                                        <i class="fa-solid fa-file-circle-plus me-1"></i>Create Exam
                                     </a>
                                 </div>
                             </div>
                             <div class="card shadow-sm">
                                 <div class="card-body text-dark pt-4">
                                     <!-- this is where to write datatable -->
-                                    <table id="dataTable2" class="display p-2">
+                                    <table id="dataTable2" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Exam Name</th>
-                                                <th>Course Name</th>
-                                                <th>Full Mark</th>
+                                                <th class="text-nowrap">Exam Name</th>
+                                                <th class="text-nowrap">Course Name</th>
+                                                <th class="text-nowrap">Full Mark</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -63,7 +59,7 @@
                                                 <td>[[${exam?.fileExamCourse.name}]]</td>
                                                 <td>[[${exam?.totalMark}]]</td>
                                                 <td>
-                                                    <a class="btn btn-danger btn bg-gradient" title="Remove"
+                                                    <a class="btn btn-outline-danger btn bg-gradient" title="Remove"
                                                         data-bs-placement="top" data-bs-toggle="tooltip"
                                                         th:attr="onclick=|handleFileExamDelete('${exam.id}')|">
                                                         <i class="fa-solid fa-trash"></i>
@@ -80,27 +76,21 @@
                         <!-- Tab 1 End Here -->
 
                         <!-- Tab 2 Start Here -->
-                        <div class="tab-pane fade" id="nav-examOne" role="tabpanel" aria-labelledby="nav-examOne-tab"
+                        <div class="tab-pane fade" id="nav-mcqExam" role="tabpanel" aria-labelledby="nav-mcqExam-tab"
                             tabindex="0">
-                            <h1 class="fs-3 mb-2 text-secondary"
-                                style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
-                                Exam Table
-                            </h1>
                             <div
                                 class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
                                 <div>
-                                    <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
-                                        style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
+                                    <a class="btn btn-primary bg-gradient shadow-sm mb-3 ps-4 pe-4"
                                         role="button" th:href="@{/admin/create-exam}">
-                                        <i class="fa-solid fa-list-check me-2"
-                                            style="padding-top: 8px; font-size:15px"></i>Create Exam
+                                        <i class="fa-solid fa-list-ul me-2"></i>Create Exam
                                     </a>
                                 </div>
                             </div>
                             <div class="card shadow-sm">
                                 <div class="card-body text-dark pt-4">
                                     <!-- this is where to write datatable -->
-                                    <table id="dataTable" class="display p-2">
+                                    <table id="dataTable" class="display" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Exam Name</th>
@@ -116,7 +106,7 @@
                                                 <td>[[${exam?.examCourse.name}]]</td>
                                                 <td>[[${exam?.fullMark}]]</td>
                                                 <td>
-                                                    <a class="btn btn-danger btn bg-gradient" title="Remove"
+                                                    <a class="btn btn-outline-danger btn bg-gradient" title="Remove"
                                                         data-bs-placement="top" data-bs-toggle="tooltip"
                                                         th:attr="onclick=|handleDelete('${exam.id}')|">
                                                         <i class="fa-solid fa-trash"></i>
@@ -153,8 +143,12 @@
         });
 
         $(document).ready(function () {
-            $('#dataTable').DataTable();
-            $('#dataTable2').DataTable();
+            $('#dataTable').DataTable({
+                responsive: true
+            });
+            $('#dataTable2').DataTable({
+                scrollX: true
+            });
         });
 
         const handleDelete = (examId) => {

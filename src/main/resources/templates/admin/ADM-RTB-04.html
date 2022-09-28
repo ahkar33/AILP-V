@@ -77,14 +77,11 @@
                     <div class="card shadow-sm text-dark">
                         <h2 class="text-danger text-center">[[${msg}]]</h2>
                         <div class="card-body">
-                            <table id="dataTable">
-                                <thead class="table">
-                                    <tr>
-
-
+                            <table id="dataTable" class="display" style="width:100%">
+                                <thead>
+                                    <tr class="text-dark">
                                         <th>Name</th>
                                         <th>Action</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -132,7 +129,9 @@
         });
 
         $(document).ready(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+                scrollX: true
+            });
         });
 
         const handleDelete = (resourceId) => {

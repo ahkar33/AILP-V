@@ -21,10 +21,9 @@
                         Teacher Table</h1>
                     <div
                         class="d-flex justify-content-end align-items-end justify-content-lg-end justify-content-xl-end align-items-xl-center">
-                        <a class="btn btn-lg btn-primary pe-1 ps-1 bg-gradient shadow-sm"
-                            style="width: 145.5px; font-size: 14px; height: 40px; margin-bottom: 11px; padding-top: 3px;"
+                        <a class="btn btn-primary pe-3 ps-3 bg-gradient shadow-sm mb-3"
                             role="button" th:href="@{/admin/teacherRegister}">
-                            <i class="fa-solid fa-user-plus me-2" style="padding-top: 9px;"></i>Add Teacher
+                            <i class="fa-solid fa-user-plus me-1"></i>Add Teacher
                         </a>
                     </div>
                     <div class="card shadow-sm">
@@ -65,7 +64,7 @@
                             </form>
                         </div> -->
                         <div class="card-body text-dark pt-4">
-                            <table id="dataTable" class="display p-2">
+                            <table id="dataTable" class="display" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Teacher Id</th>
@@ -120,7 +119,9 @@
         });
 
         $(document).ready(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+                scrollX: true
+            });
         });
 
         const handleDelete = (teacherId) => {
