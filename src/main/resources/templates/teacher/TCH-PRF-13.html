@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 
+<link rel="stylesheet" href="/assets/css/profile-photo-icon.css" />
+<link href="https://fonts.googleapis.com/css2?family=Yantramanav:wght@500&display=swap" rel="stylesheet">
+
 <head th:insert="/teacher/teacher-fragments :: teacher_head">
     <title>Profile</title>
 </head>
@@ -90,7 +93,7 @@
                                     <a class="text-decoration-none text-dark" href="#profile-name-upload"
                                         data-bs-target="#profile-name-upload" data-bs-toggle="modal">
                                         <div class="pb-2">
-                                            <h2 style="font-family: 'Noto Sans Display', sans-serif;
+                                            <h2 style="font-family: 'Yantramanav', sans-serif;
                                             font-size: 30px;">
                                                 [[${session?.name}]]
                                                 <i class="fa-regular fa-pen-to-square ms-1"
@@ -219,56 +222,6 @@
     </div>
 
     <div th:insert="/teacher/teacher-fragments :: footer" />
-
-    <style>
-        .avatar-upload {
-            position: relative;
-            max-width: 205px;
-            margin: auto;
-            margin-bottom: 20px;
-        }
-
-        .avatar-upload .avatar-edit {
-            position: absolute;
-            right: 40px;
-            z-index: 1;
-            top: 130px;
-        }
-
-        .avatar-upload .avatar-edit input {
-            display: none;
-        }
-
-        .avatar-upload .avatar-edit input+label {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            margin-bottom: 0;
-            border-radius: 100%;
-            background: #1f43af;
-            border: 3px solid #ffffff;
-            cursor: pointer;
-            font-weight: normal;
-            transition: all 0.2s ease-in-out;
-        }
-
-        .avatar-upload .avatar-edit input+label:hover {
-            background: #3f5baf;
-            border-color: #ffffff;
-        }
-
-        .avatar-upload .avatar-edit input+label:after {
-            content: "\f030";
-            font-family: 'FontAwesome';
-            color: #ffffff;
-            position: absolute;
-            left: 0;
-            right: 0;
-            text-align: center;
-            line-height: 35px;
-            margin: auto;
-        }
-    </style>
 
     <script>
 
