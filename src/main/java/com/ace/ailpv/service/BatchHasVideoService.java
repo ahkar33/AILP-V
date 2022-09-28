@@ -2,6 +2,8 @@ package com.ace.ailpv.service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,12 +32,19 @@ public class BatchHasVideoService {
     }
 
     public List<BatchHasVideo> getAllBatchHasVideoByBatchId(Long id) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy hh:mm a");
         List<BatchHasVideo> unfilteredList = batchHasVideoRepository.findByBhvBatch_Id(id);
         Long currentTime = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         List<BatchHasVideo> filteredList = unfilteredList.stream()
                 .filter(batchHasVideo -> currentTime >= batchHasVideo.getSchedule().toEpochSecond(ZoneOffset.UTC))
                 .collect(Collectors.toList());
-        return filteredList;
+        List<BatchHasVideo> formattedList = new ArrayList<>();
+        for (BatchHasVideo bhv : filteredList) {
+            String dateTimeString = bhv.getSchedule().format(dateTimeFormatter);
+            bhv.setDateTime(dateTimeString);
+            formattedList.add(bhv);
+        }
+        return formattedList;
     }
 
 }

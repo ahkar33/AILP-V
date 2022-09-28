@@ -39,6 +39,9 @@ public class BatchHasVideo {
     @Transient
     private Long bhvVideoId;
 
+    @Transient
+    private String dateTime;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime schedule;    
 
