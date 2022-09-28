@@ -7,7 +7,7 @@
 
 <style>
     .nearEnd {
-        color: #ffe200;
+        color: #c10000;
     }
 
     [v-cloak] {
@@ -15,7 +15,7 @@
     }
 </style>
 
-<body id="page-top" style="background-color: #E4E6E9;">
+<body id="page-top" style="background-color: #E4E6E9; font-family: 'Roboto', sans-serif;">
     <div th:insert="/student/student-fragments :: pc-navbar" />
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
@@ -34,7 +34,8 @@
                                 <h3 class="fw-semibold h2 mb-4"></h3>
                                 <img src="/assets/img/ExamWillStartAt-Photo.png" style="width: 80%;" class="mb-3" />
                                 <p class="fw-bold h2 mb-4 text-dark">Exam will start at</p>
-                                <div class="d-flex justify-content-evenly fw-bolder mb-3 pb-2"><span d-flex="" flex-column="">
+                                <div class="d-flex justify-content-evenly fw-bolder mb-3 pb-2"><span d-flex=""
+                                        flex-column="">
                                         <h2 style="text-align: center; font-size: 27px;">{{ startDays }}</h2>
                                         <p style="font-size: 13px;">DAYS</p>
                                     </span>
@@ -55,7 +56,9 @@
                                     </span>
                                 </div>
                                 <span th:if="${session?.role == 'ROLE_STUDENT'}">
-                                    <a th:href="@{/student/student-home}" class="btn btn-lg bg-gradient shadow-sm pe-5 ps-5 btn-primary rounded-pill">Go Home</a>
+                                    <a th:href="@{/student/student-home}"
+                                        class="btn btn-lg bg-gradient shadow-sm pe-5 ps-5 btn-primary rounded-pill">Go
+                                        Home</a>
                                 </span>
                             </div>
                         </div>
@@ -69,8 +72,11 @@
                             <div class="row">
                                 <div class="col-lg-6 me-auto ms-auto">
                                     <h3 class="fw-semibold h2 mb-4"></h3>
-                                    <p class="fw-semibold h2 mb-3 text-dark"></p>Your exam form was turned in.</p>
-                                    <h1 style="text-align: center; font-size: 25px; font-weight: 700; background-color: rgba(0, 185, 43, 0.164); color: #00661e;" class="bg-opacity-50 border mb-3 me-4 ms-4 pb-3 pt-3 rounded"><span class="fw-normal">RESULT:  </span>{{ studentScore }}/{{ exam.fullMark }}<span style="font-size: 21px; font-weight: normal;">&nbsp;Marks</span></h1>
+                                    <p class="fw-semibold h3 mb-3 text-dark" style="font-family: 'Inter Tight', sans-serif;">Your exam form was turned in.</p>
+                                    <h1 style="text-align: center; font-family: 'Source Sans Pro', sans-serif; font-size: 25px; font-weight: 700; background-color: rgba(0, 204, 61, 0.12); color: #00661e;"
+                                        class="bg-opacity-50 border mb-3 me-4 ms-4 pb-3 pt-3 rounded"><span
+                                            class="fw-normal">RESULT: </span>{{ studentScore }}/{{ exam.fullMark }}<span
+                                            style="font-size: 21px; font-weight: normal;">&nbsp;Marks</span></h1>
 
                                     <!-- If exam mark was between 0 to 30 -->
                                     <!-- <h1 style="text-align: center; font-size: 25px; font-family: 'ABeeZee', sans-serif; font-weight: 700; background-color: rgba(185, 0, 0, 0.15); color: #660000;" class="bg-opacity-50 border mb-3 me-4 ms-4 pb-3 pt-3 rounded"><span class="fw-normal">RESULT:  </span>{{ studentScore }}/{{ exam.fullMark }}<span style="font-size: 21px; font-weight: normal;">&nbsp;Marks</span></h1> -->
@@ -78,8 +84,9 @@
                                     <!-- If exam mark was between 31 to 70 -->
                                     <!-- <h1 style="text-align: center; font-size: 25px; font-family: 'ABeeZee', sans-serif; font-weight: 700; background-color: rgba(185, 94, 0, 0.15); color: #843c00;" class="bg-opacity-50 border mb-3 me-4 ms-4 pb-3 pt-3 rounded"><span class="fw-normal">RESULT:  </span>{{ studentScore }}/{{ exam.fullMark }}<span style="font-size: 21px; font-weight: normal;">&nbsp;Marks</span></h1> -->
 
-                                    <img src="/assets/img/Student1stMark-Photo.png" class="mb-3" style="width: 70%;"/>
-                                    <span><a href="http://localhost:8080/student/student-home" class="btn btn-lg pe-5 ps-5 btn-primary rounded-pill">Go Home</a></span>
+                                    <img src="/assets/img/Student1stMark-Photo.png" class="mb-3" style="width: 70%;" />
+                                    <span><a href="http://localhost:8080/student/student-home"
+                                            class="btn btn-lg pe-5 ps-5 shadow-sm btn-outline-primary rounded-pill">Go Home</a></span>
                                 </div>
                             </div>
                         </div>
@@ -88,8 +95,7 @@
 
 
                 <span v-else-if="!isExamEnd">
-                    <div class="card-body shadow-sm mb-4 mt-4" :class="[ isNearEnd ? 'nearEnd' : 'text-light' ]"
-                        style="background-image: linear-gradient(181deg, rgb(68, 94, 180) 1%, rgb(49, 72, 152) 99%); border-radius: 25px; padding: 15px 30px 3px; margin-top: -25px;">
+                    <div class="card-body mb-4 mt-4" style="border-radius: 106px; padding: 15px 30px 3px; margin-top: -25px; background-color: rgba(50, 73, 154, 0.19); color: #32499a;" :class="[ isNearEnd ? 'nearEnd' : '#32499a;' ]">
                         <div class="d-flex justify-content-evenly">
                             <span d-flex flex-column>
                                 <h2 style="text-align: center; font-size: 27px;">{{ displayDays }}</h2>
@@ -118,25 +124,22 @@
                             </span>
                         </div>
                     </div>
-                    <div class="border border-bottom-0 border-secondary card shadow-sm">
+                    <div class="card shadow-sm" style="border: 1px solid #c7c7c7;">
                         <div class="card-body p-0">
                             <span v-for="(question, index) in exam.questionList" :key="question.id">
-                                <div class="border-bottom border-secondary">
+                                <div style="border-bottom: 1px solid #d7d7d7;">
                                     <!-- Question Header/ Question -->
-                                    <h2 class="accordion-header align-items-baseline d-flex flex-row h5 px-4 py-3"
-                                    >
-                                    <div class="w-100">
-                                        <h4 style="font-size: 18px; color: #535353;"
-                                            class="mb-0">{{ question.examQuestion }}</h4>
-                                    </div> <span>
-                                        <p class="mb-0"
-                                            style="font-size: 14px; font-weight: bold; color: #03205f;">
-                                            10Marks</p>
-                                    </span>
-                                </h2>
-                                <!-- Question's Radio Buttons -->
-                                    <div class="accordion-body pt-1"
-                                        style="color: #5e5e5e;">
+                                    <h2 class="accordion-header align-items-baseline d-flex flex-row h5 px-4 py-3">
+                                        <div class="w-100">
+                                            <h4 style="font-size: 18px; color: #535353;" class="mb-0">{{
+                                                question.examQuestion }}</h4>
+                                        </div> <span>
+                                            <p class="mb-0" style="font-size: 14px; font-weight: bold; color: #03205f;">
+                                                10Marks</p>
+                                        </span>
+                                    </h2>
+                                    <!-- Question's Radio Buttons -->
+                                    <div class="accordion-body pt-1" style="color: #5e5e5e;">
                                         <div class="d-flex flex-column gap-3">
                                             <span v-for="radio in question.radioList">
                                                 <input class="ms-2 me-2" type="radio" v-model="studentAnswerList[index]"
@@ -148,17 +151,23 @@
                             </span>
                         </div>
                     </div>
-                        <!-- Each accordion starts from this -->
-                        
+                    <!-- Each accordion starts from this -->
 
-                    <span>
-                        <button v-if="studentAnswerList.length > 0" @click="handleSubmit()" class="bg-gradient btn btn-lg mt-3 shadow-sm text-light w-25" style="margin: 0px; background-color: #32499a;"> <i class="fa fa-check pe-1"></i>
-                            Submit
-                        </button>
-                        <button v-if="studentAnswerList.length == 0" @click="handleSubmit()" class="bg-gradient btn btn-lg mt-3 shadow-sm text-light w-25" style="margin: 0px; background-color: #32499a;"> <i class="fa fa-check pe-1"></i>
-                            Submit
-                        </button>
-                    </span>
+                    <div class="float-end">
+                        <span>
+                            <button v-if="studentAnswerList.length > 0" @click="handleSubmit()"
+                                class="bg-gradient btn-primary ps-5 pe-5 btn mt-3 shadow-sm pt-2 pb-2"
+                                style="margin: 0px;">
+                                Submit<i class="fa-regular fa-circle-check ms-2"></i>
+                            </button>
+                            <button v-if="studentAnswerList.length == 0" @click="handleSubmit()"
+                                class=" btn-primary ps-5 pe-5 bg-gradient btn mt-3 shadow-sm pt-2 pb-2"
+                                style="margin: 0px;">
+                                Submit<i class="fa-regular fa-circle-check ms-2"></i>
+                            </button>
+                        </span>
+                    </div>
+
 
                 </span>
                 <span v-else>
@@ -166,9 +175,11 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-6 ms-auto me-auto">
-                                    <img src="/assets/img/exam-ended.png" class="mb-3" style="width: 85%;"/>
-                                    <p class="fw-normal h2 mb-4 text-dark">Sorry, the exam has already ended.</p>
-                                    <span><a th:href="@{/student/student-home}" class="btn btn-lg bg-gradient shadow-sm pe-5 ps-5 btn-primary rounded-pill">Go Home</a>
+                                    <img src="/assets/img/exam-ended.png" class="mb-3" style="width: 75%;" />
+                                    <p class="fw-normal h3 mb-4 text-dark" style="font-family: 'Inter Tight', sans-serif;">Sorry, the exam has already ended.</p>
+                                    <span><a th:href="@{/student/student-home}"
+                                            class="btn btn-lg bg-gradient shadow-sm pe-5 ps-5 btn-outline-primary rounded-pill">Go
+                                            Home</a>
                                 </div>
                             </div>
                         </div>
