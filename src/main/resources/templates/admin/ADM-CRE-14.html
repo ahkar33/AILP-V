@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/admin/admin-fragments :: admin_head">
-    <title>Create Exam</title>
+    <title>Create MCQ Exam</title>
 </head>
 
 <style>
@@ -23,12 +23,11 @@
                 <!-- this is where nav bar is -->
                 <div th:insert="/admin/admin-fragments :: navbar" />
 
-                <div v-cloak class="container-fluid pb-5 pe-5 ps-5 pt-2" id="app" style="max-width: 45rem;">
-                    <h1 class="fs-3 mb-2 text-secondary"
-                        style="font-size: 33px; color: rgb(72,72,72);">
-                        Create Exam</h1>
+                <div v-cloak class="container-fluid pb-3 pe-3 ps-3 pt-2" id="app" style="max-width: 45rem;">
+                    <h1 class="fs-3 mb-2 fw-bold text-secondary" style="font-size: 33px; color: rgb(72,72,72);">
+                        Create MCQ Exam</h1>
                     <form action="">
-                        <div class="card shadow-sm" style="margin-bottom: 13px;">
+                        <div class="card" style="margin-bottom: 13px; box-shadow: 1px 2px 7px 1px #c8c4c4;">
                             <div class="card-body p-4 fw-bold text-dark">
                                 <select v-model="course" class="form-select w-50" aria-label="Default select example"
                                     required style="width: 10rem; margin-bottom: 13px;">
@@ -48,14 +47,14 @@
                         </div>
 
                         <div v-for="(question, index) in questionList" :key="index">
-                            <div class="card shadow-sm" style="margin-bottom: 13px;">
+                            <div class="card" style="margin-bottom: 13px; box-shadow: 1px 1px 7px 1px #c8c4c4;">
                                 <div class="card-body p-3 text-dark fw-bold">
                                     <form>
-                                        <label class="form-label fs-4 text-primary">Question {{ index + 1 }}</label>
+                                        <label class="form-label fs-5 text-primary">Question {{ index + 1 }}</label>
                                         <div class="input-group">
                                             <textarea v-model="question.examQuestion" type="text" class="form-control"
                                                 maxlength="900" required style="width: 100%; margin-bottom: 13px;"
-                                                placeholder="Untitiled Question" ></textarea>
+                                                placeholder="Untitiled Question"></textarea>
                                         </div>
                                         <div class="form-check">
                                             <div v-for="(radio, indes) in question.radioList" :key="indes"
@@ -63,30 +62,32 @@
                                                 <input v-model="radio.radioValue" type="text" required maxlength="900"
                                                     class="form-control" :placeholder="'Option ' + (++indes)" />
                                                 <button @click.prevent="removeRadio(index, --indes)" type="button"
-                                                class="btn btn-outline-danger fw-bolder shadow-sm ms-1 me-1"
-                                                style="width: 38px;">
+                                                    class="btn btn-outline-danger fw-bolder shadow-sm ms-1 me-1"
+                                                    style="width: 38px;">
                                                     -
                                                 </button>
                                                 <button @click.prevent="addRadio(index)" type="button"
-                                                class="btn btn-outline-primary fw-bolder shadow-sm"
-                                                style="width: 38px;">
+                                                    class="btn btn-outline-primary fw-bolder shadow-sm"
+                                                    style="width: 38px;">
                                                     +
                                                 </button>
                                             </div>
                                         </div>
                                         <input v-model="question.rightAnswer" class="form-control" required
-                                            placeholder="Enter the correct answer" maxlength="900"  style="margin-bottom: 13px;"/>
+                                            placeholder="Enter the correct answer" maxlength="900"
+                                            style="margin-bottom: 13px;" />
                                         <input v-model="question.mark" type="number" class="form-control"
-                                            id="inputEmail4" required style="width: 100%; margin-bottom: 13px;" placeholder="Enter Mark" />
+                                            id="inputEmail4" required style="width: 100%; margin-bottom: 13px;"
+                                            placeholder="Enter Mark" />
                                         <div class="text-end">
                                             <button @click.prevent="removeQuestion(index)" type="button"
-                                            class="btn bg-gradient btn-danger fw-bolder shadow-sm ms-1 me-1"
-                                            style="width: 38px;">-</button>
+                                                class="btn bg-gradient btn-danger fw-bolder shadow-sm ms-1 me-1"
+                                                style="width: 38px;">-</button>
                                             <button @click.prevent="addQuestion()" type="button"
-                                            class="btn bg-gradient btn-primary fw-bolder shadow-sm"
-                                            style="width: 38px;">+</button>
+                                                class="btn bg-gradient btn-primary fw-bolder shadow-sm"
+                                                style="width: 38px;">+</button>
                                         </div>
-                                        
+
 
                                     </form>
 
@@ -99,7 +100,12 @@
                                 <div class=" d-flex flex-row-reverse input-group mb-3">
                                     <input v-model="fullMark" type="number" class="form-control mb-4" id="inputEmail4"
                                         required style="width: 100%;" placeholder="Enter Full Mark" /> -->
-                        <button @click="createExam()" type="submit" class="btn bg-gradient shadow-sm btn-primary rounded">Submit<i class="ms-2 fa-solid fa-check"></i></button>
+                        <div class="text-end mt-4">
+                            <button @click="createExam()" type="submit"
+                                class="ps-4 pe-4 btn bg-gradient shadow-sm btn-primary rounded">Create<i
+                                    class="fa-regular fa-circle-check ms-2"></i></button>
+                        </div>
+
                         <!-- </div>
                             </div> -->
                 </div>

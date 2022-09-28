@@ -2,7 +2,7 @@
 <html>
 
 <head th:insert="/teacher/teacher-fragments :: teacher_head">
-    <title>Upload Exam</title>
+    <title>Upload MCQ Exam</title>
 </head>
 
 <body id="page-top" style="font-family: 'Roboto', sans-serif;">
@@ -22,7 +22,7 @@
                 <div class="container-fluid pb-5 pe-5 ps-5 pt-2" style="max-width: 45rem;" id="app">
                     <h1 class="fs-3 mb-3 text-secondary"
                         style="font-size: 33px; color: rgb(72,72,72); font-weight: bold;">
-                        Upload Exam</h1>
+                        Upload MCQ Exam</h1>
 
                     <div class="card mb-4 shadow-sm">
                         <form th:action="@{/teacher/uploadExam}" th:object="${data}" method="post">
@@ -58,11 +58,11 @@
                                     </div>
                                 </span>
 
-                                <div class="d-flex flex-wrap justify-content-between">
+                                <div class="d-flex flex-wrap justify-content-end">
                                     <button type="submit"
                                         class="bg-gradient btn btn-primary float-end shadow-sm text-nowrap"
                                         style="width: 120px; height: 37px;">
-                                        Upload
+                                        <i class="fa-solid fa-upload me-1"></i>Upload
                                     </button>
                                 </div>
 
