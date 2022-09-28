@@ -5,84 +5,45 @@
     <title>Exam</title>
 </head>
 
-<body id="page-top" style="background-color: #E4E6E9;">
+<body id="page-top" style="background-color: #E4E6E9; font-family: 'Roboto', sans-serif; ">
 
     <div th:insert="/student/student-fragments :: pc-navbar" />
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-    <div class="container mt-4" style="margin-bottom: 50px;">
-        <nav>
-            <div class="nav nav-fill nav-pills w-50" id="nav-tab" role="tablist">
-                <button class="nav-link active fw-bold" id="nav-exam-tab" data-bs-toggle="tab"
-                    data-bs-target="#nav-exam" type="button" role="tab" aria-controls="nav-exam"
-                    aria-selected="true">Exams</button>
-                <button class="nav-link fw-bold" id="nav-codetest-tab" data-bs-toggle="tab"
+    <div class="container-fluid mt-4" style="margin-bottom: 50px;">
+        <nav class="d-flex justify-content-center">
+            <div class="border-light mb-4 nav nav-fill nav-pills"
+            style="width: 500px; box-shadow: 2px 2px 5px 3px #d8d8d8; border-radius: 74px; border: 7px solid #ffffff; background-color: #ffffff;"
+                id="nav-tab" role="tablist">
+                <button class="active fw-bold nav-link rounded-pill" id="nav-codetest-tab" data-bs-toggle="tab"
                     data-bs-target="#nav-codetest" type="button" role="tab" aria-controls="nav-codetest"
-                    aria-selected="false">Code Test</button>
+                    aria-selected="true">Code Test</button>
+                <button class="nav-link rounded-pill fw-bold" id="nav-mcqExam-tab" data-bs-toggle="tab"
+                    data-bs-target="#nav-mcqExam" type="button" role="tab" aria-controls="nav-mcqExam"
+                    aria-selected="false">MCQ Exam</button>
             </div>
         </nav>
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade mt-2 show active" id="nav-exam" role="tabpanel" aria-labelledby="nav-exam-tab"
-                tabindex="0">
-                <!-- Exam Card/ Button Start -->
-                <span th:each="bhe : ${bheList}">
-                    <div class="btn btn-light ms-0 me-0 my-2 py-3 shadow-sm w-100">
-                        <div class="row align-items-center">
-                            <div
-                                class="align-items-md-start col-12 col-lg-5 col-md-4 col-xl-5 d-flex d-md-flex flex-column justify-content-center justify-content-md-start ps-0 ps-md-4">
-                                <h4 class="pt-2"
-                                    style="font-weight: 700; color: #3f3f3f;">
-                                    [[${bhe?.bheExam?.name}]]</h4>
-                                <h6 class="pt-2"
-                                    style="font-family: 'Roboto', sans-serif; font-weight: 400; color: #3f3f3f;">
-                                    Exam will start at [[${bhe?.startTime}]]</h6>
-                            </div>
-                            <ul class="align-items-lg-start col-12 col-lg-3 col-md-4 col-xl-3 d-flex d-lg-flex flex-column flex-lg-column gap-2 justify-content-lg-start justify-content-start list-unstyled mb-0 mt-2 my-4 my-md-0 text-90 text-dark-l1 text-left"
-                                style="font-size: 17px; color: #636363;">
-                                <li> <i class="fa fa-file-text-o mr-2 mt-1 text-110 text-success-m2"
-                                        style="margin-right: 8px;"></i> <span> <span
-                                            class="text-110">[[${bhe?.bheExam?.questionList.size}]] Questions</span>
-                                    </span>
-                                </li>
-                                <li class="mt-25"> <i class="fa fa-clock-o mr-2 mt-1 text-110 text-success-m2"
-                                        style="margin-right: 8px;"></i> <span class="text-110">Duration:
-                                        [[${bhe?.totalTime}]]</span>
-                                </li>
-                                <li class="mt-25"> <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"
-                                        style="margin-right: 8px;"></i> <span
-                                        class="text-110">[[${bhe?.bheExam?.fullMark}]]
-                                        Marks</span>
-                                </li>
-                            </ul>
-                            <div class="col-12 col-md-4 text-center"> <a href="#"
-                                    class="btn bg-gradient btn-raised f-n-hover fw-bold mb-md-0 mt-3 mt-md-0 pe-md-4 ps-md-4 px-4 py-25 shadow-sm text-600 text-light w-75"
-                                    style="background-color: #2c4894;" th:href="@{/student/getExam/} + ${bhe.id}">Get
-                                    Started</a>
-                            </div>
-                        </div>
-                    </div>
-                </span>
-            </div>
-            <div class="tab-pane fade mt-2" id="nav-codetest" role="tabpanel" aria-labelledby="nav-codetest-tab"
-                tabindex="0">
 
-                <div class="container allButFooter" style="margin-top: 22px;padding-right: 10px;padding-left: 10px;">
-                    <h2 class="mb-3 me-3 mt-3 text-black-50">File Exam</h2>
+        <div class="tab-content" id="nav-tabContent">
+
+            <div class="tab-pane fade mt-4 show active" id="nav-codetest" role="tabpanel"
+                aria-labelledby="nav-codetest-tab" tabindex="0">
+                <div class="container allButFooter" style="padding-right: 10px;padding-left: 10px;">
                     <div class="card shadow-sm" style="margin-bottom: 85px;">
-                        <div class="card-body" style="padding: 10px;">
+                        <div class="card-body">
                             <input type="hidden" th:value="${successMsg}" id="successMsg">
-                            <table id="dataTable">
+                            <table id="dataTable" class="display" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Exam Name</th>
-                                        <th>Exam Question</th>
-                                        <th>Exam File</th>
-                                        <th>Total Mark</th>
-                                        <th>Strat Time</th>
-                                        <th>End Time</th>
-                                        <th>To Upload</th>
-                                        <th>Action</th>
+                                        <th class="text-nowrap">Exam Name</th>
+                                        <th>Question</th>
+                                        <th class="text-nowrap">Exam File</th>
+                                        <th class="text-nowrap">Total Mark</th>
+                                        <th class="text-nowrap">Strat Time</th>
+                                        <th class="text-nowrap">End Time</th>
+                                        <th class="text-nowrap">Upload File</th>
+                                        <th>Submit</th>
                                     </tr>
                                 <tbody>
 
@@ -93,24 +54,28 @@
                                             <td class="pt-2 text-dark">[[${bhfe?.bhfeExam?.name}]]</td>
                                             <td class="pt-2 text-dark">[[${bhfe?.bhfeExam?.question}]]</td>
                                             <td class="pt-2 text-dark">
-                                                <a
-                                                    th:href="@{ ${'/courses/' + bhfe?.bhfeExam?.fileExamCourse?.name + '/exam/' + bhfe?.bhfeExam?.questionFileName } }">
+                                                <a th:href="@{ ${'/courses/' + bhfe?.bhfeExam?.fileExamCourse?.name + '/exam/' + bhfe?.bhfeExam?.questionFileName } }"
+                                                    class="btn shadow-sm bg-gradient btn-sm btn-outline-primary m-0 text-break text-overflow text-truncate w-75">
+                                                    <i class="fa-solid fa-download me-2"></i>
                                                     [[${bhfe?.bhfeExam?.questionFileName}]]
                                                 </a>
                                             </td>
                                             <td class="pt-2 text-dark">[[${bhfe?.bhfeExam?.totalMark}]]</td>
-                                            <td class="pt-2 text-dark">[[${bhfe?.startTime}]]</td>
-                                            <td class="pt-2 text-dark">[[${bhfe?.endTime}]]</td>
+                                            <td class="pt-2 text-dark" style="font-size: 14px;">[[${bhfe?.startTime}]]
+                                            </td>
+                                            <td class="pt-2 text-dark" style="font-size: 14px;">[[${bhfe?.endTime}]]
+                                            </td>
                                             <input type="hidden" th:value="${session?.uid}" th:name="examAnswerStudent"
                                                 th:id="examAnswerStudent">
                                             <input type="hidden" th:value="${bhfe.id}" th:name="batchHasFileExam"
                                                 th:id="batchHasFileExam">
                                             <td class="pt-1 ">
-                                                <input type="file" th:field="*{examAnswerFile}" accept=".zip"
-                                                    required />
+                                                <input type="file" th:field="*{examAnswerFile}" accept=".zip, .rar, .7z"
+                                                    class="form-control w-75" required />
                                             </td>
                                             <td class="text-dark">
-                                                <button class="btn btn-primary mt-3" type="submit">Upload</button>
+                                                <button class="btn btn-outline-primary shadow-sm m-0 "
+                                                    type="submit" title="Send exam file" data-bs-placement="top" data-bs-toggle="tooltip" data-bs-delay="500"><i class="fa-solid fa-file-export"></i></button>
                                             </td>
                                         </form>
                                     </tr>
@@ -121,7 +86,46 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="container tab-pane fade mt-4" id="nav-mcqExam" role="tabpanel" aria-labelledby="nav-mcqExam-tab"
+                tabindex="0">
+                <!-- Exam Card/ Button Start -->
+                <span th:each="bhe : ${bheList}">
+                    <div class="btn btn-light ms-0 me-0 my-2 py-3 shadow-sm w-100">
+                        <div class="row align-items-center">
+                            <div
+                                class="align-items-md-start col-12 col-lg-5 col-md-4 col-xl-5 d-flex d-md-flex flex-column justify-content-center justify-content-md-start ps-0 ps-md-4">
+                                <h4 class="pt-2" style="font-weight: 700; color: #3f3f3f;">
+                                    [[${bhe?.bheExam?.name}]]</h4>
+                                <h6 class="pt-2"
+                                    style="font-family: 'Roboto', sans-serif; font-weight: 400; color: #3f3f3f;">
+                                    Exam will start at [[${bhe?.startTime}]]</h6>
+                            </div>
+                            <ul class="align-items-lg-start col-12 col-lg-3 col-md-4 col-xl-3 d-flex d-lg-flex flex-column flex-lg-column gap-2 justify-content-lg-start justify-content-start list-unstyled mb-0 mt-2 my-4 my-md-0 text-90 text-dark-l1 text-left"
+                                style="font-size: 17px; color: #636363;">
+                                <li> <i class="fa-solid fa-list-ol mr-2 mt-1 text-110 text-success-m2"
+                                        style="margin-right: 8px;"></i> <span> <span
+                                            class="text-110">[[${bhe?.bheExam?.questionList.size}]] Questions</span>
+                                    </span>
+                                </li>
+                                <li class="mt-25"> <i class="fa-regular fa-clock mr-2 mt-1 text-110 text-success-m2"
+                                        style="margin-right: 8px;"></i> <span class="text-110">Duration:
+                                        [[${bhe?.totalTime}]]</span>
+                                </li>
+                                <li class="mt-25"> <i class="fa-regular fa-circle-check text-success-m2 text-110 mr-2 mt-1"
+                                        style="margin-right: 8px;"></i> <span
+                                        class="text-110">[[${bhe?.bheExam?.fullMark}]]
+                                        Marks</span>
+                                </li>
+                            </ul>
+                            <div class="col-12 col-md-4 text-center"> <a href="#"
+                                    class="btn bg-gradient btn-outline-primary btn-raised f-n-hover fw-bold mb-md-0 mt-3 mt-md-0 pe-md-4 ps-md-4 px-4 py-25 shadow-sm text-600  w-75" th:href="@{/student/getExam/} + ${bhe.id}">Get
+                                    Started</a>
+                            </div>
+                        </div>
+                    </div>
+                </span>
             </div>
         </div>
     </div>
@@ -135,8 +139,15 @@
 
     <div th:insert="/student/student-fragments :: footer" />
     <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+
         $(document).ready(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+                scrollX: true
+            });
         });
     </script>
     <script src="/assets/js/alert.js"></script>

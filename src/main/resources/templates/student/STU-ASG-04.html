@@ -6,7 +6,7 @@
 </head>
 <style>
     .allButFooter {
-    min-height: calc(80vh - 90px);
+        min-height: calc(80vh - 90px);
     }
 </style>
 
@@ -17,17 +17,17 @@
 
     <div class="container allButFooter" style="margin-top: 22px;padding-right: 10px;padding-left: 10px;">
 
-        <h2 class="mb-3 me-3 mt-3 text-black-50">Assignments</h2>
+        <h2 class="mb-3 me-3 mt-3 text-black-50" style="font-family: 'Inter Tight', sans-serif;">Assignments</h2>
         <div class="card shadow-sm" style="margin-bottom: 85px;">
-            <div class="card-body" style="padding: 10px;">
-                <table id="dataTable">
+            <div class="card-body">
+                <table id="dataTable" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Assignment Name</th>
+                            <th class="text-nowrap">Assignment Name</th>
                             <th>Resources</th>
-                            <th>Due Date</th>
-                            <th>To Upload</th>
-                            <th>Action</th>
+                            <th class="text-nowrap">Due Date</th>
+                            <th class="text-nowrap">To Upload</th>
+                            <th>Submit</th>
                         </tr>
                     <tbody>
 
@@ -36,24 +36,29 @@
                                 enctype="multipart/form-data">
                                 <input type="hidden" th:value="${successMsg}" id="successMsg">
                                 <td class="pt-2 text-dark">[[${assignment?.name}]]</td>
-                                <td class="pb-0 pt-2">
+                                <td>
                                     <a th:href="@{ ${'/courses/' + assignment?.assignmentBatch?.batchCourse?.name + '/' + assignment?.assignmentBatch?.id + '/'  +  'AssignmentQuestion' + '/' + assignment?.questionFileName} }"
-                                        target="_blank" class="btn shadow bg-gradient btn-sm btn-success mb-2 ms-0 text-break text-overflow text-truncate w-75"><i class="fa fa-download me-1 pt-1"></i>
+                                        target="_blank"
+                                        class="btn shadow-sm bg-gradient btn-sm btn-outline-primary m-0 text-break text-overflow text-truncate w-75"><i
+                                            class="fa-solid fa-download me-2"></i>
                                         [[${assignment?.questionFileName}]]
                                     </a>
                                 </td>
-                                <td>[[${assignment?.dueDate}]]</td>
+                                <td style="font-size: 14px;">[[${assignment?.dueDate}]]</td>
                                 <td class="pt-1 ">
                                     <input type="hidden" th:value="${session?.uid}" th:name="answerStudent"
                                         th:id="answerStudent">
                                     <input type="hidden" th:value="${assignment.id}" th:name="assignment"
                                         th:id="assignment">
-                                    <input class="form-control w-75" type="file" th:field="*{answerFile}" accept=".zip" required />
+                                    <input class="form-control w-75" type="file" th:field="*{answerFile}" accept=".zip"
+                                        required />
                                 </td>
-                                <td class="pb-0 pt-1">
-                                    <button type="submit" class=" btn btn-primary shadow-sm bg-gradient mb-2 ms-0">Submit</button>
+                                <td>
+                                    <button type="submit" class="btn btn-outline-primary shadow-sm m-0"
+                                        title="Send assignment file" data-bs-placement="top" data-bs-toggle="tooltip"
+                                        data-bs-delay="500"><i class="fa-solid fa-file-export"></i></button>
                                 </td>
-                          
+
                             </form>
                         </tr>
 
@@ -64,8 +69,7 @@
         </div>
     </div>
 
-    <footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed
-        style="background-color: #1a2033;">
+    <footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed style="background-color: #1a2033;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
@@ -112,8 +116,17 @@
     <!-- datatable-js -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
     <script>
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+
+
         $(document).ready(function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+                scrollX: true
+            });
         });
     </script>
     <script src="/assets/js/alert.js"></script>
