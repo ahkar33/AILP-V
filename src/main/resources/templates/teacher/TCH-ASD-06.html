@@ -23,8 +23,7 @@
 						[[${assignmentName}]]</h1>
 					<div class="gx-3 row">
 
-						<span th:if="${not #lists.isEmpty(answerList)}">
-							<div class="col-lg-4 col-md-6 col-sm-12 col-xl-3" th:each="answer : ${answerList}">
+							<div th:if="${not #lists.isEmpty(answerList)}" class="col-lg-4 col-md-6 col-sm-12 col-xl-3" th:each="answer : ${answerList}">
 								<div class="card">
 									<div class="card-body" style="box-shadow: 1px 2px 7px 1px #c8c4c4;">
 										<div th:if="${answer?.isGraded}" class="dropdown float-end">
@@ -96,9 +95,7 @@
 									</div>
 								</div>
 							</div>
-						</span>
-						<span th:if="${#lists.isEmpty(answerList)}">
-							<section class="text-center">
+							<section th:if="${#lists.isEmpty(answerList)}" class="text-center">
 								<div class="container">
 									<div class="row">
 										<div class="col-lg-6 me-auto ms-auto">
@@ -111,7 +108,6 @@
 									</div>
 								</div>
 							</section>
-						</span>
 					</div>
 				</div>
 
