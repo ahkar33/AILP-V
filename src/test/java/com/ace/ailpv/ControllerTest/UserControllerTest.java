@@ -152,21 +152,21 @@ public class UserControllerTest {
                 .andExpect(redirectedUrl("/user/profile"));
     }
 
-    @Test
-    public void uploadProfilePicFailTest() throws Exception {
-        // File file = new File("E://Shared Data/Images/xyz.jpg");
-        // DiskFileItem fileItem = new DiskFileItem("file", "image/png", false, file.getName(),
-        //                             (int) file.length(), file.getParentFile());
-        // FileInputStream input = new FileInputStream(fileItem);
-        // MultipartFile multipartFile = new MockMultipartFile("fileItem",
-        //     fileItem.getName(), "image/png", IOUtils.toByteArray(input));
+    // @Test
+    // public void uploadProfilePicFailTest() throws Exception {
+    //     // File file = new File("E://Shared Data/Images/xyz.jpg");
+    //     // DiskFileItem fileItem = new DiskFileItem("file", "image/png", false, file.getName(),
+    //     //                             (int) file.length(), file.getParentFile());
+    //     // FileInputStream input = new FileInputStream(fileItem);
+    //     // MultipartFile multipartFile = new MockMultipartFile("fileItem",
+    //     //     fileItem.getName(), "image/png", IOUtils.toByteArray(input));
 
 
-        // MultipartFile file = new MultipartFile()[] ;
-        // this.mockMvc.perform(post(apiPath + "/upload")
-        // .param("profile_pic",)
+    //     // MultipartFile file = new MultipartFile()[] ;
+    //     // this.mockMvc.perform(post(apiPath + "/upload")
+    //     // .param("profile_pic",)
 
-    }
+    // }
 
     private User getStudent() {
         User student = new User();

@@ -1,6 +1,6 @@
 package com.ace.ailpv.ControllerTest;
 
-import static org.mockito.ArgumentMatchers.any;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -98,28 +97,28 @@ public class AdminControllerTest {
     }
 
 
-    @Test
-    public void editCourseTest() throws Exception{
+    // @Test
+    // public void editCourseTest() throws Exception{
 
-        long id = 1L;
+    //     long id = 1L;
 
-        Course oldCourse = getCourse();
-        Course editCourse = new Course();
-        editCourse.setId(id);
-        editCourse.setName("name");
-        editCourse.setFee(2000.0);
-        editCourse.setDescription("description");
-        when(courseRepository.findById(id)).thenReturn(Optional.of(oldCourse));
-        when(courseRepository.save(any(Course.class))).thenReturn(editCourse);
-        // this.mockMvc.perform(post(apiPath+"/editCourse?multipart/form-data")
-        //         .param("id", "1L")
-        //         .param("name", "name")
-        //         .param("fee", "2000.0")
-        //         .param("desc", "description"))
-        //     .andExpect(status().is(302))
-        //     .andExpect(redirectedUrl("/admin/course-table"));
+    //     Course oldCourse = getCourse();
+    //     Course editCourse = new Course();
+    //     editCourse.setId(id);
+    //     editCourse.setName("name");
+    //     editCourse.setFee(2000.0);
+    //     editCourse.setDescription("description");
+    //     when(courseRepository.findById(id)).thenReturn(Optional.of(oldCourse));
+    //     when(courseRepository.save(any(Course.class))).thenReturn(editCourse);
+    //     // this.mockMvc.perform(post(apiPath+"/editCourse?multipart/form-data")
+    //     //         .param("id", "1L")
+    //     //         .param("name", "name")
+    //     //         .param("fee", "2000.0")
+    //     //         .param("desc", "description"))
+    //     //     .andExpect(status().is(302))
+    //     //     .andExpect(redirectedUrl("/admin/course-table"));
                 
-    }
+    // }
 
     @Test
     public void editVideoTest() throws Exception{
@@ -198,20 +197,20 @@ public class AdminControllerTest {
         //         .andExpect(redirectedUrl("/admin/editVideo/"+course.getId()));
     }
 
-    @Test
-    public void uploadCourseResourceTest() throws Exception{
-        Long cid = 1L;
-        Course course = getCourse();
-        when(courseService.getCourseById(cid)).thenReturn(course);
+    // @Test
+    // public void uploadCourseResourceTest() throws Exception{
+    //     Long cid = 1L;
+    //     Course course = getCourse();
+    //     when(courseService.getCourseById(cid)).thenReturn(course);
         
-        // final InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("file");
-        // MockMultipartFile pdf = new MockMultipartFile("file", "filename.pdf", "application/pdf", inputStream);
-        // this.mockMvc.perform(multipart(apiPath+"/uploadCourseResource?multipart/form-data")
-        //         .file(pdf)
-        //         .param("courseId", "cid"))
-        //         .andExpect(status().is(302))
-        //         .andExpect(redirectedUrl("/admin/editResource/"+course.getId()));
-    }
+    //     // final InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("file");
+    //     // MockMultipartFile pdf = new MockMultipartFile("file", "filename.pdf", "application/pdf", inputStream);
+    //     // this.mockMvc.perform(multipart(apiPath+"/uploadCourseResource?multipart/form-data")
+    //     //         .file(pdf)
+    //     //         .param("courseId", "cid"))
+    //     //         .andExpect(status().is(302))
+    //     //         .andExpect(redirectedUrl("/admin/editResource/"+course.getId()));
+    // }
 
     @Test
     public void deleteCourseTest() throws Exception {
@@ -250,22 +249,22 @@ public class AdminControllerTest {
                 .andExpect(view().name("/admin/ADM-BTB-05"));
     }
 
-    @Test
-    public void addBatchTest() throws Exception{
-        Batch batch = getBatch();
-        batch.setIsActive(true);
-        Course course = getCourse();
-        when(courseService.getCourseById(batch.getBatchCourse().getId())).thenReturn(course);
-        batchService.addBatch(batch, course.getName());
+    // @Test
+    // public void addBatchTest() throws Exception{
+    //     Batch batch = getBatch();
+    //     batch.setIsActive(true);
+    //     Course course = getCourse();
+    //     when(courseService.getCourseById(batch.getBatchCourse().getId())).thenReturn(course);
+    //     batchService.addBatch(batch, course.getName());
 
-        // this.mockMvc.perform(post(apiPath+"/addBatch")
-        //         .param("name",batch.getName())
-        //         .param("start date", batch.getStartDate().toString())
-        //         .param("end date", batch.getEndDate().toString())
-        //         .flashAttr("batch", new Batch()))
-        //         .andExpect(status().is(302))
-        //         .andExpect(redirectedUrl("/admin/batch-table"));
-    }
+    //     // this.mockMvc.perform(post(apiPath+"/addBatch")
+    //     //         .param("name",batch.getName())
+    //     //         .param("start date", batch.getStartDate().toString())
+    //     //         .param("end date", batch.getEndDate().toString())
+    //     //         .flashAttr("batch", new Batch()))
+    //     //         .andExpect(status().is(302))
+    //     //         .andExpect(redirectedUrl("/admin/batch-table"));
+    // }
 
     @Test
     public void deleteBatchTest() throws Exception{
@@ -304,21 +303,21 @@ public class AdminControllerTest {
                 .andExpect(view().name("/admin/ADM-EDB-06"));
     }
 
-    @Test
-    public void editBatchTest() throws Exception{
-        Long id = 1L;
-        Batch batch = getBatch();
-        when(batchService.getBatchById(id)).thenReturn(batch);
-        batch.setIsActive(true);
-        batchService.updateBatch(batch);
-        // this.mockMvc.perform(post(apiPath+"/editBatch")
-        //         .param("name", batch.getName())
-        //         .param("start date", batch.getStartDate().toString())
-        //         .param("end date", batch.getEndDate().toString())
-        //         .flashAttr("batch", new Batch()))
-        //         .andExpect(status().is(302))
-        //         .andExpect(redirectedUrl("/admin/batch-table"));
-    }
+    // @Test
+    // public void editBatchTest() throws Exception{
+    //     Long id = 1L;
+    //     Batch batch = getBatch();
+    //     when(batchService.getBatchById(id)).thenReturn(batch);
+    //     batch.setIsActive(true);
+    //     batchService.updateBatch(batch);
+    //     // this.mockMvc.perform(post(apiPath+"/editBatch")
+    //     //         .param("name", batch.getName())
+    //     //         .param("start date", batch.getStartDate().toString())
+    //     //         .param("end date", batch.getEndDate().toString())
+    //     //         .flashAttr("batch", new Batch()))
+    //     //         .andExpect(status().is(302))
+    //     //         .andExpect(redirectedUrl("/admin/batch-table"));
+    // }
 
     @Test
     public void setupStudentTableTest() throws Exception{
@@ -361,17 +360,17 @@ public class AdminControllerTest {
                 .andExpect(view().name("/admin/ADM-EDS-09"));
     }
 
-    @Test
-    public void editStudentTest() throws Exception{
-        String uid = "stu001";
-        User student = getUser();
-        userService.addUser(student);
-        when(userService.getUserById(uid)).thenReturn(student);
+    // @Test
+    // public void editStudentTest() throws Exception{
+    //     String uid = "stu001";
+    //     User student = getUser();
+    //     userService.addUser(student);
+    //     when(userService.getUserById(uid)).thenReturn(student);
 
-        // this.mockMvc.perform(post(apiPath+"/editStudent"))
-        //         .andExpect(status().is(302))
-        //         .andExpect(redirectedUrl("/admin/student-table"));
-    }
+    //     // this.mockMvc.perform(post(apiPath+"/editStudent"))
+    //     //         .andExpect(status().is(302))
+    //     //         .andExpect(redirectedUrl("/admin/student-table"));
+    // }
 
     @Test
     public void deleteExamTest() throws Exception{
@@ -423,12 +422,12 @@ public class AdminControllerTest {
                 .andExpect(view().name("/admin/ADM-EDT-12.html"));
     }
 
-    @Test
-    public void editTeacherTest() throws Exception{
-        // this.mockMvc.perform(post(apiPath+"/editTeacher"))
-        //         .andExpect(status().is(302))
-        //         .andExpect(redirectedUrl("/admin/teacher-table"));
-    }
+    // @Test
+    // public void editTeacherTest() throws Exception{
+    //     // this.mockMvc.perform(post(apiPath+"/editTeacher"))
+    //     //         .andExpect(status().is(302))
+    //     //         .andExpect(redirectedUrl("/admin/teacher-table"));
+    // }
 
     @Test
     public void changePasswordTest() throws Exception{

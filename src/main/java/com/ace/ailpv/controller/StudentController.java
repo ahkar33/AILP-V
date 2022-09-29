@@ -112,7 +112,12 @@ public class StudentController {
 
     @GetMapping("/getResources")
     public String getResources(ModelMap model, HttpSession session) {
-        String studentBatchId = (String) session.getAttribute("batchId");
+        String studentBatchId;
+        if (session.getAttribute("teacherClickBatchId") == null) {
+            studentBatchId = (String) session.getAttribute("batchId");
+        } else {
+            studentBatchId = String.valueOf(session.getAttribute("teacherClickBatchId"));
+        }
         List<BatchHasResource> batchHasResourceList = batchHasResourceService
                 .getAllBatchHasResourcesByBatchId(Long.parseLong(studentBatchId));
         model.addAttribute("batchHasResourceList", batchHasResourceList);
@@ -129,6 +134,7 @@ public class StudentController {
             userBatchId = Long.parseLong(resBatchId);
         } else {
             userBatchId = Long.parseLong(batchId);
+            session.setAttribute("teacherClickBatchId", userBatchId);
         }
 
         Batch studentBatch = batchService.getBatchById(userBatchId);

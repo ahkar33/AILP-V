@@ -41,7 +41,8 @@ public class ReportService {
 
     public void exportReport(String reportFormat, HttpServletResponse response, Long batchId) throws JRException, IOException {
         createReportTable(batchId);
-        String path = "C:\\Users\\Ahkar Toe Maw\\Documents\\Jasper Report\\Student Report";
+        String path = "C:\\AILP-V\\Jasper Report";
+
         List<StudentReport> students = studentReportService.getAllData(); 
         // load file and compile it
         File file = ResourceUtils.getFile("classpath:student.jrxml");
