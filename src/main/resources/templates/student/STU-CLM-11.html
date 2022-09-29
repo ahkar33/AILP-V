@@ -72,57 +72,58 @@
 
     <div id="app" class="container allButFooter" v-cloak
         style="margin-top: 22px;padding-right: 10px;padding-left: 10px; margin-bottom: 77px;">
-        <input type="hidden" th:value="${session.batchId}" id="batchId">
-        <div class="articles card">
-            <div class="align-items-center card-header d-flex justify-content-between pb-3 pt-3"
-                style="background-color: #32499a; color: #ffffff;">
-                <div class="row w-100">
-                    <div class="align-items-center col-6 col-lg-8 col-xl-9 d-flex"><i
-                            class="fa-solid fa-users-line pe-2" style="font-size: 20px;"></i>
-                        <h2 class="h4 mb-1 mt-1">Classmates</h2>
-                    </div>
-                    <div class="col-6 col-lg-4 col-xl-3 d-flex justify-content-end pe-0">
+        <div class="d-flex gx-2 justify-content-center row">
+            <div class="card-stacked chat col-12 col-lg-9 col-md-11 col-sm-12 col-xl-8">
+                <input type="hidden" th:value="${session.batchId}" id="batchId">
+                <div class="articles card">
+                    <div class="align-items-center card-header d-flex justify-content-between pb-3 pt-3"
+                        style="background-color: #32499a; color: #ffffff;">
+                        <div class="row w-100">
+                            <div class="align-items-center col-6 col-lg-8 col-xl-9 d-flex">
+                                <h2 class="h4 mb-1 mt-1" style="font-family: 'Inter Tight', sans-serif;">Classmates</h2>
+                            </div>
+                            <div class="col-6 col-lg-4 col-xl-3 d-flex justify-content-end pe-0">
 
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="search"
-                            placeholder="Search..." />
+                                <input type="text" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" v-model="search" placeholder="Search..." />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="card-body no-padding p-0">
-                <div v-for="student in filterList" class="align-items-center d-flex item pb-3 pt-3"
-                    style="border-top-style: none; border-bottom: 1px solid #cdcdcd;">
-                    <div class="image">
-                        <img :src=`/profile_pics/${student.profile_pic}` 
-                            style="  width: 50px;
-                            height: 50px;
-                            border-radius: 50%;" />
-                    </div>
-                    <div class="text"><a href="#">
-                            <h3 class="h5">{{ student.id }}</h3>
-                        </a><small class="fs-6"> {{ student.name }} </small>
+                    <div class="card-body no-padding p-0">
+                        <div v-for="student in filterList" class="align-items-center d-flex item pb-3 pt-3"
+                            style="border-top-style: none; border-bottom: 1px solid #cdcdcd;">
+                            <div class="image">
+                                <img :src=`/profile_pics/${student.profile_pic}` style="  width: 50px;
+                                    height: 50px;
+                                    border-radius: 50%;" />
+                            </div>
+                            <div class="text"><a href="#">
+                                    <h3 class="h5">{{ student.name }}</h3>
+                                </a><small class="fs-6">{{ student.id }}</small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed
-        style="background-color: #1a2033;">
+    <footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed style="background-color: #1a2033;">
         <div class="container">
             <div class="row">
-                <div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
+                <div class="col-lg-8 col-xl-8 me-3 pb-0 pt-3">
                     <p class="h6 mb-2" style="font-weight: 700;">How To Find Us</p>
                     <div class="mb-1">
                         <p class="mb-2 text-white" style="font-size: 14px; font-weight: 200;"><i
                                 class="fa-solid fa-location-dot ps-1 pe-3"></i> No. 169, 9th Floor, MTP Condo, Insein
                             Road, Than Lan Bus Stop, Hlaing Township, Yangon, Myanmar.</p>
                         <p class="mb-2 mt-0 text-white" style="font-size: 14px;"><i
-                                class="fa-solid fa-phone pe-3 ps-1 "></i>+959253257742</p> <a href="#"
-                            class="pb-0 pt-0 text-decoration-none text-white" style="font-size: 14px;"><i
-                                class="fa-solid fa-envelope pe-3 ps-1 "></i>info@aceinspiration.com</a>
+                                class="fa-solid fa-phone pe-3 ps-1 "></i>+959253257742</p> <a href="mailto:info@aceinspiration.com"
+                                class="pb-0 pt-0 text-decoration-none text-white" style="font-size: 14px;"><i
+                                    class="fa-solid fa-envelope pe-3 ps-1 "></i>info@aceinspiration.com</a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-xl-3 pb-0 pt-3 py-3">
+                <div class="col-lg-3 col-xl-3 pb-0 pt-3 py-3">
                     <p class="h6 mb-1" style="font-weight: 700;">Get In Touch</p>
                     <div class="d-inline-flex flex-wrap ">
                         <a href="https://www.facebook.com/aceinspiration/" class="text-decoration-none text-white"><i
@@ -131,10 +132,12 @@
                             class="text-decoration-none text-white"><i class="fa-brands fa-linkedin p-1"
                                 style="font-size: 25px;"></i></a>
                     </div>
-                    <div class="mt-2">
-                        <button type="button" class="btn btn-outline-light mb-1 ms-0"><i
-                                class="fa-solid fa-headset me-2"></i>Contact Us</button>
-                    </div>
+                    <a class="text-decoration-none text-dark" th:href="@{/student/contactUs}">
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-outline-light mb-1 ms-0"><i
+                                    class="fa-solid fa-headset me-2"></i>Contact Us</button>
+                        </div>
+                    </a>
                 </div>
             </div>
             <hr class="border-secondary mt-1 mb-1" />

@@ -98,9 +98,20 @@
 							</div>
 						</span>
 						<span th:if="${#lists.isEmpty(answerList)}">
-							<h1>empty</h1>
+							<section class="text-center">
+								<div class="container">
+									<div class="row">
+										<div class="col-lg-6 me-auto ms-auto">
+											<h3 class="fw-semibold h2 mb-4"></h3>
+											<p class="fw-semibold h3 mb-3 text-dark"
+												style="font-family: 'Inter Tight', sans-serif;">Oops! No one has yet turned in their assignment.</p>
+											<img src="/assets/img/teacher-waiting.png" style="width: 65%;"
+												class="mb-3" />
+										</div>
+									</div>
+								</div>
+							</section>
 						</span>
-
 					</div>
 				</div>
 

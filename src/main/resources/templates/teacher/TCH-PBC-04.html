@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="/assets/css/emojionearea.min.css">
 <link rel="stylesheet" href="/assets/css/student-public-chat.css">
 <link rel="stylesheet" href="/assets/css/teacher-public-chat.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
     integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -40,7 +41,7 @@
                                     <div class="w-100 archived-messages d-flex pe-3 ps-3 pt-2"
                                         style="border-bottom: 1px solid #cecece; background-color: #F0EEF6;">
                                         <div class="d-flex mt-2 pb-2 pl-0">
-                                            <p class="fw-400 h4 text-dark-75">Chats</p>
+                                            <p class="fw-400 h4 text-dark-75" style=" font-family: 'Inter Tight', sans-serif;">Chats</p>
                                         </div>
                                     </div>
                                     <div id="plist" class="chat-user-panel people-list"
@@ -74,7 +75,8 @@
 
                             <!-- this is where chat start -->
                             <div class="chat col-md-8 col-12 card-stacked">
-                                <div class="card shadow-line mb-3 chat chat-panel" style="box-shadow: 1px 1px 4px 1px #c8c4c4;">
+                                <div class="card shadow-line mb-3 chat chat-panel"
+                                    style="box-shadow: 1px 1px 4px 1px #c8c4c4;">
                                     <div class="p-3 chat-header">
                                         <div class="chat-about d-flex">
                                             <div class="w-100 d-flex pl-0">
@@ -104,9 +106,9 @@
                                         style="overflow: auto; height: 500px; font-family: Poppins;">
                                         <!-- <p class="mb-4 mt-4 text-center" style="font-size: 13px;">Today 10:45AM</p> -->
                                         <div class="w-100">
-
-                                            <!-- my messaage (right) -->
                                             <span v-for="(message, index) in messageList" :key="index">
+
+                                                <!-- my messaage (right) -->
                                                 <span v-cloak v-if="userId == message.messageUser.id">
                                                     <div class="d-flex flex-row-reverse mb-2">
                                                         <div class="fs-13 mb-2 right-chat-message">
@@ -115,11 +117,12 @@
                                                                 <span @mouseover="message.isHover = true"
                                                                     class="align-items-center d-flex"
                                                                     @mouseleave="message.isHover = false">
-                                                        <i v-show="message.isHover" @click="deleteMessage(message.id)"
-                                                            class="fa fa-trash text-light pe-3 ps-2"
-                                                            style="cursor: pointer; font-size: 15px;"></i>
+                                                                    <i v-show="message.isHover"
+                                                                        @click="deleteMessage(message.id)"
+                                                                        class="fa fa-trash text-light pe-2 ps-1"
+                                                                        style="cursor: pointer; font-size: 15px;"></i>
                                                                     <div>
-                                                                        <div class="d-flex flex-row-reverse">
+                                                                        <div class="d-flex flex-row-reverse text-break">
                                                                             {{message.message}}
                                                                         </div>
                                                                         <div class="message-options dark">
@@ -141,15 +144,16 @@
                                                         <p class="fw-bold mb-0 ms-5" style="color: #000e5c;">
                                                             {{message.messageUser.name}}
                                                             <span v-show="message.messageUser.role == 'ROLE_TEACHER'"
-                                                                class="text-info">
-                                                                (Teacher)
+                                                                class="ms-1"
+                                                                style="background-color: #263572; border-radius: 4px; font-size: 12px; border-left: 7px solid #263572; border-top: 2px solid #263572; border-right: 7px solid #263572; border-bottom: 3px solid #263572; color: #c4dcff; font-weight: 700; position: relative; top: -1px;">
+                                                                Teacher
                                                             </span>
                                                         </p>
                                                         <div class="align-items-start d-flex justify-content-start">
                                                             <img class="border rounded-circle img-profile"
                                                                 :src=`/profile_pics/${message.messageUser.profile_pic}`
                                                                 alt="avatar"
-                                                                style="width: 35px; height: 35px; position: relative; top: -17px;" />
+                                                                style="width: 35px; height: 35px; position: relative; top: -20px;" />
                                                             <div class="fs-13 left-chat-message mb-2 ">
                                                                 <span
                                                                     style="font-size: 13px; color: rgb(58, 65, 111); text-align: var(--bs-body-text-align);">
