@@ -17,7 +17,7 @@
 
 	<div class="container allButFooter mb-5 mt-4 pb-5">
 		<nav class="d-flex justify-content-center">
-			<div class="border-light mb-4 nav nav-fill nav-pills"
+			<div class="mb-4 nav nav-fill nav-pills"
 				style="width: 500px; box-shadow: 2px 2px 5px 3px #d8d8d8; border-radius: 74px; border: 7px solid #ffffff; background-color: #ffffff;"
 				id="nav-tab" role="tablist">
 				<button class="active fw-bold nav-link rounded-pill" id="nav-assignment-tab" data-bs-toggle="tab"
@@ -101,7 +101,7 @@
 						<span th:each=" studentHasExam : ${sheList}" class="col-md-4">
 							<div class="card mb-3" style="box-shadow: 1px 1px 4px 1px #d4d4d4;">
 								<div class="card-body">
-									<div class="d-flex flex-column flex-lg-row"> <i
+									<div class="d-flex flex-lg-row flex-row"> <i
 											class="fa-solid fa-file-circle-check me-3 mb-2"
 											style="font-size: 25px;"></i>
 										<div class="row flex-fill">
@@ -124,7 +124,7 @@
 						<span th:each=" result : ${fileExamResultList}" class="col-md-4">
 							<div class="card mb-3" style="box-shadow: 1px 1px 4px 1px #d4d4d4;">
 								<div class="card-body">
-									<div class="d-flex flex-column flex-lg-row"> <i
+									<div class="d-flex flex-lg-row flex-row"> <i
 											class="fa-solid fa-file-circle-check me-3 mb-2"
 											style="font-size: 25px;"></i>
 										<div class="row flex-fill">
@@ -150,19 +150,19 @@
 	<footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed style="background-color: #1a2033;">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
+				<div class="col-lg-8 col-xl-8 me-3 pb-0 pt-3">
 					<p class="h6 mb-2" style="font-weight: 700;">How To Find Us</p>
 					<div class="mb-1">
 						<p class="mb-2 text-white" style="font-size: 14px; font-weight: 200;"><i
 								class="fa-solid fa-location-dot ps-1 pe-3"></i> No. 169, 9th Floor, MTP Condo, Insein
 							Road, Than Lan Bus Stop, Hlaing Township, Yangon, Myanmar.</p>
 						<p class="mb-2 mt-0 text-white" style="font-size: 14px;"><i
-								class="fa-solid fa-phone pe-3 ps-1 "></i>+959253257742</p> <a href="#"
-							class="pb-0 pt-0 text-decoration-none text-white" style="font-size: 14px;"><i
-								class="fa-solid fa-envelope pe-3 ps-1 "></i>info@aceinspiration.com</a>
+								class="fa-solid fa-phone pe-3 ps-1 "></i>+959253257742</p> <a href="mailto:info@aceinspiration.com"
+								class="pb-0 pt-0 text-decoration-none text-white" style="font-size: 14px;"><i
+									class="fa-solid fa-envelope pe-3 ps-1 "></i>info@aceinspiration.com</a>
 					</div>
 				</div>
-				<div class="col-lg-4 col-xl-3 pb-0 pt-3 py-3">
+				<div class="col-lg-3 col-xl-3 pb-0 pt-3 py-3">
 					<p class="h6 mb-1" style="font-weight: 700;">Get In Touch</p>
 					<div class="d-inline-flex flex-wrap ">
 						<a href="https://www.facebook.com/aceinspiration/" class="text-decoration-none text-white"><i
@@ -171,10 +171,12 @@
 							class="text-decoration-none text-white"><i class="fa-brands fa-linkedin p-1"
 								style="font-size: 25px;"></i></a>
 					</div>
-					<div class="mt-2">
-						<button type="button" class="btn btn-outline-light mb-1 ms-0"><i
-								class="fa-solid fa-headset me-2"></i>Contact Us</button>
-					</div>
+					<a class="text-decoration-none text-dark" th:href="@{/student/contactUs}">
+						<div class="mt-2">
+							<button type="button" class="btn btn-outline-light mb-1 ms-0"><i
+									class="fa-solid fa-headset me-2"></i>Contact Us</button>
+						</div>
+					</a>
 				</div>
 			</div>
 			<hr class="border-secondary mt-1 mb-1" />

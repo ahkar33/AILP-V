@@ -18,8 +18,8 @@
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
     <div class="container mt-4 allButFooter" style="margin-bottom: 77px;">
-        <h1 class="fs-2 mb-2" style=" color: rgb(78, 78, 78); font-family: 'Inter Tight', sans-serif;">
-                        Resources</h1>
+        <h3 class="mb-2" style=" font-family: 'Inter Tight', sans-serif;">
+                        Resources</h3>
         <div class="row">
                 <a th:href="@{ ${'/courses/' + batchResource?.resource?.resourceCourse?.name + '/resource/' + batchResource?.resource?.name} }" class=" col-6 col-lg-3 col-md-6 col-xl-2 text-decoration-none"
                     target="_blank" th:each="batchResource : ${batchHasResourceList}">
@@ -55,12 +55,12 @@
                         <!-- Resource icons end-->
                         
                         <div class="file-man-title me-3 ms-3 text-secondary">
-                            <h5 class="mb-2 text-overflow">[[${batchResource?.resource?.name}]]</h5>
+                            <h5 class="mb-2 text-overflow text-dark">[[${batchResource?.resource?.name}]]</h5>
                         </div>
 
                         <!-- [[${batchResource?.resource?.name.substring(batchResource?.resource?.name.length() - 3 )}]] -->
                         <p class="bg-opacity-50 bg-primary border-primary mb-0 me-n1 mt-1 pb-1 pt-1 rounded-bottom text-center"
-                            style="color: #0012a6;">
+                            style="color: #0012a6; font-family: 'Inter Tight', sans-serif;">
                             [[${batchResource?.schedule.toString.substring(0, 10)}]]</p>
                     </div>
 
@@ -72,19 +72,19 @@
         style="background-color: #1a2033;">
         <div class="container">
             <div class="row">
-                <div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
+                <div class="col-lg-8 col-xl-8 me-3 pb-0 pt-3">
                     <p class="h6 mb-2" style="font-weight: 700;">How To Find Us</p>
                     <div class="mb-1">
                         <p class="mb-2 text-white" style="font-size: 14px; font-weight: 200;"><i
                                 class="fa-solid fa-location-dot ps-1 pe-3"></i> No. 169, 9th Floor, MTP Condo, Insein
                             Road, Than Lan Bus Stop, Hlaing Township, Yangon, Myanmar.</p>
                         <p class="mb-2 mt-0 text-white" style="font-size: 14px;"><i
-                                class="fa-solid fa-phone pe-3 ps-1 "></i>+959253257742</p> <a href="#"
-                            class="pb-0 pt-0 text-decoration-none text-white" style="font-size: 14px;"><i
-                                class="fa-solid fa-envelope pe-3 ps-1 "></i>info@aceinspiration.com</a>
+                                class="fa-solid fa-phone pe-3 ps-1 "></i>+959253257742</p> <a href="mailto:info@aceinspiration.com"
+                                class="pb-0 pt-0 text-decoration-none text-white" style="font-size: 14px;"><i
+                                    class="fa-solid fa-envelope pe-3 ps-1 "></i>info@aceinspiration.com</a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-xl-3 pb-0 pt-3 py-3">
+                <div class="col-lg-3 col-xl-3 pb-0 pt-3 py-3">
                     <p class="h6 mb-1" style="font-weight: 700;">Get In Touch</p>
                     <div class="d-inline-flex flex-wrap ">
                         <a href="https://www.facebook.com/aceinspiration/" class="text-decoration-none text-white"><i
@@ -93,10 +93,12 @@
                             class="text-decoration-none text-white"><i class="fa-brands fa-linkedin p-1"
                                 style="font-size: 25px;"></i></a>
                     </div>
-                    <div class="mt-2">
-                        <button type="button" class="btn btn-outline-light mb-1 ms-0"><i
-                                class="fa-solid fa-headset me-2"></i>Contact Us</button>
-                    </div>
+                    <a class="text-decoration-none text-dark" th:href="@{/student/contactUs}">
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-outline-light mb-1 ms-0"><i
+                                    class="fa-solid fa-headset me-2"></i>Contact Us</button>
+                        </div>
+                    </a>
                 </div>
             </div>
             <hr class="border-secondary mt-1 mb-1" />

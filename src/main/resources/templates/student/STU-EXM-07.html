@@ -20,7 +20,7 @@
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-    <div v-cloak class="container mt-3" style="margin-bottom: 86px;" id="app">
+    <div v-cloak class="container mt-1" style="margin-bottom: 86px;" id="app">
         <input id="studentId" type="hidden" th:value="${studentId}">
         <input id="bheId" type="hidden" th:value="${bheId}">
         <input id="examId" type="hidden" th:value="${examId}">
@@ -86,7 +86,7 @@
 
                                     <img src="/assets/img/Student1stMark-Photo.png" class="mb-3" style="width: 70%;" />
                                     <span><a href="http://localhost:8080/student/student-home"
-                                            class="btn btn-lg pe-5 ps-5 shadow-sm btn-outline-primary rounded-pill">Go Home</a></span>
+                                            class="btn mb-0 btn-lg pe-5 ps-5 shadow-sm btn-outline-primary rounded-pill">Go Home</a></span>
                                 </div>
                             </div>
                         </div>
