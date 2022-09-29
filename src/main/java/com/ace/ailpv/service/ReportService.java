@@ -41,9 +41,10 @@ public class ReportService {
 
     public void exportReport(String reportFormat, HttpServletResponse response, Long batchId) throws JRException, IOException {
         createReportTable(batchId);
-        String path = "C:\\AILP-V\\Jasper Report";
+        String path = "C:\\Users\\Ahkar Toe Maw\\Videos\\AILPV\\Report";
 
         List<StudentReport> students = studentReportService.getAllData(); 
+        String batchName = students.get(0).getBatch();
         // load file and compile it
         File file = ResourceUtils.getFile("classpath:student.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
@@ -53,12 +54,12 @@ public class ReportService {
         parameters.put("createdBy", "Java Techie");
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSourse);
         if (reportFormat.equalsIgnoreCase("pdf")) {
-            JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\student.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\student"+ batchName +".pdf");
         }
         if (reportFormat.equalsIgnoreCase("excel")) {
             JRXlsxExporter exporter = new JRXlsxExporter(); // initialize exporter
             exporter.setExporterInput(new SimpleExporterInput(jasperPrint)); // set compiled report as input
-            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(path + "\\student.xlsx")); // set output
+            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(path + "\\student"+ batchName +".xlsx")); // set output
                                                                                                         // file via path
                                                                                                         // with filename
             SimpleXlsxReportConfiguration configuration = new SimpleXlsxReportConfiguration();
