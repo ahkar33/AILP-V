@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import com.ace.ailpv.entity.Exam;
 import com.ace.ailpv.entity.StudentHasExam;
@@ -18,7 +18,7 @@ import com.ace.ailpv.service.StudentHasExamService;
 
 @SpringBootTest
 public class StudentHasExamServiceTest {
-   @Autowired
+   @Mock
    StudentHasExamRepository studentHasExamRepository;
    
    @InjectMocks
