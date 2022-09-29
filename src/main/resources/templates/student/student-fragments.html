@@ -117,6 +117,13 @@
                         </i>
                     </a>
                 </li>
+                <li th:if="${session?.role == 'ROLE_TEACHER'}" class="nav-item hide-on-desktop" data-bs-toggle="tooltip"
+                    data-bss-tooltip="" title="Group Chat" style="margin-right: 3px;margin-left: 3px;">
+                    <a class="nav-link" th:href="@{/student/getResources}">
+                        <i class="icon ion-chatboxes" style="font-size: 24px;margin-top: 2px;">
+                        </i>
+                    </a>
+                </li>
                 <div th:if="${session?.role == 'ROLE_STUDENT'}" class="d-none d-sm-block topbar-divider"></div>
                 <li th:if="${session?.role == 'ROLE_STUDENT'}" class="nav-item dropdown no-arrow">
                     <div class="nav-item dropdown no-arrow" id="profileCircle">
