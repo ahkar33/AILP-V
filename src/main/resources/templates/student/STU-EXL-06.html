@@ -16,18 +16,58 @@
             <div class="mb-4 nav nav-fill nav-pills"
             style="width: 500px; box-shadow: 2px 2px 5px 3px #d8d8d8; border-radius: 74px; border: 7px solid #ffffff; background-color: #ffffff;"
                 id="nav-tab" role="tablist">
-                <button class="active fw-bold nav-link rounded-pill" id="nav-codetest-tab" data-bs-toggle="tab"
-                    data-bs-target="#nav-codetest" type="button" role="tab" aria-controls="nav-codetest"
-                    aria-selected="true">Code Test</button>
-                <button class="nav-link rounded-pill fw-bold" id="nav-mcqExam-tab" data-bs-toggle="tab"
+                <button class="active nav-link rounded-pill fw-bold" id="nav-mcqExam-tab" data-bs-toggle="tab"
                     data-bs-target="#nav-mcqExam" type="button" role="tab" aria-controls="nav-mcqExam"
                     aria-selected="false">MCQ Exam</button>
+                <button class="fw-bold nav-link rounded-pill" id="nav-codetest-tab" data-bs-toggle="tab"
+                    data-bs-target="#nav-codetest" type="button" role="tab" aria-controls="nav-codetest"
+                    aria-selected="true">Code Test</button>
             </div>
         </nav>
 
         <div class="tab-content" id="nav-tabContent">
 
-            <div class="tab-pane fade mt-4 show active" id="nav-codetest" role="tabpanel"
+            <div class="container tab-pane fade mt-4  show active" id="nav-mcqExam" role="tabpanel" aria-labelledby="nav-mcqExam-tab"
+                tabindex="0">
+                <!-- Exam Card/ Button Start -->
+                <span th:each="bhe : ${bheList}">
+                    <div class="btn btn-light ms-0 me-0 my-2 py-3 shadow-sm w-100">
+                        <div class="row align-items-center">
+                            <div
+                                class="align-items-md-start col-12 col-lg-5 col-md-4 col-xl-5 d-flex d-md-flex flex-column justify-content-center justify-content-md-start ps-0 ps-md-4">
+                                <h4 class="pt-2" style="font-weight: 700; color: #3f3f3f;">
+                                    [[${bhe?.bheExam?.name}]]</h4>
+                                <h6 class="pt-2"
+                                    style="font-family: 'Roboto', sans-serif; font-weight: 400; color: #3f3f3f;">
+                                    Exam will start at [[${bhe?.startTime}]]</h6>
+                            </div>
+                            <ul class="align-items-lg-start col-12 col-lg-3 col-md-4 col-xl-3 d-flex d-lg-flex flex-column flex-lg-column gap-2 justify-content-lg-start justify-content-start list-unstyled mb-0 mt-2 my-4 my-md-0 text-90 text-dark-l1 text-left"
+                                style="font-size: 17px; color: #636363;">
+                                <li> <i class="fa-solid fa-list-ol mr-2 mt-1 text-110 text-success-m2"
+                                        style="margin-right: 8px;"></i> <span> <span
+                                            class="text-110">[[${bhe?.bheExam?.questionList.size}]] Questions</span>
+                                    </span>
+                                </li>
+                                <li class="mt-25"> <i class="fa-regular fa-clock mr-2 mt-1 text-110 text-success-m2"
+                                        style="margin-right: 8px;"></i> <span class="text-110">Duration:
+                                        [[${bhe?.totalTime}]]</span>
+                                </li>
+                                <li class="mt-25"> <i class="fa-regular fa-circle-check text-success-m2 text-110 mr-2 mt-1"
+                                        style="margin-right: 8px;"></i> <span
+                                        class="text-110">[[${bhe?.bheExam?.fullMark}]]
+                                        Marks</span>
+                                </li>
+                            </ul>
+                            <div class="col-12 col-md-4 text-center"> <a href="#"
+                                    class="btn bg-gradient btn-outline-primary btn-raised f-n-hover fw-bold mb-md-0 mt-3 mt-md-0 pe-md-4 ps-md-4 px-4 py-25 shadow-sm text-600  w-75" th:href="@{/student/getExam/} + ${bhe.id}">Get
+                                    Started</a>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+            </div>
+
+            <div class="tab-pane fade mt-4" id="nav-codetest" role="tabpanel"
                 aria-labelledby="nav-codetest-tab" tabindex="0">
                 <div class="container allButFooter" style="padding-right: 10px;padding-left: 10px;">
                     <div class="card shadow-sm" style="margin-bottom: 85px;">
@@ -88,45 +128,6 @@
                 </div>
             </div>
 
-            <div class="container tab-pane fade mt-4" id="nav-mcqExam" role="tabpanel" aria-labelledby="nav-mcqExam-tab"
-                tabindex="0">
-                <!-- Exam Card/ Button Start -->
-                <span th:each="bhe : ${bheList}">
-                    <div class="btn btn-light ms-0 me-0 my-2 py-3 shadow-sm w-100">
-                        <div class="row align-items-center">
-                            <div
-                                class="align-items-md-start col-12 col-lg-5 col-md-4 col-xl-5 d-flex d-md-flex flex-column justify-content-center justify-content-md-start ps-0 ps-md-4">
-                                <h4 class="pt-2" style="font-weight: 700; color: #3f3f3f;">
-                                    [[${bhe?.bheExam?.name}]]</h4>
-                                <h6 class="pt-2"
-                                    style="font-family: 'Roboto', sans-serif; font-weight: 400; color: #3f3f3f;">
-                                    Exam will start at [[${bhe?.startTime}]]</h6>
-                            </div>
-                            <ul class="align-items-lg-start col-12 col-lg-3 col-md-4 col-xl-3 d-flex d-lg-flex flex-column flex-lg-column gap-2 justify-content-lg-start justify-content-start list-unstyled mb-0 mt-2 my-4 my-md-0 text-90 text-dark-l1 text-left"
-                                style="font-size: 17px; color: #636363;">
-                                <li> <i class="fa-solid fa-list-ol mr-2 mt-1 text-110 text-success-m2"
-                                        style="margin-right: 8px;"></i> <span> <span
-                                            class="text-110">[[${bhe?.bheExam?.questionList.size}]] Questions</span>
-                                    </span>
-                                </li>
-                                <li class="mt-25"> <i class="fa-regular fa-clock mr-2 mt-1 text-110 text-success-m2"
-                                        style="margin-right: 8px;"></i> <span class="text-110">Duration:
-                                        [[${bhe?.totalTime}]]</span>
-                                </li>
-                                <li class="mt-25"> <i class="fa-regular fa-circle-check text-success-m2 text-110 mr-2 mt-1"
-                                        style="margin-right: 8px;"></i> <span
-                                        class="text-110">[[${bhe?.bheExam?.fullMark}]]
-                                        Marks</span>
-                                </li>
-                            </ul>
-                            <div class="col-12 col-md-4 text-center"> <a href="#"
-                                    class="btn bg-gradient btn-outline-primary btn-raised f-n-hover fw-bold mb-md-0 mt-3 mt-md-0 pe-md-4 ps-md-4 px-4 py-25 shadow-sm text-600  w-75" th:href="@{/student/getExam/} + ${bhe.id}">Get
-                                    Started</a>
-                            </div>
-                        </div>
-                    </div>
-                </span>
-            </div>
         </div>
     </div>
 

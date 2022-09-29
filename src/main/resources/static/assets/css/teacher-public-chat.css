@@ -484,7 +484,7 @@ img.shadow {
     background: #fff;
     width: fit-content;
     max-width: 60%;
-    padding: 0.7rem 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 0.357rem;
     -webkit-box-shadow: 0 4px 8px 0 rgb(34 41 47 / 3%);
     box-shadow: 0 4px 8px 0 rgb(34 41 47 / 3%);

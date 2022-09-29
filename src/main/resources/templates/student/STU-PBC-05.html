@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 
+<link rel="stylesheet" href="/assets/css/teacher-public-chat.css">
 <link rel="stylesheet" href="/assets/css/emojionearea.min.css">
 <link rel="stylesheet" href="/assets/css/student-public-chat.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
@@ -18,7 +19,7 @@
     }
 
     .allButFooter {
-    min-height: calc(80vh - 90px);
+        min-height: calc(80vh - 90px);
     }
 </style>
 
@@ -28,110 +29,111 @@
 
     <div th:insert="/student/student-fragments :: mobile-navbar" />
 
-    <div id="app" style="width: 90%;" class="allButFooter container-fluid h-100 mb-3 pe-1 ps-1 mt-4">
+    <div id="app" class="allButFooter container-fluid h-100 mb-3 pe-1 ps-1 mt-4">
 
         <input id="userName" type="hidden" th:value="${username}">
         <input id="batchId" type="hidden" th:value="${batchId}">
         <input id="userId" type="hidden" th:value="${userId}">
 
-        <div class="d-flex justify-content-center row">
-            <div class="col-12 col-lg-8 col-md-12 col-sm-12 col-xl-8">
-                <div class="chat d-flex justify-content-center">
-                    <div class="card shadow">
-                        <div class="chat-header clearfix pb-3 pt-3 rounded-5 rounded-top" style="background-color: rgb(50, 73, 154);">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <i class="fa-solid fa-users-line text-white me-2 mt-1" style="font-size: 21px;"></i>
-                                    <h6 class="fs-5 fw-normal m-b-0 mb-0 text-light">[[${batchName}]]</h6>
+        <div class="container mt-1 pe-0 ps-0">
+            <div class="d-flex gx-2 justify-content-center row">
+                <div class="card-stacked chat col-12 col-lg-9 col-md-11 col-sm-12 col-xl-8">
+                    <div class="card shadow-line mb-3 chat chat-panel" style="box-shadow: 1px 1px 4px 1px #c8c4c4;">
+                        <div class="p-3 chat-header">
+                            <div class="chat-about d-flex">
+                                <div class="w-100 d-flex pl-0">
+                                    <div class="mr-3">
+                                        <p class="fw-400 h6 mb-0 text-dark-75">[[${batchName}]]</p>
+                                        <p class="sub-caption text-muted mb-0"><i class="la la-clock mr-1"></i>{{
+                                            totalStudent }} Students</p>
+
+                                    </div>
                                 </div>
-                                <span @click="toggleMute()" class="me-2" id="toggleMute">
-                                    <span v-cloak v-if="isMute">
-                                        <i class="fa-solid fa-bell-slash text-white" style="font-size: 18px;"></i>
+                                <div class="flex-shrink-0 margin-auto">
+                                    <span @click="toggleMute()" class="ms-1" id="toggleMute">
+                                        <span v-cloak v-if="isMute">
+                                            <i class="fa-regular fa-bell-slash text-primary me-3"
+                                                style="font-size: 14px; background-color: #e4e8fa; border-radius: 5px; border-left: 12px solid #e4e8fa; border-top: 13px solid #e4e8fa; border-right: 12px solid #e4e8fa; border-bottom: 13px solid #e4e8fa;"></i>
+                                        </span>
+                                        <span v-cloak v-else>
+                                            <i class="fa-regular fa-bell text-primary me-3"
+                                                style="font-size: 14px; background-color: #e4e8fa; border-radius: 5px; border-left: 15px solid #e4e8fa; border-top: 13px solid #e4e8fa; border-right: 15px solid #e4e8fa; border-bottom: 13px solid #e4e8fa;"></i>
+                                        </span>
                                     </span>
-                                    <span v-cloak v-else>
-                                        <i class="fa-solid fa-bell text-white" style="font-size: 18px;"></i>
-                                    </span>
-                                </span>
+                                </div>
                             </div>
                         </div>
                         <div id="messages" class="chat-history mb-0 mt-0 pb-0 pt-0"
                             style="overflow: auto; height: 500px;">
                             <!-- <p class="mb-4 mt-4 text-center" style="font-size: 13px;">Today 10:45AM</p> -->
-                            <ul class="mt-3">
+                            <div class="w-100 mt-3">
                                 <span v-cloak v-for="(message, index) in messageList" :key="index">
+
+                                    <!-- my messaage (right) -->
                                     <span v-if="userId == message.messageUser.id">
-                                        <li
-                                            class="align-items-start clearfix d-flex flex-column flex-nowrap g-0 mb-3 text-start">
-                                            <div class="d-flex justify-content-end mw-100 row w-100"
-                                                style="max-width: 508px;">
-                                                <div @mouseleave="message.isHover = false"
-                                                    class="col-8 col-lg-9 col-md-10 col-sm-10 d-flex justify-content-end pe-0 ps-0">
+                                        <div class="d-flex flex-row-reverse mb-2">
+                                            <div class="fs-13 mb-2 right-chat-message">
+                                                <div @mouseleave="message.isHover = false" class="mb-0 mr-3 pr-4">
                                                     <span @mouseover="message.isHover = true"
                                                         class="align-items-center d-flex"
                                                         @mouseleave="message.isHover = false">
-                                                        <i v-show="message.isHover" @click="deleteMessage(message.id)" class="fa-solid fa-trash me-3 text-danger text-opacity-75 p-1" style="font-size: 16px;"></i>
-                                                        <div class="bg-primary message my-message  pb-2 pe-3 ps-3 pt-2 text-break text-light"
-                                                            style="font-size: 15px; background-color: #efefef;">
-                                                            {{message.message}}
+                                                        <i v-show="message.isHover" @click="deleteMessage(message.id)"
+                                                            class="fa fa-trash text-light pe-2 ps-1"
+                                                            style="cursor: pointer; font-size: 15px;"></i>
+                                                        <div>
+                                                            <div class="d-flex flex-row-reverse text-break"
+                                                                style="font-size: 14px;">
+                                                                {{message.message}}
+                                                            </div>
+                                                            <div class="message-options dark">
+                                                                <div
+                                                                    class="d-flex flex-row float-end mr-2 message-time pe-0">
+                                                                    {{message.dateTime}}
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </span>
                                                 </div>
-                                                <div
-                                                    class="col-8 col-lg-9 col-md-10 col-sm-10 d-flex justify-content-end pe-0 ps-0">
-                                                    <div class="bg-white mb-2 message my-message pb-0 pe-1 ps-0 pt-0 text-break text-muted"
-                                                        style="font-size: 13px;">
-                                                        {{message.dateTime}}
-                                                    </div>
-                                                </div>
                                             </div>
-                                        </li>
+                                        </div>
                                     </span>
+
+                                    <!-- other messaage (left) -->
                                     <span v-cloak v-else>
-                                        <li
-                                            class="align-items-start clearfix d-flex flex-column flex-nowrap g-0 mb-3 text-start">
-                                            <div class="d-flex mw-100 row w-100" style="max-width: 508px;">
-                                                <div class="col-1 col-lg-2 col-md-4 col-sm-1 pe-0 w-auto">
-                                                    <h6 class="fw-bold mb-auto">
-                                                        {{message.messageUser.name}}
-                                                        <span v-show="message.messageUser.role == 'ROLE_TEACHER'"
-                                                            class="text-info"> (Teacher)</span>
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex mw-100 row w-100" style="max-width: 508px;">
-                                                <div class="col-1 col-lg-2 col-md-4 col-sm-1 pe-0 w-auto">
-                                                    <img :src=`/profile_pics/${message.messageUser.profile_pic}`
-                                                        alt="avatar" class="me-2"
-                                                        style="width: 40px; height: 40px; border-radius: 50%;" />
-                                                </div>
-                                                <div
-                                                    class="align-items-start col-8 col-lg-9 col-md-10 col-sm-10 d-flex flex-column pe-0 ps-0">
-                                                    <div class="mb-0 message my-message pb-2 pe-3 ps-3 pt-2 text-break text-dark"
-                                                        style="font-size: 15px; background-color: #cdcdcd;">
-                                                        {{message.message}}
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="align-items-start col-8 col-lg-9 col-md-10 col-sm-10 d-flex flex-column pe-0 ps-0">
-                                                    <div class="bg-white message ms-5 my-message pb-0 pe-0 ps-3 pt-0 text-break text-muted"
-                                                        style="font-size: 13px;">
+                                        <div>
+                                            <p class="fw-bold ms-5" style="color: #000e5c; margin-bottom: 1px;">
+                                                {{message.messageUser.name}}
+                                                <span v-show="message.messageUser.role == 'ROLE_TEACHER'" class="ms-1"
+                                                    style="background-color: #263572; border-radius: 4px; font-size: 12px; border-left: 7px solid #263572; border-top: 2px solid #263572; border-right: 7px solid #263572; border-bottom: 3px solid #263572; color: #c4dcff; font-weight: 700; position: relative; top: -1px;">Teacher</span>
+                                            </p>
+                                            <div class="align-items-start d-flex justify-content-start">
+                                                <img :src=`/profile_pics/${message.messageUser.profile_pic}`
+                                                    alt="avatar" class="border rounded-circle img-profile"
+                                                    style="width: 35px; height: 35px; position: relative; top: -20px;" />
+                                                <div class="fs-13 left-chat-message mb-2 ">
+                                                    <span
+                                                        style="font-size: 14px; color: rgb(58, 65, 111); text-align: var(--bs-body-text-align);">{{message.message}}</span>
+                                                    <div class="message-time pe-0 ps-0 text-end"
+                                                        style="color: #aaaaaa;">
                                                         {{message.dateTime}}
                                                     </div>
                                                 </div>
                                             </div>
-                                        </li>
+                                        </div>
                                     </span>
                                 </span>
-                            </ul>
+                            </div>
                         </div>
 
-                        <div class="chat-message clearfix pb-0 pe-0 ps-3 pt-0 rounded-5 rounded-bottom" style="border-top: 1px solid #d7d7d7; background-color: #f1f1f1;">
+                        <div class="chat-message clearfix pb-0 pe-0 ps-3 pt-0 rounded-5 rounded-bottom"
+                            style="border-top: 1px solid #d7d7d7; background-color: #f1f1f1;">
                             <div class="input-group mb-0 pb-0 pt-3" style="height: 80px;">
                                 <div class="input-group-prepend">
                                 </div>
-                                <input id="inputMessage" type="text" class="form-control" style="height: 50px;" maxlength="900">
-                                <button @click="handleSend()" class="btn mb-0 mt-0 text-light" id="sendButton"
-                                    style="line-height: 30px; height: 50px; width: 48px; background-color: #32499a;">
+                                <input id="inputMessage" type="text" class="form-control" style="height: 50px;"
+                                    maxlength="900" placeholder="Type your message....">
+                                <button @click="handleSend()" id="sendButton" class="btn btn-outline-primary"
+                                    style="border-top-right-radius: 5px; border-bottom-right-radius: 5px; line-height: 30px; height: 50px; width: 48px;">
                                     <i class="fa-solid fa-paper-plane"></i>
                                 </button>
                             </div>
@@ -140,9 +142,9 @@
                 </div>
             </div>
         </div>
+
     </div>
-    <footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed
-        style="background-color: #1a2033;">
+    <footer class="mt-md-1  pb-5 pb-md-0 pt-1 text-white" data-pg-collapsed style="background-color: #1a2033;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-xl-7 me-auto pb-0 pt-3">
@@ -152,9 +154,9 @@
                                 class="fa-solid fa-location-dot ps-1 pe-3"></i> No. 169, 9th Floor, MTP Condo, Insein
                             Road, Than Lan Bus Stop, Hlaing Township, Yangon, Myanmar.</p>
                         <p class="mb-2 mt-0 text-white" style="font-size: 14px;"><i
-                                class="fa-solid fa-phone pe-3 ps-1 "></i>+959253257742</p> <a href="#"
-                            class="pb-0 pt-0 text-decoration-none text-white" style="font-size: 14px;"><i
-                                class="fa-solid fa-envelope pe-3 ps-1 "></i>info@aceinspiration.com</a>
+                                class="fa-solid fa-phone pe-3 ps-1 "></i>+959253257742</p> <a href="mailto:info@aceinspiration.com"
+                                class="pb-0 pt-0 text-decoration-none text-white" style="font-size: 14px;"><i
+                                    class="fa-solid fa-envelope pe-3 ps-1 "></i>info@aceinspiration.com</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xl-3 pb-0 pt-3 py-3">
@@ -182,6 +184,25 @@
     <div th:insert="/student/student-fragments :: footer" />
     <script src="/assets/js/emojionearea.min.js"></script>
     <script src="/assets/js/group-chat.js"></script>
+
+    <script type="text/javascript">(function ($) {
+            "use strict";
+            $('.scrollable-chat-panel').perfectScrollbar();
+            var position = $(".chat-search").last().position().top;
+            $('.scrollable-chat-panel').scrollTop(position);
+            $('.scrollable-chat-panel').perfectScrollbar('update');
+            $('.pagination-scrool').perfectScrollbar();
+
+            $('.chat-upload-trigger').on('click', function (e) {
+                $(this).parent().find('.chat-upload').toggleClass("active");
+            });
+            $('.user-detail-trigger').on('click', function (e) {
+                $(this).closest('.chat').find('.chat-user-detail').toggleClass("active");
+            });
+            $('.user-undetail-trigger').on('click', function (e) {
+                $(this).closest('.chat').find('.chat-user-detail').toggleClass("active");
+            });
+        })(jQuery);</script>
 
 </body>
 
