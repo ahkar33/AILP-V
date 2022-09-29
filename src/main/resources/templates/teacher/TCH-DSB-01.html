@@ -28,11 +28,11 @@
                     <h1 class="fs-5">
                         Classes you are currently teaching </h1>
 
-                    <div class="mb-2 row">
+                    <div class="g-3 mb-2 row">
                         <input type="hidden" th:value="${teacherId}" id="teacherId">
-                        <div class="col-lg-4 col-md-6 mb-4" th:each="batch: ${batchList}">
+                        <div class="col-lg-4 col-md-6" th:each="batch: ${batchList}">
                             <a class="text-decoration-none" th:href="@{'/student/getVideos/' + ${batch.id} }">
-                                <div class="card radius-10 border-start border-0 border-3 border-info"
+                                <div class="card radius-10 border-start mb-0 border-0 border-3 border-info"
                                     data-bss-hover-animate="pulse">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
 
-                    <div class="align-items-center mb-2 d-inline-flex flex-row">
+                    <div class="align-items-center mb-2 d-inline-flex flex-row mt-4">
                         <i class="fa-solid fa-chart-pie text-primary" style="font-size: 23px; margin-bottom: 8px;"></i>
                         <h3 class="text-secondary"
                             style="font-size: 25px; color: rgb(72,72,72); font-weight: bold;">
