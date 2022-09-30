@@ -92,32 +92,32 @@
                     style="margin-right: 3px;margin-left: 3px;">
                     <span th:if="${session?.role == 'ROLE_STUDENT'}">
                         <a class="active nav-link" th:href="@{/student/student-home}">
-                            <i class="fa-solid fa-house" style="font-size: 19px;"></i>
+                            <i class="bx bxs-home" style="font-size: 24px;"></i>
                         </a>
                     </span>
                     <span th:if="${session?.role == 'ROLE_TEACHER'}">
                         <a class="active nav-link" th:href="@{/teacher/dashboard}">
-                            <i class="fa-solid fa-house" style="font-size: 19px;"></i>
+                            <i class="bx bxs-home" style="font-size: 24px;"></i>
                         </a>
                     </span>
                 </li>
                 <li th:if="${session?.role == 'ROLE_STUDENT'}" class="nav-item hide-on-desktop" data-bs-toggle="tooltip"
                     data-bss-tooltip="" title="Course Videos" style="margin-right: 3px;margin-left: 3px;">
                     <a class="nav-link" th:href="@{/student/getVideos/AILP}">
-                        <i class="fa-solid fa-circle-play" style="font-size: 19px;"></i>
+                        <i class="fa-solid fa-circle-play" style="font-size: 21px;"></i>
                     </a>
                 </li>
                 <li th:if="${session?.role == 'ROLE_STUDENT'}" class="nav-item hide-on-desktop" data-bs-toggle="tooltip"
                     data-bss-tooltip="" title="Group Chat" style="margin-right: 3px;margin-left: 3px;">
                     <a class="nav-link" th:href="@{/student/student-public-chat}">
-                        <i class="fa-solid fa-message" style="font-size: 19px;">
+                        <i class="bx bxs-message-rounded" style="font-size: 24px;">
                         </i>
                     </a>
                 </li>
                 <li th:if="${session?.role == 'ROLE_TEACHER'}" class="nav-item hide-on-desktop" data-bs-toggle="tooltip"
                     data-bss-tooltip="" title="Resources" style="margin-right: 3px;margin-left: 3px;">
                     <a class="nav-link" th:href="@{/student/getResources}">
-                        <i class="fa-solid fa-file-zipper" style="font-size: 19px;">
+                        <i class="bx bxs-file-archive" style="font-size: 24px;">
                         </i>
                     </a>
                 </li>
